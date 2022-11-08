@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/sheet_title"
+        style="@style/enterTxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/dp_8"
+        android:textSize="@dimen/sp_20"
+        android:gravity="center"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:textStyle="bold"
+        android:text="@string/add_you_willing"
+        android:textColor="@color/block"/>
+
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:gravity="center"
+       android:layout_marginTop="@dimen/dp_10"
+       android:padding="@dimen/dp_10">
+       <TextView
+           android:id="@+id/tips_1"
+           android:layout_width="65dp"
+           android:layout_height="65dp"
+           android:text="$1"
+           android:background="@drawable/tips_selector"
+           android:padding="@dimen/dp_5"
+           android:gravity="center"
+           android:layout_marginHorizontal="@dimen/dp_10"
+           android:textColor="@color/block"
+           android:textSize="@dimen/sp_14"/>
+       <TextView
+           android:id="@+id/tips_2"
+           android:layout_width="65dp"
+           android:layout_height="65dp"
+           android:text="$3"
+           android:background="@drawable/tips_selector"
+           android:padding="@dimen/dp_5"
+           android:gravity="center"
+           android:textColor="@color/block"
+           android:textSize="@dimen/sp_14"/>
+       <TextView
+           android:id="@+id/tips_3"
+           android:layout_width="65dp"
+           android:layout_height="65dp"
+           android:text="$5"
+           android:layout_marginHorizontal="@dimen/dp_10"
+           android:background="@drawable/tips_selector"
+           android:padding="@dimen/dp_5"
+           android:gravity="center"
+           android:textColor="@color/block"
+           android:textSize="@dimen/sp_14"/>
+
+   </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginStart="@dimen/dp_12"
+        android:layout_marginEnd="@dimen/dp_12"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/dp_10"
+        >
+        <EditText
+            android:id="@+id/tips_edt"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/help_backround"
+            android:gravity="center"
+            android:hint="@string/enter_custom_amount"
+            android:inputType="number"
+            android:maxLength="20"
+            android:padding="10dp"
+            android:textSize="@dimen/sp_18"
+            android:textColor="@color/colorFontGreyLight"
+            android:textColorHint="@color/sub_heading_light" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_12"
+        android:layout_marginEnd="@dimen/dp_12"
+        android:layout_marginTop="@dimen/dp_20"
+        android:gravity="center"
+        android:orientation="horizontal"
+        >
+
+        <Button
+            android:id="@+id/cancelbtn"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_marginEnd="@dimen/dp_5"
+            android:layout_weight="1"
+            android:background="@null"
+            android:gravity="center"
+            android:text="@string/cancel"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            android:fontFamily="@font/normalfont"
+            android:textColor="@color/sub_heading_light"
+            android:textSize="@dimen/dp_16" />
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:background="@color/linebottom_light"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/okbtn"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_rect"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:fontFamily="@font/normalfont"
+            android:text="@string/submit"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dp_16" />
+    </LinearLayout>
+</LinearLayout>

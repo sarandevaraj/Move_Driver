@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/me_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/black"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <include
+            layout="@layout/driver_include_headler"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/tool_bar"
+            android:visibility="gone" />
+
+
+        <RelativeLayout
+            android:id="@+id/slide_lay"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/tool_bar"
+            android:background="@color/button_accept"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/slideImg"
+                android:layout_width="@dimen/dp_20"
+                android:layout_height="@dimen/dp_20"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/ic_back_white"
+                android:textSize="2sp"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/headerTxt"
+                style="@android:style/TextAppearance.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:textAllCaps="false"
+                android:padding="5dp"
+                android:text="@string/invite_friend"
+                android:textColor="@color/white" />
+
+        </RelativeLayout>
+
+        <FrameLayout
+            android:id="@+id/shadow"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_20"
+            android:layout_below="@+id/slide_lay"
+            android:foreground="@color/black"
+            android:visibility="visible"></FrameLayout>
+
+        <LinearLayout
+            android:id="@+id/invite_loading"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="center"
+            android:background="@color/white"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/giff"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:visibility="gone" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/lay_s"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/shadow"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white">
+
+                <View
+                    android:id="@+id/view_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    android:background="@color/black"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <FrameLayout
+                    android:id="@+id/layout_invite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dp_12"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                       >
+
+                        <LinearLayout
+                            android:id="@+id/personal_details_lay"
+                            android:layout_width="match_parent"
+                            android:layout_height="180dp"
+                            android:background="@drawable/white_corner_profile"
+                            android:orientation="vertical"
+                            app:layout_constraintTop_toTopOf="parent">
+
+
+                            <TextView
+                                android:id="@+id/txtReferralMsg"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginStart="@dimen/dp_15"
+                                android:layout_marginTop="50dp"
+                                android:gravity="center"
+                                android:padding="@dimen/dp_5"
+                                android:text="@string/invite_frdrides"
+                                android:textColor="@color/sub_heading" />
+
+                            <LinearLayout
+                                android:id="@+id/invite_main"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="10dp"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal"
+                                app:layout_constraintTop_toBottomOf="@+id/personal_details_lay">
+
+
+                                <TextView
+                                    android:id="@+id/referalamtTxt"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/dp_15"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/boldfont"
+                                    android:text="INR  100.00 \n you Earn"
+                                    android:textColor="@color/black"
+                                    android:textSize="20sp"
+                                    android:textStyle="bold" />
+
+
+                                <View
+                                    android:layout_width="0.5dp"
+                                    android:layout_height="50dp"
+
+                                    android:layout_gravity="center_horizontal"
+                                    android:background="@color/sub_heading_light" />
+
+
+                                <TextView
+                                    android:id="@+id/referalcdeTxt"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/boldfont"
+                                    android:gravity="end"
+                                    android:paddingEnd="@dimen/pad_30dp"
+                                    android:text="dsgtrhty"
+                                    android:textColor="@color/textviewcolor_dark"
+                                    android:textSize="25sp"
+                                    android:textStyle="bold" />
+
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </FrameLayout>
+
+
+                <com.taximobility.driver.utils.DriverRoundedImageView
+                    android:id="@+id/profileImg"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_margin="12dp"
+                    android:layout_gravity="center"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintBottom_toTopOf="@+id/layout_invite"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/layout_invite"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:src="@drawable/loadingimage" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/shareVia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="25dp"
+                    android:background="@drawable/invite_sharebg"
+                    android:drawableLeft="@drawable/ic_share_new"
+                    android:drawablePadding="10dp"
+                    android:fontFamily="@font/normalfont"
+                    android:gravity="center|center_vertical"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="15dp"
+                    android:paddingRight="20dp"
+                    android:textStyle="bold"
+                    android:textAllCaps="false"
+                    android:paddingBottom="15dp"
+                    android:text="Share"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/wallet_history"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        android:layout_margin="@dimen/dp_12"
+        android:background="@drawable/button_rect"
+        android:text="@string/history"
+        android:fontFamily="@font/normalfont"
+        android:textSize="@dimen/sp_16"
+        android:textStyle="bold"
+        android:textAllCaps="false"
+        android:textColor="@color/white" />
+</RelativeLayout>

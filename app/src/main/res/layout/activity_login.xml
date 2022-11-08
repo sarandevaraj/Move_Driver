@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/login_contain"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="56dp"
+        android:background="@color/white"
+        android:baselineAligned="false"
+        android:gravity="center_vertical"
+        android:visibility="visible">
+        <!--  -->
+
+        <ImageView
+            android:id="@+id/back_click"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:padding="12dp"
+            android:src="@drawable/back" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/header_lay"
+        android:layout_margin="@dimen/dp_12">
+
+        <TextView
+            android:id="@+id/txt_mobileno"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="06dp"
+            android:fontFamily="@font/boldfont"
+            android:text="@string/mobile_no"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/acc_signin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_mobileno"
+            android:layout_marginLeft="06dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="25dp"
+            android:textColor="@color/sub_heading"
+            android:text="@string/acc_signin"
+            android:textSize="13sp" />
+
+        <com.taximobility.Login.countrycode.CountryCodePicker
+            android:id="@+id/ccp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/acc_signin"
+            app:defaultNameCode="IN"
+            app:hideNameCode="true"
+            app:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/edt_mobileno"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/acc_signin"
+            android:layout_marginRight="6dp"
+            android:layout_toRightOf="@+id/ccp"
+            android:background="@color/transparent"
+            android:digits="0123456789"
+            android:focusable="true"
+            android:hint="@string/mobileno"
+            android:imeOptions="actionDone"
+            android:inputType="number"
+            android:textColor="@color/sub_heading"
+            android:maxLength="16"
+            android:maxLines="1"
+            android:padding="8dp"
+            android:textSize="16sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/edt_mobileno"
+            android:layout_marginLeft="07dp"
+            android:layout_marginRight="6dp"
+            android:background="@color/text_filed" />
+
+        <Button
+            android:id="@+id/continue_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/button_rect"
+            android:fontFamily="@font/normalfont"
+            android:text="@string/con_txt"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_16"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+
+</LinearLayout>

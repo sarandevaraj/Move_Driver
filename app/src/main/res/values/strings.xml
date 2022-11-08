@@ -1,0 +1,1165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="promo">Promo</string>
+    <string name="droploc_c">Drop Location ?</string>
+    <string name="tap_to_edit">Tap to edit pickup &amp; drop</string>
+    <string name="skip_fav">Skip Favourite Places</string>
+    <string name="waiting_fare">Waiting fare per minute</string>
+    <string name="your_card_expiry">Your card expired</string>
+    <string name="enter_the_confirmation_phoneno">Please enter  valid mobile number</string>
+    <string name="max_size">Maximum Size</string>
+    <string name="enter_valid_comment">Enter valid comment</string>
+    <string name="calldriver">Are you sure you want to call the driver?</string>
+    <string name="promo_code_empty"> You did\'t apply any promo code</string>
+    <!-- Splash act -->
+    <string name="settings">Settings</string>
+    <string name="pressBack">Please click BACK again to exit</string>
+
+    <!-- login act -->
+
+    <string name="mobileno">Mobile number</string>
+
+    <string name="password_max_character">Password should be less than 32 characters</string>
+    <string name="userphno">User Mobile Number</string>
+
+
+
+    <!-- Registration Act -->
+
+    <string name="please_select_your_salutation">Please select your salutation</string>
+
+    <string name="enter_the_valid_CVV">Please enter valid CVV</string>
+
+    <string name="old_password_mismatch_with_password">Old password does not match</string>
+    <string name="please_select_image_from_valid_path">Please select image from valid path(Gallery folder)</string>
+
+    <string name="cardnumber">Card XXXX XXXX XXXX XXXX</string>
+    <string name="card_number">Card Number</string>
+
+
+    <!-- Taxi Search -->
+    <string name="continue_package">Do you want continue with package services?</string>
+
+    <string name="select_the_pickup_location">Please select the pick up location</string>
+    <string name="select_the_drop_location">Please select the drop off location</string>
+    <string name="book_taxi">Book Taxi</string>
+    <string name="bookedtaxi">You have booked the taxi.</string>
+    <string name="book_now">Book Now</string>
+    <string name="confirm_booking">Confirm later booking?</string>
+    <string name="select_payment">Please select the payment type</string>
+
+
+    <!-- Search Location Acts -->
+    <string name="location">Location</string>
+    <string name="choose_place">Select type</string>
+    <string name="delete_fdrivers">Do you want to delete the driver from Favourites?</string>
+
+    <!-- Ongoing Act -->
+    <string name="back">Back</string>
+    <string name="Trip_in_progress">Trip in Progress</string>
+    <string name="intransit">Trip in Progress</string>
+    <string name="Confirmation">Confirmation</string>
+
+    <!-- If you cancel the trip, cancellation fee will be detected from your card ! -->
+
+    <string name="no_thanks">No Thanks</string>
+    <string name="driver_location">Driver Location</string>
+    <string name="droplocation">Drop off Location(Optional)</string>
+
+    <string name="canceled_from">Debit from :</string>
+    <string name="canceled_amount">Cancelled amount :</string>
+    <!-- PayCard Act -->
+
+    <string name="defaultcard1">Default Card</string>
+    <string name="zerofee">PAY VIA CARD AT FREE OF COST</string>
+    <string name="confirmdelete">Are you sure you want to delete card?</string>
+    <string name="delete_card">Delete card</string>
+
+    <string name="edit">Edit</string>
+    <string name="select_card_type">Please select Card Type</string>
+    <string name="thank_you">Thank You</string>
+
+
+    <string name="payment_complete">Trip Completed</string>
+    <string name="thanksforflag">Thank you for using t\'mobility. Make your next trip even more enjoyable.</string>
+    <string name="ratedriver">Rate Your Driver</string>
+    <string name="shareride">Share</string>
+
+    <!-- Trip History Act -->
+    <string name="edit_favourites">Edit Favourite</string>
+    <string name="add_favourites">Add Favourite</string>
+    <string name="register">Sign Up</string>
+
+    <string name="agree_the_terms_and_condition">Please agree with the Terms and Condition</string>
+    <string name="details">Details</string>
+
+    <!-- Fare Display -->
+    <string name="fare_txt">Fare</string>
+
+    <string name="nit_fare_to">to</string>
+
+
+    <!-- menu -->
+    <string name="menu">Menu</string>
+    <string name="menu_gettaxi">Track my taxi</string>
+    <string name="menu_mybooking">My Bookings</string>
+    <string name="menu_payment">Payment Options</string>
+    <string name="menu_profile">Profile</string>
+    <string name="menu_favourites">Favourite</string>
+    <string name="menu_fare">Fare</string>
+    <string name="menu_about">About</string>
+    <string name="menu_about_us">About Us</string>
+    <string name="book_a_taxi">Book a Taxi</string>
+    <string name="menu_logout">Log Out</string>
+
+    <!-- Booking list -->
+
+    <!-- trip details -->
+    <string name="place">Place</string>
+
+    <string name="jobref">Trip ID</string>
+
+    <string name="t_book">Booking Time</string>
+
+
+    <!-- Aboutact -->
+    <string name="rateapp">Rate us in Play Store</string>
+    <string name="likefb">Like us on Facebook</string>
+    <string name="followtw">Follow us on Twitter</string>
+    <string name="legal">Legal</string>
+    <string name="termcond">Terms &amp; Conditions</string>
+    <string name="policy">Privacy Policy</string>
+    <string name="cancellation_policy">Cancellation Policy</string>
+    <string name="refund_policy">Refund Policy</string>
+    <string name="link">Links</string>
+    <string name="menu_settings">Settings</string>
+    <string name="request_taxi">Request Taxi</string>
+    <string name="requestingtaxi">Requesting Taxi</string>
+    <string name="landmark">Landmark</string>
+    <string name="chpwd">Change Password</string>
+    <string name="conpwd">Confirm Password</string>
+    <string name="oldpwd">Old Password</string>
+    <string name="newpwd">New Password</string>
+    <string name="addcard">Add New Card</string>
+    <string name="office">Office</string>
+    <string name="airport">Airport</string>
+    <string name="others">Others</string>
+    <string name="reason_title">Reason for Cancellation</string>
+    <string name="reson_cancel_title">Reason for Cancel</string>
+
+    <string name="reason1">1.Cab delay</string>
+    <string name="reason2">2.Driver did not respond</string>
+    <string name="reason3">3.Wrong address shown</string>
+    <string name="reason4">4.Changed the travel plan</string>
+    <string name="reason5">5.Booking placed in error</string>
+    <string name="reason6">6.Others</string>
+
+
+    <string name="book_again">Book Again</string>
+    <string name="tripdetail">Trip Details</string>
+    <string name="canceling_taxi">Cancelling Request</string>
+    <string name="fav_pick_location">Favourite Pick up Location</string>
+    <string name="fav_drop_location">Favourite Drop off Location</string>
+    <string name="enter_other_details">Please select your Favourite Type</string>
+    <string name="personalcard">Personal Card</string>
+    <string name="businesscard">Business Card</string>
+    <string name="no_info">No information to update</string>
+    <string-array name="sal_type">
+        <item>Mr</item>
+        <item>Mrs</item>
+        <item>Miss</item>
+    </string-array>
+    <string-array name="percent_type">
+        <item>0%</item>
+        <item>25%</item>
+        <item>50%</item>
+        <item>75%</item>
+        <item>0%</item>
+    </string-array>
+    <string-array name="percent_type_u">
+        <item>25%</item>
+        <item>50%</item>
+        <item>75%</item>
+        <item>100%</item>
+    </string-array>
+    <string name="eta">ETA</string>
+    <string name="hour_must_greater_than">Please make sure that the ride is scheduled after at least an hour from now.</string>
+    <string name="on_going">On Going</string>
+
+    <string name="permission_not_granted">Unable to perform selected action because permissions are not granted.</string>
+    <string name="success">Success</string>
+    <!-- Below strings maximum unused -->
+
+    <string name="about_sub_title">You can depend on us</string>
+    <string name="check_internet_connection">Check your Internet connection</string>
+
+
+    <!-- menu -->
+
+    <!-- activity main -->
+    <string name="try_again">Try Again</string>
+
+    <!-- signup -->
+    <string name="referal">Referral/Promo code</string>
+
+    <!-- edit favourite -->
+
+    <string name="comment">Comments</string>
+    <!-- flgger lay -->
+
+    <!-- about us lay -->
+    <string name="headtitle_below">Lorem Ipsum is simply dummy text of the printing and typesetting industry</string>
+    <string name="fblink">facebook.com/t\'mobility</string>
+    <string name="twlink">twitter.com/t\'mobility</string>
+    <string name="facebook">Facebook</string>
+    <string name="twitter">Twitter</string>
+
+
+    <!-- forgot_popup -->
+    <!-- intransit -->
+    <string name="picktime">Pickup Time:</string>
+    <!-- booking details -->
+
+
+    <!-- <color name="opaque_back">#474541</color> -->
+    <!-- upcoming lay -->
+    <!-- forgotpassword -->
+
+    <string name="pass_app_link">https://play.google.com/store/apps/details?id=com.snape</string>
+    <!-- version upadte -->
+
+    <!-- card registration -->
+    <string name="reg_creditcard">Pay by Credit Card</string>
+    <string name="reg_cash">Pay by Cash</string>
+    <string name="reg_cardnumber">Card Number</string>
+    <string name="reg_month">MM</string>
+    <string name="reg_year">YYYY</string>
+    <string name="reg_cc">CVV</string>
+    <string name="reg_cardname">Name on the card (optional)</string>
+    <string name="reg_entercardname">Please enter your card name</string>
+    <string name="reg_savecard">Save Card Details</string>
+    <string name="reg_terms">Terms and Conditions</string>
+    <string name="reg_expmonth">Please select expiry month</string>
+    <string name="reg_expyear">Please select expiry year</string>
+
+    <string name="reg_enter_referral">Please enter your Referral/Promo code</string>
+    <!-- wallet -->
+
+
+    <!-- verify mobile -->
+    <string name="verify_valid_code">Aw,Snap! Can we try again?</string>
+    <!-- add money -->
+    <string name="addmoney_paypal">Paypal</string>
+    <string name="addmoney_braintree">Braintree</string>
+
+
+    <!-- add newly -->
+
+
+    <string name="payment_cash">Cash</string>
+    <string name="payment_card">Credit Card</string>
+    <string name="pls_complete_the_payment">Please complete the payment</string>
+
+
+    <string name="cash_card">Cash/Card</string>
+
+    <string name="apply">Apply</string>
+    <string name="Language">Language</string>
+    <string name="split_with_friends">Split Fare with Friends</string>
+    <string name="total_aprox_fare">Total Approximate Fare: </string>
+    <string name="ur_approx_fare">Approximate Fare:</string>
+    <string name="enter_pickup">Enter pickup Location</string>
+    <string name="enter_promo_code">Enter the Promo Code</string>
+    <string name="type_your_comment">Type your comments</string>
+    <string name="contact_number">Contact number</string>
+    <string name="z_split_fare_with">Split Fare with</string>
+    <string name="z_split_charged">Your ride will be charged</string>
+    <string name="fblogin">Sign in with Facebook</string>
+    <string name="cancel_fare">Cancellation Fare</string>
+    <string name="estimate_fare">Estimated Fare</string>
+    <string name="travelling_time">Travelling Time :</string>
+    <string name="estimated_fare">Estimated Fare :</string>
+    <string name="e_receipt">E-Receipt</string>
+    <string name="mybookings">My Bookings</string>
+    <string name="add_card">Add Card</string>
+    <string name="edit_card">Edit Card</string>
+    <string name="nocard">You don\'t have credit card details</string>
+    <string name="ontxt">ON</string>
+    <string name="offtxt">OFF</string>
+    <string name="split_status">Split Fare Status</string>
+    <string name="split_">Split Fare </string>
+    <string name="favoritedriver_">Favourite Drivers</string>
+    <string name="inprogress">Pending</string>
+    <string name="accepted">Accepted</string>
+    <string name="rejected">Rejected</string>
+    <string name="percentTotal">Total percentage should be 100</string>
+    <string name="split_with">Split fare with</string>
+
+    <!-- year list -->
+    <string-array name="yearary">
+        <item>2016</item>
+        <item>2017</item>
+        <item>2018</item>
+        <item>2019</item>
+        <item>2020</item>
+        <item>2021</item>
+        <item>2022</item>
+        <item>2023</item>
+        <item>2024</item>
+        <item>2025</item>
+        <item>2026</item>
+        <item>2027</item>
+        <item>2028</item>
+        <item>2029</item>
+        <item>2030</item>
+        <item>2031</item>
+    </string-array>
+    <!-- month list -->
+    <string-array name="monthlistary">
+        <item>01</item>
+        <item>02</item>
+        <item>03</item>
+        <item>04</item>
+        <item>05</item>
+        <item>06</item>
+        <item>07</item>
+        <item>08</item>
+        <item>09</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+    </string-array>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+
+
+    <string name="error">Could not connect to server,Please try again</string>
+    <string name="server_con_error">Could not connect to server,Please try again</string>
+
+
+    <string name="zerorating">Do you want to post your feedback without rating?</string>
+    <string name="message_alert_back">Your registration is not yet completed. If you click back, you must login again to complete the registration. Do you want to move back?</string>
+
+
+    <string name="select_date_arab">حدد التاريخ الوقت</string>
+    <string name="submit_arab">عرض</string>
+    <string name="mode_selection_split">You can\'t change the payment type when the split fare facility enabled</string>
+
+
+    <string name="getting_gps">Getting GPS</string>
+    <string name="loading_map">Loading map</string>
+    <string name="location_enable">Please enable your location service and make sure it should be in high accuracy.</string>
+    <string name="change_network">Please make sure Location service should be in high accuracy.</string>
+
+
+    <string name="crop_image_activity_title">Crop</string>
+    <string name="crop_image_menu_rotate_left">Rotate counter clockwise</string>
+    <string name="crop_image_menu_rotate_right">Rotate</string>
+    <string name="crop_image_menu_crop">Crop</string>
+    <string name="crop_image_menu_flip">Flip</string>
+    <string name="crop_image_menu_flip_horizontally">Flip horizontally</string>
+    <string name="crop_image_menu_flip_vertically">Flip vertically</string>
+
+    <string name="fare_per_km">Fare per </string>
+
+
+    <string name="set_date">Set pickup date</string>
+    <string name="set_time">Set pickup time</string>
+    <string name="thanks_for_your_comment">Thanks for your Rating!</string>
+    <string name="enter_det">Enter below details to complete the sign up process</string>
+    <string name="name_txt">Name</string>
+    <string name="pass_txt">Password</string>
+    <string name="email_txt">Email address</string>
+    <string name="sign_agree">By signing up with us you agree to our </string>
+    <string name="terms_cond">terms and conditions</string>
+
+    <string name="verify_otp">Verify your mobile number</string>
+    <string name="enter_pin">Enter your pin you have received via SMS on</string>
+    <string name="edt_num">Edit Number</string>
+    <string name="resend_code">Resend code</string>
+
+    <string name="mobile_no">Enter your mobile number</string>
+    <string name="acc_signin">Enter your mobile number, to create an account or sign in</string>
+    <string name="con_txt">Continue</string>
+    <string name="search_hint">Search...</string>
+    <string name="no_result_found">Results not found</string>
+    <string name="select_country">Select a county</string>
+
+
+    <string name="verify_ur_password">Verify Your Password</string>
+    <string name="welcome_continue">Welcome back, sign in to continue</string>
+    <string name="enter_ur_password">Enter your password</string>
+    <string name="forget_password">Forgot Password</string>
+    <string name="continue_mobile_number">Continue With mobile number</string>
+    <string name="car_not_available">NO CARS AVAILABLE</string>
+    <string name="confirm">Confirm</string>
+
+
+    <string name="share_app">Share this app</string>
+
+    <string name="site_desc">t\'mobility is a reliable eco-friendly public electric transport service which allows people to travel safely, without any delays at an affordable price. Depend on us to offer you the most eco friendly vehicles to transport you in total comfort.</string>
+
+    <string name="searching_text">Searching...</string>
+
+
+    <string name="old_pass">Your new password same as old password</string>
+    <string name="pinlocation">Your location</string>
+
+
+    <!--SOS and GDPA Strings-->
+
+
+    <string name="tab_emer">Tap this button to get help during an emergency</string>
+    <string name="got_it">GOT IT</string>
+
+    <string name="split_fare">We need to access your contacts inorder to select emergency and split fare contacts</string>
+
+    <string name="skip_">Skip</string>
+
+    <!--Add stop-->
+    <string name="add_stop_desc">Adding stops may vary your fare. On a kind notice,do not add stops on the way of drop location to save time</string>
+    <string name="add_stop_desc_title">Visit multiple places by adding stops</string>
+    <string name="pickUpCannotChanged">Pick up location cannot be changed once trip started</string>
+
+
+    <string name="found_search">Found not to show search</string>
+    <string name="min_str">MIN</string>
+    <string name="gps_status">Gps connection is Enable!!</string>
+    <string name="photo_view">Something went wrong!</string>
+    <string name="no_internet">No Internet Available</string>
+    <string name="share_link">Share link!</string>
+
+    <!--Cancellation module-->
+    <string name="pay_by">Pay by</string>
+    <string name="payAtNextTrip">Pay in next trip</string>
+    <string name="select_card">Select your card</string>
+
+
+    <string name="check_net_connection">Check your internet connection</string>
+    <!-- payuncard_lay -->
+
+
+    <!-- pay uncard -->
+
+
+    <string name="confirm_delete">Are you sure want to delete favourite?</string>
+    <string name="book_ride">Book a Ride</string>
+    <string name="book_delivery">Book Your Delivery</string>
+    <string name="Need_proper_loc">Couldn\'t get your proper location, Please move to coverage area.</string>
+    <string name="wallet_amount_alert">You have insufficient wallet amt. Do you want to recharge?</string>
+    <string name="fav_alert">Your location has been already added as a Favourite location</string>
+
+    <string name="change_drop">CHANGE DROP</string>
+    <string name="continueStr">CONTINUE</string>
+    <string name="restrict_alert">Drop location is outside city limits.Continue booking choose Packages</string>
+    <string name="you_are_offline">You are Now Offline</string>
+    <string name="need_pickup_address">Check your pickup address</string>
+    <string name="popular">POPULAR</string>
+    <string name="favourite">Favourites</string>
+    <string name="recent">Recent Location</string>
+
+    <string name="select_month_year">Select Expiry Month and Year</string>
+    <string name="block_company">Your company has been Blocked</string>
+
+
+    <!-- device permission -->
+
+    <string name="we_request_your_permission_for">We request your permission for</string>
+    <string name="device_information">Device information</string>
+    <string name="storage_and_gallery">Storage and gallery</string>
+    <string name="privacy_storage_gallery_text">We access your storage and gallery to choose and set your profile image.</string>
+    <string name="privacy_camera_text"> We access your camera for taking photos to set your profile image.</string>
+    <string name="privacy_device_information"> We collect and monitor your device information, such as device name, model, battery level, device manufacturer, SDK version, Play service version, available memory, available &amp; total storage, version code, version name, device token, device ID and device time to access app usage and avoid any unauthorized use. </string>
+    <string name="privacy_contacts_text">We collect your contact information to ensure that you can reach your friends and family during an emergency situation by clicking the SOS button.</string>
+    <string name="privacy_location_text">We collect and monitor your current location to provide booking and delivery requests and track the trip and delivery progress</string>
+    <string name="change_permission_in_phone">You can change the above permissions from Phone Settings, at any time.</string>
+    <string name="proceed">Proceed</string>
+    <string name="store_data">See how we store, use and secure your data</string>
+    <string name="by_clicking_proceed">By clicking the check box, you agree to the t\'mobility Cabs</string>
+    <string name="by_clicking_proceed_btn">By clicking the Submit button, you agree to the t\'mobility Cabs</string>
+    <string name="package_name">of t\'mobility cabs</string>
+    <string name="see_how_we_use_your_data">See How We Use Your Data</string>
+    <string name="how_do_we_use_your_data_description">We value your privacy and take all the measures necessary to protect your data at all times. The below important points are meant to help you understand how we collect and use your personal information. </string>
+    <string name="brief_privacy_policy">Brief Privacy Policy</string>
+    <string name="brief_privacy_policy_description">To provide better user experience of our mobile application and ensure that you are able to access all our features, we may collect and maintain your personal and other information which is shared by you or collected by us. We may collect, use, store, import and export your information and you are solely responsible for the accuracy of the details. To understand our policy, we request you to read our Privacy Policy.</string>
+    <string name="what_do_we_collect">What do we collect?</string>
+    <string name="what_do_we_collect_desctiption"><![CDATA[t\'mobility collects your personal information when you create, use and update your account. Using the information, we will be able to provide the complete experience of the application. The information we collect includes:
+\n(1)Personal data (e.g., name, location, and password) to create, update and maintain the account;
+\n(2)Contact data (e.g., email ID, address, and telephone or mobile number) to create, update and maintain the account and also send notifications;
+\n(3)Contract data (e.g., registration time and manner, and status) to review app usage;
+\n(4)Vehicle information (e.g., vehicle number, vehicle model, vehicle owner name, manufacturer and vehicle image);
+\n(5)Driving license, driving license expiry date and driving license image;
+\n(6)Location information to provide accurate ride booking and delivery requests;
+\n(7)Device information (e.g.,device manufacturer, device token, device ID and device time) to access app usage and avoid unauthorized access;
+\n(8)Camera, photos and gallery to set and update profile photo;
+\n(9)Internet information to verify the availability of network and Wifi connectivity;
+\n(10)Access and initiate phone calls without using the dialer UI;
+\n(11)GPS information to verify its connection.and
+\n(12)We use device manufacturer information for custom OS devices which protect background services from running for battery optimization.With this information,we prevent devices from killing background services once the application is disabled from the Protected apps section of Device Settings.
+\n(13)In our local storage, we are storing places api,geocode and direction api result to reduce the hits for same location.
+\nTo know more, read our Privacy Policy.]]></string>
+    <string name="what_do_we_use_it_for">What do we use it for?</string>
+    <string name="what_do_we_use_it_fo_descr">The personal information will be collected, used and stored for the purpose of creating and maintaining your account. We will also collect the information to help drivers in getting incoming ride and delivery requests. To know more, please read our Privacy Policy.</string>
+    <string name="how_do_we_protect_your_data">How do we protect your data?</string>
+    <string name="how_do_we_protect_your_data_desc">We use proper technical and organizational security measures to protect your sensitive and personal information. The transfer of information between t\'mobility cabs and any other devices is in an encrypted form (SSL data). We adopt security measures based on the industry standards to prevent any modification, damage or loss of the data. To know more, please read our Privacy Policy.</string>
+    <string name="know_your_rights">Know your rights</string>
+    <string name="know_your_rights_desc">Subject to and in accordance with the agreed Terms and Conditions and Privacy Policy, you also have the rights to know the purpose for which your information is collected, the kind of data that is collected, the way the data is stored and which agency collects and manages your information. You also have the right to correct, delete and modify your personal information and withdraw the consent which is given by you. To know more, please read our Privacy Policy and Terms and Conditions.</string>
+    <string name="agreed_checkbox">You need to agree to our Privacy Policy and Terms and Conditions to proceed further.</string>
+    <string name="location_permission_denied">You have denied location permission</string>
+    <string name="location_permission_required">We require your location permission</string>
+    <string name="above_permission_settings">Without providing the location permission, you will not be able to use the app any further. You can change the above permission from your Phone Settings.</string>
+    <string name="deny_permission">Without providing the location permission, you will not be able to use the app any further. Are you sure you want to deny location permission?</string>
+    <string name="edit_permissions"> Edit Permission</string>
+    <string name="privacy_exit_app">I\’m sure, exit the app</string>
+    <string name="privacy_call_text">Allows the application to initiate a phone call without using the Dialer user interface</string>
+    <!--<string name="termcond">Terms &amp; Conditions</string>-->
+    <string name="exit_anyway">Exit anyway</string>
+    <string name="call_permission">Call Permission</string>
+    <string name="without_loc">Without providing the location permission, you will not be able to use the app any further</string>
+    <string name="mandatory">(Mandatory)</string>
+    <string name="contacts">Contacts</string>
+    <string name="retry">Retry</string>
+
+
+    <string name="app_buildversion">Version</string>
+    <string name="c_tryagain"> Try again! </string>
+    <string name="nodata">No data found</string>
+
+    <!-- Splash Act -->
+    <string name="location_disable">Location Services Disabled</string>
+    <string name="enable">Enable</string>
+    <string name="cancel"> Cancel </string>
+
+    <string name="please_check_internet">Please check your internet connection</string>
+
+    <!-- Login Act -->
+    <string name="phone">Mobile Number</string>
+    <string name="password">Password</string>
+    <string name="forgotpswd"> Forgot Password? </string>
+    <string name="done"> DONE </string>
+    <string name="signin">Sign In</string>
+    <string name="enter_your_mobile_number">Please enter your mobile number</string>
+    <string name="check_internet">Please Take New Ride</string>
+    <string name="t_ok"> OK </string>
+    <string name="enter_mobile_number">Please enter your mobile number</string>
+    <string name="enter_the_password">Please enter your password</string>
+    <string name="pwd_min">Password should be minimum 6 characters</string>
+    <string name="confirmlogout">Are you sure you want to logout?</string>
+    <string name="confirm_complete">Are you sure you want to complete this trip?</string>
+
+    <!-- HomeActivity -->
+    <string name="m_me"> Profile </string>
+    <string name="total">Total</string>
+    <string name="excuse_me_brevity"> Excuse my brevity,Sign up with the Referral code </string>
+    <string name="and_earn"> and earn </string>
+    <string name="download_from">. Download the app from:</string>
+    <string name="profile_image">Profile Image</string>
+    <string name="choose_an_image">Choose an Image</string>
+    <string name="gallery">Gallery</string>
+    <string name="camera">Camera</string>
+    <string name="cancelled">Cancelled</string>
+
+    <!-- Profile Act -->
+    <string name="m_logout">Log Out</string>
+    <string name="submit"> Submit </string>
+    <string name="get_started"> Get Started </string>
+    <string name="pwd_same">Password and confirm password does not match</string>
+    <string name="cancell"> Cancel </string>
+    <string name="image_failed">Please select image from valid path(Gallery folder)</string>
+    <!-- Failed to get file, Please try again! -->
+    <string name="first"> First Name </string>
+    <string name="last"> Last Name </string>
+    <string name="email"> Email </string>
+    <string name="mobile"> Mobile </string>
+    <string name="confimpswd"> Confirm Password </string>
+    <string name="bankstmt">Bank A/C is used to pay out commission</string>
+    <string name="bankcomm"><nowiki>*</nowiki></string>
+    <string name="no_changes">No changes made</string>
+
+    <!-- My Status Act -->
+    <string name="my_status">My Location</string>
+    <string name="you_are_here">You are here!</string>
+    <string name="current_location">Current Location</string>
+
+    <!-- JobsAct -->
+    <string name="trip_history">Trip History</string>
+    <string name="trip_details">Trip Details</string>
+    <string name="past_booking">Past Bookings</string>
+
+    <!-- Notification Act -->
+    <string name="name">Name</string>
+    <string name="accept_time">30 SECONDS LEFT TO ACCEPT</string>
+    <string name="min">Min</string>
+    <string name="sec">Sec</string>
+    <string name="minutestxt">Minute</string>
+    <string name="mins">min(s)</string>
+    <string name="secondstxt">Sec</string>
+    <string name="accept"> ACCEPT </string>
+    <string name="decline"> DECLINE </string>
+    <string name="Trip_Request">Trip Request</string>
+    <string name="seconds_to_left">LEFT TO ACCEPT</string>
+
+    <!-- Ongoing Act -->
+    <string name="device_not_support_map">Device does not support map version!</string>
+    <string name="invalid_mobile_number">Invalid mobile number</string>
+    <string name="stop_waiting">Stop Waiting</string>
+    <string name="start_waiting">Start Waiting</string>
+    <string name="heading_ongoing">Waiting For Passenger</string>
+    <string name="pass_onboard">Start Trip</string>
+    <string name="ongoing_journey">Trip in Progress</string>
+    <string name="waiting_time_txt">Waiting Time</string>
+    <string name="arvd_destination">End Trip</string>
+    <string name="ive_arrived">I\'ve Arrived</string>
+    <string name="pickup_passenger">Pickup Passenger</string>
+    <string name="you_are_in_trip">You\'re already in a trip!</string>
+    <string name="pickuploc"> Pick up Location </string>
+    <string name="droploc"> Drop Location </string>
+    <string name="picklocation"> Pick up Location </string>
+    <string name="notes">Landmark</string>
+    <string name="you">You</string>
+    <string name="waiting_time">Waiting Time Cost(per min)</string>
+    <string name="total_km">Total km </string>
+    <string name="per">per</string>
+
+    <!-- Fare calculator -->
+    <string name="actual_distance">Total Distance</string>
+    <string name="waiting_cost">Waiting Time Cost </string>
+    <string name="Tax">Tax</string>
+    <string name="tax"> Tax( </string>
+    <string name="tax_percent"> %) </string>
+    <string name="total_amount">Total</string>
+    <string name="paymentby">Payment by</string>
+    <string name="cash"> Cash </string>
+    <string name="card"> Card </string>
+    <string name="uncard"> New Card </string>
+    <string name="pay_online"> Pay Online </string>
+    <string name="fare_calculator">Fare Calculator</string>
+    <string name="wallet_amount">Wallet Amount Used</string>
+    <string name="pay_amount">Amount to Pay</string>
+
+
+    <!-- Job Done Act -->
+    <string name="trip_completed">Trip Completed</string>
+
+    <string name="trip_id">Trip ID</string>
+    <string name="p_congrats"> Payment Completed </string>
+    <string name="p_main"> Back To Home </string>
+
+    <!-- payuncard_lay -->
+    <string name="p_cardno">Card Number **** **** **** **** </string>
+    <string name="p_expiry">Expiry MM/YY </string>
+    <string name="p_cvv">CVV</string>
+    <!-- add newly -->
+    <!-- invite friend -->
+    <string name="invite_sms">SMS</string>
+    <string name="invite_email">Email</string>
+    <string name="invite_fb">Facebook</string>
+    <string name="invite_whatsapp">Whats App</string>
+    <string name="invite_twitter">Twitter</string>
+    <string name="invite_sharevia">Share Via</string>
+    <string name="invite_frdrides">When a driver rides the trip with your code</string>
+    <string name="invite_youearn">You Earn</string>
+    <string name="invite_friend">Invite Friends</string>
+
+    <string name="sendmail">Send mail</string>
+    <string name="there_is_no_email_client_installed">There is no email client installed</string>
+    <string name="add">Add</string>
+    <!-- trip details -->
+    <string name="amount"> Amount </string>
+    <string name="payment"> Payment </string>
+    <string name="t_passname">Passenger Name</string>
+    <string name="t_pickloc">Pick up Location</string>
+    <string name="t_picktime">Pick up Time</string>
+    <string name="t_droploc">Drop Location</string>
+    <string name="t_droptime">Drop Time</string>
+    <string name="t_distance">Distance Travelled</string>
+    <string name="t_tripduration">Trip Duration</string>
+
+    <!-- pay uncard -->
+    <string name="heading_payuncard">Pay with new card</string>
+    <string name="ent_ccard_no">Please enter your credit card number</string>
+    <string name="ent_chk_ccard">Kindly check your credit card number</string>
+    <string name="ent_exp_date">Please enter expiry date</string>
+    <string name="ent_exp_year_gt">Expired year should be equal and greater than current year</string>
+    <string name="ent_cvv">Please enter your cvv number</string>
+    <string name="ent_chk_cvv">Kindly check your cvv number</string>
+    <string name="message"> Message </string>
+    <string name="ok">OK</string>
+    <string name="select_language">Select Language</string>
+    <string name="discount">Discount</string>
+    <string name="trip_fare">Trip Fare</string>
+    <string name="enter_the_first_name">Please enter your first name</string>
+    <string name="enter_the_last_name">Please enter your last name</string>
+    <string name="enter_the_card_number">Please enter your card number</string>
+    <string name="enter_the_valid_card_number">Please enter valid card number</string>
+    <string name="enter_the_expiry_date">Please enter your expiry date</string>
+    <string name="enter_the_email">Please enter your Email</string>
+
+    <string name="enter_the_valid_email">Please enter valid Email</string>
+
+    <!-- Ongoing Trip Act -->
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="cancel_in_going_trip">Are you sure want to cancel the trip?</string>
+
+    <!-- If you cancel the trip, cancellation fee will be detected from your card ! -->
+
+
+    <!-- Dashboard Act -->
+    <string name="please_click_back_again_exit">Please click back again to exit</string>
+
+    <!-- UpcomingtripAct -->
+
+    <!-- AssignTaxi Act -->
+    <string name="upload_your_image"> Upload your File </string>
+    <string name="file_upload">Upload Files?</string>
+    <string name="choose">Choose File</string>
+    <string name="please_choose">Please choose your file</string>
+    <string name="please_choosedate">Please choose correct date</string>
+    <string name="call_passeneger">Call</string>
+    <string name="taxi_details">Taxi Details</string>
+
+    <string name="taxi_model">Taxi Model</string>
+    <string name="taxi_number">Taxi Number</string>
+    <string name="taxi_assignfrom">Taxi from Date</string>
+    <string name="taxi_assignto">Taxi to Date</string>
+    <string name="close">Close</string>
+    <!-- Cancel Trip Act -->
+
+
+    <!-- Statistics Act -->
+
+    <string name="help"> Help </string>
+
+    <!-- Below Strings are maximum unused -->
+
+    <!-- signin -->
+    <string name="s_signin"> Sign In </string>
+    <string name="s_pass_max">Password should be less than 32 characters</string>
+    <string name="remarks">Remarks</string>
+
+    <!-- tell friend -->
+
+    <!-- streetride_lay -->
+    <string name="r_fare"> Fare </string>
+
+    <!-- salestarget_lay -->
+
+    <string name="l_fromdate"> From date </string>
+    <string name="l_todate"> To date </string>
+
+    <!-- recordact_lay -->
+
+    <!-- paymentcash_popup -->
+
+    <!-- forgot_popup -->
+    <string name="f_timetoreach"> Time to Reach </string>
+    <string name="f_forgotpwd"> Forgot Password </string>
+
+    <!-- changepass_lay -->
+    <string name="c_oldpwd"> Old Password </string>
+    <string name="c_newpwd"> New Password </string>
+    <string name="c_conpwd"> Confirm Password </string>
+    <string name="c_chnpwd"> Change Password </string>
+
+    <!-- menu -->
+    <string name="m_timer">00.00.00</string>
+
+    <!-- signup -->
+
+    <string name="referral"> Referral </string>
+    <string name="trip">Trip</string>
+    <string name="trips1">Trips</string>
+
+    <string name="Lasttrip">Last Trip</string>
+    <string name="Last2trip">Last 2 Trips</string>
+    <string name="Last3trip">Last 3 Trips</string>
+
+    <string name="waitingpassenger">Waiting For Passenger</string>
+    <string name="tripprogress">Trip in Progress</string>
+    <string name="tripdetails">Trip Details</string>
+
+
+    <!-- paymentoption lay -->
+    <!-- about us lay -->
+
+    <!-- manage salaes lay -->
+    <string name="zero"> 0 </string>
+
+    <!-- me lay -->
+
+    <!-- notifiaction lay -->
+    <string name="Colon"> : </string>
+    <string name="seconds">00</string>
+
+    <!-- farecalculator lay -->
+    <string name="farecal"> Fare </string>
+    <string name="string_tips">Tips</string>
+    <string name="round_trip"> Round Trip </string>
+    <string name="f_km"> km </string>
+    <string name="f_float"> 0.0 </string>
+    <string name="f_currsymbol"> $ </string>
+
+    <color name="block">#000000</color>
+
+    <string name="enter_the_old_password">Please enter your old password</string>
+    <string name="enter_the_new_password">Please enter your new password</string>
+    <string name="enter_the_confirmation_password">Please enter your confirmation password</string>
+    <string name="password_min_character"> Password should be minimum 6 characters </string>
+    <string name="confirmation_password_mismatch_with_password">Password and Confirm password do not match</string>
+    <string name="old_password_and_newpassword_are_same">Old password and new password are Same</string>
+
+    <!-- version update -->
+    <string name="version_up_message">There is a new version of t\'mobility available, this version is no longer supported.</string>
+    <string name="version_up_title">Update</string>
+    <string name="version_up_now">Update now</string>
+    <string name="version_up_later">Later</string>
+
+    <!-- add newly -->
+    <string name="hide">Hide</string>
+    <string name="show">Show</string>
+    <string name="z_req_date">Requested Date</string>
+    <string name="z_status">Status</string>
+    <string name="z_history">Withdraw History</string>
+    <string name="z_view">View</string>
+    <string name="z_datetime">Date &amp; Time</string>
+
+
+    <string name="withdraw">Withdraw</string>
+    <string name="with_draw">Are you sure want to withdraw </string>
+    <string name="save">Save</string>
+    <string name="pickup1"> Pick up </string>
+    <string name="passenger_details">Passenger Details</string>
+    <string name="wallet_history">Withdraw History</string>
+    <string name="no_data">No data found</string>
+    <string name="back_home">Back To Home</string>
+    <string name="enter_the_mobile_number">Please enter your mobile number</string>
+    <string name="taxi_detailsu">Taxi Details</string>
+
+
+    <!-- Referal Code -->
+    <string name="referal_code">Enter trip referral code</string>
+    <string name="Hreferal"> Referral Code </string>
+    <string name="referal_amount">Referral Amount</string>
+    <string name="trip_amount">Trip Amount</string>
+    <string name="trip_Amount">Trip amount</string>
+    <string name="payment_pending">Payment request in pending </string>
+
+
+    <!-- Withdraw view -->
+    <string name="withdraw_view">Withdraw Request View</string>
+    <string name="request_id">Request ID</string>
+    <string name="brand_type">Brand Type</string>
+    <string name="company_name">Company Name</string>
+    <string name="withdraw_amount">Withdraw Amount</string>
+    <string name="waiting_tcost">Waiting Time Cost(1 hour)</string>
+    <string name="status_details">Status Details</string>
+    <string name="status">Status</string>
+    <string name="payment_mode">Payment Mode</string>
+    <string name="transaction_id">Transaction ID</string>
+    <string name="Comments">Comments!</string>
+
+    <string name="Referalwithdraw_request">Referral Withdraw Request</string>
+    <string name="payment_availed">Payment Availed</string>
+    <string name="payment_request">Payment Request in Pending </string>
+    <string name="req_model">Trip Requested for </string>
+    <string name="track_now">Track Now</string>
+    <string name="fare2">123</string>
+    <string name="droplocnew">Drop Location(Optional)</string>
+
+    <string name="online">Online</string>
+    <string name="you_are_offline_new">You are offline !</string>
+    <string name="go_online_to_start_jobs">Go online to start accepting jobs.</string>
+    <string name="offline">Offline</string>
+
+
+    <string name="dist_fare">Distance Fare</string>
+    <string name="vehicle_dist">Total Distance Fare</string>
+
+    <string name="vehicle_wait_fare">Total Waiting Charges</string>
+    <string name="min_fare">Minute Fare</string>
+    <string name="vehicle_min">Total Minutes Fare</string>
+    <string name="vehicle_wait">Waiting Time</string>
+    <string name="even_charge">Evening Charges</string>
+    <string name="nit_fare">Night Charges</string>
+    <string name="sub_total">Sub Total</string>
+    <string name="promo_code">Discount(Promo Code)</string>
+    <string name="paid_by">Paid By</string>
+    <string name="wallet">Wallet</string>
+    <string name="select_date_time">Select Date Time</string>
+
+
+    <string-array name="Status">
+        <item>Not yet Approved</item>
+        <item>Approved</item>
+        <item>Deny/Rejected</item>
+    </string-array>
+
+    <string name="filter">Filter</string>
+    <string name="up_coming">Up Coming</string>
+    <string name="new_trips">New Trips</string>
+    <string name="past_trips">Past Trips</string>
+
+
+    <!-- Referal Code -->
+
+    <string name="fare_details">Fare Details</string>
+    <string name="home">Home</string>
+    <string name="profile">Profile</string>
+    <string name="street_pickup">Street Pickup</string>
+    <string name="earnings">My Earnings</string>
+    <string name="fetching_address">Fetching Address</string>
+    <string name="enter_dest">Enter Drop Location</string>
+    <string name="above">Above</string>
+    <string name="below">Below</string>
+    <string name="start_trip">Start Trip</string>
+    <string name="end_trip">End Trip</string>
+
+    <string name="trips">8 Trips</string>
+    <string name="Estimated">Estimated Amount</string>
+    <string name="Week">This week</string>
+    <string name="confirm_call">Are you sure,You want to call passenger?</string>
+    <string name="call">Call</string>
+    <string name="insufficent_amout">Insufficient amount</string>
+    <string name="no_sufficient_amount">You have no sufficient amount !</string>
+    <string name="minutes_travel">Total travel time</string>
+    <string name="domain_hint">Enter your Account ID</string>
+
+
+    <string name="server_error">Could not connect to server,Please try again</string>
+
+
+    <string name="today_hdr">Today</string>
+
+
+    <string name="tap_triphistory">Tap the trip history link to see your ongoing and past trip details</string>
+
+
+    <string name="completed">Completed</string>
+    <string name="date_change">Your phone date is inaccurate! Adjust your clock and try again.</string>
+    <string name="error_in_string">Error in getting string</string>
+    <string name="error_in_color">Error in getting color</string>
+    <string name="error_in_getting_gps">Error in getting gps. Check your gps accuracy</string>
+    <string name="getting_gps_low">We are trying to get your location in low accuracy</string>
+    <string name="address_cant_fetch">Sorry we can\'t get your current location</string>
+
+
+    <!-- add money -->
+    <string name="addmoney">Add Money</string>
+    <string name="recharge_money">Recharge Money</string>
+    <string name="amount_between">Enter the amount between</string>
+    <string name="enter_amount">Please enter valid amount</string>
+    <string name="have_promocode">Have a  Promocode?</string>
+    <!-- card registration -->
+    <string name="reg_promocode">Pay by Referral Code</string>
+    <string name="walletmsg">Cashless, hassle-free rides with t\'mobility wallet</string>
+
+    <string name="reg_enterprcode">Please enter your Promo code</string>
+    <string name="minimum_fare">Minimum Fare</string>
+    <string name="subscription">Subscription</string>
+    <string name="recharge">Recharge</string>
+
+
+    <string name="start_time">Start Time</string>
+    <string name="drop_time">Drop Time</string>
+    <string name="total_travel_time">Total Travel Time "\n"(hrs:mins)</string>
+    <string name="total_distance">Total Distance</string>
+    <string name="confir_complete_payment">Are you sure you want to Complete the Payment</string>
+    <string name="confir_tips_payment">Are you sure you want to Complete the Payment without tips</string>
+    <string name="endter_valid_fare">Please make sure the trip fare before proceed.</string>
+
+
+    <string name="base_fare">Base Fare</string>
+    <string name="min_trav">Total travel time</string>
+
+    <string name="payment_type">Payment type</string>
+    <string name="waiting_fare_">Waiting Fare</string>
+
+    <string name="promotion">Promotion Discount</string>
+    <string name="wallet_amt">Wallet amount used</string>
+    <string name="paid_amt">Amount Paid</string>
+
+
+    //outstaion receipt strings
+    <string name="additonal_time_fare">Fare for Additional Time</string>
+    <string name="additonal_distance_fare">Fare for Additional</string>
+
+    <string name="triptype">Trip type</string>
+    <string name="hrs">hr(s)</string>
+    <string name="trip_type_outstation">Outstation Trip</string>
+    <string name="trip_type_rental">Rental Trip</string>
+    <string name="trip_type_normal">Local Trip</string>
+    <string name="trip_cost">Trip cost</string>
+    <string name="net_total">Net Total</string>
+
+    <string name="notiy_lanch_app">Open app</string>
+    <string name="calculation_progress">Calculation Inprogress</string>
+    <string name="trip_summary">Trip Summary</string>
+    <string name="tap_drop">Tap your current Location on Map</string>
+    <string name="use_map">Use Map</string>
+    <string name="Selected_Week">Selected  Week</string>
+    <string name="pickup_location">PICKUP LOCATION</string>
+    <string name="app_running">App is using location services</string>
+
+    <string name="btn_share_invite">Share this App</string>
+    <!--checking_sandeep-->
+
+
+    <string name="speed">SPEED</string>
+    <string name="wait_time">WAITING TIME</string>
+    <string name="speed_ongoing">Speed</string>
+    <string name="wait_time_ongoing">Waiting Time</string>
+
+    <string name="no_going_trip">Currently no tracking available!</string>
+    <string name="signup">Sign Up</string>
+    <string name="address_not_found">Address not found</string>
+    <string name="sucessfull_driver_registartion">Thanks for register as driver. We will get back to you shortly!</string>
+    <string name="driver_registartion_failure">Try again later</string>
+
+
+    <!--SOS and GDPA strings-->
+
+    <string name="str_loc">We need to update your current location to our server inorder to verify our closest driver\'s availability.</string>
+    <string name="str_phone">We need call and read phone state permission to contact passenger</string>
+    <string name="sos_contact">We need to access your contacts inorder to select emergency contacts</string>
+    <string name="str_media">We would like to access your media inorder to set the profile picture</string>
+    <string name="terms_condition">By logging in you agree to our</string>
+    <string name="terms_condition2">Terms and Conditions</string>
+    <string name="and">and</string>
+    <string name="privacy_policy">Privacy policy</string>
+    <string name="account_deleted_success">Account deleted successfully</string>
+    <string name="del_acc">Delete Your Account</string>
+    <string name="privacy_settings">Privacy Settings</string>
+    <string name="send_emergency_alert">Are you sure want to send Emergency Alert?</string>
+    <string name="alert_delete_contact">Are you sure want to delete the contact?</string>
+    <string name="sos_long_desc">Alert your dear ones incase of an emergency. Add them to your emergency contacts.</string>
+    <string name="emergency_contact">Emergency Contacts</string>
+    <string name="sos_short_desc">Let\'s make travel safer...</string>
+    <string name="sos_more_info">You can add up to 3 contacts</string>
+    <string name="add_contacts">Add Contacts</string>
+    <string name="already_added">Contact already present. Please try adding another contact.</string>
+    <string name="contact_limit_reached">You can add up to 3 contacts. Remove any contact to add another.</string>
+    <string name="please_try_again">Please try again</string>
+    <string name="emergency">Emergency</string>
+    <string name="contact_min_alert">Please select valid contact number</string>
+
+    <!--settlement_history strings-->
+    <string name="settlement_history">Settlement History</string>
+    <string name="settlement_request">Settlement Request</string>
+    <string name="settlement">Settlement</string>
+    <string name="your_credit">Your Credit</string>
+    <string name="raise_request">Raise Request</string>
+    <string name="date">Date</string>
+    <string name="go">Go</string>
+    <string name="total_earnings">Total Earnings</string>
+    <string name="admin_commision">Admin Commission</string>
+    <string name="net_earings">Wallet Amount</string>
+    <string name="cash_collected">Cash Collected</string>
+    <string name="card_payment">Card Payment</string>
+    <string name="yet_to_pay">Yet to Pay by Admin</string>
+    <string name="one_req">One req per day</string>
+    <string name="last_req">Last req sent by </string>
+    <string name="req_to_admin">Request to Admin</string>
+    <string name="days_limit_exceed">Kindly Select with in 31 days</string>
+    <string name="wallet_tooltip_text">Wallet details are moved here</string>
+    <string name="withdraw_tooltip_text">Withdraw details are moved here</string>
+    <string name="settlement_tooltip_text">Introducing "Amount Settlement" option here</string>
+    <string name="wallet_moved_tooltip">Wallet details are moved to Earnings page</string>
+    <string name="next">Next</string>
+    <string name="id">ID</string>
+    <string name="requested_payment">Requested Payments</string>
+    <string name="driver_commision">Driver Commission</string>
+    <string name="low_gps_alert_message">Couldn\'t get your proper location, Please move to coverage area.</string>
+    <string name="distance_calcuation_inprogress">Distance calculation in progress</string>
+    <string name="email_optional">Email (Optional)</string>
+    <string name="search_stop_hint">Enter stop location</string>
+    <string name="idle_stop">You seem to be idle for long time. Kindly click here to get a trip</string>
+    <string name="trip_stop">You seem to be idle for long time. Kindly click here to update the status</string>
+
+
+    <string name="mob_settings">Mobile settings     </string>
+    <string name="huawei_title">Protected Apps</string>
+    <string name="huawei_msg">t\'mobility App  requires to be enabled in \'Protected Apps\' to Function Properly.</string>
+    <string name="auto_start">Auto start Enable</string>
+    <string name="auto_start_msg">t\'mobility App requires to be enabled in \'Auto Start\' and \'Other Permissions\' to Function Properly.</string>
+    <string name="power_saving">Power saving disable</string>
+    <string name="power_saving_msg">t\'mobility App requires to be disabled in \'Power saving\' to Function Properly.</string>
+    <string name="track_shift_status">Now you are in shift out.Kindly shift in to continue.</string>
+    <string name="you_are_in_shift_out">You are in shift out</string>
+    <string name="something">Something went wrong!</string>
+    <string name="cancellation_fare">Cancellation Fare</string>
+    <string name="pickup_time">Pickup Time</string>
+
+    <string name="tap_loc">Tap to view Current location</string>
+    <string name="withdraw_history">View transaction</string>
+    <string name="current_trips">Currently no trips available!</string>
+    <string name="corporate">Corporate</string>
+
+    <string name="passenger_phone">Call Passenger</string>
+    <string name="schedule_trip">Schedule Trip</string>
+    <string name="corporate_trip">Corporate Trip</string>
+    <string name="app_name">t\'mobility driver</string>
+    <string name="become_driver">Become a Driver</string>
+    <string name="become_passenger">Become a Passenger</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="sign_up_acc">Enter below details to complete the sign up process</string>
+    <string name="history">History</string>
+    <string name="today_trip">Today\'s Trip</string>
+    <string name="accept_ride">Accept Ride</string>
+    <string name="notes_txt">Notes</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="locate_on_map">Locate on Map</string>
+    <string name="newride">+ New Ride</string>
+    <string name="my_ride">My Rides</string>
+    <string name="notification_setting">Notification Settings</string>
+    <string name="call_helpline">Call Helpline</string>
+    <string name="confirm_call_admin">Are you sure,You want to call HelpLine?</string>
+    <string name="below_miles">Below 25 Miles</string>
+    <string name="above_miles">Above 25 Miles</string>
+    <string name="total_trips">Total Trips</string>
+    <string name="total_online">Total Online</string>
+    <string name="thanks_msg">Your Booking has been Scheduled. We will get back to you with Driver Details</string>
+    <string name="pay_back">Pay Back</string>
+    <string name="add_balance_amount">Add Balance Amount to Passenger Wallet</string>
+    <string name="enter_balance_amount">Enter Balance Amount</string>
+    <string name="add_you_willing">Are you willing to give tip</string>
+    <string name="enter_custom_amount">Enter Custom Amount</string>
+    <string name="preferences">Preferences</string>
+    <string name="tips_error">Enter the valid tips amount or press cancel button</string>
+
+    <string name="my_fleet">My Fleet</string>
+    <string name="add_vehicle">Add Vehicle</string>
+    <string name="vehicle_information">Enter Your Vehicle Information</string>
+    <string name="vehicle_number">Vehicle Number</string>
+    <string name="select_model">Select Model</string>
+    <string name="vehicle_owner_name">Vehicle Owner Name</string>
+    <string name="vehicle_manufacturer">Vehicle Manufacturer</string>
+    <string name="upload_vehicle_img">Upload Vehicle Image</string>
+    <string name="img_format">Image should be in following format, jpg or png</string>
+    <string name="enter_the_num">Please enter your vehicle number</string>
+    <string name="select_the_model">Please select your model</string>
+    <string name="enter_vehicle_manufacturer">Please enter your vehicle manufacturer</string>
+    <string name="upload_image_file">Please upload your vehicle image</string>
+    <string name="request_ride">Request Ride</string>
+    <string name="change_fleet">Are you sure want to change fleet </string>
+    <string name="total_preferences_fare">Total Preferences Fare</string>
+    <string name="preferences_fare">Preferences Fare</string>
+    <string name="preferences_detail">Preferences</string>
+    <string name="product_name">Product Name</string>
+    <string name="product_weight">Product Weight</string>
+    <string name="product_size">Product Size</string>
+    <string name="date_time">Date and Time</string>
+
+    <string name="setDate">Set date</string>
+    <string name="setTime">Set time</string>
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <string name="trip_cancelled">Trip Cancelled</string>
+    <string name="trip_cancelled_by_passenger">Trip cancelled by passenger</string>
+    <string name="trip_completed_by_passenger_using_wallet">Trip completed by passenger wallet</string>
+    <string name="wait_tips">Wait until passenger pay the tip or Disable the tip option and continue</string>
+    <string name="delivery_fare">Delivery Fare</string>
+    <string name="welcome_to_">Welcome to t\'mobility</string>
+
+</resources>

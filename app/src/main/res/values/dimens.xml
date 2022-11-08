@@ -1,0 +1,105 @@
+<resources>
+
+
+    <dimen name="circle_indicator_radius">3dp</dimen>
+    <dimen name="circle_indicator_radius_search">3dp</dimen>
+    <dimen name="taxi__search_padding_medium">8dp</dimen>
+    <dimen name="taxi__search_padding_large">16dp</dimen>
+    <dimen name="taxi__button_height">48dp</dimen>
+    <!--26-->
+    <dimen name="text_normal">17sp</dimen>
+    <!--32-->
+    <dimen name="text_large">22dp</dimen>
+    <!--42-->
+    <dimen name="text_elarge">32dp</dimen>
+    <!--16-->
+
+    <!--28-->
+    <dimen name="text_slide_name">19sp</dimen>
+
+    <dimen name="text_slide_pno">16sp</dimen>
+    <!--24-->
+    <!--26-->
+    <dimen name="text_dialog_normal">17sp</dimen>
+    <!--20-->
+    <dimen name="text_dialog_small">13sp</dimen>
+    <!--32-->
+    <!--20-->
+    <!--24-->
+
+    <dimen name="fare_details_header">18sp</dimen>
+    <dimen name="text_fare">20sp</dimen>
+
+    <dimen name="fare_details_item">16sp</dimen>
+    <dimen name="google_1x">8dp</dimen>
+
+
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="padding_left_no_internet_connection_text">30dp</dimen>
+    <dimen name="padding_right_no_internet_connection_text">30dp</dimen>
+    <dimen name="padding_googleplay_text">8dp</dimen>
+    <dimen name="dp_1">1dp</dimen>
+    <dimen name="dp_3">3dp</dimen>
+    <dimen name="dp_2">2dp</dimen>
+    <dimen name="dp_4">4dp</dimen>
+    <dimen name="dp_5">5dp</dimen>
+    <dimen name="dp_6">6dp</dimen>
+    <dimen name="dp_8">8dp</dimen>
+    <dimen name="dp_10">10dp</dimen>
+    <dimen name="dp_12">12dp</dimen>
+    <dimen name="dp_15">15dp</dimen>
+    <dimen name="dp_18">18dp</dimen>
+    <dimen name="dp_20">20dp</dimen>
+    <dimen name="dp_24">24dp</dimen>
+
+
+    <dimen name="stop_lay_height">40dp</dimen>
+    <dimen name="stop_space_lay">1dp</dimen>
+    <dimen name="stop_icon_lay">8dp</dimen>
+    <dimen name="underline_view_height">1dp</dimen>
+
+
+
+    <dimen name="tool_bar">56dp</dimen>
+
+    <dimen name="pad_5dp">5dp</dimen>
+    <dimen name="pad_10dp">10dp</dimen>
+    <dimen name="pad_15dp">15dp</dimen>
+    <dimen name="pad_20dp">20dp</dimen>
+    <dimen name="pad_30dp">30dp</dimen>
+    <dimen name="sp_14">14sp</dimen>
+    <dimen name="sp_16">16sp</dimen>
+    <dimen name="sp_17">17sp</dimen>
+    <dimen name="sp_18">18sp</dimen>
+    <dimen name="sp_19">19sp</dimen>
+    <dimen name="sp_20">20sp</dimen>
+    <dimen name="dp_25">25dp</dimen>
+    <dimen name="dp_40">40dp</dimen>
+
+
+
+
+
+
+
+
+
+    <!--driver-->
+
+    <dimen name="small_text">12sp</dimen>
+    <dimen name="map_dot_marker_size">8dp</dimen>
+
+    <dimen name="tool_bar_bottom">48dp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="radius">95dp</dimen>
+    <dimen name="dp_16">16dp</dimen>
+    <dimen name="pad_16dp">16dp</dimen>
+    <dimen name="pad_100dp">100dp</dimen>
+
+
+
+
+
+
+</resources>

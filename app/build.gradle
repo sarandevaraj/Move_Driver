@@ -1,0 +1,207 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'com.google.firebase.crashlytics'
+// apply plugin: 'io.fabric'
+android {
+    compileSdkVersion 31
+    signingConfigs {
+        release_config {
+            try {
+                storeFile file('/home/developer/Documents/Android Project/Snape/snapecabs_andr/app/keystore/keystore.jks')
+                storePassword 'taximobility'
+                keyAlias 'taximobility'
+                keyPassword 'taximobility'
+            } catch (Exception ex) {
+                throw new InvalidUserDataException("You should define KEYSTORE_PASSWORD and KEY_PASSWORD in gradle.properties.")
+            }
+        }
+    }
+
+
+    defaultConfig {
+        applicationId "$rootProject.ext.packageName"
+        minSdkVersion 19
+        targetSdkVersion 31
+        signingConfig signingConfigs.release_config
+        multiDexEnabled true
+        vectorDrawables.useSupportLibrary = true
+        ndk.abiFilters 'armeabi-v7a','arm64-v8a','x86','x86_64'
+        compileOptions {
+            sourceCompatibility JavaVersion.VERSION_1_8
+            targetCompatibility JavaVersion.VERSION_1_8
+        }
+    }
+    configurations {
+        all*.exclude group: 'com.android.support', module: 'support-v13'
+    }
+    // Temporary fix until alpha10
+    packagingOptions {
+        exclude 'META-INF/proguard/androidx-annotations.pro'
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            shrinkResources false
+            debuggable false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //proguardFiles getDefaultProguardFile('proguard-rules.txt')
+            resValue "string", "googleID", "$rootProject.ext.googleID"
+            resValue "string", "common_name", "$rootProject.ext.common_name"
+            resValue "string", "facebookId", "$rootProject.ext.facebookId"
+            resValue "string", "facebookAppId", "$rootProject.ext.facebookAppId"
+        }
+        debug {
+            minifyEnabled false
+            shrinkResources false
+            debuggable true
+         /*   minifyEnabled true
+            shrinkResources true
+            debuggable true
+            useProguard true*/
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            resValue "string", "googleID", "$rootProject.ext.googleID"
+            resValue "string", "common_name", "$rootProject.ext.common_name"
+            resValue "string", "facebookId", "$rootProject.ext.facebookId"
+            resValue "string", "facebookAppId", "$rootProject.ext.facebookAppId"
+        }
+    }
+    lintOptions {
+        checkReleaseBuilds false
+        disable 'InvalidPackage'
+        // set to true to turn off analysis progress reporting by lint
+        quiet true
+        // if true, stop the gradle build if errors are found
+        abortOnError false
+        // if true, only report errors
+        ignoreWarnings true
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    dexOptions {
+        jumboMode = true
+        javaMaxHeapSize "4g"
+    }
+    dataBinding {
+        enabled = true
+    }
+    androidExtensions {
+        experimental = true
+    }
+  /*  splits {
+     *//*   density {
+            enable true
+            reset()
+            include "ldpi", "mdpi", "hdpi","xhdpi" , "xxhdpi","xxhdpi"
+        }*//*
+        abi {
+            enable true
+            reset()
+//            include "armeabi-v7a", "x86", "x86_64"
+            include "x86", "armeabi-v7a", "arm64-v8a", "x86_64"
+            universalApk true
+        }
+    }*/
+}
+//upload apks in this order:armeabi-v7a,x86,x86_64,universal apk.
+//ext.abiCodes = ['armeabi-v7a': 1, x86: 2, x86_64: 3]
+/*ext.abiCodes = ['x86': 1,'armeabi-v7a':2, 'arm64-v8a': 3, 'x86_64': 4]
+import com.android.build.OutputFile
+android.applicationVariants.all { variant ->
+
+    // Assigns a different version code for each output APK
+    // other than the universal APK.
+    variant.outputs.all { output ->
+
+        // Stores the value of ext.abiCodes that is associated with the ABI for this variant.
+        def baseAbiVersionCode =
+                // Determines the ABI for this variant and returns the mapped value.
+                project.ext.abiCodes.get(output.getFilter(OutputFile.ABI))
+
+        // Because abiCodes.get() returns null for ABIs that are not mapped by ext.abiCodes,
+        // the following code does not override the version code for universal APKs.
+        // However, because we want universal APKs to have the lowest version code,
+        // this outcome is desirable.
+        if (baseAbiVersionCode != null) {
+
+            // Assigns the new version code to versionCodeOverride, which changes the version code
+            // for only the output APK, not for the variant itself. Skipping this step simply
+            // causes Gradle to use the value of variant.versionCode for the APK.
+            output.versionCodeOverride =
+                    baseAbiVersionCode * 1000 + variant.versionCode
+
+            outputFileName = "${"upload"}-${"" + baseAbiVersionCode}.apk"
+        }
+    }
+
+}*/
+dependencies {
+//    implementation files('libs/jsoup-1.7.1.jar')
+    implementation project(':sospluginmodlue')
+  //  implementation "com.crashlytics.sdk.android:crashlytics:$rootProject.ext.crashlytics"
+    implementation 'androidx.multidex:multidex:2.0.1'
+    implementation "com.github.yalantis:ucrop:$rootProject.ext.ucrop"
+    implementation "com.squareup.retrofit2:retrofit:$rootProject.ext.retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$rootProject.ext.converter_gson"
+    implementation "com.squareup.picasso:picasso:$rootProject.ext.picasso"
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation "com.google.android.gms:play-services-maps:$rootProject.ext.maps"
+    implementation ("com.google.android.gms:play-services-location:$rootProject.ext.location")
+            {
+                exclude group: 'com.google.android.gms', module: 'play-services-ads'
+            }
+
+    implementation "com.google.android.libraries.places:places:$rootProject.ext.places"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'com.google.android.material:material:1.2.0'
+//    implementation "com.wdullaer:materialdatetimepicker:$rootProject.ext.materialdatetimepicker"
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation "com.github.bumptech.glide:glide:$rootProject.ext.glide"
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
+    implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.ext.interceptor"
+    implementation 'androidx.browser:browser:1.2.0'
+//    implementation "com.google.firebase:firebase-core:$rootProject.ext.firebase"
+    implementation "com.google.firebase:firebase-messaging:$rootProject.ext.firebase_messaging"
+    implementation "com.google.android.gms:play-services-auth:$rootProject.play_service_auth"
+    implementation "com.github.PhilJay:MPAndroidChart:$rootProject.ext.MPAndroid"
+    // Room components
+    implementation 'androidx.room:room-runtime:2.2.5'
+    annotationProcessor 'androidx.room:room-compiler:2.2.5'
+    androidTestImplementation 'androidx.room:room-testing:2.2.5'
+    // Lifecycle components
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    annotationProcessor 'androidx.lifecycle:lifecycle-compiler:2.2.0'
+    kapt "android.arch.persistence.room:compiler:1.1.1"
+
+    implementation 'androidx.paging:paging-runtime:2.1.2'
+    // alternatively - without Android dependencies for testing
+    testImplementation 'androidx.paging:paging-common:2.1.2'
+//    implementation "uk.co.samuelwall:material-tap-target-prompt:$rootProject.material"
+//    implementation "jp.wasabeef:recyclerview-animators:$rootProject.animator"
+//    implementation "com.ethanhua:skeleton:$rootProject.skeleton"
+//    implementation "io.supercharge:shimmerlayout:$rootProject.shimmerlayout"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "com.github.ybq:Android-SpinKit:$rootProject.spinkit"
+    implementation "uk.co.samuelwall:material-tap-target-prompt:$rootProject.ext.target_prompt"
+    implementation 'com.github.lzyzsd:circleprogress:1.2.1'
+
+//to zoom an imageView
+//    implementation "me.relex:photodraweeview:$rootProject.photodraweeview"
+//    implementation "com.facebook.fresco:fresco:$rootProject.fresco"
+  //  implementation "com.facebook.stetho:stetho-okhttp3:$rootProject.stetho"
+    implementation "com.facebook.android:facebook-android-sdk:$rootProject.ext.facebook_android_sdk"
+//    implementation "androidx.versionedparcelable:versionedparcelable:1.1.0"
+
+    // Recommended: Add the Firebase SDK for Google Analytics.
+//    implementation 'com.google.firebase:firebase-analytics:17.4.4'
+
+    // Add the Firebase Crashlytics SDK.
+    implementation 'com.google.firebase:firebase-crashlytics:17.2.1'
+    implementation "com.google.maps.android:android-maps-utils:$rootProject.ext.maps_utils"
+    //RazorPay
+    implementation 'com.razorpay:checkout:1.5.12'
+}
+apply plugin: 'com.google.gms.google-services'

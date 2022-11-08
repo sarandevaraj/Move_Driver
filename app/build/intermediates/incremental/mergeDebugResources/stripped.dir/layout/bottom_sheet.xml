@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
+    android:id="@+id/bottom_sheet"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/corner_over_tripdetail"
+    android:orientation="vertical"
+    app:behavior_hideable="false"
+    app:behavior_peekHeight="320dp"
+    app:layout_behavior="@string/bottom_sheet_behavior">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <View
+            android:layout_width="50dp"
+            android:layout_height="5dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@color/linebottom_light"
+            android:visibility="gone"/>
+
+        <RelativeLayout
+            android:id="@+id/searchlay"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:id="@+id/pickup_pinlay"
+                android:layout_width="wrap_content"
+                android:layout_height="140dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerInParent="true"
+                android:visibility="visible">
+
+                <ImageView
+                    android:id="@+id/drop_pin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/pad_100dp"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:contentDescription="@null"
+                    android:gravity="bottom"
+                    android:paddingStart="@dimen/taxi__search_padding_medium"
+                    android:paddingEnd="@dimen/dp_8"
+                    app:srcCompat="@drawable/ic_pickup_drop" />
+            </FrameLayout>
+
+
+            <LinearLayout
+                android:id="@+id/pick_lay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/pickup_pinlay"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:weightSum="1">
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dp_2"
+                    android:paddingStart="@dimen/dp_10"
+                    android:text="PICKUP"
+                    android:textSize="10sp">
+
+                </TextView>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/pick_pin"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:paddingLeft="8dp"
+                        android:src="@drawable/dot"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/txt_pickup"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.9"
+                        android:background="@android:color/transparent"
+                        android:drawablePadding="@dimen/dp_10"
+                        android:fadingEdge="horizontal"
+                        android:gravity="center_vertical"
+                        android:hint="@string/picklocation"
+                        android:lines="1"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:paddingStart="@dimen/dp_10"
+                        android:paddingTop="@dimen/taxi__search_padding_medium"
+                        android:paddingEnd="@dimen/pad_15dp"
+                        android:paddingBottom="@dimen/taxi__search_padding_medium"
+                        android:scrollHorizontally="true"
+                        android:singleLine="true"
+                        android:text=""
+                        android:fontFamily="@font/boldfont"
+
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/hintcolor"
+                        android:textSize="16sp" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/pic_loc_select"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/pad_5dp"
+                        android:layout_weight="0.1"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:visibility="gone"
+                        app:srcCompat="@drawable/ic_favorite_unselect" />
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/pickup_drop_Sep"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_below="@id/pick_lay"
+                android:layout_marginRight="@dimen/dp_15"
+                android:layout_toEndOf="@+id/pickup_pinlay"
+                android:background="@color/linebottom_light" />
+
+            <LinearLayout
+                android:id="@+id/drop_lay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/pickup_drop_Sep"
+                android:layout_toEndOf="@+id/pickup_pinlay"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:weightSum="1">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dp_2"
+                    android:paddingStart="8dp"
+                    android:text="DROP-OFF"
+                    android:textSize="12sp"
+                    android:visibility="visible">
+
+                </TextView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/drop_pin1"
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:layout_gravity="center"
+                        android:paddingStart="8dp"
+                        android:src="@drawable/circle_red"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/txt_drop"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.9"
+                        android:background="@android:color/transparent"
+                        android:drawablePadding="@dimen/dp_10"
+                        android:fadingEdge="horizontal"
+                        android:gravity="center_vertical"
+                        android:hint="@string/droploc"
+                        android:lines="1"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:paddingStart="@dimen/dp_10"
+                        android:paddingTop="@dimen/taxi__search_padding_medium"
+                        android:paddingEnd="@dimen/pad_15dp"
+                        android:paddingBottom="@dimen/taxi__search_padding_medium"
+                        android:scrollHorizontally="true"
+                        android:singleLine="true"
+                        android:fontFamily="@font/boldfont"
+
+                        android:text=""
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/hintcolor"
+                        android:textSize="16sp" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/drop_loc_select"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/pad_5dp"
+                        android:layout_weight="0.1"
+                        android:visibility="invisible"
+                        app:srcCompat="@drawable/ic_favorite_unselect" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <View
+
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="@color/linebottom_light" />
+
+        <LinearLayout
+            android:id="@+id/intransitlay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+
+            android:visibility="gone">
+
+            <include
+                layout="@layout/include_transit"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/driverdetailslay"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <include
+                layout="@layout/include_driverdetail"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+
+
+</LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/withdraw_menu"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/appbg"
+    android:orientation="vertical"
+    tools:context="com.taximobility.driver.DriverWithDrawMenuAct">
+
+    <RelativeLayout
+        android:id="@+id/slide_lay"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/tool_bar"
+        android:background="@color/button_accept"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/slideImg"
+            android:layout_width="@dimen/dp_25"
+            android:layout_height="@dimen/dp_25"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="5dp"
+            android:background="@drawable/ic_back_white"
+            android:textSize="2sp"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/headerTxt"
+            style="@android:style/TextAppearance.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:textAllCaps="false"
+            android:text="@string/withdraw"
+            android:textColor="@color/white" />
+
+
+        <ImageView
+            android:id="@+id/history"
+            android:layout_width="@dimen/pad_30dp"
+            android:layout_height="@dimen/dp_25"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/ic_history_white" />
+
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/shadow"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_below="@+id/slide_lay"
+        android:foreground="@drawable/driver_background_shadow"
+        android:visibility="gone">
+        <!-- YOUR STUFF HERE -->
+    </FrameLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="12dp"
+       >
+
+        <TextView
+            android:id="@+id/withdraw_title1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/withdraw_BalanceAmttext1"
+            android:text="@string/referal_amount"
+            android:textColor="@color/button_accept"
+            android:textSize="16sp" />
+
+        <View
+            android:layout_width="60dp"
+            android:layout_height="0.5dp"
+            android:layout_below="@+id/withdraw_title1"
+            android:layout_marginTop="05dp"
+            android:background="@color/sub_heading_light" />
+
+        <TextView
+            android:id="@+id/withdraw_pendingtext1"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/withdraw_title1"
+            android:layout_marginTop="25dp"
+            android:singleLine="true"
+            android:text="@string/payment_pending"
+            android:textColor="@color/sub_heading"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/withdraw_BalanceAmttext1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textSize="25sp" />
+
+        <Button
+            android:id="@+id/withdraw_btn1"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_below="@+id/withdraw_pendingtext1"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="05dp"
+            android:background="@drawable/button_rect"
+            android:paddingLeft="08dp"
+            android:gravity="center"
+            android:fontFamily="@font/normalfont"
+            android:textAllCaps="false"
+            android:textSize="@dimen/sp_16"
+            android:textStyle="bold"
+            android:paddingTop="05dp"
+            android:paddingRight="08dp"
+            android:paddingBottom="05dp"
+            android:text="@string/withdraw"
+            android:textColor="@color/white" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="@dimen/dp_12"
+        android:background="@color/separator_line" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="12dp"
+        >
+
+        <TextView
+            android:id="@+id/withdraw_title2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/withdraw_BalanceAmttext2"
+            android:text="@string/trip_amount"
+            android:textColor="@color/button_accept"
+            android:textSize="16sp" />
+
+        <View
+            android:layout_width="60dp"
+            android:layout_height="0.5dp"
+            android:layout_below="@+id/withdraw_title2"
+            android:layout_marginTop="05dp"
+            android:background="@color/sub_heading_light" />
+
+        <TextView
+            android:id="@+id/withdraw_pendingtext2"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/withdraw_title2"
+            android:layout_marginTop="25dp"
+            android:text="@string/payment_pending"
+            android:textColor="@color/sub_heading"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/withdraw_BalanceAmttext2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/black"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/withdraw_btn2"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_below="@+id/withdraw_pendingtext2"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="05dp"
+            android:background="@drawable/button_rect"
+            android:paddingLeft="08dp"
+            android:gravity="center"
+            android:fontFamily="@font/normalfont"
+            android:textAllCaps="false"
+            android:textSize="@dimen/sp_16"
+            android:textStyle="bold"
+            android:paddingTop="05dp"
+            android:paddingRight="08dp"
+            android:paddingBottom="05dp"
+            android:text="@string/withdraw"
+            android:textColor="@color/white" />
+
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="12dp"
+        android:background="@color/separator_line" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/version_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="05dp"
+            android:gravity="right|bottom"
+            android:paddingLeft="08dp"
+            android:paddingTop="05dp"
+            android:paddingRight="08dp"
+            android:paddingBottom="05dp"
+            android:textColor="@color/sub_heading" />
+
+        <TextView
+            android:id="@+id/baseUrl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:layout_toLeftOf="@+id/version_text"
+            android:paddingLeft="08dp"
+            android:paddingTop="05dp"
+            android:paddingRight="08dp"
+            android:paddingBottom="05dp"
+            android:textColor="@color/black" />
+    </RelativeLayout>
+</LinearLayout>

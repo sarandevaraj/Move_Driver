@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_margin="10dp"
+        android:id="@+id/btn_delete_acc"
+        android:textSize="@dimen/sp_16"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:text="@string/del_acc"
+        android:background="@color/button_accept"
+        android:fontFamily="@font/normalfont"
+        android:textStyle="bold"
+        android:textAllCaps="false"
+        android:gravity="center"
+        android:textColor="@color/white"/>
+
+</LinearLayout>

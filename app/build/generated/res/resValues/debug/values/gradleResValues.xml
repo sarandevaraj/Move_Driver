@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Automatically generated file. DO NOT MODIFY -->
+
+    <!-- Values from build type: debug -->
+    <string name="common_name" translatable="false">MoveX</string>
+    <string name="facebookAppId" translatable="false">10684112666354</string>
+    <string name="facebookId" translatable="false">com.facebook.app.FacebookContentProvider10684112666354</string>
+    <string name="googleID" translatable="false">AIzaSyD4bjaWEK1vs0DSAF6kUYTEqODQgCk2dr8</string>
+
+</resources>

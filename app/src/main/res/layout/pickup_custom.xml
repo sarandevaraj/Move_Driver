@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:gravity="bottom"
+        android:src="@drawable/pickup_dot" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/time_to_reach"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/pickup_rounded_corner"
+
+        android:gravity="center"
+        android:paddingBottom="6dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="6dp"
+        android:text="--
+2 MIN"
+        android:textColor="#fff"
+        android:textSize="8sp"
+        android:visibility="visible" />
+
+    <TextView
+        android:id="@+id/location_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="5dp"
+        android:layout_toRightOf="@+id/time_to_reach"
+        android:background="#fff"
+        android:maxLength="15"
+        android:paddingBottom="10dp"
+        android:paddingLeft="8dp"
+        android:paddingTop="10dp"
+        android:text="My Location  "
+        android:textColor="@color/black" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="center"
+        android:layout_marginBottom="5dp"
+        android:background="#fff"
+        android:drawablePadding="10dp"
+        android:gravity="right"
+        android:maxLength="15"
+        android:padding="8dp"
+        android:src="@drawable/right_arrow"
+        android:text="My Location  " />
+
+</LinearLayout>
+
+

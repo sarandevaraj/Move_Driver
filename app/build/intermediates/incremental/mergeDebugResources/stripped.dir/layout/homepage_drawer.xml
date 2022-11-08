@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootlay"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="false"
+        android:scrollbars="none">
+
+        <!-- The main content view -->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/tool_bar_lay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/header_text">
+
+                <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/tool_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:layout_alignParentTop="true"
+                    android:layout_margin="0dp"
+                    android:background="@color/button_accept"
+                    android:minHeight="50dp"
+                    android:padding="0dp"
+
+                    app:contentInsetLeft="0dp"
+                    app:contentInsetRight="0dp"
+                    app:contentInsetStart="0dp">
+
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <!-- This is a centered logo -->
+                        <ImageView
+                            android:id="@+id/toolbar_logo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+
+                            android:visibility="gone" />
+
+                        <!-- This is a centered title -->
+                        <TextView
+                            android:id="@+id/toolbar_title"
+                            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/boldfont"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:textColor="@color/white"
+                            android:textSize="20sp"
+                            android:visibility="visible" />
+
+                        <LinearLayout
+                            android:id="@+id/toolbar_titletm"
+                            android:layout_width="wrap_content"
+                            android:layout_height="35dp"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:visibility="gone">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="35dp"
+                                android:layout_gravity="center"
+
+                                android:visibility="visible" />
+
+                            <TextView
+                                style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:drawablePadding="20dp"
+                                android:fontFamily="@font/normalfont"
+                                android:orientation="horizontal"
+                                android:paddingLeft="10dp"
+                                android:text=""
+
+                                android:textColor="@color/black"
+                                android:textSize="26sp"
+                                android:visibility="visible" />
+
+
+                        </LinearLayout>
+
+
+                        <!-- This is a custom left side button -->
+
+                        <ImageButton
+                            android:id="@+id/left_icon"
+
+                            android:layout_width="@dimen/pad_30dp"
+                            android:layout_height="@dimen/dp_20"
+                            android:layout_gravity="start|center_vertical"
+                            android:layout_marginLeft="10dp"
+                            android:background="@color/black"
+
+                            android:visibility="gone" />
+
+
+                        <ImageView
+                            android:id="@+id/left_img"
+
+                            android:layout_width="@dimen/pad_30dp"
+                            android:layout_height="@dimen/dp_20"
+                            android:layout_gravity="start|center_vertical"
+                            android:layout_marginLeft="12dp"
+                            android:background="@color/transparent"
+                            android:visibility="gone"
+                            app:srcCompat="@drawable/ic_back_white" />
+
+
+                        <!--<ImageButton
+                            android:id="@+id/left_icon"
+                            style="@style/Widget.AppCompat.ActionButton"
+                            android:layout_width="?attr/actionBarSize"
+                            android:layout_height="?attr/actionBarSize"
+                            android:layout_gravity="start|center_vertical"
+                            android:layout_marginRight="?attr/actionBarSize"
+                            android:src="@drawable/menu"
+                            android:visibility="visible" />-->
+
+                        <!-- This is a custom right side button -->
+                        <FrameLayout
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="?attr/actionBarSize"
+                            android:layout_gravity="end"
+                            android:layout_marginRight="5dp">
+
+                            <ImageButton
+                                android:id="@+id/right_icon"
+                                style="@style/Widget.AppCompat.ActionButton"
+                                android:layout_width="?attr/actionBarSize"
+                                android:layout_height="?attr/actionBarSize"
+                                android:scaleType="center"
+                                android:src="@drawable/plus"
+                                android:visibility="gone" />
+
+                            <TextView
+                                android:id="@+id/cancel_b"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="05dp"
+                                android:layout_marginRight="5dp"
+                                android:background="@drawable/rect_red"
+                                android:fontFamily="@font/normalfont"
+                                android:padding="5dp"
+                                android:text="@string/cancel"
+
+                                android:textColor="@color/button_accept"
+                                android:visibility="gone" />
+
+                            <androidx.appcompat.widget.AppCompatButton
+                                android:id="@+id/txt_emergency"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:background="@drawable/oval_red"
+                                android:gravity="center"
+                                android:maxWidth="150dp"
+                                android:minWidth="70dp"
+                                android:minHeight="30dp"
+                                android:paddingLeft="7dp"
+                                android:paddingRight="7dp"
+                                android:text="@string/emergency"
+                                android:textAllCaps="false"
+                                android:textColor="@color/white"
+                                android:textSize="12sp"
+                                android:visibility="gone" />
+
+                            <ImageView
+                                android:id="@+id/call_image"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginRight="8dp"
+                                android:padding="10dp"
+                                android:src="@drawable/call_driver"
+                                android:visibility="gone" />
+
+                            <androidx.appcompat.widget.SwitchCompat
+                                android:id="@+id/switch_right_icon"
+                                style="@style/Widget.AppCompat.ActionButton"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:visibility="gone"
+
+
+                                app:theme="@style/Color1SwitchStyle" />
+                        </FrameLayout>
+                    </FrameLayout>
+
+
+                </androidx.appcompat.widget.Toolbar>
+            </LinearLayout>
+            <!--                <include
+                                layout="@layout/book_taxi_home"/>-->
+
+
+            <FrameLayout
+                android:id="@+id/mainFrag"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/tool_bar_lay" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_below="@id/tool_bar_lay"
+                android:foreground="@drawable/background_shadow"
+                android:visibility="gone">
+                <!-- YOUR STUFF HERE -->
+            </FrameLayout>
+
+        </RelativeLayout>
+
+        <!-- The navigation drawer -->
+
+        <LinearLayout
+            android:layout_width="260dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:background="#100000"
+            android:choiceMode="singleChoice"
+            android:fitsSystemWindows="true"
+            android:orientation="vertical"
+            android:scrollbars="none">
+
+            <include layout="@layout/sliderlay" />
+        </LinearLayout>
+
+
+    </androidx.drawerlayout.widget.DrawerLayout>
+
+</FrameLayout>

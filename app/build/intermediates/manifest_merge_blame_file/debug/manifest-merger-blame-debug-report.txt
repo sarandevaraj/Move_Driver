@@ -1,0 +1,1361 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.Taximobility.driver"
+4    android:versionCode="9"
+5    android:versionName="1.5" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="19"
+8-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="31" />
+9-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml
+10
+11    <!-- <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" /> -->
+12    <!-- <uses-permission android:name="android.permission.WRITE_SETTINGS" /> -->
+13    <!-- <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" /> -->
+14
+15    <uses-permission android:name="com.adrop.permission.MAPS_RECEIVE" />
+15-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:12:5-73
+15-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:12:22-70
+16    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+16-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:13:5-79
+16-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:13:22-76
+17    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+17-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:14:5-81
+17-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:14:22-78
+18    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+18-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:15:5-79
+18-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:15:22-76
+19    <uses-permission android:name="android.permission.INTERNET" />
+19-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:16:5-67
+19-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:16:22-64
+20    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+20-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:17:5-81
+20-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:17:22-78
+21    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+21-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:18:5-76
+21-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:18:22-73
+22    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+22-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:19:5-76
+22-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:19:22-73
+23    <!-- <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" /> -->
+24    <!-- <uses-permission android:name="android.permission.READ_CALENDAR" /> -->
+25    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+25-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:22:5-80
+25-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:22:22-77
+26    <!-- <uses-permission android:name="android.permission.CALL_PHONE" /> -->
+27    <!-- <uses-permission android:name="android.permission.READ_PHONE_STATE" /> -->
+28    <uses-permission android:name="android.permission.GPS_ENABLED_CHANGE" />
+28-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:25:5-77
+28-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:25:22-74
+29    <!-- <uses-permission android:name="android.permission.READ_CONTACTS" /> -->
+30    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+30-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:27:5-82
+30-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:27:22-79
+31    <uses-permission android:name="com.adrop.permission.C2D_MESSAGE" />
+31-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:28:5-72
+31-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:28:22-69
+32    <uses-permission android:name="android.permission.WAKE_LOCK" />
+32-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:29:5-68
+32-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:29:22-65
+33    <uses-permission android:name="com.google.android.things.permission.SET_TIME" />
+33-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:30:5-85
+33-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:30:22-82
+34    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+34-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:31:5-77
+34-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:31:22-74
+35    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+35-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:32:5-78
+35-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:32:22-75
+36    <!-- <uses-permission android:name="android.permission.GET_ACCOUNTS" /> -->
+37
+38    <uses-feature
+38-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:35:5-37:35
+39        android:name="android.hardware.location.gps"
+39-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:36:9-53
+40        android:required="true" />
+40-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:37:9-32
+41    <uses-feature
+41-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:38:5-40:35
+42        android:glEsVersion="0x00020000"
+42-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:39:9-41
+43        android:required="true" />
+43-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:40:9-32
+44
+45    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+45-->[:sospluginmodlue] D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\sospluginmodlue\build\intermediates\library_manifest\debug\AndroidManifest.xml:15:5-75
+45-->[:sospluginmodlue] D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\sospluginmodlue\build\intermediates\library_manifest\debug\AndroidManifest.xml:15:22-72
+46
+47    <application
+47-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:42:5-613:19
+48        android:name="com.taximobility.util.AppController"
+48-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:43:9-59
+49        android:allowBackup="false"
+49-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:44:9-36
+50        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+50-->[androidx.core:core:1.3.1] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\988f8ff91cebcbec53a68e470f40c729\core-1.3.1\AndroidManifest.xml:24:18-86
+51        android:debuggable="true"
+52        android:icon="@drawable/ic_launcher"
+52-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:45:9-45
+53        android:label="@string/app_name"
+53-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:46:9-41
+54        android:largeHeap="true"
+54-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:47:9-33
+55        android:requestLegacyExternalStorage="true"
+55-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:48:9-52
+56        android:supportsRtl="true"
+56-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:49:9-35
+57        android:testOnly="true"
+58        android:theme="@style/Mymaterialact"
+58-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:50:9-45
+59        android:usesCleartextTraffic="true" >
+59-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:51:9-44
+60        <uses-library android:name="com.google.android.maps" />
+60-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:55:9-64
+60-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:55:23-61
+61        <uses-library
+61-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:56:9-58:40
+62            android:name="org.apache.http.legacy"
+62-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:57:13-50
+63            android:required="false" />
+63-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:58:13-37
+64
+65        <activity
+65-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:60:9-72:20
+66            android:name="com.taximobility.SplashActivity"
+66-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:61:13-59
+67            android:exported="true"
+67-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:63:13-36
+68            android:label="@string/app_name"
+68-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:62:13-45
+69            android:screenOrientation="portrait"
+69-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:64:13-49
+70            android:theme="@style/Theme.AppCompat.Translucent" >
+70-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:65:13-63
+71            <intent-filter>
+71-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:66:13-71:29
+72                <action android:name="android.intent.action.MAIN" />
+72-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:67:17-69
+72-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:67:25-66
+73                <action android:name="android.intent.action.VIEW" />
+73-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:68:17-69
+73-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:68:25-66
+74
+75                <category android:name="android.intent.category.LAUNCHER" />
+75-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:70:17-77
+75-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:70:27-74
+76            </intent-filter>
+77        </activity>
+78        <!--
+79        <intent-filter>
+80            <action android:name="android.intent.action.MAIN" />
+81
+82            <category android:name="android.intent.category.LAUNCHER" />
+83        </intent-filter>
+84        -->
+85        <activity
+85-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:80:9-83:70
+86            android:name="com.taximobility.WebviewAct"
+86-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:81:13-55
+87            android:theme="@style/Mymaterialact"
+87-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:82:13-49
+88            android:windowSoftInputMode="adjustResize|stateHidden" />
+88-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:83:13-67
+89
+90        <!-- <activity -->
+91        <!-- android:name="moovexx.ContactShareActivity" -->
+92        <!-- android:theme="@style/Mymaterialact" -->
+93        <!-- android:windowSoftInputMode="adjustResize|stateHidden" /> -->
+94        <activity
+94-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:89:9-92:67
+95            android:name="com.taximobility.driver.DriverAddFleetAct"
+95-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:90:13-69
+96            android:theme="@style/Mymaterialact"
+96-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:91:13-49
+97            android:windowSoftInputMode="adjustPan|stateHidden" />
+97-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:92:13-64
+98        <activity
+98-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:94:9-97:70
+99            android:name="com.taximobility.permission.DevicePermissionActivity"
+99-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:95:13-80
+100            android:theme="@style/Mymaterialact"
+100-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:96:13-49
+101            android:windowSoftInputMode="adjustResize|stateHidden" />
+101-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:97:13-67
+102        <activity
+102-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:98:9-101:70
+103            android:name="com.taximobility.permission.StoreAndSecureActivity"
+103-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:99:13-78
+104            android:theme="@style/Mymaterialact"
+104-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:100:13-49
+105            android:windowSoftInputMode="adjustResize|stateHidden" />
+105-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:101:13-67
+106        <activity
+106-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:102:9-107:73
+107            android:name="com.taximobility.ReceiptAct"
+107-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:103:13-55
+108            android:launchMode="singleTask"
+108-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:104:13-44
+109            android:screenOrientation="portrait"
+109-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:105:13-49
+110            android:theme="@style/Mymaterialact"
+110-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:106:13-49
+111            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
+111-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:107:13-70
+112        <activity
+112-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:108:9-114:73
+113            android:name="com.taximobility.MainHomeFragmentActivity"
+113-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:109:13-69
+114            android:launchMode="singleTask"
+114-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:110:13-44
+115            android:screenOrientation="portrait"
+115-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:111:13-49
+116            android:supportsRtl="true"
+116-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:112:13-39
+117            android:theme="@style/MyMaterialTheme"
+117-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:113:13-51
+118            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
+118-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:114:13-70
+119        <activity
+119-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:117:9-121:67
+120            android:name="com.taximobility.PayuncardAct"
+120-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:118:13-57
+121            android:screenOrientation="portrait"
+121-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:119:13-49
+122            android:theme="@style/MyMaterialTheme"
+122-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:120:13-51
+123            android:windowSoftInputMode="adjustPan|stateHidden" />
+123-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:121:13-64
+124        <activity
+124-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:123:9-126:68
+125            android:name="com.taximobility.ActivityThanks"
+125-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:124:13-59
+126            android:screenOrientation="portrait"
+126-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:125:13-49
+127            android:windowSoftInputMode="adjustPan|stateVisible" />
+127-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:126:13-65
+128        <activity
+128-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:127:9-130:68
+129            android:name="com.taximobility.Login.LoginActivity"
+129-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:128:13-64
+130            android:screenOrientation="portrait"
+130-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:129:13-49
+131            android:windowSoftInputMode="adjustPan|stateVisible" />
+131-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:130:13-65
+132        <activity
+132-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:131:9-134:73
+133            android:name="com.taximobility.ContinousRequest"
+133-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:132:13-61
+134            android:theme="@style/Transparent1"
+134-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:133:13-48
+135            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
+135-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:134:13-70
+136        <activity
+136-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:136:9-140:73
+137            android:name="com.taximobility.locationSearch.AddStopActivity"
+137-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:137:13-75
+138            android:screenOrientation="portrait"
+138-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:138:13-49
+139            android:theme="@style/MyMaterialTheme"
+139-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:139:13-51
+140            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
+140-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:140:13-70
+141        <activity
+141-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:142:9-145:68
+142            android:name="com.taximobility.Login.RegisterActivity"
+142-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:143:13-67
+143            android:screenOrientation="portrait"
+143-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:144:13-49
+144            android:windowSoftInputMode="adjustPan|stateVisible" />
+144-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:145:13-65
+145        <activity
+145-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:146:9-150:73
+146            android:name="com.taximobility.TermsAndConditions"
+146-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:147:13-63
+147            android:launchMode="singleTask"
+147-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:148:13-44
+148            android:screenOrientation="portrait"
+148-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:149:13-49
+149            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
+149-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:150:13-70
+150        <activity
+150-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:151:9-154:55
+151            android:name="com.taximobility.TripDetailsAct"
+151-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:152:13-59
+152            android:screenOrientation="portrait"
+152-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:153:13-49
+153            android:windowSoftInputMode="adjustPan" />
+153-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:154:13-52
+154        <activity
+154-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:155:9-158:63
+155            android:name="com.taximobility.Login.LoginSelectionAcivity"
+155-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:156:13-72
+156            android:screenOrientation="portrait"
+156-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:157:13-49
+157            android:windowSoftInputMode="stateAlwaysHidden" />
+157-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:158:13-60
+158        <activity
+158-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:159:9-162:73
+159            android:name="com.taximobility.Login.CardRegisterAct"
+159-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:160:13-66
+160            android:screenOrientation="portrait"
+160-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:161:13-49
+161            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
+161-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:162:13-70
+162        <activity
+162-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:163:9-166:58
+163            android:name="com.taximobility.Login.VerificationActivity"
+163-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:164:13-71
+164            android:screenOrientation="portrait"
+164-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:165:13-49
+165            android:windowSoftInputMode="stateVisible" />
+165-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:166:13-55
+166
+167        <!--
+168                <service android:name=".MyFirebaseInstanceIDService">
+169                    <intent-filter>
+170                        <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+171                    </intent-filter>
+172                </service>
+173        -->
+174        <service
+174-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:174:9-180:19
+175            android:name="com.taximobility.service.FirebaseService"
+175-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:175:13-68
+176            android:exported="false" >
+176-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:176:13-37
+177            <intent-filter>
+177-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:177:13-179:29
+178                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+178-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:178:17-78
+178-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:178:25-75
+179            </intent-filter>
+180        </service>
+181
+182        <!-- <meta-data -->
+183        <!-- android:name="com.google.firebase.messaging.default_notification_icon" -->
+184        <!-- android:resource="@drawable/driver_notification_icon" -->
+185        <!-- android:value="@color/button_accept"/> -->
+186
+187        <service android:name="com.taximobility.service.BackgroundCoreConfig" />
+187-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:187:9-81
+187-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:187:18-78
+188
+189        <meta-data
+189-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:189:9-192:47
+190            android:name="com.facebook.sdk.ApplicationName"
+190-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:190:13-60
+191            android:value="@string/app_name" />
+191-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:191:13-45
+192
+193        <activity
+193-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:193:9-196:48
+194            android:name="com.facebook.FacebookActivity"
+194-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:194:13-57
+195            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+195-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:195:13-96
+196            android:label="@string/app_name"
+196-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:196:13-45
+197            android:theme="@style/com_facebook_activity_theme" />
+197-->[com.facebook.android:facebook-common:5.8.0] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\0f2aff8facc3be3b0e08136d20814a1f\jetified-facebook-common-5.8.0\AndroidManifest.xml:32:13-63
+198
+199        <meta-data
+199-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:198:9-200:53
+200            android:name="com.facebook.sdk.ApplicationId"
+200-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:199:13-58
+201            android:value="@string/facebookAppId" />
+201-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:200:13-50
+202
+203        <!-- <provider -->
+204        <!-- android:name="com.facebook.FacebookContentProvider" -->
+205        <!-- android:authorities="@string/facebookId" -->
+206        <!-- android:exported="false" /> -->
+207
+208        <receiver
+208-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:207:9-212:20
+209            android:name="com.taximobility.util.NetworkStatus"
+209-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:207:19-69
+210            android:exported="false" >
+210-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:208:13-37
+211            <intent-filter>
+211-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:209:13-211:29
+212                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+212-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:210:17-79
+212-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:210:25-76
+213            </intent-filter>
+214        </receiver>
+215        <receiver
+215-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:213:9-218:20
+216            android:name="com.taximobility.util.GpsStatus"
+216-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:213:19-65
+217            android:exported="false" >
+217-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:214:13-37
+218            <intent-filter>
+218-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:215:13-217:29
+219                <action android:name="android.location.PROVIDERS_CHANGED" />
+219-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:216:17-77
+219-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:216:25-74
+220            </intent-filter>
+221        </receiver>
+222
+223        <provider
+223-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:220:9-228:20
+224            android:name="androidx.core.content.FileProvider"
+224-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:221:13-62
+225            android:authorities="com.Taximobility.driver.files_root"
+225-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:222:13-69
+226            android:exported="false"
+226-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:223:13-37
+227            android:grantUriPermissions="true" >
+227-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:224:13-47
+228            <meta-data
+228-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:225:13-227:58
+229                android:name="android.support.FILE_PROVIDER_PATHS"
+229-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:226:17-67
+230                android:resource="@xml/provider_paths" />
+230-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:227:17-55
+231        </provider> <!-- <meta-data -->
+232        <!-- android:name="com.google.android.maps.v2.API_KEY" -->
+233        <!-- android:value="AIzaSyDewldf9PLpuky-ALFglTIhNdU5mp82G9k" /> -->
+234        <!-- <meta-data -->
+235        <!--
+236         android:name="com.google.android.maps.v2.API_KEY"
+237         android:value="AIzaSyB-ofTslYif7glRvvoACQvdhk3oKOA93bU" />
+238        -->
+239        <!--
+240           <meta-data
+241           android:name="com.google.android.geo.API_KEY"
+242           android:value="AIzaSyDOelatbj5RRQtUMRWI4bEtN3K_JfAbtmA"/>
+243        -->
+244
+245        <meta-data
+245-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:242:9-244:69
+246            android:name="com.google.android.gms.version"
+246-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:243:13-58
+247            android:value="@integer/google_play_services_version" />
+247-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:244:13-66
+248
+249        <service android:name="com.taximobility.service.GetPassengerUpdate" /> <!-- <service android:name=".service.AuthService" /> -->
+249-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:246:9-79
+249-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:246:18-76
+250        <activity
+250-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:247:9-250:52
+251            android:name="com.yalantis.ucrop.UCropActivity"
+251-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:248:13-60
+252            android:screenOrientation="portrait"
+252-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:249:13-49
+253            android:theme="@style/Mymaterialact" />
+253-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:250:13-49
+254        <activity
+254-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:253:9-255:52
+255            android:name="com.taximobility.roomDB.CommonLoggerAct"
+255-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:254:13-67
+256            android:screenOrientation="portrait" />
+256-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:255:13-49
+257        <activity
+257-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:256:9-258:52
+258            android:name="com.taximobility.roomDB.FullLoggerAct"
+258-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:257:13-65
+259            android:screenOrientation="portrait" />
+259-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:258:13-49
+260        <activity
+260-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:259:9-261:52
+261            android:name="com.taximobility.roomDB.FindLogActivity"
+261-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:260:13-67
+262            android:screenOrientation="portrait" />
+262-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:261:13-49
+263        <activity
+263-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:262:9-265:67
+264            android:name="com.taximobility.ShowAlertAct"
+264-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:263:13-57
+265            android:theme="@style/Theme.Transparent3"
+265-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:264:13-54
+266            android:windowSoftInputMode="adjustPan|stateHidden" />
+266-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:265:13-64
+267        <activity
+267-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:266:9-269:58
+268            android:name="com.taximobility.locationSearch.PickupDropSearchActivity"
+268-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:267:13-84
+269            android:screenOrientation="portrait"
+269-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:268:13-49
+270            android:windowSoftInputMode="adjustResize" />
+270-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:269:13-55
+271        <activity
+271-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:270:9-273:58
+272            android:name="com.taximobility.locationSearch.LocationSearchActivity"
+272-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:271:13-82
+273            android:screenOrientation="portrait"
+273-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:272:13-49
+274            android:windowSoftInputMode="adjustResize" />
+274-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:273:13-55
+275        <activity
+275-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:275:9-280:58
+276            android:name="com.taximobility.MapZoomAct"
+276-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:276:13-55
+277            android:launchMode="singleTask"
+277-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:277:13-44
+278            android:screenOrientation="portrait"
+278-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:278:13-49
+279            android:theme="@style/Mymaterialact"
+279-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:279:13-49
+280            android:windowSoftInputMode="adjustResize" />
+280-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:280:13-55
+281
+282        <meta-data
+282-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:282:9-284:57
+283            android:name="preloaded_fonts"
+283-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:283:13-43
+284            android:resource="@array/preloaded_fonts" />
+284-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:284:13-54
+285
+286        <service
+286-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:286:9-288:40
+287            android:name="com.taximobility.tripCancel.service.GetCardDetailsService"
+287-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:287:13-85
+288            android:exported="false" />
+288-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:288:13-37
+289
+290        <meta-data
+290-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:290:9-292:37
+291            android:name="firebase_analytics_collection_enabled"
+291-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:291:13-65
+292            android:value="false" />
+292-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:292:13-34
+293
+294        <!-- DRiver -->
+295
+296        <activity
+296-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:297:9-301:70
+297            android:name="com.taximobility.driver.DummyActivityDriver"
+297-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:298:13-71
+298            android:screenOrientation="portrait"
+298-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:299:13-49
+299            android:theme="@style/MyMaterialTheme"
+299-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:300:13-51
+300            android:windowSoftInputMode="adjustResize|stateHidden" />
+300-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:301:13-67
+301
+302        <receiver
+302-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:303:9-310:20
+303            android:name="com.taximobility.driver.DriverCallReceiver"
+303-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:304:13-70
+304            android:enabled="true"
+304-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:305:13-35
+305            android:exported="false" >
+305-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:306:13-37
+306            <intent-filter>
+306-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:307:13-309:29
+307                <action android:name="android.intent.action.PHONE_STATE" />
+307-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:308:17-76
+307-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:308:25-73
+308            </intent-filter>
+309        </receiver>
+310
+311        <activity
+311-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:312:9-316:67
+312            android:name="com.taximobility.driver.utils.DriverSignUpWebviewAct"
+312-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:313:13-80
+313            android:screenOrientation="portrait"
+313-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:314:13-49
+314            android:theme="@style/MyMaterialTheme"
+314-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:315:13-51
+315            android:windowSoftInputMode="adjustPan|stateHidden" />
+315-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:316:13-64
+316        <activity
+316-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:317:9-324:20
+317            android:name="com.taximobility.driver.DriverSplashAct"
+317-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:318:13-67
+318            android:label="@string/app_name"
+318-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:319:13-45
+319            android:screenOrientation="portrait"
+319-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:320:13-49
+320            android:theme="@style/Theme.AppCompat.Translucent" >
+320-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:321:13-63
+321        </activity>
+322        <activity
+322-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:325:9-329:70
+323            android:name="com.taximobility.driver.permission.DriverDevicePermissionActivityDriver"
+323-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:326:13-99
+324            android:screenOrientation="portrait"
+324-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:327:13-49
+325            android:theme="@style/MyMaterialTheme"
+325-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:328:13-51
+326            android:windowSoftInputMode="adjustResize|stateHidden" />
+326-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:329:13-67
+327        <activity
+327-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:331:9-335:70
+328            android:name="com.taximobility.driver.permission.DriverStoreAndSecureActivityDriver"
+328-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:332:13-97
+329            android:screenOrientation="portrait"
+329-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:333:13-49
+330            android:theme="@style/MyMaterialTheme"
+330-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:334:13-51
+331            android:windowSoftInputMode="adjustResize|stateHidden" />
+331-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:335:13-67
+332        <activity
+332-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:337:9-341:70
+333            android:name="com.taximobility.driver.DriverWebviewAct"
+333-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:338:13-68
+334            android:screenOrientation="portrait"
+334-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:339:13-49
+335            android:theme="@style/MyMaterialTheme"
+335-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:340:13-51
+336            android:windowSoftInputMode="adjustResize|stateHidden" />
+336-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:341:13-67
+337        <activity
+337-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:342:9-346:67
+338            android:name="com.taximobility.driver.DriverStreetPickUpAct"
+338-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:343:13-73
+339            android:screenOrientation="portrait"
+339-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:344:13-49
+340            android:theme="@style/MyMaterialTheme"
+340-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:345:13-51
+341            android:windowSoftInputMode="adjustPan|stateHidden" />
+341-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:346:13-64
+342        <activity
+342-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:347:9-351:64
+343            android:name="com.taximobility.driver.locationSearch.DriverLocationSearchActivityDriver"
+343-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:348:13-101
+344            android:screenOrientation="portrait"
+344-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:349:13-49
+345            android:theme="@style/MyMaterialTheme"
+345-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:350:13-51
+346            android:windowSoftInputMode="stateAlwaysVisible" />
+346-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:351:13-61
+347        <activity
+347-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:353:9-357:67
+348            android:name="com.taximobility.driver.DriverTripHistoryAct"
+348-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:354:13-72
+349            android:screenOrientation="portrait"
+349-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:355:13-49
+350            android:theme="@style/MyMaterialTheme"
+350-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:356:13-51
+351            android:windowSoftInputMode="adjustPan|stateHidden" />
+351-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:357:13-64
+352        <activity
+352-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:358:9-362:67
+353            android:name="com.taximobility.driver.DriverTripDetails"
+353-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:359:13-69
+354            android:screenOrientation="portrait"
+354-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:360:13-49
+355            android:theme="@style/MyMaterialTheme"
+355-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:361:13-51
+356            android:windowSoftInputMode="adjustPan|stateHidden" />
+356-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:362:13-64
+357        <activity
+357-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:363:9-368:67
+358            android:name="com.taximobility.driver.DriverUserLoginAct"
+358-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:364:13-70
+359            android:launchMode="singleTask"
+359-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:365:13-44
+360            android:screenOrientation="portrait"
+360-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:366:13-49
+361            android:theme="@style/MyMaterialTheme"
+361-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:367:13-51
+362            android:windowSoftInputMode="adjustPan|stateHidden" />
+362-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:368:13-64
+363        <activity
+363-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:369:9-373:67
+364            android:name="com.taximobility.driver.DriverJobdoneAct"
+364-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:370:13-68
+365            android:screenOrientation="portrait"
+365-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:371:13-49
+366            android:theme="@style/MyMaterialTheme"
+366-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:372:13-51
+367            android:windowSoftInputMode="adjustPan|stateHidden" />
+367-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:373:13-64
+368        <activity
+368-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:374:9-378:67
+369            android:name="com.taximobility.driver.DriverInviteFriendAct"
+369-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:375:13-73
+370            android:screenOrientation="portrait"
+370-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:376:13-49
+371            android:theme="@style/MyMaterialTheme"
+371-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:377:13-51
+372            android:windowSoftInputMode="adjustPan|stateHidden" />
+372-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:378:13-64
+373        <activity
+373-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:379:9-384:67
+374            android:name="com.taximobility.driver.DriverOngoingAct"
+374-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:380:13-68
+375            android:launchMode="singleTask"
+375-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:381:13-44
+376            android:screenOrientation="portrait"
+376-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:382:13-49
+377            android:theme="@style/MyMaterialTheme"
+377-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:383:13-51
+378            android:windowSoftInputMode="adjustPan|stateHidden" />
+378-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:384:13-64
+379        <activity
+379-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:385:9-390:67
+380            android:name="com.taximobility.driver.DriverMeAct"
+380-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:386:13-63
+381            android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|layoutDirection|fontScale"
+381-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:387:13-186
+382            android:screenOrientation="portrait"
+382-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:388:13-49
+383            android:theme="@style/MyMaterialTheme"
+383-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:389:13-51
+384            android:windowSoftInputMode="adjustPan|stateHidden" />
+384-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:390:13-64
+385        <activity
+385-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:391:9-396:67
+386            android:name="com.taximobility.driver.DriverSettingsAct"
+386-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:392:13-69
+387            android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|layoutDirection|fontScale"
+387-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:393:13-186
+388            android:screenOrientation="portrait"
+388-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:394:13-49
+389            android:theme="@style/MyMaterialTheme"
+389-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:395:13-51
+390            android:windowSoftInputMode="adjustPan|stateHidden" />
+390-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:396:13-64
+391        <activity
+391-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:398:9-405:67
+392            android:name="com.taximobility.driver.DriverNotificationAct"
+392-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:399:13-73
+393            android:configChanges="locale"
+393-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:400:13-43
+394            android:launchMode="singleTask"
+394-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:401:13-44
+395            android:screenOrientation="portrait"
+395-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:402:13-49
+396            android:theme="@style/MyMaterialTheme"
+396-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:403:13-51
+397            android:windowSoftInputMode="adjustPan|stateHidden" />
+397-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:405:13-64
+398        <activity
+398-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:406:9-411:67
+399            android:name="com.taximobility.driver.DriverFarecalcAct"
+399-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:407:13-69
+400            android:launchMode="singleTop"
+400-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:408:13-43
+401            android:screenOrientation="portrait"
+401-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:409:13-49
+402            android:theme="@style/MyMaterialTheme"
+402-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:410:13-51
+403            android:windowSoftInputMode="adjustPan|stateHidden" />
+403-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:411:13-64
+404        <activity
+404-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:412:9-416:67
+405            android:name="com.taximobility.driver.DriverPayuncardAct"
+405-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:413:13-70
+406            android:screenOrientation="portrait"
+406-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:414:13-49
+407            android:theme="@style/MyMaterialTheme"
+407-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:415:13-51
+408            android:windowSoftInputMode="adjustPan|stateHidden" />
+408-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:416:13-64
+409        <activity
+409-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:417:9-421:67
+410            android:name="com.taximobility.driver.DriverCanceltripAct"
+410-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:418:13-71
+411            android:screenOrientation="portrait"
+411-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:419:13-49
+412            android:theme="@style/Theme.Transparent"
+412-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:420:13-53
+413            android:windowSoftInputMode="adjustPan|stateHidden" />
+413-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:421:13-64
+414        <activity
+414-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:423:9-427:67
+415            android:name="com.taximobility.driver.DriverShowAlertAct"
+415-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:424:13-70
+416            android:screenOrientation="portrait"
+416-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:425:13-49
+417            android:theme="@style/Theme.Transparent"
+417-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:426:13-53
+418            android:windowSoftInputMode="adjustPan|stateHidden" />
+418-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:427:13-64
+419        <activity
+419-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:428:9-433:67
+420            android:name="com.taximobility.driver.DriverMyStatus"
+420-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:429:13-66
+421            android:launchMode="singleTask"
+421-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:430:13-44
+422            android:screenOrientation="portrait"
+422-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:431:13-49
+423            android:theme="@style/MyMaterialTheme_home"
+423-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:432:13-56
+424            android:windowSoftInputMode="adjustPan|stateHidden" />
+424-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:433:13-64
+425        <activity
+425-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:434:9-439:67
+426            android:name="com.taximobility.driver.DriverWithdrawHistoryAct"
+426-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:435:13-76
+427            android:launchMode="singleTask"
+427-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:436:13-44
+428            android:screenOrientation="portrait"
+428-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:437:13-49
+429            android:theme="@style/MyMaterialTheme"
+429-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:438:13-51
+430            android:windowSoftInputMode="adjustPan|stateHidden" />
+430-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:439:13-64
+431        <activity
+431-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:440:9-445:67
+432            android:name="com.taximobility.driver.DriverWithDrawMenuAct"
+432-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:441:13-73
+433            android:launchMode="singleTask"
+433-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:442:13-44
+434            android:screenOrientation="portrait"
+434-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:443:13-49
+435            android:theme="@style/MyMaterialTheme"
+435-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:444:13-51
+436            android:windowSoftInputMode="adjustPan|stateHidden" />
+436-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:445:13-64
+437        <activity
+437-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:446:9-451:67
+438            android:name="com.taximobility.driver.DriverWithdrawReqAct"
+438-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:447:13-72
+439            android:launchMode="singleTask"
+439-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:448:13-44
+440            android:screenOrientation="portrait"
+440-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:449:13-49
+441            android:theme="@style/MyMaterialTheme"
+441-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:450:13-51
+442            android:windowSoftInputMode="adjustPan|stateHidden" />
+442-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:451:13-64
+443        <!--
+444              <activity
+445              android:name="com.yalantis.ucrop.UCropActivity"
+446              android:screenOrientation="portrait"
+447              android:theme="@style/MyMaterialTheme" />
+448        -->
+449        <activity
+449-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:456:9-458:54
+450            android:name="com.taximobility.driver.DriverSelectDropLocationAct"
+450-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:457:13-79
+451            android:theme="@style/MyMaterialTheme" />
+451-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:458:13-51
+452
+453        <provider
+453-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:220:9-228:20
+454            android:name="androidx.core.content.FileProvider"
+454-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:221:13-62
+455            android:authorities="com.Taximobility.driver.files_root"
+455-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:222:13-69
+456            android:exported="false"
+456-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:223:13-37
+457            android:grantUriPermissions="true" >
+457-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:224:13-47
+458            <meta-data
+458-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:225:13-227:58
+459                android:name="android.support.FILE_PROVIDER_PATHS"
+459-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:226:17-67
+460                android:resource="@xml/provider_paths" />
+460-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:227:17-55
+461        </provider>
+462
+463        <receiver
+463-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:470:9-475:20
+464            android:name="com.taximobility.driver.utils.DriverNetworkStatus"
+464-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:470:19-83
+465            android:exported="false" >
+465-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:471:13-37
+466            <intent-filter>
+466-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:209:13-211:29
+467                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+467-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:210:17-79
+467-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:210:25-76
+468            </intent-filter>
+469        </receiver>
+470        <receiver
+470-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:476:9-482:20
+471            android:name="com.taximobility.driver.utils.DriverGpsStatus"
+471-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:476:19-79
+472            android:exported="false" >
+472-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:477:13-37
+473            <intent-filter>
+473-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:478:13-481:29
+474                <action android:name="android.location.PROVIDERS_CHANGED" />
+474-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:216:17-77
+474-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:216:25-74
+475
+476                <category android:name="android.intent.category.DEFAULT" />
+476-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:480:17-76
+476-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:480:27-73
+477            </intent-filter>
+478        </receiver>
+479
+480        <service android:name="com.taximobility.driver.service.DriverBackgroundCoreConfig" />
+480-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:484:9-94
+480-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:484:18-91
+481
+482        <receiver
+482-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:487:9-492:20
+483            android:name="com.taximobility.driver.utils.DriverBootCompletedIntentReceiver"
+483-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:487:19-97
+484            android:exported="false" >
+484-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:488:13-37
+485            <intent-filter>
+485-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:489:13-491:29
+486                <action android:name="android.intent.action.BOOT_COMPLETED" />
+486-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:490:17-79
+486-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:490:25-76
+487            </intent-filter>
+488        </receiver>
+489
+490        <!--
+491              <service
+492              android:name=".service.WaitingTimerRun"
+493              android:stopWithTask="false" />
+494        -->
+495        <!-- <service android:name="taximobilitybility.driver.service.LocationUpdate" /> -->
+496        <!-- <service android:name=".service.UpdateLocation" /> -->
+497
+498        <service
+498-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:501:9-505:56
+499            android:name="com.taximobility.driver.service.LocationUpdate"
+499-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:502:13-74
+500            android:enabled="true"
+500-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:503:13-35
+501            android:exported="true"
+501-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:504:13-36
+502            android:foregroundServiceType="location" />
+502-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:505:13-53
+503
+504        <meta-data
+504-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:242:9-244:69
+505            android:name="com.google.android.gms.version"
+505-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:243:13-58
+506            android:value="@integer/google_play_services_version" />
+506-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:244:13-66
+507        <meta-data
+507-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:511:9-513:48
+508            android:name="com.google.android.geo.API_KEY"
+508-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:512:13-58
+509            android:value="@string/googleID" />
+509-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:513:13-45
+510
+511        <activity
+511-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:515:9-517:54
+512            android:name="com.taximobility.driver.earningchart.DriverEarningsAct"
+512-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:516:13-82
+513            android:theme="@style/MyMaterialTheme" />
+513-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:517:13-51
+514
+515        <service
+515-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:519:9-522:40
+516            android:name="com.taximobility.driver.service.DriverForegroundEnablingService"
+516-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:520:13-91
+517            android:enabled="true"
+517-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:521:13-35
+518            android:exported="false" />
+518-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:522:13-37
+519        <!--
+520         <service android:name=".MyFirebaseInstanceIDService">
+521             <intent-filter>
+522                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+523             </intent-filter>
+524         </service>
+525        -->
+526        <service
+526-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:528:9-534:19
+527            android:name="com.taximobility.driver.service.DriverFirebaseService"
+527-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:529:13-81
+528            android:exported="false" >
+528-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:530:13-37
+529            <intent-filter>
+529-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:177:13-179:29
+530                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+530-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:178:17-78
+530-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:178:25-75
+531            </intent-filter>
+532        </service>
+533
+534        <meta-data
+534-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:536:9-538:71
+535            android:name="com.google.firebase.messaging.default_notification_channel_id"
+535-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:537:13-89
+536            android:value="@string/default_notification_channel_id" />
+536-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:538:13-68
+537
+538        <activity
+538-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:541:9-543:54
+539            android:name="com.taximobility.driver.DeleteAccountActivityDriver"
+539-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:542:13-79
+540            android:theme="@style/MyMaterialTheme" />
+540-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:543:13-51
+541        <activity
+541-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:544:9-547:54
+542            android:name="com.taximobility.driver.DriverTermsAndConditions"
+542-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:545:13-76
+543            android:launchMode="singleTask"
+543-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:546:13-44
+544            android:theme="@style/MyMaterialTheme" />
+544-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:547:13-51
+545        <activity
+545-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:548:9-550:54
+546            android:name="com.taximobility.driver.DriverSettlementDetail"
+546-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:549:13-74
+547            android:theme="@style/MyMaterialTheme" />
+547-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:550:13-51
+548        <activity
+548-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:552:9-555:67
+549            android:name="com.taximobility.driver.SettlementHistoryActivityDriver"
+549-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:553:13-83
+550            android:theme="@style/MyMaterialTheme"
+550-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:554:13-51
+551            android:windowSoftInputMode="adjustPan|stateHidden" />
+551-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:555:13-64
+552        <activity
+552-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:558:9-562:20
+553            android:name="com.taximobility.driver.DriverMapZoomAct"
+553-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:559:13-68
+554            android:theme="@style/MyMaterialTheme" >
+554-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:560:13-51
+555        </activity>
+556        <activity
+556-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:564:9-567:67
+557            android:name="com.taximobility.driver.DriverWalletHistory"
+557-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:565:13-71
+558            android:theme="@style/MyMaterialTheme"
+558-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:566:13-51
+559            android:windowSoftInputMode="adjustPan|stateHidden" />
+559-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:567:13-64
+560        <activity
+560-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:569:9-573:70
+561            android:name="com.taximobility.driver.DriverChatWebviewAct"
+561-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:570:13-72
+562            android:screenOrientation="portrait"
+562-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:571:13-49
+563            android:theme="@style/MyMaterialTheme"
+563-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:572:13-51
+564            android:windowSoftInputMode="adjustResize|stateHidden" />
+564-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:573:13-67
+565        <activity
+565-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:575:9-577:54
+566            android:name="com.taximobility.driver.DriverMyFleetAct"
+566-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:576:13-68
+567            android:theme="@style/MyMaterialTheme" />
+567-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:577:13-51
+568        <activity
+568-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:579:9-583:70
+569            android:name="com.taximobility.ChatWebviewAct"
+569-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:580:13-59
+570            android:screenOrientation="portrait"
+570-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:581:13-49
+571            android:theme="@style/MyMaterialTheme"
+571-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:582:13-51
+572            android:windowSoftInputMode="adjustResize|stateHidden" />
+572-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:583:13-67
+573
+574        <receiver
+574-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:585:9-591:20
+575            android:name="com.razorpay.RzpTokenReceiver"
+575-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:586:13-57
+576            android:exported="false" >
+576-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:587:13-37
+577            <intent-filter>
+577-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:588:13-590:29
+578                <action android:name="rzp.device_token.share" />
+578-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:589:17-65
+578-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:589:25-62
+579            </intent-filter>
+580        </receiver>
+581
+582        <activity
+582-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:593:9-604:20
+583            android:name="com.razorpay.CheckoutActivity"
+583-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:594:13-57
+584            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+584-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:595:13-83
+585            android:exported="true"
+585-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:596:13-36
+586            android:theme="@style/CheckoutTheme" >
+586-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:597:13-49
+587            <intent-filter>
+587-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:598:13-603:29
+588                <action android:name="android.intent.action.MAIN" />
+588-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:67:17-69
+588-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:67:25-66
+589
+590                <data
+590-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:600:17-602:47
+591                    android:host="rzp.io"
+591-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:601:21-42
+592                    android:scheme="io.rzp" />
+592-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:602:21-44
+593            </intent-filter>
+594        </activity>
+595
+596        <!-- <meta-data -->
+597        <!-- android:name="com.razorpay.ApiKey" -->
+598        <!-- android:value="rzp_live_w5qhHavFaedhdm" /> -->
+599
+600
+601        <!-- // test key - rzp_test_v67rWleYcdwBqU -->
+602
+603
+604        <!-- // test key - rzp_live_w5qhHavFaedhdm -->
+605        <activity
+605-->[:sospluginmodlue] D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\sospluginmodlue\build\intermediates\library_manifest\debug\AndroidManifest.xml:22:9-32:20
+606            android:name="com.mayan.sospluginmodlue.SOSActivity"
+606-->[:sospluginmodlue] D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\sospluginmodlue\build\intermediates\library_manifest\debug\AndroidManifest.xml:23:13-65
+607            android:exported="true"
+607-->[:sospluginmodlue] D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\sospluginmodlue\build\intermediates\library_manifest\debug\AndroidManifest.xml:24:13-36
+608            android:screenOrientation="portrait"
+608-->[:sospluginmodlue] D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\sospluginmodlue\build\intermediates\library_manifest\debug\AndroidManifest.xml:25:13-49
+609            android:theme="@style/MyMaterialTheme" >
+609-->[:sospluginmodlue] D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\sospluginmodlue\build\intermediates\library_manifest\debug\AndroidManifest.xml:26:13-51
+610            <intent-filter>
+610-->[:sospluginmodlue] D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\sospluginmodlue\build\intermediates\library_manifest\debug\AndroidManifest.xml:27:13-31:29
+611                <action android:name="android.intent.action.MAIN" />
+611-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:67:17-69
+611-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:67:25-66
+612
+613                <category android:name="android.intent.category.DEFAULT" />
+613-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:480:17-76
+613-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:480:27-73
+614            </intent-filter>
+615        </activity>
+616
+617        <service android:name="com.mayan.sospluginmodlue.service.SOSService" />
+617-->[:sospluginmodlue] D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\sospluginmodlue\build\intermediates\library_manifest\debug\AndroidManifest.xml:34:9-80
+617-->[:sospluginmodlue] D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\sospluginmodlue\build\intermediates\library_manifest\debug\AndroidManifest.xml:34:18-77
+618
+619        <provider
+619-->[com.squareup.picasso:picasso:2.71828] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\ca68fe5b3def3bd0bacb7837eac8ae0a\jetified-picasso-2.71828\AndroidManifest.xml:8:9-11:40
+620            android:name="com.squareup.picasso.PicassoProvider"
+620-->[com.squareup.picasso:picasso:2.71828] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\ca68fe5b3def3bd0bacb7837eac8ae0a\jetified-picasso-2.71828\AndroidManifest.xml:9:13-64
+621            android:authorities="com.Taximobility.driver.com.squareup.picasso"
+621-->[com.squareup.picasso:picasso:2.71828] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\ca68fe5b3def3bd0bacb7837eac8ae0a\jetified-picasso-2.71828\AndroidManifest.xml:10:13-72
+622            android:exported="false" />
+622-->[com.squareup.picasso:picasso:2.71828] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\ca68fe5b3def3bd0bacb7837eac8ae0a\jetified-picasso-2.71828\AndroidManifest.xml:11:13-37
+623
+624        <activity
+624-->[com.google.android.libraries.places:places:2.3.0] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\9cd98ca58055d262292b767f9d967fee\jetified-places-2.3.0\AndroidManifest.xml:14:9-20:20
+625            android:name="com.google.android.libraries.places.widget.AutocompleteActivity"
+625-->[com.google.android.libraries.places:places:2.3.0] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\9cd98ca58055d262292b767f9d967fee\jetified-places-2.3.0\AndroidManifest.xml:15:13-91
+626            android:exported="false"
+626-->[com.google.android.libraries.places:places:2.3.0] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\9cd98ca58055d262292b767f9d967fee\jetified-places-2.3.0\AndroidManifest.xml:16:13-37
+627            android:label="@string/places_autocomplete_label"
+627-->[com.google.android.libraries.places:places:2.3.0] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\9cd98ca58055d262292b767f9d967fee\jetified-places-2.3.0\AndroidManifest.xml:17:13-62
+628            android:theme="@style/PlacesAutocompleteOverlay"
+628-->[com.google.android.libraries.places:places:2.3.0] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\9cd98ca58055d262292b767f9d967fee\jetified-places-2.3.0\AndroidManifest.xml:18:13-61
+629            android:windowSoftInputMode="adjustResize" >
+629-->[com.google.android.libraries.places:places:2.3.0] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\9cd98ca58055d262292b767f9d967fee\jetified-places-2.3.0\AndroidManifest.xml:19:13-55
+630        </activity>
+631        <activity android:name="com.facebook.CustomTabMainActivity" />
+631-->[com.facebook.android:facebook-common:5.8.0] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\0f2aff8facc3be3b0e08136d20814a1f\jetified-facebook-common-5.8.0\AndroidManifest.xml:33:9-71
+631-->[com.facebook.android:facebook-common:5.8.0] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\0f2aff8facc3be3b0e08136d20814a1f\jetified-facebook-common-5.8.0\AndroidManifest.xml:33:19-68
+632        <activity android:name="com.facebook.CustomTabActivity" />
+632-->[com.facebook.android:facebook-common:5.8.0] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\0f2aff8facc3be3b0e08136d20814a1f\jetified-facebook-common-5.8.0\AndroidManifest.xml:34:9-67
+632-->[com.facebook.android:facebook-common:5.8.0] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\0f2aff8facc3be3b0e08136d20814a1f\jetified-facebook-common-5.8.0\AndroidManifest.xml:34:19-64
+633        <!--
+634             FirebaseMessagingService performs security checks at runtime,
+635             but set to not exported to explicitly avoid allowing another app to call it.
+636        -->
+637        <service
+637-->[com.google.firebase:firebase-messaging:20.2.4] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\a6bcc62e09e0715c3470026041da3bdb\jetified-firebase-messaging-20.2.4\AndroidManifest.xml:28:9-35:19
+638            android:name="com.google.firebase.messaging.FirebaseMessagingService"
+638-->[com.google.firebase:firebase-messaging:20.2.4] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\a6bcc62e09e0715c3470026041da3bdb\jetified-firebase-messaging-20.2.4\AndroidManifest.xml:29:13-82
+639            android:directBootAware="true"
+639-->[com.google.firebase:firebase-messaging:20.2.4] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\a6bcc62e09e0715c3470026041da3bdb\jetified-firebase-messaging-20.2.4\AndroidManifest.xml:30:13-43
+640            android:exported="false" >
+640-->[com.google.firebase:firebase-messaging:20.2.4] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\a6bcc62e09e0715c3470026041da3bdb\jetified-firebase-messaging-20.2.4\AndroidManifest.xml:31:13-37
+641            <intent-filter android:priority="-500" >
+641-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:177:13-179:29
+642                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+642-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:178:17-78
+642-->D:\Sakthi\Projects\T_Mobility_New_Driver\T_Mobility_New_Driver\app\src\main\AndroidManifest.xml:178:25-75
+643            </intent-filter>
+644        </service>
+645        <service
+645-->[com.google.firebase:firebase-messaging:20.2.4] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\a6bcc62e09e0715c3470026041da3bdb\jetified-firebase-messaging-20.2.4\AndroidManifest.xml:36:9-42:19
+646            android:name="com.google.firebase.components.ComponentDiscoveryService"
+646-->[com.google.firebase:firebase-messaging:20.2.4] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\a6bcc62e09e0715c3470026041da3bdb\jetified-firebase-messaging-20.2.4\AndroidManifest.xml:37:13-84
+647            android:directBootAware="true"
+647-->[com.google.firebase:firebase-common:19.3.1] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\557ca60c1a403b565e9f56774d99a1f8\jetified-firebase-common-19.3.1\AndroidManifest.xml:35:13-43
+648            android:exported="false" >
+648-->[com.google.firebase:firebase-messaging:20.2.4] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\a6bcc62e09e0715c3470026041da3bdb\jetified-firebase-messaging-20.2.4\AndroidManifest.xml:38:13-37
+649            <meta-data
+649-->[com.google.firebase:firebase-messaging:20.2.4] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\a6bcc62e09e0715c3470026041da3bdb\jetified-firebase-messaging-20.2.4\AndroidManifest.xml:39:13-41:85
+650                android:name="com.google.firebase.components:com.google.firebase.messaging.FirebaseMessagingRegistrar"
+650-->[com.google.firebase:firebase-messaging:20.2.4] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\a6bcc62e09e0715c3470026041da3bdb\jetified-firebase-messaging-20.2.4\AndroidManifest.xml:40:17-119
+651                android:value="com.google.firebase.components.ComponentRegistrar" />
+651-->[com.google.firebase:firebase-messaging:20.2.4] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\a6bcc62e09e0715c3470026041da3bdb\jetified-firebase-messaging-20.2.4\AndroidManifest.xml:41:17-82
+652            <meta-data
+652-->[com.google.firebase:firebase-crashlytics:17.2.1] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\b8fdf7cd9491028fee7c23890f6f3b69\jetified-firebase-crashlytics-17.2.1\AndroidManifest.xml:16:13-18:85
+653                android:name="com.google.firebase.components:com.google.firebase.crashlytics.CrashlyticsRegistrar"
+653-->[com.google.firebase:firebase-crashlytics:17.2.1] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\b8fdf7cd9491028fee7c23890f6f3b69\jetified-firebase-crashlytics-17.2.1\AndroidManifest.xml:17:17-115
+654                android:value="com.google.firebase.components.ComponentRegistrar" />
+654-->[com.google.firebase:firebase-crashlytics:17.2.1] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\b8fdf7cd9491028fee7c23890f6f3b69\jetified-firebase-crashlytics-17.2.1\AndroidManifest.xml:18:17-82
+655            <meta-data
+655-->[com.google.firebase:firebase-iid:20.2.3] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\e5e814f186fc7b9f86d739225a4c1924\jetified-firebase-iid-20.2.3\AndroidManifest.xml:32:13-34:85
+656                android:name="com.google.firebase.components:com.google.firebase.iid.Registrar"
+656-->[com.google.firebase:firebase-iid:20.2.3] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\e5e814f186fc7b9f86d739225a4c1924\jetified-firebase-iid-20.2.3\AndroidManifest.xml:33:17-96
+657                android:value="com.google.firebase.components.ComponentRegistrar" />
+657-->[com.google.firebase:firebase-iid:20.2.3] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\e5e814f186fc7b9f86d739225a4c1924\jetified-firebase-iid-20.2.3\AndroidManifest.xml:34:17-82
+658            <meta-data
+658-->[com.google.firebase:firebase-installations:16.3.3] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\34c81b4a15fd5968bcf812f22d2d6298\jetified-firebase-installations-16.3.3\AndroidManifest.xml:17:13-19:85
+659                android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar"
+659-->[com.google.firebase:firebase-installations:16.3.3] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\34c81b4a15fd5968bcf812f22d2d6298\jetified-firebase-installations-16.3.3\AndroidManifest.xml:18:17-127
+660                android:value="com.google.firebase.components.ComponentRegistrar" />
+660-->[com.google.firebase:firebase-installations:16.3.3] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\34c81b4a15fd5968bcf812f22d2d6298\jetified-firebase-installations-16.3.3\AndroidManifest.xml:19:17-82
+661            <meta-data
+661-->[com.google.firebase:firebase-datatransport:17.0.3] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\851ccf964779c18f943f36fb95ce3bce\jetified-firebase-datatransport-17.0.3\AndroidManifest.xml:28:13-30:85
+662                android:name="com.google.firebase.components:com.google.firebase.datatransport.TransportRegistrar"
+662-->[com.google.firebase:firebase-datatransport:17.0.3] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\851ccf964779c18f943f36fb95ce3bce\jetified-firebase-datatransport-17.0.3\AndroidManifest.xml:29:17-115
+663                android:value="com.google.firebase.components.ComponentRegistrar" />
+663-->[com.google.firebase:firebase-datatransport:17.0.3] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\851ccf964779c18f943f36fb95ce3bce\jetified-firebase-datatransport-17.0.3\AndroidManifest.xml:30:17-82
+664        </service>
+665
+666        <activity
+666-->[com.google.android.gms:play-services-auth:18.1.0] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\fc707c3f19fb3f0f9e39e6f9560d03c3\jetified-play-services-auth-18.1.0\AndroidManifest.xml:23:9-27:75
+667            android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity"
+667-->[com.google.android.gms:play-services-auth:18.1.0] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\fc707c3f19fb3f0f9e39e6f9560d03c3\jetified-play-services-auth-18.1.0\AndroidManifest.xml:24:13-93
+668            android:excludeFromRecents="true"
+668-->[com.google.android.gms:play-services-auth:18.1.0] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\fc707c3f19fb3f0f9e39e6f9560d03c3\jetified-play-services-auth-18.1.0\AndroidManifest.xml:25:13-46
+669            android:exported="false"
+669-->[com.google.android.gms:play-services-auth:18.1.0] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\fc707c3f19fb3f0f9e39e6f9560d03c3\jetified-play-services-auth-18.1.0\AndroidManifest.xml:26:13-37
+670            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+670-->[com.google.android.gms:play-services-auth:18.1.0] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\fc707c3f19fb3f0f9e39e6f9560d03c3\jetified-play-services-auth-18.1.0\AndroidManifest.xml:27:13-72
+671        <!--
+672            Service handling Google Sign-In user revocation. For apps that do not integrate with
+673            Google Sign-In, this service will never be started.
+674        -->
+675        <service
+675-->[com.google.android.gms:play-services-auth:18.1.0] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\fc707c3f19fb3f0f9e39e6f9560d03c3\jetified-play-services-auth-18.1.0\AndroidManifest.xml:33:9-37:51
+676            android:name="com.google.android.gms.auth.api.signin.RevocationBoundService"
+676-->[com.google.android.gms:play-services-auth:18.1.0] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\fc707c3f19fb3f0f9e39e6f9560d03c3\jetified-play-services-auth-18.1.0\AndroidManifest.xml:34:13-89
+677            android:exported="true"
+677-->[com.google.android.gms:play-services-auth:18.1.0] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\fc707c3f19fb3f0f9e39e6f9560d03c3\jetified-play-services-auth-18.1.0\AndroidManifest.xml:35:13-36
+678            android:permission="com.google.android.gms.auth.api.signin.permission.REVOCATION_NOTIFICATION"
+678-->[com.google.android.gms:play-services-auth:18.1.0] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\fc707c3f19fb3f0f9e39e6f9560d03c3\jetified-play-services-auth-18.1.0\AndroidManifest.xml:36:13-107
+679            android:visibleToInstantApps="true" />
+679-->[com.google.android.gms:play-services-auth:18.1.0] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\fc707c3f19fb3f0f9e39e6f9560d03c3\jetified-play-services-auth-18.1.0\AndroidManifest.xml:37:13-48
+680        <service
+680-->[androidx.room:room-runtime:2.2.5] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\225cc6e83b75f00151eaa2c9d3cb7491\room-runtime-2.2.5\AndroidManifest.xml:25:9-28:40
+681            android:name="androidx.room.MultiInstanceInvalidationService"
+681-->[androidx.room:room-runtime:2.2.5] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\225cc6e83b75f00151eaa2c9d3cb7491\room-runtime-2.2.5\AndroidManifest.xml:26:13-74
+682            android:directBootAware="true"
+682-->[androidx.room:room-runtime:2.2.5] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\225cc6e83b75f00151eaa2c9d3cb7491\room-runtime-2.2.5\AndroidManifest.xml:27:13-43
+683            android:exported="false" />
+683-->[androidx.room:room-runtime:2.2.5] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\225cc6e83b75f00151eaa2c9d3cb7491\room-runtime-2.2.5\AndroidManifest.xml:28:13-37
+684
+685        <receiver
+685-->[com.google.firebase:firebase-iid:20.2.3] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\e5e814f186fc7b9f86d739225a4c1924\jetified-firebase-iid-20.2.3\AndroidManifest.xml:37:9-44:20
+686            android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver"
+686-->[com.google.firebase:firebase-iid:20.2.3] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\e5e814f186fc7b9f86d739225a4c1924\jetified-firebase-iid-20.2.3\AndroidManifest.xml:38:13-78
+687            android:exported="true"
+687-->[com.google.firebase:firebase-iid:20.2.3] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\e5e814f186fc7b9f86d739225a4c1924\jetified-firebase-iid-20.2.3\AndroidManifest.xml:39:13-36
+688            android:permission="com.google.android.c2dm.permission.SEND" >
+688-->[com.google.firebase:firebase-iid:20.2.3] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\e5e814f186fc7b9f86d739225a4c1924\jetified-firebase-iid-20.2.3\AndroidManifest.xml:40:13-73
+689            <intent-filter>
+689-->[com.google.firebase:firebase-iid:20.2.3] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\e5e814f186fc7b9f86d739225a4c1924\jetified-firebase-iid-20.2.3\AndroidManifest.xml:41:13-43:29
+690                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+690-->[com.google.firebase:firebase-iid:20.2.3] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\e5e814f186fc7b9f86d739225a4c1924\jetified-firebase-iid-20.2.3\AndroidManifest.xml:42:17-81
+690-->[com.google.firebase:firebase-iid:20.2.3] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\e5e814f186fc7b9f86d739225a4c1924\jetified-firebase-iid-20.2.3\AndroidManifest.xml:42:25-78
+691            </intent-filter>
+692        </receiver>
+693        <!--
+694         The initialization ContentProvider will call FacebookSdk.sdkInitialize automatically
+695         with the application context. This config is merged in with the host app's manifest,
+696         but there can only be one provider with the same authority activated at any given
+697         point; so if the end user has two or more different apps that use Facebook SDK, only the
+698         first one will be able to use the provider. To work around this problem, we use the
+699         following placeholder in the authority to identify each host application as if it was
+700         a completely different provider.
+701        -->
+702        <provider
+702-->[com.facebook.android:facebook-core:5.8.0] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\6ffe3546125e10664ba1e7976be6e786\jetified-facebook-core-5.8.0\AndroidManifest.xml:39:9-42:40
+703            android:name="com.facebook.internal.FacebookInitProvider"
+703-->[com.facebook.android:facebook-core:5.8.0] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\6ffe3546125e10664ba1e7976be6e786\jetified-facebook-core-5.8.0\AndroidManifest.xml:40:13-70
+704            android:authorities="com.Taximobility.driver.FacebookInitProvider"
+704-->[com.facebook.android:facebook-core:5.8.0] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\6ffe3546125e10664ba1e7976be6e786\jetified-facebook-core-5.8.0\AndroidManifest.xml:41:13-72
+705            android:exported="false" />
+705-->[com.facebook.android:facebook-core:5.8.0] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\6ffe3546125e10664ba1e7976be6e786\jetified-facebook-core-5.8.0\AndroidManifest.xml:42:13-37
+706
+707        <receiver
+707-->[com.facebook.android:facebook-core:5.8.0] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\6ffe3546125e10664ba1e7976be6e786\jetified-facebook-core-5.8.0\AndroidManifest.xml:44:9-50:20
+708            android:name="com.facebook.CurrentAccessTokenExpirationBroadcastReceiver"
+708-->[com.facebook.android:facebook-core:5.8.0] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\6ffe3546125e10664ba1e7976be6e786\jetified-facebook-core-5.8.0\AndroidManifest.xml:45:13-86
+709            android:exported="false" >
+709-->[com.facebook.android:facebook-core:5.8.0] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\6ffe3546125e10664ba1e7976be6e786\jetified-facebook-core-5.8.0\AndroidManifest.xml:46:13-37
+710            <intent-filter>
+710-->[com.facebook.android:facebook-core:5.8.0] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\6ffe3546125e10664ba1e7976be6e786\jetified-facebook-core-5.8.0\AndroidManifest.xml:47:13-49:29
+711                <action android:name="com.facebook.sdk.ACTION_CURRENT_ACCESS_TOKEN_CHANGED" />
+711-->[com.facebook.android:facebook-core:5.8.0] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\6ffe3546125e10664ba1e7976be6e786\jetified-facebook-core-5.8.0\AndroidManifest.xml:48:17-95
+711-->[com.facebook.android:facebook-core:5.8.0] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\6ffe3546125e10664ba1e7976be6e786\jetified-facebook-core-5.8.0\AndroidManifest.xml:48:25-92
+712            </intent-filter>
+713        </receiver>
+714        <receiver
+714-->[com.facebook.android:facebook-core:5.8.0] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\6ffe3546125e10664ba1e7976be6e786\jetified-facebook-core-5.8.0\AndroidManifest.xml:51:9-58:20
+715            android:name="com.facebook.CampaignTrackingReceiver"
+715-->[com.facebook.android:facebook-core:5.8.0] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\6ffe3546125e10664ba1e7976be6e786\jetified-facebook-core-5.8.0\AndroidManifest.xml:52:13-65
+716            android:exported="true"
+716-->[com.facebook.android:facebook-core:5.8.0] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\6ffe3546125e10664ba1e7976be6e786\jetified-facebook-core-5.8.0\AndroidManifest.xml:53:13-36
+717            android:permission="android.permission.INSTALL_PACKAGES" >
+717-->[com.facebook.android:facebook-core:5.8.0] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\6ffe3546125e10664ba1e7976be6e786\jetified-facebook-core-5.8.0\AndroidManifest.xml:54:13-69
+718            <intent-filter>
+718-->[com.facebook.android:facebook-core:5.8.0] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\6ffe3546125e10664ba1e7976be6e786\jetified-facebook-core-5.8.0\AndroidManifest.xml:55:13-57:29
+719                <action android:name="com.android.vending.INSTALL_REFERRER" />
+719-->[com.facebook.android:facebook-core:5.8.0] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\6ffe3546125e10664ba1e7976be6e786\jetified-facebook-core-5.8.0\AndroidManifest.xml:56:17-79
+719-->[com.facebook.android:facebook-core:5.8.0] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\6ffe3546125e10664ba1e7976be6e786\jetified-facebook-core-5.8.0\AndroidManifest.xml:56:25-76
+720            </intent-filter>
+721        </receiver>
+722
+723        <activity
+723-->[com.google.android.gms:play-services-base:17.1.0] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\74f447e69d2d1652e986304e61fbe10c\jetified-play-services-base-17.1.0\AndroidManifest.xml:23:9-26:75
+724            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+724-->[com.google.android.gms:play-services-base:17.1.0] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\74f447e69d2d1652e986304e61fbe10c\jetified-play-services-base-17.1.0\AndroidManifest.xml:24:13-79
+725            android:exported="false"
+725-->[com.google.android.gms:play-services-base:17.1.0] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\74f447e69d2d1652e986304e61fbe10c\jetified-play-services-base-17.1.0\AndroidManifest.xml:25:13-37
+726            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+726-->[com.google.android.gms:play-services-base:17.1.0] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\74f447e69d2d1652e986304e61fbe10c\jetified-play-services-base-17.1.0\AndroidManifest.xml:26:13-72
+727
+728        <provider
+728-->[com.google.firebase:firebase-common:19.3.1] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\557ca60c1a403b565e9f56774d99a1f8\jetified-firebase-common-19.3.1\AndroidManifest.xml:26:9-31:39
+729            android:name="com.google.firebase.provider.FirebaseInitProvider"
+729-->[com.google.firebase:firebase-common:19.3.1] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\557ca60c1a403b565e9f56774d99a1f8\jetified-firebase-common-19.3.1\AndroidManifest.xml:27:13-77
+730            android:authorities="com.Taximobility.driver.firebaseinitprovider"
+730-->[com.google.firebase:firebase-common:19.3.1] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\557ca60c1a403b565e9f56774d99a1f8\jetified-firebase-common-19.3.1\AndroidManifest.xml:28:13-72
+731            android:directBootAware="true"
+731-->[com.google.firebase:firebase-common:19.3.1] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\557ca60c1a403b565e9f56774d99a1f8\jetified-firebase-common-19.3.1\AndroidManifest.xml:29:13-43
+732            android:exported="false"
+732-->[com.google.firebase:firebase-common:19.3.1] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\557ca60c1a403b565e9f56774d99a1f8\jetified-firebase-common-19.3.1\AndroidManifest.xml:30:13-37
+733            android:initOrder="100" />
+733-->[com.google.firebase:firebase-common:19.3.1] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\557ca60c1a403b565e9f56774d99a1f8\jetified-firebase-common-19.3.1\AndroidManifest.xml:31:13-36
+734        <provider
+734-->[androidx.lifecycle:lifecycle-process:2.2.0] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\04b7dbde8c8ab270bf6383dcba3e3b7a\jetified-lifecycle-process-2.2.0\AndroidManifest.xml:25:9-29:43
+735            android:name="androidx.lifecycle.ProcessLifecycleOwnerInitializer"
+735-->[androidx.lifecycle:lifecycle-process:2.2.0] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\04b7dbde8c8ab270bf6383dcba3e3b7a\jetified-lifecycle-process-2.2.0\AndroidManifest.xml:26:13-79
+736            android:authorities="com.Taximobility.driver.lifecycle-process"
+736-->[androidx.lifecycle:lifecycle-process:2.2.0] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\04b7dbde8c8ab270bf6383dcba3e3b7a\jetified-lifecycle-process-2.2.0\AndroidManifest.xml:27:13-69
+737            android:exported="false"
+737-->[androidx.lifecycle:lifecycle-process:2.2.0] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\04b7dbde8c8ab270bf6383dcba3e3b7a\jetified-lifecycle-process-2.2.0\AndroidManifest.xml:28:13-37
+738            android:multiprocess="true" />
+738-->[androidx.lifecycle:lifecycle-process:2.2.0] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\04b7dbde8c8ab270bf6383dcba3e3b7a\jetified-lifecycle-process-2.2.0\AndroidManifest.xml:29:13-40
+739
+740        <service
+740-->[com.google.android.datatransport:transport-backend-cct:2.3.1] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\74708699ea9331df947ee5296951f6ec\jetified-transport-backend-cct-2.3.1\AndroidManifest.xml:29:9-35:19
+741            android:name="com.google.android.datatransport.runtime.backends.TransportBackendDiscovery"
+741-->[com.google.android.datatransport:transport-backend-cct:2.3.1] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\74708699ea9331df947ee5296951f6ec\jetified-transport-backend-cct-2.3.1\AndroidManifest.xml:30:13-103
+742            android:exported="false" >
+742-->[com.google.android.datatransport:transport-backend-cct:2.3.1] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\74708699ea9331df947ee5296951f6ec\jetified-transport-backend-cct-2.3.1\AndroidManifest.xml:31:13-37
+743            <meta-data
+743-->[com.google.android.datatransport:transport-backend-cct:2.3.1] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\74708699ea9331df947ee5296951f6ec\jetified-transport-backend-cct-2.3.1\AndroidManifest.xml:32:13-34:39
+744                android:name="backend:com.google.android.datatransport.cct.CctBackendFactory"
+744-->[com.google.android.datatransport:transport-backend-cct:2.3.1] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\74708699ea9331df947ee5296951f6ec\jetified-transport-backend-cct-2.3.1\AndroidManifest.xml:33:17-94
+745                android:value="cct" />
+745-->[com.google.android.datatransport:transport-backend-cct:2.3.1] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\74708699ea9331df947ee5296951f6ec\jetified-transport-backend-cct-2.3.1\AndroidManifest.xml:34:17-36
+746        </service>
+747        <service
+747-->[com.google.android.datatransport:transport-runtime:2.2.4] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\da567500fbf6bc8f2f03b4f2eff3d46b\jetified-transport-runtime-2.2.4\AndroidManifest.xml:26:9-30:19
+748            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService"
+748-->[com.google.android.datatransport:transport-runtime:2.2.4] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\da567500fbf6bc8f2f03b4f2eff3d46b\jetified-transport-runtime-2.2.4\AndroidManifest.xml:27:13-117
+749            android:exported="false"
+749-->[com.google.android.datatransport:transport-runtime:2.2.4] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\da567500fbf6bc8f2f03b4f2eff3d46b\jetified-transport-runtime-2.2.4\AndroidManifest.xml:28:13-37
+750            android:permission="android.permission.BIND_JOB_SERVICE" >
+750-->[com.google.android.datatransport:transport-runtime:2.2.4] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\da567500fbf6bc8f2f03b4f2eff3d46b\jetified-transport-runtime-2.2.4\AndroidManifest.xml:29:13-69
+751        </service>
+752
+753        <receiver
+753-->[com.google.android.datatransport:transport-runtime:2.2.4] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\da567500fbf6bc8f2f03b4f2eff3d46b\jetified-transport-runtime-2.2.4\AndroidManifest.xml:32:9-34:40
+754            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver"
+754-->[com.google.android.datatransport:transport-runtime:2.2.4] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\da567500fbf6bc8f2f03b4f2eff3d46b\jetified-transport-runtime-2.2.4\AndroidManifest.xml:33:13-132
+755            android:exported="false" />
+755-->[com.google.android.datatransport:transport-runtime:2.2.4] C:\Users\developer\.gradle\caches\transforms-2\files-2.1\da567500fbf6bc8f2f03b4f2eff3d46b\jetified-transport-runtime-2.2.4\AndroidManifest.xml:34:13-37
+756    </application>
+757
+758</manifest>

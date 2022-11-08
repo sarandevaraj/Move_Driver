@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <EditText
+                android:id="@+id/edOriginLat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Origin Latitute"
+                android:inputType="numberDecimal" />
+
+            <EditText
+                android:id="@+id/edOriginLng"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Origin Longitute"
+                android:inputType="numberDecimal" />
+
+            <EditText
+                android:id="@+id/edDestLat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Dest Latitute"
+                android:inputType="numberDecimal" />
+
+            <EditText
+                android:id="@+id/edDestLng"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Dest Longitute"
+                android:inputType="numberDecimal" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnDirections"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Directions"
+                    android:textColor="@color/white"
+                    android:backgroundTint="@color/colorAccent"
+                    android:layout_weight="1"/>
+                <Button
+                    android:id="@+id/btnGeocode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Geocode"
+                    android:textColor="@color/white"
+                    android:backgroundTint="@color/colorAccent"
+                    android:layout_weight="1"/>
+                <Button
+                    android:id="@+id/btnDistance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Distance"
+                    android:textColor="@color/white"
+                    android:backgroundTint="@color/colorAccent"
+                    android:layout_weight="1"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textResult"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center"
+                android:hint="No Results" />
+        </LinearLayout>
+
+    </ScrollView>
+</layout>

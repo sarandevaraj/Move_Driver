@@ -1,0 +1,511 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="Colon"> : </string>
+    <string name="Confirmation">Confirmação</string>
+    <string name="Language">Língua</string>
+    <string name="Need_proper_loc">Não foi possível obter sua localização correta. Por favor, vá para a área de cobertura.</string>
+    <string name="Tax">Imposto</string>
+    <string name="Trip_in_progress">Viagem em andamento</string>
+    <string msgid="5976598919945601918" name="abc_action_bar_home_description">"Navegar para a página inicial"</string>
+    <string msgid="8388173803310557296" name="abc_action_bar_up_description">"Navegar para cima"</string>
+    <string msgid="3937310113216875497" name="abc_action_menu_overflow_description">"Mais opções"</string>
+    <string msgid="4692188335987374352" name="abc_action_mode_done">"Concluído"</string>
+    <string msgid="1189761859438369441" name="abc_activity_chooser_view_see_all">"Ver tudo"</string>
+    <string msgid="2165779757652331008" name="abc_activitychooserview_choose_application">"Selecionar um app"</string>
+    <string msgid="4215997306490295099" name="abc_capital_off">"DESATIVADO"</string>
+    <string msgid="884982626291842264" name="abc_capital_on">"ATIVADO"</string>
+    <string msgid="8833365367933412986" name="abc_menu_alt_shortcut_label">"Alt+"</string>
+    <string msgid="2223301931652355242" name="abc_menu_ctrl_shortcut_label">"Ctrl+"</string>
+    <string msgid="838001238306846836" name="abc_menu_delete_shortcut_label">"delete"</string>
+    <string msgid="7986526966204849475" name="abc_menu_enter_shortcut_label">"enter"</string>
+    <string msgid="375214403600139847" name="abc_menu_function_shortcut_label">"Function+"</string>
+    <string msgid="4192209724446364286" name="abc_menu_meta_shortcut_label">"Meta+"</string>
+    <string msgid="4741552369836443843" name="abc_menu_shift_shortcut_label">"Shift+"</string>
+    <string msgid="5473865519181928982" name="abc_menu_space_shortcut_label">"espaço"</string>
+    <string msgid="6180552449598693998" name="abc_menu_sym_shortcut_label">"Sym+"</string>
+    <string msgid="5520303668377388990" name="abc_prepend_shortcut_label">"Menu+"</string>
+    <string msgid="7208076849092622260" name="abc_search_hint">"Pesquisar…"</string>
+    <string msgid="3741173234950517107" name="abc_searchview_description_clear">"Limpar consulta"</string>
+    <string msgid="693312494995508443" name="abc_searchview_description_query">"Consulta de pesquisa"</string>
+    <string msgid="3417662926640357176" name="abc_searchview_description_search">"Pesquisar"</string>
+    <string msgid="1486535517437947103" name="abc_searchview_description_submit">"Enviar consulta"</string>
+    <string msgid="2293578557972875415" name="abc_searchview_description_voice">"Pesquisa por voz"</string>
+    <string msgid="8875138169939072951" name="abc_shareactionprovider_share_with">"Compartilhar com"</string>
+    <string msgid="9055268688411532828" name="abc_shareactionprovider_share_with_application">"Compartilhar com <ns1:g id="APPLICATION_NAME">%s</ns1:g>"</string>
+    <string msgid="1656852541809559762" name="abc_toolbar_collapse_description">"Recolher"</string>
+    <string name="about_sub_title">Passeio de qualquer lugar \n TaxiMobility</string>
+    <string name="above">Acima</string>
+    <string name="acc_signin">Digite seu número de celular, crie uma conta ou faça login</string>
+    <string name="accept">Aceitar</string>
+    <string name="accepted">Aceitaram</string>
+    <string name="account_deleted_success">Conta excluída com sucesso</string>
+    <string name="actual_distance">Distância total</string>
+    <string name="add">Adicionar</string>
+    <string name="add_card">Adicionar cartão</string>
+    <string name="add_contacts">Adicionar contatos</string>
+    <string name="add_favourites">Adicionar favorito</string>
+    <string name="add_stop_desc">Adicionar paradas pode variar sua tarifa. Em um aviso gentil, não adicione paradas no caminho do local de descarte para economizar tempo</string>
+    <string name="add_stop_desc_title">Visite vários locais adicionando paradas</string>
+    <string name="addcard">Adicionar novo cartão</string>
+    <string name="additonal_distance_fare">Tarifa para Adicional</string>
+    <string name="additonal_time_fare">Tarifa por tempo adicional</string>
+    <string name="addmoney">Adicionar dinheiro</string>
+    <string name="addmoney_braintree">Braintree</string>
+    <string name="addmoney_paypal">Paypal</string>
+    <string name="agree_the_terms_and_condition">Por favor, concorde com os Termos e Condições</string>
+    <string name="airport">Aeroporto</string>
+    <string name="alert_delete_contact">Tem certeza de que deseja excluir o contato?</string>
+    <string name="already_added">Contato já presente. Por favor, tente adicionar outro contato.</string>
+    <string name="amount">Montante</string>
+    <string name="amount_between">Digite o valor entre</string>
+    <string name="and">e</string>
+    <string name="apply">Aplique</string>
+    <string name="back">De volta</string>
+    <string name="base_fare">Tarifa base</string>
+    <string name="below">Abaixo</string>
+    <string name="block_company">Your company has been Blocked</string>
+    <string name="book_a_taxi">Reservar um táxi</string>
+    <string name="book_again">Reservar novamente</string>
+    <string name="book_now">Livro agora</string>
+    <string name="book_ride">Reserve uma carona</string>
+    <string name="book_taxi">Reserve Taxi</string>
+    <string name="bookedtaxi">Você reservou o táxi.</string>
+    <string name="btn_share_invite">Compartilhar</string>
+    <string name="businesscard">Cartão de visitas</string>
+    <string name="call">Ligar</string>
+    <string name="calldriver">Tem certeza de que deseja ligar para o motorista?</string>
+    <string name="camera">Câmera</string>
+    <string name="cancel">Cancelar</string>
+    <string name="cancel_fare">Tarifa de cancelamento</string>
+    <string name="cancel_in_going_trip">Tem certeza de que deseja cancelar a viagem?</string>
+    <string name="canceled_amount">Quantidade cancelada:</string>
+    <string name="canceled_from">Débito de:</string>
+    <string name="canceling_taxi">Pedido de cancelamento</string>
+    <string name="cancell"> Cancelar </string>
+    <string name="cancelled">Cancelado</string>
+    <string name="car_not_available">NENHUM CARRO DISPONÍVEL</string>
+    <string name="card">Cartão</string>
+    <string name="cardnumber">Cartão XXXX XXXX XXXX XXXX</string>
+    <string name="cash">Dinheiro</string>
+    <string name="cash_card">Dinheiro / Cartão</string>
+    <string name="change_drop">O Sange Trope</string>
+    <string name="change_network">Por favor, certifique-se de que o serviço de localização deve ser de alta precisão.</string>
+    <string name="check_internet_connection">Verifique sua conexão com a internet</string>
+    <string name="check_net_connection">Verifique sua conexão com a internet</string>
+    <string name="choose_an_image">Escolha uma imagem</string>
+    <string name="choose_place">Selecione o tipo</string>
+    <string name="chpwd">Mudar senha</string>
+    <string gender="unknown" name="com_facebook_device_auth_instructions">Acesse &lt;b>facebook.com/device&lt;/b> e insira o código mostrado acima.</string>
+    <string gender="unknown" name="com_facebook_image_download_unknown_error">Erro inesperado ao baixar uma imagem.</string>
+    <string gender="unknown" name="com_facebook_internet_permission_error_message">O login do WebView exige permissão da INTERNET</string>
+    <string gender="unknown" name="com_facebook_internet_permission_error_title">Erro AndroidManifest</string>
+    <string gender="unknown" name="com_facebook_like_button_liked">Curtiu</string>
+    <string gender="unknown" name="com_facebook_like_button_not_liked">Curtir</string>
+    <string gender="unknown" name="com_facebook_loading">Carregando...</string>
+    <string gender="unknown" name="com_facebook_loginview_cancel_action">Cancelar</string>
+    <string gender="unknown" name="com_facebook_loginview_log_in_button">Entrar</string>
+    <string gender="unknown" name="com_facebook_loginview_log_in_button_continue">Continuar com o Facebook</string>
+    <string gender="unknown" name="com_facebook_loginview_log_in_button_long">Entrar com o Facebook</string>
+    <string gender="unknown" name="com_facebook_loginview_log_out_action">Sair</string>
+    <string gender="unknown" name="com_facebook_loginview_log_out_button">Sair</string>
+    <string gender="unknown" name="com_facebook_loginview_logged_in_as">Conectado como: %1$s</string>
+    <string gender="unknown" name="com_facebook_loginview_logged_in_using_facebook">Conectado usando o Facebook</string>
+    <string gender="unknown" name="com_facebook_send_button_text">Enviar</string>
+    <string gender="unknown" name="com_facebook_share_button_text">Compartilhar</string>
+    <string gender="unknown" name="com_facebook_smart_device_instructions">Para conectar sua conta, abra o aplicativo do Facebook no seu dispositivo móvel e verifique se há notificações.</string>
+    <string gender="unknown" name="com_facebook_smart_device_instructions_or">- OU -</string>
+    <string gender="unknown" name="com_facebook_smart_login_confirmation_cancel">Não é você?</string>
+    <string gender="unknown" name="com_facebook_smart_login_confirmation_continue_as">Continuar como %1$s</string>
+    <string gender="unknown" name="com_facebook_smart_login_confirmation_title">Confirmar login</string>
+    <string gender="unknown" name="com_facebook_tooltip_default">Você está no controle — escolha quais informações você quer compartilhar com os aplicativos.</string>
+    <string name="comment">Comentários</string>
+    <string name="completed">Concluído</string>
+    <string name="con_txt">Continuar</string>
+    <string name="confir_complete_payment">Tem certeza de que deseja concluir o pagamento?</string>
+    <string name="confirm_booking">Confirmar posterior reserva?</string>
+    <string name="confirm_delete">Tem certeza de que deseja excluir o favorito?</string>
+    <string name="confirmation_password_mismatch_with_password">Senha e Confirmar senha não correspondem</string>
+    <string name="confirmdelete">Tem certeza de que deseja excluir o cartão?</string>
+    <string name="confirmlogout">Tem certeza que deseja sair?</string>
+    <string name="conpwd">Confirme a Senha</string>
+    <string name="contact_limit_reached">Você pode adicionar até 3 contatos. Remova qualquer contato para adicionar outro.</string>
+    <string name="contact_min_alert">Por favor, selecione um número de contato válido</string>
+    <string name="contact_number">Número de contato</string>
+    <string name="continueStr">Kontinukke</string>
+    <string name="continue_mobile_number">Continue com o número do celular</string>
+    <string name="continue_package">Você quer continuar com os serviços de pacotes?</string>
+    <string msgid="8230469354668895088" name="copy_toast_msg">"Link copiado para a área de transferência"</string>
+    <string name="corporate">Corporativa</string>
+    <string name="crop_image_activity_title">Colheita</string>
+    <string name="crop_image_menu_crop">Colheita</string>
+    <string name="crop_image_menu_flip">Giro</string>
+    <string name="crop_image_menu_flip_horizontally">Virar horizontalmente</string>
+    <string name="crop_image_menu_flip_vertically">Virar verticalmente</string>
+    <string name="crop_image_menu_rotate_left">Rodar no sentido contrário ao dos ponteiros do relógio</string>
+    <string name="crop_image_menu_rotate_right">Girar</string>
+    <string name="date_change">A data do seu telefone está imprecisa! Ajuste o seu relógio e tente novamente.</string>
+    <string name="defaultcard1">Cartão Padrão</string>
+    <string name="del_acc">Deletar sua conta</string>
+    <string name="delete_card">Excluir cartão</string>
+    <string name="delete_fdrivers">Deseja excluir o driver dos Favoritos?</string>
+    <string name="details">Detalhes</string>
+    <string name="discount">Desconto</string>
+    <string name="dist_fare">Tarifa de distância</string>
+    <string name="done">Feito</string>
+    <string name="download_from">Baixe o aplicativo de:</string>
+    <string name="driver_location">Localização do Driver</string>
+    <string name="drop_time">Tempo de queda</string>
+    <string name="droploc">Drop off Localização</string>
+    <string name="droploc_c">Drop Location?</string>
+    <string name="droplocation">Drop off Location (Opcional)</string>
+    <string name="droplocnew">Drop off Location (Opcional)</string>
+    <string name="e_receipt">E-recibo</string>
+    <string name="edit">Editar</string>
+    <string name="edit_card">Editar cartão</string>
+    <string name="edit_favourites">Editar favorito</string>
+    <string name="edt_num">Editar número</string>
+    <string name="email">O email</string>
+    <string name="email_optional">E-mail opcional)</string>
+    <string name="email_txt">Endereço de e-mail</string>
+    <string name="emergency">Emergência</string>
+    <string name="emergency_contact">Contatos de emergência</string>
+    <string name="enable">Habilitar</string>
+    <string name="endter_valid_fare">Por favor, certifique-se da tarifa da viagem antes de prosseguir.</string>
+    <string name="ent_ccard_no">Por favor insira o número do seu cartão de crédito</string>
+    <string name="ent_chk_ccard">Por favor, verifique o seu número de cartão de crédito</string>
+    <string name="ent_chk_cvv">Por favor, verifique o seu número de cvv</string>
+    <string name="ent_cvv">Por favor insira o seu número de cvv</string>
+    <string name="ent_exp_date">Por favor insira a data de vencimento</string>
+    <string name="ent_exp_year_gt">O ano expirado deve ser igual e maior que o ano atual</string>
+    <string name="enter_amount">Por favor entre com um valor válido</string>
+    <string name="enter_dest">Enter drop off Localização</string>
+    <string name="enter_det">Insira os detalhes abaixo para concluir o processo de inscrição</string>
+    <string name="enter_other_details">Por favor, selecione o seu tipo de favorito</string>
+    <string name="enter_pickup">Insira o local de coleta</string>
+    <string name="enter_pin">Digite o seu pin que você recebeu via SMS em</string>
+    <string name="enter_promo_code">Digite o código promocional</string>
+    <string name="enter_the_card_number">Por favor, insira o número do seu cartão</string>
+    <string name="enter_the_confirmation_password">Por favor, insira a senha de confirmação</string>
+    <string name="enter_the_confirmation_phoneno">Por favor, insira um número de celular válido</string>
+    <string name="enter_the_email">Por favor introduza o seu e-mail</string>
+    <string name="enter_the_expiry_date">Por favor insira a data de vencimento</string>
+    <string name="enter_the_first_name">Por favor digite seu nome válido</string>
+    <string name="enter_the_last_name">Por favor insira seu sobrenome</string>
+    <string name="enter_the_mobile_number">Por favor, insira seu número de telefone</string>
+    <string name="enter_the_new_password">Por favor digite sua nova senha</string>
+    <string name="enter_the_old_password">Por favor digite sua senha antiga</string>
+    <string name="enter_the_password">Por favor, insira sua senha</string>
+    <string name="enter_the_valid_CVV">Por favor insira um CVV válido</string>
+    <string name="enter_the_valid_card_number">Por favor, insira o número do cartão válido</string>
+    <string name="enter_the_valid_email">Por favor insira um e-mail válido</string>
+    <string name="enter_ur_password">Coloque sua senha</string>
+    <string name="enter_valid_comment">Insira um comentário válido</string>
+    <string name="error">Não foi possível conectar ao servidor. Por favor, tente novamente</string>
+    <string name="estimate_fare">Tarifa estimada</string>
+    <string name="eta">ETA</string>
+    <string name="even_charge">Encargos da noite</string>
+    <string name="excuse_me_brevity">Inscreva-se com o código de referência</string>
+    <string name="f_currsymbol"> $ </string>
+    <string name="f_float"> 0.0 </string>
+    <string name="f_km"> km </string>
+    <string msgid="2615365786337886368" name="fallback_menu_item_copy_link">"Copiar link"</string>
+    <string msgid="8984733760067120953" name="fallback_menu_item_open_in_browser">"Abrir no navegador"</string>
+    <string msgid="271185644269364308" name="fallback_menu_item_share_link">"Compartilhar link"</string>
+    <string name="fare2">123</string>
+    <string name="fare_calculator">Calculadora de Tarifa</string>
+    <string name="fare_details">Detalhes da tarifa</string>
+    <string name="fare_per_km">Tarifa por</string>
+    <string name="fare_txt">Tarifa</string>
+    <string name="farecal"> Tarifa </string>
+    <string name="fav_alert">Sua localização já foi adicionada como um local favorito</string>
+    <string name="fav_drop_location">Favorite Drop off Localização</string>
+    <string name="fav_pick_location">Local favorito para pegar</string>
+    <string name="favoritedriver_">Drivers Favoritos</string>
+    <string name="favourite">FAVORITO</string>
+    <string name="fblink">facebook.com/Taximobility</string>
+    <string name="fblogin">Entre com Facebook</string>
+    <string name="fetching_address">Buscando endereço ...</string>
+    <string name="first">Primeiro nome</string>
+    <string name="followtw">Siga-nos no Twitter</string>
+    <string name="forget_password">Esqueceu a senha</string>
+    <string name="found_search">Encontrado para não mostrar a pesquisa</string>
+    <string name="gallery">Galeria</string>
+    <string name="getting_gps">Obtendo o GPS</string>
+    <string name="got_it">CONSEGUI</string>
+    <string name="gps_status">A conexão GPS é ativada!!</string>
+    <string name="have_promocode">TEM UM CÓDIGO PROMOCIONAL?</string>
+    <string name="heading_payuncard">Pague com novo cartão</string>
+    <string name="headtitle_below">Lorem Ipsum é simplesmente texto fictício da indústria tipográfica e tipográfica</string>
+    <string name="help">Socorro</string>
+    <string name="hide">ocultar</string>
+    <string name="home">Casa</string>
+    <string name="hour_must_greater_than">Por favor, certifique-se que o passeio está agendado após pelo menos uma hora a partir de agora.</string>
+    <string name="hrs">hr (s)</string>
+    <string name="huawei_msg">TaxiMobility requer para ser habilitado em \'Protected Apps \' para funcionar corretamente.</string>
+    <string name="huawei_title">Apps protegidos</string>
+    <string name="inprogress">Pendente</string>
+    <string name="intransit">Viagem em andamento</string>
+    <string name="invite_email">O email</string>
+    <string name="invite_fb">Facebook</string>
+    <string name="invite_frdrides">Quando um amigo anda com seu código</string>
+    <string name="invite_friend">Convide amigos</string>
+    <string name="invite_sharevia">Compartilhar via</string>
+    <string name="invite_sms">SMS</string>
+    <string name="invite_twitter">Twitter</string>
+    <string name="invite_whatsapp">Whatsapp</string>
+    <string name="invite_youearn">Você ganha</string>
+    <string name="jobref">ID da viagem</string>
+    <string name="landmark">Ponto de referência</string>
+    <string name="last">Último nome</string>
+    <string name="legal">Legal</string>
+    <string name="likefb">Curta-nos no Facebook</string>
+    <string name="link">Links</string>
+    <string name="loading_map">Carregando mapa</string>
+    <string name="location">Localização</string>
+    <string name="location_disable">Serviços de localização desativados</string>
+    <string name="location_enable">Ative seu serviço de localização e verifique se ele deve ser de alta precisão.</string>
+    <string name="max_size">Tamanho máximo</string>
+    <string name="menu">Cardápio</string>
+    <string name="menu_about">Sobre</string>
+    <string name="menu_about_us">Sobre nós</string>
+    <string name="menu_fare">Tarifa</string>
+    <string name="menu_favourites">Favorito</string>
+    <string name="menu_gettaxi">Acompanhe meu táxi</string>
+    <string name="menu_logout">Sair</string>
+    <string name="menu_mybooking">Minhas reservas</string>
+    <string name="menu_payment">Opções de pagamento</string>
+    <string name="menu_profile">Perfil</string>
+    <string name="menu_settings">Definições</string>
+    <string name="message">mensagem</string>
+    <string name="message_alert_back">Seu registro ainda não está concluído. Se você clicar novamente, deverá fazer login novamente para concluir o registro. Você quer voltar?</string>
+    <string name="min_fare">Minutos de tarifa</string>
+    <string name="min_str">MIN</string>
+    <string name="min_trav">Tempo total de viagem</string>
+    <string name="minimum_fare">Tarifa Mínima</string>
+    <string name="mins">min (s)</string>
+    <string name="minutes_travel">Tempo total de viagem</string>
+    <string name="mobile">Móvel</string>
+    <string name="mobile_no">Digite seu número de celular</string>
+    <string name="mobileno">Número de celular</string>
+    <string name="mode_selection_split">Você não pode alterar o tipo de pagamento quando o recurso de tarifa dividida está habilitado</string>
+    <string name="my_status">Minha localização</string>
+    <string name="mybookings">Minhas reservas</string>
+    <string name="name_txt">Nome</string>
+    <string name="need_pickup_address">Verifique seu endereço de retirada</string>
+    <string name="net_total">Total Líquido</string>
+    <string name="newpwd">Nova senha</string>
+    <string name="nit_fare">Cobranças noturnas</string>
+    <string name="nit_fare_to">para</string>
+    <string name="no">Não</string>
+    <string name="no_changes">Nenhuma alteração feita</string>
+    <string name="no_going_trip">Atualmente não há rastreamento disponível!</string>
+    <string name="no_info">Nenhuma informação para atualizar</string>
+    <string name="no_internet">Nenhuma Internet disponível</string>
+    <string name="no_result_found">Resultados não encontrados</string>
+    <string name="no_thanks">Não, obrigado</string>
+    <string name="nocard">Você não tem detalhes de cartão de crédito</string>
+    <string name="office">Escritório</string>
+    <string name="offtxt">FORA</string>
+    <string name="ok">Está bem</string>
+    <string name="old_pass">Sua nova senha é igual à senha antiga</string>
+    <string name="old_password_mismatch_with_password">Senha antiga não confere</string>
+    <string name="oldpwd">Senha Antiga</string>
+    <string name="on_going">Em progresso</string>
+    <string name="ontxt">EM</string>
+    <string name="others">Outras</string>
+    <string name="p_cardno">Número do cartão **** **** **** ****</string>
+    <string name="p_cvv">CVV</string>
+    <string name="p_expiry">Expiração MM / AA</string>
+    <string name="paid_amt">Quantidade paga</string>
+    <string name="paid_by">Pago pelo</string>
+    <string name="pass_app_link">https://play.google.com/store/apps/details?id=com.Taximobility</string>
+    <string name="pass_txt">Senha</string>
+    <string name="password">Senha</string>
+    <string name="password_max_character">A senha deve ter menos de 32 caracteres</string>
+    <string name="password_min_character">A senha deve ter no mínimo 6 caracteres</string>
+    <string name="past_booking">Reservas Anteriores</string>
+    <string name="payAtNextTrip">Pague na próxima viagem</string>
+    <string name="pay_amount">Quantidade a pagar</string>
+    <string name="pay_by">Pagar por</string>
+    <string name="payment">Forma de pagamento</string>
+    <string name="payment_card">Cartão de crédito</string>
+    <string name="payment_cash">Dinheiro</string>
+    <string name="payment_complete">Viagem concluída</string>
+    <string name="payment_type">Tipo de pagamento</string>
+    <string name="paymentby">Pagamento por</string>
+    <string name="per">por</string>
+    <string name="percentTotal">A porcentagem total deve ser 100</string>
+    <string name="permission_not_granted">Não é possível executar a ação selecionada porque as permissões não são concedidas.</string>
+    <string name="personalcard">Cartão pessoal</string>
+    <string name="photo_view">Algo deu errado!</string>
+    <string name="pickUpCannotChanged">O local de retirada não pode ser alterado depois de iniciada a viagem</string>
+    <string name="picklocation">Local de retirada</string>
+    <string name="picktime">Tempo de Coleta:</string>
+    <string name="pickuploc"> Pick up Localização </string>
+    <string name="pinlocation">Sua localização</string>
+    <string name="place">Lugar, colocar</string>
+    <string name="please_select_image_from_valid_path">Por favor selecione imagem do caminho válido (pasta Gallery)</string>
+    <string name="please_select_your_salutation">Por favor selecione sua saudação</string>
+    <string name="please_try_again">Por favor, tente novamente</string>
+    <string name="policy">Política de Privacidade</string>
+    <string name="popular">POPULAR</string>
+    <string name="pressBack">Por favor, clique novamente para sair</string>
+    <string name="privacy_policy">Política de Privacidade</string>
+    <string name="privacy_settings">Configurações de privacidade</string>
+    <string name="profile_image">Imagem de perfil</string>
+    <string name="promo">Promo</string>
+    <string name="promo_code">Desconto (Código Promocional)</string>
+    <string name="promo_code_empty">Você não aplicou nenhum código promocional</string>
+    <string name="promotion">Promoção</string>
+    <string name="rateapp">Avalie-nos na Play Store</string>
+    <string name="ratedriver">Avalie seu driver</string>
+    <string name="reason1">1. Atraso da cabina</string>
+    <string name="reason2">2. Motorista não respondeu</string>
+    <string name="reason3">3. Endereço incorreto mostrado</string>
+    <string name="reason4">4. Mudou o plano de viagem</string>
+    <string name="reason5">5. Reservas colocadas em erro</string>
+    <string name="reason6">6. Outros</string>
+    <string name="reason_title">Razão para cancelamento</string>
+    <string name="recent">RECENTE</string>
+    <string name="recharge_money">Recarregue Dinheiro</string>
+    <string name="referal">Código de referência / promocional</string>
+    <string name="reg_cardname">Nome no cartão (opcional)</string>
+    <string name="reg_cardnumber">Número do cartão</string>
+    <string name="reg_cash">Pagar com dinheiro</string>
+    <string name="reg_cc">CVV</string>
+    <string name="reg_creditcard">Pagar com cartão de crédito</string>
+    <string name="reg_enter_referral">Por favor insira o seu código de referência / promoção</string>
+    <string name="reg_entercardname">Por favor, insira o nome do seu cartão</string>
+    <string name="reg_enterprcode">Por favor insira o seu código promocional</string>
+    <string name="reg_expmonth">Por favor selecione mês de vencimento</string>
+    <string name="reg_expyear">Por favor selecione ano de expiração</string>
+    <string name="reg_month">MILÍMETROS</string>
+    <string name="reg_promocode">Pagar pelo código de referência</string>
+    <string name="reg_savecard">Salvar detalhes do cartão</string>
+    <string name="reg_terms">Termos e Condições</string>
+    <string name="reg_year">AAAA</string>
+    <string name="register">Inscrever-se</string>
+    <string name="rejected">Rejeitado</string>
+    <string name="request_taxi">Solicitar táxi</string>
+    <string name="requestingtaxi">Solicitando Táxi</string>
+    <string name="resend_code">Reenviar código</string>
+    <string name="restrict_alert">Reserva Sues Estante para Tropa Localização Cidade do Gelo Limites da Cidade.Continue</string>
+    <string name="round_trip"> Ida e volta </string>
+    <string name="save">Salve </string>
+    <string name="search_hint">Procurar...</string>
+    <string msgid="6264217191555673260" name="search_menu_title">"Pesquisar"</string>
+    <string name="search_stop_hint">Insira o local da parada</string>
+    <string name="searching_text">Procurando...</string>
+    <string name="select_card">Selecione seu cartão</string>
+    <string name="select_card_type">Por favor selecione Tipo de Cartão</string>
+    <string name="select_country">Selecione um condado</string>
+    <string name="select_date_arab">حدد التاريخ الوقت</string>
+    <string name="select_date_time">Selecione data e hora</string>
+    <string name="select_month_year">DINHEIRO E ANO ESPÍRITO SELECIONADOS</string>
+    <string name="select_payment">Por favor, selecione o tipo de pagamento</string>
+    <string name="select_the_drop_location">Por favor, selecione o local de entrega</string>
+    <string name="select_the_pickup_location">Por favor, selecione o local de retirada</string>
+    <string name="send_emergency_alert">Tem certeza de que deseja enviar um alerta de emergência?</string>
+    <string name="sendmail">Enviar correio</string>
+    <string name="server_con_error">Não foi possível conectar ao servidor. Por favor, tente novamente</string>
+    <string name="server_error">Não foi possível conectar ao servidor. Por favor, tente novamente</string>
+    <string name="set_date">Definir data de coleta</string>
+    <string name="set_time">Definir tempo de pickup</string>
+    <string name="settings">Definições</string>
+    <string name="share_app">Compartilhe esse aplicativo</string>
+    <string name="share_link">Compartilhar link!</string>
+    <string name="shareride">Compartilhar</string>
+    <string name="show">exposição</string>
+    <string name="sign_agree">Ao se inscrever conosco, você concorda com nossos</string>
+    <string name="site_desc">Este é um sistema de despacho de reserva de táxi pronto para empresas de táxi existentes ou start ups. Realize reservas de táxi on-line e em tempo real sobre aplicativos e sites móveis.</string>
+    <string name="skip_">Pular</string>
+    <string name="skip_fav">Saltar Locais Favoritos</string>
+    <string name="sos_contact">Precisamos acessar seus contatos para selecionar contatos de tarifas de emergência e divididos</string>
+    <string name="sos_long_desc">Alerte seus entes queridos em caso de emergência. Adicione-os aos seus contatos de emergência.</string>
+    <string name="sos_more_info">Você pode adicionar até 3 contatos</string>
+    <string name="sos_short_desc">Vamos tornar as viagens mais seguras ...</string>
+    <string name="split_">Tarifa dividida</string>
+    <string name="split_fare">Precisamos acessar seus contatos para selecionar contatos de tarifas de emergência e divididos</string>
+    <string name="split_status">Status da tarifa dividida</string>
+    <string name="split_with">Tarifa dividida com</string>
+    <string name="split_with_friends">Tarifa dividida com amigos</string>
+    <string name="start_time">Hora de início</string>
+    <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"999+"</string>
+    <string name="str_loc">Precisamos atualizar sua localização atual para nosso servidor para verificar a disponibilidade do nosso motorista mais próximo e rastrear a localização durante a viagem.</string>
+    <string name="str_media">Gostaríamos de acessar sua mídia para definir a foto do perfil</string>
+    <string name="str_phone">Precisamos ligar e ler a permissão do estado do telefone para entrar em contato com o motorista</string>
+    <string name="string_tips">Dicas</string>
+    <string name="sub_total">Subtotal</string>
+    <string name="submit">Enviar</string>
+    <string name="submit_arab">عرض</string>
+    <string name="success">Sucesso</string>
+    <string name="t_book">Horário de reserva</string>
+    <string name="t_distance">Distância</string>
+    <string name="t_droploc">Drop off Localização</string>
+    <string name="t_droptime">Deixar o tempo</string>
+    <string name="t_passname">Nome do motorista</string>
+    <string name="t_pickloc">Pick up Localização</string>
+    <string name="t_picktime">Hora de pegar</string>
+    <string name="t_tripduration">Duração da viagem</string>
+    <string name="tab_emer">Toque neste botão para obter ajuda durante uma emergência</string>
+    <string name="tap_to_edit">Toque para editar pickup &amp; drop</string>
+    <string name="tax"> Imposto (</string>
+    <string name="tax_percent"> %) </string>
+    <string name="termcond">termos e Condições</string>
+    <string name="terms_cond">termos e Condições</string>
+    <string name="terms_condition">Ao fazer o login, você concorda com nossos</string>
+    <string name="terms_condition2">Termos e Condições</string>
+    <string name="thanks_for_your_comment">Obrigado pela sua avaliação!</string>
+    <string name="thanksforflag">Obrigado por usar o TaxiMobility. Torne sua próxima viagem ainda mais agradável.</string>
+    <string name="there_is_no_email_client_installed">Não há cliente de email instalado</string>
+    <string name="total">Total</string>
+    <string name="total_amount">Total</string>
+    <string name="total_aprox_fare">Tarifa Aproximada Total:</string>
+    <string name="total_distance">Distância total</string>
+    <string name="total_travel_time">Tempo total de viagem "\ n" (horas: minutos)</string>
+    <string name="track_now">Acompanhar agora</string>
+    <string name="trip_cost">Custo da viagem</string>
+    <string name="trip_fare">Tarifa de Viagem</string>
+    <string name="trip_id">ID da viagem</string>
+    <string name="trip_summary">Resumo da viagem</string>
+    <string name="trip_type_normal">Viagem local</string>
+    <string name="trip_type_outstation">Viagem de Outstation</string>
+    <string name="trip_type_rental">Viagem de aluguel</string>
+    <string name="tripdetail">Detalhes da viagem</string>
+    <string name="try_again">Tente novamente</string>
+    <string name="twlink">twitter.com/Taximobility</string>
+    <string name="type_your_comment">Digite seus comentários</string>
+    <string name="uncard"> Novo cartão</string>
+    <string name="up_coming">próximos</string>
+    <string name="ur_approx_fare">Tarifa Aproximada:</string>
+    <string name="userphno">Número do celular do usuário</string>
+    <string name="vehicle_dist">Tarifa de Distância Total</string>
+    <string name="vehicle_min">Total de minutos de tarifa</string>
+    <string name="vehicle_wait">Tempo de espera do veículo</string>
+    <string name="vehicle_wait_fare">Tarifa Total de Espera</string>
+    <string name="verify_otp">Confirme seu número de celular</string>
+    <string name="verify_ur_password">Verifique sua senha</string>
+    <string name="verify_valid_code">Aw, Snap! Podemos tentar de novo?</string>
+    <string name="version_up_later">Mais tarde</string>
+    <string name="version_up_message">Existe uma nova versão do TaxiMobility disponível. Esta versão não é mais suportada.</string>
+    <string name="version_up_now">Atualizar agora</string>
+    <string name="version_up_title">Atualizar</string>
+    <string name="waiting_cost">Custo do tempo de espera </string>
+    <string name="waiting_fare">Tarifa de espera por minuto</string>
+    <string name="waiting_fare_">Esperando tarifa</string>
+    <string name="waiting_time">Custo do Tempo de Espera (por min)</string>
+    <string name="wallet">Carteira</string>
+    <string name="wallet_amount">Quantidade de carteira usada</string>
+    <string name="wallet_amount_alert">Você tem um valor de carteira insuficiente</string>
+    <string name="wallet_amt">Montante da Carteira</string>
+    <string name="walletmsg">Passeios sem dinheiro e sem problemas com a carteira TaxiMobility</string>
+    <string name="welcome_continue">Bem-vindo de volta, faça login para continuar</string>
+    <string name="yes">sim</string>
+    <string name="you_are_offline">Você está agora todo</string>
+    <string name="your_card_expiry">Seu cartão expirou</string>
+    <string name="z_split_charged">Seu passeio será cobrado</string>
+    <string name="z_split_fare_with">Tarifa dividida com</string>
+    <string name="zero"> 0 </string>
+    <string name="zerofee">PAGUE VIA CARTÃO SEM CUSTO</string>
+    <string name="zerorating">Você quer postar seus comentários sem classificação?</string>
+</resources>

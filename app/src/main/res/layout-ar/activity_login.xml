@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/login_contain"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="56dp"
+        android:background="@color/white"
+        android:baselineAligned="false"
+        android:gravity="center_vertical"
+        android:visibility="visible">
+        <!--  -->
+
+        <ImageView
+            android:id="@+id/back_click"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?selectableItemBackgroundBorderless"
+            android:src="@drawable/back"
+            android:rotation="180"
+            android:layout_marginLeft="4dp"
+            android:padding="12dp"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/header_lay">
+
+        <TextView
+            android:id="@+id/txt_mobileno"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="06dp"
+            android:text="@string/mobile_no"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/acc_signin"
+            android:textSize="13sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_mobileno"
+            android:layout_marginLeft="06dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="7dp"
+            android:text="@string/acc_signin" />
+
+        <com.taximobility.Login.countrycode.CountryCodePicker
+            android:id="@+id/ccp"
+            app:defaultNameCode="IN"
+            app:hideNameCode="true"
+            app:textSize="16sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/acc_signin" />
+
+        <EditText
+            android:id="@+id/edt_mobileno"
+            android:textSize="16sp"
+            android:maxLength="16"
+            android:padding="8dp"
+            android:hint="@string/mobileno"
+            android:inputType="number"
+            android:digits="0123456789"
+            android:maxLines="1"
+            android:imeOptions="actionDone"
+            android:background="@color/transparent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/acc_signin"
+            android:layout_toLeftOf="@+id/ccp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_below="@+id/edt_mobileno"
+            android:layout_marginRight="07dp"
+            android:layout_marginLeft="6dp"
+            android:background="@color/button_accept" />
+
+        <Button
+            android:id="@+id/continue_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="25dp"
+            android:textAllCaps="false"
+            android:background="@color/button_accept"
+            android:text="@string/con_txt"
+            android:textColor="@color/white" />
+
+    </RelativeLayout>
+
+
+</LinearLayout>

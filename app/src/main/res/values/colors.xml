@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="header_bgcolor">#f5f5f5</color>
+    <color name="header_text">#404041</color>
+    <color name="linebottom_light">#e0e0e0</color>
+    <color name="linebottom_dark">#646464</color>
+    <color name="hintcolor">#666666</color>
+    <color name="appbgdark">#6f6f6f</color>
+    <color name="pickupheadertext">#48bf27</color>
+    <color name="pastbookingcashtext">#48bf27</color>
+    <color name="transparent">#00000000</color>
+    <color name="semi_transparent">#66000000</color>
+
+    <color name="button_accept">#000000</color>
+    <color name="button_reject">#000000</color>
+
+  <!--<color name="button_accept">#94c8ed</color>
+    <color name="button_reject">#94c8ed</color>
+-->
+  <!--<color name="button_accept">#305FE0</color>-->
+    <color name="splash_color">#ed950d</color>
+   <!-- <color name="button_background">#305FE0</color>-->
+
+    <color name="paymentcard">#00BFFF</color>
+    <color name="MatThemectrlActive">#ecbe2a</color>
+    <color name="cancelbtntxtcolor">#fe0000</color>
+    <color name="submitbtntxtcolor">#fe0000</color>
+    <color name="checkboxtxtcolor">#fe0000</color>
+    <color name="highlighttxtcolor">#fe0000</color>
+    <color name="buttonnormaltheme">#ff6666</color>
+    <color name="textviewcolor_dark">#666666</color>
+    <color name="textviewcolor_light">#a2a2a2</color>
+    <color name="buttontextcolor">#ffffff</color>
+    <color name="edittextcolor">#00000F</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="home_drawer_bg">#1C1C24</color>
+    <color name="home_drawer_head_bg">#333333</color>
+    <color name="defaultContentColor">@android:color/black</color>
+    <color name="hyperlink">#00A1E5</color>
+    <color name="status_transparent">#aaa5a5a5</color>
+    <color name="semii_transparent">#8c000000</color>
+    <color name="title_text_color">#999999</color>
+    <color name="colorFontGreyLight">#666666</color>
+    <color name="light_on_gray">#F4F2F2</color>
+    <color name="colorLine">#dfdfdf</color>
+    <color name="dark_transparent">#24000000</color>
+    <color name="light_transparent">#16000000</color>
+    <color name="colorPrimary">#fff</color>
+    <color name="colorPrimaryDark">#333333</color>
+    <color name="colorAccent">#ee3324</color>
+    <color name="light_gray">#EDEDED</color>
+    <color name="button_unselect">#B0B0B0</color>
+    <color name="textNormalColor">#3d3d3d</color>
+    <color name="stopTextBackgroundColor">#f9f9f9</color>
+    <color name="pickup_green">#48bf27</color>
+    <color name="pickup_red">#EE3324</color>
+    <color name="appbg">#f6f6f6</color>
+    <color name="sos_color">#EE3325</color>
+    <color name="black_new">#3d3d3d</color>
+    <color name="grey_color_text">#666666</color>
+    <color name="grey_color_new">#B0B0B0</color>
+    <color name="mdtp_done_disabled_dark">#bfbfbf</color>
+    <color name="highlightcolor">#FF0000</color>
+    <color name="view_background">#d0d0d0</color>
+    <color name="tooltip_background">#DD000000</color>
+    <color name="focal_white">#90ffffff</color>
+    <color name="link_color">#03a9f4</color>
+    <color name="pastbookingcard">#87cefa</color>
+    <color name="colorFontGreen">#388e3c</color>
+    <color name="shiftoffcolor">#9C9C9C</color>
+    <color name="shiftoncolor">#5E9A04</color>
+    <color name="bordercolor">#979797</color>
+<!--
+    Driver color
+-->
+
+    <color name="popup_heading">#47bf28</color>
+    <!--<color name="highlightcolor">#1d3248</color>-->
+ <color name="notificationbg">#A6000000</color>
+<!--<color name="button_accept">#1d3248</color>
+    <color name="button_reject">#f7ab28</color>-->
+    <color name="semitransparent">#88676767</color>
+    <color name="btnaccept">#87dc1f</color>
+    <color name="trip_history_text_grey">#5F5F5F</color>
+    <color name="light_white">#BDBDBD</color>
+    <color name="invite_gray">#a3a3a3</color>
+    <color name="viewBackground">#d3d3d3</color>
+    <color name="whiteBackground">#FFFFFF</color>
+    <color name="blue">#0000FF</color>
+    <color name="heading">#000000</color>
+    <color name="sub_heading">#333333</color>
+    <color name="sub_heading_light">#666666</color>
+    <color name="text_filed">#ebebeb</color>
+    <color name="separator_line">#e6e6e6</color>
+    <color name="green_new">#6dbe16</color>
+
+</resources>

@@ -1,0 +1,27 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- This is the line -->
+    <item
+        android:bottom="1dp"
+        android:left="1dp"
+        android:right="1dp"
+        android:top="1dp">
+          <shape>
+              <solid android:color="@color/button_reject" />
+              <corners
+                  android:bottomRightRadius="3dp"
+                  android:bottomLeftRadius="3dp"
+                  android:topLeftRadius="3dp"
+                  android:topRightRadius="3dp"/>
+          </shape>
+
+        <shape xmlns:android="http://schemas.android.com/apk/res/android">
+            <stroke
+                android:width="0.2dp"
+                android:color="@color/black" />
+
+            <solid android:color="@color/white" />
+        </shape>
+    </item>
+    <!-- This is the main color -->
+
+</layer-list>

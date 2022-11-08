@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:facebook="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/body_iv"
+        android:layout_width="270dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="40dp" />
+
+    <ImageView
+        android:id="@+id/center_image"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_centerInParent="true"
+        android:src="@drawable/login_back" />
+
+
+    <RelativeLayout
+        android:layout_marginBottom="10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/continue_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_above="@+id/fbloginBtn"
+            android:background="@color/button_accept"
+            android:text="@string/continue_mobile_number"
+            android:textAllCaps="false"
+            android:textColor="@color/white" />
+
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/fbloginBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_above="@+id/t_c_web_txt"
+            android:paddingBottom="12dp"
+            android:paddingLeft="20dp"
+            android:paddingTop="12dp"
+            android:visibility="visible"
+            android:layout_alignParentBottom="true"
+            facebook:com_facebook_confirm_logout="false"
+            facebook:com_facebook_login_text="@string/fblogin"
+            facebook:com_facebook_tooltip_mode="never_display" />
+
+
+        <TextView
+            android:id="@+id/t_c_web_txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|center_vertical"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="2dp"
+            android:visibility="gone"
+            android:text="@string/terms_condition"
+            android:textColorHint="@color/hintcolor"
+             />
+    </RelativeLayout>
+</RelativeLayout>

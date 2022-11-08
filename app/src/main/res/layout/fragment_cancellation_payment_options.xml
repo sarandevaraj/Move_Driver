@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_8"
+            android:gravity="center"
+            android:padding="@dimen/dp_5"
+            android:text="@string/pay_by"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/divider1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_1"
+            android:layout_marginStart="@dimen/dp_8"
+            android:layout_marginEnd="@dimen/dp_8"
+            android:background="@color/linebottom_light"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivWallet"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_margin="@dimen/dp_8"
+            android:padding="@dimen/dp_5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider1"
+            app:srcCompat="@drawable/wallet2" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvWallet"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_8"
+            android:padding="@dimen/dp_5"
+            android:text="@string/wallet"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@id/ivWallet"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ivWallet"
+            app:layout_constraintTop_toTopOf="@id/ivWallet" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivCard"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_margin="@dimen/dp_8"
+            android:padding="@dimen/dp_5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivWallet"
+            app:srcCompat="@drawable/credit_card" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvCard"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_8"
+            android:padding="@dimen/dp_5"
+            android:text="@string/pay_online"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@id/ivCard"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ivCard"
+            app:layout_constraintTop_toTopOf="@id/ivCard" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivNextTrip"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_margin="@dimen/dp_8"
+            android:padding="@dimen/dp_5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivCard"
+            app:srcCompat="@drawable/credit_card" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvNextTrip"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_8"
+            android:padding="@dimen/dp_5"
+            android:text="@string/payAtNextTrip"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@id/ivNextTrip"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ivNextTrip"
+            app:layout_constraintTop_toTopOf="@id/ivNextTrip" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

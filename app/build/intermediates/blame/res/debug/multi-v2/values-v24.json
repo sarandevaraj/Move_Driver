@@ -1,0 +1,62 @@
+{
+    "logs": [
+        {
+            "outputFile": "D:\\Sakthi\\Projects\\T_Mobility_New_Driver\\T_Mobility_New_Driver\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v24\\values-v24.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\developer\\.gradle\\caches\\transforms-2\\files-2.1\\d55fb137ba05e7417e0ec7dd6c696ef0\\appcompat-1.2.0\\res\\values-v24\\values-v24.xml",
+                    "from": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,212",
+                        "endColumns": "156,134",
+                        "endOffsets": "207,342"
+                    },
+                    "to": {
+                        "startLines": "17,18",
+                        "startColumns": "4,4",
+                        "startOffsets": "692,849",
+                        "endColumns": "156,134",
+                        "endOffsets": "844,979"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\developer\\.gradle\\caches\\transforms-2\\files-2.1\\9919bf4e1f8871a45b663908483ac111\\media-1.0.0\\res\\values-v24\\values-v24.xml",
+                    "from": {
+                        "startLines": "2,3,4,5",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,121,182,248",
+                        "endColumns": "65,60,65,66",
+                        "endOffsets": "116,177,243,310"
+                    },
+                    "to": {
+                        "startLines": "79,80,81,82",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "4551,4617,4678,4744",
+                        "endColumns": "65,60,65,66",
+                        "endOffsets": "4612,4673,4739,4806"
+                    }
+                },
+                {
+                    "source": "D:\\Sakthi\\Projects\\T_Mobility_New_Driver\\T_Mobility_New_Driver\\app\\src\\main\\res\\values-v24\\styles.xml",
+                    "from": {
+                        "startLines": "6,19,69,33,42,97,58,91,110,77,24,82,94,146,129,120,142,137,154,150",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "251,773,3391,1400,1922,4476,2814,4335,5138,3746,940,4010,4406,6876,6216,5707,6780,6604,7073,6973",
+                        "endLines": "16,22,74,40,56,107,67,91,118,80,31,88,94,148,135,127,144,140,156,152",
+                        "endColumns": "12,12,12,79,12,12,12,65,12,12,12,12,64,12,12,12,12,12,12,12",
+                        "endOffsets": "732,932,3736,1914,2806,5128,3383,4396,5699,4002,1387,4325,4466,6965,6596,6208,6868,6772,7162,7065"
+                    },
+                    "to": {
+                        "startLines": "2,13,19,25,33,48,59,69,70,83,87,95,102,103,106,113,121,124,128,131",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,531,984,1329,1841,2716,3363,3928,3993,4811,5069,5514,5828,5892,5984,6363,6862,6953,7123,7215",
+                        "endLines": "12,16,24,32,47,58,68,69,78,86,94,101,102,105,112,120,123,127,130,133",
+                        "endColumns": "12,12,12,79,12,12,12,64,12,12,12,12,63,12,12,12,12,12,12,12",
+                        "endOffsets": "526,687,1324,1836,2711,3358,3923,3988,4546,5064,5509,5823,5887,5979,6358,6857,6948,7118,7210,7305"
+                    }
+                }
+            ]
+        }
+    ]
+}

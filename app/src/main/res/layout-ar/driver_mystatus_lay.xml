@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/lay_home"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/mystatus_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/no_taxi_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/no_taxi_assigned"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/button_accept"
+                android:gravity="center"
+                android:maxLines="4"
+                android:padding="15dp"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/slide_lay"
+            android:layout_width="fill_parent"
+            android:layout_height="56dp"
+            android:background="@color/header_bgcolor">
+
+            <TextView
+                android:id="@+id/slideImg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/driver_back_green_to_white"
+                android:padding="5dp"
+                android:text="@string/back"
+                android:textColor="@drawable/driver_text_color_black_to_white"
+                android:textSize="16sp"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/backup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:drawableLeft="@drawable/driver_backbtn"
+                android:gravity="left"
+                android:padding="5dp"
+                android:visibility="gone" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_emergency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/driver_emergency_contact_btn"
+                android:gravity="center"
+                android:minWidth="70dp"
+                android:minHeight="30dp"
+                android:singleLine="true"
+                android:text="@string/emergency"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/headerTxt"
+                style="@android:style/TextAppearance.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center_horizontal"
+                android:padding="5dp"
+                android:text="@string/app_name"
+                android:textColor="@color/black"
+                android:visibility="visible" />
+
+            <ImageView
+                android:id="@+id/headicon"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="2dp"
+                android:layout_toLeftOf="@+id/headerTxt"
+                android:gravity="center"
+                app:srcCompat="@drawable/driver_headicon"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/btn_shift"
+                android:layout_width="70dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/driver_shiftbg"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="Online"
+                android:textColor="@color/white" />
+
+
+        </RelativeLayout>
+
+        <FrameLayout
+            android:id="@+id/shadow"
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:foreground="@drawable/driver_background_shadow"
+            android:visibility="visible">
+            <!-- YOUR STUFF HERE -->
+        </FrameLayout>
+
+
+        <include
+            layout="@layout/driver_home_top_navigation"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+
+            android:orientation="vertical">
+
+
+            <include
+                layout="@layout/driver_map_lay"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/device_not_support_map"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:visibility="gone">
+
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/driver_remarks"
+                    android:gravity="top|left"
+                    android:hint="@string/remarks"
+                    android:inputType="textMultiLine"
+                    android:lines="6"
+                    android:maxLines="6"
+                    android:minLines="4"
+                    android:padding="10dp"
+                    android:scrollbars="vertical" />
+
+                <Button
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/driver_draw_black_bg"
+                    android:text="@string/submit"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/currentlocTxt_lay"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="5dp"
+                    android:orientation="horizontal"
+                    android:showDividers="middle"
+                    app:cardCornerRadius="3dp">
+
+                    <LinearLayout
+                        android:id="@+id/tapCurrentLocation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/current_location"
+                            android:textColor="@color/block"
+                            android:visibility="gone" />
+
+                        <TextView
+                            android:id="@+id/currentlocation"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawableRight="@drawable/driver_dot"
+                            android:drawablePadding="10dp"
+                            android:gravity="center"
+                            android:padding="5dp"
+                            android:text="@string/tap_loc"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/mov_cur_loc"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_below="@+id/currentlocTxt_lay"
+                    android:layout_alignParentLeft="true"
+                    android:layout_gravity="left"
+                    android:layout_margin="5dp"
+                    android:paddingLeft="05dp"
+                    android:paddingTop="1dp"
+                    android:paddingBottom="05dp"
+                    app:backgroundTint="@color/white"
+                    app:fabCustomSize="50dp"
+                    app:layout_anchor="@+id/currentlocTxt_lay"
+                    app:layout_anchorGravity="bottom|left|right"
+                    app:srcCompat="@drawable/driver_current_loc" />
+            </RelativeLayout>
+
+
+            <include layout="@layout/driver_include_bottom_home" />
+        </FrameLayout>
+
+    </LinearLayout>
+</FrameLayout>

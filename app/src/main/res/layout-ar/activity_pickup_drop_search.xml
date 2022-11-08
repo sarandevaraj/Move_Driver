@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="mList"
+            type="com.taximobility.bookingmodule.BookTaxiHomeViewModel" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/top"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@color/white">
+
+            <ImageView
+                android:id="@+id/back_icon"
+                style="@style/Widget.AppCompat.ActionButton"
+                android:layout_width="?attr/actionBarSize"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_gravity="start|center_vertical"
+                android:layout_marginEnd="?attr/actionBarSize"
+                android:scaleX="-1"
+                android:src="@drawable/back"
+                android:visibility="visible" />
+
+            <ImageView
+                android:id="@+id/header_titleTxt"
+                style="@android:style/TextAppearance.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_centerInParent="true"
+                android:padding="3dp"
+                android:textColor="@color/header_text"
+                android:visibility="invisible" />
+
+        </RelativeLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:foreground="@drawable/background_shadow"
+            android:visibility="gone">
+            <!-- YOUR STUFF HERE -->
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/searchlay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:id="@+id/pickup_pinlay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="70dp"
+                    android:visibility="visible">
+
+                    <ImageView
+                        android:id="@+id/drop_pin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:paddingStart="@dimen/taxi__search_padding_medium"
+                        android:paddingEnd="@dimen/dp_8"
+                        android:src="@drawable/location" />
+                </FrameLayout>
+
+                <LinearLayout
+                    android:id="@+id/pickupp"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_toEndOf="@+id/pickup_pinlay"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+
+                    <EditText
+                        android:id="@+id/currentlocTxt"
+                        style="@style/enterTxt"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.2"
+                        android:background="@android:color/transparent"
+                        android:fadingEdge="horizontal"
+                        android:gravity="center_vertical|right"
+                        android:hint="@string/picklocation"
+                        android:imeOptions="flagNoExtractUi"
+                        android:lines="1"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:paddingStart="@dimen/pad_15dp"
+                        android:paddingTop="@dimen/taxi__search_padding_medium"
+                        android:paddingEnd="@dimen/pad_15dp"
+                        android:paddingBottom="@dimen/taxi__search_padding_medium"
+                        android:scrollHorizontally="true"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/hintcolor"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/pickup_drop_Sep"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_below="@id/pickupp"
+                    android:background="@color/linebottom_light" />
+
+
+                <LinearLayout
+                    android:id="@+id/dropppp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="45dp"
+                    android:layout_below="@id/pickup_drop_Sep"
+                    android:layout_toEndOf="@id/pickup_pinlay"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:visibility="visible">
+
+
+                    <EditText
+                        android:id="@+id/taxi__locationsearch_edittext_search"
+                        android:layout_width="0.0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start|center"
+                        android:layout_weight="1.0"
+                        android:background="@null"
+                        android:ellipsize="none"
+                        android:fadingEdge="horizontal"
+                        android:fadingEdgeLength="16.0dip"
+                        android:gravity="center_vertical|right"
+                        android:hint="@string/enter_dest"
+                        android:imeOptions="actionSearch"
+                        android:inputType="textNoSuggestions"
+                        android:paddingStart="@dimen/pad_15dp"
+                        android:paddingTop="@dimen/taxi__search_padding_medium"
+                        android:paddingEnd="@dimen/pad_15dp"
+                        android:paddingBottom="@dimen/taxi__search_padding_medium"
+                        android:saveEnabled="false"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/hintcolor"
+                        android:textSize="16sp" />
+
+                    <ImageButton
+                        android:id="@+id/taxi__locationsearch_imagebutton_clear"
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:layout_gravity="end|center"
+                        android:background="@null"
+                        android:contentDescription="@null"
+                        android:paddingLeft="@dimen/taxi__search_padding_large"
+                        android:paddingRight="@dimen/taxi__search_padding_large"
+                        android:src="@drawable/close"
+                        android:visibility="gone" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/add_stop"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".15"
+                        android:padding="@dimen/dp_5"
+                        android:src="@drawable/plus1"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:foreground="@drawable/background_shadow"
+                android:visibility="visible">
+                <!-- YOUR STUFF HERE -->
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/locationList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <FrameLayout
+            android:id="@+id/searchFrag"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+</layout>
