@@ -3,9 +3,9 @@
     <font
         android:fontStyle="normal"
         android:fontWeight="600"
-        android:font="@font/opensansbold" />
+        android:font="@font/ubermovetextbold" />
     <font
         android:fontStyle="italic"
         android:fontWeight="600"
-        android:font="@font/opensansbold" />
+        android:font="@font/ubermovetextbold" />
 </font-family>

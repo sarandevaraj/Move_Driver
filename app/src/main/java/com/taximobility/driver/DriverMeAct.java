@@ -195,7 +195,7 @@ public class DriverMeAct extends MainActivityDriver implements OnClickListener, 
         DirverColorchange.ChangeColor((ViewGroup) (((ViewGroup) DriverMeAct.this
                 .findViewById(android.R.id.content)).getChildAt(0)), DriverMeAct.this);
 
-      //  DriverFontHelper.applyFont(this, findViewById(R.id.me_layout));
+        DriverFontHelper.applyFont(this, findViewById(R.id.me_layout));
         profileAct = this;
         me_layout = findViewById(R.id.me_layout);
         profile_lay_s = findViewById(R.id.profile_lay_s);

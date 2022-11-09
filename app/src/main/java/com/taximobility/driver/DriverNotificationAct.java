@@ -27,6 +27,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.cardview.widget.CardView;
 
 import com.github.lzyzsd.circleprogress.DonutProgress;
@@ -121,6 +122,7 @@ public class DriverNotificationAct extends MainActivityDriver implements OnMapRe
     private CardView card_bottom_lay;
 
     private ImageView proimg;
+    AppCompatImageView drop_loc_select;
 
     /**
      * Get the google map pixels from xml density independent pixel.
@@ -202,6 +204,8 @@ public class DriverNotificationAct extends MainActivityDriver implements OnMapRe
                 txt_order = findViewById(R.id.txt_order);
                 card_bottom_lay = findViewById(R.id.card_bottom_lay);
                 card_bottom_lay.setBackgroundResource(R.drawable.corner_over_wallet);
+                drop_loc_select = findViewById(R.id.drop_loc_select);
+                drop_loc_select.setVisibility(View.GONE);
                 card_bottom_lay.setCardElevation(20);
 
                 accept_trip.setOnClickListener(new View.OnClickListener() {

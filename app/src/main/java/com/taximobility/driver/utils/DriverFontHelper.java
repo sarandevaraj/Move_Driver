@@ -22,8 +22,8 @@ import java.lang.reflect.Field;
  */
 public class DriverFontHelper {
     private static final String TAG = DriverFontHelper.class.getSimpleName();
-    public final static String FONT_TYPEFACE = "GoogleSans-Regular.ttf";
-    public final static String FONT_TYPEFACE_BOLD = "OpenSans-Bold.ttf";
+    public final static String FONT_TYPEFACE = "ubermovetextregular.ttf";
+    public final static String FONT_TYPEFACE_BOLD = "ubermovetextbold.ttf";
 
     /**
      * Apply specified font for all text views (including nested ones) in the specified root view.

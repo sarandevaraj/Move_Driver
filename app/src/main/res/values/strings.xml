@@ -23,7 +23,6 @@
     <string name="userphno">User Mobile Number</string>
 
 
-
     <!-- Registration Act -->
 
     <string name="please_select_your_salutation">Please select your salutation</string>
@@ -1115,6 +1114,7 @@
     <string name="my_ride">My Rides</string>
     <string name="notification_setting">Notification Settings</string>
     <string name="call_helpline">Call Helpline</string>
+    <string name="helpline">Helpline</string>
     <string name="confirm_call_admin">Are you sure,You want to call HelpLine?</string>
     <string name="below_miles">Below 25 Miles</string>
     <string name="above_miles">Above 25 Miles</string>

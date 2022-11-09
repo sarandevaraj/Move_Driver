@@ -68,6 +68,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.mayan.sospluginmodlue.SOSActivity;
 import com.taximobility.ProfileImageSetupClass;
+import com.taximobility.driver.fragments.DriverTripDetailNewFrag;
 import com.taximobility.features.CToast;
 import com.squareup.picasso.Picasso;
 import com.taximobility.R;
@@ -91,6 +92,7 @@ import com.taximobility.driver.utils.DriverSessionSave;
 import com.taximobility.driver.utils.DriverSystems;
 import com.taximobility.driver.utils.Driver_Utils;
 import com.taximobility.interfaces.AlertListener;
+import com.taximobility.util.FontHelper;
 import com.taximobility.util.NC;
 import com.taximobility.util.RoundedImageView;
 import com.taximobility.util.Utility;
@@ -108,10 +110,12 @@ import java.util.List;
 import java.util.Locale;
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.app.ActivityCompat;
 import androidx.core.view.ViewCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import static com.taximobility.driver.service.DriverFirebaseService.BOOKLATER_NOTIFICATION_ID;
@@ -266,6 +270,9 @@ public class DriverMyStatus extends MainActivityDriver implements ConnectionCall
         // with actions named LocationUpdate.LOCATION_ACCURACY_LOW.
         LocalBroadcastManager.getInstance(this).registerReceiver(listener,
                 new IntentFilter(LocationUpdate.LOCATION_ACCURACY_LOW));
+        DriverFontHelper.applyFont(this, findViewById(R.id.drawer_layout));
+//        DriverFontHelper.applyFont(this, findViewById(R.id.nav_view));
+        FontHelper.applyFont(this, findViewById(R.id.carlayout));
 
     }
 
@@ -527,6 +534,25 @@ public class DriverMyStatus extends MainActivityDriver implements ConnectionCall
             currentLocation1.setVisibility(View.GONE);
         }
         currentLocation1.setText(DriverNC.getString(R.string.tap_loc));
+
+        first_lay.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Trip_history.performClick();
+            }
+        });
+        second_lay.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Trip_history.performClick();
+            }
+        });
+        third_lay.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Trip_history.performClick();
+            }
+        });
 
         new_ride.setOnClickListener(new OnClickListener() {
             @Override

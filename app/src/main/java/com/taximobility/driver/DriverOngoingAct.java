@@ -301,6 +301,7 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
     private String product_size = "";
     private String delivery_person_name = "", delivery_phone_number = "", delivery_date_time = "";
     private String delivery_notes = "";
+    AppCompatImageView fav_icon_drop;
     /**
      * This handler helps to draw the route between driver place to pickup place and pickup place to drop place.
      */
@@ -636,6 +637,8 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
         card_bottom_lay.setBackgroundResource(R.drawable.corner_over_wallet);
         card_bottom_lay.setCardElevation(20);
         chatTxt.setVisibility(View.GONE);
+        fav_icon_drop = findViewById(R.id.drop_loc_select);
+        fav_icon_drop.setVisibility(View.GONE);
         if (dropppp.getVisibility() == View.GONE) {
 
             final float scale = this.getResources().getDisplayMetrics().density;

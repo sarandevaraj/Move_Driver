@@ -851,7 +851,6 @@
                             android:gravity="center_vertical"
                             android:hint="@string/droploc"
                             android:lines="1"
-                            android:marqueeRepeatLimit="marquee_forever"
                             android:paddingStart="@dimen/dp_10"
                             android:paddingTop="@dimen/taxi__search_padding_medium"
                             android:paddingEnd="@dimen/pad_15dp"
@@ -869,7 +868,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="@dimen/pad_5dp"
                             android:layout_weight="0.1"
-                            android:visibility="invisible"
+                            android:visibility="gone"
                             app:srcCompat="@drawable/ic_favorite_unselect" />
 
                     </LinearLayout>
@@ -953,8 +952,8 @@
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal">
                                 <ImageView
-                                    android:layout_width="16dp"
-                                    android:layout_height="16dp"
+                                    android:layout_width="18dp"
+                                    android:layout_height="18dp"
                                     android:layout_gravity="center"
                                     android:src="@drawable/ic_green_call_new" />
                                 <TextView

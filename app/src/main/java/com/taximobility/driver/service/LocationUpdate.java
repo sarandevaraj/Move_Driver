@@ -1425,7 +1425,7 @@ public class LocationUpdate extends Service implements DriverDistanceMatrixInter
                     .setContentText(DriverNC.getString(R.string.app_running))
                     .setContentTitle(getResources().getString(R.string.app_name))
                     .setOngoing(true)
-                    .setSmallIcon(R.drawable.driver_notification_icon)
+                    .setSmallIcon(R.drawable.small_logo)
                     .setColor(ContextCompat.getColor(getBaseContext(), R.color.button_accept))
                     .setWhen(System.currentTimeMillis());
         } else {
@@ -1436,7 +1436,7 @@ public class LocationUpdate extends Service implements DriverDistanceMatrixInter
                     .setContentTitle(getResources().getString(R.string.app_name))
                     .setOngoing(true)
                     .setPriority(Notification.PRIORITY_HIGH)
-                    .setSmallIcon(R.drawable.driver_notification_icon)
+                    .setSmallIcon(R.drawable.small_logo)
                     .setWhen(System.currentTimeMillis());
         }
 
@@ -1466,7 +1466,7 @@ public class LocationUpdate extends Service implements DriverDistanceMatrixInter
                     .setContentText("You have new trip")
                     .setContentTitle(getResources().getString(R.string.app_name))
                     .setOngoing(true)
-                    .setSmallIcon(R.drawable.driver_notification_icon)
+                    .setSmallIcon(R.drawable.small_logo)
                     .setColor(Color.RED)
                     .setWhen(System.currentTimeMillis());
         } else {
@@ -1478,7 +1478,7 @@ public class LocationUpdate extends Service implements DriverDistanceMatrixInter
                     .setContentTitle(getResources().getString(R.string.app_name))
                     .setOngoing(true)
                     .setPriority(Notification.PRIORITY_HIGH)
-                    .setSmallIcon(R.drawable.driver_notification_icon)
+                    .setSmallIcon(R.drawable.small_logo)
                     .setWhen(System.currentTimeMillis());
         }
 

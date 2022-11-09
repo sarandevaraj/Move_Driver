@@ -25,6 +25,9 @@ import com.taximobility.driver.utils.DriverNC;
 import com.taximobility.driver.utils.DriverSystems;
 import com.taximobility.util.SessionSave;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -110,6 +113,25 @@ public class DriverPastBookingAdapter extends RecyclerView.Adapter<DriverPastBoo
 //        }
 //        holder.trip_payment_amount.setText(DriverSessionSave.getSession("site_currency", mContext) + " " + data.get(position).amt);
 
+//        2022-11-08 16:38:49
+
+//        Date date = new Date();
+//        date.setTime(Long.parseLong(data.get(position).pickup_time.toString()));
+//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//        simpleDateFormat.format();
+//        String time = String.valueOf(simpleDateFormat.getCalendar().getTime());
+//        String date_new = String.valueOf(simpleDateFormat.getCalendar());
+//        System.out.println("Checking values formt   " + date_new +"       "+ time);
+
+        holder.trip_id.setText("#" + data.get(position).passengers_log_id);
+        holder.trip_date.setText(data.get(position).pickup_time);
+        holder.trip_time_new.setText(data.get(position).pickup_time);
+        holder.trip_amt.setText(DriverSessionSave.getSession("site_currency", mContext) +" "+ data.get(position).distance_fare_km);
+        if(data.get(position).travel_status.equals("1"))
+            holder.trip_com_canl.setText(DriverNC.getString(R.string.completed));
+        else
+            holder.trip_com_canl.setText(DriverNC.getString(R.string.cancelled));
+
 
         if (data.get(position).travel_status.trim().equals("1")) {
             holder.book_lay.setOnClickListener(new View.OnClickListener() {
@@ -148,6 +170,9 @@ public class DriverPastBookingAdapter extends RecyclerView.Adapter<DriverPastBoo
         LinearLayout book_lay;
         TextView passengerCallTxt, cancelTxt, startTripTxt, txt_pickup, txt_drop, model_name;
 
+        TextView trip_id, trip_date, trip_time_new, trip_amt, trip_com_canl;
+        ImageView icon_arrow;
+
         public CustomViewHolder(View v) {
             super(v);
             //  map_image = v.findViewById(R.id.map_image);
@@ -160,6 +185,14 @@ public class DriverPastBookingAdapter extends RecyclerView.Adapter<DriverPastBoo
             total_distance_fare = v.findViewById(R.id.total_distance_fare);
             total_km = v.findViewById(R.id.total_km);
             model_name = v.findViewById(R.id.model_name);
+
+            trip_id = v.findViewById(R.id.trip_id);
+            trip_date = v.findViewById(R.id.trip_date);
+            trip_time_new = v.findViewById(R.id.trip_time_new);
+            trip_amt = v.findViewById(R.id.trip_amt);
+            trip_com_canl = v.findViewById(R.id.trip_com_canl);
+            icon_arrow = v.findViewById(R.id.icon_arrow);
+
 //            trip_payment_type = v.findViewById(R.id.trip_payment_type);
 //            trip_payment_amount = v.findViewById(R.id.trip_payment_amount);
 //            trip_status = v.findViewById(R.id.trip_status);

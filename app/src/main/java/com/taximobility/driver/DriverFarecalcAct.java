@@ -1012,24 +1012,24 @@ public class DriverFarecalcAct extends MainActivityDriver implements DriverClick
                             b_discount.setText("" + DriverSessionSave.getSession("site_currency", DriverFarecalcAct.this) + " " + f_farediscount);
                         } else {
                             DriverSystems.out.println("aaaaaaaaaaa2");
-                            promoLayout.setVisibility(View.VISIBLE);
+//                            promoLayout.setVisibility(View.VISIBLE);
                         }
                     } else {
                         if (Double.parseDouble(json.getString("promodiscount_amount")) >= 0.0) {
                             b_discount.setText("" + DriverSessionSave.getSession("site_currency", DriverFarecalcAct.this) + " " + json.getString("promodiscount_amount"));
                         } else {
-                            promoLayout.setVisibility(View.VISIBLE);
+//                            promoLayout.setVisibility(View.VISIBLE);
                         }
                     }
 
                     vid_discount.setVisibility(View.GONE);
 
                 } else {
-                    promoLayout.setVisibility(View.VISIBLE);
+//                    promoLayout.setVisibility(View.VISIBLE);
                     vid_discount.setVisibility(View.GONE);
                 }
                 if (promoamt.equals("0")) {
-                    promoLayout.setVisibility(View.VISIBLE);
+//                    promoLayout.setVisibility(View.VISIBLE);
                 }
                 metricTxt.setText(f_metric.toLowerCase());
                 actdistanceTxt.setText("" + f_distance);
@@ -1071,7 +1071,7 @@ public class DriverFarecalcAct extends MainActivityDriver implements DriverClick
                 if (m_walletamt > 0) {
                     walletlay.setVisibility(View.VISIBLE);
                     walletamountTxt.setText(f_walletamt);
-                    paylay.setVisibility(View.VISIBLE);
+//                    paylay.setVisibility(View.VISIBLE);
                     amountpayTxt.setText(f_payamt);
                 }
 
@@ -1409,8 +1409,8 @@ public class DriverFarecalcAct extends MainActivityDriver implements DriverClick
 
     private void setNormalTripFareScreen() {
         layoutNormal.setVisibility(View.GONE);
-        paylay.setVisibility(View.VISIBLE);
-        promoLayout.setVisibility(View.VISIBLE);
+//        paylay.setVisibility(View.VISIBLE);
+//        promoLayout.setVisibility(View.VISIBLE);
         tax_lay.setVisibility(View.VISIBLE);
         totalamountTxt_lay.setVisibility(View.VISIBLE);
         fabInfo.setVisibility(View.GONE);

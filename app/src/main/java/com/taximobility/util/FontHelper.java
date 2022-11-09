@@ -23,8 +23,8 @@ import java.util.List;
 
 public class FontHelper {
 
-    public final static String FONT_TYPEFACE = "GoogleSans-Regular.ttf";
-    public final static String FONT_TYPEFACE_BOLD = "GoogleSans-Bold.ttf";
+    public final static String FONT_TYPEFACE = "ubermovetextregular.ttf";
+    public final static String FONT_TYPEFACE_BOLD = "ubermovetextbold.ttf";
     public static Typeface tf,tf2;
 
     public static void applyFont(final Context context, final View root) {

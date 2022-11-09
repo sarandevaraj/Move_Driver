@@ -33,6 +33,7 @@
     -->
     <style name="MyMaterialTheme" parent="MyMaterialTheme.Base">
         <item name="android:windowBackground">@color/black</item>
+        <item name="android:fontFamily">@font/ubermovetextregular</item>
 
         <!--<item name="android:windowLightStatusBar">true</item>-->
         <!--  <item name="android:windowBackground">@color/white_transparent</item>
@@ -89,7 +90,9 @@
     </style>
 
 
-    <style name="Mymaterialact" parent="MyMaterialTheme.Base2" />
+    <style name="Mymaterialact" parent="MyMaterialTheme.Base2" >
+        <item name="android:fontFamily">@font/ubermovetextregular</item>
+    </style>
 
 
     <style name="Transparent1" parent="MyMaterialTheme.Base1" />
