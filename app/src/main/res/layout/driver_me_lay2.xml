@@ -176,7 +176,7 @@
                             android:padding="@dimen/dp_5"
                             android:text="Mobile settings     "
                             android:textColor="@color/black"
-                            android:visibility="visible"/>
+                            android:visibility="gone"/>
 
                         <TextView
                             android:id="@+id/btnupload"

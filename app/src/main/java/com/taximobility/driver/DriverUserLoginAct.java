@@ -629,7 +629,7 @@ public class DriverUserLoginAct extends MainActivityDriver implements DriverClic
     protected void onResume() {
         super.onResume();
 
-
+/*
         String reqString = Build.MANUFACTURER;
         if (DriverSessionSave.getSession("settings_alert", DriverUserLoginAct.this).isEmpty()) {
             if (reqString.toLowerCase().contains("huawei")) {
@@ -642,6 +642,8 @@ public class DriverUserLoginAct extends MainActivityDriver implements DriverClic
                 oppoDeviceAlert();
             }
         }
+
+ */
     }
 
     @Override

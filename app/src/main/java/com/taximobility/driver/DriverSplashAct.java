@@ -302,7 +302,7 @@ public class DriverSplashAct extends MainActivityDriver {
 
     private void LoadDataForsplash() {
         String reqString = Build.MANUFACTURER;
-        if (DriverSessionSave.getSession("settings_alert", DriverSplashAct.this).isEmpty()) {
+        /*if (DriverSessionSave.getSession("settings_alert", DriverSplashAct.this).isEmpty()) {
             if (reqString.toLowerCase().contains("huawei")) {
                 HuaweiDeviceAlert();
             } else if (reqString.toLowerCase().contains("vivo")) {
@@ -315,7 +315,8 @@ public class DriverSplashAct extends MainActivityDriver {
                 DriverSessionSave.saveSession("settings_alert", "SETTINGS", DriverSplashAct.this);
                 LoadDataForsplash();
             }
-        } else if (DriverNetworkStatus.isOnline(DriverSplashAct.this)) {
+        } else */
+        if (DriverNetworkStatus.isOnline(DriverSplashAct.this)) {
 
             new Handler().postDelayed(new Runnable() {
 

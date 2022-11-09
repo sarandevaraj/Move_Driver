@@ -260,13 +260,15 @@ TextView driver_start;
                 SessionSave.saveSession("PLNG", P_longitude + "", LoginSelectionAcivity.this);
             }
         }
-
+/*
         String reqString = Build.MANUFACTURER;
         if (reqString.toLowerCase().contains("huawei")) {
             if (SessionSave.getSession("show_hauwai_alert", LoginSelectionAcivity.this, false)) {
                 HuaweiDeviceAlert();
             }
         }
+
+ */
     }
 
     /**

@@ -44,6 +44,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.common.ConnectionResult;
@@ -1791,7 +1792,8 @@ public class DriverMyStatus extends MainActivityDriver implements ConnectionCall
     public void latLongAlert(String message, LatLng latLng) {
         try {
             if (DriverMyStatus.this != null) {
-                dialog1 = Driver_Utils.alert_view(DriverMyStatus.this, DriverNC.getString(R.string.message), message, DriverNC.getString(R.string.ok), DriverNC.getString(R.string.cancel), false, DriverMyStatus.this, "3");
+                Toast.makeText(DriverMyStatus.this, DriverNC.getString(R.string.message), Toast.LENGTH_SHORT).show();
+//                dialog1 = Driver_Utils.alert_view(DriverMyStatus.this, DriverNC.getString(R.string.message), message, DriverNC.getString(R.string.ok), DriverNC.getString(R.string.cancel), false, DriverMyStatus.this, "3");
             } else {
                 try {
                     if (DriverMyStatus.this != null && errorDialog != null)

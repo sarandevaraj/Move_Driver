@@ -249,6 +249,7 @@ public class DriverMeAct extends MainActivityDriver implements OnClickListener, 
             emergency_contact.setVisibility(View.VISIBLE);
         }*/
         String reqString = Build.MANUFACTURER;
+        /*
         if (reqString.toLowerCase().contains("huawei") || reqString.toLowerCase().contains("vivo") || reqString.toLowerCase().contains("xiaomi") || reqString.toLowerCase().contains("oppo")) {
             txt_mobile_settings.setVisibility(View.VISIBLE);
         } else {
@@ -269,6 +270,8 @@ public class DriverMeAct extends MainActivityDriver implements OnClickListener, 
                 }
             }
         });
+
+         */
 
 
         if (!DriverSessionSave.getSession(DriverCommonData.HELP_URL, this).equals("")) {

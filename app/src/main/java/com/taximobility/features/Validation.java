@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.taximobility.R;
 import com.taximobility.util.FontHelper;
@@ -146,25 +147,27 @@ public class Validation {
     }
 
     public static void alert_view(Context mContext, String title, String message, String success_txt, String failure_txt) {
-        try {
-            final View view = View.inflate(mContext, R.layout.alert_view, null);
-            alertmDialog = new Dialog(mContext, R.style.dialogwinddow);
-            alertmDialog.setContentView(view);
-            alertmDialog.setCancelable(true);
-            FontHelper.applyFont(mContext, alertmDialog.findViewById(R.id.alert_id));
-            alertmDialog.show();
-            final TextView title_text = alertmDialog.findViewById(R.id.title_text);
-            final TextView message_text = alertmDialog.findViewById(R.id.message_text);
-            final Button button_success = alertmDialog.findViewById(R.id.button_success);
-            final Button button_failure = alertmDialog.findViewById(R.id.button_failure);
-            button_failure.setVisibility(View.GONE);
-            title_text.setText(title);
-            message_text.setText(message);
-            button_success.setText(success_txt);
-            button_success.setOnClickListener(v -> alertmDialog.dismiss());
-            button_failure.setOnClickListener(v -> alertmDialog.dismiss());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
+        Toast.makeText(mContext, message, Toast.LENGTH_LONG).show();
+//        try {
+//            final View view = View.inflate(mContext, R.layout.alert_view, null);
+//            alertmDialog = new Dialog(mContext, R.style.dialogwinddow);
+//            alertmDialog.setContentView(view);
+//            alertmDialog.setCancelable(true);
+//            FontHelper.applyFont(mContext, alertmDialog.findViewById(R.id.alert_id));
+//            alertmDialog.show();
+//            final TextView title_text = alertmDialog.findViewById(R.id.title_text);
+//            final TextView message_text = alertmDialog.findViewById(R.id.message_text);
+//            final Button button_success = alertmDialog.findViewById(R.id.button_success);
+//            final Button button_failure = alertmDialog.findViewById(R.id.button_failure);
+//            button_failure.setVisibility(View.GONE);
+//            title_text.setText(title);
+//            message_text.setText(message);
+//            button_success.setText(success_txt);
+//            button_success.setOnClickListener(v -> alertmDialog.dismiss());
+//            button_failure.setOnClickListener(v -> alertmDialog.dismiss());
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 }
