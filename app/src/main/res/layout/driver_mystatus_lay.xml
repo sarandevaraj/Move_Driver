@@ -220,7 +220,7 @@
                     android:id="@+id/offline_lay_bottom"
                     android:padding="@dimen/dp_5"
                     android:orientation="horizontal"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:layout_width="match_parent"
                     android:background="@color/quantum_orange300"
                     android:layout_height="65dp">
@@ -228,8 +228,8 @@
                     <ImageButton
                         android:id="@+id/image_offline_lay"
                         android:scaleType="centerCrop"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
                         android:background="@color/transparent"
                         android:padding="10dp"
                         app:srcCompat="@drawable/ic_launcher" />

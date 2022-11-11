@@ -41,10 +41,10 @@
 
     <string name="select_the_pickup_location">Please select the pick up location</string>
     <string name="select_the_drop_location">Please select the drop off location</string>
-    <string name="book_taxi">Book Taxi</string>
-    <string name="bookedtaxi">You have booked the taxi.</string>
+    <string name="book_taxi">Book Vehicle</string>
+    <string name="bookedtaxi">You have booked the Vehicle.</string>
     <string name="book_now">Book Now</string>
-    <string name="confirm_booking">Confirm later booking?</string>
+    <string name="confirm_booking">Confirm later Trips?</string>
     <string name="select_payment">Please select the payment type</string>
 
 
@@ -100,15 +100,15 @@
 
     <!-- menu -->
     <string name="menu">Menu</string>
-    <string name="menu_gettaxi">Track my taxi</string>
-    <string name="menu_mybooking">My Bookings</string>
+    <string name="menu_gettaxi">Track my vehicle</string>
+    <string name="menu_mybooking">My Trips</string>
     <string name="menu_payment">Payment Options</string>
     <string name="menu_profile">Profile</string>
     <string name="menu_favourites">Favourite</string>
     <string name="menu_fare">Fare</string>
     <string name="menu_about">About</string>
     <string name="menu_about_us">About Us</string>
-    <string name="book_a_taxi">Book a Taxi</string>
+    <string name="book_a_taxi">Book a Vehicle</string>
     <string name="menu_logout">Log Out</string>
 
     <!-- Booking list -->
@@ -118,7 +118,7 @@
 
     <string name="jobref">Trip ID</string>
 
-    <string name="t_book">Booking Time</string>
+    <string name="t_book">Trip Time</string>
 
 
     <!-- Aboutact -->
@@ -132,8 +132,8 @@
     <string name="refund_policy">Refund Policy</string>
     <string name="link">Links</string>
     <string name="menu_settings">Settings</string>
-    <string name="request_taxi">Request Taxi</string>
-    <string name="requestingtaxi">Requesting Taxi</string>
+    <string name="request_taxi">Request vehicle</string>
+    <string name="requestingtaxi">Requesting vehicle</string>
     <string name="landmark">Landmark</string>
     <string name="chpwd">Change Password</string>
     <string name="conpwd">Confirm Password</string>
@@ -150,7 +150,7 @@
     <string name="reason2">2.Driver did not respond</string>
     <string name="reason3">3.Wrong address shown</string>
     <string name="reason4">4.Changed the travel plan</string>
-    <string name="reason5">5.Booking placed in error</string>
+    <string name="reason5">5.Trip placed in error</string>
     <string name="reason6">6.Others</string>
 
 
@@ -279,7 +279,7 @@
     <string name="travelling_time">Travelling Time :</string>
     <string name="estimated_fare">Estimated Fare :</string>
     <string name="e_receipt">E-Receipt</string>
-    <string name="mybookings">My Bookings</string>
+    <string name="mybookings">My Trips</string>
     <string name="add_card">Add Card</string>
     <string name="edit_card">Edit Card</string>
     <string name="nocard">You don\'t have credit card details</string>
@@ -451,7 +451,7 @@
 
     <string name="change_drop">CHANGE DROP</string>
     <string name="continueStr">CONTINUE</string>
-    <string name="restrict_alert">Drop location is outside city limits.Continue booking choose Packages</string>
+    <string name="restrict_alert">Drop location is outside city limits.Continue trip choose Packages</string>
     <string name="you_are_offline">You are Now Offline</string>
     <string name="need_pickup_address">Check your pickup address</string>
     <string name="popular">POPULAR</string>
@@ -471,7 +471,7 @@
     <string name="privacy_camera_text"> We access your camera for taking photos to set your profile image.</string>
     <string name="privacy_device_information"> We collect and monitor your device information, such as device name, model, battery level, device manufacturer, SDK version, Play service version, available memory, available &amp; total storage, version code, version name, device token, device ID and device time to access app usage and avoid any unauthorized use. </string>
     <string name="privacy_contacts_text">We collect your contact information to ensure that you can reach your friends and family during an emergency situation by clicking the SOS button.</string>
-    <string name="privacy_location_text">We collect and monitor your current location to provide booking and delivery requests and track the trip and delivery progress</string>
+    <string name="privacy_location_text">We collect and monitor your current location to provide trip and delivery requests and track the trip and delivery progress</string>
     <string name="change_permission_in_phone">You can change the above permissions from Phone Settings, at any time.</string>
     <string name="proceed">Proceed</string>
     <string name="store_data">See how we store, use and secure your data</string>
@@ -489,7 +489,7 @@
 \n(3)Contract data (e.g., registration time and manner, and status) to review app usage;
 \n(4)Vehicle information (e.g., vehicle number, vehicle model, vehicle owner name, manufacturer and vehicle image);
 \n(5)Driving license, driving license expiry date and driving license image;
-\n(6)Location information to provide accurate ride booking and delivery requests;
+\n(6)Location information to provide accurate ride trip and delivery requests;
 \n(7)Device information (e.g.,device manufacturer, device token, device ID and device time) to access app usage and avoid unauthorized access;
 \n(8)Camera, photos and gallery to set and update profile photo;
 \n(9)Internet information to verify the availability of network and Wifi connectivity;
@@ -584,7 +584,7 @@
     <!-- JobsAct -->
     <string name="trip_history">Trip History</string>
     <string name="trip_details">Trip Details</string>
-    <string name="past_booking">Past Bookings</string>
+    <string name="past_booking">Past Trips</string>
 
     <!-- Notification Act -->
     <string name="name">Name</string>
@@ -717,12 +717,12 @@
     <string name="please_choose">Please choose your file</string>
     <string name="please_choosedate">Please choose correct date</string>
     <string name="call_passeneger">Call</string>
-    <string name="taxi_details">Taxi Details</string>
+    <string name="taxi_details">Vehicle Details</string>
 
-    <string name="taxi_model">Taxi Model</string>
-    <string name="taxi_number">Taxi Number</string>
-    <string name="taxi_assignfrom">Taxi from Date</string>
-    <string name="taxi_assignto">Taxi to Date</string>
+    <string name="taxi_model">Vehicle Model</string>
+    <string name="taxi_number">Vehicle Number</string>
+    <string name="taxi_assignfrom">Vehicle from Date</string>
+    <string name="taxi_assignto">Vehicle to Date</string>
     <string name="close">Close</string>
     <!-- Cancel Trip Act -->
 
@@ -773,7 +773,7 @@
 
     <string name="Lasttrip">Last Trip</string>
     <string name="Last2trip">Last 2 Trips</string>
-    <string name="Last3trip">Last 3 Trips</string>
+    <string name="Last3trip">Recent Trips</string>
 
     <string name="waitingpassenger">Waiting For Passenger</string>
     <string name="tripprogress">Trip in Progress</string>
@@ -834,7 +834,7 @@
     <string name="no_data">No data found</string>
     <string name="back_home">Back To Home</string>
     <string name="enter_the_mobile_number">Please enter your mobile number</string>
-    <string name="taxi_detailsu">Taxi Details</string>
+    <string name="taxi_detailsu">Vehicle Details</string>
 
 
     <!-- Referal Code -->
@@ -907,7 +907,7 @@
     <string name="home">Home</string>
     <string name="profile">Profile</string>
     <string name="street_pickup">Street Pickup</string>
-    <string name="earnings">My Earnings</string>
+    <string name="earnings">Earnings</string>
     <string name="fetching_address">Fetching Address</string>
     <string name="enter_dest">Enter Drop Location</string>
     <string name="above">Above</string>
@@ -1010,7 +1010,7 @@
     <string name="speed_ongoing">Speed</string>
     <string name="wait_time_ongoing">Waiting Time</string>
 
-    <string name="no_going_trip">Currently no tracking available!</string>
+    <string name="no_going_trip">No upcoming trips</string>
     <string name="signup">Sign Up</string>
     <string name="address_not_found">Address not found</string>
     <string name="sucessfull_driver_registartion">Thanks for register as driver. We will get back to you shortly!</string>
@@ -1120,7 +1120,7 @@
     <string name="above_miles">Above 25 Miles</string>
     <string name="total_trips">Total Trips</string>
     <string name="total_online">Total Online</string>
-    <string name="thanks_msg">Your Booking has been Scheduled. We will get back to you with Driver Details</string>
+    <string name="thanks_msg">Your Trips has been Scheduled. We will get back to you with Driver Details</string>
     <string name="pay_back">Pay Back</string>
     <string name="add_balance_amount">Add Balance Amount to Passenger Wallet</string>
     <string name="enter_balance_amount">Enter Balance Amount</string>

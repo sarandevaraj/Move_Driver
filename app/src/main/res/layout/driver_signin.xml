@@ -179,7 +179,7 @@
                 android:gravity="right"
                 android:text="@string/forgotpswd"
                 android:textColor="@color/black"
-                android:textSize="16dp" />
+                android:textSize="@dimen/dp_18" />
         </RelativeLayout>
 
         <TextView
@@ -225,6 +225,7 @@
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp"
                     android:gravity="center"
+                    android:textSize="@dimen/dp_18"
                     android:text="@string/become_driver"
                     android:textColor="@color/black"
 

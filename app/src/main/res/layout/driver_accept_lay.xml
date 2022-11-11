@@ -65,7 +65,7 @@
             android:layout_margin="2dp"
             android:gravity="left"
             android:orientation="vertical"
-            android:visibility="invisible">
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/total_km"
@@ -499,14 +499,11 @@
                                 android:layout_width="fill_parent"
                                 android:layout_height="30dp"
                                 android:layout_weight="0.2"
-                                android:ellipsize="marquee"
                                 android:fadingEdge="horizontal"
                                 android:focusable="true"
                                 android:focusableInTouchMode="true"
                                 android:gravity="center"
                                 android:hint="@string/droploc"
-                                android:lines="1"
-                                android:marqueeRepeatLimit="marquee_forever"
                                 android:scrollHorizontally="true"
                                 android:singleLine="true"
                                 android:textColor="@color/black"
@@ -955,7 +952,7 @@
                                     android:layout_width="18dp"
                                     android:layout_height="18dp"
                                     android:layout_gravity="center"
-                                    android:src="@drawable/ic_green_call_new" />
+                                    app:srcCompat="@drawable/ic_green_call_new" />
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"

@@ -210,19 +210,6 @@
                         android:layout_centerVertical="true"
                         android:layout_gravity="right">
 
-                        <TextView
-                            android:id="@+id/trip_track"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="8dp"
-                            android:background="@drawable/driver_rect_red"
-                            android:paddingLeft="5dp"
-                            android:paddingTop="5dp"
-                            android:paddingRight="5dp"
-                            android:paddingBottom="5dp"
-                            android:text="@string/track_now"
-                            android:textColor="@color/button_accept"
-                            android:visibility="gone" />
 
                         <TextView
                             android:id="@+id/trip_cancel"
@@ -292,7 +279,7 @@
                         android:layout_width="@dimen/pad_30dp"
                         android:layout_height="@dimen/pad_30dp"
                         android:layout_gravity="center"
-                        android:padding="5dp"
+                        android:padding="6dp"
                         card_view:srcCompat="@drawable/ic_drop_pin" />
 
 
