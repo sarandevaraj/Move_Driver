@@ -182,7 +182,7 @@
         <item>100%</item>
     </string-array>
     <string name="eta">ETA</string>
-    <string name="hour_must_greater_than">Please make sure that the ride is scheduled after at least an hour from now.</string>
+    <string name="hour_must_greater_than">Please make sure that the trip is scheduled after at least an hour from now.</string>
     <string name="on_going">On Going</string>
 
     <string name="permission_not_granted">Unable to perform selected action because permissions are not granted.</string>
@@ -272,7 +272,7 @@
     <string name="type_your_comment">Type your comments</string>
     <string name="contact_number">Contact number</string>
     <string name="z_split_fare_with">Split Fare with</string>
-    <string name="z_split_charged">Your ride will be charged</string>
+    <string name="z_split_charged">Your trip will be charged</string>
     <string name="fblogin">Sign in with Facebook</string>
     <string name="cancel_fare">Cancellation Fare</string>
     <string name="estimate_fare">Estimated Fare</string>
@@ -443,7 +443,7 @@
 
 
     <string name="confirm_delete">Are you sure want to delete favourite?</string>
-    <string name="book_ride">Book a Ride</string>
+    <string name="book_ride">Book a Trip</string>
     <string name="book_delivery">Book Your Delivery</string>
     <string name="Need_proper_loc">Couldn\'t get your proper location, Please move to coverage area.</string>
     <string name="wallet_amount_alert">You have insufficient wallet amt. Do you want to recharge?</string>
@@ -539,7 +539,7 @@
     <string name="done"> DONE </string>
     <string name="signin">Sign In</string>
     <string name="enter_your_mobile_number">Please enter your mobile number</string>
-    <string name="check_internet">Please Take New Ride</string>
+    <string name="check_internet">Please Take New Trips</string>
     <string name="t_ok"> OK </string>
     <string name="enter_mobile_number">Please enter your mobile number</string>
     <string name="enter_the_password">Please enter your password</string>
@@ -952,7 +952,7 @@
     <string name="have_promocode">Have a  Promocode?</string>
     <!-- card registration -->
     <string name="reg_promocode">Pay by Referral Code</string>
-    <string name="walletmsg">Cashless, hassle-free rides with t\'mobility wallet</string>
+    <string name="walletmsg">Cashless, hassle-free trips with t\'mobility wallet</string>
 
     <string name="reg_enterprcode">Please enter your Promo code</string>
     <string name="minimum_fare">Minimum Fare</string>
@@ -1106,12 +1106,12 @@
     <string name="sign_up_acc">Enter below details to complete the sign up process</string>
     <string name="history">History</string>
     <string name="today_trip">Today\'s Trip</string>
-    <string name="accept_ride">Accept Ride</string>
+    <string name="accept_ride">Accept Trip</string>
     <string name="notes_txt">Notes</string>
     <string name="dismiss">Dismiss</string>
     <string name="locate_on_map">Locate on Map</string>
-    <string name="newride">+ New Ride</string>
-    <string name="my_ride">My Rides</string>
+    <string name="newride">+ New Trip</string>
+    <string name="my_ride">Trips</string>
     <string name="notification_setting">Notification Settings</string>
     <string name="call_helpline">Call Helpline</string>
     <string name="helpline">Helpline</string>
@@ -1142,11 +1142,11 @@
     <string name="select_the_model">Please select your model</string>
     <string name="enter_vehicle_manufacturer">Please enter your vehicle manufacturer</string>
     <string name="upload_image_file">Please upload your vehicle image</string>
-    <string name="request_ride">Request Ride</string>
+    <string name="request_ride">Request Trip</string>
     <string name="change_fleet">Are you sure want to change fleet </string>
     <string name="total_preferences_fare">Total Preferences Fare</string>
     <string name="preferences_fare">Preferences Fare</string>
-    <string name="preferences_detail">Preferences</string>
+    <string name="preferences_detail">Options</string>
     <string name="product_name">Product Name</string>
     <string name="product_weight">Product Weight</string>
     <string name="product_size">Product Size</string>

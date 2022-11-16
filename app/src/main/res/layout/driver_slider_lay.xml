@@ -78,8 +78,10 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/black"
-                    android:visibility="gone" />
+                    android:layout_marginStart="@dimen/sp_16"
+                    android:layout_marginEnd="@dimen/sp_16"
+                    android:background="@color/light_gray"
+                    android:visibility="visible" />
 
 
                 <LinearLayout
@@ -129,10 +131,10 @@
                         android:gravity="center">
 
                         <ImageView
-                            android:layout_width="26dp"
-                            android:layout_height="26dp"
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
                             android:layout_gravity="center"
-                            app:srcCompat="@drawable/ic_home_unfocus" />
+                            app:srcCompat="@drawable/google_ic_home" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -181,7 +183,7 @@
                             android:layout_width="26dp"
                             android:layout_height="26dp"
                             android:layout_gravity="center"
-                            app:srcCompat="@drawable/ic_menu_my_booking_new" />
+                            app:srcCompat="@drawable/google_ic_trips" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -230,7 +232,7 @@
                             android:layout_width="26dp"
                             android:layout_height="26dp"
                             android:layout_gravity="center"
-                            app:srcCompat="@drawable/ic_earnings_unfocus" />
+                            app:srcCompat="@drawable/google_ic_earnings" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -279,7 +281,7 @@
                             android:layout_width="26dp"
                             android:layout_height="26dp"
                             android:layout_gravity="center"
-                            app:srcCompat="@drawable/ic_profile_unfocus" />
+                            app:srcCompat="@drawable/google_ic_profile" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -327,7 +329,7 @@
                             android:layout_width="26dp"
                             android:layout_height="26dp"
                             android:layout_gravity="center"
-                            app:srcCompat="@drawable/ic_menu_settings_new" />
+                            app:srcCompat="@drawable/google_ic_setting" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -532,24 +534,24 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:orientation="horizontal"
-        android:padding="10dp"
+        android:padding="5dp"
         android:layout_weight="1"
         android:paddingLeft="3dip"
         android:paddingTop="3dip">
 
         <LinearLayout
-            android:layout_width="26dp"
-            android:layout_height="26dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
             android:layout_gravity="center"
-            android:layout_weight="0.6"
+            android:layout_marginStart="@dimen/dp_8"
             android:gravity="center"
             android:visibility="visible">
 
             <ImageView
-                android:layout_width="26dp"
-                android:layout_height="26dp"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
                 android:layout_gravity="center"
-                app:srcCompat="@drawable/ic_call" />
+                app:srcCompat="@drawable/google_ic_call" />
 
         </LinearLayout>
 
@@ -633,7 +635,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:orientation="horizontal"
-            android:padding="10dp"
+            android:padding="5dp"
             android:layout_weight="1"
             android:paddingLeft="3dip"
             android:paddingTop="3dip">
@@ -650,7 +652,7 @@
                     android:layout_width="26dp"
                     android:layout_height="26dp"
                     android:layout_gravity="center"
-                    app:srcCompat="@drawable/driver_ic_sos" />
+                    app:srcCompat="@drawable/google_ic_sos" />
             </LinearLayout>
 
             <LinearLayout

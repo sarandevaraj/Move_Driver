@@ -941,7 +941,7 @@
                                 android:ellipsize="end"
                                 android:text="Name"
                                 android:textColor="@color/block"
-                                android:textSize="@dimen/dp_20"
+                                android:textSize="@dimen/dp_18"
                                 android:textStyle="bold" />
                             <LinearLayout
                                 android:id="@+id/lay_call"
@@ -949,10 +949,10 @@
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal">
                                 <ImageView
-                                    android:layout_width="18dp"
-                                    android:layout_height="18dp"
+                                    android:layout_width="@dimen/dp_20"
+                                    android:layout_height="@dimen/dp_20"
                                     android:layout_gravity="center"
-                                    app:srcCompat="@drawable/ic_green_call_new" />
+                                    app:srcCompat="@drawable/google_ic_call" />
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -963,7 +963,7 @@
                                     android:textStyle="bold"
                                     android:text="@string/call"
                                     android:textColor="@color/sub_heading"
-                                    android:textSize="20dp" />
+                                    android:textSize="@dimen/dp_18" />
                             </LinearLayout>
                             <TextView
                                 android:id="@+id/phoneTxt"

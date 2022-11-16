@@ -96,7 +96,7 @@
             android:textColor="@color/black"
             android:textSize="@dimen/sp_14"
             android:visibility="visible"
-            app:drawableRightCompat="@drawable/right_arrow" />
+            app:drawableRightCompat="@drawable/google_ic_right_small" />
 
         <View
             android:layout_width="fill_parent"
@@ -136,7 +136,7 @@
             android:text="@string/m_logout"
             android:textColor="@color/black"
             android:textSize="@dimen/sp_14"
-            app:drawableRightCompat="@drawable/right_arrow" />
+            app:drawableRightCompat="@drawable/google_ic_right_small" />
 
         <View
             android:layout_width="fill_parent"

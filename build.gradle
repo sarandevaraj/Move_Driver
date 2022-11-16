@@ -47,7 +47,7 @@ ext {
     facebook_android_sdk = '5.8.0'
     companykey = 'tm87'
     companyurl = 'http://mongo.taximobility.com/passengerapi113/index/'
-    googleID = 'AIzaSyD4bjaWEK1vs0DSAF6kUYTEqODQgCk2dr8'
+    googleID = 'AIzaSyCvwWt2UBTqq2Iew6IbQ0VdsEGz2Wporz8'
     common_name = 'MoveX'
     facebookId = 'com.facebook.app.FacebookContentProvider10684112666354'
     packageName = 'com.Taximobility.driver'
