@@ -6,7 +6,7 @@ import android.content.Intent;
 import static com.taximobility.driver.service.LocationUpdate.startLocationService;
 
 //This class used to make the service stop/start functions easily.
-public class DriverNonActivity {
+public class DriverNonActivity { 
     public Context context;
 
     // Constructor

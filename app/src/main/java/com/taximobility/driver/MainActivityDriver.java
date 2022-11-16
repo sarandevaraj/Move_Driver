@@ -592,7 +592,7 @@ public abstract class MainActivityDriver extends DriverBaseActivity implements D
         if (MainActivityDriver.this != null) {
 
             DriverNetworkStatus.isOnline(MainActivityDriver.this);
-            if (DriverSessionSave.getSession("user_privacy_policy", MainActivityDriver.this).equals("")) {
+//            if (DriverSessionSave.getSession("user_privacy_policy", MainActivityDriver.this).equals("")) {
 //                if (!((this instanceof DriverDevicePermissionActivityDriver) || (this instanceof DriverSplashAct) || (this instanceof DriverStoreAndSecureActivityDriver))) {
 //                    Intent i = new Intent(MainActivityDriver.this, DriverDevicePermissionActivityDriver.class);
 //                    i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -606,7 +606,7 @@ public abstract class MainActivityDriver extends DriverBaseActivity implements D
                         startActivity(i);
                     }
                 }
-            }
+//            }
         }
 
 

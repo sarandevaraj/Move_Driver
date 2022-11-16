@@ -1022,16 +1022,16 @@ public class DriverUserLoginAct extends MainActivityDriver implements DriverClic
     @Override
     public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
         if ((keyEvent != null && (keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE)) {
-            phone = PhoneEdt.getText().toString().trim();
-            SessionSave.saveSession("base_url", SessionSave.getSession("passenger_base_url", DriverUserLoginAct.this), DriverUserLoginAct.this);
-            if (validations(ValidateAction.isValueNULL, DriverUserLoginAct.this, phone))
-                if (validations(ValidateAction.isValidPassword, DriverUserLoginAct.this, PasswordEdt.getText().toString().trim())) {
-                    DriverSessionSave.saveSession("phone_number", phone, DriverUserLoginAct.this);
-                    DriverSessionSave.saveSession("driver_password", PasswordEdt.getText().toString().trim(), DriverUserLoginAct.this);
-                    password = PasswordEdt.getText().toString().trim();
-                    final String url = "type=user_validate";
-                    new SignIn(url, false);
-                }
+//            phone = PhoneEdt.getText().toString().trim();
+//            SessionSave.saveSession("base_url", SessionSave.getSession("passenger_base_url", DriverUserLoginAct.this), DriverUserLoginAct.this);
+//            if (validations(ValidateAction.isValueNULL, DriverUserLoginAct.this, phone))
+//                if (validations(ValidateAction.isValidPassword, DriverUserLoginAct.this, PasswordEdt.getText().toString().trim())) {
+//                    DriverSessionSave.saveSession("phone_number", phone, DriverUserLoginAct.this);
+//                    DriverSessionSave.saveSession("driver_password", PasswordEdt.getText().toString().trim(), DriverUserLoginAct.this);
+//                    password = PasswordEdt.getText().toString().trim();
+//                    final String url = "type=user_validate";
+//                    new SignIn(url, false);
+            DoneBtn.performClick();
         }
         return false;
     }

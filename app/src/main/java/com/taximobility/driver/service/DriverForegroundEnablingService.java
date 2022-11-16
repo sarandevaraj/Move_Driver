@@ -15,8 +15,10 @@ import android.os.IBinder;
 
 
 import com.taximobility.R;
+import com.taximobility.SplashActivity;
 import com.taximobility.driver.DriverSplashAct;
 import com.taximobility.driver.utils.DriverNC;
+import com.taximobility.locationSearch.SetPlaceResult;
 
 public class DriverForegroundEnablingService extends Service {
 
@@ -56,7 +58,7 @@ public class DriverForegroundEnablingService extends Service {
 
     private Notification getNotification() {
 
-        PendingIntent activityPendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, DriverSplashAct.class), PendingIntent.FLAG_IMMUTABLE);
+        PendingIntent activityPendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, SplashActivity.class), PendingIntent.FLAG_IMMUTABLE);
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         String NOTIFICATION_CHANNEL_ID = "my_channel_id_01";
         int notifyId = 10;

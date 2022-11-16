@@ -53,7 +53,7 @@ import com.taximobility.driver.utils.DriverSessionSave;
 import com.taximobility.driver.utils.DriverSystems;
 import com.taximobility.features.CToast;
 import com.taximobility.interfaces.APIResult;
-import com.taximobility.permission.DevicePermissionActivity;
+
 import com.taximobility.service.APIService_Retrofit_JSON_NoProgress;
 import com.taximobility.service.BackgroundCoreConfig;
 import com.taximobility.service.CoreClient;
