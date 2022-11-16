@@ -9,6 +9,7 @@
     android:layout_centerInParent="true"
     android:layout_gravity="bottom"
     android:gravity="center"
+    android:clickable="true"
     android:keepScreenOn="true"
     android:orientation="vertical"
     app:ignore="NamespaceTypo">
@@ -21,7 +22,9 @@
 
 
     <RelativeLayout
+        android:id="@+id/noti_font_2"
         android:layout_width="match_parent"
+        android:clickable="true"
         android:layout_height="match_parent"
         android:visibility="visible">
 
@@ -42,7 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_marginTop="40dp"
-            android:clickable="false"
+            android:clickable="true"
             android:focusable="false"
             android:visibility="gone">
 
@@ -369,6 +372,7 @@
             android:id="@+id/card_bottom_lay"
             card_view:cardElevation="30dp"
             android:showDividers="end"
+            android:clickable="true"
             android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -1008,9 +1012,6 @@
                  </RelativeLayout>-->
             </LinearLayout>
 
-
-
-
             <LinearLayout
                 android:id="@+id/trip_detail_lay"
                 android:layout_below="@+id/con_lay"
@@ -1194,6 +1195,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:clickable="true"
         android:layout_gravity="center|center_horizontal"
         android:gravity="center"
         android:visibility="gone">

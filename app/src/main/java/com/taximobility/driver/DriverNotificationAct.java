@@ -23,6 +23,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -207,6 +208,12 @@ public class DriverNotificationAct extends MainActivityDriver implements OnMapRe
                 drop_loc_select = findViewById(R.id.drop_loc_select);
                 drop_loc_select.setVisibility(View.GONE);
                 card_bottom_lay.setCardElevation(20);
+
+                RelativeLayout notify_lay = findViewById(R.id.noti_font_2);
+
+                notify_lay.setOnClickListener(view -> {
+                    return;
+                });
 
                 accept_trip.setOnClickListener(new View.OnClickListener() {
                     @Override

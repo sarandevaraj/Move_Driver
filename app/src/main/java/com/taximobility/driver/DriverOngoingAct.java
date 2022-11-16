@@ -1479,7 +1479,8 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
                     final LatLng coordinate = new LatLng(latitude1, longitude1);
                     if (map != null)
                         map.moveCamera(CameraUpdateFactory.newLatLngZoom(coordinate, zoom));
-                    mapWrapperLayout.setVisibility(View.VISIBLE);
+                    if (mapWrapperLayout != null)
+                        mapWrapperLayout.setVisibility(View.VISIBLE);
                 }
                 break;
             case LOCATION_REQUEST_TYPE_COMPLETE_TRIP:

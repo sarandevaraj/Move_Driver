@@ -644,11 +644,12 @@ public class DriverSplashAct extends MainActivityDriver {
     private void MoveToNavigatorPanel() {
         startService(new Intent(DriverSplashAct.this, DriverBackgroundCoreConfig.class));
         Intent i;
-        if (DriverSessionSave.getSession("user_privacy_policy", DriverSplashAct.this).equals("")) {
-            i = new Intent(DriverSplashAct.this, DriverDevicePermissionActivityDriver.class);
-            startActivity(i);
-            finish();
-        } else if (DriverSessionSave.getSession("Id", DriverSplashAct.this).equals("")) {
+//        if (DriverSessionSave.getSession("user_privacy_policy", DriverSplashAct.this).equals("")) {
+//            i = new Intent(DriverSplashAct.this, DriverDevicePermissionActivityDriver.class);
+//            startActivity(i);
+//            finish();
+//        } else
+            if (DriverSessionSave.getSession("Id", DriverSplashAct.this).equals("")) {
             i = new Intent(DriverSplashAct.this, DriverUserLoginAct.class);
             startActivity(i);
             finish();
@@ -1280,11 +1281,11 @@ public class DriverSplashAct extends MainActivityDriver {
                     Intent i = null;
 //                    if (CommonData.isCurrentTimeZone(getCore_Utc)) {
 
-                    if (DriverSessionSave.getSession("user_privacy_policy", DriverSplashAct.this).equals("")) {
-                        i = new Intent(DriverSplashAct.this, DriverDevicePermissionActivityDriver.class);
-                        startActivity(i);
-                        finish();
-                    } else {
+//                    if (DriverSessionSave.getSession("user_privacy_policy", DriverSplashAct.this).equals("")) {
+//                        i = new Intent(DriverSplashAct.this, DriverDevicePermissionActivityDriver.class);
+//                        startActivity(i);
+//                        finish();
+//                    } else {
 
                         if (DriverSessionSave.getSession("Id", DriverSplashAct.this).equals("")) {
                             i = new Intent(DriverSplashAct.this, DriverUserLoginAct.class);
@@ -1314,7 +1315,7 @@ public class DriverSplashAct extends MainActivityDriver {
                             }
                         }
 
-                    }
+//                    }
 //                    } else {
 //                        cancelLoading();
 //                        alert_view_date(SplashAct.this, NC.getString(R.string.message), NC.getString(R.string.date_change), NC.getString(R.string.ok), NC.getString(R.string.cancel));
@@ -1354,11 +1355,11 @@ public class DriverSplashAct extends MainActivityDriver {
 
 
                 Intent i = null;
-                if (DriverSessionSave.getSession("user_privacy_policy", DriverSplashAct.this).equals("")) {
-                    i = new Intent(DriverSplashAct.this, DriverDevicePermissionActivityDriver.class);
-                    startActivity(i);
-                    finish();
-                } else {
+//                if (DriverSessionSave.getSession("user_privacy_policy", DriverSplashAct.this).equals("")) {
+//                    i = new Intent(DriverSplashAct.this, DriverDevicePermissionActivityDriver.class);
+//                    startActivity(i);
+//                    finish();
+//                } else {
                     if (DriverSessionSave.getSession("Id", DriverSplashAct.this).equals("")) {
                         i = new Intent(DriverSplashAct.this, DriverUserLoginAct.class);
                         startActivity(i);
@@ -1379,7 +1380,7 @@ public class DriverSplashAct extends MainActivityDriver {
                         }
                     }
 
-                }
+//                }
 
             } else {
                 errorInSplash(getString(R.string.error_in_color));
@@ -1562,11 +1563,11 @@ public class DriverSplashAct extends MainActivityDriver {
                         } else {
 //                            if (CommonData.isCurrentTimeZone(jArry.getJSONObject(0).getLong("utc_time"))) {
 
-                            if (DriverSessionSave.getSession("user_privacy_policy", DriverSplashAct.this).equals("")) {
-                                i = new Intent(DriverSplashAct.this, DriverDevicePermissionActivityDriver.class);
-                                startActivity(i);
-                                finish();
-                            } else {
+//                            if (DriverSessionSave.getSession("user_privacy_policy", DriverSplashAct.this).equals("")) {
+//                                i = new Intent(DriverSplashAct.this, DriverDevicePermissionActivityDriver.class);
+//                                startActivity(i);
+//                                finish();
+//                            } else {
                                 if (DriverSessionSave.getSession("Id", DriverSplashAct.this).equals("")) {
                                     i = new Intent(DriverSplashAct.this, DriverUserLoginAct.class);
                                     startActivity(i);
@@ -1589,7 +1590,7 @@ public class DriverSplashAct extends MainActivityDriver {
                                     }
                                 }
 
-                            }
+//                            }
                            /* } else {
                                 cancelLoading();
                                 alert_view_date(SplashAct.this, NC.getString(R.string.message), NC.getString(R.string.date_change), NC.getString(R.string.ok), NC.getString(R.string.cancel));

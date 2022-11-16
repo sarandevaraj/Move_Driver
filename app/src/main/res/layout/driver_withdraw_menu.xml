@@ -17,8 +17,8 @@
 
         <TextView
             android:id="@+id/slideImg"
-            android:layout_width="@dimen/dp_25"
-            android:layout_height="@dimen/dp_25"
+            android:layout_width="@dimen/dp_18"
+            android:layout_height="@dimen/dp_18"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginStart="5dp"

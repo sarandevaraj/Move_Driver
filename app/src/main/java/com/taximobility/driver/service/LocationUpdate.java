@@ -75,6 +75,7 @@ import com.taximobility.driver.utils.DriverNC;
 import com.taximobility.driver.utils.DriverNetworkStatus;
 import com.taximobility.driver.utils.DriverSessionSave;
 import com.taximobility.driver.utils.DriverSystems;
+import com.taximobility.features.CToast;
 import com.taximobility.util.AppController;
 
 import org.json.JSONException;
@@ -1156,16 +1157,18 @@ public class LocationUpdate extends Service implements DriverDistanceMatrixInter
                             MainActivityDriver.mMyStatus.setOndriverLongitude("");
                             DriverSessionSave.saveSession(DriverCommonData.ST_WAITING_TIME, false, getApplicationContext());
                             DriverSessionSave.saveSession(DriverCommonData.WAITING_TIME, false, getApplicationContext());
-                            Intent cancelIntent = new Intent();
-                            Bundle bun = new Bundle();
-                            bun.putString("message", cancelmsg);
-                            cancelIntent.putExtras(bun);
-                            cancelIntent.setAction(Intent.ACTION_MAIN);
-                            cancelIntent.addCategory(Intent.CATEGORY_LAUNCHER);
-                            cancelIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT | Intent.FLAG_ACTIVITY_NO_ANIMATION | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                            ComponentName cn = new ComponentName(getApplicationContext(), DriverCanceltripAct.class);
-                            cancelIntent.setComponent(cn);
-                            startActivity(cancelIntent);
+                            CToast.ShowToast(getApplicationContext(), cancelmsg);
+                            movetohome();
+//                            Intent cancelIntent = new Intent();
+//                            Bundle bun = new Bundle();
+//                            bun.putString("message", cancelmsg);
+//                            cancelIntent.putExtras(bun);
+//                            cancelIntent.setAction(Intent.ACTION_MAIN);
+//                            cancelIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+//                            cancelIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT | Intent.FLAG_ACTIVITY_NO_ANIMATION | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+//                            ComponentName cn = new ComponentName(getApplicationContext(), DriverCanceltripAct.class);
+//                            cancelIntent.setComponent(cn);
+//                            startActivity(cancelIntent);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -1255,6 +1258,33 @@ public class LocationUpdate extends Service implements DriverDistanceMatrixInter
             DriverErrorLogRepository.getRepository(LocationUpdate.this).insertAllApiErrorLogs(new DriverApiErrorModel(0, DriverCommonData.getCurrentTimeForLogger(), "type=driver_location_history_update", DriverExceptionConverter.INSTANCE.buildStackTraceString(e.getStackTrace()), DriverUtils.INSTANCE.driverInfo(LocationUpdate.this), data, LocationUpdate.this.getClass().getSimpleName(), 0));
         }
 
+    }
+
+    private void movetohome() {
+        MainActivityDriver.mMyStatus.setStatus("F");
+        DriverSessionSave.saveSession("status", "F", getApplicationContext());
+        MainActivityDriver.mMyStatus.settripId("");
+        DriverSessionSave.saveSession("trip_id", "", getApplicationContext());
+        MainActivityDriver.mMyStatus.setOnstatus("On");
+        MainActivityDriver.mMyStatus.setOnPassengerImage("");
+        MainActivityDriver.mMyStatus.setOnpassengerName("");
+        MainActivityDriver.mMyStatus.setOndropLocation("");
+        MainActivityDriver.mMyStatus.setPassengerOndropLocation("");
+        MainActivityDriver.mMyStatus.setOnpickupLatitude("");
+        MainActivityDriver.mMyStatus.setOnpickupLongitude("");
+        MainActivityDriver.mMyStatus.setOndropLatitude("");
+        MainActivityDriver.mMyStatus.setOndropLongitude("");
+        MainActivityDriver.mMyStatus.setOndriverLatitude("");
+        MainActivityDriver.mMyStatus.setOndriverLongitude("");
+        DriverSystems.out.println("Comminggggg_cancel");
+        Intent in = new Intent(getApplicationContext(), DriverMyStatus.class);
+        in.setAction(Intent.ACTION_MAIN);
+        in.addCategory(Intent.CATEGORY_LAUNCHER);
+        in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET | Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT | Intent.FLAG_ACTIVITY_NO_ANIMATION | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        ComponentName cn = new ComponentName(getApplicationContext(), DriverMyStatus.class);
+        in.setComponent(cn);
+        startActivity(in);
+//        finish();
     }
 
     private boolean servicesConnected() {

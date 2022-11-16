@@ -69,6 +69,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.mayan.sospluginmodlue.SOSActivity;
 import com.taximobility.ProfileImageSetupClass;
+import com.taximobility.SplashActivity;
 import com.taximobility.driver.fragments.DriverTripDetailNewFrag;
 import com.taximobility.features.CToast;
 import com.squareup.picasso.Picasso;
@@ -2014,7 +2015,7 @@ public class DriverMyStatus extends MainActivityDriver implements ConnectionCall
                 if (grantResults.length > 0) {
                     if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                         nonactiityobj.stopServicefromNonActivity(DriverMyStatus.this);
-                        final Intent i = new Intent(getApplicationContext(), DriverSplashAct.class);
+                        final Intent i = new Intent(getApplicationContext(), SplashActivity.class);
                         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(i);
                     } else {
