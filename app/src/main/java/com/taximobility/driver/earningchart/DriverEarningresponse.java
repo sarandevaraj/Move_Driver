@@ -9,6 +9,7 @@ import java.util.List;
 public class DriverEarningresponse {
     public String message;
     public List<TodayEarning> today_earnings = new ArrayList<>();
+    public List<TotalEarning> total_earnings = new ArrayList<>();
     public List<WeeklyEarning> weekly_earnings = new ArrayList<>();
     int status;
     public List<WithDrawArray> withdraw_array;
@@ -17,6 +18,17 @@ public class DriverEarningresponse {
 
         public String total_trips;
         public String total_amount;
+
+    }
+
+    public static class TotalEarning {
+
+        public String total_trips;
+        public String total_amount;
+        public String total_distance;
+        public String total_duration;
+        public String total_shift_duration;
+
 
     }
 

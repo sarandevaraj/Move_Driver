@@ -14,7 +14,7 @@ public class CToast {
         if (s != null && !s.equals("") && context != null) {
             if (toast != null)
                 toast.cancel();
-            toast = Toast.makeText(context, "" + s, Toast.LENGTH_LONG);
+            toast = Toast.makeText(context, "" + s, Toast.LENGTH_SHORT);
             toast.show();
         }
     }

@@ -26,7 +26,8 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/ic_contact_small" />
+        app:srcCompat="@drawable/google_ic_contact"
+        tools:ignore="VectorDrawableCompat" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_contact"
@@ -51,9 +52,10 @@
         android:layout_marginRight="28dp"
         android:layout_marginTop="8dp"
         android:background="?android:attr/selectableItemBackground"
-        app:srcCompat="@drawable/ic_trash"
+        app:srcCompat="@drawable/google_ic_delete"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/img_contact" />
+        app:layout_constraintTop_toTopOf="@+id/img_contact"
+        tools:ignore="VectorDrawableCompat" />
 
 
     <androidx.core.widget.ContentLoadingProgressBar
@@ -78,7 +80,6 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="@+id/tv_title"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="@+id/tv_contact"
         app:layout_constraintTop_toBottomOf="@+id/tv_contact"

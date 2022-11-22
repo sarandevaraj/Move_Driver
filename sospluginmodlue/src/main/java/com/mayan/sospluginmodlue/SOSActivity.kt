@@ -10,20 +10,24 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.os.Handler
 import android.provider.ContactsContract
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
+import android.text.InputType
 import android.util.Log
 import android.view.View
+import android.view.ViewGroup
 import android.view.Window
 import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.ethanhua.skeleton.RecyclerViewSkeletonScreen
 import com.ethanhua.skeleton.Skeleton
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.mayan.sospluginmodlue.model.ApiRequestData
@@ -35,6 +39,7 @@ import com.mayan.sospluginmodlue.service.ServiceGenerator
 import com.mayan.sospluginmodlue.util.SessionSave
 import jp.wasabeef.recyclerview.adapters.SlideInLeftAnimationAdapter
 import kotlinx.android.synthetic.main.sos__activity_main.*
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -125,32 +130,63 @@ class SOSActivity : AppCompatActivity(), ItemClicked {
     }
 
     private fun showdialog(){
-        val dialog = Dialog(this)
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setCancelable(false)
-        dialog.setContentView(R.layout.sos_contact_dialog_view)
-        val mbl_number = dialog.findViewById(R.id.sos_mbl_number) as EditText
-        val name = dialog.findViewById(R.id.sos_name) as EditText
-        val yesBtn = dialog.findViewById(R.id.yesbtn) as Button
-        val noBtn = dialog.findViewById(R.id.nobtn) as Button
-        val addcontact = dialog.findViewById(R.id.add_contact) as LinearLayout
+//        val dialog = Dialog(this)
+//        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+//        dialog.setCancelable(false)
+//        dialog.setContentView(R.layout.sos_contact_dialog_view)
+//        val mbl_number = dialog.findViewById(R.id.sos_mbl_number) as EditText
+//        val name = dialog.findViewById(R.id.sos_name) as EditText
+//        val yesBtn = dialog.findViewById(R.id.yesbtn) as Button
+//        val noBtn = dialog.findViewById(R.id.nobtn) as Button
+//        val addcontact = dialog.findViewById(R.id.add_contact) as LinearLayout
+//        addcontact.visibility = View.VISIBLE
+//        val nocontact = dialog.findViewById(R.id.no_contact) as LinearLayout
+//        nocontact.visibility = View.GONE
+
+//        yesBtn.setOnClickListener {
+//            callAddApi(mbl_number.text.toString(), name.text.toString(),SessionSave.getSession("country_code", this@SOSActivity))
+//            no_data_lay?.visibility = View.GONE
+//            dialog.dismiss()
+//        }
+//        noBtn.setOnClickListener { dialog.dismiss() }
+//        dialog.show()
+//        val lp: WindowManager.LayoutParams = WindowManager.LayoutParams()
+//        lp.copyFrom(dialog.getWindow()?.getAttributes())
+//        lp.width = WindowManager.LayoutParams.MATCH_PARENT
+//        lp.height = WindowManager.LayoutParams.WRAP_CONTENT
+//        dialog.show()
+//        dialog.getWindow()?.setAttributes(lp)
+
+        val mBottomSheetDialog = BottomSheetDialog(this)
+        val forgetView: View =
+            this.getLayoutInflater().inflate(R.layout.sos_contact_dialog_view, null)
+        mBottomSheetDialog.setContentView(forgetView)
+        mBottomSheetDialog.show()
+        val mbl_number = forgetView.findViewById(R.id.sos_mbl_number) as EditText
+        val name = forgetView.findViewById(R.id.sos_name) as EditText
+        val yesBtn = forgetView.findViewById(R.id.yesbtn) as Button
+        val noBtn = forgetView.findViewById(R.id.nobtn) as Button
+        val addcontact = forgetView.findViewById(R.id.add_contact) as LinearLayout
         addcontact.visibility = View.VISIBLE
-        val nocontact = dialog.findViewById(R.id.no_contact) as LinearLayout
+        val nocontact = forgetView.findViewById(R.id.no_contact) as LinearLayout
         nocontact.visibility = View.GONE
 
-        yesBtn.setOnClickListener {
-            callAddApi(mbl_number.text.toString(), name.text.toString(),SessionSave.getSession("country_code", this@SOSActivity))
-            no_data_lay?.visibility = View.GONE
-            dialog.dismiss()
+        yesBtn.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v: View) {
+                // TODO Auto-generated method stub
+                try {
+                    callAddApi(mbl_number.text.toString(), name.text.toString(),SessionSave.getSession("country_code", this@SOSActivity))
+//                    no_data_lay?.visibility = View.GONE
+                    mBottomSheetDialog.cancel()
+                } catch (e: java.lang.Exception) {
+                    e.printStackTrace()
+                }
+            }
+        })
+        noBtn.setOnClickListener {
+            mBottomSheetDialog.cancel()
         }
-        noBtn.setOnClickListener { dialog.dismiss() }
-        dialog.show()
-        val lp: WindowManager.LayoutParams = WindowManager.LayoutParams()
-        lp.copyFrom(dialog.getWindow()?.getAttributes())
-        lp.width = WindowManager.LayoutParams.MATCH_PARENT
-        lp.height = WindowManager.LayoutParams.WRAP_CONTENT
-        dialog.show()
-        dialog.getWindow()?.setAttributes(lp)
+
     }
 
     private fun checkPermissionLocation() {

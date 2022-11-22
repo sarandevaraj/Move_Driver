@@ -69,7 +69,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="03dp"
                 android:orientation="vertical"
-                android:visibility="gone"
+                android:visibility="visible"
                 app:layout_behavior="@string/bottom_sheet_behavior">
 
                 <LinearLayout
@@ -288,7 +288,6 @@
                     android:layout_width="fill_parent"
                     android:layout_height="70dp"
                     android:layout_marginBottom="06dp"
-                    android:layout_marginTop="06dp"
                     android:background="@drawable/driver_border_bg"
                     android:padding="2dp">
 

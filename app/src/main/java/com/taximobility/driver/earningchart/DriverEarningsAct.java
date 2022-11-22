@@ -109,7 +109,7 @@ public class DriverEarningsAct extends DriverBaseActivity implements DriverClick
     private Dialog mDialog;
     private int pos = 0, total_weeks = 0;
     private ImageView img_left, img_right;
-    private TextView tv_this_week, tv_this_week_amt;
+    private TextView tv_this_week, tv_this_week_amt,tv_total_trip,tv_total_distance;
 
 
     private Dialog dialog1;
@@ -217,6 +217,8 @@ public class DriverEarningsAct extends DriverBaseActivity implements DriverClick
         img_right = findViewById(R.id.img_right);
         tv_this_week = findViewById(R.id.tv_this_week);
         tv_this_week_amt = findViewById(R.id.tv_this_week_amt);
+        tv_total_trip = findViewById(R.id.tv_total_trip);
+        tv_total_distance= findViewById(R.id.tv_total_distance);
         btn_withdraw.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -498,6 +500,7 @@ public class DriverEarningsAct extends DriverBaseActivity implements DriverClick
                                     wallet_amount.setText(DriverSessionSave.getSession("site_currency", DriverEarningsAct.this) + " " + data.withdraw_array.get(0).driver_trip_wallet_amount);
                             }
 
+
                             earnings_layout.setVisibility(View.VISIBLE);
                             // date.removeAllViews();
 
@@ -554,6 +557,8 @@ public class DriverEarningsAct extends DriverBaseActivity implements DriverClick
 
                                 try {
                                     //if(data.)
+                                    tv_total_trip.setText(data.total_earnings.get(0).total_trips);
+                                    tv_total_distance.setText(data.total_earnings.get(0).total_distance);
                                     trips.setText(data.today_earnings.get(0).total_trips + " " + DriverNC.getResources().getString(R.string.trips1));
                                     eAmt.setText("" + DriverSessionSave.getSession("site_currency", DriverEarningsAct.this) + "" + data.today_earnings.get(0).total_amount);
                                 } catch (Exception e) {

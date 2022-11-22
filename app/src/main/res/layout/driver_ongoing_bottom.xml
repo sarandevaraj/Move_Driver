@@ -422,43 +422,6 @@
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/start_end_lay"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="150dp"
-        android:gravity="bottom|end">
-
-        <ImageView
-            android:id="@+id/botton_layout"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="right"
-            android:layout_marginRight="5dp"
-            android:paddingLeft="05dp"
-            android:paddingTop="5dp"
-            android:paddingRight="5dp"
-            android:paddingBottom="5dp"
-            android:visibility="gone" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/botton_navi"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="right"
-            android:layout_marginRight="5dp"
-            android:paddingLeft="05dp"
-            android:paddingTop="5dp"
-            android:paddingRight="5dp"
-            android:paddingBottom="5dp"
-            android:src="@drawable/driver_current_loc"
-            android:visibility="gone"
-            app:backgroundTint="@color/white"
-            app:fabCustomSize="50dp"
-            app:layout_anchorGravity="top|right|end" />
-
-    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/start_end_lay"

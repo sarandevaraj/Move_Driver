@@ -58,7 +58,11 @@ class ContactAdapter(val item: ArrayList<ContactsData>, val mContext: Context, v
         init {
             imageDelete.setOnClickListener {
 
-
+                view.visibility = View.GONE
+                if (view.tag is View)
+                    view.visibility = View.VISIBLE
+                itemClicked.deleteItemClicked(item[adapterPosition].contact_id!!)
+                /*
                 val builder = AlertDialog.Builder(mContext)
                 // Set the alert dialog title
                 builder.setTitle("")
@@ -83,6 +87,8 @@ class ContactAdapter(val item: ArrayList<ContactsData>, val mContext: Context, v
                     }
                 }
                 dialogs.show()
+
+                 */
             }
         }
 

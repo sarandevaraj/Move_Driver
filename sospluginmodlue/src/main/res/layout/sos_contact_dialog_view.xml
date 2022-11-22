@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_alignParentBottom="true"
     android:background="@color/white"
     android:orientation="vertical">
 
@@ -62,7 +61,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/button_accept"
+                android:background="#000001"
                 android:text="@string/cancel"
                 android:textAlignment="center"
                 android:textColor="@color/white"
@@ -114,7 +113,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/button_accept"
+                android:background="#000001"
                 android:text="@string/cancel"
                 android:textAlignment="center"
                 android:textColor="@color/white"
