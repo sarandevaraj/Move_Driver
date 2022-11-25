@@ -115,16 +115,7 @@ public class DriverCommonData {
         }
         return false;
     }
-/*
 
-    public static boolean isCurrentTimeZone(long s) {
-//        long dateInMillis = System.currentTimeMillis() / 1000;
-//        Systems.out.println("____________LLL" + s + "__" + dateInMillis + "__" + TimeUnit.MILLISECONDS.toSeconds(Math.abs(s - dateInMillis)));
-//        return TimeUnit.MILLISECONDS.toSeconds(Math.abs(s - dateInMillis)) < 24;
-
-        return true;
-    }
-*/
     public static String getTime(Context context) {
         TimeZone.setDefault(TimeZone.getTimeZone(DriverSessionSave.getSession(DriverCommonData.TIMEZONE, context)));
         Calendar cal = Calendar.getInstance();

@@ -32,7 +32,7 @@ public class DriverEarningresponse {
 
     }
 
-    public class WeeklyEarning {
+    public static class WeeklyEarning {
 
         public List<Float> trip_amount = new ArrayList<>();
         public List<String> day_list = new ArrayList<>();
@@ -40,7 +40,7 @@ public class DriverEarningresponse {
 
     }
 
-    public class WithDrawArray {
+    public static class WithDrawArray {
 
         public String driver_wallet_pending_amount;
 

@@ -1,5 +1,8 @@
 package com.taximobility.driver.adapter;
 
+import static com.taximobility.driver.DriverOngoingAct.MY_PERMISSIONS_REQUEST_CALL;
+
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -16,6 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,7 +28,6 @@ import com.squareup.picasso.Picasso;
 import com.taximobility.ProfileImageSetupClass;
 import com.taximobility.R;
 import com.taximobility.driver.DriverOngoingAct;
-import com.taximobility.driver.DriverSettingsAct;
 import com.taximobility.driver.MainActivityDriver;
 import com.taximobility.driver.data.DriverCommonData;
 import com.taximobility.driver.data.apiData.DriverUpcomingResponse;
@@ -39,9 +42,7 @@ import com.taximobility.driver.utils.DirverColorchange;
 import com.taximobility.driver.utils.DriverCToast;
 import com.taximobility.driver.utils.DriverNC;
 import com.taximobility.driver.utils.DriverSessionSave;
-import com.taximobility.driver.utils.Driver_Utils;
 import com.taximobility.interfaces.AlertListener;
-import com.taximobility.util.NC;
 import com.taximobility.util.Utility;
 
 import org.json.JSONException;
@@ -50,12 +51,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
-import static com.taximobility.driver.DriverOngoingAct.MY_PERMISSIONS_REQUEST_CALL;
-
-/**
- * Created by developer on 1/11/16.
- */
 
 /**
  * This adapter class is used to show upcoming trip and pending trip
@@ -76,22 +71,22 @@ public class DriverUpcomingAdapter extends RecyclerView.Adapter<DriverUpcomingAd
         this.mInterface = driverUpcomingAdapterInterface;
     }
 
+    @NonNull
     @Override
-    public CustomViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(mContext);
-        View view = null;
+        View view;
         view = inflater.inflate(R.layout.driver_upcoming_list_item, parent, false);
         return new CustomViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(CustomViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull CustomViewHolder holder, @SuppressLint("RecyclerView") final int position) {
         if (!data.get(position).profile_image.trim().equals("")) {
             Picasso.get().load(data.get(position).map_image).into(holder.map_image);
             Picasso.get().load(data.get(position).profile_image).into(holder.driver_image);
             Picasso.get().load(data.get(position).profile_image).into(holder.passengerImg);
         } else {
-//            Picasso.get().load(R.drawable.driver_noimage).into(holder.driver_image);
             if (data.get(position).passenger_name != "") {
                 ProfileImageSetupClass.setupProfileImage(
                         data.get(position).passenger_name, holder.driver_image
@@ -159,16 +154,11 @@ public class DriverUpcomingAdapter extends RecyclerView.Adapter<DriverUpcomingAd
 
                 holder.pickUpDropLayout.setData(getStopArray(position, data), "SCHEDULE", DriverSessionSave.getSession("Lang", mContext));
 
-//                    holder.testLay.setData(getStopArray(position, data), "SCHEDULE", SessionSave.getSession("Lang", mContext));
 
                 holder.passengerCallTxt.setOnClickListener(view -> {
                     try {
                         passPhoneNo = data.get(position).passenger_country_code + data.get(position).passenger_phone;
-                        if (passPhoneNo.equals("0"))
-                            Toast.makeText(mContext,""+DriverNC.getResources().getString(R.string.invalid_mobile_number),Toast.LENGTH_LONG);
-//                            Driver_Utils.alert_view(mContext, "" + DriverNC.getResources().getString(R.string.message), "" + DriverNC.getResources().getString(R.string.invalid_mobile_number), "" + DriverNC.getResources().getString(R.string.ok), "", true, this, "4");
-                        else {
-                       /*     if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(mContext, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                        /*     if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(mContext, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
                                 Utils.alert_view_dialog(mContext, "", NC.getResources().getString(R.string.str_phone), NC.getResources().getString(R.string.yes), NC.getResources().getString(R.string.no), true, (dialog, i) -> {
                                     ActivityCompat.requestPermissions((Activity) mContext,
                                             new String[]{Manifest.permission.CALL_PHONE, Manifest.permission.READ_PHONE_STATE},
@@ -176,9 +166,11 @@ public class DriverUpcomingAdapter extends RecyclerView.Adapter<DriverUpcomingAd
                                     dialog.dismiss();
                                 }, (dialog, i) -> dialog.dismiss(), "");
                             } else {*/
+                        //                            }
+                        if (passPhoneNo.equals("0"))
+                            Toast.makeText(mContext, "" + DriverNC.getString(R.string.invalid_mobile_number), Toast.LENGTH_LONG);
+                        else
                             ensureCall();
-//                            }
-                        }
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -233,7 +225,6 @@ public class DriverUpcomingAdapter extends RecyclerView.Adapter<DriverUpcomingAd
 
                         }
                     });
-//                    Driver_Utils.alert_view(mContext, DriverNC.getResources().getString(R.string.message), DriverNC.getResources().getString(R.string.cancel_in_going_trip), DriverNC.getResources().getString(R.string.yes), DriverNC.getResources().getString(R.string.no), true, this, "3");
                 });
 
             } else {
@@ -245,29 +236,17 @@ public class DriverUpcomingAdapter extends RecyclerView.Adapter<DriverUpcomingAd
                     holder.trip_cancel.setVisibility(View.GONE);
                     holder.trip_track.setTag(position);
                     holder.book_lay.setTag(position);
-                    holder.trip_track.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            if (DriverSessionSave.getSession("shift_status", mContext).equalsIgnoreCase("IN")) {
-                                DriverSessionSave.saveSession("trip_id", data.get((Integer) view.getTag()).passengers_log_id.trim(), mContext);
-                                Intent in = new Intent(mContext, DriverOngoingAct.class);
-                                mContext.startActivity(in);
-                            } else {
-                                DriverCToast.ShowToast(mContext, DriverNC.getResources().getString(R.string.track_shift_status));
-                            }
+                    holder.trip_track.setOnClickListener(view -> {
+                        if (DriverSessionSave.getSession("shift_status", mContext).equalsIgnoreCase("IN")) {
+                            DriverSessionSave.saveSession("trip_id", data.get((Integer) view.getTag()).passengers_log_id.trim(), mContext);
+                            Intent in = new Intent(mContext, DriverOngoingAct.class);
+                            mContext.startActivity(in);
+                        } else {
+                            DriverCToast.ShowToast(mContext, DriverNC.getString(R.string.track_shift_status));
                         }
                     });
-                    holder.book_lay.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-//                            if (DriverSessionSave.getSession("shift_status", mContext).equalsIgnoreCase("IN")) {
-//                                DriverSessionSave.saveSession("trip_id", data.get((Integer) view.getTag()).passengers_log_id.trim(), mContext);
-//                                Intent in = new Intent(mContext, DriverOngoingAct.class);
-//                                mContext.startActivity(in);
-//                            } else {
-//                                DriverCToast.ShowToast(mContext, DriverNC.getResources().getString(R.string.track_shift_status));
-//                            }
-                        }
+                    holder.book_lay.setOnClickListener(view -> {
+
                     });
 
 
@@ -280,7 +259,6 @@ public class DriverUpcomingAdapter extends RecyclerView.Adapter<DriverUpcomingAd
                     holder.trip_cancel.setTag(position);
                 }
             }
-//            }
     }
 
     private ArrayList<DriverStopData> getStopArray(int position, List<DriverUpcomingResponse.PastBooking> data) {
@@ -303,7 +281,7 @@ public class DriverUpcomingAdapter extends RecyclerView.Adapter<DriverUpcomingAd
      * Call passenger
      */
     private void ensureCall() {
-        Utility.actionSheet((Activity) mContext, DriverNC.getResources().getString(R.string.confirm_call), DriverNC.getResources().getString(R.string.call), DriverNC.getResources().getString(R.string.call), false, new AlertListener() {
+        Utility.actionSheet((Activity) mContext, DriverNC.getString(R.string.confirm_call), DriverNC.getResources().getString(R.string.call), DriverNC.getResources().getString(R.string.call), false, new AlertListener() {
             @Override
             public void onSuccess() {
                 try {
@@ -330,7 +308,6 @@ public class DriverUpcomingAdapter extends RecyclerView.Adapter<DriverUpcomingAd
 
             }
         });
-//        Driver_Utils.alert_view(mContext, DriverNC.getResources().getString(R.string.message), DriverNC.getResources().getString(R.string.confirm_call), DriverNC.getResources().getString(R.string.call), DriverNC.getResources().getString(R.string.call), false, this, "1");
     }
 
 
@@ -345,7 +322,6 @@ public class DriverUpcomingAdapter extends RecyclerView.Adapter<DriverUpcomingAd
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         switch (requestCode) {
             case MY_PERMISSIONS_REQUEST_CALL:
-                // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     ensureCall();
@@ -475,7 +451,7 @@ public class DriverUpcomingAdapter extends RecyclerView.Adapter<DriverUpcomingAd
                 if (isOnline()) {
                     new DriverAPIService_Retrofit_JSON(mContext, this, data, false).execute(url);
                 } else {
-                    Toast.makeText(mContext,"" + DriverNC.getResources().getString(R.string.check_net_connection),Toast.LENGTH_LONG);
+                    Toast.makeText(mContext, "" + DriverNC.getResources().getString(R.string.check_net_connection), Toast.LENGTH_LONG);
 //                    Driver_Utils.alert_view(mContext, "" + DriverNC.getResources().getString(R.string.message), "" + DriverNC.getResources().getString(R.string.check_net_connection), "" + DriverNC.getResources().getString(R.string.ok), "", true, DriverUpcomingAdapter.this, "4");
                 }
             } catch (Exception e) {
@@ -517,7 +493,7 @@ public class DriverUpcomingAdapter extends RecyclerView.Adapter<DriverUpcomingAd
                 if (isOnline()) {
                     new DriverAPIService_Retrofit_JSON(mContext, this, data, false).execute(url);
                 } else {
-                    Toast.makeText(mContext,"" + DriverNC.getResources().getString(R.string.check_net_connection),Toast.LENGTH_LONG);
+                    Toast.makeText(mContext, "" + DriverNC.getResources().getString(R.string.check_net_connection), Toast.LENGTH_LONG);
 //                    Driver_Utils.alert_view(mContext, "" + DriverNC.getResources().getString(R.string.message), "" + DriverNC.getResources().getString(R.string.check_net_connection), "" + DriverNC.getResources().getString(R.string.ok), "", true, DriverUpcomingAdapter.this, "4");
                 }
             } catch (Exception e) {

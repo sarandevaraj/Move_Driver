@@ -6,10 +6,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * Created by developer on 29/11/16.
- */
-
-/**
  * Used to Store and get string files from Hash map
  */
 public class DriverNC {
@@ -28,8 +24,6 @@ public class DriverNC {
     static DriverNC getInstance() {
         if (NC == null)
             NC = new DriverNC();
-        else
-            NC = NC;
         return NC;
     }
 

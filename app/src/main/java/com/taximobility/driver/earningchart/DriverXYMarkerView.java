@@ -23,7 +23,7 @@ public class DriverXYMarkerView extends MarkerView {
     private IAxisValueFormatter xAxisValueFormatter;
 
     private DecimalFormat format;
-    String currencySymbol = "";
+    String currencySymbol;
 
     public DriverXYMarkerView(Context context, IAxisValueFormatter xAxisValueFormatter, String currencySymbol) {
         super(context, R.layout.custom_marker_view);

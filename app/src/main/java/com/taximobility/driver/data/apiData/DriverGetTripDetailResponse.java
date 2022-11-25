@@ -1,5 +1,7 @@
 package com.taximobility.driver.data.apiData;
 
+import androidx.annotation.NonNull;
+
 /**
  * Created by developer on 14/11/16.
  */
@@ -143,6 +145,7 @@ public class DriverGetTripDetailResponse {
     }
 
 
+    @NonNull
     @Override
     public String toString() {
         return "ClassPojo [message = " + message + ", detail = " + detail + ", site_currency = " + site_currency + ", status = " + status + "]";

@@ -17,16 +17,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * Created by developer on 5/10/16.
- */
-
-/**
  * This adapter class is used to show withdraw trip history
  */
 public class DriverWithdraw_history_adapter extends BaseAdapter {
     private Context mContext;
     private ArrayList<HashMap<String, String>> mList;
-    private ArrayList<Integer> Bg = new ArrayList<>();
     private int mtype = 1;
 
     // constructor
@@ -69,29 +64,15 @@ public class DriverWithdraw_history_adapter extends BaseAdapter {
             holder.status = convertView.findViewById(R.id.status);
 
             holder.layout = convertView.findViewById(R.id.main);
-//            holder.view_lay = convertView.findViewById(R.id.view);
             convertView.setTag(holder);
 
 
-             holder.layout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    String withdrawrequestId = mList.get(position).get("wallet_request_id");
-                    Intent in = new Intent(mContext, DriverWithdrawReqAct.class);
-                    in.putExtra("wallet_request_id", withdrawrequestId);
-                    mContext.startActivity(in);
-                }
-            });
-
-           /* holder.view_lay.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    String withdrawrequestId = mList.get(position).get("wallet_request_id");
-                    Intent in = new Intent(mContext, DriverWithdrawReqAct.class);
-                    in.putExtra("wallet_request_id", withdrawrequestId);
-                    mContext.startActivity(in);
-                }
-            });*/
+             holder.layout.setOnClickListener(v -> {
+                 String withdrawrequestId = mList.get(position).get("wallet_request_id");
+                 Intent in = new Intent(mContext, DriverWithdrawReqAct.class);
+                 in.putExtra("wallet_request_id", withdrawrequestId);
+                 mContext.startActivity(in);
+             });
 
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -112,7 +93,7 @@ public class DriverWithdraw_history_adapter extends BaseAdapter {
     /**
      * View holder class member this contains in every row in list.
      */
-    private class ViewHolder {
+    private static class ViewHolder {
         LinearLayout layout;
         TextView view_lay;
         TextView request_amount;

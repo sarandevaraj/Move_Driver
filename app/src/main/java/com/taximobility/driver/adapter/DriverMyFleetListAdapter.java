@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
@@ -32,8 +33,9 @@ public class DriverMyFleetListAdapter extends RecyclerView.Adapter<DriverMyFleet
         this.data = data;
     }
 
+    @NonNull
     @Override
-    public CustomViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(mContext);
         View view = inflater.inflate(R.layout.driver_my_fleet_item, parent, false);
         return new CustomViewHolder(view);
@@ -41,7 +43,7 @@ public class DriverMyFleetListAdapter extends RecyclerView.Adapter<DriverMyFleet
 
 
     @Override
-    public void onBindViewHolder(CustomViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull CustomViewHolder holder, final int position) {
 
         if (data.get(position).getprimaryFleet().equals("1")) {
             holder.primary_txt.setText("Primary");
@@ -78,12 +80,7 @@ public class DriverMyFleetListAdapter extends RecyclerView.Adapter<DriverMyFleet
             primary_txt = v.findViewById(R.id.primary_txt);
             fleet_list_lay = v.findViewById(R.id.fleet_list_lay);
 
-            fleet_list_lay.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    ((DriverMyFleetAct) mContext).setPrimaryFleet(data.get(getAdapterPosition()).getdetails_taxi_id());
-                }
-            });
+            fleet_list_lay.setOnClickListener(view -> ((DriverMyFleetAct) mContext).setPrimaryFleet(data.get(getAdapterPosition()).getdetails_taxi_id()));
 
         }
     }

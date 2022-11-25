@@ -163,18 +163,12 @@ class DriverErrorLogRepository private constructor(val mContext: Context) {
         val coreResponse = client.errorLogUpdate(body)
         coreResponse.enqueue(DriverRetrofitCallbackClass(mContext, object : Callback<ResponseBody> {
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-//                CToast.ShowToast(mContext, "callSubmitErrorLogApi onResponse ${response.isSuccessful}")
-//                errorLogDao.run {
-//                    println("Log check   ___5")
-//                    deleteApiErrorLogs().execute()
-//                }
 
                 UpdateApiErrorLogs(1, driverApiErrorLogs[0].ids).execute()
             }
 
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                 t.printStackTrace()
-//                CToast.ShowToast(mContext, "callSubmitErrorLogApi onFailure ${t.message}")
             }
         }))
     }

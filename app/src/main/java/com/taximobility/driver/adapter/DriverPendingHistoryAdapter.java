@@ -34,9 +34,9 @@ public class DriverPendingHistoryAdapter extends RecyclerView.Adapter<DriverPend
 
     LayoutInflater layoutInflater;
 
+    @NonNull
     @Override
-
-    public CustomViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         if (layoutInflater == null) {
 
@@ -80,7 +80,7 @@ public class DriverPendingHistoryAdapter extends RecyclerView.Adapter<DriverPend
 
     }
 
-    public class CustomViewHolder extends RecyclerView.ViewHolder {
+    public static class CustomViewHolder extends RecyclerView.ViewHolder {
 
         DriverSettlementHistoryListBinding binding;
 

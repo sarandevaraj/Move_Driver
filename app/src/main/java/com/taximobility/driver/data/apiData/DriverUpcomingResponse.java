@@ -1,9 +1,5 @@
 package com.taximobility.driver.data.apiData;
 
-/**
- * Created by developer on 1/11/16.
- */
-
 import java.util.ArrayList;
 import java.util.List;
 

@@ -13,12 +13,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.interpolator.view.animation.LinearOutSlowInInterpolator;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.DrawableImageViewTarget;
@@ -35,14 +37,12 @@ import com.taximobility.R;
 import com.taximobility.driver.DriverBaseActivity;
 import com.taximobility.driver.DriverMeAct;
 import com.taximobility.driver.DriverMyStatus;
-import com.taximobility.driver.DriverOngoingAct;
-
-import com.taximobility.driver.SettlementHistoryActivityDriver;
 import com.taximobility.driver.DriverStreetPickUpAct;
 import com.taximobility.driver.DriverTripHistoryAct;
 import com.taximobility.driver.DriverWalletHistory;
 import com.taximobility.driver.DriverWebviewAct;
 import com.taximobility.driver.DriverWithDrawMenuAct;
+import com.taximobility.driver.SettlementHistoryActivityDriver;
 import com.taximobility.driver.data.DriverCommonData;
 import com.taximobility.driver.data.apiData.DriverApiRequestData;
 import com.taximobility.driver.interfaces.DriverAPIResult;
@@ -52,10 +52,9 @@ import com.taximobility.driver.service.DriverCoreClient;
 import com.taximobility.driver.service.DriverNonActivity;
 import com.taximobility.driver.service.DriverRetrofitCallbackClass;
 import com.taximobility.driver.service.DriverServiceGenerator;
+import com.taximobility.driver.utils.DirverColorchange;
 import com.taximobility.driver.utils.DriverCL;
 import com.taximobility.driver.utils.DriverCToast;
-import com.taximobility.driver.utils.DirverColorchange;
-import com.taximobility.driver.utils.DriverFontHelper;
 import com.taximobility.driver.utils.DriverNC;
 import com.taximobility.driver.utils.DriverNetworkStatus;
 import com.taximobility.driver.utils.DriverSessionSave;
@@ -64,15 +63,11 @@ import com.taximobility.driver.utils.Driver_Utils;
 import com.taximobility.driver.utils.drawable_program.Drawables_program;
 import com.taximobility.interfaces.AlertListener;
 import com.taximobility.util.AppController;
-import com.taximobility.util.ShowToast;
 import com.taximobility.util.Utility;
 
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-
-import androidx.appcompat.widget.AppCompatButton;
-import androidx.interpolator.view.animation.LinearOutSlowInInterpolator;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -109,7 +104,7 @@ public class DriverEarningsAct extends DriverBaseActivity implements DriverClick
     private Dialog mDialog;
     private int pos = 0, total_weeks = 0;
     private ImageView img_left, img_right;
-    private TextView tv_this_week, tv_this_week_amt,tv_total_trip,tv_total_distance;
+    private TextView tv_this_week, tv_this_week_amt, tv_total_trip, tv_total_distance;
 
 
     private Dialog dialog1;
@@ -147,45 +142,22 @@ public class DriverEarningsAct extends DriverBaseActivity implements DriverClick
     }
 
     public void initalize() {
-        slideImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
+        slideImg.setOnClickListener(view -> onBackPressed());
         btn_emergency = findViewById(R.id.btn_emergency);
-      /*  if (SessionSave.getSession(CommonData.SOS_ENABLED, this, false)) {
-            btn_emergency.setVisibility(View.VISIBLE);
-        }*/
-        btn_emergency.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Utility.actionSheet(DriverEarningsAct.this, DriverNC.getResources().getString(R.string.send_emergency_alert), DriverNC.getResources().getString(R.string.yes), DriverNC.getResources().getString(R.string.no), false, new AlertListener() {
-                    @Override
-                    public void onSuccess() {
-                        startSOSService();
-                    }
-                    @Override
-                    public void onFailure() {
 
-                    }
-                });
-                /*
-                final View view1 = View.inflate(DriverEarningsAct.this, R.layout.driver_emergency_alert, null);
-                Dialog emergency_dialog = new Dialog(DriverEarningsAct.this, R.style.dialogwinddow);
-                emergency_dialog.setContentView(view1);
-                emergency_dialog.setCancelable(true);
-                emergency_dialog.show();
-                final Button button_success = emergency_dialog.findViewById(R.id.button_success);
-                final Button button_failure = emergency_dialog.findViewById(R.id.button_failure);
-                button_success.setOnClickListener(view2 -> {
-                    emergency_dialog.dismiss();
-           //         startSOSService();
-                });
-                button_failure.setOnClickListener(view22 -> emergency_dialog.dismiss());
+        btn_emergency.setOnClickListener(view -> {
+            Utility.actionSheet(DriverEarningsAct.this, DriverNC.getResources().getString(R.string.send_emergency_alert), DriverNC.getResources().getString(R.string.yes), DriverNC.getResources().getString(R.string.no), false, new AlertListener() {
+                @Override
+                public void onSuccess() {
+                    startSOSService();
+                }
 
-                 */
-            }
+                @Override
+                public void onFailure() {
+
+                }
+            });
+
         });
 
         layout_earnings_items = findViewById(R.id.layout_earnings_items);
@@ -196,7 +168,6 @@ public class DriverEarningsAct extends DriverBaseActivity implements DriverClick
         trips = findViewById(R.id.trips);
         eAmt = findViewById(R.id.amt);
         wek_txt = findViewById(R.id.wek_txt);
-        //DriverFontHelper.applyFont(this, findViewById(R.id.chartact));
         earnings_layout = findViewById(R.id.earnings_layout);
         earnings_iv = findViewById(R.id.earnings_iv);
         earnings_iv.setImageResource(R.drawable.ic_earnings_focus);
@@ -218,79 +189,52 @@ public class DriverEarningsAct extends DriverBaseActivity implements DriverClick
         tv_this_week = findViewById(R.id.tv_this_week);
         tv_this_week_amt = findViewById(R.id.tv_this_week_amt);
         tv_total_trip = findViewById(R.id.tv_total_trip);
-        tv_total_distance= findViewById(R.id.tv_total_distance);
-        btn_withdraw.setOnClickListener(new View.OnClickListener() {
+        tv_total_distance = findViewById(R.id.tv_total_distance);
+        btn_withdraw.setOnClickListener(v -> {
+            Intent in = new Intent(DriverEarningsAct.this, DriverWithDrawMenuAct.class);
+            startActivity(in);
 
-            @Override
-            public void onClick(View v) {
-                Intent in = new Intent(DriverEarningsAct.this, DriverWithDrawMenuAct.class);
-                startActivity(in);
-
-            }
         });
 
-        btn_settlement.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(DriverEarningsAct.this, SettlementHistoryActivityDriver.class));
-            }
+        btn_settlement.setOnClickListener(view -> startActivity(new Intent(DriverEarningsAct.this, SettlementHistoryActivityDriver.class)));
+
+        txt_recharge_link.setOnClickListener(v -> {
+            Intent in = new Intent(DriverEarningsAct.this, DriverWebviewAct.class);
+
+            in.putExtra("type", "1");
+            in.putExtra(DriverCommonData.IS_FROM_EARNINGS, true);
+            startActivity(in);
         });
 
-        txt_recharge_link.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent in = new Intent(DriverEarningsAct.this, DriverWebviewAct.class);
+        btnWithdrawHistory.setOnClickListener(v -> {
+            Intent in = new Intent(DriverEarningsAct.this, DriverWalletHistory.class);
+            startActivity(in);
 
-                in.putExtra("type", "1");
-                in.putExtra(DriverCommonData.IS_FROM_EARNINGS, true);
-                startActivity(in);
-            }
         });
 
-        btnWithdrawHistory.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Intent in = new Intent(DriverEarningsAct.this, DriverWalletHistory.class);
-                startActivity(in);
-
+        img_left.setOnClickListener(view -> {
+            if (pos > 0) {
+                pos = pos - 1;
+                tv_this_week.setText(data.weekly_earnings.get(pos).date_text);
+                tv_this_week_amt.setText(DriverSessionSave.getSession("site_currency", DriverEarningsAct.this) + " " + data.weekly_earnings.get(pos).this_week_earnings);
+                setmChart(pos);
             }
+
         });
 
-        img_left.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (pos > 0) {
-                    pos = pos - 1;
-                    tv_this_week.setText(data.weekly_earnings.get(pos).date_text);
-                    tv_this_week_amt.setText(DriverSessionSave.getSession("site_currency", DriverEarningsAct.this) + " " + data.weekly_earnings.get(pos).this_week_earnings);
-                    setmChart(pos);
-                }
-
+        img_right.setOnClickListener(view -> {
+            if (pos < total_weeks - 1) {
+                pos = pos + 1;
+                tv_this_week.setText(data.weekly_earnings.get(pos).date_text);
+                tv_this_week_amt.setText(DriverSessionSave.getSession("site_currency", DriverEarningsAct.this) + " " + data.weekly_earnings.get(pos).this_week_earnings);
+                setmChart(pos);
             }
+
         });
 
-        img_right.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (pos < total_weeks - 1) {
-                    pos = pos + 1;
-                    tv_this_week.setText(data.weekly_earnings.get(pos).date_text);
-                    tv_this_week_amt.setText(DriverSessionSave.getSession("site_currency", DriverEarningsAct.this) + " " + data.weekly_earnings.get(pos).this_week_earnings);
-                    setmChart(pos);
-                }
 
-            }
-        });
-
-      /*  DrawableImageViewTarget imageViewTarget = new DrawableImageViewTarget(chart_loading);
-        Glide.with(DriverEarningsAct.this)
-                .load(R.raw.driver_loading_anim)
-                .into(imageViewTarget);*/
         DirverColorchange.ChangeColor((ViewGroup) (((ViewGroup) DriverEarningsAct.this
                 .findViewById(android.R.id.content)).getChildAt(0)), DriverEarningsAct.this);
-
-        // Glide.with(this).load(DriverSessionSave.getSession("image_path", this) + "earningsFocus.png").apply(RequestOptions.placeholderOf(R.drawable.driver_earnings_focus).error(R.drawable.driver_earnings_focus)).into((ImageView) findViewById(R.id.earnings_iv));
 
 
         ImageView headerlogo = findViewById(R.id.headicon);
@@ -319,8 +263,6 @@ public class DriverEarningsAct extends DriverBaseActivity implements DriverClick
 
 
         YAxis leftAxis = mChart.getAxisLeft();
-        // leftAxis.setLabelCount(8, false);
-        // leftAxis.setValueFormatter(custom);
         leftAxis.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART);
         leftAxis.setSpaceTop(25f);
         leftAxis.setDrawGridLines(false);
@@ -794,7 +736,7 @@ public class DriverEarningsAct extends DriverBaseActivity implements DriverClick
         if (requestCode == REQUEST_READ_PHONE_STATE) {// If request is cancelled, the result arrays are empty.
             if (grantResults.length > 0) {
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-       //             startSOSService();
+                    //             startSOSService();
                 }
             }
         }
@@ -904,8 +846,6 @@ public class DriverEarningsAct extends DriverBaseActivity implements DriverClick
                 ex.printStackTrace();
                 btn_shift.setClickable(true);
                 DriverCToast.ShowToast(DriverEarningsAct.this, "" + DriverNC.getResources().getString(R.string.server_error));
-//                dialog1 = Driver_Utils.alert_view(DriverEarningsAct.this, "", "" + DriverNC.getResources().getString(R.string.server_error), DriverNC.getResources().getString(R.string.ok),
-//                        "", true, DriverEarningsAct.this, "");
 
             }
         }

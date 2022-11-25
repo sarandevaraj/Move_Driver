@@ -16,10 +16,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * Created by developer on 14/11/16.
- */
-
-/**
  * This adapter class is used to show withdraw referal history
  */
 public class DriverWithdraw_referalhistory_adapter extends BaseAdapter {
@@ -87,7 +83,7 @@ public class DriverWithdraw_referalhistory_adapter extends BaseAdapter {
     /**
      * View holder class member this contains in every row in list.
      */
-    private class ViewHolder {
+    private static class ViewHolder {
         LinearLayout layout;
         TextView request_amount;
         TextView request_taxi;
