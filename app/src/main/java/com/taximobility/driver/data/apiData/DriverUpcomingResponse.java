@@ -23,6 +23,8 @@ public class DriverUpcomingResponse {
         public String pickup_location;
         public String drop_location;
         public String pickup_time;
+        public String pickup_date;
+        public String pickup_time_oly;
         public String travel_status;
         public String trip_id;
         public String passenger_name;

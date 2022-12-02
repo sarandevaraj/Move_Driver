@@ -1038,7 +1038,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="@string/preferences_detail"
                                     android:textColor="@color/block"
-                                    android:textSize="14sp"
+                                    android:textSize="@dimen/sp_18"
                                     android:textStyle="bold"
                                     android:visibility="gone" />
 

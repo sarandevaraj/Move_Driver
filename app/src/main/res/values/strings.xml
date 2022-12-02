@@ -1126,7 +1126,7 @@
     <string name="enter_balance_amount">Enter Balance Amount</string>
     <string name="add_you_willing">Are you willing to give tip</string>
     <string name="enter_custom_amount">Enter Custom Amount</string>
-    <string name="preferences">Preferences</string>
+    <string name="preferences">Options</string>
     <string name="tips_error">Enter the valid tips amount or press cancel button</string>
 
     <string name="my_fleet">My Fleet</string>
@@ -1144,8 +1144,8 @@
     <string name="upload_image_file">Please upload your vehicle image</string>
     <string name="request_ride">Request Trip</string>
     <string name="change_fleet">Are you sure want to change fleet </string>
-    <string name="total_preferences_fare">Total Preferences Fare</string>
-    <string name="preferences_fare">Preferences Fare</string>
+    <string name="total_preferences_fare">Total Options Fare</string>
+    <string name="preferences_fare">Options Fare</string>
     <string name="preferences_detail">Options</string>
     <string name="product_name">Product Name</string>
     <string name="product_weight">Product Weight</string>

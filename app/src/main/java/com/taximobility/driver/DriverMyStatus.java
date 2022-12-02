@@ -466,9 +466,10 @@ public class DriverMyStatus extends MainActivityDriver implements ConnectionCall
                             if (a_marker != null) {
                                 a_marker.remove();
                             }
-                            if (googleMap != null) {
-                                a_marker = googleMap.addMarker(new MarkerOptions().position(new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude())).rotation(0).anchor(0.5f, 0.5f).title("My Location").icon(BitmapDescriptorFactory.fromResource(R.drawable.driver_img)));
-                            }
+                            /*if (googleMap != null) {
+                               // a_marker = googleMap.addMarker(new MarkerOptions().position(new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude())).rotation(0).anchor(0.5f, 0.5f).title("My Location").icon(BitmapDescriptorFactory.fromResource(R.drawable.driver_img)));
+                                a_marker = googleMap.addMarker(new MarkerOptions().position(new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude())).rotation(0).anchor(0.5f, 0.5f));
+                            }*/
 
                         }
                     }
@@ -1131,6 +1132,7 @@ public class DriverMyStatus extends MainActivityDriver implements ConnectionCall
         } catch (Resources.NotFoundException e) {
             DriverSystems.out.println("Can't find style. Error: ");
         }
+        googleMap.setMyLocationEnabled(true);
         DriverMyStatus.googleMap.getUiSettings().setZoomControlsEnabled(false);
         MapsInitializer.initialize(DriverMyStatus.this);
         mapWrapperLayout = findViewById(R.id.map_relative_layout);
@@ -1542,9 +1544,10 @@ public class DriverMyStatus extends MainActivityDriver implements ConnectionCall
                 if (a_marker != null) {
                     a_marker.remove();
                 }
-                if (googleMap != null) {
-                    a_marker = googleMap.addMarker(new MarkerOptions().position(new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude())).rotation(0).anchor(0.5f, 0.5f).title("My Location").icon(BitmapDescriptorFactory.fromResource(R.drawable.driver_img)));
-                }
+                /*if (googleMap != null) {
+                    a_marker = googleMap.addMarker(new MarkerOptions().position(new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude())).rotation(0).anchor(0.5f, 0.5f));
+                   // a_marker = googleMap.addMarker(new MarkerOptions().position(new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude())).rotation(0).anchor(0.5f, 0.5f).title("My Location").icon(BitmapDescriptorFactory.fromResource(R.drawable.driver_img)));
+                }*/
 
             }
 
@@ -1590,9 +1593,11 @@ public class DriverMyStatus extends MainActivityDriver implements ConnectionCall
                     if (a_marker != null) {
                         a_marker.remove();
                     }
-                    if (googleMap != null) {
-                        a_marker = googleMap.addMarker(new MarkerOptions().position(new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude())).rotation(0).anchor(0.5f, 0.5f).title("My Location").icon(BitmapDescriptorFactory.fromResource(R.drawable.driver_img)));
-                    }
+                    /*if (googleMap != null) {
+                        a_marker = googleMap.addMarker(new MarkerOptions().position(new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude())).rotation(0).anchor(0.5f, 0.5f));
+                       // a_marker = googleMap.addMarker(new MarkerOptions().position(new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude())).rotation(0).anchor(0.5f, 0.5f).title("My Location").icon(BitmapDescriptorFactory.fromResource(R.drawable.driver_img)));
+
+                    }*/
 
                 }
 
@@ -1640,9 +1645,10 @@ public class DriverMyStatus extends MainActivityDriver implements ConnectionCall
                     if (a_marker != null) {
                         a_marker.remove();
                     }
-                    if (googleMap != null) {
-                        a_marker = googleMap.addMarker(new MarkerOptions().position(new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude())).rotation(0).anchor(0.5f, 0.5f).title("My Location").icon(BitmapDescriptorFactory.fromResource(R.drawable.driver_img)));
-                    }
+                    /*if (googleMap != null) {
+//                        a_marker = googleMap.addMarker(new MarkerOptions().position(new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude())).rotation(0).anchor(0.5f, 0.5f).title("My Location").icon(BitmapDescriptorFactory.fromResource(R.drawable.driver_img)));
+                        a_marker = googleMap.addMarker(new MarkerOptions().position(new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude())).rotation(0).anchor(0.5f, 0.5f));
+                    }*/
 
                 }
             }

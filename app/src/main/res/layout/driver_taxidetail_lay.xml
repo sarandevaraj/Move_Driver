@@ -212,6 +212,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/button_rect"
             android:text="@string/close"
+            android:visibility="gone"
             android:textAllCaps="false"
             android:fontFamily="@font/normalfont"
             android:textStyle="bold"

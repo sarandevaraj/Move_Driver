@@ -60,9 +60,9 @@
                             android:layout_marginTop="5dp"
                             android:fontFamily="@font/normalfont"
                             android:text="@string/menu"
-                            android:textStyle="bold"
                             android:textColor="@color/black"
-                            android:textSize="@dimen/text_slide_name" />
+                            android:textSize="@dimen/text_slide_name"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/menu_pno"
@@ -258,6 +258,55 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/menu_fleet_lay"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:gravity="center_vertical"
+                    android:onClick="ClickMethod"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/dp_10"
+                    android:paddingLeft="3dip"
+                    android:paddingTop="3dip">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_5"
+                        android:layout_marginBottom="@dimen/dp_5"
+                        android:layout_weight="0.3"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:layout_width="26dp"
+                            android:layout_height="26dp"
+                            android:layout_gravity="center"
+                            app:srcCompat="@drawable/google_ic_my_fleet" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/dp_5"
+                        android:layout_marginBottom="@dimen/dp_5"
+                        android:layout_weight="1.5"
+                        android:gravity="center">
+
+                        <TextView
+                            style="@style/slidemenuTxt"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/normalfont"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="10dp"
+                            android:textStyle="bold"
+                            android:text="@string/my_fleet"
+                            android:textColor="@color/black" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
                     android:id="@+id/menu_profile_lay"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
@@ -354,56 +403,10 @@
                     </LinearLayout>
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/menu_fleet_lay"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/dp_8"
-                    android:gravity="center"
-                    android:onClick="ClickMethod"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/dp_10"
-                    android:paddingLeft="3dip"
-                    android:paddingTop="3dip"
-                    android:visibility="gone">
 
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="0.3"
-                        android:gravity="center"
-                        android:visibility="gone">
 
-                        <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:layout_gravity="center"
-                            app:srcCompat="@drawable/ic_streetpickup_unfocus" />
-                    </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="@dimen/dp_5"
-                        android:layout_marginBottom="@dimen/dp_5"
-                        android:layout_weight="1.5"
-                        android:gravity="center">
 
-                        <TextView
-                            style="@style/slidemenuTxt"
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/normalfont"
-                            android:gravity="center_vertical"
-                            android:paddingLeft="10dp"
-                            android:textStyle="bold"
-                            android:text="@string/my_fleet"
-                            android:textColor="@color/black" />
-                    </LinearLayout>
-                </LinearLayout>
 
 
                 <LinearLayout

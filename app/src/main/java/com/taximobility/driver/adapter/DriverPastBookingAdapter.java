@@ -80,8 +80,8 @@ public class DriverPastBookingAdapter extends RecyclerView.Adapter<DriverPastBoo
         SessionSave.saveSession("past_drop_location", data.get(position).drop_location, mContext);
 
         holder.trip_id.setText("#" + data.get(position).passengers_log_id);
-        holder.trip_date.setText(data.get(position).pickup_time);
-        holder.trip_time_new.setText(data.get(position).pickup_time);
+        holder.trip_date.setText(data.get(position).pickup_date);
+        holder.trip_time_new.setText(data.get(position).pickup_time_oly);
         holder.trip_amt.setText(DriverSessionSave.getSession("site_currency", mContext) + " " + data.get(position).distance_fare_km);
         if (data.get(position).travel_status.equals("1"))
             holder.trip_com_canl.setText(DriverNC.getString(R.string.completed));

@@ -209,82 +209,82 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/dp_5"
                             android:orientation="horizontal"
+                            android:layout_marginStart="@dimen/dp_5"
                             android:padding="@dimen/pad_5dp">
 
                             <TextView
                                 android:id="@+id/trip_date"
-                                android:layout_width="wrap_content"
+                                android:layout_width="120dp"
                                 android:layout_height="wrap_content"
-                                android:ellipsize="end"
                                 android:fontFamily="@font/normalfont"
-                                android:text="Oct 26"
+                                android:ellipsize="end"
+                                android:text="23 aug 22"
                                 android:textColor="@color/block"
                                 android:textSize="16dp" />
-
-                            <View
-                                android:layout_width="2dp"
-                                android:layout_height="2dp"
-                                android:layout_gravity="center"
-                                android:layout_marginRight="10dp"
-                                android:layout_marginLeft="10dp"
-                                android:visibility="gone"
-                                android:backgroundTint="@color/black"
-                                android:background="@drawable/circle"
-                                />
-
-                            <TextView
-                                android:id="@+id/trip_time_new"
-                                android:layout_width="wrap_content"
+                            <LinearLayout
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:drawablePadding="@dimen/dp_5"
-                                android:fontFamily="@font/normalfont"
-                                android:text="10.33 PM"
-                                android:visibility="gone"
-                                android:textColor="@color/block"
-                                android:textSize="@dimen/dp_16" />
+
+                                android:orientation="horizontal">
+                                <TextView
+                                    android:id="@+id/trip_time_new"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:paddingRight="@dimen/dp_10"
+
+                                    android:text="10.55pm"
+                                    android:textColor="@color/block"
+                                    android:textSize="@dimen/dp_16"/>
+                            </LinearLayout>
+
+
 
                         </LinearLayout>
+
+
+
+
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/dp_5"
                             android:orientation="horizontal"
+                            android:layout_marginStart="@dimen/dp_5"
                             android:padding="@dimen/pad_5dp">
 
                             <TextView
                                 android:id="@+id/trip_amt"
-                                android:layout_width="wrap_content"
+                                android:layout_width="120dp"
                                 android:layout_height="wrap_content"
-                                android:ellipsize="end"
                                 android:fontFamily="@font/normalfont"
+                                android:ellipsize="end"
                                 android:text="Rs.10.00"
                                 android:textColor="@color/block"
                                 android:textSize="16dp" />
-
-                            <View
-                                android:layout_width="2dp"
-                                android:layout_height="2dp"
-                                android:layout_gravity="center"
-                                android:layout_marginRight="10dp"
-                                android:layout_marginLeft="10dp"
-                                android:backgroundTint="@color/black"
-                                android:background="@drawable/circle"
-                                />
-
-                            <TextView
-                                android:id="@+id/trip_com_canl"
-                                android:layout_width="wrap_content"
+                            <LinearLayout
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:drawablePadding="@dimen/dp_5"
-                                android:fontFamily="@font/normalfont"
-                                android:text="Completed"
-                                android:textColor="@color/block"
-                                android:textSize="@dimen/dp_16" />
+
+                                android:orientation="horizontal">
+                                <TextView
+                                    android:id="@+id/trip_com_canl"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:paddingRight="@dimen/dp_10"
+
+                                    android:text="Completed"
+                                    android:textColor="@color/block"
+                                    android:textSize="@dimen/dp_16"/>
+                            </LinearLayout>
+
+
 
                         </LinearLayout>
+
+
+
+
 
                     </LinearLayout>
 
@@ -339,7 +339,7 @@
                     android:paddingRight="@dimen/dp_10"
                     android:padding="5dp"
                     android:layout_marginBottom="2dp"
-                    android:src="@drawable/ic_baseline_keyboard_arrow_right_24" />
+                    card_view:srcCompat="@drawable/ic_baseline_keyboard_arrow_right_24" />
 
                 <LinearLayout
                     android:id="@+id/pick_lay"
