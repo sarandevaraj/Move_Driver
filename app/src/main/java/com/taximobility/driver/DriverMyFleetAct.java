@@ -111,10 +111,10 @@ public class DriverMyFleetAct extends MainActivityDriver {
                         JSONArray mFleetArray = json.getJSONArray("detail");
                         JSONArray model_detailArray = json.getJSONArray("model_details");
                         modelArray = model_detailArray.toString();
+                        System.out.println("testData" + mFleetArray.length());
                         fleetList.clear();
                         for (int i = 0; i < mFleetArray.length(); i++) {
                             JSONObject mJsonObject = mFleetArray.getJSONObject(i);
-                            JSONObject modelJsonObject = model_detailArray.getJSONObject(i);
                             DriverFleetData mDriverFleetData = new DriverFleetData();
 
                             mDriverFleetData.setdetails_model_name(mJsonObject.getString("details_model_name"));

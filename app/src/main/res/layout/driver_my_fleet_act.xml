@@ -36,13 +36,13 @@
 
         <ImageView
             android:id="@+id/add_fleet"
-            android:layout_width="@dimen/pad_30dp"
-            android:layout_height="@dimen/pad_30dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="@dimen/dp_12"
             android:layout_marginRight="10dp"
-            android:background="@drawable/driver_plus_icon_white"
+            android:background="@drawable/google_ic_circle"
             android:visibility="visible" />
 
         <ImageView

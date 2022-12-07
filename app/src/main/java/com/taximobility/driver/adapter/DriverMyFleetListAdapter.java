@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -15,6 +16,7 @@ import com.squareup.picasso.Picasso;
 import com.taximobility.R;
 import com.taximobility.driver.DriverMyFleetAct;
 import com.taximobility.driver.data.DriverFleetData;
+import com.taximobility.util.CL;
 
 import java.util.List;
 
@@ -46,9 +48,11 @@ public class DriverMyFleetListAdapter extends RecyclerView.Adapter<DriverMyFleet
     public void onBindViewHolder(@NonNull CustomViewHolder holder, final int position) {
 
         if (data.get(position).getprimaryFleet().equals("1")) {
-            holder.primary_txt.setText("Primary");
+            holder.primary_txt.setText("Assigned");
+            holder.primary_txt.setTextColor(CL.getColor(mContext,R.color.green_new));
         } else {
-            holder.primary_txt.setText("");
+            holder.primary_txt.setTextColor(CL.getColor(mContext,R.color.white));
+            holder.primary_txt.setText("Assign");
         }
 
         holder.taxiNameTxt.setText(data.get(position).getdetails_model_name());
@@ -65,8 +69,9 @@ public class DriverMyFleetListAdapter extends RecyclerView.Adapter<DriverMyFleet
     }
 
     public class CustomViewHolder extends RecyclerView.ViewHolder {
-        TextView taxiNameTxt, taxiNoTxt, primary_txt;
+        TextView taxiNameTxt, taxiNoTxt;
         TextView fromDate, to_date;
+        Button primary_txt;
         ImageView taxi_img;
         LinearLayout fleet_list_lay;
 
@@ -80,7 +85,8 @@ public class DriverMyFleetListAdapter extends RecyclerView.Adapter<DriverMyFleet
             primary_txt = v.findViewById(R.id.primary_txt);
             fleet_list_lay = v.findViewById(R.id.fleet_list_lay);
 
-            fleet_list_lay.setOnClickListener(view -> ((DriverMyFleetAct) mContext).setPrimaryFleet(data.get(getAdapterPosition()).getdetails_taxi_id()));
+            primary_txt.setOnClickListener(view -> ((DriverMyFleetAct) mContext).setPrimaryFleet(data.get(getAdapterPosition()).getdetails_taxi_id()));
+
 
         }
     }
