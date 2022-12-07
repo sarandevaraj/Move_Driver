@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_view"
     android:layout_width="match_parent"
-    android:layout_marginRight="70dp"
     android:layout_height="match_parent"
     android:layout_gravity="start"
+    android:layout_marginRight="70dp"
     android:background="@color/white"
     android:gravity="start"
     android:orientation="vertical">
@@ -153,8 +153,8 @@
                             android:gravity="center_vertical"
                             android:paddingLeft="10dp"
                             android:text="@string/home"
-                            android:textStyle="bold"
-                            android:textColor="@color/black" />
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -202,8 +202,8 @@
                             android:gravity="center_vertical"
                             android:paddingLeft="10dp"
                             android:text="@string/my_ride"
-                            android:textStyle="bold"
-                            android:textColor="@color/black" />
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -232,7 +232,7 @@
                             android:layout_width="26dp"
                             android:layout_height="26dp"
                             android:layout_gravity="center"
-                            app:srcCompat="@drawable/google_ic_earnings" />
+                            app:srcCompat="@drawable/monetization_on" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -251,9 +251,9 @@
                             android:fontFamily="@font/normalfont"
                             android:gravity="center_vertical"
                             android:paddingLeft="10dp"
-                            android:textStyle="bold"
                             android:text="@string/earnings"
-                            android:textColor="@color/black" />
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -300,9 +300,9 @@
                             android:fontFamily="@font/normalfont"
                             android:gravity="center_vertical"
                             android:paddingLeft="10dp"
-                            android:textStyle="bold"
                             android:text="@string/my_fleet"
-                            android:textColor="@color/black" />
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -347,9 +347,9 @@
                             android:fontFamily="@font/normalfont"
                             android:gravity="center_vertical"
                             android:paddingLeft="10dp"
-                            android:textStyle="bold"
                             android:text="@string/profile"
-                            android:textColor="@color/black" />
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -397,16 +397,11 @@
                             android:fontFamily="@font/normalfont"
                             android:gravity="center_vertical"
                             android:paddingLeft="10dp"
-                            android:textStyle="bold"
                             android:text="@string/settings"
-                            android:textColor="@color/black" />
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
                     </LinearLayout>
                 </LinearLayout>
-
-
-
-
-
 
 
                 <LinearLayout
@@ -453,9 +448,9 @@
                             android:fontFamily="@font/normalfont"
                             android:gravity="center_vertical"
                             android:paddingLeft="10dp"
-                            android:textStyle="bold"
                             android:text="@string/emergency_contact"
-                            android:textColor="@color/black" />
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -526,120 +521,119 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:paddingTop="50dp"
-        android:weightSum="2"
-        android:orientation="horizontal">
-
-    <LinearLayout
-        android:id="@+id/menu_call_helpline"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
         android:orientation="horizontal"
-        android:padding="5dp"
-        android:layout_weight="1"
-        android:paddingLeft="3dip"
-        android:paddingTop="3dip">
+        android:paddingTop="5dp"
+        android:weightSum="2">
 
         <LinearLayout
-            android:layout_width="22dp"
-            android:layout_height="22dp"
+            android:id="@+id/menu_call_helpline"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginStart="@dimen/dp_8"
+            android:layout_weight="1"
             android:gravity="center"
-            android:visibility="visible">
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:paddingLeft="3dip"
+            android:paddingTop="3dip">
 
-            <ImageView
+            <LinearLayout
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 android:layout_gravity="center"
-                app:srcCompat="@drawable/google_ic_call" />
+                android:layout_marginStart="@dimen/dp_8"
+                android:gravity="center"
+                android:visibility="visible">
 
-        </LinearLayout>
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_gravity="center"
+                    app:srcCompat="@drawable/google_ic_call" />
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/dp_5"
-            android:layout_marginBottom="@dimen/dp_5"
-            android:layout_weight="2.5"
-            android:gravity="center">
+            </LinearLayout>
 
-            <TextView
-                style="@style/slidemenuTxt"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/normalfont"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:textStyle="bold"
-                android:text="@string/helpline"
-                android:textColor="@color/black" />
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:visibility="gone"
-        android:id="@+id/menu_chat_helpline"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="@dimen/dp_8"
-        android:gravity="center"
-        android:layout_weight="1"
-        android:orientation="horizontal"
-        android:padding="@dimen/dp_5"
-      >
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="0.3"
-            android:gravity="center"
-            android:visibility="visible">
-
-            <ImageView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                app:srcCompat="@drawable/ic_chat" />
+                android:layout_marginTop="@dimen/dp_5"
+                android:layout_marginBottom="@dimen/dp_5"
+                android:layout_weight="2.5"
+                android:gravity="center">
+
+                <TextView
+                    style="@style/slidemenuTxt"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/normalfont"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:text="@string/helpline"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/menu_chat_helpline"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="@dimen/dp_5"
-            android:layout_marginBottom="@dimen/dp_5"
-            android:layout_weight="2.5"
-            android:gravity="center">
+            android:layout_marginTop="@dimen/dp_8"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="@dimen/dp_5"
+            android:visibility="gone">
 
-            <TextView
-                style="@style/slidemenuTxt"
-                android:layout_width="fill_parent"
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/normalfont"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:textStyle="bold"
-                android:text="Chat us"
-                android:textColor="@color/black" />
+                android:layout_gravity="center"
+                android:layout_weight="0.3"
+                android:gravity="center"
+                android:visibility="visible">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    app:srcCompat="@drawable/ic_chat" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/dp_5"
+                android:layout_marginBottom="@dimen/dp_5"
+                android:layout_weight="2.5"
+                android:gravity="center">
+
+                <TextView
+                    style="@style/slidemenuTxt"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/normalfont"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:text="Chat us"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
 
         <LinearLayout
             android:id="@+id/menu_sos"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_weight="1"
             android:gravity="center"
             android:orientation="horizontal"
             android:padding="5dp"
-            android:layout_weight="1"
             android:paddingLeft="3dip"
             android:paddingTop="3dip">
 
@@ -674,9 +668,9 @@
                     android:fontFamily="@font/normalfont"
                     android:gravity="center_vertical"
                     android:paddingLeft="10dp"
-                    android:textStyle="bold"
                     android:text="SOS"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
             </LinearLayout>
 
         </LinearLayout>

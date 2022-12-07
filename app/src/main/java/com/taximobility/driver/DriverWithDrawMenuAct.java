@@ -91,7 +91,7 @@ public class DriverWithDrawMenuAct extends MainActivityDriver implements DriverC
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
-            ((TextView) findViewById(R.id.baseUrl)).setText(host);
+            //((TextView) findViewById(R.id.baseUrl)).setText(host);
 
            /* if (APP_VERSION.equals("")) {
                 APP_VERSION = BuildConfig.VERSION_NAME;

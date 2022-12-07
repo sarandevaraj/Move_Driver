@@ -245,9 +245,9 @@ public class DriverNetworkStatus extends BroadcastReceiver {
                             window.setStatusBarColor(Color.BLACK);
                         }
                         AppCompatButton btn_emergency = errorDialog.findViewById(R.id.btn_emergency);
-                        if (DriverSessionSave.getSession(DriverCommonData.SOS_ENABLED, appContext, false)) {
-                            btn_emergency.setVisibility(View.VISIBLE);
-                        }
+//                        if (DriverSessionSave.getSession(DriverCommonData.SOS_ENABLED, appContext, false)) {
+//                            btn_emergency.setVisibility(View.VISIBLE);
+//                        }
                         btn_emergency.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {

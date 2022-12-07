@@ -59,7 +59,7 @@ public class DriverWithdrawHistoryAct extends MainActivityDriver implements Driv
 
     private TextView txt_view;
 
-    private TextView txt_fromdate, txt_todate;
+    private TextView txt_fromdate, txt_todate,noDataTxt;
 
     Spinner Statusspn;
     private int viewType = 1;
@@ -107,6 +107,7 @@ public class DriverWithdrawHistoryAct extends MainActivityDriver implements Driv
         btn_filter = findViewById(R.id.filter);
         no_data_txt = findViewById(R.id.no_data);
         lay_list = findViewById(R.id.lay_list);
+        noDataTxt = findViewById(R.id.no_datatxt);
 
 
         DirverColorchange.ChangeColor((ViewGroup) (((ViewGroup) DriverWithdrawHistoryAct.this
@@ -477,6 +478,7 @@ public class DriverWithdrawHistoryAct extends MainActivityDriver implements Driv
                         }
                         list.setAdapter(new DriverWithdraw_history_adapter(DriverWithdrawHistoryAct.this, data, viewType));
                         if (data.size() <= 0) {
+                            noDataTxt.setText(R.string.no_trips_available);
                             no_data_txt.setVisibility(View.VISIBLE);
                             lay_list.setVisibility(View.GONE);
                             //findViewById(R.id.progress_history).setVisibility(View.GONE);
@@ -486,6 +488,7 @@ public class DriverWithdrawHistoryAct extends MainActivityDriver implements Driv
                            // findViewById(R.id.progress_history).setVisibility(View.GONE);
                         }
                     } else {
+                        noDataTxt.setText(R.string.no_trips_available);
                         no_data_txt.setVisibility(View.VISIBLE);
                         lay_list.setVisibility(View.GONE);
                     }
@@ -548,6 +551,7 @@ public class DriverWithdrawHistoryAct extends MainActivityDriver implements Driv
                         }
                         list.setAdapter(new DriverWithdraw_referalhistory_adapter(DriverWithdrawHistoryAct.this, data));
                         if (data.size() <= 0) {
+                            noDataTxt.setText(R.string.no_ref_available);
                             no_data_txt.setVisibility(View.VISIBLE);
                             lay_list.setVisibility(View.GONE);
                             // findViewById(R.id.progress_history).setVisibility(View.GONE);

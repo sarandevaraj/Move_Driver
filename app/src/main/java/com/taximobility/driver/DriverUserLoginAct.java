@@ -1231,6 +1231,7 @@ public class DriverUserLoginAct extends MainActivityDriver implements DriverClic
                             DriverSessionSave.saveSession("Id", detail.getString("userid"), DriverUserLoginAct.this);
                             DriverSessionSave.saveSession("Lastname", detail.getString("lastname"), DriverUserLoginAct.this);
                             DriverSessionSave.saveSession("Name", detail.getString("name"), DriverUserLoginAct.this);
+                            DriverSessionSave.saveSession("Phone", detail.getString("phone"), DriverUserLoginAct.this);
                             DriverSessionSave.saveSession("u_name", detail.getString("name"), DriverUserLoginAct.this);
                             DriverSessionSave.saveSession("Bankname", detail.getString("bankname"), DriverUserLoginAct.this);
                             DriverSessionSave.saveSession("Bankaccount_No", detail.getString("bankaccount_no"), DriverUserLoginAct.this);
@@ -1634,6 +1635,7 @@ public class DriverUserLoginAct extends MainActivityDriver implements DriverClic
                         DriverSessionSave.saveSession("Id", detail.getString("userid"), DriverUserLoginAct.this);
                         DriverSessionSave.saveSession("Lastname", detail.getString("lastname"), DriverUserLoginAct.this);
                         DriverSessionSave.saveSession("Name", detail.getString("name"), DriverUserLoginAct.this);
+                        DriverSessionSave.saveSession("Phone", detail.getString("phone"), DriverUserLoginAct.this);
                         DriverSessionSave.saveSession("u_name", detail.getString("name"), DriverUserLoginAct.this);
                         DriverSessionSave.saveSession("Bankname", detail.getString("bankname"), DriverUserLoginAct.this);
                         DriverSessionSave.saveSession("Bankaccount_No", detail.getString("bankaccount_no"), DriverUserLoginAct.this);

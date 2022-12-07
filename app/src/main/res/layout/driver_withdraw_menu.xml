@@ -243,6 +243,7 @@
             android:paddingTop="05dp"
             android:paddingRight="08dp"
             android:paddingBottom="05dp"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:visibility="gone"/>
     </RelativeLayout>
 </LinearLayout>

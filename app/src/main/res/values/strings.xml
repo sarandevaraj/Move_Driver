@@ -832,6 +832,8 @@
     <string name="passenger_details">Passenger Details</string>
     <string name="wallet_history">Withdraw History</string>
     <string name="no_data">No data found</string>
+    <string name="no_ref_available">No referrals are available</string>
+    <string name="no_trips_available">No trips are available</string>
     <string name="back_home">Back To Home</string>
     <string name="enter_the_mobile_number">Please enter your mobile number</string>
     <string name="taxi_detailsu">Vehicle Details</string>
