@@ -398,7 +398,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_20"
                         android:background="@drawable/white_corner_profile"
-
                         android:orientation="vertical"
                         app:layout_constraintTop_toBottomOf="@+id/personal_details_lay">
 
@@ -411,6 +410,7 @@
                         android:background="@color/white"
                         android:padding="14dp"
                         android:text="@string/taxi_detailsu"
+                        android:gravity="center_vertical"
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp_14"
                         app:drawableRightCompat="@drawable/google_ic_right_small"

@@ -33,19 +33,20 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:gravity="center"
-            android:textAllCaps="false"
             android:text="@string/withdraw"
+            android:textAllCaps="false"
             android:textColor="@color/white" />
 
 
         <ImageView
             android:id="@+id/history"
-            android:layout_width="@dimen/pad_30dp"
-            android:layout_height="@dimen/pad_30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="5dp"
-            android:background="@drawable/google_ic_history" />
+            android:layout_marginEnd="10dp"
+            android:backgroundTint="@color/white"
+            android:background="@drawable/google_ic_trip_history" />
 
     </RelativeLayout>
 

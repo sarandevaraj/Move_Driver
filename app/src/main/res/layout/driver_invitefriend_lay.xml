@@ -219,7 +219,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="25dp"
                     android:background="@drawable/invite_sharebg"
-                    android:drawableLeft="@drawable/ic_share_new"
+                    android:drawableLeft="@drawable/google_ic_share"
                     android:drawablePadding="10dp"
                     android:fontFamily="@font/normalfont"
                     android:gravity="center|center_vertical"

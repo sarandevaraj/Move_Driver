@@ -331,10 +331,10 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
                                     pp.add(viaLatlng);
 
                                 if (pickupLatLng != null && pickupLatLng.latitude != 0.0 && pickupLatLng.longitude != 0.0) {
-                                    p_marker = map.addMarker(new MarkerOptions().position(new LatLng(pickupLatLng.latitude, pickupLatLng.longitude)).title("" + DriverNC.getResources().getString(R.string.pickuploc)).icon(BitmapDescriptorFactory.fromResource(R.drawable.driver_flag_green)).draggable(true));
+                                    p_marker = map.addMarker(new MarkerOptions().position(new LatLng(pickupLatLng.latitude, pickupLatLng.longitude)).title("" + DriverNC.getResources().getString(R.string.pickuploc)).icon(BitmapDescriptorFactory.fromResource(R.drawable.driver_flag_green)).draggable(false));
                                 }
                                 if (dropLatLng != null && dropLatLng.latitude != 0.0 && dropLatLng.longitude != 0.0) {
-                                    d_marker = map.addMarker(new MarkerOptions().position(new LatLng(dropLatLng.latitude, dropLatLng.longitude)).title("" + DriverNC.getResources().getString(R.string.droploc)).icon(BitmapDescriptorFactory.fromResource(R.drawable.driver_flag_red)).draggable(true));
+                                    d_marker = map.addMarker(new MarkerOptions().position(new LatLng(dropLatLng.latitude, dropLatLng.longitude)).title("" + DriverNC.getResources().getString(R.string.droploc)).icon(BitmapDescriptorFactory.fromResource(R.drawable.driver_flag_red)).draggable(false));
 //                                    route.setUpPolyLine(map, OngoingAct.this, pp.get(0), pp.get(1));
 
                                     new Handler().postDelayed(new Runnable() {
@@ -526,7 +526,7 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
             public void onSuccess() {
                 try {
                     final Intent callIntent = new Intent(Intent.ACTION_VIEW);
-                    callIntent.setData(Uri.parse("tel:" +/* MainActivityDriver.mMyStatus.getpassengerphone()*/ call_masking_ph_no));
+                    callIntent.setData(Uri.parse("tel:" + MainActivityDriver.mMyStatus.getpassengerphone()/* call_masking_ph_no*/));
                     /*if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
                         // TODO: Consider calling
                         //    ActivityCompat#requestPermissions
@@ -909,23 +909,45 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
         lay_call.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(final View v) {
-                try {
-                    JSONObject j = new JSONObject();
-                    j.put("trip_id", DriverSessionSave.getSession("trip_id", DriverOngoingAct.this));
-                    final String Url = "type=get_twilio_number";
-                    new getMaskedPhoneNumber(Url, j);
+                ensureCall();
 
+//                try {
+//                    JSONObject j = new JSONObject();
+//                    j.put("trip_id", DriverSessionSave.getSession("trip_id", DriverOngoingAct.this));
+//                    final String Url = "type=get_twilio_number";
+//                    new getMaskedPhoneNumber(Url, j);
 
-                   /* if (MainActivityDriver.mMyStatus.getpassengerphone().length() == 0)
-                        dialog1 = Driver_Utils.alert_view(DriverOngoingAct.this, "" + DriverNC.getResources().getString(R.string.message), "" + DriverNC.getResources().getString(R.string.invalid_mobile_number), "" + DriverNC.getResources().getString(R.string.ok), "", true, DriverOngoingAct.this, "4");
+/*
+                   if (MainActivityDriver.mMyStatus.getpassengerphone().length() == 0)
+                       Toast.makeText(DriverOngoingAct.this,"" + DriverNC.getResources().getString(R.string.invalid_mobile_number),Toast.LENGTH_LONG).show();
+//                        dialog1 = Driver_Utils.alert_view(DriverOngoingAct.this, "" + DriverNC.getResources().getString(R.string.message), "" + DriverNC.getResources().getString(R.string.invalid_mobile_number), "" + DriverNC.getResources().getString(R.string.ok), "", true, DriverOngoingAct.this, "4");
                     else {
                         final Intent callIntent = new Intent(Intent.ACTION_CALL);
                         callIntent.setData(Uri.parse("tel:" + MainActivityDriver.mMyStatus.getpassengerphone()));
-                      *//*  if (ActivityCompat.checkSelfPermission(OngoingAct.this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(OngoingAct.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                            dialog1 = Utils.alert_view_dialog(OngoingAct.this, "", NC.getResources().getString(R.string.str_phone), NC.getResources().getString(R.string.yes), NC.getResources().getString(R.string.no), true, new DialogInterface.OnClickListener() {
+                        if (ActivityCompat.checkSelfPermission(DriverOngoingAct.this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(DriverOngoingAct.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                            Utility.actionSheet(DriverOngoingAct.this, NC.getResources().getString(R.string.str_phone), NC.getResources().getString(R.string.yes), NC.getResources().getString(R.string.no), false, new AlertListener() {
+                                @Override
+                                public void onSuccess() {
+                                    try {
+                                        ActivityCompat.requestPermissions(DriverOngoingAct.this,
+                                                new String[]{Manifest.permission.CALL_PHONE, Manifest.permission.READ_PHONE_STATE},
+                                                MY_PERMISSIONS_REQUEST_CALL);
+                                    } catch (Exception e) {
+                                        // TODO: handle exception
+                                        e.printStackTrace();
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure() {
+
+                                }
+                            });
+                            /*
+                            dialog1 = Driver_Utils.alert_view_dialog(DriverOngoingAct.this, "", NC.getResources().getString(R.string.str_phone), NC.getResources().getString(R.string.yes), NC.getResources().getString(R.string.no), true, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int i) {
-                                    ActivityCompat.requestPermissions(OngoingAct.this,
+                                    ActivityCompat.requestPermissions(DriverOngoingAct.this,
                                             new String[]{Manifest.permission.CALL_PHONE, Manifest.permission.READ_PHONE_STATE},
                                             MY_PERMISSIONS_REQUEST_CALL);
                                     dialog.dismiss();
@@ -936,19 +958,23 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
                                     dialog.dismiss();
                                 }
                             }, "");
+                            */
+                /*
                         } else {
                             runOnUiThread(new Runnable() {
                                 @Override
-                                public void run() {*//*
-                        ensureCall();
-                                *//*}
+                                public void run() {
+                                    ensureCall();
+                               }
                             });
 
-                        }*//*
-                    }*/
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                        }
+                    }
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+
+                 */
             }
         });
         // This onclick method used to cancel the current ongoing trip.
@@ -1909,7 +1935,7 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
                 if (p_latitude != null && p_latitude != 0.0 && p_longtitude != null && p_longtitude != 0.0) {
                     if (p_marker != null)
                         p_marker.remove();
-                    p_marker = map.addMarker(new MarkerOptions().position(new LatLng(p_latitude, p_longtitude)).title("" + DriverNC.getResources().getString(R.string.pickuploc)).icon(BitmapDescriptorFactory.fromResource(R.drawable.driver_flag_green)).draggable(true));
+                    p_marker = map.addMarker(new MarkerOptions().position(new LatLng(p_latitude, p_longtitude)).title("" + DriverNC.getResources().getString(R.string.pickuploc)).icon(BitmapDescriptorFactory.fromResource(R.drawable.driver_flag_green)).draggable(false));
                     pickupLatLng = new LatLng(p_latitude, p_longtitude);
                 }
                 if (d_latitude != null && d_latitude != 0.0 && d_longtitude != null && d_longtitude != 0.0) {
@@ -1921,7 +1947,7 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
                     Drawable shape = getResources().getDrawable(R.drawable.driver_cust_progress);
                     shape.setBounds(0, 0, mDotMarkerBitmap.getWidth(), mDotMarkerBitmap.getHeight());
                     shape.draw(canvas);
-                    d_marker = map.addMarker(new MarkerOptions().position(new LatLng(d_latitude, d_longtitude)).title("" + DriverNC.getResources().getString(R.string.droploc)).icon(BitmapDescriptorFactory.fromResource(R.drawable.driver_flag_red)).draggable(true));
+                    d_marker = map.addMarker(new MarkerOptions().position(new LatLng(d_latitude, d_longtitude)).title("" + DriverNC.getResources().getString(R.string.droploc)).icon(BitmapDescriptorFactory.fromResource(R.drawable.driver_flag_red)).draggable(false));
                     dropLatLng = new LatLng(d_latitude, d_longtitude);
                 }
             }
@@ -2550,7 +2576,7 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
                         if (pickupLatLng != null && pickupLatLng.latitude != 0.0 && pickupLatLng.longitude != 0.0) {
                             if (p_marker != null)
                                 p_marker.remove();
-                            p_marker = map.addMarker(new MarkerOptions().position(new LatLng(pickupLatLng.latitude, pickupLatLng.longitude)).title("" + DriverNC.getResources().getString(R.string.pickuploc)).icon(BitmapDescriptorFactory.fromResource(R.drawable.driver_flag_green)).draggable(true));
+                            p_marker = map.addMarker(new MarkerOptions().position(new LatLng(pickupLatLng.latitude, pickupLatLng.longitude)).title("" + DriverNC.getResources().getString(R.string.pickuploc)).icon(BitmapDescriptorFactory.fromResource(R.drawable.driver_flag_green)).draggable(false));
                         }
                         if (!MainActivityDriver.mMyStatus.getPassengerOndropLocation().equals("")) {
                             final String drop = MainActivityDriver.mMyStatus.getPassengerOndropLocation();
