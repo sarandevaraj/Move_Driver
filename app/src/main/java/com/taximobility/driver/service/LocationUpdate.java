@@ -1,8 +1,13 @@
 package com.taximobility.driver.service;
 
+import static com.taximobility.driver.MainActivityDriver.mshowDialog;
+
 import android.Manifest;
+import android.animation.AnimatorInflater;
+import android.animation.AnimatorSet;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
+import android.app.Dialog;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -32,9 +37,15 @@ import android.os.SystemClock;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
+import android.view.animation.DecelerateInterpolator;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.DrawableImageViewTarget;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.gms.common.util.ScopeUtil;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
@@ -44,7 +55,9 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.squareup.picasso.Picasso;
 import com.taximobility.BuildConfig;
+import com.taximobility.ProfileImageSetupClass;
 import com.taximobility.R;
 import com.taximobility.driver.DriverCallReceiver;
 import com.taximobility.driver.DriverCanceltripAct;
@@ -77,7 +90,9 @@ import com.taximobility.driver.utils.DriverSessionSave;
 import com.taximobility.driver.utils.DriverSystems;
 import com.taximobility.features.CToast;
 import com.taximobility.util.AppController;
+import com.taximobility.util.SessionSave;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Document;
@@ -163,6 +178,7 @@ public class LocationUpdate extends Service implements DriverDistanceMatrixInter
     private int startID, errorCount = 0;
     private long UPDATE_INTERVAL = 0, TIMER_INTERVAL = 5000, DELAY_DUE_TO_TRAFFIC = 10000;
     private long timeSwap;
+    private String trip_id = "", drop,bookedby;
     JSONObject data = new JSONObject();
     private final Runnable updateTimerMethod = new Runnable() {
         @Override
@@ -1113,15 +1129,32 @@ public class LocationUpdate extends Service implements DriverDistanceMatrixInter
                     }
                 }, time_out * 1000);
 
-
-                Intent intent = new Intent();
-                intent.putExtra("message", json.toString());
-                intent.setAction(Intent.ACTION_MAIN);
-                intent.addCategory(Intent.CATEGORY_LAUNCHER);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT | Intent.FLAG_ACTIVITY_NO_ANIMATION | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                ComponentName cn = new ComponentName(LocationUpdate.this, DriverNotificationAct.class);
-                intent.setComponent(cn);
-                startActivity(intent);
+                System.out.println("Check Trip auto accept : "+DriverSessionSave.getSession("is_driver_auto_accept", LocationUpdate.this));
+                if(DriverSessionSave.getSession("is_driver_auto_accept", LocationUpdate.this).equals("1")){
+                    String message = json.toString();
+                    try {
+                        final JSONObject jsonnew = new JSONObject(message);
+                        final JSONObject tripdetails = jsonnew.getJSONObject("trip_details");
+                        trip_id = tripdetails.getString("passengers_log_id");
+                        final JSONObject details = tripdetails.getJSONObject("booking_details");
+                        drop = details.getString("drop");
+                        if (details.getString("bookedby").length() != 0) {
+                            bookedby = details.getString("bookedby");
+                        }
+                    } catch (final JSONException e) {
+                        e.printStackTrace();
+                    }
+                    auto_accept();
+                }else {
+                    Intent intent = new Intent();
+                    intent.putExtra("message", json.toString());
+                    intent.setAction(Intent.ACTION_MAIN);
+                    intent.addCategory(Intent.CATEGORY_LAUNCHER);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT | Intent.FLAG_ACTIVITY_NO_ANIMATION | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    ComponentName cn = new ComponentName(LocationUpdate.this, DriverNotificationAct.class);
+                    intent.setComponent(cn);
+                    startActivity(intent);
+                }
             } else if (json.getInt("status") == 7 && !TextUtils.isEmpty(DriverSessionSave.getSession("trip_id", LocationUpdate.this)) || json.getInt("status") == 12 && !TextUtils.isEmpty(DriverSessionSave.getSession("trip_id", LocationUpdate.this)) || json.getInt("status") == 10) {
                 DriverSystems.out.println("VVVVVVVVVVv" + json.getInt("status"));
                 final JSONObject jsons = json;
@@ -1260,6 +1293,139 @@ public class LocationUpdate extends Service implements DriverDistanceMatrixInter
 
     }
 
+    private void auto_accept(){
+        try {
+            if (DriverNetworkStatus.isOnline(LocationUpdate.this)) {
+                if (GPSEnabled(LocationUpdate.this)) {
+                    MainActivityDriver.mMyStatus.settripId(trip_id);
+                    DriverSessionSave.saveSession("trip_id", "" + trip_id, LocationUpdate.this);
+                    MainActivityDriver.mMyStatus.setpassengerId(trip_id);
+                    JSONObject j = new JSONObject();
+                    j.put("pass_logid", trip_id);
+                    j.put("driver_id", DriverSessionSave.getSession("Id", LocationUpdate.this));
+                    j.put("taxi_id", DriverSessionSave.getSession("taxi_id", LocationUpdate.this));
+                    j.put("company_id", DriverSessionSave.getSession("company_id", LocationUpdate.this));
+                    j.put("driver_reply", "A");
+                    j.put("drop_location", drop);
+                    j.put("field", "rejection");
+                    j.put("flag", "0");
+                    final String Url = "type=driver_reply";
+                    DriverSystems.out.println("result" + "Sucess");
+                    new TripAccept(Url, j);
+                } else {
+                    DriverCToast.ShowToast(LocationUpdate.this, "GPS Connection Failed");
+
+                }
+            } else {
+                DriverCToast.ShowToast(LocationUpdate.this, "" + DriverNC.getResources().getString(R.string.check_net_connection));
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public class TripAccept implements DriverAPIResult {
+        String msg;
+        JSONObject jsonObject;
+
+        public TripAccept(final String url, JSONObject data) {
+            jsonObject = data;
+            DriverSystems.out.println("result" + url);
+
+            new DriverAPIService_Retrofit_JSON(LocationUpdate.this, this, data, false).execute(url);
+        }
+
+        @Override
+        public void getResult(final boolean isSuccess, final String result) {
+
+//            ACCEPT_TRIP_IN_PROGRESS = false;
+            try {
+                if (isSuccess) {
+
+                    final JSONObject json = new JSONObject(result);
+                    msg = json.getString("message");
+                    DriverCommonData.current_trip_accept = 1;
+
+                    if (json.getInt("status") == 7) {
+                        bookedby = "";
+                        DriverSessionSave.saveSession("trip_id", "", LocationUpdate.this);
+                        msg = json.getString("message");
+                        Intent i = new Intent(getBaseContext(), DriverMyStatus.class);
+                        showLoading(LocationUpdate.this);
+                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT | Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                        Bundle extras = new Bundle();
+                        extras.putString("alert_message", msg);
+                        DriverCToast.ShowToast(LocationUpdate.this, msg);
+                        getApplication().startActivity(i);
+                    } else if (json.getInt("status") == 1 || bookedby.equals("2")) {
+                        DriverSessionSave.saveSession("speedwaiting", "", LocationUpdate.this);
+                        MainActivityDriver.mMyStatus.settripId(trip_id);
+                        DriverSessionSave.saveSession("trip_id", "" + trip_id, LocationUpdate.this);
+                        DriverSessionSave.saveSession("status", "B",
+                                LocationUpdate.this);
+                        DriverSessionSave.saveSession(DriverCommonData.IS_STREET_PICKUP, false, LocationUpdate.this);
+                        DriverSessionSave.saveSession("bookedby", "" + bookedby, LocationUpdate.this);
+                        showLoading(LocationUpdate.this);
+                        final Intent intent = new Intent(LocationUpdate.this, DriverOngoingAct.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT | Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                        Bundle extras = new Bundle();
+                        extras.putString("alert_message", msg);
+                        intent.putExtras(extras);
+                        startActivity(intent);
+                    } else if (json.getInt("status") == 5) {
+                        DriverSessionSave.saveSession("trip_id", "", LocationUpdate.this);
+                        msg = json.getString("message");
+                        Intent i = new Intent(getBaseContext(), DriverMyStatus.class);
+                        showLoading(LocationUpdate.this);
+                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT | Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                        Bundle extras = new Bundle();
+                        extras.putString("alert_message", msg);
+                        //i.putExtras(extras);
+                        getApplication().startActivity(i);
+                        DriverCToast.ShowToast(LocationUpdate.this, msg);
+
+                    } else if (json.getInt("status") == 25) {
+                        DriverCToast.ShowToast(LocationUpdate.this, DriverNC.getString(R.string.server_error));
+                    } else {
+                       DriverCToast.ShowToast(LocationUpdate.this, msg);
+                    }
+                } else {
+
+                     DriverCToast.ShowToast(LocationUpdate.this, DriverNC.getString(R.string.server_error));
+//                    finish();
+                }
+            } catch (final JSONException e) {
+                DriverErrorLogRepository.getRepository(LocationUpdate.this).insertAllApiErrorLogs(new DriverApiErrorModel(0, DriverCommonData.getCurrentTimeForLogger(), "type=driver_reply", DriverExceptionConverter.INSTANCE.buildStackTraceString(e.getStackTrace()), DriverUtils.INSTANCE.driverInfo(LocationUpdate.this), jsonObject, LocationUpdate.this.getClass().getSimpleName(), 0));
+
+//                ACCEPT_TRIP_IN_PROGRESS = false;
+                e.printStackTrace();
+            }
+        }
+    }
+    public void showLoading(Context context) {
+
+        try {
+            if (mshowDialog != null)
+                if (mshowDialog.isShowing())
+                    mshowDialog.dismiss();
+            View view = View.inflate(context, R.layout.driver_progress_bar, null);
+            mshowDialog = new Dialog(context, R.style.dialogwinddow);
+            mshowDialog.setContentView(view);
+            mshowDialog.setCancelable(false);
+
+            mshowDialog.show();
+
+            ImageView iv = mshowDialog.findViewById(R.id.giff);
+            DrawableImageViewTarget imageViewTarget = new DrawableImageViewTarget(iv);
+            Glide.with(MainActivityDriver.context)
+                    .load(R.raw.driver_loading_anim)
+                    .into(imageViewTarget);
+
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+    }
     private void movetohome() {
         MainActivityDriver.mMyStatus.setStatus("F");
         DriverSessionSave.saveSession("status", "F", getApplicationContext());

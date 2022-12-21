@@ -67,6 +67,7 @@ public class DriverCommonData {
     public static final String ST_WAITING_TIME = "streetPickup_waitingtime_check";
     //auto=1 manual=0
     public static final String WAITING_TIME_MANUAL = "streetPickup_waitingtime_manual";
+    public static final String IS_AUTO_ACCEPT = "is_auto_accept";
     public static final String WAITING_TIME_START_STOP = "start_stop_waiting_time";
     public static final String WAITING_TIME_START = "START";
     public static final String WAITING_TIME_STOP = "STOP";

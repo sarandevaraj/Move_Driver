@@ -727,7 +727,7 @@ public class DriverNotificationAct extends MainActivityDriver implements OnMapRe
     /**
      * Used to call the trip accept API and parse the response
      */
-    private class TripAccept implements DriverAPIResult {
+    public class TripAccept implements DriverAPIResult {
         String msg;
         JSONObject jsonObject;
 

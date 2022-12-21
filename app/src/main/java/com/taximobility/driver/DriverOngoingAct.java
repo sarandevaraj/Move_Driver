@@ -1562,8 +1562,8 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
                         imagepath = "" + DriverSessionSave.getSession("p_image", DriverOngoingAct.this);
                         Log.i("Imagepath in session", DriverSessionSave.getSession("p_image", DriverOngoingAct.this));
                     } else
-                        imagepath = DriverSessionSave.getSession("noimage_base", DriverOngoingAct.this);
-                    Picasso.get().load(imagepath).placeholder(getResources().getDrawable(R.drawable.driver_loadingimage)).error(getResources().getDrawable(R.drawable.driver_noimage)).into(proimg);
+//                        imagepath = DriverSessionSave.getSession("noimage_base", DriverOngoingAct.this);
+//                    Picasso.get().load(imagepath).placeholder(getResources().getDrawable(R.drawable.driver_loadingimage)).error(getResources().getDrawable(R.drawable.driver_noimage)).into(proimg);
 
                     if (imagepath != null && imagepath.length() > 0) {
                         Picasso.get().load(imagepath).error(R.drawable.loadingimage).placeholder(R.drawable.loadingimage).into(proimg);
@@ -3457,7 +3457,7 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
                                     imagepath = "" + DriverSessionSave.getSession("p_image", DriverOngoingAct.this);
                                     Log.i("Imagepath in session", DriverSessionSave.getSession("p_image", DriverOngoingAct.this));
                                 } else
-                                    imagepath = DriverSessionSave.getSession("noimage_base", DriverOngoingAct.this);
+//                                    imagepath = DriverSessionSave.getSession("noimage_base", DriverOngoingAct.this);
                                 //   Picasso.get().load(imagepath).placeholder(getResources().getDrawable(R.drawable.driver_loadingimage)).error(getResources().getDrawable(R.drawable.driver_noimage)).into(proimg);
 
                                 if (imagepath != null && imagepath.length() > 0) {

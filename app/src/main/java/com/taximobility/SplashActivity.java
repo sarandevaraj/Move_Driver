@@ -41,6 +41,7 @@ import com.taximobility.data.apiData.ApiRequestData;
 import com.taximobility.data.apiData.CompanyDomainResponse;
 import com.taximobility.driver.DriverMyStatus;
 import com.taximobility.driver.DriverOngoingAct;
+import com.taximobility.driver.DriverSplashAct;
 import com.taximobility.driver.DriverTermsAndConditions;
 import com.taximobility.driver.DriverTripHistoryAct;
 import com.taximobility.driver.DriverUserLoginAct;
@@ -1238,7 +1239,10 @@ public class SplashActivity extends AppCompatActivity {
                         if (json.has("dispatcher_phone_number")) {
                             SessionSave.saveSession("dispatcher_phone_number", json.getString("dispatcher_phone_number"), SplashActivity.this);
                         }
-
+                        if (array.getJSONObject(0).has("is_driver_auto_accept")) {
+                            DriverSessionSave.saveSession("is_driver_auto_accept", array.getJSONObject(0).getString("is_driver_auto_accept"), SplashActivity.this);
+                            System.out.println("Check Trip auto accept : "+DriverSessionSave.getSession("is_driver_auto_accept",SplashActivity.this));
+                        }
                         if (array.getJSONObject(0).has("pickupsuggestion_url"))
                             SessionSave.saveSession("pickupsuggestion_url", array.getJSONObject(0).getString("pickupsuggestion_url"), SplashActivity.this);
                         if (array.getJSONObject(0).has("pickupsuggestion"))

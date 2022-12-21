@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 
 import com.taximobility.R;
+import com.taximobility.driver.DriverSplashAct;
 import com.taximobility.driver.DriverUserLoginAct;
 import com.taximobility.driver.data.DriverCommonData;
 import com.taximobility.driver.interfaces.DriverAPIResult;
@@ -318,7 +319,9 @@ public class DriverBackgroundCoreConfig extends IntentService {
                         if (jArry.getJSONObject(0).has("manual_waiting_enable")) {
                             DriverSessionSave.saveSession(DriverCommonData.WAITING_TIME_MANUAL, jArry.getJSONObject(0).getString("manual_waiting_enable").equals("1"), DriverBackgroundCoreConfig.this);
                         }
-
+                        if (jArry.getJSONObject(0).has("is_driver_auto_accept")) {
+                            DriverSessionSave.saveSession("is_driver_auto_accept", jArry.getJSONObject(0).getString("is_driver_auto_accept"), DriverBackgroundCoreConfig.this);
+                        }
                         DriverSessionSave.saveSession("country_iso_code", jArry.getJSONObject(0).getString("country_iso_code"), DriverBackgroundCoreConfig.this);
 
                         String googleApiKey = jArry.getJSONObject(0).getString("android_google_api_key");

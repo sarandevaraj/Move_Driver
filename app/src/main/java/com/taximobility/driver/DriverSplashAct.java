@@ -1438,6 +1438,10 @@ public class DriverSplashAct extends MainActivityDriver {
                         if (jArry.getJSONObject(0).has("manual_waiting_enable")) {
                             DriverSessionSave.saveSession(DriverCommonData.WAITING_TIME_MANUAL, jArry.getJSONObject(0).getString("manual_waiting_enable").equals("1"), DriverSplashAct.this);
                         }
+                        if (jArry.getJSONObject(0).has("is_driver_auto_accept")) {
+                            DriverSessionSave.saveSession("is_driver_auto_accept", jArry.getJSONObject(0).getString("is_driver_auto_accept"), DriverSplashAct.this);
+                            System.out.println("Check Trip auto accept : "+DriverSessionSave.getSession("is_driver_auto_accept",DriverSplashAct.this));
+                        }
                         if (jArry.getJSONObject(0).has(DriverCommonData.SKIP_DRIVER_EMAIL))
                             DriverSessionSave.saveSession(DriverCommonData.SKIP_DRIVER_EMAIL, jArry.getJSONObject(0).getString(DriverCommonData.SKIP_DRIVER_EMAIL).equals("1"), DriverSplashAct.this);
                         else
