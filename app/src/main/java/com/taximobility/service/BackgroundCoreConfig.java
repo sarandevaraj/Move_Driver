@@ -7,6 +7,7 @@ import android.content.res.Configuration;
 import android.util.Log;
 
 import com.taximobility.R;
+import com.taximobility.driver.DriverSplashAct;
 import com.taximobility.driver.DriverUserLoginAct;
 import com.taximobility.driver.data.DriverCommonData;
 import com.taximobility.features.CToast;
@@ -208,6 +209,10 @@ public class BackgroundCoreConfig extends IntentService {
                             SessionSave.saveSession(TaxiUtil.GETCORE_LASTUPDATE, json.getString("gt_lst_time"), BackgroundCoreConfig.this);
                         final JSONArray array = json.getJSONArray("detail");
 
+                        if(array.getJSONObject(0).has("customer_wallet_transaction")){
+                            SessionSave.saveSession("customer_wallet_transaction", array.getJSONObject(0).getString("customer_wallet_transaction"), BackgroundCoreConfig.this);
+                            System.out.println("customer_wallet_transaction check " + SessionSave.getSession("customer_wallet_transaction", BackgroundCoreConfig.this));
+                        }
                         if (array.getJSONObject(0).has(TaxiUtil.KM_RESTRICT))
                             SessionSave.saveSession(TaxiUtil.KM_RESTRICT, array.getJSONObject(0).getString(TaxiUtil.KM_RESTRICT), BackgroundCoreConfig.this);
 

@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.taximobility.BuildConfig;
 import com.taximobility.R;
+import com.taximobility.SplashActivity;
 import com.taximobility.driver.data.DriverCommonData;
 import com.taximobility.driver.data.apiData.DriverApiRequestData;
 import com.taximobility.driver.data.apiData.DriverCompanyDomainResponse;
@@ -48,6 +49,7 @@ import com.taximobility.driver.utils.Driver_Utils;
 import com.taximobility.interfaces.AlertListener;
 import com.taximobility.util.AppController;
 import com.taximobility.util.NC;
+import com.taximobility.util.SessionSave;
 import com.taximobility.util.Utility;
 
 import org.json.JSONArray;
@@ -1442,6 +1444,12 @@ public class DriverSplashAct extends MainActivityDriver {
                             DriverSessionSave.saveSession("is_driver_auto_accept", jArry.getJSONObject(0).getString("is_driver_auto_accept"), DriverSplashAct.this);
                             System.out.println("Check Trip auto accept : "+DriverSessionSave.getSession("is_driver_auto_accept",DriverSplashAct.this));
                         }
+
+                        if(jArry.getJSONObject(0).has("customer_wallet_transaction")){
+                            SessionSave.saveSession("customer_wallet_transaction", jArry.getJSONObject(0).getString("customer_wallet_transaction"), DriverSplashAct.this);
+                            System.out.println("customer_wallet_transaction check " + SessionSave.getSession("customer_wallet_transaction", DriverSplashAct.this));
+                        }
+
                         if (jArry.getJSONObject(0).has(DriverCommonData.SKIP_DRIVER_EMAIL))
                             DriverSessionSave.saveSession(DriverCommonData.SKIP_DRIVER_EMAIL, jArry.getJSONObject(0).getString(DriverCommonData.SKIP_DRIVER_EMAIL).equals("1"), DriverSplashAct.this);
                         else

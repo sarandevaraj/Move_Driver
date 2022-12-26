@@ -1180,6 +1180,11 @@ public class SplashActivity extends AppCompatActivity {
                             SessionSave.saveSession(TaxiUtil.GETCORE_LASTUPDATE, json.getString("gt_lst_time"), SplashActivity.this);
                         final JSONArray array = json.getJSONArray("detail");
 
+                        if(array.getJSONObject(0).has("customer_wallet_transaction")){
+                            SessionSave.saveSession("customer_wallet_transaction", array.getJSONObject(0).getString("customer_wallet_transaction"), SplashActivity.this);
+                            System.out.println("customer_wallet_transaction check " + SessionSave.getSession("customer_wallet_transaction",SplashActivity.this));
+                        }
+
                         if (array.getJSONObject(0).has(TaxiUtil.KM_RESTRICT))
                             SessionSave.saveSession(TaxiUtil.KM_RESTRICT, array.getJSONObject(0).getString(TaxiUtil.KM_RESTRICT), SplashActivity.this);
 

@@ -59,8 +59,10 @@ import com.taximobility.driver.utils.DriverSystems;
 import com.taximobility.driver.utils.Driver_Utils;
 import com.taximobility.features.CToast;
 import com.taximobility.interfaces.AlertListener;
+import com.taximobility.service.BackgroundCoreConfig;
 import com.taximobility.util.AppController;
 import com.taximobility.util.NC;
+import com.taximobility.util.SessionSave;
 import com.taximobility.util.Utility;
 
 import org.json.JSONArray;
@@ -441,9 +443,6 @@ public class DriverFarecalcAct extends MainActivityDriver implements DriverClick
         v_trip_fare = findViewById(R.id.v_trip_fare);
         vid_discount = findViewById(R.id.vid_discount);
         radiocashButton = findViewById(R.id.rbtn_cash);
-        radiowalletButton = findViewById(R.id.rbtn_wallet);
-        radiocardButton = findViewById(R.id.rbtn_card);
-        radiouncardButton = findViewById(R.id.rbtn_uncard);
         total_amt = findViewById(R.id.total_amt);
         cash_img = findViewById(R.id.cash_img);
         card_img = findViewById(R.id.card_img);
@@ -452,6 +451,9 @@ public class DriverFarecalcAct extends MainActivityDriver implements DriverClick
         pay_back_lay = findViewById(R.id.pay_back_lay);
         card_lay = findViewById(R.id.card_lay);
         uncard_lay = findViewById(R.id.uncard_lay);
+        radiowalletButton = findViewById(R.id.rbtn_wallet);
+        radiocardButton = findViewById(R.id.rbtn_card);
+        radiouncardButton = findViewById(R.id.rbtn_uncard);
         HeadTitle.setText("" + DriverNC.getResources().getString(R.string.fare_txt));
         details = getIntent();
 
@@ -1076,7 +1078,10 @@ public class DriverFarecalcAct extends MainActivityDriver implements DriverClick
                 }
 
                 if (DriverSessionSave.getSession(DriverCommonData.BALANCE_CREDIT_OPTION, DriverFarecalcAct.this).equals("1") && !fromStreetPickUp) {
-                    pay_back_lay.setVisibility(View.VISIBLE);
+                    if(SessionSave.getSession("customer_wallet_transaction", DriverFarecalcAct.this).equals("1"))
+                        pay_back_lay.setVisibility(View.VISIBLE);
+                    else
+                        pay_back_lay.setVisibility(View.GONE);
                 } else {
                     pay_back_lay.setVisibility(View.GONE);
                 }
@@ -1108,7 +1113,10 @@ public class DriverFarecalcAct extends MainActivityDriver implements DriverClick
                     String paymentModeDefault = ary.getJSONObject(i).getString("pay_mod_default");
                     String paymentMode_Id = ary.getJSONObject(i).getString("pay_mod_id");
                     if (paymentMode_Id.equalsIgnoreCase("5")) {
-                        radiowalletButton.setVisibility(View.VISIBLE);
+                        if(SessionSave.getSession("customer_wallet_transaction", DriverFarecalcAct.this).equals("1"))
+                            radiowalletButton.setVisibility(View.VISIBLE);
+                        else
+                            radiowalletButton.setVisibility(View.GONE);
                         if (paymentModeDefault.equals("1")) {
                             radiowalletButton.setTextColor(Color.DKGRAY);
                         }
@@ -1119,13 +1127,18 @@ public class DriverFarecalcAct extends MainActivityDriver implements DriverClick
                             //  radiocashButton.setTextColor(Color.DKGRAY);
                         }
                     } else if (paymentMode_Id.equalsIgnoreCase("2")) {
-                        card_lay.setVisibility(View.VISIBLE);
+                        if(SessionSave.getSession("customer_wallet_transaction", DriverFarecalcAct.this).equals("1"))
+                            card_lay.setVisibility(View.VISIBLE);
+                        else
+                            card_lay.setVisibility(View.GONE);
                         if (paymentModeDefault.equals("1")) {
                             //  radiocardButton.setTextColor(Color.DKGRAY);
                         }
                     } else if (paymentMode_Id.equalsIgnoreCase("3")) {
-
-                        uncard_lay.setVisibility(View.VISIBLE);
+                        if(SessionSave.getSession("customer_wallet_transaction", DriverFarecalcAct.this).equals("1"))
+                            uncard_lay.setVisibility(View.VISIBLE);
+                        else
+                            uncard_lay.setVisibility(View.GONE);
                         if (paymentModeDefault.equals("1")) {
                             //  radiouncardButton.setTextColor(Color.DKGRAY);
                         }
