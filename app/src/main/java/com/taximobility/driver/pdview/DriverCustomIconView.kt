@@ -72,7 +72,7 @@ class DriverCustomIconView @JvmOverloads constructor(
             for (i in 1..length) {
 
                 if (i == 1) {
-                    paint.color = ContextCompat.getColor(context, R.color.pickup_green)
+                    paint.color = ContextCompat.getColor(context, R.color.sub_heading_light)
                     canvas.drawCircle(widthoffset.toFloat(), yOffset.toFloat() + (pointHeight / 2), (pointHeight / 2).toFloat(), paint)
 
                     yOffset += pointHeight
@@ -80,7 +80,7 @@ class DriverCustomIconView @JvmOverloads constructor(
                         canvas.drawRect(Rect(widthoffset - (linkLineWidth / 2), yOffset, widthoffset + (linkLineWidth / 2), yOffset + (linkLineHeight / 2)), paint)
 
                         yOffset += linkLineHeight / 2
-                        paint.color = ContextCompat.getColor(context, R.color.pickup_red)
+                        paint.color = ContextCompat.getColor(context, R.color.invite_gray)
                         canvas.drawRect(Rect(widthoffset - (linkLineWidth / 2), yOffset, widthoffset + (linkLineWidth / 2), yOffset + (linkLineHeight / 2)), paint)
                         yOffset += linkLineHeight / 2
                     }

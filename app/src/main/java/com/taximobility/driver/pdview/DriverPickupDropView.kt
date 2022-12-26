@@ -6,6 +6,7 @@ import androidx.core.content.ContextCompat
 import androidx.appcompat.widget.AppCompatImageView
 import android.text.TextUtils
 import android.util.AttributeSet
+import android.view.Gravity
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
@@ -25,7 +26,8 @@ class DriverPickupDropView @JvmOverloads constructor(
     private var isCollapsed = false
     private val locationListView = DriverLocationListView(context)
     private val customIconView = DriverCustomIconView(context)
-    private val upDownImageView = AppCompatImageView(context)
+    private val upDownImageView = TextView(context)
+    var tapStop : Int = 0
 
     init {
         customIconView.id = 1
@@ -34,15 +36,28 @@ class DriverPickupDropView @JvmOverloads constructor(
         addView(customIconView)
         addView(locationListView)
         addView(upDownImageView)
+        upDownImageView.setTextSize(6f)
+        upDownImageView.setText("Less")
         customIconView.visibility = View.GONE
+        upDownImageView.gravity = Gravity.CENTER
         upDownImageView.setOnClickListener {
             isCollapsed = !isCollapsed
             customIconView.collapsed(isCollapsed)
             locationListView.collapsed(isCollapsed)
-            if (!isCollapsed)
-                it.rotation = 180.0f
-            else
-                it.rotation = 0.0f
+            if (!isCollapsed){
+                upDownImageView.setText("Less")
+            } else{
+                if (driverStopArray.size > 2) {
+                    var count: Int = 0
+                    count = driverStopArray.size - 2;
+                    upDownImageView.setText("Tap to" + " " + count + " " + "More Stop")
+                    upDownImageView.visibility = View.VISIBLE
+                } else {
+                    upDownImageView.setText("less")
+                    upDownImageView.visibility = View.GONE
+
+                }
+            }
         }
     }
 
@@ -88,14 +103,15 @@ class DriverPickupDropView @JvmOverloads constructor(
             locationListView.setData(driverStopArray, type, language)
             customIconView.setData(driverStopArray.size)
             customIconView.collapsed(isCollapsed)
-            val collapseParams = LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+            val collapseParams = LayoutParams(100,100)
             collapseParams.addRule(ALIGN_PARENT_LEFT)
             collapseParams.addRule(CENTER_VERTICAL)
             collapseParams.marginEnd = 10
             upDownImageView.layoutParams = collapseParams
-            upDownImageView.setImageResource(R.drawable.driver_ic_expand_more_black_24dp)
-            upDownImageView.setBackgroundResource(R.drawable.driver_circle_background)
+            upDownImageView.setBackgroundResource(R.drawable.circle_background)
             upDownImageView.setPadding(7, 7, 7, 7)
+
+            tapStop = driverStopArray.size
             if (driverStopArray.size <= 2)
                 upDownImageView.visibility = View.INVISIBLE
             else
@@ -108,13 +124,12 @@ class DriverPickupDropView @JvmOverloads constructor(
             this.driverStopArray = driverStopArray
             locationListView.setData(driverStopArray, type, language)
             customIconView.setData(driverStopArray.size)
-            val collapseParams = LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+            val collapseParams = LayoutParams(100,100)
             collapseParams.addRule(ALIGN_PARENT_END)
             collapseParams.addRule(CENTER_VERTICAL)
             collapseParams.marginEnd = 10
             upDownImageView.layoutParams = collapseParams
-            upDownImageView.setImageResource(R.drawable.driver_ic_expand_more_black_24dp)
-            upDownImageView.setBackgroundResource(R.drawable.driver_circle_background)
+            upDownImageView.setBackgroundResource(R.drawable.circle_background)
             upDownImageView.setPadding(7, 7, 7, 7)
             if (driverStopArray.size <= 2)
                 upDownImageView.visibility = View.GONE

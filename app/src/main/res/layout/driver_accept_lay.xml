@@ -332,17 +332,7 @@
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content" />
 
-                        <com.taximobility.driver.pdview.DriverPickupDropView
-                            android:id="@+id/pdview"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="top"
-                            android:layout_margin="10dp"
-                            android:background="@drawable/driver_elevated_bg"
-                            android:clickable="true"
-                            android:elevation="8dp"
-                            android:focusable="true"
-                            android:orientation="vertical" />
+
 
                         <LinearLayout
                             android:layout_width="fill_parent"
@@ -459,7 +449,7 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/stop_listview"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="150dp"
                         android:clickable="true"
                         android:focusable="true" />
 
@@ -674,6 +664,7 @@
                     android:background="@color/separator_line" />
 
                 <RelativeLayout
+                    android:visibility="gone"
                     android:id="@+id/searchlay"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -888,8 +879,18 @@
                     android:layout_below="@+id/searchlay"
                     android:background="@color/whiteBackground"
                     android:gravity="center_horizontal"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/dp_5">
+                    android:orientation="vertical"
+                   >
+
+                    <com.taximobility.driver.pdview.DriverPickupDropView
+                        android:id="@+id/pdview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top"
+                        android:clickable="true"
+
+                        android:focusable="true"
+                        android:orientation="vertical" />
 
                     <LinearLayout
                         android:id="@+id/contact_lay"
