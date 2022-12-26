@@ -303,6 +303,10 @@ public class DriverBackgroundCoreConfig extends IntentService {
                         }
                         JSONArray jArry = json.getJSONArray("detail");
 
+                        if(jArry.getJSONObject(0).has("customer_wallet_transaction")){
+                            SessionSave.saveSession("customer_wallet_transaction", jArry.getJSONObject(0).getString("customer_wallet_transaction"), DriverBackgroundCoreConfig.this);
+                            System.out.println("customer_wallet_transaction check " + SessionSave.getSession("customer_wallet_transaction", DriverBackgroundCoreConfig.this));
+                        }
                         DriverSessionSave.saveSession("api_base", jArry.getJSONObject(0).getString("api_base"), DriverBackgroundCoreConfig.this);
                         DriverSessionSave.saveSession("isFourSquare", jArry.getJSONObject(0).getString("android_foursquare_status"), DriverBackgroundCoreConfig.this);
                         DriverSessionSave.saveSession("android_foursquare_api_key", jArry.getJSONObject(0).getString("android_foursquare_api_key"), DriverBackgroundCoreConfig.this);
