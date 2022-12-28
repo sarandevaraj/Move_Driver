@@ -10,6 +10,8 @@ import com.taximobility.R;
 import com.taximobility.driver.DriverSplashAct;
 import com.taximobility.driver.DriverUserLoginAct;
 import com.taximobility.driver.data.DriverCommonData;
+import com.taximobility.driver.service.DriverBackgroundCoreConfig;
+import com.taximobility.driver.utils.DriverSessionSave;
 import com.taximobility.features.CToast;
 import com.taximobility.interfaces.APIResult;
 import com.taximobility.util.AppController;
@@ -212,6 +214,9 @@ public class BackgroundCoreConfig extends IntentService {
                         if(array.getJSONObject(0).has("customer_wallet_transaction")){
                             SessionSave.saveSession("customer_wallet_transaction", array.getJSONObject(0).getString("customer_wallet_transaction"), BackgroundCoreConfig.this);
                             System.out.println("customer_wallet_transaction check " + SessionSave.getSession("customer_wallet_transaction", BackgroundCoreConfig.this));
+                        }
+                        if (array.getJSONObject(0).has("is_driver_auto_accept")) {
+                            DriverSessionSave.saveSession("is_driver_auto_accept", array.getJSONObject(0).getString("is_driver_auto_accept"), BackgroundCoreConfig.this);
                         }
                         if (array.getJSONObject(0).has(TaxiUtil.KM_RESTRICT))
                             SessionSave.saveSession(TaxiUtil.KM_RESTRICT, array.getJSONObject(0).getString(TaxiUtil.KM_RESTRICT), BackgroundCoreConfig.this);

@@ -3456,19 +3456,21 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
                                 if (!DriverSessionSave.getSession("p_image", DriverOngoingAct.this).equals("")) {
                                     imagepath = "" + DriverSessionSave.getSession("p_image", DriverOngoingAct.this);
                                     Log.i("Imagepath in session", DriverSessionSave.getSession("p_image", DriverOngoingAct.this));
-                                } else
+//                                }
+//                                else
 //                                    imagepath = DriverSessionSave.getSession("noimage_base", DriverOngoingAct.this);
-                                //   Picasso.get().load(imagepath).placeholder(getResources().getDrawable(R.drawable.driver_loadingimage)).error(getResources().getDrawable(R.drawable.driver_noimage)).into(proimg);
+                                    //   Picasso.get().load(imagepath).placeholder(getResources().getDrawable(R.drawable.driver_loadingimage)).error(getResources().getDrawable(R.drawable.driver_noimage)).into(proimg);
 
-                                if (imagepath != null && imagepath.length() > 0) {
-                                    Picasso.get().load(imagepath).error(R.drawable.loadingimage).placeholder(R.drawable.loadingimage).into(proimg);
-                                } else {
-                                    if (p_name != "") {
-                                        ProfileImageSetupClass.setupProfileImage(
-                                                p_name, proimg
-                                        );
+                                    if (imagepath != null && imagepath.length() > 0) {
+                                        Picasso.get().load(imagepath).error(R.drawable.loadingimage).placeholder(R.drawable.loadingimage).into(proimg);
                                     } else {
-                                        Picasso.get().load(R.drawable.loadingimage).into(proimg);
+                                        if (p_name != "") {
+                                            ProfileImageSetupClass.setupProfileImage(
+                                                    p_name, proimg
+                                            );
+                                        } else {
+                                            Picasso.get().load(R.drawable.loadingimage).into(proimg);
+                                        }
                                     }
                                 }
 
