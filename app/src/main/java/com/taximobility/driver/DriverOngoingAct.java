@@ -83,6 +83,7 @@ import com.taximobility.ProfileImageSetupClass;
 import com.squareup.picasso.Picasso;
 import com.taximobility.BuildConfig;
 import com.taximobility.R;
+import com.taximobility.SplashActivity;
 import com.taximobility.driver.adapter.DriverStopListAdapter;
 import com.taximobility.driver.data.DriverCommonData;
 import com.taximobility.driver.data.DriverMapWrapperLayout;
@@ -1973,6 +1974,9 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
 
     }
 
+    public void Call_arrived(){
+        butt_onboard.performClick();
+    }
     /**
      * Initially update the trip details based on get_trip_detail response.
      */
@@ -1982,6 +1986,9 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
                 .findViewById(android.R.id.content)).getChildAt(0)), DriverOngoingAct.this);
         DriverSystems.out.println("_________________OOOO" + MainActivityDriver.mMyStatus.getOnstatus());
         if (MainActivityDriver.mMyStatus.getOnstatus().equalsIgnoreCase("on")) {
+            if(SessionSave.getSession("is_enabled_ive_arrived", DriverOngoingAct.this).equals("0")) {
+                Call_arrived();
+            }
             HeadTitle.setText("" + DriverNC.getResources().getString(R.string.pickup_passenger));
             HeadTitle.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
             butt_onboard.setText("" + DriverNC.getResources().getString(R.string.ive_arrived));

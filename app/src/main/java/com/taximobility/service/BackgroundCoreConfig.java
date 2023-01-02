@@ -7,6 +7,7 @@ import android.content.res.Configuration;
 import android.util.Log;
 
 import com.taximobility.R;
+import com.taximobility.SplashActivity;
 import com.taximobility.driver.DriverSplashAct;
 import com.taximobility.driver.DriverUserLoginAct;
 import com.taximobility.driver.data.DriverCommonData;
@@ -218,6 +219,12 @@ public class BackgroundCoreConfig extends IntentService {
                         if (array.getJSONObject(0).has("is_driver_auto_accept")) {
                             DriverSessionSave.saveSession("is_driver_auto_accept", array.getJSONObject(0).getString("is_driver_auto_accept"), BackgroundCoreConfig.this);
                         }
+
+                        if(array.getJSONObject(0).has("is_enabled_ive_arrived")){
+                            SessionSave.saveSession("is_enabled_ive_arrived", array.getJSONObject(0).getString("is_enabled_ive_arrived"), BackgroundCoreConfig.this);
+                            System.out.println("is_enabled_ive_arrived check " + SessionSave.getSession("is_enabled_ive_arrived",BackgroundCoreConfig.this));
+                        }
+
                         if (array.getJSONObject(0).has(TaxiUtil.KM_RESTRICT))
                             SessionSave.saveSession(TaxiUtil.KM_RESTRICT, array.getJSONObject(0).getString(TaxiUtil.KM_RESTRICT), BackgroundCoreConfig.this);
 
