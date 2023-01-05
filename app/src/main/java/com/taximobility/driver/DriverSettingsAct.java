@@ -15,7 +15,7 @@ import com.taximobility.util.Utility;
 public class DriverSettingsAct extends MainActivityDriver implements View.OnClickListener {
 
 
-    private TextView bt_privacysettings,notification_settings,log_out_txt;
+    private TextView bt_privacysettings,notification_settings,log_out_txt,edit_profile_txt;
     private ImageView slider;
     private TextView HeadTitle;
     private RelativeLayout slide_lay;
@@ -34,6 +34,7 @@ public class DriverSettingsAct extends MainActivityDriver implements View.OnClic
         bt_privacysettings = findViewById(R.id.bt_privacysettings);
         notification_settings = findViewById(R.id.notification_settings);
         log_out_txt = findViewById(R.id.log_out_txt);
+        edit_profile_txt = findViewById(R.id.edit_profile_txt);
         slider = findViewById(R.id.slideImg);
         HeadTitle = findViewById(R.id.headerTxt);
         slide_lay=findViewById(R.id.slide_lay);
@@ -67,6 +68,14 @@ public class DriverSettingsAct extends MainActivityDriver implements View.OnClic
             public void onClick(View view) {
                 Intent deleteAcc = new Intent(DriverSettingsAct.this, DeleteAccountActivityDriver.class);
                 startActivity(deleteAcc);
+            }
+        });
+
+        edit_profile_txt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent profile = new Intent(DriverSettingsAct.this, DriverMeAct.class);
+                startActivity(profile);
             }
         });
 

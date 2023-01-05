@@ -1163,5 +1163,6 @@
     <string name="wait_tips">Wait until passenger pay the tip or Disable the tip option and continue</string>
     <string name="delivery_fare">Delivery Fare</string>
     <string name="welcome_to_">Welcome to t\'mobility</string>
+    <string name="edit_profile">Edit Profile</string>
 
 </resources>

@@ -81,6 +81,26 @@
         android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@+id/personal_details_lay">
 
+
+        <TextView
+            android:id="@+id/edit_profile_txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_5"
+            android:background="@color/white"
+            android:padding="14dp"
+            android:text="@string/edit_profile"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_14"
+            app:drawableRightCompat="@drawable/google_ic_right_small" />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="@dimen/dp_15"
+            android:layout_marginEnd="@dimen/dp_15"
+            android:background="@color/separator_line" />
+
         <TextView
             android:id="@+id/bt_privacysettings"
             android:layout_width="match_parent"
