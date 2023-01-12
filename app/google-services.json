@@ -1,52 +1,65 @@
 {
   "project_info": {
-    "project_number": "731540038622",
-    "firebase_url": "https://taximobility-driver.firebaseio.com",
-    "project_id": "taximobility-driver",
-    "storage_bucket": "taximobility-driver.appspot.com"
+    "project_number": "53606335106",
+    "project_id": "t-mobility",
+    "storage_bucket": "t-mobility.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:731540038622:android:04dd108a61177c56",
+        "mobilesdk_app_id": "1:53606335106:android:22e36f15da264ee947aa9b",
+        "android_client_info": {
+          "package_name": "com.Taximobility"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "53606335106-d773bdh7devs4tdf8pmou6rj15g101vp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTyrdJ30zPOe66kiwlAFNVlm3Cb9xCHmE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "53606335106-d773bdh7devs4tdf8pmou6rj15g101vp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:53606335106:android:f7356568be11969f47aa9b",
         "android_client_info": {
           "package_name": "com.Taximobility.driver"
         }
       },
       "oauth_client": [
         {
-          "client_id": "731540038622-ch7r38tv0bbqankjdf0ck6pgpt2lks5a.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.Taximobility.driver",
-            "certificate_hash": "70db817716f1142c6e096219dcf2bcfb3c3885a3"
-          }
-        },
-        {
-          "client_id": "731540038622-er2vubp4ft9qn64jlemilhahl9s3bi1n.apps.googleusercontent.com",
+          "client_id": "53606335106-d773bdh7devs4tdf8pmou6rj15g101vp.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBawiaJfKO97N2XcrCaLI5ilylX_BtAS9s"
+          "current_key": "AIzaSyCTyrdJ30zPOe66kiwlAFNVlm3Cb9xCHmE"
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "731540038622-er2vubp4ft9qn64jlemilhahl9s3bi1n.apps.googleusercontent.com",
+              "client_id": "53606335106-d773bdh7devs4tdf8pmou6rj15g101vp.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
-        },
-        "ads_service": {
-          "status": 2
         }
       }
     }
