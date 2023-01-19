@@ -17,17 +17,16 @@ import com.taximobility.driver.utils.DriverCircleOverlayView.dpToPx
 
 @SuppressLint("ResourceType")
 class DriverPickupDropView @JvmOverloads constructor(
-        context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
+    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : RelativeLayout(context, attrs, defStyleAttr) {
     private lateinit var driverStopArray: ArrayList<DriverStopData>
     var lang: String = ""
-
 
     private var isCollapsed = false
     private val locationListView = DriverLocationListView(context)
     private val customIconView = DriverCustomIconView(context)
     private val upDownImageView = TextView(context)
-    var tapStop : Int = 0
+    var tapStop: Int = 0
 
     init {
         customIconView.id = 1
@@ -44,9 +43,9 @@ class DriverPickupDropView @JvmOverloads constructor(
             isCollapsed = !isCollapsed
             customIconView.collapsed(isCollapsed)
             locationListView.collapsed(isCollapsed)
-            if (!isCollapsed){
+            if (!isCollapsed) {
                 upDownImageView.setText("Less")
-            } else{
+            } else {
                 if (driverStopArray.size > 2) {
                     var count: Int = 0
                     count = driverStopArray.size - 2;
@@ -82,7 +81,7 @@ class DriverPickupDropView @JvmOverloads constructor(
     }
 
     fun forceInvalidate() {
-        val customMarkerParams = LayoutParams(dpToPx(30), locationListView.height)
+        val customMarkerParams = LayoutParams(dpToPx(20), locationListView.height)
 
         if (lang == "ar" || lang == "fa") {
             customMarkerParams.addRule(ALIGN_PARENT_RIGHT)
@@ -103,7 +102,8 @@ class DriverPickupDropView @JvmOverloads constructor(
             locationListView.setData(driverStopArray, type, language)
             customIconView.setData(driverStopArray.size)
             customIconView.collapsed(isCollapsed)
-            val collapseParams = LayoutParams(100,100)
+            val collapseParams = LayoutParams(70, 70)
+            collapseParams.addRule(ALIGN_PARENT_TOP)
             collapseParams.addRule(ALIGN_PARENT_LEFT)
             collapseParams.addRule(CENTER_VERTICAL)
             collapseParams.marginEnd = 10
@@ -112,11 +112,11 @@ class DriverPickupDropView @JvmOverloads constructor(
             upDownImageView.setPadding(7, 7, 7, 7)
 
             tapStop = driverStopArray.size
-            if (driverStopArray.size <= 2)
-                upDownImageView.visibility = View.INVISIBLE
-            else
-                upDownImageView.visibility = View.VISIBLE
-            val listViewParams = LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+            if (driverStopArray.size <= 2) upDownImageView.visibility = View.INVISIBLE
+            else upDownImageView.visibility = View.VISIBLE
+            val listViewParams = LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT
+            )
             listViewParams.addRule(RIGHT_OF, upDownImageView.id)
             listViewParams.addRule(LEFT_OF, customIconView.id)
             locationListView.layoutParams = listViewParams
@@ -124,18 +124,19 @@ class DriverPickupDropView @JvmOverloads constructor(
             this.driverStopArray = driverStopArray
             locationListView.setData(driverStopArray, type, language)
             customIconView.setData(driverStopArray.size)
-            val collapseParams = LayoutParams(100,100)
+            val collapseParams = LayoutParams(70, 70)
             collapseParams.addRule(ALIGN_PARENT_END)
+            collapseParams.addRule(ALIGN_PARENT_TOP)
             collapseParams.addRule(CENTER_VERTICAL)
-            collapseParams.marginEnd = 10
+            collapseParams.marginStart = 10
             upDownImageView.layoutParams = collapseParams
             upDownImageView.setBackgroundResource(R.drawable.circle_background)
             upDownImageView.setPadding(7, 7, 7, 7)
-            if (driverStopArray.size <= 2)
-                upDownImageView.visibility = View.GONE
-            else
-                upDownImageView.visibility = View.VISIBLE
-            val listViewParams = LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+            if (driverStopArray.size <= 2) upDownImageView.visibility = View.GONE
+            else upDownImageView.visibility = View.VISIBLE
+            val listViewParams = LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT
+            )
             listViewParams.addRule(START_OF, upDownImageView.id)
             listViewParams.addRule(END_OF, customIconView.id)
             locationListView.layoutParams = listViewParams

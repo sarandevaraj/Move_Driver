@@ -880,17 +880,26 @@
                     android:background="@color/whiteBackground"
                     android:gravity="center_horizontal"
                     android:orientation="vertical"
-                   >
+                    >
 
-                    <com.taximobility.driver.pdview.DriverPickupDropView
-                        android:id="@+id/pdview"
+                    <androidx.core.widget.NestedScrollView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="100dp"
+                        android:paddingTop="5dp"
                         android:layout_gravity="top"
-                        android:clickable="true"
+                        android:orientation="vertical">
 
-                        android:focusable="true"
-                        android:orientation="vertical" />
+                        <com.taximobility.driver.pdview.DriverPickupDropView
+                            android:id="@+id/pdview"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_gravity="top"
+                            android:layout_marginEnd="@dimen/dp_3"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:orientation="vertical" />
+
+                    </androidx.core.widget.NestedScrollView>
 
                     <LinearLayout
                         android:id="@+id/contact_lay"
@@ -961,9 +970,8 @@
                                         android:fontFamily="@font/normalfont"
                                         android:gravity="left"
                                         android:text="@string/call"
-                                        android:textColor="@color/sub_heading"
-                                        android:textSize="@dimen/dp_18"
-                                        android:textStyle="bold" />
+                                        android:textColor="@color/black"
+                                        android:textSize="16sp" />
                                 </LinearLayout>
 
                                 <TextView
@@ -976,9 +984,8 @@
                                     android:fontFamily="@font/normalfont"
                                     android:gravity="right"
                                     android:text="@string/call"
-                                    android:textColor="@color/sub_heading"
-                                    android:textSize="14sp"
-                                    android:textStyle="bold"
+                                    android:textColor="@color/black"
+                                    android:textSize="16sp"
                                     android:visibility="gone" />
 
 
@@ -1002,9 +1009,8 @@
                                     android:ellipsize="end"
                                     android:fontFamily="@font/normalfont"
                                     android:text=""
-                                    android:textColor="@color/sub_heading"
-                                    android:textSize="14sp"
-                                    android:textStyle="bold" />
+                                    android:textColor="@color/black"
+                                    android:textSize="16sp" />
 
                                 <TextView
                                     android:id="@+id/chatTxt"
@@ -1039,8 +1045,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="@string/preferences_detail"
                                     android:textColor="@color/block"
-                                    android:textSize="@dimen/sp_18"
-                                    android:textStyle="bold"
+                                    android:textSize="@dimen/sp_16"
                                     android:visibility="gone" />
 
                                 <TextView
@@ -1172,8 +1177,8 @@
                     android:layout_height="50dp"
                     android:layout_below="@+id/con_lay"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginRight="@dimen/dp_12"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="@dimen/dp_5"
                     android:background="@drawable/button_rect"
                     android:fontFamily="@font/normalfont"
                     android:gravity="center"
