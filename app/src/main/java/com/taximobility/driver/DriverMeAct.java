@@ -60,7 +60,6 @@ import com.taximobility.driver.utils.DriverSessionSave;
 import com.taximobility.driver.utils.DriverSystems;
 import com.taximobility.driver.utils.Driver_Utils;
 import com.taximobility.interfaces.AlertListener;
-import com.taximobility.util.NC;
 import com.taximobility.util.Utility;
 import com.yalantis.ucrop.UCrop;
 
@@ -441,7 +440,7 @@ public class DriverMeAct extends MainActivityDriver implements OnClickListener, 
 
     public void HuaweiDeviceAlert() {
 
-        Utility.actionSheet(DriverMeAct.this, "" + String.format(DriverNC.getResources().getString(R.string.huawei_msg)), DriverNC.getResources().getString(R.string.ok), NC.getResources().getString(R.string.cancel), false, new AlertListener() {
+        Utility.actionSheet(DriverMeAct.this, "" + String.format(DriverNC.getResources().getString(R.string.huawei_msg)), DriverNC.getResources().getString(R.string.ok), DriverNC.getResources().getString(R.string.cancel), false, new AlertListener() {
             @Override
             public void onSuccess() {
                 DriverSessionSave.saveSession("settings_alert", "SETTINGS", DriverMeAct.this);
@@ -475,7 +474,7 @@ public class DriverMeAct extends MainActivityDriver implements OnClickListener, 
     }
 
     public void vivoDeviceAlert() {
-        Utility.actionSheet(DriverMeAct.this, "" + String.format(DriverNC.getResources().getString(R.string.auto_start_msg)), DriverNC.getResources().getString(R.string.ok), NC.getResources().getString(R.string.cancel), false, new AlertListener() {
+        Utility.actionSheet(DriverMeAct.this, "" + String.format(DriverNC.getResources().getString(R.string.auto_start_msg)), DriverNC.getResources().getString(R.string.ok), DriverNC.getResources().getString(R.string.cancel), false, new AlertListener() {
             @Override
             public void onSuccess() {
                 DriverSessionSave.saveSession("settings_alert", "SETTINGS", DriverMeAct.this);
@@ -504,7 +503,7 @@ public class DriverMeAct extends MainActivityDriver implements OnClickListener, 
     }
 
     public void xiaomiDeviceAlert() {
-        Utility.actionSheet(DriverMeAct.this, "" + String.format(DriverNC.getResources().getString(R.string.auto_start_msg)), DriverNC.getResources().getString(R.string.ok), NC.getResources().getString(R.string.cancel), false, new AlertListener() {
+        Utility.actionSheet(DriverMeAct.this, "" + String.format(DriverNC.getResources().getString(R.string.auto_start_msg)), DriverNC.getResources().getString(R.string.ok), DriverNC.getResources().getString(R.string.cancel), false, new AlertListener() {
             @Override
             public void onSuccess() {
                 DriverSessionSave.saveSession("settings_alert", "SETTINGS", DriverMeAct.this);
@@ -555,7 +554,7 @@ public class DriverMeAct extends MainActivityDriver implements OnClickListener, 
     }
 
     public void oppoDeviceAlert() {
-        Utility.actionSheet(DriverMeAct.this, "" + String.format(DriverNC.getResources().getString(R.string.power_saving_msg)), DriverNC.getResources().getString(R.string.ok), NC.getResources().getString(R.string.cancel), false, new AlertListener() {
+        Utility.actionSheet(DriverMeAct.this, "" + String.format(DriverNC.getResources().getString(R.string.power_saving_msg)), DriverNC.getResources().getString(R.string.ok), DriverNC.getResources().getString(R.string.cancel), false, new AlertListener() {
             @Override
             public void onSuccess() {
                 DriverSessionSave.saveSession("settings_alert", "SETTINGS", DriverMeAct.this);
@@ -1462,7 +1461,7 @@ public class DriverMeAct extends MainActivityDriver implements OnClickListener, 
                         Intent locationService = new Intent(DriverMeAct.this, LocationUpdate.class);
                         stopService(new Intent(locationService));
                         clearsession(DriverMeAct.this);
-                        Utility.actionSheet(DriverMeAct.this, json.getString("message"),DriverNC.getResources().getString(R.string.ok), NC.getResources().getString(R.string.cancel), false, new AlertListener() {
+                        Utility.actionSheet(DriverMeAct.this, json.getString("message"),DriverNC.getResources().getString(R.string.ok), DriverNC.getResources().getString(R.string.cancel), false, new AlertListener() {
                             @Override
                             public void onSuccess() {
                                 int length = DriverCommonData.mActivitylist.size();

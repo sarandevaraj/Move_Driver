@@ -17,13 +17,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.taximobility.driver.utils.DriverNC;
 import com.taximobility.features.CToast;
 import com.taximobility.util.FontHelper;
-import com.taximobility.util.NC;
 import com.taximobility.util.SessionSave;
 import com.taximobility.util.Systems;
 import com.taximobility.util.TaxiUtil;
-import com.taximobility.util.TaxiUtil.Logout;
 import com.taximobility.util.Utility;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.DrawableImageViewTarget;
@@ -65,7 +64,7 @@ public abstract class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         BsavedInstanceState = savedInstanceState;
-        MainHomeFragmentActivity.context = this;
+//        MainHomeFragmentActivity.context = this;
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         if (!SessionSave.getSession("facebook_key", MainActivity.this).equals(""))
             FacebookSdk.setApplicationId(SessionSave.getSession("facebook_key", MainActivity.this));
@@ -166,9 +165,9 @@ public abstract class MainActivity extends AppCompatActivity {
             final Button button_success = mgpsDialog.findViewById(R.id.button_success);
             final Button button_failure = mgpsDialog.findViewById(R.id.button_failure);
             button_failure.setVisibility(View.GONE);
-            title_text.setText("" + NC.getResources().getString(R.string.location_disable));
-            message_text.setText("" + NC.getResources().getString(R.string.location_enable));
-            button_success.setText("" + NC.getResources().getString(R.string.enable));
+            title_text.setText("" + DriverNC.getResources().getString(R.string.location_disable));
+            message_text.setText("" + DriverNC.getResources().getString(R.string.location_enable));
+            button_success.setText("" + DriverNC.getResources().getString(R.string.enable));
             button_success.setOnClickListener(v -> {
                 Intent mIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                 mContext.startActivity(mIntent);
@@ -213,43 +212,43 @@ public abstract class MainActivity extends AppCompatActivity {
     /**
      * This method used to call logout API.
      */
-    public void logout(final Context context) {
-        try {
-            final View view = View.inflate(context, R.layout.netcon_lay, null);
-            mlogoutDialog = new Dialog(context, R.style.dialogwinddow);
-            mlogoutDialog.setContentView(view);
-            mlogoutDialog.setCancelable(false);
-            mlogoutDialog.show();
-            FontHelper.applyFont(context, mlogoutDialog.findViewById(R.id.alert_id));
-            final TextView title_text = mlogoutDialog.findViewById(R.id.title_text);
-            final TextView message_text = mlogoutDialog.findViewById(R.id.message_text);
-            final Button button_success = mlogoutDialog.findViewById(R.id.button_success);
-            final Button button_failure = mlogoutDialog.findViewById(R.id.button_failure);
-            title_text.setText("" + NC.getResources().getString(R.string.message));
-            message_text.setText("" + NC.getResources().getString(R.string.confirmlogout));
-            button_success.setText("" + NC.getResources().getString(R.string.yes));
-            button_failure.setText("" + NC.getResources().getString(R.string.no));
-            button_success.setOnClickListener(v -> {
-                try {
-                    mlogoutDialog.dismiss();
-                    JSONObject j = new JSONObject();
-                    j.put("id", SessionSave.getSession(PASS_ID, context));
-                    if (SessionSave.getSession(LOGOUT, context).equals("")) {
-                        new Logout("type=passenger_logout", context, j);
-                        fbLogout();
-                    } else
-                        alert_view(context, "" + NC.getResources().getString(R.string.message), "" + NC.getResources().getString(R.string.bookedtaxi), "" + NC.getResources().getString(R.string.ok), "");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            });
-            button_failure.setOnClickListener(v -> {
-                mlogoutDialog.dismiss();
-            });
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+//    public void logout(final Context context) {
+//        try {
+//            final View view = View.inflate(context, R.layout.netcon_lay, null);
+//            mlogoutDialog = new Dialog(context, R.style.dialogwinddow);
+//            mlogoutDialog.setContentView(view);
+//            mlogoutDialog.setCancelable(false);
+//            mlogoutDialog.show();
+//            FontHelper.applyFont(context, mlogoutDialog.findViewById(R.id.alert_id));
+//            final TextView title_text = mlogoutDialog.findViewById(R.id.title_text);
+//            final TextView message_text = mlogoutDialog.findViewById(R.id.message_text);
+//            final Button button_success = mlogoutDialog.findViewById(R.id.button_success);
+//            final Button button_failure = mlogoutDialog.findViewById(R.id.button_failure);
+//            title_text.setText("" + DriverNC.getResources().getString(R.string.message));
+//            message_text.setText("" + DriverNC.getResources().getString(R.string.confirmlogout));
+//            button_success.setText("" + DriverNC.getResources().getString(R.string.yes));
+//            button_failure.setText("" + DriverNC.getResources().getString(R.string.no));
+//            button_success.setOnClickListener(v -> {
+//                try {
+//                    mlogoutDialog.dismiss();
+//                    JSONObject j = new JSONObject();
+//                    j.put("id", SessionSave.getSession(PASS_ID, context));
+//                    if (SessionSave.getSession(LOGOUT, context).equals("")) {
+//                        new Logout("type=passenger_logout", context, j);
+//                        fbLogout();
+//                    } else
+//                        alert_view(context, "" + DriverNC.getResources().getString(R.string.message), "" + DriverNC.getResources().getString(R.string.bookedtaxi), "" + DriverNC.getResources().getString(R.string.ok), "");
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            });
+//            button_failure.setOnClickListener(v -> {
+//                mlogoutDialog.dismiss();
+//            });
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     /**
      * This is method for logout the user from their facebook login if they logged in using facebook.
@@ -314,49 +313,49 @@ public abstract class MainActivity extends AppCompatActivity {
         switch (VA) {
             case isValueNULL:
                 if (TextUtils.isEmpty(stringtovalidate))
-                    message = "" + NC.getResources().getString(R.string.enter_the_mobile_number);
+                    message = "" + DriverNC.getResources().getString(R.string.enter_the_mobile_number);
                 else
                     result = true;
                 break;
             case isValidPassword:
                 if (TextUtils.isEmpty(stringtovalidate))
-                    message = "" + NC.getResources().getString(R.string.enter_the_password);
+                    message = "" + DriverNC.getResources().getString(R.string.enter_the_password);
                 else if (stringtovalidate.length() < 6)
-                    message = "" + NC.getResources().getString(R.string.password_min_character);
+                    message = "" + DriverNC.getResources().getString(R.string.password_min_character);
                 else if (stringtovalidate.length() > 32)
-                    message = "" + NC.getResources().getString(R.string.password_max_character);
+                    message = "" + DriverNC.getResources().getString(R.string.password_max_character);
                 else
                     result = true;
                 break;
             case isValidSalutation:
                 if (TextUtils.isEmpty(stringtovalidate) || stringtovalidate == null)
-                    message = "" + NC.getResources().getString(R.string.please_select_your_salutation);
+                    message = "" + DriverNC.getResources().getString(R.string.please_select_your_salutation);
                 else
                     result = true;
                 break;
             case isValidFirstname:
                 if (TextUtils.isEmpty(stringtovalidate) || stringtovalidate.length() < 3)
-                    message = "" + NC.getResources().getString(R.string.enter_the_first_name);
+                    message = "" + DriverNC.getResources().getString(R.string.enter_the_first_name);
                 else
                     result = true;
                 break;
             case isValidLastname:
                 if (TextUtils.isEmpty(stringtovalidate))
-                    message = "" + NC.getResources().getString(R.string.enter_the_last_name);
+                    message = "" + DriverNC.getResources().getString(R.string.enter_the_last_name);
                 else
                     result = true;
                 break;
             case isValidCard:
                 if (TextUtils.isEmpty(stringtovalidate))
-                    message = "" + NC.getResources().getString(R.string.enter_the_card_number);
+                    message = "" + DriverNC.getResources().getString(R.string.enter_the_card_number);
                 else if (stringtovalidate.length() < 9 || stringtovalidate.length() > 16)
-                    message = "" + NC.getResources().getString(R.string.enter_the_valid_card_number);
+                    message = "" + DriverNC.getResources().getString(R.string.enter_the_valid_card_number);
                 else
                     result = true;
                 break;
             case isValidExpiry:
                 if (TextUtils.isEmpty(stringtovalidate))
-                    message = "" + NC.getResources().getString(R.string.enter_the_expiry_date);
+                    message = "" + DriverNC.getResources().getString(R.string.enter_the_expiry_date);
                 else
                     result = true;
                 break;
@@ -365,59 +364,59 @@ public abstract class MainActivity extends AppCompatActivity {
                     if (TextUtils.isEmpty(stringtovalidate))
                         result = true;
                     else if (!validdmail(stringtovalidate))
-                        message = "" + NC.getResources().getString(R.string.enter_the_valid_email);
+                        message = "" + DriverNC.getResources().getString(R.string.enter_the_valid_email);
                     else
                         result = true;
                 } else {
                     if (TextUtils.isEmpty(stringtovalidate))
-                        message = "" + NC.getResources().getString(R.string.enter_the_email);
+                        message = "" + DriverNC.getResources().getString(R.string.enter_the_email);
                     else if (!validdmail(stringtovalidate))
-                        message = "" + NC.getResources().getString(R.string.enter_the_valid_email);
+                        message = "" + DriverNC.getResources().getString(R.string.enter_the_valid_email);
                     else
                         result = true;
                 }
                 break;
             case isValidConfirmPassword:
                 if (TextUtils.isEmpty(stringtovalidate))
-                    message = "" + NC.getResources().getString(R.string.enter_the_confirmation_password);
+                    message = "" + DriverNC.getResources().getString(R.string.enter_the_confirmation_password);
                 else
                     result = true;
                 break;
             case isNullPromoCode:
                 if (TextUtils.isEmpty(stringtovalidate))
-                    message = "" + NC.getResources().getString(R.string.reg_enterprcode);
+                    message = "" + DriverNC.getResources().getString(R.string.reg_enterprcode);
                 else
                     result = true;
                 break;
             case isNullMonth:
                 if (TextUtils.isEmpty(stringtovalidate))
-                    message = "" + NC.getResources().getString(R.string.reg_expmonth);
+                    message = "" + DriverNC.getResources().getString(R.string.reg_expmonth);
                 else
                     result = true;
                 break;
             case isNullYear:
                 if (TextUtils.isEmpty(stringtovalidate))
-                    message = "" + NC.getResources().getString(R.string.reg_expyear);
+                    message = "" + DriverNC.getResources().getString(R.string.reg_expyear);
                 else
                     result = true;
                 break;
             case isValidCvv:
                 if (TextUtils.isEmpty(stringtovalidate))
-                    message = "" + NC.getResources().getString(R.string.enter_the_valid_CVV);
+                    message = "" + DriverNC.getResources().getString(R.string.enter_the_valid_CVV);
                 else
                     result = true;
                 break;
             case isNullCardname:
                 if (TextUtils.isEmpty(stringtovalidate))
-                    message = "" + NC.getResources().getString(R.string.reg_entercardname);
+                    message = "" + DriverNC.getResources().getString(R.string.reg_entercardname);
                 else
                     result = true;
                 break;
             case isValidphone:
                 if (TextUtils.isEmpty(stringtovalidate))
-                    message = "" + NC.getResources().getString(R.string.enter_the_confirmation_phoneno);
+                    message = "" + DriverNC.getResources().getString(R.string.enter_the_confirmation_phoneno);
                 else if (stringtovalidate.length() < 6 || stringtovalidate.length() > 15)
-                    message = "" + NC.getResources().getString(R.string.enter_the_confirmation_phoneno);
+                    message = "" + DriverNC.getResources().getString(R.string.enter_the_confirmation_phoneno);
                 else
                     result = true;
                 break;

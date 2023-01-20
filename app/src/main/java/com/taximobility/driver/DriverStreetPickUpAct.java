@@ -67,7 +67,6 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.mayan.sospluginmodlue.service.SOSService;
 import com.taximobility.interfaces.AlertListener;
-import com.taximobility.util.NC;
 import com.taximobility.util.SessionSave;
 import com.squareup.picasso.Picasso;
 import com.taximobility.BuildConfig;

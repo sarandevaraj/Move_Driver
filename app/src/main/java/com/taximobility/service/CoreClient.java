@@ -1,21 +1,7 @@
 package com.taximobility.service;
 
-import com.taximobility.bookingmodule.Data.NearestDriverDatas;
-import com.taximobility.bookingmodule.Data.PassengerInfoData;
-import com.taximobility.bookingmodule.Data.SaveBookingResponse;
-import com.taximobility.data.apiData.AddFavouriteData;
 import com.taximobility.data.apiData.ApiRequestData;
-import com.taximobility.data.apiData.CheckPromoCodeData;
 import com.taximobility.data.apiData.CompanyDomainResponse;
-import com.taximobility.data.apiData.DeleteFavouriteData;
-import com.taximobility.data.apiData.DetailInfo;
-import com.taximobility.data.apiData.HelpResponse;
-import com.taximobility.data.apiData.PastBookingResponse;
-import com.taximobility.data.apiData.StandardResponse;
-import com.taximobility.data.apiData.TripDetailResponse;
-import com.taximobility.data.apiData.UpcomingResponse;
-import com.taximobility.tripCancel.CancelTripRequestData;
-import com.taximobility.tripCancel.CancelTripResponseData;
 import com.google.gson.JsonObject;
 
 import okhttp3.RequestBody;
@@ -53,20 +39,20 @@ public interface CoreClient {
     @GET
     Call<ResponseBody> getWhole(@Header("Cache-Control") String cacheControl, @Url String url);
 
-    @POST("{owner}" + "?type=booking_list")
-    Call<UpcomingResponse> callData(@Path(value = "owner", encoded = true) String owner, @Body ApiRequestData.UpcomingRequest body, @Query("lang") String lang);
-
-    @POST("{owner}" + "?type=completed_journey_monthwise")
-    Call<PastBookingResponse> callData(@Path(value = "owner", encoded = true) String owner, @Body ApiRequestData.PastBookingRequest body, @Query("lang") String lang);
-
-    @POST("{owner}" + "?type=get_trip_detail")
-    Call<TripDetailResponse> callData(@Path(value = "owner", encoded = true) String owner, @Body ApiRequestData.getTripDetailRequest body, @Query("lang") String lang);
-
-    @GET("{owner}" + "?type=help_content")
-    Call<HelpResponse> helpContent(@Path(value = "owner", encoded = true) String owner, @Query("lang") String lang);
-
-    @POST("{owner}" + "?type=help_comment_update")
-    Call<StandardResponse> helpSubmit(@Path(value = "owner", encoded = true) String owner, @Body ApiRequestData.HelpSubmit body, @Query("lang") String lang);
+//    @POST("{owner}" + "?type=booking_list")
+//    Call<UpcomingResponse> callData(@Path(value = "owner", encoded = true) String owner, @Body ApiRequestData.UpcomingRequest body, @Query("lang") String lang);
+//
+//    @POST("{owner}" + "?type=completed_journey_monthwise")
+//    Call<PastBookingResponse> callData(@Path(value = "owner", encoded = true) String owner, @Body ApiRequestData.PastBookingRequest body, @Query("lang") String lang);
+//
+//    @POST("{owner}" + "?type=get_trip_detail")
+//    Call<TripDetailResponse> callData(@Path(value = "owner", encoded = true) String owner, @Body ApiRequestData.getTripDetailRequest body, @Query("lang") String lang);
+//
+//    @GET("{owner}" + "?type=help_content")
+//    Call<HelpResponse> helpContent(@Path(value = "owner", encoded = true) String owner, @Query("lang") String lang);
+//
+//    @POST("{owner}" + "?type=help_comment_update")
+//    Call<StandardResponse> helpSubmit(@Path(value = "owner", encoded = true) String owner, @Body ApiRequestData.HelpSubmit body, @Query("lang") String lang);
 
     @POST("{owner}" + "?type=check_companydomain")
     Call<CompanyDomainResponse> callData(@Path(value = "owner", encoded = true) String owner, @Body ApiRequestData.BaseUrl body);
@@ -87,8 +73,8 @@ public interface CoreClient {
     @POST("auth")
     Call<ResponseBody> nodeAuth(@Body RequestBody body);
 
-    @POST
-    Call<ResponseBody> detail_infoCall(@Url String url, @Body DetailInfo body, @Query(value = "lang", encoded = true) String langCode);
+//    @POST
+//    Call<ResponseBody> detail_infoCall(@Url String url, @Body DetailInfo body, @Query(value = "lang", encoded = true) String langCode);
 
     @POST("?type=update_stops")
     Call<ResponseBody> updateStops(@Body RequestBody body, @Query(value = "lang", encoded = true) String langCode);
@@ -99,33 +85,33 @@ public interface CoreClient {
     @GET
     Call<ResponseBody> getPolylineDataWithWayPoint(@Url String url, @Query("origin") String origin, @Query("destination") String destination, @Query(value = "waypoints", encoded = true) String waypoints, @Query("key") String key);
 
-    @POST("?type=cancel_trip")
-    Call<CancelTripResponseData> callCancelTripApi(@Body CancelTripRequestData body);
-
-
-    @POST("?type=add_favourite")
-    Call<AddFavouriteData> addFavourite(@Body RequestBody body, @Query(value = "lang", encoded = true) String langCode);
-
-
-    @POST("nearestdriver_list")
-    Call<NearestDriverDatas> nodeUpdates(@Body RequestBody body, @Query(value = "lang", encoded = true)String langCode);
-
-    @POST("nearestDrivers")
-    Call<NearestDriverDatas> goLangUpdates(@Body RequestBody body, @Query(value = "lang", encoded = true)String langCode);
-
-    @POST("?type=savebooking")
-    Call<SaveBookingResponse> saveBookingData(@Body RequestBody body, @Query(value = "lang", encoded = true)String langCode);
-
-
-    @POST("?type=delete_favourite")
-    Call<DeleteFavouriteData> deleteFavourite(@Body RequestBody body, @Query(value = "lang", encoded = true) String langCode);
-
-
-    @POST("?type=check_valid_promocode")
-    Call<CheckPromoCodeData> checkProcode(@Body RequestBody body, @Query(value = "lang", encoded = true)String langCode);
-
-    @POST("?type=getPassengerInfo")
-    Call<PassengerInfoData> getPassengerInfo(@Body RequestBody body, @Query(value = "lang", encoded = true)String langCode);
+//    @POST("?type=cancel_trip")
+//    Call<CancelTripResponseData> callCancelTripApi(@Body CancelTripRequestData body);
+//
+//
+//    @POST("?type=add_favourite")
+//    Call<AddFavouriteData> addFavourite(@Body RequestBody body, @Query(value = "lang", encoded = true) String langCode);
+//
+//
+//    @POST("nearestdriver_list")
+//    Call<NearestDriverDatas> nodeUpdates(@Body RequestBody body, @Query(value = "lang", encoded = true)String langCode);
+//
+//    @POST("nearestDrivers")
+//    Call<NearestDriverDatas> goLangUpdates(@Body RequestBody body, @Query(value = "lang", encoded = true)String langCode);
+//
+//    @POST("?type=savebooking")
+//    Call<SaveBookingResponse> saveBookingData(@Body RequestBody body, @Query(value = "lang", encoded = true)String langCode);
+//
+//
+//    @POST("?type=delete_favourite")
+//    Call<DeleteFavouriteData> deleteFavourite(@Body RequestBody body, @Query(value = "lang", encoded = true) String langCode);
+//
+//
+//    @POST("?type=check_valid_promocode")
+//    Call<CheckPromoCodeData> checkProcode(@Body RequestBody body, @Query(value = "lang", encoded = true)String langCode);
+//
+//    @POST("?type=getPassengerInfo")
+//    Call<PassengerInfoData> getPassengerInfo(@Body RequestBody body, @Query(value = "lang", encoded = true)String langCode);
 
 
     @POST("?type=getService_models")

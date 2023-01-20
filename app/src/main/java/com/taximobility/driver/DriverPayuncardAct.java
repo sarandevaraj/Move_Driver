@@ -40,7 +40,6 @@ import com.taximobility.features.CToast;
 import com.taximobility.service.CoreClient;
 import com.taximobility.service.RetrofitCallbackClass;
 import com.taximobility.util.AppController;
-import com.taximobility.util.NC;
 import com.taximobility.util.NetworkStatus;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.DrawableImageViewTarget;
@@ -386,7 +385,7 @@ public class DriverPayuncardAct extends MainActivityDriver implements OnClickLis
 
 
                             } else {
-                                CToast.ShowToast(DriverPayuncardAct.this, NC.getString(R.string.server_con_error));
+                                CToast.ShowToast(DriverPayuncardAct.this, DriverNC.getString(R.string.server_con_error));
                             }
                         }
 
@@ -396,7 +395,7 @@ public class DriverPayuncardAct extends MainActivityDriver implements OnClickLis
                         }
                     }));
         } else {
-            CToast.ShowToast(DriverPayuncardAct.this, NC.getString(R.string.check_internet_connection));
+            CToast.ShowToast(DriverPayuncardAct.this, DriverNC.getString(R.string.check_internet_connection));
         }
 
     }

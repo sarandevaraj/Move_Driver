@@ -9,7 +9,6 @@ import android.widget.TextView;
 import com.taximobility.R;
 import com.taximobility.driver.utils.DriverNC;
 import com.taximobility.interfaces.AlertListener;
-import com.taximobility.util.NC;
 import com.taximobility.util.Utility;
 
 public class DriverSettingsAct extends MainActivityDriver implements View.OnClickListener {
@@ -47,7 +46,7 @@ public class DriverSettingsAct extends MainActivityDriver implements View.OnClic
         log_out_txt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Utility.actionSheet(DriverSettingsAct.this, NC.getResources().getString(R.string.confirmlogout), NC.getResources().getString(R.string.menu_logout), NC.getResources().getString(R.string.cancel), false, new AlertListener() {
+                Utility.actionSheet(DriverSettingsAct.this, DriverNC.getResources().getString(R.string.confirmlogout), DriverNC.getResources().getString(R.string.menu_logout), DriverNC.getResources().getString(R.string.cancel), false, new AlertListener() {
                     @Override
                     public void onSuccess() {
                         if (view == log_out_txt) {

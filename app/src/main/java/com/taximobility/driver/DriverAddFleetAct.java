@@ -1,7 +1,6 @@
 package com.taximobility.driver;
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -42,14 +41,11 @@ import com.taximobility.driver.interfaces.DriverClickInterface;
 import com.taximobility.driver.service.DriverAPIService_Retrofit_JSON;
 import com.taximobility.driver.utils.DriverCToast;
 import com.taximobility.driver.utils.DriverNC;
-import com.taximobility.driver.utils.DriverNetworkStatus;
 import com.taximobility.driver.utils.DriverSessionSave;
 import com.taximobility.driver.utils.DriverSystems;
-import com.taximobility.driver.utils.Driver_Utils;
 import com.taximobility.features.CToast;
 import com.taximobility.interfaces.AlertListener;
 import com.taximobility.util.Colorchange;
-import com.taximobility.util.NC;
 import com.taximobility.util.Utility;
 import com.yalantis.ucrop.UCrop;
 
@@ -152,13 +148,13 @@ public class DriverAddFleetAct extends AppCompatActivity implements DriverClickI
             @Override
             public void onClick(View view) {
                 if (vehicle_number.getText().toString().trim().isEmpty()) {
-                    CToast.ShowToast(DriverAddFleetAct.this, NC.getResources().getString(R.string.enter_the_num));
+                    CToast.ShowToast(DriverAddFleetAct.this, DriverNC.getResources().getString(R.string.enter_the_num));
                 } else if (select_model.getText().toString().trim().isEmpty()) {
-                    CToast.ShowToast(DriverAddFleetAct.this, NC.getResources().getString(R.string.select_the_model));
+                    CToast.ShowToast(DriverAddFleetAct.this, DriverNC.getResources().getString(R.string.select_the_model));
                 } else if (vehicle_manufacturer.getText().toString().trim().isEmpty()) {
-                    CToast.ShowToast(DriverAddFleetAct.this, NC.getResources().getString(R.string.enter_vehicle_manufacturer));
+                    CToast.ShowToast(DriverAddFleetAct.this, DriverNC.getResources().getString(R.string.enter_vehicle_manufacturer));
                 } else if (upload_vehicle_img.getText().toString().trim().isEmpty()) {
-                    CToast.ShowToast(DriverAddFleetAct.this, NC.getResources().getString(R.string.upload_image_file));
+                    CToast.ShowToast(DriverAddFleetAct.this, DriverNC.getResources().getString(R.string.upload_image_file));
                 } else {
                     String url = "type=saveNewFleet";
                     new AddFleet(url);

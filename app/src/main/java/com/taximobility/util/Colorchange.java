@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.taximobility.R;
 import com.taximobility.SplashActivity;
+import com.taximobility.driver.utils.DriverNC;
 
 /**
  * this class is used to set the dynamic srings and colors commonly and used in whole project
@@ -70,7 +71,7 @@ public class Colorchange {
                                 text = et.getHint().toString();
                                 if (SplashActivity.fields_value.indexOf(text) != -1) {
                                     String keyValue = SplashActivity.fields.get(SplashActivity.fields_value.indexOf(text));
-                                    et.setHint(NC.nfields_byName.get(keyValue));
+                                    et.setHint(DriverNC.nfields_byName.get(keyValue));
 
 
                                 }
@@ -78,7 +79,7 @@ public class Colorchange {
                                 text = et.getText().toString();
                                 if (SplashActivity.fields_value.indexOf(text) != -1) {
                                     String keyValue = SplashActivity.fields.get(SplashActivity.fields_value.indexOf(text));
-                                    et.setText(NC.nfields_byName.get(keyValue));
+                                    et.setText(DriverNC.nfields_byName.get(keyValue));
 
                                 }
                             }
@@ -158,7 +159,7 @@ public class Colorchange {
                                 }
                                 if (SplashActivity.fields_value.indexOf(text) > 0) {
                                     String keyValue = SplashActivity.fields.get(SplashActivity.fields_value.indexOf(text));
-                                    tv.setText(NC.nfields_byName.get(keyValue));
+                                    tv.setText(DriverNC.nfields_byName.get(keyValue));
                                     String hexColor11 = String.format("#%06X", (0xFFFFFF & tv.getCurrentTextColor()));
                                     switch (hexColor11) {
                                         case "#F5F5F5":
@@ -234,7 +235,7 @@ public class Colorchange {
                                 text = (tv).getText().toString();
 
                                 String keyValue = SplashActivity.fields.get(SplashActivity.fields_value.indexOf(text));
-                                tv.setText(NC.nfields_byName.get(keyValue));
+                                tv.setText(DriverNC.nfields_byName.get(keyValue));
 
                                 String hexColor11 = String.format("#%06X", (0xFFFFFF & tv.getCurrentTextColor()));
 
@@ -459,7 +460,7 @@ public class Colorchange {
                             text = tv.getHint().toString();
                             if (SplashActivity.fields_value.indexOf(text) != -1) {
                                 String keyValue = SplashActivity.fields.get(SplashActivity.fields_value.indexOf(text));
-                                ((EditText) view).setHint(NC.nfields_byName.get(keyValue));
+                                ((EditText) view).setHint(DriverNC.nfields_byName.get(keyValue));
 
 
                             }
@@ -539,7 +540,7 @@ public class Colorchange {
                             text = tv.getText().toString();
                             if (SplashActivity.fields_value.indexOf(text) != -1) {
                                 String keyValue = SplashActivity.fields.get(SplashActivity.fields_value.indexOf(text));
-                                ((EditText) view).setText(NC.nfields_byName.get(keyValue));
+                                ((EditText) view).setText(DriverNC.nfields_byName.get(keyValue));
                             }
                         }
                         String hexColort = String.format("#%06X", (0xFFFFFF & tv.getCurrentTextColor()));
@@ -617,7 +618,7 @@ public class Colorchange {
                             text = (tv).getText().toString();
                             if (SplashActivity.fields_value.indexOf(text) != -1) {
                                 String keyValue = SplashActivity.fields.get(SplashActivity.fields_value.indexOf(text));
-                                tv.setText(NC.nfields_byName.get(keyValue));
+                                tv.setText(DriverNC.nfields_byName.get(keyValue));
                             }
 
                             String hexColor = String.format("#%06X", (0xFFFFFF & tv.getCurrentTextColor()));
@@ -763,7 +764,7 @@ public class Colorchange {
                             text = (tv).getText().toString();
                             if (SplashActivity.fields_value.indexOf(text) != -1) {
                                 String keyValue = SplashActivity.fields.get(SplashActivity.fields_value.indexOf(text));
-                                tv.setText(NC.nfields_byName.get(keyValue));
+                                tv.setText(DriverNC.nfields_byName.get(keyValue));
                             }
 
                             String hexColor = String.format("#%06X", (0xFFFFFF & tv.getCurrentTextColor()));

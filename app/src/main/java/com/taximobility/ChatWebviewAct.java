@@ -105,17 +105,19 @@ public class ChatWebviewAct extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (!TextUtils.isEmpty(Id)) {
-            Intent intent = new Intent(this, MainHomeFragmentActivity.class);
-            startActivity(intent);
+//        if (!TextUtils.isEmpty(Id)) {
+//            Intent intent = new Intent(this, MainHomeFragmentActivity.class);
+//            startActivity(intent);
+//            finish();
+//        } else
+            if (type.equals("2")) {
             finish();
-        } else if (type.equals("2")) {
-            finish();
-        } else {
-            Intent intent = new Intent(this, MainHomeFragmentActivity.class);
-            startActivity(intent);
-            finish();
-        }
+            }
+//        else {
+//            Intent intent = new Intent(this, MainHomeFragmentActivity.class);
+//            startActivity(intent);
+//            finish();
+//        }
         super.onBackPressed();
     }
 

@@ -7,17 +7,14 @@ import android.content.res.Configuration;
 import android.util.Log;
 
 import com.taximobility.R;
-import com.taximobility.SplashActivity;
-import com.taximobility.driver.DriverSplashAct;
 import com.taximobility.driver.DriverUserLoginAct;
 import com.taximobility.driver.data.DriverCommonData;
-import com.taximobility.driver.service.DriverBackgroundCoreConfig;
+import com.taximobility.driver.utils.DriverNC;
 import com.taximobility.driver.utils.DriverSessionSave;
 import com.taximobility.features.CToast;
 import com.taximobility.interfaces.APIResult;
 import com.taximobility.util.AppController;
 import com.taximobility.util.CL;
-import com.taximobility.util.NC;
 import com.taximobility.util.SessionSave;
 import com.taximobility.util.Systems;
 import com.taximobility.util.TaxiUtil;
@@ -112,7 +109,7 @@ public class BackgroundCoreConfig extends IntentService {
                     chhh++;
 
                     Element element2 = (Element) node;
-                    NC.nfields_byName.put(element2.getAttribute("name"), element2.getTextContent());
+                    DriverNC.nfields_byName.put(element2.getAttribute("name"), element2.getTextContent());
 
                 }
             }
@@ -127,7 +124,7 @@ public class BackgroundCoreConfig extends IntentService {
         Field[] fieldss = R.string.class.getDeclaredFields();
         for (int i = 0; i < fieldss.length; i++) {
             int id = getResources().getIdentifier(fieldss[i].getName(), "string", getPackageName());
-            if (NC.nfields_byName.containsKey(fieldss[i].getName())) {
+            if (DriverNC.nfields_byName.containsKey(fieldss[i].getName())) {
                 fields.add(fieldss[i].getName());
                 fields_value.add(getResources().getString(id));
                 fields_id.put(fieldss[i].getName(), id);
@@ -135,10 +132,10 @@ public class BackgroundCoreConfig extends IntentService {
             }
         }
 
-        for (Map.Entry<String, String> entry : NC.nfields_byName.entrySet()) {
+        for (Map.Entry<String, String> entry : DriverNC.nfields_byName.entrySet()) {
             String h = entry.getKey();
             String value = entry.getValue();
-            NC.nfields_byID.put(fields_id.get(h), NC.nfields_byName.get(h));
+            DriverNC.nfields_byID.put(fields_id.get(h), DriverNC.nfields_byName.get(h));
             // do stuff
         }
 
@@ -435,7 +432,7 @@ public class BackgroundCoreConfig extends IntentService {
                             SessionSave.saveSession("lang_json", totalLanguage, BackgroundCoreConfig.this);
                             SessionSave.saveSession("colorcode", json.getJSONObject("language_color").getJSONObject("android").getString("colorcode"), BackgroundCoreConfig.this);
                         } catch (JSONException e) {
-                            errorInSplash(NC.getString(R.string.server_con_error));
+                            errorInSplash(DriverNC.getString(R.string.server_con_error));
                             e.printStackTrace();
                         }
                         //android_passenger_language
@@ -450,7 +447,7 @@ public class BackgroundCoreConfig extends IntentService {
                         if (json.has("message"))
                             forceLogout(json.getString("message"));
                         else
-                            forceLogout(NC.getString(R.string.server_error));
+                            forceLogout(DriverNC.getString(R.string.server_error));
                     } else if (json.getInt("status") == 0) {
                         //no changes made
                     } else {
@@ -458,11 +455,11 @@ public class BackgroundCoreConfig extends IntentService {
                     }
                 } catch (Exception e) {
                     // TODO Auto-generated catch block
-                    errorInSplash(NC.getString(R.string.server_con_error));
+                    errorInSplash(DriverNC.getString(R.string.server_con_error));
                     e.printStackTrace();
                 }
             } else {
-                errorInSplash(NC.getString(R.string.server_error));
+                errorInSplash(DriverNC.getString(R.string.server_error));
             }
         }
     }
@@ -503,7 +500,7 @@ public class BackgroundCoreConfig extends IntentService {
                     new callColor("");
 
             } else
-                errorInSplash(NC.getString(R.string.server_con_error));
+                errorInSplash(DriverNC.getString(R.string.server_con_error));
 
         }
     }
@@ -525,7 +522,7 @@ public class BackgroundCoreConfig extends IntentService {
                 getAndStoreColorValues(result);
                 SessionSave.saveSession("wholekeyColor", result, BackgroundCoreConfig.this);
             } else
-                errorInSplash(NC.getString(R.string.server_con_error));
+                errorInSplash(DriverNC.getString(R.string.server_con_error));
 
         }
     }

@@ -23,7 +23,6 @@ import android.widget.Toast;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.taximobility.ChatWebviewAct;
-import com.taximobility.MainHomeFragmentActivity;
 import com.taximobility.R;
 import com.taximobility.SplashActivity;
 import com.taximobility.data.apiData.PromoDataList;
@@ -47,7 +46,7 @@ import com.taximobility.driver.utils.DriverSessionSave;
 import com.taximobility.driver.utils.DriverSystems;
 import com.taximobility.driver.utils.DriverUtils;
 import com.taximobility.util.AppController;
-import com.taximobility.util.NC;
+import com.taximobility.driver.utils.DriverNC;
 import com.taximobility.util.SessionSave;
 import com.taximobility.util.Systems;
 import com.taximobility.util.TaxiUtil;
@@ -72,7 +71,7 @@ public class FirebaseService extends FirebaseMessagingService {
     public static final int NOTIFICATION_ID = 123;
     private NotificationManager mNotificationManager;
     NotificationCompat.Builder builder;
-    public static MainHomeFragmentActivity MAIN_ACT;
+    public static DriverMyStatus MAIN_ACT;
     public static AppCompatActivity activity;
     private JSONObject jo;
 
@@ -147,7 +146,7 @@ public class FirebaseService extends FirebaseMessagingService {
 
                     }
                 } else {
-                    generateNotification(this, message, MainHomeFragmentActivity.class);
+                    generateNotification(this, message, DriverMyStatus.class);
                 }
 
                 if (jos.getString("status") != null) {
@@ -211,7 +210,7 @@ public class FirebaseService extends FirebaseMessagingService {
             builder.setAutoCancel(false);
             builder.setOngoing(true);
             if (jo.has("passenger_name"))
-                Message = NC.getString(R.string.z_split_fare_with) + " " + jo.getString("passenger_name");
+                Message = DriverNC.getString(R.string.z_split_fare_with) + " " + jo.getString("passenger_name");
             else {
                 Message = jo.getString("message");
                 SessionSave.saveSession("GCMnotificationPopup", Message, context);
@@ -267,7 +266,7 @@ public class FirebaseService extends FirebaseMessagingService {
                 home.setAction(Intent.ACTION_MAIN);
                 home.addCategory(Intent.CATEGORY_LAUNCHER);
                 home.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET | Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT | Intent.FLAG_ACTIVITY_NO_ANIMATION | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                ComponentName cn = new ComponentName(FirebaseService.this, MainHomeFragmentActivity.class);
+                ComponentName cn = new ComponentName(FirebaseService.this, DriverMyStatus.class);
                 home.setComponent(cn);
                 getApplication().startActivity(home);
             }

@@ -3,6 +3,7 @@ package com.taximobility.service
 
 import android.content.Context
 import android.text.TextUtils
+import com.mayan.sospluginmodlue.service.CheckStatus
 import com.taximobility.BuildConfig
 import com.taximobility.R
 import com.taximobility.util.LANG

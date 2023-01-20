@@ -18,11 +18,9 @@ import android.widget.TextView;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.taximobility.R;
+import com.taximobility.driver.utils.DriverNC;
 import com.taximobility.features.CToast;
 import com.taximobility.interfaces.AlertListener;
-import com.taximobility.interfaces.ClickInterface;
-
-
 
 public class Utility {
     private static AlertDialog alert;
@@ -42,49 +40,49 @@ public class Utility {
         switch (VA) {
             case isValueNULL:
                 if (TextUtils.isEmpty(stringToValidate))
-                    message = "" + NC.getString(R.string.enter_the_mobile_number);
+                    message = "" + DriverNC.getString(R.string.enter_the_mobile_number);
                 else
                     result = true;
                 break;
             case isValidPassword:
                 if (TextUtils.isEmpty(stringToValidate))
-                    message = "" + NC.getString(R.string.enter_the_password);
+                    message = "" + DriverNC.getString(R.string.enter_the_password);
                 else if (stringToValidate.length() < 5)
-                    message = "" + NC.getString(R.string.password_min_character);
+                    message = "" + DriverNC.getString(R.string.password_min_character);
                 else if (stringToValidate.length() > 32)
-                    message = "" + NC.getString(R.string.password_max_character);
+                    message = "" + DriverNC.getString(R.string.password_max_character);
                 else
                     result = true;
                 break;
             case isValidSalutation:
                 if (TextUtils.isEmpty(stringToValidate) || stringToValidate == null)
-                    message = "" + NC.getString(R.string.please_select_your_salutation);
+                    message = "" + DriverNC.getString(R.string.please_select_your_salutation);
                 else
                     result = true;
                 break;
             case isValidFirstname:
                 if (TextUtils.isEmpty(stringToValidate) || stringToValidate.length() < 3)
-                    message = "" + NC.getString(R.string.enter_the_first_name);
+                    message = "" + DriverNC.getString(R.string.enter_the_first_name);
                 else
                     result = true;
                 break;
             case isValidLastname:
                 if (TextUtils.isEmpty(stringToValidate))
-                    message = "" + NC.getString(R.string.enter_the_last_name);
+                    message = "" + DriverNC.getString(R.string.enter_the_last_name);
                 else
                     result = true;
                 break;
             case isValidCard:
                 if (TextUtils.isEmpty(stringToValidate))
-                    message = "" + NC.getString(R.string.enter_the_card_number);
+                    message = "" + DriverNC.getString(R.string.enter_the_card_number);
                 else if (stringToValidate.length() < 9 || stringToValidate.length() > 16)
-                    message = "" + NC.getString(R.string.enter_the_valid_card_number);
+                    message = "" + DriverNC.getString(R.string.enter_the_valid_card_number);
                 else
                     result = true;
                 break;
             case isValidExpiry:
                 if (TextUtils.isEmpty(stringToValidate))
-                    message = "" + NC.getString(R.string.enter_the_expiry_date);
+                    message = "" + DriverNC.getString(R.string.enter_the_expiry_date);
                 else
                     result = true;
                 break;
@@ -93,59 +91,59 @@ public class Utility {
                     if (TextUtils.isEmpty(stringToValidate))
                         result = true;
                     else if (!validMail(stringToValidate))
-                        message = "" + NC.getString(R.string.enter_the_valid_email);
+                        message = "" + DriverNC.getString(R.string.enter_the_valid_email);
                     else
                         result = true;
                 } else {
                     if (TextUtils.isEmpty(stringToValidate))
-                        message = "" + NC.getString(R.string.enter_the_email);
+                        message = "" + DriverNC.getString(R.string.enter_the_email);
                     else if (!validMail(stringToValidate))
-                        message = "" + NC.getString(R.string.enter_the_valid_email);
+                        message = "" + DriverNC.getString(R.string.enter_the_valid_email);
                     else
                         result = true;
                 }
                 break;
             case isValidConfirmPassword:
                 if (TextUtils.isEmpty(stringToValidate))
-                    message = "" + NC.getString(R.string.enter_the_confirmation_password);
+                    message = "" + DriverNC.getString(R.string.enter_the_confirmation_password);
                 else
                     result = true;
                 break;
             case isNullPromoCode:
                 if (TextUtils.isEmpty(stringToValidate))
-                    message = "" + NC.getString(R.string.reg_enterprcode);
+                    message = "" + DriverNC.getString(R.string.reg_enterprcode);
                 else
                     result = true;
                 break;
             case isNullMonth:
                 if (TextUtils.isEmpty(stringToValidate))
-                    message = "" + NC.getString(R.string.reg_expmonth);
+                    message = "" + DriverNC.getString(R.string.reg_expmonth);
                 else
                     result = true;
                 break;
             case isNullYear:
                 if (TextUtils.isEmpty(stringToValidate))
-                    message = "" + NC.getString(R.string.reg_expyear);
+                    message = "" + DriverNC.getString(R.string.reg_expyear);
                 else
                     result = true;
                 break;
             case isValidCvv:
                 if (TextUtils.isEmpty(stringToValidate))
-                    message = "" + NC.getString(R.string.enter_the_valid_CVV);
+                    message = "" + DriverNC.getString(R.string.enter_the_valid_CVV);
                 else
                     result = true;
                 break;
             case isNullCardname:
                 if (TextUtils.isEmpty(stringToValidate))
-                    message = "" + NC.getString(R.string.reg_entercardname);
+                    message = "" + DriverNC.getString(R.string.reg_entercardname);
                 else
                     result = true;
                 break;
             case isValidphone:
                 if (TextUtils.isEmpty(stringToValidate))
-                    message = "" + NC.getString(R.string.enter_the_confirmation_phoneno);
+                    message = "" + DriverNC.getString(R.string.enter_the_confirmation_phoneno);
                 else if (stringToValidate.length() < 6 || stringToValidate.length() > 15)
-                    message = "" + NC.getString(R.string.enter_the_confirmation_phoneno);
+                    message = "" + DriverNC.getString(R.string.enter_the_confirmation_phoneno);
                 else
                     result = true;
                 break;
@@ -217,35 +215,35 @@ public class Utility {
         return alert;
     }
 
-    public static AlertDialog alert_view(final Activity mContext, String title, String message,
-                                         String success_txt, String failure_txt,
-                                         Boolean cancelable_val, final ClickInterface dialogInterface, final String s) {
-        if (mContext != null) {
-            AlertDialog.Builder dialog = new AlertDialog.Builder(mContext,R.style.DialogSlideAnim);
-            dialog.setCancelable(cancelable_val);
-            dialog.setMessage(message);
-            dialog.setPositiveButton(success_txt, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int id) {
-                    dialogInterface.positiveButtonClick(dialog, id, s);
-                }
-            })
-                    .setNegativeButton(failure_txt, (dialog1, id) -> dialogInterface.negativeButtonClick(dialog1, id, s));
-
-            if (alert != null && alert.isShowing())
-                alert.dismiss();
-            alert = dialog.create();
-            alert.setOnShowListener(arg0 -> {
-                if (mContext != null && alert != null) {
-                    alert.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(mContext.getResources().getColor(R.color.button_accept));
-                    alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(mContext.getResources().getColor(R.color.black));
-                }
-            });
-            alert.show();
-
-        }
-        return alert;
-    }
+//    public static AlertDialog alert_view(final Activity mContext, String title, String message,
+//                                         String success_txt, String failure_txt,
+//                                         Boolean cancelable_val, final ClickInterface dialogInterface, final String s) {
+//        if (mContext != null) {
+//            AlertDialog.Builder dialog = new AlertDialog.Builder(mContext,R.style.DialogSlideAnim);
+//            dialog.setCancelable(cancelable_val);
+//            dialog.setMessage(message);
+//            dialog.setPositiveButton(success_txt, new DialogInterface.OnClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialog, int id) {
+//                    dialogInterface.positiveButtonClick(dialog, id, s);
+//                }
+//            })
+//                    .setNegativeButton(failure_txt, (dialog1, id) -> dialogInterface.negativeButtonClick(dialog1, id, s));
+//
+//            if (alert != null && alert.isShowing())
+//                alert.dismiss();
+//            alert = dialog.create();
+//            alert.setOnShowListener(arg0 -> {
+//                if (mContext != null && alert != null) {
+//                    alert.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(mContext.getResources().getColor(R.color.button_accept));
+//                    alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(mContext.getResources().getColor(R.color.black));
+//                }
+//            });
+//            alert.show();
+//
+//        }
+//        return alert;
+//    }
 
 
     public static void gps_dialog(final Context mContext, String title, String message,
@@ -312,7 +310,7 @@ public class Utility {
         View sheetView = mContext.getLayoutInflater().inflate(R.layout.alert_sheet, null);
         mBottomSheetDialog.setContentView(sheetView);
         mBottomSheetDialog.show();
-        Colorchange.ChangeColor((ViewGroup) sheetView, mContext);
+//        Colorchange.ChangeColor((ViewGroup) sheetView, mContext);
         FontHelper.applyFont(mContext, sheetView.findViewById(R.id.rootlay));
         final TextView titleTxt = sheetView.findViewById(R.id.title_txt);
         final Button cancelBtn = sheetView.findViewById(R.id.cancel_btn);
@@ -352,7 +350,7 @@ public class Utility {
         mBottomSheetDialogcancel.setContentView(sheetView);
         mBottomSheetDialogcancel.setCancelable(false);
         mBottomSheetDialogcancel.show();
-        Colorchange.ChangeColor((ViewGroup) sheetView, mContext);
+//        Colorchange.ChangeColor((ViewGroup) sheetView, mContext);
         FontHelper.applyFont(mContext, sheetView.findViewById(R.id.rootlay));
         final TextView titleTxt = sheetView.findViewById(R.id.title_txt);
         final Button cancelBtn = sheetView.findViewById(R.id.cancel_btn);

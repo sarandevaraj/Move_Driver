@@ -16,9 +16,7 @@ import android.os.IBinder;
 
 import com.taximobility.R;
 import com.taximobility.SplashActivity;
-import com.taximobility.driver.DriverSplashAct;
 import com.taximobility.driver.utils.DriverNC;
-import com.taximobility.locationSearch.SetPlaceResult;
 
 public class DriverForegroundEnablingService extends Service {
 

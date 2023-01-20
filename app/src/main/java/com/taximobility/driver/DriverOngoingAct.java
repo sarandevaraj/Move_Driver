@@ -83,7 +83,6 @@ import com.taximobility.ProfileImageSetupClass;
 import com.squareup.picasso.Picasso;
 import com.taximobility.BuildConfig;
 import com.taximobility.R;
-import com.taximobility.SplashActivity;
 import com.taximobility.driver.adapter.DriverStopListAdapter;
 import com.taximobility.driver.data.DriverCommonData;
 import com.taximobility.driver.data.DriverMapWrapperLayout;
@@ -112,7 +111,6 @@ import com.taximobility.driver.utils.DriverSessionSave;
 import com.taximobility.driver.utils.DriverSystems;
 import com.taximobility.driver.utils.Driver_Utils;
 import com.taximobility.interfaces.AlertListener;
-import com.taximobility.util.NC;
 import com.taximobility.util.SessionSave;
 import com.taximobility.util.Utility;
 
@@ -522,7 +520,7 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
      * Call passenger
      */
     private void ensureCall() {
-        Utility.actionSheet(DriverOngoingAct.this,DriverNC.getResources().getString(R.string.confirm_call), DriverNC.getResources().getString(R.string.call), NC.getResources().getString(R.string.cancel), false, new AlertListener() {
+        Utility.actionSheet(DriverOngoingAct.this,DriverNC.getResources().getString(R.string.confirm_call), DriverNC.getResources().getString(R.string.call), DriverNC.getResources().getString(R.string.cancel), false, new AlertListener() {
             @Override
             public void onSuccess() {
                 try {

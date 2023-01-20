@@ -7,18 +7,17 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 import com.google.gson.Gson;
-import com.taximobility.Login.LoginActivity;
-import com.taximobility.bookingmodule.BookTaxiHomeRepository;
-import com.taximobility.data.DriverData;
-import com.taximobility.data.FavouriteData;
-import com.taximobility.data.FavouriteDriverData;
-import com.taximobility.data.HelpData;
-import com.taximobility.data.SplitStatusData;
+//import com.taximobility.Login.LoginActivity;
+//import com.taximobility.bookingmodule.BookTaxiHomeRepository;
+//import com.taximobility.data.DriverData;
+//import com.taximobility.data.FavouriteData;
+//import com.taximobility.data.FavouriteDriverData;
+//import com.taximobility.data.HelpData;
+//import com.taximobility.data.SplitStatusData;
 import com.taximobility.driver.DriverUserLoginAct;
 import com.taximobility.features.CToast;
 import com.taximobility.interfaces.APIResult;
 import com.taximobility.service.APIService_Retrofit_JSON;
-import com.taximobility.tripCancel.CreditCardRepository;
 
 import org.json.JSONObject;
 
@@ -78,17 +77,17 @@ public class TaxiUtil {
     public static final String RENTAL_OUTSTATION_AVAILABLE = "rental_out_availability";
     public static String USER_PRIVACY_POLICY = "user_privacy_policy";
     public static ArrayList<Activity> mActivitylist = new ArrayList<Activity>();
-    public static ArrayList<SplitStatusData> SPLIT_STATUS_ITEM = new ArrayList<>();
+//    public static ArrayList<SplitStatusData> SPLIT_STATUS_ITEM = new ArrayList<>();
     public static int close = 0;
-    public static ArrayList<DriverData> mDrivermovementdata = new ArrayList<>();
+//    public static ArrayList<DriverData> mDrivermovementdata = new ArrayList<>();
     public static String mDevice_id = "";
-    public static ArrayList<FavouriteData> mFavouritelist = new ArrayList<FavouriteData>();
-    public static ArrayList<HelpData> mHelplist = new ArrayList<HelpData>();
+//    public static ArrayList<FavouriteData> mFavouritelist = new ArrayList<FavouriteData>();
+//    public static ArrayList<HelpData> mHelplist = new ArrayList<HelpData>();
     public static String Address = "";
     public static double Latitude;
     public static double Longitude;
-    public static ArrayList<DriverData> mDriverdata = new ArrayList<DriverData>();
-    public static ArrayList<FavouriteDriverData> mFavouriteDriverlist = new ArrayList<FavouriteDriverData>();
+//    public static ArrayList<DriverData> mDriverdata = new ArrayList<DriverData>();
+//    public static ArrayList<FavouriteDriverData> mFavouriteDriverlist = new ArrayList<FavouriteDriverData>();
     public static double p_lat, p_lng;
     public static int LocationResult = 420;
     public static String current_act = "";
@@ -191,19 +190,19 @@ public class TaxiUtil {
      *
      * @return void clear session
      */
-    private static void logout(Context ctx) {
-
-        mContext = ctx;
-        clearsession(ctx);
-        int length = mActivitylist.size();
-        if (length != 0) {
-            for (int i = 0; i < length; i++) {
-                mActivitylist.get(i).finish();
-            }
-        }
-        Intent i_s = new Intent(mContext, LoginActivity.class);
-        mContext.startActivity(i_s);
-    }
+//    private static void logout(Context ctx) {
+//
+//        mContext = ctx;
+//        clearsession(ctx);
+//        int length = mActivitylist.size();
+//        if (length != 0) {
+//            for (int i = 0; i < length; i++) {
+//                mActivitylist.get(i).finish();
+//            }
+//        }
+//        Intent i_s = new Intent(mContext, LoginActivity.class);
+//        mContext.startActivity(i_s);
+//    }
 
     /**
      * This is method for logout from the application
@@ -214,53 +213,53 @@ public class TaxiUtil {
      *
      * @return void clear session
      */
-    public static class Logout implements APIResult {
-        private CreditCardRepository creditCardRepository;
-        private BookTaxiHomeRepository placesRepository;
-
-        public Logout(String string, Context ctx, JSONObject data) {
-            creditCardRepository = CreditCardRepository.getRepository(ctx);
-            placesRepository = new BookTaxiHomeRepository(ctx);
-            mContext = ctx;
-            new APIService_Retrofit_JSON(mContext, this, data, false).execute(string);
-        }
-
-        @Override
-        public void getResult(boolean isSuccess, String result) {
-            // TODO Auto-generated method stub
-            if (isSuccess) {
-                logout(mContext);
-                try {
-                    JSONObject json = new JSONObject(result);
-                    if (json.getInt("status") == 1) {
-                        SessionSave.saveSession(LOGOUT, "", mContext);
-                        SessionSave.saveSession(TaxiUtil.USER_KEY, "", mContext);
-                        SessionSave.saveSession(TaxiUtil.CORPORATE_PASSENGER, "", mContext);
-                        SessionSave.saveSession(TaxiUtil.CORPORATE_COMPANY_BLOCK, "", mContext);
-                        SessionSave.saveSession(TaxiUtil.CORPORATE_COMPANY_ID, "", mContext);
-                        try {
-
-                            Intent logIn = new Intent(mContext, DriverUserLoginAct.class);
-                            logIn.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            mContext.startActivity(logIn);
-                            ((Activity) mContext).finish();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        CToast.ShowToast(mContext, json.getString("message"));
-                        if (creditCardRepository != null)
-                            creditCardRepository.deleteAllCards();
-                        if (placesRepository != null) {
-                            placesRepository.deleteSavedPlaces();
-                        }
-                        SessionSave.saveWalletAmount(0f, mContext);
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
+//    public static class Logout implements APIResult {
+//        private CreditCardRepository creditCardRepository;
+//        private BookTaxiHomeRepository placesRepository;
+//
+//        public Logout(String string, Context ctx, JSONObject data) {
+//            creditCardRepository = CreditCardRepository.getRepository(ctx);
+//            placesRepository = new BookTaxiHomeRepository(ctx);
+//            mContext = ctx;
+//            new APIService_Retrofit_JSON(mContext, this, data, false).execute(string);
+//        }
+//
+//        @Override
+//        public void getResult(boolean isSuccess, String result) {
+//            // TODO Auto-generated method stub
+//            if (isSuccess) {
+//                logout(mContext);
+//                try {
+//                    JSONObject json = new JSONObject(result);
+//                    if (json.getInt("status") == 1) {
+//                        SessionSave.saveSession(LOGOUT, "", mContext);
+//                        SessionSave.saveSession(TaxiUtil.USER_KEY, "", mContext);
+//                        SessionSave.saveSession(TaxiUtil.CORPORATE_PASSENGER, "", mContext);
+//                        SessionSave.saveSession(TaxiUtil.CORPORATE_COMPANY_BLOCK, "", mContext);
+//                        SessionSave.saveSession(TaxiUtil.CORPORATE_COMPANY_ID, "", mContext);
+//                        try {
+//
+//                            Intent logIn = new Intent(mContext, DriverUserLoginAct.class);
+//                            logIn.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                            mContext.startActivity(logIn);
+//                            ((Activity) mContext).finish();
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+//                        CToast.ShowToast(mContext, json.getString("message"));
+//                        if (creditCardRepository != null)
+//                            creditCardRepository.deleteAllCards();
+//                        if (placesRepository != null) {
+//                            placesRepository.deleteSavedPlaces();
+//                        }
+//                        SessionSave.saveWalletAmount(0f, mContext);
+//                    }
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }
+//    }
 
     private static void clearsession(Context ctx) {
 

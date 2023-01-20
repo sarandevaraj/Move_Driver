@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
@@ -25,12 +24,10 @@ import android.widget.Toast;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.taximobility.BuildConfig;
 import com.taximobility.R;
-import com.taximobility.SplashActivity;
 import com.taximobility.driver.data.DriverCommonData;
 import com.taximobility.driver.data.apiData.DriverApiRequestData;
 import com.taximobility.driver.data.apiData.DriverCompanyDomainResponse;
 import com.taximobility.driver.interfaces.DriverAPIResult;
-import com.taximobility.driver.permission.DriverDevicePermissionActivityDriver;
 import com.taximobility.driver.service.DriverAPIService_Retrofit_JSON_NoProgress;
 import com.taximobility.driver.service.DriverBackgroundCoreConfig;
 import com.taximobility.driver.service.DriverCoreClient;
@@ -48,7 +45,6 @@ import com.taximobility.driver.utils.DriverSystems;
 import com.taximobility.driver.utils.Driver_Utils;
 import com.taximobility.interfaces.AlertListener;
 import com.taximobility.util.AppController;
-import com.taximobility.util.NC;
 import com.taximobility.util.SessionSave;
 import com.taximobility.util.Utility;
 
@@ -365,7 +361,7 @@ public class DriverSplashAct extends MainActivityDriver {
 
     public void HuaweiDeviceAlert() {
 
-        Utility.actionSheet(DriverSplashAct.this, "" + String.format(DriverNC.getResources().getString(R.string.huawei_msg)), DriverNC.getResources().getString(R.string.ok), NC.getResources().getString(R.string.cancel), false, new AlertListener() {
+        Utility.actionSheet(DriverSplashAct.this, "" + String.format(DriverNC.getResources().getString(R.string.huawei_msg)), DriverNC.getResources().getString(R.string.ok), DriverNC.getResources().getString(R.string.cancel), false, new AlertListener() {
             @Override
             public void onSuccess() {
                 DriverSessionSave.saveSession("settings_alert", "SETTINGS", DriverSplashAct.this);
@@ -399,7 +395,7 @@ public class DriverSplashAct extends MainActivityDriver {
     }
 
     public void vivoDeviceAlert() {
-        Utility.actionSheet(DriverSplashAct.this, "" + String.format(DriverNC.getResources().getString(R.string.auto_start_msg)), DriverNC.getResources().getString(R.string.ok), NC.getResources().getString(R.string.cancel), false, new AlertListener() {
+        Utility.actionSheet(DriverSplashAct.this, "" + String.format(DriverNC.getResources().getString(R.string.auto_start_msg)), DriverNC.getResources().getString(R.string.ok), DriverNC.getResources().getString(R.string.cancel), false, new AlertListener() {
             @Override
             public void onSuccess() {
                 DriverSessionSave.saveSession("settings_alert", "SETTINGS", DriverSplashAct.this);
@@ -428,7 +424,7 @@ public class DriverSplashAct extends MainActivityDriver {
     }
 
     public void xiaomiDeviceAlert() {
-        Utility.actionSheet(DriverSplashAct.this, "" + String.format(DriverNC.getResources().getString(R.string.auto_start_msg)), DriverNC.getResources().getString(R.string.ok), NC.getResources().getString(R.string.cancel), false, new AlertListener() {
+        Utility.actionSheet(DriverSplashAct.this, "" + String.format(DriverNC.getResources().getString(R.string.auto_start_msg)), DriverNC.getResources().getString(R.string.ok), DriverNC.getResources().getString(R.string.cancel), false, new AlertListener() {
             @Override
             public void onSuccess() {
                 DriverSessionSave.saveSession("settings_alert", "SETTINGS", DriverSplashAct.this);
@@ -479,7 +475,7 @@ public class DriverSplashAct extends MainActivityDriver {
     }
 
     public void oppoDeviceAlert() {
-        Utility.actionSheet(DriverSplashAct.this, "" + String.format(DriverNC.getResources().getString(R.string.power_saving_msg)), DriverNC.getResources().getString(R.string.ok), NC.getResources().getString(R.string.cancel), false, new AlertListener() {
+        Utility.actionSheet(DriverSplashAct.this, "" + String.format(DriverNC.getResources().getString(R.string.power_saving_msg)), DriverNC.getResources().getString(R.string.ok), DriverNC.getResources().getString(R.string.cancel), false, new AlertListener() {
             @Override
             public void onSuccess() {
                 DriverSessionSave.saveSession("settings_alert", "SETTINGS", DriverSplashAct.this);
@@ -1634,7 +1630,7 @@ public class DriverSplashAct extends MainActivityDriver {
                     errorInSplash(DriverNC.getString(R.string.server_error));
                 }
             } else {
-                Utility.actionSheetCancel(DriverSplashAct.this,DriverNC.getString(R.string.server_error), DriverNC.getString(R.string.c_tryagain), NC.getResources().getString(R.string.cancel), false, new AlertListener() {
+                Utility.actionSheetCancel(DriverSplashAct.this,DriverNC.getString(R.string.server_error), DriverNC.getString(R.string.c_tryagain), DriverNC.getResources().getString(R.string.cancel), false, new AlertListener() {
                     @Override
                     public void onSuccess() {
                         String url = "type=getcoreconfig";

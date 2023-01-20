@@ -12,8 +12,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.taximobility.MainActivity;
-import com.taximobility.MainHomeFragmentActivity;
 import com.taximobility.R;
+import com.taximobility.driver.utils.DriverNC;
 
 import java.util.Objects;
 
@@ -34,12 +34,12 @@ public class GpsStatus extends BroadcastReceiver {
             try {
                 Systems.out.println("Gps");
                 if (!isGpsEnabled(mContext)) {
-                    if (TaxiUtil.sContext != null && TaxiUtil.sContext instanceof MainHomeFragmentActivity)
-                        MainHomeFragmentActivity.gpsalert(TaxiUtil.sContext, false);
+//                    if (TaxiUtil.sContext != null && TaxiUtil.sContext instanceof MainHomeFragmentActivity)
+//                        MainHomeFragmentActivity.gpsalert(TaxiUtil.sContext, false);
                     count++;
                 } else {
                     count = 0;
-                    message = NC.getString(R.string.gps_status);
+                    message = DriverNC.getString(R.string.gps_status);
                     if (!TaxiUtil.current_act.equals("SplashAct")) {
                         if (TaxiUtil.sContext != null)
                             MainActivity.gpsalert(TaxiUtil.sContext, true);

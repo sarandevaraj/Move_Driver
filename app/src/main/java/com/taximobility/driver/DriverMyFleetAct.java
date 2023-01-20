@@ -1,7 +1,6 @@
 package com.taximobility.driver;
 
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
@@ -17,9 +16,7 @@ import com.taximobility.driver.service.DriverAPIService_Retrofit_JSON;
 import com.taximobility.driver.utils.DriverCToast;
 import com.taximobility.driver.utils.DriverNC;
 import com.taximobility.driver.utils.DriverSessionSave;
-import com.taximobility.driver.utils.Driver_Utils;
 import com.taximobility.interfaces.AlertListener;
-import com.taximobility.util.NC;
 import com.taximobility.util.Utility;
 
 import org.json.JSONArray;

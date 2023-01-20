@@ -39,12 +39,6 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
-import com.taximobility.Login.CardRegisterAct;
-import com.taximobility.Login.LoginActivity;
-import com.taximobility.Login.VerificationActivity;
-import com.taximobility.Login.countrycode.CountryCodePicker;
-import com.taximobility.MainActivity;
-import com.taximobility.MainHomeFragmentActivity;
 import com.taximobility.R;
 import com.taximobility.driver.data.DriverCommonData;
 import com.taximobility.driver.interfaces.DriverAPIResult;
@@ -64,9 +58,7 @@ import com.taximobility.interfaces.AlertListener;
 import com.taximobility.service.APIService_Retrofit_JSON;
 import com.taximobility.util.Colorchange;
 import com.taximobility.util.FontHelper;
-import com.taximobility.util.NC;
 import com.taximobility.util.SessionSave;
-import com.taximobility.util.ShowToast;
 import com.taximobility.util.TaxiUtil;
 import com.taximobility.util.Utility;
 
@@ -181,10 +173,10 @@ public class DriverUserLoginAct extends MainActivityDriver implements DriverClic
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(driverSignUpUrl));
             startActivity(intent);
         });
-        become_pass.setOnClickListener(V -> {
-            Intent intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
-        });
+//        become_pass.setOnClickListener(V -> {
+//            Intent intent = new Intent(this, LoginActivity.class);
+//            startActivity(intent);
+//        });
         AtomicInteger c = new AtomicInteger(0);
         String mDeviceid = "";
 
@@ -404,7 +396,7 @@ public class DriverUserLoginAct extends MainActivityDriver implements DriverClic
 
     public void HuaweiDeviceAlert() {
 
-        Utility.actionSheet(DriverUserLoginAct.this, "" + String.format(DriverNC.getResources().getString(R.string.huawei_msg)), DriverNC.getResources().getString(R.string.ok), NC.getResources().getString(R.string.cancel), false, new AlertListener() {
+        Utility.actionSheet(DriverUserLoginAct.this, "" + String.format(DriverNC.getResources().getString(R.string.huawei_msg)), DriverNC.getResources().getString(R.string.ok), DriverNC.getResources().getString(R.string.cancel), false, new AlertListener() {
             @Override
             public void onSuccess() {
                 DriverSessionSave.saveSession("settings_alert", "SETTINGS", DriverUserLoginAct.this);
@@ -438,7 +430,7 @@ public class DriverUserLoginAct extends MainActivityDriver implements DriverClic
     }
 
     public void vivoDeviceAlert() {
-        Utility.actionSheet(DriverUserLoginAct.this, "" + String.format(DriverNC.getResources().getString(R.string.auto_start_msg)), DriverNC.getResources().getString(R.string.ok), NC.getResources().getString(R.string.cancel), false, new AlertListener() {
+        Utility.actionSheet(DriverUserLoginAct.this, "" + String.format(DriverNC.getResources().getString(R.string.auto_start_msg)), DriverNC.getResources().getString(R.string.ok), DriverNC.getResources().getString(R.string.cancel), false, new AlertListener() {
             @Override
             public void onSuccess() {
                 DriverSessionSave.saveSession("settings_alert", "SETTINGS", DriverUserLoginAct.this);
@@ -467,7 +459,7 @@ public class DriverUserLoginAct extends MainActivityDriver implements DriverClic
     }
 
     public void xiaomiDeviceAlert() {
-        Utility.actionSheet(DriverUserLoginAct.this, "" + String.format(DriverNC.getResources().getString(R.string.auto_start_msg)), DriverNC.getResources().getString(R.string.ok), NC.getResources().getString(R.string.cancel), false, new AlertListener() {
+        Utility.actionSheet(DriverUserLoginAct.this, "" + String.format(DriverNC.getResources().getString(R.string.auto_start_msg)), DriverNC.getResources().getString(R.string.ok), DriverNC.getResources().getString(R.string.cancel), false, new AlertListener() {
             @Override
             public void onSuccess() {
                 DriverSessionSave.saveSession("settings_alert", "SETTINGS", DriverUserLoginAct.this);
@@ -518,7 +510,7 @@ public class DriverUserLoginAct extends MainActivityDriver implements DriverClic
     }
 
     public void oppoDeviceAlert() {
-        Utility.actionSheet(DriverUserLoginAct.this, "" + String.format(DriverNC.getResources().getString(R.string.power_saving_msg)), DriverNC.getResources().getString(R.string.ok), NC.getResources().getString(R.string.cancel), false, new AlertListener() {
+        Utility.actionSheet(DriverUserLoginAct.this, "" + String.format(DriverNC.getResources().getString(R.string.power_saving_msg)), DriverNC.getResources().getString(R.string.ok), DriverNC.getResources().getString(R.string.cancel), false, new AlertListener() {
             @Override
             public void onSuccess() {
                 DriverSessionSave.saveSession("settings_alert", "SETTINGS", DriverUserLoginAct.this);
@@ -859,69 +851,69 @@ public class DriverUserLoginAct extends MainActivityDriver implements DriverClic
         }
     }
 
-    public void Userselection_Dialog() {
-
-        try {
-            final View view = View.inflate(DriverUserLoginAct.this, R.layout.selection_popup, null);
-            mDialog = new Dialog(DriverUserLoginAct.this);
-            mDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            mDialog.setContentView(view);
-            mDialog.setCancelable(true);
-            mDialog.setCanceledOnTouchOutside(true);
-            RadioGroup radioGroup = mDialog.findViewById(R.id.rb_group);
-            radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(RadioGroup group, int checkedId) {
-                    if (group.getCheckedRadioButtonId() == R.id.rb_pass) {
-                        mDialog.dismiss();
-                        try {
-                            //SessionSave.saveSession("base_url", SessionSave.getSession("passenger_base_url", DriverUserLoginAct.this), DriverUserLoginAct.this);
-                            JSONObject json = new JSONObject();
-                            json.put("phone", phone);
-                            json.put("country_code", "+91");
-                            json.put("password", Uri.encode(password));
-                            json.put("deviceid", "" + SessionSave.getSession("mDevice_id", DriverUserLoginAct.this));
-                            String token = SessionSave.getSession(TaxiUtil.DEVICE_TOKEN, DriverUserLoginAct.this);
-
-                            json.put("devicetoken", token == null ? SessionSave.getSession("mDevice_id", DriverUserLoginAct.this) : token);
-                            json.put("devicetype", "1");
-
-                            new Pass_SignIn("type=passenger_login", json);
-
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-
-
-                    } else if (group.getCheckedRadioButtonId() == R.id.rb_driv) {
-                        mDialog.dismiss();
-                        try {
-                            SessionSave.saveSession("base_url", SessionSave.getSession("driver_base_url", DriverUserLoginAct.this), DriverUserLoginAct.this);
-                            final String url = "type=driver_login";
-                            DriverSessionSave.saveSession(USER_KEY, "", DriverUserLoginAct.this);
-                            new DriverSignIn(url, FORCE_LOGIN);
-
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                }
-            });
-
-            Window window = mDialog.getWindow();
-            WindowManager.LayoutParams wlp = window.getAttributes();
-            window.setAttributes(wlp);
-            mDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            mDialog.show();
-
-
-        } catch (Exception e) {
-            // TODO: handle exception
-            e.printStackTrace();
-        }
-
-    }
+//    public void Userselection_Dialog() {
+//
+//        try {
+//            final View view = View.inflate(DriverUserLoginAct.this, R.layout.selection_popup, null);
+//            mDialog = new Dialog(DriverUserLoginAct.this);
+//            mDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//            mDialog.setContentView(view);
+//            mDialog.setCancelable(true);
+//            mDialog.setCanceledOnTouchOutside(true);
+//            RadioGroup radioGroup = mDialog.findViewById(R.id.rb_group);
+//            radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+//                @Override
+//                public void onCheckedChanged(RadioGroup group, int checkedId) {
+//                    if (group.getCheckedRadioButtonId() == R.id.rb_pass) {
+//                        mDialog.dismiss();
+//                        try {
+//                            //SessionSave.saveSession("base_url", SessionSave.getSession("passenger_base_url", DriverUserLoginAct.this), DriverUserLoginAct.this);
+//                            JSONObject json = new JSONObject();
+//                            json.put("phone", phone);
+//                            json.put("country_code", "+91");
+//                            json.put("password", Uri.encode(password));
+//                            json.put("deviceid", "" + SessionSave.getSession("mDevice_id", DriverUserLoginAct.this));
+//                            String token = SessionSave.getSession(TaxiUtil.DEVICE_TOKEN, DriverUserLoginAct.this);
+//
+//                            json.put("devicetoken", token == null ? SessionSave.getSession("mDevice_id", DriverUserLoginAct.this) : token);
+//                            json.put("devicetype", "1");
+//
+//                            new Pass_SignIn("type=passenger_login", json);
+//
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+//
+//
+//                    } else if (group.getCheckedRadioButtonId() == R.id.rb_driv) {
+//                        mDialog.dismiss();
+//                        try {
+//                            SessionSave.saveSession("base_url", SessionSave.getSession("driver_base_url", DriverUserLoginAct.this), DriverUserLoginAct.this);
+//                            final String url = "type=driver_login";
+//                            DriverSessionSave.saveSession(USER_KEY, "", DriverUserLoginAct.this);
+//                            new DriverSignIn(url, FORCE_LOGIN);
+//
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//
+//                }
+//            });
+//
+//            Window window = mDialog.getWindow();
+//            WindowManager.LayoutParams wlp = window.getAttributes();
+//            window.setAttributes(wlp);
+//            mDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//            mDialog.show();
+//
+//
+//        } catch (Exception e) {
+//            // TODO: handle exception
+//            e.printStackTrace();
+//        }
+//
+//    }
 
 
     /**
@@ -931,7 +923,7 @@ public class DriverUserLoginAct extends MainActivityDriver implements DriverClic
     public void loggedInOtherDevice(String msg) {
         try {
 
-            Utility.actionSheetCancel(DriverUserLoginAct.this,msg, DriverNC.getResources().getString(R.string.ok), NC.getResources().getString(R.string.cancel), false, new AlertListener() {
+            Utility.actionSheetCancel(DriverUserLoginAct.this,msg, DriverNC.getResources().getString(R.string.ok), DriverNC.getResources().getString(R.string.cancel), false, new AlertListener() {
                 @Override
                 public void onSuccess() {
                     if (DriverNetworkStatus.isOnline(DriverUserLoginAct.this)) {
@@ -1118,441 +1110,441 @@ public class DriverUserLoginAct extends MainActivityDriver implements DriverClic
     /**
      * Signin post method API call and response parsing.
      */
-    private class SignIn implements APIResult {
-        SignIn(final String url, boolean FORCE_LOGIN) {
-            try {
-                System.out.println("LOGIN  " + DriverCommonData.mDevice_id);
-
-                JSONObject j = new JSONObject();
-                j.put("phone", phone);
-                j.put("password", password);
-                String token = SessionSave.getSession(TaxiUtil.DEVICE_TOKEN, DriverUserLoginAct.this);
-                j.put("device_id", Settings.Secure.getString(DriverUserLoginAct.this.getContentResolver(), Settings.Secure.ANDROID_ID));
-                j.put("device_token", token == null || token == "" ? SessionSave.getSession("mDevice_id", DriverUserLoginAct.this) : token);
-
-                j.put("device_type", "1");
-                j.put("country_code", SessionSave.getSession("country_code", DriverUserLoginAct.this));
-
-
-                j.put("force_login", FORCE_LOGIN);
-                //    j.put("device_info", new JSONObject(new Gson().toJson(DeviceUtils.INSTANCE.getAllInfo(UserLoginAct.this))));
-                DriverUserLoginAct.FORCE_LOGIN = false;
-                DoneBtn.setEnabled(false);
-                PasswordEdt.setOnEditorActionListener(null);
-                new APIService_Retrofit_JSON(DriverUserLoginAct.this, this, j, false).execute(url);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
-        @Override
-        public void getResult(final boolean isSuccess, final String result) {
-            Runnable runnableServerError = () -> DriverCToast.ShowToast(DriverUserLoginAct.this, DriverNC.getString(R.string.server_error));
-            try {
-                if (isSuccess) {
-                    final JSONObject json = new JSONObject(result);
-                    if (json.getInt("status") == 1 || json.getInt("status") == 10) {
-                        final JSONObject obj = json.getJSONObject("detail");
-                        if (json.getString("user_type").equals("P")) {
-
-                            SessionSave.saveSession("is_driver", "", DriverUserLoginAct.this);
-                            SessionSave.saveSession("Email", json.getJSONObject("detail").getString("email"), DriverUserLoginAct.this);
-                            SessionSave.saveSession(PASS_ID, json.getJSONObject("detail").getString("id"), DriverUserLoginAct.this);
-                            SessionSave.saveSession("Tellfrdmsg", json.getJSONObject("detail").getString("telltofriend_message"), DriverUserLoginAct.this);
-                            SessionSave.saveSession("Phone", json.getJSONObject("detail").getString("phone"), DriverUserLoginAct.this);
-                            SessionSave.saveSession("ProfileImage", json.getJSONObject("detail").getString("profile_image"), DriverUserLoginAct.this);
-                            SessionSave.saveSession(PASS_NAME, json.getJSONObject("detail").getString("name"), DriverUserLoginAct.this);
-                            SessionSave.saveSession("About", json.getJSONObject("detail").getString("aboutpage_description"), DriverUserLoginAct.this);
-//                        SessionSave.saveSession("Currency", json.getJSONObject("detail").getString("site_currency") + " ", DriverUserLoginAct.this);
-                            SessionSave.saveSession("RefCode", json.getJSONObject("detail").getString("referral_code"), DriverUserLoginAct.this);
-                            SessionSave.saveSession("RefAmount", json.getJSONObject("detail").getString("referral_code_amount"), DriverUserLoginAct.this);
-                            SessionSave.saveSession("Register", "", DriverUserLoginAct.this);
-                            SessionSave.saveSession(CREDIT_CARD, "" + json.getJSONObject("detail").getString("credit_card_status"), DriverUserLoginAct.this);
-                            SessionSave.saveSession("CountyCode", json.getJSONObject("detail").getString("country_code"), DriverUserLoginAct.this);
-                            if (json.getJSONObject("detail").getString("split_fare").equals("1"))
-                                SessionSave.saveSession(TaxiUtil.isSplitOn, true, DriverUserLoginAct.this);
-                            else
-                                SessionSave.saveSession(TaxiUtil.isSplitOn, false, DriverUserLoginAct.this);
-                            if (json.getJSONObject("detail").getString("favourite_driver").equals("1"))
-                                SessionSave.saveSession(TaxiUtil.isFavDriverOn, true, DriverUserLoginAct.this);
-                            else
-                                SessionSave.saveSession(TaxiUtil.isFavDriverOn, false, DriverUserLoginAct.this);
-                            if (json.getJSONObject("detail").getString("skip_favourite").equals("1"))
-                                SessionSave.saveSession(TaxiUtil.isSkipFavOn, true, DriverUserLoginAct.this);
-                            else
-                                SessionSave.saveSession(TaxiUtil.isSkipFavOn, false, DriverUserLoginAct.this);
-
-                            Log.e("splitfare", json.getJSONObject("detail").getString("split_fare"));
-
-                            if (json.has("sos_detail")) {
-                                SessionSave.saveSession("contact_sos_list", json.getString("sos_detail"), DriverUserLoginAct.this);
-                            }
-
-                            if (json.has(TaxiUtil.USER_KEY)) {
-                                if (!json.getString(TaxiUtil.USER_KEY).equals("") && json.getString(TaxiUtil.USER_KEY) != null)
-                                    SessionSave.saveSession(TaxiUtil.USER_KEY, json.getString(TaxiUtil.USER_KEY), DriverUserLoginAct.this);
-                            }
-
-                            if (json.getJSONObject("detail").has(TaxiUtil.CORPORATE_PASSENGER)) {
-                                SessionSave.saveSession(TaxiUtil.CORPORATE_PASSENGER, json.getJSONObject("detail").getString(TaxiUtil.CORPORATE_PASSENGER), DriverUserLoginAct.this);
-                            }
-
-                            if (json.getJSONObject("detail").has(TaxiUtil.CORPORATE_COMPANY_ID)) {
-                                SessionSave.saveSession(TaxiUtil.CORPORATE_COMPANY_ID, json.getJSONObject("detail").getString(TaxiUtil.CORPORATE_COMPANY_ID), DriverUserLoginAct.this);
-                            }
-
-                            if (json.getJSONObject("detail").has(TaxiUtil.CORPORATE_COMPANY_NAME)) {
-                                SessionSave.saveSession(TaxiUtil.CORPORATE_COMPANY_NAME, json.getJSONObject("detail").getString(TaxiUtil.CORPORATE_COMPANY_NAME), DriverUserLoginAct.this);
-                            }
-
-                            if (json.getJSONObject("detail").has(TaxiUtil.CORPORATE_COMPANY_BLOCK)) {
-                                SessionSave.saveSession(TaxiUtil.CORPORATE_COMPANY_BLOCK, json.getJSONObject("detail").getString(TaxiUtil.CORPORATE_COMPANY_BLOCK), DriverUserLoginAct.this);
-                            }
-                            if (json.getJSONObject("detail").has("creditcard_details"))
-                                // storeCardList(json.getJSONObject("detail").getJSONArray("creditcard_details"));
-
-                                if (json.getJSONObject("detail").has(TaxiUtil.USER_WALLET_AMOUNT))
-                                    SessionSave.saveWalletAmount((float) json.getJSONObject("detail").getDouble(TaxiUtil.USER_WALLET_AMOUNT), DriverUserLoginAct.this);
-                                else
-                                    SessionSave.saveWalletAmount(0f, DriverUserLoginAct.this);
-
-                            Intent intent = new Intent(getApplicationContext(), MainHomeFragmentActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(intent);
-                            finish();
-
-                        } else if (json.getString("user_type").equals("D")) {
-                            DriverSessionSave.saveSession("base_url", SessionSave.getSession("driver_base_url", DriverUserLoginAct.this), DriverUserLoginAct.this);
-
-                            SessionSave.saveSession("is_driver", "true", DriverUserLoginAct.this);
-                            final JSONArray ary = obj.getJSONArray("driver_details");
-                            final JSONObject detail = ary.getJSONObject(0);
-                            DriverSessionSave.saveSession("Email", detail.getString("email"), DriverUserLoginAct.this);
-                            DriverSessionSave.saveSession("Id", detail.getString("userid"), DriverUserLoginAct.this);
-                            DriverSessionSave.saveSession("Lastname", detail.getString("lastname"), DriverUserLoginAct.this);
-                            DriverSessionSave.saveSession("Name", detail.getString("name"), DriverUserLoginAct.this);
-                            DriverSessionSave.saveSession("Phone", detail.getString("phone"), DriverUserLoginAct.this);
-                            DriverSessionSave.saveSession("u_name", detail.getString("name"), DriverUserLoginAct.this);
-                            DriverSessionSave.saveSession("Bankname", detail.getString("bankname"), DriverUserLoginAct.this);
-                            DriverSessionSave.saveSession("Bankaccount_No", detail.getString("bankaccount_no"), DriverUserLoginAct.this);
-                            DriverSessionSave.saveSession("Salutation", detail.getString("salutation"), DriverUserLoginAct.this);
-                            DriverSessionSave.saveSession("taxi_id", detail.getString("taxi_id"), DriverUserLoginAct.this);
-                            DriverSessionSave.saveSession("company_id", detail.getString("company_id"), DriverUserLoginAct.this);
-                            DriverSessionSave.saveSession("status", detail.getString("driver_status"), DriverUserLoginAct.this);
-                            DriverSessionSave.saveSession("Shiftupdate_Id", detail.getString("shiftupdate_id"), DriverUserLoginAct.this);
-                            if (detail.has("driver_type")) {
-                                DriverSessionSave.saveSession("account_message", json.getString("message"), DriverUserLoginAct.this);
-                                DriverSessionSave.saveSession("driver_type", detail.getString("driver_type"), DriverUserLoginAct.this);
-                            } else {
-                                DriverSessionSave.saveSession("driver_type", "A", DriverUserLoginAct.this);
-                            }
-                            if (!detail.getString("shiftupdate_id").equals(""))
-                                DriverSessionSave.saveSession("driver_shift", "IN", DriverUserLoginAct.this);
-                            DriverSessionSave.saveSession("Picture", detail.getString("profile_picture"), DriverUserLoginAct.this);
-                            DriverSessionSave.saveSession("Register", "", DriverUserLoginAct.this);
-                            if (!detail.getString("trip_id").equals("")) {
-                                DriverSessionSave.saveSession("trip_id", detail.getString("trip_id"), DriverUserLoginAct.this);
-                                MainActivityDriver.mMyStatus.settripId(detail.getString("trip_id"));
-                                DriverSessionSave.saveSession("status", detail.getString("driver_status"), DriverUserLoginAct.this);
-                                DriverSessionSave.saveSession("travel_status", detail.getString("travel_status"), DriverUserLoginAct.this);
-                            }
-
-                          /*  if (json.has("user_key")) {
-                                String userKey = json.getString(DriverCommonData.USER_KEY);
-                                if (!TextUtils.isEmpty(userKey))
-                                    DriverSessionSave.saveSession(DriverCommonData.USER_KEY, userKey, DriverUserLoginAct.this);
-                            }*/
-
-                            if (json.has("sos_detail"))
-                                DriverSessionSave.saveSession("contact_sos_list", json.getString("sos_detail"), DriverUserLoginAct.this);
-                            jsonDriver = detail.getJSONObject("driver_statistics");
-                            DriverSessionSave.saveSession("driver_statistics", "" + jsonDriver, DriverUserLoginAct.this);
-                            DriverSessionSave.saveSession("Version_Update", "0", DriverUserLoginAct.this);
-                            DriverSessionSave.saveSession("shift_status", detail.getJSONObject("driver_statistics").getString("shift_status"), DriverUserLoginAct.this);
-
-
-                            DriverSessionSave.saveSession("taxi_no", detail.getString("taxi_no"), DriverUserLoginAct.this);
-                            DriverSessionSave.saveSession("model_name", detail.getString("model_name"), DriverUserLoginAct.this);
-
-                            String isFirst = detail.getString("driver_first_login");
-                            if (isFirst.equals("1")) {
-                                if ((Integer.parseInt(DriverSessionSave.getSession("referal", DriverUserLoginAct.this))) == 1)
-                                    referalPopup();
-                                else
-                                    pop_up(jsonDriver);
-                            } else
-                                pop_up(jsonDriver);
-                        }
-
-
-                    } else if (json.getInt("status") == -3) {
-                        if (json.has("detail")) {
-                            SessionSave.saveSession("Email", json.getJSONObject("detail").getString("email"), DriverUserLoginAct.this);
-                            SessionSave.saveSession(PASS_ID, json.getJSONObject("detail").getString("id"), DriverUserLoginAct.this);
-                            SessionSave.saveSession("Tellfrdmsg", json.getJSONObject("detail").getString("telltofriend_message"), DriverUserLoginAct.this);
-                            SessionSave.saveSession("Phone", json.getJSONObject("detail").getString("phone"), DriverUserLoginAct.this);
-                            SessionSave.saveSession("ProfileImage", json.getJSONObject("detail").getString("profile_image"), DriverUserLoginAct.this);
-                            SessionSave.saveSession(PASS_NAME, json.getJSONObject("detail").getString("name"), DriverUserLoginAct.this);
-                            SessionSave.saveSession("About", json.getJSONObject("detail").getString("aboutpage_description"), DriverUserLoginAct.this);
-//                        SessionSave.saveSession("Currency", json.getJSONObject("detail").getString("site_currency") + " ", DriverUserLoginAct.this);
-                            SessionSave.saveSession("RefCode", json.getJSONObject("detail").getString("referral_code"), DriverUserLoginAct.this);
-                            SessionSave.saveSession("RefAmount", json.getJSONObject("detail").getString("referral_code_amount"), DriverUserLoginAct.this);
-                            SessionSave.saveSession("Register", "", DriverUserLoginAct.this);
-                            SessionSave.saveSession(CREDIT_CARD, "" + json.getJSONObject("detail").getString("credit_card_status"), DriverUserLoginAct.this);
-                            SessionSave.saveSession("CountyCode", json.getJSONObject("detail").getString("country_code"), DriverUserLoginAct.this);
-                            if (json.getJSONObject("detail").getString("split_fare").equals("1"))
-                                SessionSave.saveSession(TaxiUtil.isSplitOn, true, DriverUserLoginAct.this);
-                            else
-                                SessionSave.saveSession(TaxiUtil.isSplitOn, false, DriverUserLoginAct.this);
-                            if (json.getJSONObject("detail").getString("favourite_driver").equals("1"))
-                                SessionSave.saveSession(TaxiUtil.isFavDriverOn, true, DriverUserLoginAct.this);
-                            else
-                                SessionSave.saveSession(TaxiUtil.isFavDriverOn, false, DriverUserLoginAct.this);
-                            if (json.getJSONObject("detail").getString("skip_favourite").equals("1"))
-                                SessionSave.saveSession(TaxiUtil.isSkipFavOn, true, DriverUserLoginAct.this);
-                            else
-                                SessionSave.saveSession(TaxiUtil.isSkipFavOn, false, DriverUserLoginAct.this);
-
-                            if (json.has("sos_detail")) {
-                                SessionSave.saveSession("contact_sos_list", json.getString("sos_detail"), DriverUserLoginAct.this);
-                            }
-
-
-                            final Intent i = new Intent(DriverUserLoginAct.this, CardRegisterAct.class);
-                            i.putExtra("alert_message", json.getString("message"));
-                            if (json.getJSONObject("detail").has("SKIP_CREDIT_CARD") && json.getJSONObject("detail").getString("SKIP_CREDIT_CARD").equals("1"))
-                                SessionSave.saveSession("SKIP_CREDIT_CARD", true, DriverUserLoginAct.this);
-                            else
-                                SessionSave.saveSession("SKIP_CREDIT_CARD", false, DriverUserLoginAct.this);
-                            startActivity(i);
-                            finish();
-                        } else {
-                            showAlertView(json.getString("message"));
-                        }
-                    } else if (json.getInt("status") == -5)
-                        DriverCToast.ShowToast(DriverUserLoginAct.this, "" + json.getString("message"));
-                    else if (json.getInt("status") == 0) {
-                        loggedInOtherDevice(json.getString("message"));
-                    } else if (json.getInt("status") == 100) {
-                        Userselection_Dialog();
-                    } else
-                        showAlertView(json.getString("message"));
-
-                    DoneBtn.setEnabled(true);
-                } else {
-                    runOnUiThread(runnableServerError);
-                    DoneBtn.setEnabled(true);
-                }
-
-                PasswordEdt.setOnEditorActionListener(DriverUserLoginAct.this);
-
-            } catch (final Exception e) {
-                e.printStackTrace();
-                DoneBtn.setEnabled(true);
-                PasswordEdt.setOnEditorActionListener(DriverUserLoginAct.this);
-                runOnUiThread(runnableServerError);
-            }
-        }
-    }
-
-
-    private class Pass_SignIn implements APIResult {
-        Pass_SignIn(final String url, JSONObject j) {
-            // new APIService_Retrofit_JSON(DriverUserLoginAct.this, this, j, false, TaxiUtil.API_BASE_URL + TaxiUtil.COMPANY_KEY + "/?" + "lang=" + SessionSave.getSession("Lang", DriverUserLoginAct.this) + "&" + url).execute();
-
-            new APIService_Retrofit_JSON(DriverUserLoginAct.this, this, j, false).execute(url);
-
-
-        }
-
-        @Override
-        public void getResult(final boolean isSuccess, final String result) {
-            // TODO Auto-generated method stub
-            try {
-
-                if (isSuccess) {
-                    final JSONObject json = new JSONObject(result);
-                    if (json.getInt("status") == 1) {
-                        SessionSave.saveSession("Email", json.getJSONObject("detail").getString("email"), DriverUserLoginAct.this);
-                        SessionSave.saveSession(PASS_ID, json.getJSONObject("detail").getString("id"), DriverUserLoginAct.this);
-                        SessionSave.saveSession("Tellfrdmsg", json.getJSONObject("detail").getString("telltofriend_message"), DriverUserLoginAct.this);
-                        SessionSave.saveSession("Phone", json.getJSONObject("detail").getString("phone"), DriverUserLoginAct.this);
-                        SessionSave.saveSession("ProfileImage", json.getJSONObject("detail").getString("profile_image"), DriverUserLoginAct.this);
-                        SessionSave.saveSession(PASS_NAME, json.getJSONObject("detail").getString("name"), DriverUserLoginAct.this);
-                        SessionSave.saveSession("About", json.getJSONObject("detail").getString("aboutpage_description"), DriverUserLoginAct.this);
-//                        SessionSave.saveSession("Currency", json.getJSONObject("detail").getString("site_currency") + " ", DriverUserLoginAct.this);
-                        SessionSave.saveSession("RefCode", json.getJSONObject("detail").getString("referral_code"), DriverUserLoginAct.this);
-                        SessionSave.saveSession("RefAmount", json.getJSONObject("detail").getString("referral_code_amount"), DriverUserLoginAct.this);
-                        SessionSave.saveSession("Register", "", DriverUserLoginAct.this);
-                        SessionSave.saveSession(CREDIT_CARD, "" + json.getJSONObject("detail").getString("credit_card_status"), DriverUserLoginAct.this);
-                        SessionSave.saveSession("CountyCode", json.getJSONObject("detail").getString("country_code"), DriverUserLoginAct.this);
-                        if (json.getJSONObject("detail").getString("split_fare").equals("1"))
-                            SessionSave.saveSession(TaxiUtil.isSplitOn, true, DriverUserLoginAct.this);
-                        else
-                            SessionSave.saveSession(TaxiUtil.isSplitOn, false, DriverUserLoginAct.this);
-                        if (json.getJSONObject("detail").getString("favourite_driver").equals("1"))
-                            SessionSave.saveSession(TaxiUtil.isFavDriverOn, true, DriverUserLoginAct.this);
-                        else
-                            SessionSave.saveSession(TaxiUtil.isFavDriverOn, false, DriverUserLoginAct.this);
-                        if (json.getJSONObject("detail").getString("skip_favourite").equals("1"))
-                            SessionSave.saveSession(TaxiUtil.isSkipFavOn, true, DriverUserLoginAct.this);
-                        else
-                            SessionSave.saveSession(TaxiUtil.isSkipFavOn, false, DriverUserLoginAct.this);
-
-                        Log.e("splitfare", json.getJSONObject("detail").getString("split_fare"));
-
-                        if (json.has("sos_detail")) {
-                            SessionSave.saveSession("contact_sos_list", json.getString("sos_detail"), DriverUserLoginAct.this);
-                        }
-
-                        if (json.has(TaxiUtil.USER_KEY)) {
-                            if (!json.getString(TaxiUtil.USER_KEY).equals("") && json.getString(TaxiUtil.USER_KEY) != null)
-                                SessionSave.saveSession(TaxiUtil.USER_KEY, json.getString(TaxiUtil.USER_KEY), DriverUserLoginAct.this);
-                        }
-
-                        if (json.getJSONObject("detail").has(TaxiUtil.CORPORATE_PASSENGER)) {
-                            SessionSave.saveSession(TaxiUtil.CORPORATE_PASSENGER, json.getJSONObject("detail").getString(TaxiUtil.CORPORATE_PASSENGER), DriverUserLoginAct.this);
-                        }
-
-                        if (json.getJSONObject("detail").has(TaxiUtil.CORPORATE_COMPANY_ID)) {
-                            SessionSave.saveSession(TaxiUtil.CORPORATE_COMPANY_ID, json.getJSONObject("detail").getString(TaxiUtil.CORPORATE_COMPANY_ID), DriverUserLoginAct.this);
-                        }
-
-                        if (json.getJSONObject("detail").has(TaxiUtil.CORPORATE_COMPANY_NAME)) {
-                            SessionSave.saveSession(TaxiUtil.CORPORATE_COMPANY_NAME, json.getJSONObject("detail").getString(TaxiUtil.CORPORATE_COMPANY_NAME), DriverUserLoginAct.this);
-                        }
-
-                        if (json.getJSONObject("detail").has(TaxiUtil.CORPORATE_COMPANY_BLOCK)) {
-                            SessionSave.saveSession(TaxiUtil.CORPORATE_COMPANY_BLOCK, json.getJSONObject("detail").getString(TaxiUtil.CORPORATE_COMPANY_BLOCK), DriverUserLoginAct.this);
-                        }
-                        if (json.getJSONObject("detail").has("creditcard_details"))
-                            // storeCardList(json.getJSONObject("detail").getJSONArray("creditcard_details"));
-
-                            if (json.getJSONObject("detail").has(TaxiUtil.USER_WALLET_AMOUNT))
-                                SessionSave.saveWalletAmount((float) json.getJSONObject("detail").getDouble(TaxiUtil.USER_WALLET_AMOUNT), DriverUserLoginAct.this);
-                            else
-                                SessionSave.saveWalletAmount(0f, DriverUserLoginAct.this);
-
-                        Intent intent = new Intent(getApplicationContext(), MainHomeFragmentActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
-                        finish();
-                    } else if (json.getInt("status") == -3) {
-
-
-                        SessionSave.saveSession("Email", json.getJSONObject("detail").getString("email"), DriverUserLoginAct.this);
-                        SessionSave.saveSession(PASS_ID, json.getJSONObject("detail").getString("id"), DriverUserLoginAct.this);
-                        SessionSave.saveSession("Tellfrdmsg", json.getJSONObject("detail").getString("telltofriend_message"), DriverUserLoginAct.this);
-                        SessionSave.saveSession("Phone", json.getJSONObject("detail").getString("phone"), DriverUserLoginAct.this);
-                        SessionSave.saveSession("ProfileImage", json.getJSONObject("detail").getString("profile_image"), DriverUserLoginAct.this);
-                        SessionSave.saveSession(PASS_NAME, json.getJSONObject("detail").getString("name"), DriverUserLoginAct.this);
-                        SessionSave.saveSession("About", json.getJSONObject("detail").getString("aboutpage_description"), DriverUserLoginAct.this);
-//                        SessionSave.saveSession("Currency", json.getJSONObject("detail").getString("site_currency") + " ", DriverUserLoginAct.this);
-                        SessionSave.saveSession("RefCode", json.getJSONObject("detail").getString("referral_code"), DriverUserLoginAct.this);
-                        SessionSave.saveSession("RefAmount", json.getJSONObject("detail").getString("referral_code_amount"), DriverUserLoginAct.this);
-                        SessionSave.saveSession("Register", "", DriverUserLoginAct.this);
-                        SessionSave.saveSession(CREDIT_CARD, "" + json.getJSONObject("detail").getString("credit_card_status"), DriverUserLoginAct.this);
-                        SessionSave.saveSession("CountyCode", json.getJSONObject("detail").getString("country_code"), DriverUserLoginAct.this);
-                        if (json.getJSONObject("detail").getString("split_fare").equals("1"))
-                            SessionSave.saveSession(TaxiUtil.isSplitOn, true, DriverUserLoginAct.this);
-                        else
-                            SessionSave.saveSession(TaxiUtil.isSplitOn, false, DriverUserLoginAct.this);
-                        if (json.getJSONObject("detail").getString("favourite_driver").equals("1"))
-                            SessionSave.saveSession(TaxiUtil.isFavDriverOn, true, DriverUserLoginAct.this);
-                        else
-                            SessionSave.saveSession(TaxiUtil.isFavDriverOn, false, DriverUserLoginAct.this);
-                        if (json.getJSONObject("detail").getString("skip_favourite").equals("1"))
-                            SessionSave.saveSession(TaxiUtil.isSkipFavOn, true, DriverUserLoginAct.this);
-                        else
-                            SessionSave.saveSession(TaxiUtil.isSkipFavOn, false, DriverUserLoginAct.this);
-
-                        if (json.has("sos_detail")) {
-                            SessionSave.saveSession("contact_sos_list", json.getString("sos_detail"), DriverUserLoginAct.this);
-                        }
-
-
-                        final Intent i = new Intent(DriverUserLoginAct.this, CardRegisterAct.class);
-                        i.putExtra("alert_message", json.getString("message"));
-                        if (json.getJSONObject("detail").has("SKIP_CREDIT_CARD") && json.getJSONObject("detail").getString("SKIP_CREDIT_CARD").equals("1"))
-                            SessionSave.saveSession("SKIP_CREDIT_CARD", true, DriverUserLoginAct.this);
-                        else
-                            SessionSave.saveSession("SKIP_CREDIT_CARD", false, DriverUserLoginAct.this);
-                        startActivity(i);
-                        finish();
-                    } else if (json.getInt("status") == -10) {
-                        ShowToast.center(DriverUserLoginAct.this, json.getString("message"));
-
-                    } else if (json.getInt("status") == -2) {
-
-                        SessionSave.saveSession("Email", json.getJSONObject("detail").getString("email"), DriverUserLoginAct.this);
-                        SessionSave.saveSession("Phone", json.getJSONObject("detail").getString("phone"), DriverUserLoginAct.this);
-                        SessionSave.saveSession("Register", "1", DriverUserLoginAct.this);
-                        SessionSave.saveSession("m_no", phone, DriverUserLoginAct.this);
-                        final Intent i = new Intent(DriverUserLoginAct.this, DriverUserLoginAct.class);
-                        Bundle detail_fb = new Bundle();
-
-                        if (json.has("phone_exist"))
-                            detail_fb.putString("phone_exist", json.getString("phone_exist"));
-                        else detail_fb.putString("phone_exist", "0");
-
-                        detail_fb.putString("phone", phone);
-                        detail_fb.putString("country", "+91");
-                        i.putExtras(detail_fb);
-                        startActivity(i);
-                        finish();
-                    } else if (json.getInt("status") == -5) {
-                        Toast.makeText(DriverUserLoginAct.this,"" + json.getString("message"), Toast.LENGTH_LONG).show();
-//                        dialog1 = Utility.alert_view_dialog(DriverUserLoginAct.this, "" + NC.getResources().getString(R.string.message), "" + json.getString("message"), NC.getResources().getString(R.string.ok), "", true, new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                dialog.dismiss();
+//    private class SignIn implements APIResult {
+//        SignIn(final String url, boolean FORCE_LOGIN) {
+//            try {
+//                System.out.println("LOGIN  " + DriverCommonData.mDevice_id);
+//
+//                JSONObject j = new JSONObject();
+//                j.put("phone", phone);
+//                j.put("password", password);
+//                String token = SessionSave.getSession(TaxiUtil.DEVICE_TOKEN, DriverUserLoginAct.this);
+//                j.put("device_id", Settings.Secure.getString(DriverUserLoginAct.this.getContentResolver(), Settings.Secure.ANDROID_ID));
+//                j.put("device_token", token == null || token == "" ? SessionSave.getSession("mDevice_id", DriverUserLoginAct.this) : token);
+//
+//                j.put("device_type", "1");
+//                j.put("country_code", SessionSave.getSession("country_code", DriverUserLoginAct.this));
+//
+//
+//                j.put("force_login", FORCE_LOGIN);
+//                //    j.put("device_info", new JSONObject(new Gson().toJson(DeviceUtils.INSTANCE.getAllInfo(UserLoginAct.this))));
+//                DriverUserLoginAct.FORCE_LOGIN = false;
+//                DoneBtn.setEnabled(false);
+//                PasswordEdt.setOnEditorActionListener(null);
+//                new APIService_Retrofit_JSON(DriverUserLoginAct.this, this, j, false).execute(url);
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        }
+//
+//        @Override
+//        public void getResult(final boolean isSuccess, final String result) {
+//            Runnable runnableServerError = () -> DriverCToast.ShowToast(DriverUserLoginAct.this, DriverNC.getString(R.string.server_error));
+//            try {
+//                if (isSuccess) {
+//                    final JSONObject json = new JSONObject(result);
+//                    if (json.getInt("status") == 1 || json.getInt("status") == 10) {
+//                        final JSONObject obj = json.getJSONObject("detail");
+//                        if (json.getString("user_type").equals("P")) {
+//
+//                            SessionSave.saveSession("is_driver", "", DriverUserLoginAct.this);
+//                            SessionSave.saveSession("Email", json.getJSONObject("detail").getString("email"), DriverUserLoginAct.this);
+//                            SessionSave.saveSession(PASS_ID, json.getJSONObject("detail").getString("id"), DriverUserLoginAct.this);
+//                            SessionSave.saveSession("Tellfrdmsg", json.getJSONObject("detail").getString("telltofriend_message"), DriverUserLoginAct.this);
+//                            SessionSave.saveSession("Phone", json.getJSONObject("detail").getString("phone"), DriverUserLoginAct.this);
+//                            SessionSave.saveSession("ProfileImage", json.getJSONObject("detail").getString("profile_image"), DriverUserLoginAct.this);
+//                            SessionSave.saveSession(PASS_NAME, json.getJSONObject("detail").getString("name"), DriverUserLoginAct.this);
+//                            SessionSave.saveSession("About", json.getJSONObject("detail").getString("aboutpage_description"), DriverUserLoginAct.this);
+////                        SessionSave.saveSession("Currency", json.getJSONObject("detail").getString("site_currency") + " ", DriverUserLoginAct.this);
+//                            SessionSave.saveSession("RefCode", json.getJSONObject("detail").getString("referral_code"), DriverUserLoginAct.this);
+//                            SessionSave.saveSession("RefAmount", json.getJSONObject("detail").getString("referral_code_amount"), DriverUserLoginAct.this);
+//                            SessionSave.saveSession("Register", "", DriverUserLoginAct.this);
+//                            SessionSave.saveSession(CREDIT_CARD, "" + json.getJSONObject("detail").getString("credit_card_status"), DriverUserLoginAct.this);
+//                            SessionSave.saveSession("CountyCode", json.getJSONObject("detail").getString("country_code"), DriverUserLoginAct.this);
+//                            if (json.getJSONObject("detail").getString("split_fare").equals("1"))
+//                                SessionSave.saveSession(TaxiUtil.isSplitOn, true, DriverUserLoginAct.this);
+//                            else
+//                                SessionSave.saveSession(TaxiUtil.isSplitOn, false, DriverUserLoginAct.this);
+//                            if (json.getJSONObject("detail").getString("favourite_driver").equals("1"))
+//                                SessionSave.saveSession(TaxiUtil.isFavDriverOn, true, DriverUserLoginAct.this);
+//                            else
+//                                SessionSave.saveSession(TaxiUtil.isFavDriverOn, false, DriverUserLoginAct.this);
+//                            if (json.getJSONObject("detail").getString("skip_favourite").equals("1"))
+//                                SessionSave.saveSession(TaxiUtil.isSkipFavOn, true, DriverUserLoginAct.this);
+//                            else
+//                                SessionSave.saveSession(TaxiUtil.isSkipFavOn, false, DriverUserLoginAct.this);
+//
+//                            Log.e("splitfare", json.getJSONObject("detail").getString("split_fare"));
+//
+//                            if (json.has("sos_detail")) {
+//                                SessionSave.saveSession("contact_sos_list", json.getString("sos_detail"), DriverUserLoginAct.this);
 //                            }
-//                        }, new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                dialog.dismiss();
+//
+//                            if (json.has(TaxiUtil.USER_KEY)) {
+//                                if (!json.getString(TaxiUtil.USER_KEY).equals("") && json.getString(TaxiUtil.USER_KEY) != null)
+//                                    SessionSave.saveSession(TaxiUtil.USER_KEY, json.getString(TaxiUtil.USER_KEY), DriverUserLoginAct.this);
 //                            }
-//                        }, "");
-                    } else if (json.getInt("status") == 4) {
-                        Toast.makeText(DriverUserLoginAct.this,"" + json.getString("message"), Toast.LENGTH_LONG).show();
-//                        dialog1 = Utility.alert_view_dialog(DriverUserLoginAct.this, "" + NC.getResources().getString(R.string.message), "" + json.getString("message"), NC.getResources().getString(R.string.ok), "", true, new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                dialog.dismiss();
+//
+//                            if (json.getJSONObject("detail").has(TaxiUtil.CORPORATE_PASSENGER)) {
+//                                SessionSave.saveSession(TaxiUtil.CORPORATE_PASSENGER, json.getJSONObject("detail").getString(TaxiUtil.CORPORATE_PASSENGER), DriverUserLoginAct.this);
 //                            }
-//                        }, new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                dialog.dismiss();
+//
+//                            if (json.getJSONObject("detail").has(TaxiUtil.CORPORATE_COMPANY_ID)) {
+//                                SessionSave.saveSession(TaxiUtil.CORPORATE_COMPANY_ID, json.getJSONObject("detail").getString(TaxiUtil.CORPORATE_COMPANY_ID), DriverUserLoginAct.this);
 //                            }
-//                        }, "");
-                    } else {
-                        Toast.makeText(DriverUserLoginAct.this,"" + json.getString("message"), Toast.LENGTH_LONG).show();
-//                        dialog1 = Utility.alert_view_dialog(DriverUserLoginAct.this, "" + NC.getResources().getString(R.string.message), "" + json.getString("message"), NC.getResources().getString(R.string.ok), "", true, new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                dialog.dismiss();
+//
+//                            if (json.getJSONObject("detail").has(TaxiUtil.CORPORATE_COMPANY_NAME)) {
+//                                SessionSave.saveSession(TaxiUtil.CORPORATE_COMPANY_NAME, json.getJSONObject("detail").getString(TaxiUtil.CORPORATE_COMPANY_NAME), DriverUserLoginAct.this);
 //                            }
-//                        }, new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                dialog.dismiss();
+//
+//                            if (json.getJSONObject("detail").has(TaxiUtil.CORPORATE_COMPANY_BLOCK)) {
+//                                SessionSave.saveSession(TaxiUtil.CORPORATE_COMPANY_BLOCK, json.getJSONObject("detail").getString(TaxiUtil.CORPORATE_COMPANY_BLOCK), DriverUserLoginAct.this);
 //                            }
-//                        }, "");
-                    }
-                } else {
-                    runOnUiThread(new Runnable() {
-                        public void run() {
-                            ShowToast(DriverUserLoginAct.this, NC.getString(R.string.server_con_error));
-                        }
-                    });
-                }
-            } catch (final Exception e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        }
-    }
+//                            if (json.getJSONObject("detail").has("creditcard_details"))
+//                                // storeCardList(json.getJSONObject("detail").getJSONArray("creditcard_details"));
+//
+//                                if (json.getJSONObject("detail").has(TaxiUtil.USER_WALLET_AMOUNT))
+//                                    SessionSave.saveWalletAmount((float) json.getJSONObject("detail").getDouble(TaxiUtil.USER_WALLET_AMOUNT), DriverUserLoginAct.this);
+//                                else
+//                                    SessionSave.saveWalletAmount(0f, DriverUserLoginAct.this);
+//
+//                            Intent intent = new Intent(getApplicationContext(), MainHomeFragmentActivity.class);
+//                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                            startActivity(intent);
+//                            finish();
+//
+//                        } else if (json.getString("user_type").equals("D")) {
+//                            DriverSessionSave.saveSession("base_url", SessionSave.getSession("driver_base_url", DriverUserLoginAct.this), DriverUserLoginAct.this);
+//
+//                            SessionSave.saveSession("is_driver", "true", DriverUserLoginAct.this);
+//                            final JSONArray ary = obj.getJSONArray("driver_details");
+//                            final JSONObject detail = ary.getJSONObject(0);
+//                            DriverSessionSave.saveSession("Email", detail.getString("email"), DriverUserLoginAct.this);
+//                            DriverSessionSave.saveSession("Id", detail.getString("userid"), DriverUserLoginAct.this);
+//                            DriverSessionSave.saveSession("Lastname", detail.getString("lastname"), DriverUserLoginAct.this);
+//                            DriverSessionSave.saveSession("Name", detail.getString("name"), DriverUserLoginAct.this);
+//                            DriverSessionSave.saveSession("Phone", detail.getString("phone"), DriverUserLoginAct.this);
+//                            DriverSessionSave.saveSession("u_name", detail.getString("name"), DriverUserLoginAct.this);
+//                            DriverSessionSave.saveSession("Bankname", detail.getString("bankname"), DriverUserLoginAct.this);
+//                            DriverSessionSave.saveSession("Bankaccount_No", detail.getString("bankaccount_no"), DriverUserLoginAct.this);
+//                            DriverSessionSave.saveSession("Salutation", detail.getString("salutation"), DriverUserLoginAct.this);
+//                            DriverSessionSave.saveSession("taxi_id", detail.getString("taxi_id"), DriverUserLoginAct.this);
+//                            DriverSessionSave.saveSession("company_id", detail.getString("company_id"), DriverUserLoginAct.this);
+//                            DriverSessionSave.saveSession("status", detail.getString("driver_status"), DriverUserLoginAct.this);
+//                            DriverSessionSave.saveSession("Shiftupdate_Id", detail.getString("shiftupdate_id"), DriverUserLoginAct.this);
+//                            if (detail.has("driver_type")) {
+//                                DriverSessionSave.saveSession("account_message", json.getString("message"), DriverUserLoginAct.this);
+//                                DriverSessionSave.saveSession("driver_type", detail.getString("driver_type"), DriverUserLoginAct.this);
+//                            } else {
+//                                DriverSessionSave.saveSession("driver_type", "A", DriverUserLoginAct.this);
+//                            }
+//                            if (!detail.getString("shiftupdate_id").equals(""))
+//                                DriverSessionSave.saveSession("driver_shift", "IN", DriverUserLoginAct.this);
+//                            DriverSessionSave.saveSession("Picture", detail.getString("profile_picture"), DriverUserLoginAct.this);
+//                            DriverSessionSave.saveSession("Register", "", DriverUserLoginAct.this);
+//                            if (!detail.getString("trip_id").equals("")) {
+//                                DriverSessionSave.saveSession("trip_id", detail.getString("trip_id"), DriverUserLoginAct.this);
+//                                MainActivityDriver.mMyStatus.settripId(detail.getString("trip_id"));
+//                                DriverSessionSave.saveSession("status", detail.getString("driver_status"), DriverUserLoginAct.this);
+//                                DriverSessionSave.saveSession("travel_status", detail.getString("travel_status"), DriverUserLoginAct.this);
+//                            }
+//
+//                          /*  if (json.has("user_key")) {
+//                                String userKey = json.getString(DriverCommonData.USER_KEY);
+//                                if (!TextUtils.isEmpty(userKey))
+//                                    DriverSessionSave.saveSession(DriverCommonData.USER_KEY, userKey, DriverUserLoginAct.this);
+//                            }*/
+//
+//                            if (json.has("sos_detail"))
+//                                DriverSessionSave.saveSession("contact_sos_list", json.getString("sos_detail"), DriverUserLoginAct.this);
+//                            jsonDriver = detail.getJSONObject("driver_statistics");
+//                            DriverSessionSave.saveSession("driver_statistics", "" + jsonDriver, DriverUserLoginAct.this);
+//                            DriverSessionSave.saveSession("Version_Update", "0", DriverUserLoginAct.this);
+//                            DriverSessionSave.saveSession("shift_status", detail.getJSONObject("driver_statistics").getString("shift_status"), DriverUserLoginAct.this);
+//
+//
+//                            DriverSessionSave.saveSession("taxi_no", detail.getString("taxi_no"), DriverUserLoginAct.this);
+//                            DriverSessionSave.saveSession("model_name", detail.getString("model_name"), DriverUserLoginAct.this);
+//
+//                            String isFirst = detail.getString("driver_first_login");
+//                            if (isFirst.equals("1")) {
+//                                if ((Integer.parseInt(DriverSessionSave.getSession("referal", DriverUserLoginAct.this))) == 1)
+//                                    referalPopup();
+//                                else
+//                                    pop_up(jsonDriver);
+//                            } else
+//                                pop_up(jsonDriver);
+//                        }
+//
+//
+//                    } else if (json.getInt("status") == -3) {
+//                        if (json.has("detail")) {
+//                            SessionSave.saveSession("Email", json.getJSONObject("detail").getString("email"), DriverUserLoginAct.this);
+//                            SessionSave.saveSession(PASS_ID, json.getJSONObject("detail").getString("id"), DriverUserLoginAct.this);
+//                            SessionSave.saveSession("Tellfrdmsg", json.getJSONObject("detail").getString("telltofriend_message"), DriverUserLoginAct.this);
+//                            SessionSave.saveSession("Phone", json.getJSONObject("detail").getString("phone"), DriverUserLoginAct.this);
+//                            SessionSave.saveSession("ProfileImage", json.getJSONObject("detail").getString("profile_image"), DriverUserLoginAct.this);
+//                            SessionSave.saveSession(PASS_NAME, json.getJSONObject("detail").getString("name"), DriverUserLoginAct.this);
+//                            SessionSave.saveSession("About", json.getJSONObject("detail").getString("aboutpage_description"), DriverUserLoginAct.this);
+////                        SessionSave.saveSession("Currency", json.getJSONObject("detail").getString("site_currency") + " ", DriverUserLoginAct.this);
+//                            SessionSave.saveSession("RefCode", json.getJSONObject("detail").getString("referral_code"), DriverUserLoginAct.this);
+//                            SessionSave.saveSession("RefAmount", json.getJSONObject("detail").getString("referral_code_amount"), DriverUserLoginAct.this);
+//                            SessionSave.saveSession("Register", "", DriverUserLoginAct.this);
+//                            SessionSave.saveSession(CREDIT_CARD, "" + json.getJSONObject("detail").getString("credit_card_status"), DriverUserLoginAct.this);
+//                            SessionSave.saveSession("CountyCode", json.getJSONObject("detail").getString("country_code"), DriverUserLoginAct.this);
+//                            if (json.getJSONObject("detail").getString("split_fare").equals("1"))
+//                                SessionSave.saveSession(TaxiUtil.isSplitOn, true, DriverUserLoginAct.this);
+//                            else
+//                                SessionSave.saveSession(TaxiUtil.isSplitOn, false, DriverUserLoginAct.this);
+//                            if (json.getJSONObject("detail").getString("favourite_driver").equals("1"))
+//                                SessionSave.saveSession(TaxiUtil.isFavDriverOn, true, DriverUserLoginAct.this);
+//                            else
+//                                SessionSave.saveSession(TaxiUtil.isFavDriverOn, false, DriverUserLoginAct.this);
+//                            if (json.getJSONObject("detail").getString("skip_favourite").equals("1"))
+//                                SessionSave.saveSession(TaxiUtil.isSkipFavOn, true, DriverUserLoginAct.this);
+//                            else
+//                                SessionSave.saveSession(TaxiUtil.isSkipFavOn, false, DriverUserLoginAct.this);
+//
+//                            if (json.has("sos_detail")) {
+//                                SessionSave.saveSession("contact_sos_list", json.getString("sos_detail"), DriverUserLoginAct.this);
+//                            }
+//
+//
+//                            final Intent i = new Intent(DriverUserLoginAct.this, CardRegisterAct.class);
+//                            i.putExtra("alert_message", json.getString("message"));
+//                            if (json.getJSONObject("detail").has("SKIP_CREDIT_CARD") && json.getJSONObject("detail").getString("SKIP_CREDIT_CARD").equals("1"))
+//                                SessionSave.saveSession("SKIP_CREDIT_CARD", true, DriverUserLoginAct.this);
+//                            else
+//                                SessionSave.saveSession("SKIP_CREDIT_CARD", false, DriverUserLoginAct.this);
+//                            startActivity(i);
+//                            finish();
+//                        } else {
+//                            showAlertView(json.getString("message"));
+//                        }
+//                    } else if (json.getInt("status") == -5)
+//                        DriverCToast.ShowToast(DriverUserLoginAct.this, "" + json.getString("message"));
+//                    else if (json.getInt("status") == 0) {
+//                        loggedInOtherDevice(json.getString("message"));
+//                    } else if (json.getInt("status") == 100) {
+//                        Userselection_Dialog();
+//                    } else
+//                        showAlertView(json.getString("message"));
+//
+//                    DoneBtn.setEnabled(true);
+//                } else {
+//                    runOnUiThread(runnableServerError);
+//                    DoneBtn.setEnabled(true);
+//                }
+//
+//                PasswordEdt.setOnEditorActionListener(DriverUserLoginAct.this);
+//
+//            } catch (final Exception e) {
+//                e.printStackTrace();
+//                DoneBtn.setEnabled(true);
+//                PasswordEdt.setOnEditorActionListener(DriverUserLoginAct.this);
+//                runOnUiThread(runnableServerError);
+//            }
+//        }
+//    }
+
+
+//    private class Pass_SignIn implements APIResult {
+//        Pass_SignIn(final String url, JSONObject j) {
+//            // new APIService_Retrofit_JSON(DriverUserLoginAct.this, this, j, false, TaxiUtil.API_BASE_URL + TaxiUtil.COMPANY_KEY + "/?" + "lang=" + SessionSave.getSession("Lang", DriverUserLoginAct.this) + "&" + url).execute();
+//
+//            new APIService_Retrofit_JSON(DriverUserLoginAct.this, this, j, false).execute(url);
+//
+//
+//        }
+//
+//        @Override
+//        public void getResult(final boolean isSuccess, final String result) {
+//            // TODO Auto-generated method stub
+//            try {
+//
+//                if (isSuccess) {
+//                    final JSONObject json = new JSONObject(result);
+//                    if (json.getInt("status") == 1) {
+//                        SessionSave.saveSession("Email", json.getJSONObject("detail").getString("email"), DriverUserLoginAct.this);
+//                        SessionSave.saveSession(PASS_ID, json.getJSONObject("detail").getString("id"), DriverUserLoginAct.this);
+//                        SessionSave.saveSession("Tellfrdmsg", json.getJSONObject("detail").getString("telltofriend_message"), DriverUserLoginAct.this);
+//                        SessionSave.saveSession("Phone", json.getJSONObject("detail").getString("phone"), DriverUserLoginAct.this);
+//                        SessionSave.saveSession("ProfileImage", json.getJSONObject("detail").getString("profile_image"), DriverUserLoginAct.this);
+//                        SessionSave.saveSession(PASS_NAME, json.getJSONObject("detail").getString("name"), DriverUserLoginAct.this);
+//                        SessionSave.saveSession("About", json.getJSONObject("detail").getString("aboutpage_description"), DriverUserLoginAct.this);
+////                        SessionSave.saveSession("Currency", json.getJSONObject("detail").getString("site_currency") + " ", DriverUserLoginAct.this);
+//                        SessionSave.saveSession("RefCode", json.getJSONObject("detail").getString("referral_code"), DriverUserLoginAct.this);
+//                        SessionSave.saveSession("RefAmount", json.getJSONObject("detail").getString("referral_code_amount"), DriverUserLoginAct.this);
+//                        SessionSave.saveSession("Register", "", DriverUserLoginAct.this);
+//                        SessionSave.saveSession(CREDIT_CARD, "" + json.getJSONObject("detail").getString("credit_card_status"), DriverUserLoginAct.this);
+//                        SessionSave.saveSession("CountyCode", json.getJSONObject("detail").getString("country_code"), DriverUserLoginAct.this);
+//                        if (json.getJSONObject("detail").getString("split_fare").equals("1"))
+//                            SessionSave.saveSession(TaxiUtil.isSplitOn, true, DriverUserLoginAct.this);
+//                        else
+//                            SessionSave.saveSession(TaxiUtil.isSplitOn, false, DriverUserLoginAct.this);
+//                        if (json.getJSONObject("detail").getString("favourite_driver").equals("1"))
+//                            SessionSave.saveSession(TaxiUtil.isFavDriverOn, true, DriverUserLoginAct.this);
+//                        else
+//                            SessionSave.saveSession(TaxiUtil.isFavDriverOn, false, DriverUserLoginAct.this);
+//                        if (json.getJSONObject("detail").getString("skip_favourite").equals("1"))
+//                            SessionSave.saveSession(TaxiUtil.isSkipFavOn, true, DriverUserLoginAct.this);
+//                        else
+//                            SessionSave.saveSession(TaxiUtil.isSkipFavOn, false, DriverUserLoginAct.this);
+//
+//                        Log.e("splitfare", json.getJSONObject("detail").getString("split_fare"));
+//
+//                        if (json.has("sos_detail")) {
+//                            SessionSave.saveSession("contact_sos_list", json.getString("sos_detail"), DriverUserLoginAct.this);
+//                        }
+//
+//                        if (json.has(TaxiUtil.USER_KEY)) {
+//                            if (!json.getString(TaxiUtil.USER_KEY).equals("") && json.getString(TaxiUtil.USER_KEY) != null)
+//                                SessionSave.saveSession(TaxiUtil.USER_KEY, json.getString(TaxiUtil.USER_KEY), DriverUserLoginAct.this);
+//                        }
+//
+//                        if (json.getJSONObject("detail").has(TaxiUtil.CORPORATE_PASSENGER)) {
+//                            SessionSave.saveSession(TaxiUtil.CORPORATE_PASSENGER, json.getJSONObject("detail").getString(TaxiUtil.CORPORATE_PASSENGER), DriverUserLoginAct.this);
+//                        }
+//
+//                        if (json.getJSONObject("detail").has(TaxiUtil.CORPORATE_COMPANY_ID)) {
+//                            SessionSave.saveSession(TaxiUtil.CORPORATE_COMPANY_ID, json.getJSONObject("detail").getString(TaxiUtil.CORPORATE_COMPANY_ID), DriverUserLoginAct.this);
+//                        }
+//
+//                        if (json.getJSONObject("detail").has(TaxiUtil.CORPORATE_COMPANY_NAME)) {
+//                            SessionSave.saveSession(TaxiUtil.CORPORATE_COMPANY_NAME, json.getJSONObject("detail").getString(TaxiUtil.CORPORATE_COMPANY_NAME), DriverUserLoginAct.this);
+//                        }
+//
+//                        if (json.getJSONObject("detail").has(TaxiUtil.CORPORATE_COMPANY_BLOCK)) {
+//                            SessionSave.saveSession(TaxiUtil.CORPORATE_COMPANY_BLOCK, json.getJSONObject("detail").getString(TaxiUtil.CORPORATE_COMPANY_BLOCK), DriverUserLoginAct.this);
+//                        }
+//                        if (json.getJSONObject("detail").has("creditcard_details"))
+//                            // storeCardList(json.getJSONObject("detail").getJSONArray("creditcard_details"));
+//
+//                            if (json.getJSONObject("detail").has(TaxiUtil.USER_WALLET_AMOUNT))
+//                                SessionSave.saveWalletAmount((float) json.getJSONObject("detail").getDouble(TaxiUtil.USER_WALLET_AMOUNT), DriverUserLoginAct.this);
+//                            else
+//                                SessionSave.saveWalletAmount(0f, DriverUserLoginAct.this);
+//
+//                        Intent intent = new Intent(getApplicationContext(), MainHomeFragmentActivity.class);
+//                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                        startActivity(intent);
+//                        finish();
+//                    } else if (json.getInt("status") == -3) {
+//
+//
+//                        SessionSave.saveSession("Email", json.getJSONObject("detail").getString("email"), DriverUserLoginAct.this);
+//                        SessionSave.saveSession(PASS_ID, json.getJSONObject("detail").getString("id"), DriverUserLoginAct.this);
+//                        SessionSave.saveSession("Tellfrdmsg", json.getJSONObject("detail").getString("telltofriend_message"), DriverUserLoginAct.this);
+//                        SessionSave.saveSession("Phone", json.getJSONObject("detail").getString("phone"), DriverUserLoginAct.this);
+//                        SessionSave.saveSession("ProfileImage", json.getJSONObject("detail").getString("profile_image"), DriverUserLoginAct.this);
+//                        SessionSave.saveSession(PASS_NAME, json.getJSONObject("detail").getString("name"), DriverUserLoginAct.this);
+//                        SessionSave.saveSession("About", json.getJSONObject("detail").getString("aboutpage_description"), DriverUserLoginAct.this);
+////                        SessionSave.saveSession("Currency", json.getJSONObject("detail").getString("site_currency") + " ", DriverUserLoginAct.this);
+//                        SessionSave.saveSession("RefCode", json.getJSONObject("detail").getString("referral_code"), DriverUserLoginAct.this);
+//                        SessionSave.saveSession("RefAmount", json.getJSONObject("detail").getString("referral_code_amount"), DriverUserLoginAct.this);
+//                        SessionSave.saveSession("Register", "", DriverUserLoginAct.this);
+//                        SessionSave.saveSession(CREDIT_CARD, "" + json.getJSONObject("detail").getString("credit_card_status"), DriverUserLoginAct.this);
+//                        SessionSave.saveSession("CountyCode", json.getJSONObject("detail").getString("country_code"), DriverUserLoginAct.this);
+//                        if (json.getJSONObject("detail").getString("split_fare").equals("1"))
+//                            SessionSave.saveSession(TaxiUtil.isSplitOn, true, DriverUserLoginAct.this);
+//                        else
+//                            SessionSave.saveSession(TaxiUtil.isSplitOn, false, DriverUserLoginAct.this);
+//                        if (json.getJSONObject("detail").getString("favourite_driver").equals("1"))
+//                            SessionSave.saveSession(TaxiUtil.isFavDriverOn, true, DriverUserLoginAct.this);
+//                        else
+//                            SessionSave.saveSession(TaxiUtil.isFavDriverOn, false, DriverUserLoginAct.this);
+//                        if (json.getJSONObject("detail").getString("skip_favourite").equals("1"))
+//                            SessionSave.saveSession(TaxiUtil.isSkipFavOn, true, DriverUserLoginAct.this);
+//                        else
+//                            SessionSave.saveSession(TaxiUtil.isSkipFavOn, false, DriverUserLoginAct.this);
+//
+//                        if (json.has("sos_detail")) {
+//                            SessionSave.saveSession("contact_sos_list", json.getString("sos_detail"), DriverUserLoginAct.this);
+//                        }
+//
+//
+//                        final Intent i = new Intent(DriverUserLoginAct.this, CardRegisterAct.class);
+//                        i.putExtra("alert_message", json.getString("message"));
+//                        if (json.getJSONObject("detail").has("SKIP_CREDIT_CARD") && json.getJSONObject("detail").getString("SKIP_CREDIT_CARD").equals("1"))
+//                            SessionSave.saveSession("SKIP_CREDIT_CARD", true, DriverUserLoginAct.this);
+//                        else
+//                            SessionSave.saveSession("SKIP_CREDIT_CARD", false, DriverUserLoginAct.this);
+//                        startActivity(i);
+//                        finish();
+//                    } else if (json.getInt("status") == -10) {
+//                        DriverCToast.ShowToast(DriverUserLoginAct.this, json.getString("message"));
+//
+//                    } else if (json.getInt("status") == -2) {
+//
+//                        SessionSave.saveSession("Email", json.getJSONObject("detail").getString("email"), DriverUserLoginAct.this);
+//                        SessionSave.saveSession("Phone", json.getJSONObject("detail").getString("phone"), DriverUserLoginAct.this);
+//                        SessionSave.saveSession("Register", "1", DriverUserLoginAct.this);
+//                        SessionSave.saveSession("m_no", phone, DriverUserLoginAct.this);
+//                        final Intent i = new Intent(DriverUserLoginAct.this, DriverUserLoginAct.class);
+//                        Bundle detail_fb = new Bundle();
+//
+//                        if (json.has("phone_exist"))
+//                            detail_fb.putString("phone_exist", json.getString("phone_exist"));
+//                        else detail_fb.putString("phone_exist", "0");
+//
+//                        detail_fb.putString("phone", phone);
+//                        detail_fb.putString("country", "+91");
+//                        i.putExtras(detail_fb);
+//                        startActivity(i);
+//                        finish();
+//                    } else if (json.getInt("status") == -5) {
+//                        Toast.makeText(DriverUserLoginAct.this,"" + json.getString("message"), Toast.LENGTH_LONG).show();
+////                        dialog1 = Utility.alert_view_dialog(DriverUserLoginAct.this, "" + NC.getResources().getString(R.string.message), "" + json.getString("message"), NC.getResources().getString(R.string.ok), "", true, new DialogInterface.OnClickListener() {
+////                            @Override
+////                            public void onClick(DialogInterface dialog, int which) {
+////                                dialog.dismiss();
+////                            }
+////                        }, new DialogInterface.OnClickListener() {
+////                            @Override
+////                            public void onClick(DialogInterface dialog, int which) {
+////                                dialog.dismiss();
+////                            }
+////                        }, "");
+//                    } else if (json.getInt("status") == 4) {
+//                        Toast.makeText(DriverUserLoginAct.this,"" + json.getString("message"), Toast.LENGTH_LONG).show();
+////                        dialog1 = Utility.alert_view_dialog(DriverUserLoginAct.this, "" + NC.getResources().getString(R.string.message), "" + json.getString("message"), NC.getResources().getString(R.string.ok), "", true, new DialogInterface.OnClickListener() {
+////                            @Override
+////                            public void onClick(DialogInterface dialog, int which) {
+////                                dialog.dismiss();
+////                            }
+////                        }, new DialogInterface.OnClickListener() {
+////                            @Override
+////                            public void onClick(DialogInterface dialog, int which) {
+////                                dialog.dismiss();
+////                            }
+////                        }, "");
+//                    } else {
+//                        Toast.makeText(DriverUserLoginAct.this,"" + json.getString("message"), Toast.LENGTH_LONG).show();
+////                        dialog1 = Utility.alert_view_dialog(DriverUserLoginAct.this, "" + NC.getResources().getString(R.string.message), "" + json.getString("message"), NC.getResources().getString(R.string.ok), "", true, new DialogInterface.OnClickListener() {
+////                            @Override
+////                            public void onClick(DialogInterface dialog, int which) {
+////                                dialog.dismiss();
+////                            }
+////                        }, new DialogInterface.OnClickListener() {
+////                            @Override
+////                            public void onClick(DialogInterface dialog, int which) {
+////                                dialog.dismiss();
+////                            }
+////                        }, "");
+//                    }
+//                } else {
+//                    runOnUiThread(new Runnable() {
+//                        public void run() {
+//                            ShowToast(DriverUserLoginAct.this, NC.getString(R.string.server_con_error));
+//                        }
+//                    });
+//                }
+//            } catch (final Exception e) {
+//                // TODO Auto-generated catch block
+//                e.printStackTrace();
+//            }
+//        }
+//    }
 
     /**
      * Referal  method API call and response parsing.
@@ -1692,7 +1684,7 @@ public class DriverUserLoginAct extends MainActivityDriver implements DriverClic
                     else if (json.getInt("status") == 0) {
                         loggedInOtherDevice(json.getString("message"));
                     } else if (json.getInt("status") == 100) {
-                        Userselection_Dialog();
+//                        Userselection_Dialog();
                     } else
                         showAlertView(json.getString("message"));
 

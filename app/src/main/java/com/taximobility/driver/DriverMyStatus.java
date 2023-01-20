@@ -29,7 +29,6 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.provider.Settings;
-import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -70,7 +69,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.mayan.sospluginmodlue.SOSActivity;
 import com.taximobility.ProfileImageSetupClass;
 import com.taximobility.SplashActivity;
-import com.taximobility.driver.fragments.DriverTripDetailNewFrag;
+import com.taximobility.driver.utils.DriverRoundedImageView;
 import com.taximobility.features.CToast;
 import com.squareup.picasso.Picasso;
 import com.taximobility.R;
@@ -95,8 +94,6 @@ import com.taximobility.driver.utils.DriverSystems;
 import com.taximobility.driver.utils.Driver_Utils;
 import com.taximobility.interfaces.AlertListener;
 import com.taximobility.util.FontHelper;
-import com.taximobility.util.NC;
-import com.taximobility.util.RoundedImageView;
 import com.taximobility.util.Utility;
 
 import org.json.JSONArray;
@@ -112,12 +109,10 @@ import java.util.List;
 import java.util.Locale;
 
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.app.ActivityCompat;
 import androidx.core.view.ViewCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import static com.taximobility.driver.service.DriverFirebaseService.BOOKLATER_NOTIFICATION_ID;
@@ -203,7 +198,7 @@ public class DriverMyStatus extends MainActivityDriver implements ConnectionCall
     private AsyncTask<String, String, GeocoderModel> getAddress;
     private AppCompatButton btn_emergency;
     private int shift_value = 0;
-    private RoundedImageView menu_profile_img;
+    private DriverRoundedImageView menu_profile_img;
 
 
     Dialog dialog1;

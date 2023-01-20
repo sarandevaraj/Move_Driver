@@ -62,88 +62,9 @@
         </activity>
 
         <activity
-            android:name="com.taximobility.WebviewAct"
-            android:theme="@style/Mymaterialact"
-            android:windowSoftInputMode="adjustResize|stateHidden" />
-
-        <activity
             android:name="com.taximobility.driver.DriverAddFleetAct"
             android:theme="@style/Mymaterialact"
             android:windowSoftInputMode="adjustPan|stateHidden" />
-
-        <activity
-            android:name="com.taximobility.permission.DevicePermissionActivity"
-            android:theme="@style/Mymaterialact"
-            android:windowSoftInputMode="adjustResize|stateHidden" />
-        <activity
-            android:name="com.taximobility.permission.StoreAndSecureActivity"
-            android:theme="@style/Mymaterialact"
-            android:windowSoftInputMode="adjustResize|stateHidden" />
-        <activity
-            android:name="com.taximobility.ReceiptAct"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:theme="@style/Mymaterialact"
-            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
-        <activity
-            android:name="com.taximobility.MainHomeFragmentActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:supportsRtl="true"
-            android:theme="@style/MyMaterialTheme"
-            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
-
-
-        <activity
-            android:name="com.taximobility.PayuncardAct"
-            android:screenOrientation="portrait"
-            android:theme="@style/MyMaterialTheme"
-            android:windowSoftInputMode="adjustPan|stateHidden" />
-
-        <activity
-            android:name="com.taximobility.ActivityThanks"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan|stateVisible" />
-        <activity
-            android:name="com.taximobility.Login.LoginActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan|stateVisible" />
-        <activity
-            android:name="com.taximobility.ContinousRequest"
-            android:theme="@style/Transparent1"
-            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
-
-        <activity
-            android:name="com.taximobility.locationSearch.AddStopActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/MyMaterialTheme"
-            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
-
-        <activity
-            android:name="com.taximobility.Login.RegisterActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan|stateVisible" />
-        <activity
-            android:name="com.taximobility.TermsAndConditions"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
-        <activity
-            android:name="com.taximobility.TripDetailsAct"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" />
-        <activity
-            android:name="com.taximobility.Login.LoginSelectionAcivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity
-            android:name="com.taximobility.Login.CardRegisterAct"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
-        <activity
-            android:name="com.taximobility.Login.VerificationActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateVisible" />
 
         <!--
                 <service android:name=".MyFirebaseInstanceIDService">
@@ -213,54 +134,19 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <service android:name="com.taximobility.service.GetPassengerUpdate" /> <!-- <service android:name=".service.AuthService" /> -->
+        <!-- <service android:name=".service.AuthService" /> -->
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Mymaterialact" />
 
-
-        <activity
-            android:name="com.taximobility.roomDB.CommonLoggerAct"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.taximobility.roomDB.FullLoggerAct"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.taximobility.roomDB.FindLogActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.taximobility.ShowAlertAct"
-            android:theme="@style/Theme.Transparent3"
-            android:windowSoftInputMode="adjustPan|stateHidden" />
-        <activity
-            android:name="com.taximobility.locationSearch.PickupDropSearchActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name="com.taximobility.locationSearch.LocationSearchActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize" />
-
-        <activity
-            android:name="com.taximobility.MapZoomAct"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:theme="@style/Mymaterialact"
-            android:windowSoftInputMode="adjustResize" />
-
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <service
-            android:name="com.taximobility.tripCancel.service.GetCardDetailsService"
-            android:exported="false" />
-
         <meta-data
             android:name="firebase_analytics_collection_enabled"
             android:value="false" />
-
 
         <!--DRiver-->
 

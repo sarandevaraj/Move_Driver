@@ -5,12 +5,13 @@ import android.os.Handler;
 import android.os.Looper;
 import android.text.TextUtils;
 
+import com.mayan.sospluginmodlue.service.CheckStatus;
 import com.taximobility.BuildConfig;
 import com.taximobility.R;
 import com.taximobility.driver.service.DriverCheckStatus;
+import com.taximobility.driver.utils.DriverNC;
 import com.taximobility.features.CToast;
 import com.taximobility.roomDB.LoggerRepository;
-import com.taximobility.util.NC;
 import com.taximobility.util.SessionSave;
 import com.taximobility.util.TaxiUtil;
 
@@ -215,7 +216,7 @@ public class ServiceGenerator {
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
-                            CToast.ShowToast(c.getApplicationContext(), NC.getString(R.string.server_error));
+                            CToast.ShowToast(c.getApplicationContext(), DriverNC.getString(R.string.server_error));
                         }
                     });
                 } else {

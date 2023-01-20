@@ -1,6 +1,5 @@
 package com.taximobility.driver;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
@@ -59,9 +58,7 @@ import com.taximobility.driver.utils.DriverSystems;
 import com.taximobility.driver.utils.Driver_Utils;
 import com.taximobility.features.CToast;
 import com.taximobility.interfaces.AlertListener;
-import com.taximobility.service.BackgroundCoreConfig;
 import com.taximobility.util.AppController;
-import com.taximobility.util.NC;
 import com.taximobility.util.SessionSave;
 import com.taximobility.util.Utility;
 
@@ -74,7 +71,6 @@ import java.util.Locale;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
-import androidx.core.app.ActivityCompat;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -1716,7 +1712,7 @@ public class DriverFarecalcAct extends MainActivityDriver implements DriverClick
 
     @Override
     public void onBackPressed() {
-        CToast.ShowToast(context, NC.getString(R.string.pls_complete_the_payment));
+        CToast.ShowToast(context, DriverNC.getString(R.string.pls_complete_the_payment));
 //        Intent intent = new Intent(DriverFarecalcAct.this, DriverMyStatus.class);
 //        startActivity(intent);
 //        finish();
