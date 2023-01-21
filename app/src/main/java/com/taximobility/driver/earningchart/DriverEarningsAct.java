@@ -19,6 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.interpolator.view.animation.LinearOutSlowInInterpolator;
 
@@ -61,7 +62,7 @@ import com.taximobility.driver.utils.DriverSessionSave;
 import com.taximobility.driver.utils.DriverSystems;
 import com.taximobility.driver.utils.Driver_Utils;
 import com.taximobility.driver.utils.drawable_program.Drawables_program;
-import com.taximobility.interfaces.AlertListener;
+import com.taximobility.driver.interfaces.AlertListener;
 import com.taximobility.util.AppController;
 import com.taximobility.util.Utility;
 
@@ -75,7 +76,6 @@ import retrofit2.Response;
 import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetSequence;
 import uk.co.samuelwall.materialtaptargetprompt.extras.backgrounds.FullscreenPromptBackground;
-
 
 /**
  * This class is used to show driver earning details based on date
@@ -105,8 +105,6 @@ public class DriverEarningsAct extends DriverBaseActivity implements DriverClick
     private int pos = 0, total_weeks = 0;
     private ImageView img_left, img_right;
     private TextView tv_this_week, tv_this_week_amt, tv_total_trip, tv_total_distance;
-
-
     private Dialog dialog1;
     private LinearLayout layout_earnings_items;
 
@@ -133,11 +131,8 @@ public class DriverEarningsAct extends DriverBaseActivity implements DriverClick
         if (mTapTarget != null) {
             mTapTarget.dismiss();
         }
-        if (dialog1 != null)
-            Driver_Utils.closeDialog(dialog1);
-
+        if (dialog1 != null) Driver_Utils.closeDialog(dialog1);
         closeDialog();
-
         super.onDestroy();
     }
 
@@ -145,26 +140,21 @@ public class DriverEarningsAct extends DriverBaseActivity implements DriverClick
         slideImg.setOnClickListener(view -> onBackPressed());
         btn_emergency = findViewById(R.id.btn_emergency);
 
-        btn_emergency.setOnClickListener(view -> {
-            Utility.actionSheet(DriverEarningsAct.this, DriverNC.getResources().getString(R.string.send_emergency_alert), DriverNC.getResources().getString(R.string.yes), DriverNC.getResources().getString(R.string.no), false, new AlertListener() {
-                @Override
-                public void onSuccess() {
-                    startSOSService();
-                }
+        btn_emergency.setOnClickListener(view -> Utility.actionSheet(DriverEarningsAct.this, DriverNC.getResources().getString(R.string.send_emergency_alert), DriverNC.getResources().getString(R.string.yes), DriverNC.getResources().getString(R.string.no), false, new AlertListener() {
+            @Override
+            public void onSuccess() {
+                startSOSService();
+            }
 
-                @Override
-                public void onFailure() {
+            @Override
+            public void onFailure() {
 
-                }
-            });
-
-        });
+            }
+        }));
 
         layout_earnings_items = findViewById(R.id.layout_earnings_items);
         mChart = findViewById(R.id.chart1);
         date = findViewById(R.id.dates);
-
-
         trips = findViewById(R.id.trips);
         eAmt = findViewById(R.id.amt);
         wek_txt = findViewById(R.id.wek_txt);
@@ -193,14 +183,12 @@ public class DriverEarningsAct extends DriverBaseActivity implements DriverClick
         btn_withdraw.setOnClickListener(v -> {
             Intent in = new Intent(DriverEarningsAct.this, DriverWithDrawMenuAct.class);
             startActivity(in);
-
         });
 
         btn_settlement.setOnClickListener(view -> startActivity(new Intent(DriverEarningsAct.this, SettlementHistoryActivityDriver.class)));
 
         txt_recharge_link.setOnClickListener(v -> {
             Intent in = new Intent(DriverEarningsAct.this, DriverWebviewAct.class);
-
             in.putExtra("type", "1");
             in.putExtra(DriverCommonData.IS_FROM_EARNINGS, true);
             startActivity(in);
@@ -209,7 +197,6 @@ public class DriverEarningsAct extends DriverBaseActivity implements DriverClick
         btnWithdrawHistory.setOnClickListener(v -> {
             Intent in = new Intent(DriverEarningsAct.this, DriverWalletHistory.class);
             startActivity(in);
-
         });
 
         img_left.setOnClickListener(view -> {
@@ -219,7 +206,6 @@ public class DriverEarningsAct extends DriverBaseActivity implements DriverClick
                 tv_this_week_amt.setText(DriverSessionSave.getSession("site_currency", DriverEarningsAct.this) + " " + data.weekly_earnings.get(pos).this_week_earnings);
                 setmChart(pos);
             }
-
         });
 
         img_right.setOnClickListener(view -> {
@@ -229,20 +215,12 @@ public class DriverEarningsAct extends DriverBaseActivity implements DriverClick
                 tv_this_week_amt.setText(DriverSessionSave.getSession("site_currency", DriverEarningsAct.this) + " " + data.weekly_earnings.get(pos).this_week_earnings);
                 setmChart(pos);
             }
-
         });
 
-
-        DirverColorchange.ChangeColor((ViewGroup) (((ViewGroup) DriverEarningsAct.this
-                .findViewById(android.R.id.content)).getChildAt(0)), DriverEarningsAct.this);
-
-
+        DirverColorchange.ChangeColor((ViewGroup) (((ViewGroup) DriverEarningsAct.this.findViewById(android.R.id.content)).getChildAt(0)), DriverEarningsAct.this);
         ImageView headerlogo = findViewById(R.id.headicon);
-
         Picasso.get().load(DriverSessionSave.getSession("image_path", this) + "headerLogo_driver.png").into((ImageView) findViewById(R.id.headicon));
-
         headerlogo.setVisibility(View.GONE);
-
         mChart.setVisibility(View.INVISIBLE);
         mChart.setDrawBarShadow(false);
         mChart.setDrawValueAboveBar(true);
@@ -252,7 +230,6 @@ public class DriverEarningsAct extends DriverBaseActivity implements DriverClick
         mChart.setDrawGridBackground(false);
         mChart.setDrawValueAboveBar(true);
         DriverWeekaxisformatter xAxisFormatter = new DriverWeekaxisformatter();
-
         XAxis xAxis = mChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setDrawGridLines(false);
@@ -260,8 +237,6 @@ public class DriverEarningsAct extends DriverBaseActivity implements DriverClick
         xAxis.setValueFormatter(xAxisFormatter);
         xAxis.setDrawAxisLine(false);
         IAxisValueFormatter custom = new DriverMyAxisValueFormatter(DriverSessionSave.getSession("site_currency", DriverEarningsAct.this));
-
-
         YAxis leftAxis = mChart.getAxisLeft();
         leftAxis.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART);
         leftAxis.setSpaceTop(25f);
@@ -269,7 +244,6 @@ public class DriverEarningsAct extends DriverBaseActivity implements DriverClick
         leftAxis.setAxisMinimum(0f);
         leftAxis.setDrawAxisLine(false);
         leftAxis.setDrawLabels(false);
-
         YAxis rightAxis = mChart.getAxisRight();
         rightAxis.setDrawGridLines(false);
         rightAxis.setGranularityEnabled(false);
@@ -281,103 +255,68 @@ public class DriverEarningsAct extends DriverBaseActivity implements DriverClick
         rightAxis.setDrawAxisLine(false);
         rightAxis.setDrawLabels(false);
 
-
-
       /*  DriverXYMarkerView mv = new DriverXYMarkerView(this, xAxisFormatter, DriverSessionSave.getSession("site_currency", DriverEarningsAct.this));
         mv.setChartView(mChart);
         mChart.setMarker(mv);*/
         mChart.getLegend().setEnabled(false);
-
         setData();
-
 
         //Setting driver shift status
         if (DriverSessionSave.getSession("shift_status", DriverEarningsAct.this).equals("IN")) {
-
             Drawables_program.shift_on(btn_shift);
             btn_shift.setText(DriverNC.getString(R.string.online));
-
             if (!DriverSessionSave.getSession("driver_type", DriverEarningsAct.this).equals("D"))
                 nonactiityobj.startServicefromNonActivity(DriverEarningsAct.this);
-
         } else {
-
             Drawables_program.shift_bg_grey(btn_shift);
             btn_shift.setText(DriverNC.getString(R.string.offline));
-
             nonactiityobj.stopServicefromNonActivity(DriverEarningsAct.this);
         }
 
-
-        earnings_lay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                //Intent intent = new Intent(EarningsAct.this, EarningsAct.class);
-                // startActivity(intent);
-                //finish();
-
-            }
+        earnings_lay.setOnClickListener(view -> {
+            //Intent intent = new Intent(EarningsAct.this, EarningsAct.class);
+            // startActivity(intent);
+            //finish();
         });
 
-        home_lay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent intent = new Intent(DriverEarningsAct.this, DriverMyStatus.class);
-                startActivity(intent);
-                // finish();
-            }
+        home_lay.setOnClickListener(view -> {
+            Intent intent = new Intent(DriverEarningsAct.this, DriverMyStatus.class);
+            startActivity(intent);
+            // finish();
         });
 
-        profile_lay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(DriverEarningsAct.this, DriverMeAct.class);
-                startActivity(intent);
-                // finish();
-            }
+        profile_lay.setOnClickListener(view -> {
+            Intent intent = new Intent(DriverEarningsAct.this, DriverMeAct.class);
+            startActivity(intent);
+            // finish();
         });
 
-        streetpick_lay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!DriverSessionSave.getSession("driver_type", DriverEarningsAct.this).equalsIgnoreCase("D")) {
-                    if (DriverSessionSave.getSession("trip_id", DriverEarningsAct.this).equals("")) {
-                        Intent intent = new Intent(DriverEarningsAct.this, DriverStreetPickUpAct.class);
-                        startActivity(intent);
-                    } else if (!DriverSessionSave.getSession("trip_id", DriverEarningsAct.this).equals("") && DriverSessionSave.getSession(DriverCommonData.IS_STREET_PICKUP, DriverEarningsAct.this, false)) {
-                        Intent intent = new Intent(DriverEarningsAct.this, DriverStreetPickUpAct.class);
-                        startActivity(intent);
-                    } else {
-//                        showStreetAlert(DriverNC.getString(R.string.you_are_in_trip));
-                        DriverCToast.ShowToast(DriverEarningsAct.this, DriverNC.getString(R.string.you_are_in_trip));
-                    }
+        streetpick_lay.setOnClickListener(view -> {
+            if (!DriverSessionSave.getSession("driver_type", DriverEarningsAct.this).equalsIgnoreCase("D")) {
+                if (DriverSessionSave.getSession("trip_id", DriverEarningsAct.this).equals("")) {
+                    Intent intent = new Intent(DriverEarningsAct.this, DriverStreetPickUpAct.class);
+                    startActivity(intent);
+                } else if (!DriverSessionSave.getSession("trip_id", DriverEarningsAct.this).equals("") && DriverSessionSave.getSession(DriverCommonData.IS_STREET_PICKUP, DriverEarningsAct.this, false)) {
+                    Intent intent = new Intent(DriverEarningsAct.this, DriverStreetPickUpAct.class);
+                    startActivity(intent);
                 } else {
-                    DriverCToast.ShowToast(DriverEarningsAct.this, DriverSessionSave.getSession("account_message", DriverEarningsAct.this));
+//                        showStreetAlert(DriverNC.getString(R.string.you_are_in_trip));
+                    DriverCToast.ShowToast(DriverEarningsAct.this, DriverNC.getString(R.string.you_are_in_trip));
                 }
+            } else {
+                DriverCToast.ShowToast(DriverEarningsAct.this, DriverSessionSave.getSession("account_message", DriverEarningsAct.this));
             }
         });
 
-        btn_shift.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                btn_shift.setClickable(false);
-                new RequestingCheckBox();
-            }
+        btn_shift.setOnClickListener(v -> {
+            btn_shift.setClickable(false);
+            new RequestingCheckBox();
         });
 
-        triphistory_lay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(DriverEarningsAct.this, DriverTripHistoryAct.class);
-                startActivity(intent);
-
-            }
+        triphistory_lay.setOnClickListener(v -> {
+            Intent intent = new Intent(DriverEarningsAct.this, DriverTripHistoryAct.class);
+            startActivity(intent);
         });
-
     }
 
     @Override
@@ -406,18 +345,14 @@ public class DriverEarningsAct extends DriverBaseActivity implements DriverClick
         showLoading();
         yVals1 = new ArrayList<>();
 
-
         DriverCoreClient client = AppController.getInstance().getApiManagerWithEncryptBaseUrl_driver();
         DriverApiRequestData.Earnings request = new DriverApiRequestData.Earnings();
-
         request.setDriver_id(DriverSessionSave.getSession("Id", DriverEarningsAct.this));
-
-
         Call<DriverEarningresponse> response = client.callData(DriverServiceGenerator.COMPANY_KEY, request);
         response.enqueue(new DriverRetrofitCallbackClass<>(DriverEarningsAct.this, new Callback<DriverEarningresponse>() {
             @SuppressLint("SetTextI18n")
             @Override
-            public void onResponse(Call<DriverEarningresponse> call, Response<DriverEarningresponse> response) {
+            public void onResponse(@NonNull Call<DriverEarningresponse> call, @NonNull Response<DriverEarningresponse> response) {
                 closeLoading();
 
                 if (response.isSuccessful() && DriverEarningsAct.this != null) {
@@ -429,7 +364,6 @@ public class DriverEarningsAct extends DriverBaseActivity implements DriverClick
                             if (data.withdraw_array != null && data.withdraw_array.size() != 0) {
                                 if (data.withdraw_array.get(0).driver_wallet_amount != null)
                                     DriverSessionSave.saveSession("driver_wallet_amount", "" + data.withdraw_array.get(0).driver_wallet_amount, DriverEarningsAct.this);
-
                                 if (data.withdraw_array.get(0).driver_wallet_pending_amount != null)
                                     DriverSessionSave.saveSession("driver_wallet_pending_amount", data.withdraw_array.get(0).driver_wallet_pending_amount, DriverEarningsAct.this);
                                 if (data.withdraw_array.get(0).trip_amount != null)
@@ -441,7 +375,6 @@ public class DriverEarningsAct extends DriverBaseActivity implements DriverClick
                                 if (data.withdraw_array.get(0).driver_trip_wallet_amount != null)
                                     wallet_amount.setText(DriverSessionSave.getSession("site_currency", DriverEarningsAct.this) + " " + data.withdraw_array.get(0).driver_trip_wallet_amount);
                             }
-
 
                             earnings_layout.setVisibility(View.VISIBLE);
                             // date.removeAllViews();
@@ -478,7 +411,6 @@ public class DriverEarningsAct extends DriverBaseActivity implements DriverClick
                                             wek_txt.setText(DriverNC.getResources().getString(R.string.Week));
                                         } else {
                                             wek_txt.setText(DriverNC.getResources().getString(R.string.Selected_Week));
-
                                         }
                                         mChart.notifyDataSetChanged();
                                         weekAmt.setText("" + DriverSessionSave.getSession("site_currency", DriverEarningsAct.this) + " " + data.weekly_earnings.get(i).this_week_earnings);
@@ -486,7 +418,6 @@ public class DriverEarningsAct extends DriverBaseActivity implements DriverClick
                                             TextView v = (TextView) date.getChildAt(j);
                                             v.setTextColor(Color.GRAY);
                                         }
-
                                         ((TextView) view).setTextColor(DriverCL.getColor(R.color.black));
                                         ((TextView) view).setText(data.weekly_earnings.get(i).date_text + "\n" + DriverSessionSave.getSession("site_currency", DriverEarningsAct.this) + " " + data.weekly_earnings.get(i).this_week_earnings);
                                         date.invalidate();
@@ -495,7 +426,6 @@ public class DriverEarningsAct extends DriverBaseActivity implements DriverClick
                                 });
 
                                 date.addView(et);*/
-
 
                                 try {
                                     //if(data.)
@@ -511,7 +441,6 @@ public class DriverEarningsAct extends DriverBaseActivity implements DriverClick
                                 else
                                     weekAmt.setText("" + DriverSessionSave.getSession("site_currency", DriverEarningsAct.this) + " 0");
                             }
-
                         } else if (data.status == -1) {
                             DriverCToast.ShowToast(DriverEarningsAct.this, data.message);
                         } else {
@@ -520,20 +449,15 @@ public class DriverEarningsAct extends DriverBaseActivity implements DriverClick
                     } else {
                         DriverCToast.ShowToast(DriverEarningsAct.this, DriverNC.getString(R.string.server_error));
                     }
-
                 }
-
-
             }
 
             @Override
-            public void onFailure(Call<DriverEarningresponse> call, Throwable t) {
+            public void onFailure(@NonNull Call<DriverEarningresponse> call, @NonNull Throwable t) {
                 closeLoading();
                 t.printStackTrace();
             }
         }));
-
-
     }
 
     private void closeLoading() {
@@ -548,47 +472,9 @@ public class DriverEarningsAct extends DriverBaseActivity implements DriverClick
 
     private void showTapTargetPrompt() {
         if (!DriverSessionSave.getSession(DriverCommonData.SHOW_TOOLTIP, DriverEarningsAct.this, false) && txt_recharge_link != null) {
-            txt_recharge_link.post(new Runnable() {
-                @Override
-                public void run() {
-
-                    mTapTarget = new MaterialTapTargetSequence()
-                            .addPrompt(new MaterialTapTargetPrompt.Builder(DriverEarningsAct.this)
-                                    .setTarget(txt_recharge_link)
-                                    .setAnimationInterpolator(new LinearOutSlowInInterpolator())
-                                    .setFocalColour(DriverCL.getResources().getColor(R.color.focal_white))
-                                    .setFocalRadius(Float.parseFloat(Integer.toString(txt_recharge_link.getHeight() + wallet_amount.getHeight())))
-                                    .setBackgroundColour(DriverCL.getResources().getColor(R.color.tooltip_background))
-                                    .setPrimaryText(DriverNC.getString(R.string.wallet_tooltip_text))
-                                    .setPrimaryTextColour(DriverCL.getResources().getColor(R.color.white))
-                                    .setSecondaryText(DriverNC.getString(R.string.next))
-                                    .setSecondaryTextColour(DriverCL.getResources().getColor(R.color.pastbookingcashtext))
-                                    .setPromptBackground(new FullscreenPromptBackground()).create(), 4000)
-                            .addPrompt(new MaterialTapTargetPrompt.Builder(DriverEarningsAct.this)
-                                    .setTarget(btn_withdraw)
-                                    .setAnimationInterpolator(new LinearOutSlowInInterpolator())
-                                    .setBackgroundColour(DriverCL.getResources().getColor(R.color.tooltip_background))
-                                    .setPrimaryText(DriverNC.getString(R.string.withdraw_tooltip_text))
-                                    .setSecondaryText(DriverNC.getString(R.string.next))
-                                    .setPrimaryTextColour(DriverCL.getResources().getColor(R.color.white))
-                                    .setSecondaryTextColour(DriverCL.getResources().getColor(R.color.pastbookingcashtext))
-                                    .setFocalPadding(R.dimen.sp_20)
-                                    .setPromptBackground(new FullscreenPromptBackground())
-                                    .create(), 4000)
-                            .addPrompt(new MaterialTapTargetPrompt.Builder(DriverEarningsAct.this)
-                                    .setTarget(btn_settlement)
-                                    .setAnimationInterpolator(new LinearOutSlowInInterpolator())
-                                    .setBackgroundColour(DriverCL.getResources().getColor(R.color.tooltip_background))
-                                    .setPrimaryText(DriverNC.getString(R.string.settlement_tooltip_text))
-                                    .setSecondaryText(DriverNC.getString(R.string.ok))
-                                    .setPrimaryTextColour(DriverCL.getResources().getColor(R.color.white))
-                                    .setSecondaryTextColour(DriverCL.getResources().getColor(R.color.pastbookingcashtext))
-                                    .setFocalPadding(R.dimen.sp_20)
-                                    .setPromptBackground(new FullscreenPromptBackground())
-                                    .create(), 4000).show();
-                    DriverSessionSave.saveSession(DriverCommonData.SHOW_TOOLTIP, true, DriverEarningsAct.this);
-
-                }
+            txt_recharge_link.post(() -> {
+                mTapTarget = new MaterialTapTargetSequence().addPrompt(new MaterialTapTargetPrompt.Builder(DriverEarningsAct.this).setTarget(txt_recharge_link).setAnimationInterpolator(new LinearOutSlowInInterpolator()).setFocalColour(DriverCL.getResources().getColor(R.color.focal_white)).setFocalRadius(Float.parseFloat(Integer.toString(txt_recharge_link.getHeight() + wallet_amount.getHeight()))).setBackgroundColour(DriverCL.getResources().getColor(R.color.tooltip_background)).setPrimaryText(DriverNC.getString(R.string.wallet_tooltip_text)).setPrimaryTextColour(DriverCL.getResources().getColor(R.color.white)).setSecondaryText(DriverNC.getString(R.string.next)).setSecondaryTextColour(DriverCL.getResources().getColor(R.color.pastbookingcashtext)).setPromptBackground(new FullscreenPromptBackground()).create(), 4000).addPrompt(new MaterialTapTargetPrompt.Builder(DriverEarningsAct.this).setTarget(btn_withdraw).setAnimationInterpolator(new LinearOutSlowInInterpolator()).setBackgroundColour(DriverCL.getResources().getColor(R.color.tooltip_background)).setPrimaryText(DriverNC.getString(R.string.withdraw_tooltip_text)).setSecondaryText(DriverNC.getString(R.string.next)).setPrimaryTextColour(DriverCL.getResources().getColor(R.color.white)).setSecondaryTextColour(DriverCL.getResources().getColor(R.color.pastbookingcashtext)).setFocalPadding(R.dimen.sp_20).setPromptBackground(new FullscreenPromptBackground()).create(), 4000).addPrompt(new MaterialTapTargetPrompt.Builder(DriverEarningsAct.this).setTarget(btn_settlement).setAnimationInterpolator(new LinearOutSlowInInterpolator()).setBackgroundColour(DriverCL.getResources().getColor(R.color.tooltip_background)).setPrimaryText(DriverNC.getString(R.string.settlement_tooltip_text)).setSecondaryText(DriverNC.getString(R.string.ok)).setPrimaryTextColour(DriverCL.getResources().getColor(R.color.white)).setSecondaryTextColour(DriverCL.getResources().getColor(R.color.pastbookingcashtext)).setFocalPadding(R.dimen.sp_20).setPromptBackground(new FullscreenPromptBackground()).create(), 4000).show();
+                DriverSessionSave.saveSession(DriverCommonData.SHOW_TOOLTIP, true, DriverEarningsAct.this);
             });
         }
     }
@@ -600,18 +486,15 @@ public class DriverEarningsAct extends DriverBaseActivity implements DriverClick
 
         try {
             mChart.setVisibility(View.VISIBLE);
-
             yVals1.clear();
             for (int i = 0; i < data.weekly_earnings.get(x).trip_amount.size(); i++) {
                 yVals1.add(new BarEntry(i, Float.parseFloat(data.weekly_earnings.get(x).trip_amount.get(i).toString())));
             }
-
             DriverWeekaxisformatter.mMonths = data.weekly_earnings.get(x).day_list;
             mChart.invalidate();
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         BarDataSet set1;
         set1 = new BarDataSet(yVals1, "");
         set1.setDrawValues(true);
@@ -627,7 +510,6 @@ public class DriverEarningsAct extends DriverBaseActivity implements DriverClick
         mChart.setData(null);
         mChart.setData(datas);
         mChart.setFitBars(false);
-
         mChart.invalidate();
     }
 
@@ -649,11 +531,10 @@ public class DriverEarningsAct extends DriverBaseActivity implements DriverClick
         ConnectivityManager connectivity = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
         if (connectivity != null) {
             NetworkInfo[] info = connectivity.getAllNetworkInfo();
-            if (info != null)
-                for (NetworkInfo networkInfo : info)
-                    if (networkInfo.getState() == NetworkInfo.State.CONNECTED) {
-                        return true;
-                    }
+            if (info != null) for (NetworkInfo networkInfo : info)
+                if (networkInfo.getState() == NetworkInfo.State.CONNECTED) {
+                    return true;
+                }
         }
         return false;
     }
@@ -683,12 +564,9 @@ public class DriverEarningsAct extends DriverBaseActivity implements DriverClick
                     @Override
                     public void onClick(final View v) {
                         // TODO Auto-generated method stub
-
                         errorDialog.dismiss();
-
                         Intent i = new Intent(DriverEarningsAct.this, DriverOngoingAct.class);
                         startActivity(i);
-
                     }
                 });
                 button_failure.setOnClickListener(new View.OnClickListener() {
@@ -696,7 +574,6 @@ public class DriverEarningsAct extends DriverBaseActivity implements DriverClick
                     public void onClick(final View v) {
                         // TODO Auto-generated method stub
                         errorDialog.dismiss();
-
                     }
                 });
             } else {
@@ -712,12 +589,10 @@ public class DriverEarningsAct extends DriverBaseActivity implements DriverClick
             e.printStackTrace();
         }
     }
-
  */
 
     @Override
     public void onBackPressed() {
-
         Intent intent = new Intent(DriverEarningsAct.this, DriverMyStatus.class);
         startActivity(intent);
         finish();
@@ -726,13 +601,11 @@ public class DriverEarningsAct extends DriverBaseActivity implements DriverClick
     private void startSOSService() {
         DriverSessionSave.saveSession("sos_id", DriverSessionSave.getSession("Id", DriverEarningsAct.this), DriverEarningsAct.this);
         DriverSessionSave.saveSession("user_type", "d", DriverEarningsAct.this);
-
-
         //    startService(new Intent(EarningsAct.this, SOSService.class));
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == REQUEST_READ_PHONE_STATE) {// If request is cancelled, the result arrays are empty.
             if (grantResults.length > 0) {
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -752,9 +625,7 @@ public class DriverEarningsAct extends DriverBaseActivity implements DriverClick
             try {
                 if (btn_shift.getText().toString().equals(DriverNC.getString(R.string.online)))
                     checked = "OUT";
-                else
-                    checked = "IN";
-
+                else checked = "IN";
                 JSONObject j = new JSONObject();
                 j.put("driver_id", DriverSessionSave.getSession("Id", DriverEarningsAct.this));
                 j.put("shiftstatus", checked);
@@ -767,11 +638,9 @@ public class DriverEarningsAct extends DriverBaseActivity implements DriverClick
                     new DriverAPIService_Retrofit_JSON(DriverEarningsAct.this, this, j, false).execute(requestingCheckBox);
                 else {
                     btn_shift.setClickable(true);
-
                     DriverCToast.ShowToast(DriverEarningsAct.this, "" + DriverNC.getResources().getString(R.string.check_net_connection));
 //                    dialog1 = Driver_Utils.alert_view(DriverEarningsAct.this, "" + DriverNC.getResources().getString(R.string.message), "" + DriverNC.getResources().getString(R.string.check_net_connection), DriverNC.getResources().getString(R.string.ok),
 //                            "", true, DriverEarningsAct.this, "");
-
                 }
             } catch (Exception e) {
                 // TODO: handle exception
@@ -781,11 +650,8 @@ public class DriverEarningsAct extends DriverBaseActivity implements DriverClick
 
         @Override
         public void getResult(boolean isSuccess, final String result) {
-
             try {
-
                 Log.e("driverstatus", result);
-
                 if (isSuccess && DriverEarningsAct.this != null) {
                     btn_shift.setClickable(true);
 
@@ -827,12 +693,7 @@ public class DriverEarningsAct extends DriverBaseActivity implements DriverClick
 //                                "", true, DriverEarningsAct.this, "");
                     }
                 } else {
-
-                    runOnUiThread(new Runnable() {
-                        public void run() {
-                            DriverCToast.ShowToast(DriverEarningsAct.this, DriverNC.getString(R.string.please_check_internet));
-                        }
-                    });
+                    runOnUiThread(() -> DriverCToast.ShowToast(DriverEarningsAct.this, DriverNC.getString(R.string.please_check_internet)));
                     btn_shift.setClickable(true);
                     if (checked.equals("IN")) {
                         btn_shift.setText(DriverNC.getString(R.string.online));
@@ -846,11 +707,9 @@ public class DriverEarningsAct extends DriverBaseActivity implements DriverClick
                 ex.printStackTrace();
                 btn_shift.setClickable(true);
                 DriverCToast.ShowToast(DriverEarningsAct.this, "" + DriverNC.getResources().getString(R.string.server_error));
-
             }
         }
     }
-
 
     public void showDialog() {
         try {
@@ -860,18 +719,13 @@ public class DriverEarningsAct extends DriverBaseActivity implements DriverClick
                 mDialog.setContentView(view);
                 mDialog.setCancelable(false);
                 mDialog.show();
-
                 ImageView iv = mDialog.findViewById(R.id.giff);
                 DrawableImageViewTarget imageViewTarget = new DrawableImageViewTarget(iv);
-                Glide.with(DriverEarningsAct.this)
-                        .load(R.raw.driver_loading_anim)
-                        .into(imageViewTarget);
-
+                Glide.with(DriverEarningsAct.this).load(R.raw.driver_loading_anim).into(imageViewTarget);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     /**
@@ -879,9 +733,7 @@ public class DriverEarningsAct extends DriverBaseActivity implements DriverClick
      */
     public void closeDialog() {
         try {
-            if (mDialog != null)
-                if (mDialog.isShowing())
-                    mDialog.dismiss();
+            if (mDialog != null) if (mDialog.isShowing()) mDialog.dismiss();
         } catch (Exception e) {
             e.printStackTrace();
         }

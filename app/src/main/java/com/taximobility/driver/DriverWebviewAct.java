@@ -93,9 +93,7 @@ public class DriverWebviewAct extends DriverBaseActivity {
         simpleWebView.setWebViewClient(new MyWebViewClient());
         simpleWebView.setWebChromeClient(new WebChromeClient() {
             //For Android 5.0+
-            public boolean onShowFileChooser(
-                    WebView webView, ValueCallback<Uri[]> filePathCallback,
-                    FileChooserParams fileChooserParams) {
+            public boolean onShowFileChooser(WebView webView, ValueCallback<Uri[]> filePathCallback, FileChooserParams fileChooserParams) {
                 if (mUMA != null) {
                     mUMA.onReceiveValue(null);
                 }
@@ -115,9 +113,7 @@ public class DriverWebviewAct extends DriverBaseActivity {
                         mCM = "file:" + photoFile.getAbsolutePath();
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                             takePictureIntent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                            imageUri = FileProvider.getUriForFile(DriverWebviewAct.this,
-                                    DriverWebviewAct.this.getPackageName().concat(".files_root"),
-                                    photoFile);
+                            imageUri = FileProvider.getUriForFile(DriverWebviewAct.this, DriverWebviewAct.this.getPackageName().concat(".files_root"), photoFile);
                         } else {
                             imageUri = Uri.fromFile(photoFile);
                         }
@@ -181,7 +177,7 @@ public class DriverWebviewAct extends DriverBaseActivity {
             e.printStackTrace();
         }
         String colorCode = "&b_act=" + btnAct + "&b_cal=" + btnRjt + "&new=1";
-       if (type.equals("delete")) {
+        if (type.equals("delete")) {
             link_2_attach = link_1 + "/" + encodeSTr + "?lang=" + lang_Str;
         } else if (type.equals(DriverCommonData.HELP_URL)) {
             link_2_attach = link_1 + "?" + encodeSTr + "&lang=" + lang_Str;
@@ -189,13 +185,10 @@ public class DriverWebviewAct extends DriverBaseActivity {
             link_2_attach = link_1 + encodeSTr + "/?lang=" + lang_Str;
         }
         link_2_attach = link_2_attach + colorCode;
-        switch (type) {
-            case "12":
-                simpleWebView.loadUrl(link_2 + "&lang=" + lang_Str + colorCode);
-                break;
-            default:
-                simpleWebView.loadUrl(link_2_attach);
-                break;
+        if ("12".equals(type)) {
+            simpleWebView.loadUrl(link_2 + "&lang=" + lang_Str + colorCode);
+        } else {
+            simpleWebView.loadUrl(link_2_attach);
         }
         showDialog();
     }
@@ -239,8 +232,7 @@ public class DriverWebviewAct extends DriverBaseActivity {
     public void showDialog() {
         try {
             if (DriverNetworkStatus.isOnline(DriverWebviewAct.this)) {
-                if (mDialog != null)
-                    mDialog.dismiss();
+                if (mDialog != null) mDialog.dismiss();
                 View view = View.inflate(DriverWebviewAct.this, R.layout.driver_progress_bar, null);
                 mDialog = new Dialog(DriverWebviewAct.this, R.style.dialogwinddow);
                 DirverColorchange.ChangeColor((ViewGroup) view, DriverWebviewAct.this);
@@ -253,9 +245,7 @@ public class DriverWebviewAct extends DriverBaseActivity {
                 }
                 ImageView iv = mDialog.findViewById(R.id.giff);
                 DrawableImageViewTarget imageViewTarget = new DrawableImageViewTarget(iv);
-                Glide.with(DriverWebviewAct.this)
-                        .load(R.raw.driver_loading_anim)
-                        .into(imageViewTarget);
+                Glide.with(DriverWebviewAct.this).load(R.raw.driver_loading_anim).into(imageViewTarget);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -295,9 +285,7 @@ public class DriverWebviewAct extends DriverBaseActivity {
 
     public void closeDialog() {
         try {
-            if (mDialog != null)
-                if (mDialog.isShowing())
-                    mDialog.dismiss();
+            if (mDialog != null) if (mDialog.isShowing()) mDialog.dismiss();
         } catch (Exception e) {
             e.printStackTrace();
         }

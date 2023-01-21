@@ -5,7 +5,6 @@ import com.taximobility.driver.data.DriverCommonData
 import com.taximobility.driver.data.DriverModelDriverInfo
 import com.taximobility.driver.service.LocationUpdate.*
 
-
 /**
  * Created on 10th October by developer at NDOT Technologies
  * Singleton class to get driver information like id,shift status,etc ...
@@ -17,9 +16,15 @@ object DriverUtils {
     fun driverInfo(context: Context): DriverModelDriverInfo {
         val driverLastLocation = "$currentLatitude,${currentLongtitude}"
         val driverLocationAccuracy = "$currentAccuracy"
-        return DriverModelDriverInfo(DriverSessionSave.getSession("Id", context),
-                DriverSessionSave.getSession("trip_id", context), "$driverLastLocation,$driverLocationAccuracy", DriverSessionSave.getSession("shift_status", context), DriverSessionSave.getSession("travel_status", context),
-                DriverSessionSave.getSession("service_status", context, false),
-                DriverSessionSave.getSession(DriverCommonData.DRIVER_LOCATION_STATIC, context).replace("null", ""))
+        return DriverModelDriverInfo(
+            DriverSessionSave.getSession("Id", context),
+            DriverSessionSave.getSession("trip_id", context),
+            "$driverLastLocation,$driverLocationAccuracy",
+            DriverSessionSave.getSession("shift_status", context),
+            DriverSessionSave.getSession("travel_status", context),
+            DriverSessionSave.getSession("service_status", context, false),
+            DriverSessionSave.getSession(DriverCommonData.DRIVER_LOCATION_STATIC, context)
+                .replace("null", "")
+        )
     }
 }

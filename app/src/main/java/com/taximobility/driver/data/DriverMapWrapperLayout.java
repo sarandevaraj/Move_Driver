@@ -29,7 +29,7 @@ public class DriverMapWrapperLayout extends RelativeLayout {
      * Our custom view which is returned from either the InfoWindowAdapter.getInfoContents or InfoWindowAdapter.getInfoWindow
      */
     private View infoWindow;
-    private Context mContext;
+    private final Context mContext;
     private final Handler handler = new Handler();
     private static boolean mMapIsTouched = true;
     private Runnable mRunnable;
@@ -58,12 +58,7 @@ public class DriverMapWrapperLayout extends RelativeLayout {
         this.bottomOffsetPixels = bottomOffsetPixels;
 
         mHandler = new Handler();
-        mRunnable = new Runnable() {
-            @Override
-            public void run() {
-                setmMapIsTouched(true);
-            }
-        };
+        mRunnable = () -> setmMapIsTouched(true);
     }
 
     /**

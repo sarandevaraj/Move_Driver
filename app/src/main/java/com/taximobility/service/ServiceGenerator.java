@@ -9,8 +9,8 @@ import com.mayan.sospluginmodlue.service.CheckStatus;
 import com.taximobility.BuildConfig;
 import com.taximobility.R;
 import com.taximobility.driver.service.DriverCheckStatus;
+import com.taximobility.driver.utils.DriverCToast;
 import com.taximobility.driver.utils.DriverNC;
-import com.taximobility.features.CToast;
 import com.taximobility.roomDB.LoggerRepository;
 import com.taximobility.util.SessionSave;
 import com.taximobility.util.TaxiUtil;
@@ -48,8 +48,7 @@ public class ServiceGenerator {
     private static OkHttpClient.Builder httpClient;
     private static Retrofit.Builder builder;
     private static LoggerRepository mRepository;
-    private static String to_encode = "";
-
+    private static final String to_encode = "";
 
     public static Retrofit getRetrofitWithEncryptBaseUrl(Context context) {
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
@@ -64,17 +63,13 @@ public class ServiceGenerator {
             httpClient.addNetworkInterceptor(new StethoInterceptor());
             httpClient.interceptors().add(logging);
         }*/
-        if (BuildConfig.DEBUG)
-            httpClient.interceptors().add(logging);
+        if (BuildConfig.DEBUG) httpClient.interceptors().add(logging);
 
         httpClient.addInterceptor(responseInterceptor);
         httpClient.addInterceptor(requestInterceptor);
-        builder = new Retrofit.Builder()
-                .baseUrl(SessionSave.getSession("base_url", context))
-                .addConverterFactory(GsonConverterFactory.create()).client(httpClient.build());
+        builder = new Retrofit.Builder().baseUrl(SessionSave.getSession("base_url", context)).addConverterFactory(GsonConverterFactory.create()).client(httpClient.build());
         return builder.build();
     }
-
 
     public static Retrofit getRetrofitEncryptUrl(Context context, String url) {
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
@@ -89,18 +84,14 @@ public class ServiceGenerator {
             httpClient.addNetworkInterceptor(new StethoInterceptor());
             httpClient.interceptors().add(logging);
         }*/
-        if (BuildConfig.DEBUG)
-            httpClient.interceptors().add(logging);
+        if (BuildConfig.DEBUG) httpClient.interceptors().add(logging);
 
         httpClient.addInterceptor(responseInterceptor);
         httpClient.addInterceptor(requestInterceptor);
 
-        builder = new Retrofit.Builder()
-                .baseUrl(url)
-                .addConverterFactory(GsonConverterFactory.create()).client(httpClient.build());
+        builder = new Retrofit.Builder().baseUrl(url).addConverterFactory(GsonConverterFactory.create()).client(httpClient.build());
         return builder.build();
     }
-
 
     public static Retrofit getRetrofitWithoutEncryptBaseUrl(Context context) {
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
@@ -115,15 +106,12 @@ public class ServiceGenerator {
             httpClient.addNetworkInterceptor(new StethoInterceptor());
             httpClient.interceptors().add(logging);
         }*/
-        if (BuildConfig.DEBUG)
-            httpClient.interceptors().add(logging);
+        if (BuildConfig.DEBUG) httpClient.interceptors().add(logging);
 
         httpClient.addInterceptor(responseInterceptor);
         httpClient.addInterceptor(requestInterceptor);
 
-        builder = new Retrofit.Builder()
-                .baseUrl(SessionSave.getSession("base_url", context))
-                .addConverterFactory(GsonConverterFactory.create()).client(httpClient.build());
+        builder = new Retrofit.Builder().baseUrl(SessionSave.getSession("base_url", context)).addConverterFactory(GsonConverterFactory.create()).client(httpClient.build());
         return builder.build();
     }
 
@@ -141,18 +129,14 @@ public class ServiceGenerator {
             httpClient.addNetworkInterceptor(new StethoInterceptor());
             httpClient.interceptors().add(logging);
         }*/
-        if (BuildConfig.DEBUG)
-            httpClient.interceptors().add(logging);
+        if (BuildConfig.DEBUG) httpClient.interceptors().add(logging);
 
         httpClient.addInterceptor(responseInterceptor);
         httpClient.addInterceptor(requestInterceptor);
 
-        builder = new Retrofit.Builder()
-                .baseUrl(SessionSave.getSession("base_url", context))
-                .addConverterFactory(GsonConverterFactory.create()).client(httpClient.build());
+        builder = new Retrofit.Builder().baseUrl(SessionSave.getSession("base_url", context)).addConverterFactory(GsonConverterFactory.create()).client(httpClient.build());
         return builder.build();
     }
-
 
     public static Retrofit getRetrofitWithTimeOutWithEncrypt(Context context, int timeOut) {
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
@@ -167,22 +151,18 @@ public class ServiceGenerator {
             httpClient.addNetworkInterceptor(new StethoInterceptor());
             httpClient.interceptors().add(logging);
         }*/
-        if (BuildConfig.DEBUG)
-            httpClient.interceptors().add(logging);
+        if (BuildConfig.DEBUG) httpClient.interceptors().add(logging);
 
         httpClient.addInterceptor(responseInterceptor);
         httpClient.addInterceptor(requestInterceptor);
 
-        builder = new Retrofit.Builder()
-                .baseUrl(SessionSave.getSession("base_url", context))
-                .addConverterFactory(GsonConverterFactory.create()).client(httpClient.build());
+        builder = new Retrofit.Builder().baseUrl(SessionSave.getSession("base_url", context)).addConverterFactory(GsonConverterFactory.create()).client(httpClient.build());
         return builder.build();
     }
 
-
     public static class DecryptedPayloadInterceptor implements Interceptor {
         Context c;
-        boolean dont_encode = true;
+        boolean dont_encode;
 
         DecryptedPayloadInterceptor(Context c, boolean dont_encode) {
             this.c = c;
@@ -201,7 +181,7 @@ public class ServiceGenerator {
                 String contentType = response.header("Content-Type");
                 if (TextUtils.isEmpty(contentType)) contentType = "application/json";
                 InputStream cryptedStream = response.body().byteStream();
-                String decrypted = null;
+                String decrypted;
                 ByteArrayOutputStream result = new ByteArrayOutputStream();
                 byte[] buffer = new byte[1024];
                 int length;
@@ -213,12 +193,7 @@ public class ServiceGenerator {
                 if (decrypted == null || decrypted.trim().isEmpty()) {
 
                     Handler handler = new Handler(Looper.getMainLooper());
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            CToast.ShowToast(c.getApplicationContext(), DriverNC.getString(R.string.server_error));
-                        }
-                    });
+                    handler.post(() -> DriverCToast.ShowToast(c.getApplicationContext(), DriverNC.getString(R.string.server_error)));
                 } else {
                     try {
                         new CheckStatus(new JSONObject(decrypted), c).updateAuthKey();
@@ -234,8 +209,7 @@ public class ServiceGenerator {
                 } catch (Exception e) {
                     e.printStackTrace();
                 } finally {
-                    if (cryptedStream != null)
-                        cryptedStream.close();
+                    if (cryptedStream != null) cryptedStream.close();
                 }
                 Response ress = newResponse.build();
 
@@ -250,10 +224,8 @@ public class ServiceGenerator {
                 }
                 try {
                     if (url_type.contains("passengerapi")) {
-                        if (new CheckStatus(new JSONObject(decrypted), c).isNormal())
-                            return ress;
-                        else
-                            return response;
+                        if (new CheckStatus(new JSONObject(decrypted), c).isNormal()) return ress;
+                        else return response;
                     } else return ress;
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -270,12 +242,11 @@ public class ServiceGenerator {
 
     public static class Base64EncodeRequestInterceptor implements Interceptor {
         String companyKey = "FNpfuspyEAzhjfoh2ONpWK0rsnClVL6OCaasqDQtWdI=";
-        private Context context;
+        private final Context context;
 
         Base64EncodeRequestInterceptor(String key, Context context) {
             this.context = context;
-            if (!key.trim().isEmpty())
-                companyKey = key;
+            if (!key.trim().isEmpty()) companyKey = key;
         }
 
         @NotNull
@@ -286,8 +257,7 @@ public class ServiceGenerator {
             Request.Builder builder = originalRequest.newBuilder();
 
             if (originalRequest.method().equalsIgnoreCase("POST")) {
-                builder = originalRequest.newBuilder()
-                        .method(originalRequest.method(), originalRequest.body());
+                builder = originalRequest.newBuilder().method(originalRequest.method(), originalRequest.body());
             }
             builder.addHeader("authkey", SessionSave.getSession(TaxiUtil.AUTH_KEY, context));
             builder.addHeader("userAuth", SessionSave.getSession(TaxiUtil.USER_KEY, context));
@@ -295,11 +265,7 @@ public class ServiceGenerator {
             System.out.println("ok authkey : " + " " + SessionSave.getSession(TaxiUtil.AUTH_KEY, context));
             System.out.println("ok userauth : " + " " + SessionSave.getSession(TaxiUtil.USER_KEY, context));
             HttpUrl originalHttpUrl = originalRequest.url();
-            HttpUrl url = originalHttpUrl.newBuilder()
-                    .addQueryParameter("dt", "a")
-                    .addQueryParameter("i", SessionSave.getSession(PASS_ID, context))
-                    .addQueryParameter("pv", "" + BuildConfig.VERSION_CODE)
-                    .build();
+            HttpUrl url = originalHttpUrl.newBuilder().addQueryParameter("dt", "a").addQueryParameter("i", SessionSave.getSession(PASS_ID, context)).addQueryParameter("pv", "" + BuildConfig.VERSION_CODE).build();
 
             builder.url(url.toString().replace("%26", "&"));
             String body_value = "";
@@ -308,19 +274,16 @@ public class ServiceGenerator {
                 if (originalRequest.body() != null) {
                     final RequestBody body = originalRequest.body();
                     final Buffer buffer = new Buffer();
-                    if (body != null)
-                        body.writeTo(buffer);
+                    if (body != null) body.writeTo(buffer);
                     body_value = buffer.readUtf8();
                 }
 
             } catch (final IOException e) {
+                e.printStackTrace();
             }
             String logs = url + " - " + originalRequest.method() + " - " + body_value + " - auth: " + SessionSave.getSession(TaxiUtil.AUTH_KEY, context) + " - user_auth: " + SessionSave.getSession(TaxiUtil.USER_KEY, context);
             SessionSave.saveAPI(logs, context);
             return chain.proceed(builder.build());
         }
-
     }
-
-
 }

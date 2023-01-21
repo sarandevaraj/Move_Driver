@@ -4,16 +4,22 @@ import android.os.Parcel
 import android.os.Parcelable
 import com.google.android.gms.maps.model.LatLng
 
-
-data class DriverStopData(var id: Int, var lat: Double,
-                          var lng: Double, var placeName: String, var tripId: String, var placeId: String = "") : Parcelable {
+data class DriverStopData(
+    var id: Int,
+    var lat: Double,
+    var lng: Double,
+    var placeName: String,
+    var tripId: String,
+    var placeId: String = ""
+) : Parcelable {
     constructor(parcel: Parcel) : this(
-            parcel.readInt(),
-            parcel.readDouble(),
-            parcel.readDouble(),
-            parcel.readString().toString(),
-            parcel.readString().toString(),
-            parcel.readString().toString())
+        parcel.readInt(),
+        parcel.readDouble(),
+        parcel.readDouble(),
+        parcel.readString().toString(),
+        parcel.readString().toString(),
+        parcel.readString().toString()
+    )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(id)

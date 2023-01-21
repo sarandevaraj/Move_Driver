@@ -1,7 +1,9 @@
 package com.taximobility.driver.utils;
 
 import android.os.Bundle;
+
 import androidx.fragment.app.DialogFragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,14 +30,17 @@ public class DriverDatePicker_CardExpiry extends DialogFragment {
     TextView dialogtitle;
     String key;
     private String selectedDate;
+
     public interface DialogInterface {
         void onSuccess(int month, int year, int day);
+
         void failure(String inputText);
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.date_picker_dialog, container, false);
-        DirverColorchange.ChangeColor((ViewGroup)v, requireActivity());
+        DirverColorchange.ChangeColor((ViewGroup) v, requireActivity());
         DriverFontHelper.applyFont(getActivity(), v);
         dialogtitle = v.findViewById(R.id.dialogtitle);
         getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);

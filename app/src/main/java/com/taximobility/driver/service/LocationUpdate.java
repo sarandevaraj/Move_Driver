@@ -3,8 +3,6 @@ package com.taximobility.driver.service;
 import static com.taximobility.driver.MainActivityDriver.mshowDialog;
 
 import android.Manifest;
-import android.animation.AnimatorInflater;
-import android.animation.AnimatorSet;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Dialog;
@@ -38,14 +36,12 @@ import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.DrawableImageViewTarget;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
-import com.google.android.gms.common.util.ScopeUtil;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
@@ -55,9 +51,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.squareup.picasso.Picasso;
 import com.taximobility.BuildConfig;
-import com.taximobility.ProfileImageSetupClass;
 import com.taximobility.R;
 import com.taximobility.driver.DriverCallReceiver;
 import com.taximobility.driver.DriverCanceltripAct;
@@ -88,11 +82,8 @@ import com.taximobility.driver.utils.DriverNC;
 import com.taximobility.driver.utils.DriverNetworkStatus;
 import com.taximobility.driver.utils.DriverSessionSave;
 import com.taximobility.driver.utils.DriverSystems;
-import com.taximobility.features.CToast;
 import com.taximobility.util.AppController;
-import com.taximobility.util.SessionSave;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Document;
@@ -129,8 +120,6 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 
-//import com.taximobility.driver.utils.DeviceUtils;
-
 /**
  * getting gps status without location manager
  * This class helps to get the driver current location using location client. It
@@ -156,29 +145,31 @@ public class LocationUpdate extends Service implements DriverDistanceMatrixInter
     public static DriverStreetPickupInterface streetPickupInterface;
     public static Location currentLocation = null;
     public static String sTimer = "00:00:00";
-    private static int Notification_ID = 1;
-    private static Handler myHandler = new Handler();
+    private static final int Notification_ID = 1;
+    private static final Handler myHandler = new Handler();
     private static boolean waitingTimeRunning;
-    private static int idleNotification = 201;
+    private static final int idleNotification = 201;
     private final long FREE_UPDATE_INTERVAL = 5000;
     private final long INTRIP_UPDATE_INTERVAL = 10000;
     DriverLocationDb LocDB;
     DecimalFormat latlngdf = new DecimalFormat("#.######");
     private LocalBroadcastManager localBroadcastManager;
-    private ArrayList<Float> locationAccuracyList = new ArrayList<>();
+    private final ArrayList<Float> locationAccuracyList = new ArrayList<>();
     private long logLocationInterval = 0;
     private double lastlatitude = 0.0, lastlongitude = 0.0;
-    private double slabDistance = 250;
+    private final double slabDistance = 250;
     public String updateLocation = "", bearing = "0";
     public static String sLocation = "";
     private String serviceStartedFrom = "", serviceStartedTime = "", serviceCreatedTime = "";
     private boolean canCalculateDistance;
     private boolean UPDATE_LOCATION_NO_TRAFFIC = true;
-    private long locationUpdatedAt = 0L;
+    private final long locationUpdatedAt = 0L;
     private int startID, errorCount = 0;
-    private long UPDATE_INTERVAL = 0, TIMER_INTERVAL = 5000, DELAY_DUE_TO_TRAFFIC = 10000;
+    private long UPDATE_INTERVAL = 0;
+    private final long TIMER_INTERVAL = 5000;
+    private final long DELAY_DUE_TO_TRAFFIC = 10000;
     private long timeSwap;
-    private String trip_id = "", drop,bookedby;
+    private String trip_id = "", drop, bookedby;
     JSONObject data = new JSONObject();
     private final Runnable updateTimerMethod = new Runnable() {
         @Override
@@ -218,7 +209,7 @@ public class LocationUpdate extends Service implements DriverDistanceMatrixInter
     private Date mDateObject;
     private ScheduledFuture<?> excecuter;
     private NotificationManager notificationManager;
-    private ScheduledExecutorService mTimer = Executors.newSingleThreadScheduledExecutor();
+    private final ScheduledExecutorService mTimer = Executors.newSingleThreadScheduledExecutor();
 
     FusedLocationProviderClient mFusedLocationClient;
 
@@ -359,8 +350,7 @@ public class LocationUpdate extends Service implements DriverDistanceMatrixInter
         lastlatitude = DriverSessionSave.getLastLng(LocationUpdate.this).latitude;
         lastlongitude = DriverSessionSave.getLastLng(LocationUpdate.this).longitude;
         DistanceHandler = new Handler();
-        this.localBroadcastManager.registerReceiver(listener,
-                new IntentFilter(DriverStreetPickUpAct.WAITING_TIME_RUN));
+        this.localBroadcastManager.registerReceiver(listener, new IntentFilter(DriverStreetPickUpAct.WAITING_TIME_RUN));
         distanceRunnable = new Runnable() {
             @Override
             public void run() {
@@ -399,23 +389,22 @@ public class LocationUpdate extends Service implements DriverDistanceMatrixInter
 
                     if (sLocation.equals("")) {
                         if (ActivityCompat.checkSelfPermission(LocationUpdate.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(LocationUpdate.this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                            mFusedLocationClient.getLastLocation()
-                                    .addOnSuccessListener(new OnSuccessListener<Location>() {
-                                        @Override
-                                        public void onSuccess(Location location) {
-                                            // Got last known location. In some rare situations this can be null.
-                                            if (location != null) {
-                                                mLastLocation = location;
-                                                if (servicesConnected() && mLastLocation != null && mLastLocation.hasAccuracy() && mLastLocation.getAccuracy() <= slabAccuracy) {
-                                                    DriverSystems.out.println("nnn---onConnected!!!!!!%%%%%%");
-                                                    currentLatitude = mLastLocation.getLatitude();
-                                                    currentLongtitude = mLastLocation.getLongitude();
-                                                    if (mLastLocation.hasBearing())
-                                                        bearing = String.valueOf(mLastLocation.getBearing());
-                                                }
-                                            }
+                            mFusedLocationClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
+                                @Override
+                                public void onSuccess(Location location) {
+                                    // Got last known location. In some rare situations this can be null.
+                                    if (location != null) {
+                                        mLastLocation = location;
+                                        if (servicesConnected() && mLastLocation != null && mLastLocation.hasAccuracy() && mLastLocation.getAccuracy() <= slabAccuracy) {
+                                            DriverSystems.out.println("nnn---onConnected!!!!!!%%%%%%");
+                                            currentLatitude = mLastLocation.getLatitude();
+                                            currentLongtitude = mLastLocation.getLongitude();
+                                            if (mLastLocation.hasBearing())
+                                                bearing = String.valueOf(mLastLocation.getBearing());
                                         }
-                                    });
+                                    }
+                                }
+                            });
                         }
 
                     } else {
@@ -431,8 +420,7 @@ public class LocationUpdate extends Service implements DriverDistanceMatrixInter
                     }
 
                     if (DriverSessionSave.getSession("Id", LocationUpdate.this).trim().equals("") || !DriverSessionSave.getSession("shift_status", LocationUpdate.this).equals("IN")) {
-                        if (mTimer != null)
-                            mTimer.shutdown();
+                        if (mTimer != null) mTimer.shutdown();
                         stopSelf();
                     } else {
                         if (DriverNetworkStatus.isOnline(LocationUpdate.this)) {
@@ -486,8 +474,7 @@ public class LocationUpdate extends Service implements DriverDistanceMatrixInter
                                 DriverSessionSave.saveSession(DriverCommonData.LOGOUT, true, LocationUpdate.this);
                                 Intent intent = new Intent(LocationUpdate.this, DriverUserLoginAct.class);
                                 startActivity(intent);
-                                if (mTimer != null)
-                                    mTimer.shutdown();
+                                if (mTimer != null) mTimer.shutdown();
                                 stopSelf();
                             }
                         } else if (sLocation.equals("")) {
@@ -572,16 +559,15 @@ public class LocationUpdate extends Service implements DriverDistanceMatrixInter
                 }
             } else {
                 if (DriverSessionSave.getSession("status", LocationUpdate.this).equalsIgnoreCase("F")) {
-                    if (location != null)
-                        if (location.getAccuracy() <= slabAccuracy) {
-                            sLocation = currentLatitude + "," + currentLongtitude + "|";
-                            lastlatitude = currentLatitude;
-                            lastlongitude = currentLongtitude;
-                        } else {
-                            if (lastlatitude != 0.0 && lastlongitude != 0.0) {
-                                sLocation = lastlatitude + "," + lastlongitude + "|";
-                            }
+                    if (location != null) if (location.getAccuracy() <= slabAccuracy) {
+                        sLocation = currentLatitude + "," + currentLongtitude + "|";
+                        lastlatitude = currentLatitude;
+                        lastlongitude = currentLongtitude;
+                    } else {
+                        if (lastlatitude != 0.0 && lastlongitude != 0.0) {
+                            sLocation = lastlatitude + "," + lastlongitude + "|";
                         }
+                    }
                 } else if (DriverSessionSave.getSession("status", LocationUpdate.this).equalsIgnoreCase("B")) {
                     if (location != null) {
                         if (location.getAccuracy() <= slabAccuracy) {
@@ -614,8 +600,7 @@ public class LocationUpdate extends Service implements DriverDistanceMatrixInter
             }
 //            errorLogRepository.insertLocationLog(new LocationModel(GetUTCdatetimeAsString(), new LatLng(currentLatitude, currentLongtitude), String.valueOf(totalAccuracy / locationAccuracyList.size()), SessionSave.getSession("travel_status", LocationUpdate.this)));
             locationAccuracyList.clear();
-        } else
-            logLocationInterval += TIMER_INTERVAL;
+        } else logLocationInterval += TIMER_INTERVAL;
     }
 
     @Override
@@ -690,8 +675,7 @@ public class LocationUpdate extends Service implements DriverDistanceMatrixInter
      * Calculates the Internal distance that travel by fleet during active status
      */
     public void DistanceCalculation(Location currentLocation, Location to) {
-        haversine(currentLocation.getLatitude(), currentLocation.getLongitude(), to.getLatitude(),
-                to.getLongitude());
+        haversine(currentLocation.getLatitude(), currentLocation.getLongitude(), to.getLatitude(), to.getLongitude());
     }
 
 
@@ -846,8 +830,7 @@ public class LocationUpdate extends Service implements DriverDistanceMatrixInter
     /**
      * This Function is used for calculate the distance travelled
      */
-    public synchronized void haversine(double lat1, double lon1,
-                                       double lat2, double lon2) {
+    public synchronized void haversine(double lat1, double lon1, double lat2, double lon2) {
         double tempDistance = 0.0;
         LatLng from = new LatLng(lat1, lon1);
         LatLng to = new LatLng(lat2, lon2);
@@ -1129,8 +1112,8 @@ public class LocationUpdate extends Service implements DriverDistanceMatrixInter
                     }
                 }, time_out * 1000);
 
-                System.out.println("Check Trip auto accept : "+DriverSessionSave.getSession("is_driver_auto_accept", LocationUpdate.this));
-                if(DriverSessionSave.getSession("is_driver_auto_accept", LocationUpdate.this).equals("1")){
+                System.out.println("Check Trip auto accept : " + DriverSessionSave.getSession("is_driver_auto_accept", LocationUpdate.this));
+                if (DriverSessionSave.getSession("is_driver_auto_accept", LocationUpdate.this).equals("1")) {
                     String message = json.toString();
                     try {
                         final JSONObject jsonnew = new JSONObject(message);
@@ -1145,7 +1128,7 @@ public class LocationUpdate extends Service implements DriverDistanceMatrixInter
                         e.printStackTrace();
                     }
                     auto_accept();
-                }else {
+                } else {
                     Intent intent = new Intent();
                     intent.putExtra("message", json.toString());
                     intent.setAction(Intent.ACTION_MAIN);
@@ -1190,7 +1173,7 @@ public class LocationUpdate extends Service implements DriverDistanceMatrixInter
                             MainActivityDriver.mMyStatus.setOndriverLongitude("");
                             DriverSessionSave.saveSession(DriverCommonData.ST_WAITING_TIME, false, getApplicationContext());
                             DriverSessionSave.saveSession(DriverCommonData.WAITING_TIME, false, getApplicationContext());
-                            CToast.ShowToast(getApplicationContext(), cancelmsg);
+                            DriverCToast.ShowToast(getApplicationContext(), cancelmsg);
                             movetohome();
 //                            Intent cancelIntent = new Intent();
 //                            Bundle bun = new Bundle();
@@ -1293,7 +1276,7 @@ public class LocationUpdate extends Service implements DriverDistanceMatrixInter
 
     }
 
-    private void auto_accept(){
+    private void auto_accept() {
         try {
             if (DriverNetworkStatus.isOnline(LocationUpdate.this)) {
                 if (GPSEnabled(LocationUpdate.this)) {
@@ -1362,8 +1345,7 @@ public class LocationUpdate extends Service implements DriverDistanceMatrixInter
                         DriverSessionSave.saveSession("speedwaiting", "", LocationUpdate.this);
                         MainActivityDriver.mMyStatus.settripId(trip_id);
                         DriverSessionSave.saveSession("trip_id", "" + trip_id, LocationUpdate.this);
-                        DriverSessionSave.saveSession("status", "B",
-                                LocationUpdate.this);
+                        DriverSessionSave.saveSession("status", "B", LocationUpdate.this);
                         DriverSessionSave.saveSession(DriverCommonData.IS_STREET_PICKUP, false, LocationUpdate.this);
                         DriverSessionSave.saveSession("bookedby", "" + bookedby, LocationUpdate.this);
                         showLoading(LocationUpdate.this);
@@ -1388,11 +1370,11 @@ public class LocationUpdate extends Service implements DriverDistanceMatrixInter
                     } else if (json.getInt("status") == 25) {
                         DriverCToast.ShowToast(LocationUpdate.this, DriverNC.getString(R.string.server_error));
                     } else {
-                       DriverCToast.ShowToast(LocationUpdate.this, msg);
+                        DriverCToast.ShowToast(LocationUpdate.this, msg);
                     }
                 } else {
 
-                     DriverCToast.ShowToast(LocationUpdate.this, DriverNC.getString(R.string.server_error));
+                    DriverCToast.ShowToast(LocationUpdate.this, DriverNC.getString(R.string.server_error));
 //                    finish();
                 }
             } catch (final JSONException e) {
@@ -1403,12 +1385,11 @@ public class LocationUpdate extends Service implements DriverDistanceMatrixInter
             }
         }
     }
+
     public void showLoading(Context context) {
 
         try {
-            if (mshowDialog != null)
-                if (mshowDialog.isShowing())
-                    mshowDialog.dismiss();
+            if (mshowDialog != null) if (mshowDialog.isShowing()) mshowDialog.dismiss();
             View view = View.inflate(context, R.layout.driver_progress_bar, null);
             mshowDialog = new Dialog(context, R.style.dialogwinddow);
             mshowDialog.setContentView(view);
@@ -1418,14 +1399,13 @@ public class LocationUpdate extends Service implements DriverDistanceMatrixInter
 
             ImageView iv = mshowDialog.findViewById(R.id.giff);
             DrawableImageViewTarget imageViewTarget = new DrawableImageViewTarget(iv);
-            Glide.with(MainActivityDriver.context)
-                    .load(R.raw.driver_loading_anim)
-                    .into(imageViewTarget);
+            Glide.with(MainActivityDriver.context).load(R.raw.driver_loading_anim).into(imageViewTarget);
 
         } catch (Exception e) {
             // TODO: handle exception
         }
     }
+
     private void movetohome() {
         MainActivityDriver.mMyStatus.setStatus("F");
         DriverSessionSave.saveSession("status", "F", getApplicationContext());
@@ -1462,8 +1442,7 @@ public class LocationUpdate extends Service implements DriverDistanceMatrixInter
         return ConnectionResult.SUCCESS == resultCode;
     }
 
-    public void generateNotifications(Context context, String message, Class<?> class1,
-                                      boolean cancelable, int Notification_ID) {
+    public void generateNotifications(Context context, String message, Class<?> class1, boolean cancelable, int Notification_ID) {
         notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         String title = getString(R.string.app_name);
         Intent notificationIntent = new Intent(this, class1);
@@ -1480,28 +1459,9 @@ public class LocationUpdate extends Service implements DriverDistanceMatrixInter
             notificationChannel.setLightColor(Color.RED);
             notificationManager.createNotificationChannel(notificationChannel);
 
-            builder = new Notification.Builder(this, NOTIFICATION_CHANNEL_ID)
-                    .setContentText(message)
-                    .setContentTitle(title)
-                    .setOngoing(true)
-                    .setSmallIcon(getNotificationIcon())
-                    .setContentIntent(pendingIntent)
-                    .setLargeIcon(((BitmapDrawable) ContextCompat.getDrawable(context, R.drawable.ic_launcher)).getBitmap())
-                    .setStyle(new Notification.BigTextStyle()
-                            .bigText(message))
-                    .setWhen(System.currentTimeMillis());
+            builder = new Notification.Builder(this, NOTIFICATION_CHANNEL_ID).setContentText(message).setContentTitle(title).setOngoing(true).setSmallIcon(getNotificationIcon()).setContentIntent(pendingIntent).setLargeIcon(((BitmapDrawable) ContextCompat.getDrawable(context, R.drawable.ic_launcher)).getBitmap()).setStyle(new Notification.BigTextStyle().bigText(message)).setWhen(System.currentTimeMillis());
         } else {
-            builder = new Notification.Builder(this)
-                    .setAutoCancel(true)
-                    .setTicker(getResources().getString(R.string.common_name))
-                    .setContentTitle(title)
-                    .setContentText(message)
-                    .setContentIntent(pendingIntent)
-                    .setOngoing(true)
-                    .setSmallIcon(getNotificationIcon())
-                    .setStyle(new Notification.BigTextStyle()
-                            .bigText(message))
-                    .setLargeIcon(((BitmapDrawable) getResources().getDrawable(R.drawable.ic_launcher)).getBitmap());
+            builder = new Notification.Builder(this).setAutoCancel(true).setTicker(getResources().getString(R.string.common_name)).setContentTitle(title).setContentText(message).setContentIntent(pendingIntent).setOngoing(true).setSmallIcon(getNotificationIcon()).setStyle(new Notification.BigTextStyle().bigText(message)).setLargeIcon(((BitmapDrawable) getResources().getDrawable(R.drawable.ic_launcher)).getBitmap());
 
         }
 
@@ -1572,8 +1532,7 @@ public class LocationUpdate extends Service implements DriverDistanceMatrixInter
     }
 
     @Override
-    public void onDistanceCalled(LatLng pick, LatLng drop, double distance, double time, String
-            result, String status) {
+    public void onDistanceCalled(LatLng pick, LatLng drop, double distance, double time, String result, String status) {
         DriverSystems.out.println("haiiiiiii " + "LocationUpdate " + pick.latitude + "__" + pick.longitude + "_____" + drop.latitude + "__" + drop.longitude + "___" + distance + "____" + status);
         if (status.equalsIgnoreCase("OK")) {
 
@@ -1616,24 +1575,9 @@ public class LocationUpdate extends Service implements DriverDistanceMatrixInter
             notificationChannel.enableLights(true);
             notificationChannel.setLightColor(Color.RED);
             notificationManager.createNotificationChannel(notificationChannel);
-            builder = new Notification.Builder(this, NOTIFICATION_CHANNEL_ID)
-                    .addAction(action)
-                    .setContentText(DriverNC.getString(R.string.app_running))
-                    .setContentTitle(getResources().getString(R.string.app_name))
-                    .setOngoing(true)
-                    .setSmallIcon(R.drawable.small_logo)
-                    .setColor(ContextCompat.getColor(getBaseContext(), R.color.button_accept))
-                    .setWhen(System.currentTimeMillis());
+            builder = new Notification.Builder(this, NOTIFICATION_CHANNEL_ID).addAction(action).setContentText(DriverNC.getString(R.string.app_running)).setContentTitle(getResources().getString(R.string.app_name)).setOngoing(true).setSmallIcon(R.drawable.small_logo).setColor(ContextCompat.getColor(getBaseContext(), R.color.button_accept)).setWhen(System.currentTimeMillis());
         } else {
-            builder = new Notification.Builder(this)
-                    .addAction(0, getString(R.string.notiy_lanch_app) + ""/* + getTripStatus()*/,
-                            activityPendingIntent)
-                    .setContentText(DriverNC.getString(R.string.app_running))
-                    .setContentTitle(getResources().getString(R.string.app_name))
-                    .setOngoing(true)
-                    .setPriority(Notification.PRIORITY_HIGH)
-                    .setSmallIcon(R.drawable.small_logo)
-                    .setWhen(System.currentTimeMillis());
+            builder = new Notification.Builder(this).addAction(0, getString(R.string.notiy_lanch_app) + ""/* + getTripStatus()*/, activityPendingIntent).setContentText(DriverNC.getString(R.string.app_running)).setContentTitle(getResources().getString(R.string.app_name)).setOngoing(true).setPriority(Notification.PRIORITY_HIGH).setSmallIcon(R.drawable.small_logo).setWhen(System.currentTimeMillis());
         }
 
         notification = builder.build();
@@ -1657,25 +1601,9 @@ public class LocationUpdate extends Service implements DriverDistanceMatrixInter
             notificationChannel.enableLights(true);
             notificationChannel.setLightColor(Color.RED);
             notificationManager.createNotificationChannel(notificationChannel);
-            builder = new Notification.Builder(this, NOTIFICATION_CHANNEL_ID)
-                    .addAction(action)
-                    .setContentText("You have new trip")
-                    .setContentTitle(getResources().getString(R.string.app_name))
-                    .setOngoing(true)
-                    .setSmallIcon(R.drawable.small_logo)
-                    .setColor(Color.RED)
-                    .setWhen(System.currentTimeMillis());
+            builder = new Notification.Builder(this, NOTIFICATION_CHANNEL_ID).addAction(action).setContentText("You have new trip").setContentTitle(getResources().getString(R.string.app_name)).setOngoing(true).setSmallIcon(R.drawable.small_logo).setColor(Color.RED).setWhen(System.currentTimeMillis());
         } else {
-            builder = new Notification.Builder(this)
-                    .addAction(0, getString(R.string.notiy_lanch_app) + ""/* + getTripStatus()*/,
-                            activityPendingIntent)
-                    .setContentText("You have new trip")
-                    .setContentTitle(getResources().getString(R.string.app_name))
-                    .setContentTitle(getResources().getString(R.string.app_name))
-                    .setOngoing(true)
-                    .setPriority(Notification.PRIORITY_HIGH)
-                    .setSmallIcon(R.drawable.small_logo)
-                    .setWhen(System.currentTimeMillis());
+            builder = new Notification.Builder(this).addAction(0, getString(R.string.notiy_lanch_app) + ""/* + getTripStatus()*/, activityPendingIntent).setContentText("You have new trip").setContentTitle(getResources().getString(R.string.app_name)).setContentTitle(getResources().getString(R.string.app_name)).setOngoing(true).setPriority(Notification.PRIORITY_HIGH).setSmallIcon(R.drawable.small_logo).setWhen(System.currentTimeMillis());
         }
 
         notification = builder.build();

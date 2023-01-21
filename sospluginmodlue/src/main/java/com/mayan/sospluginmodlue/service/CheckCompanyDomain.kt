@@ -1,10 +1,8 @@
 package com.mayan.sospluginmodlue.service
 
 import android.content.Context
-import com.mayan.sospluginmodlue.R
 import com.mayan.sospluginmodlue.model.ApiRequestData
 import com.mayan.sospluginmodlue.model.CompanyDomainResponse
-import com.mayan.sospluginmodlue.util.CToast
 import com.mayan.sospluginmodlue.util.SessionSave
 import retrofit2.Call
 import retrofit2.Callback

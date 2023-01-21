@@ -3,6 +3,8 @@ package com.taximobility.util;
 import android.content.Context;
 
 import com.taximobility.R;
+import com.taximobility.driver.utils.DriverCL;
+import com.taximobility.driver.utils.DriverSystems;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -40,20 +42,17 @@ public class ColorRestore {
 
             NodeList nList = doc.getElementsByTagName("*");
 
-            Systems.out.println("lislength" + nList.getLength());
+            DriverSystems.out.println("lislength" + nList.getLength());
             int chhh = 0;
             for (int i = 0; i < nList.getLength(); i++) {
 
                 Node node = nList.item(i);
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
                     chhh++;
-
                     Element element2 = (Element) node;
                     if (element2.getAttribute("name").equals("pressBack"))
-                        Systems.out.println("size" + chhh + "___" + element2.getTextContent());
-
-                    CL.nfields_byName.put(element2.getAttribute("name"), element2.getTextContent());
-
+                        DriverSystems.out.println("size" + chhh + "___" + element2.getTextContent());
+                    DriverCL.nfields_byName.put(element2.getAttribute("name"), element2.getTextContent());
                 }
             }
             getColorValueDetail();
@@ -68,24 +67,21 @@ public class ColorRestore {
     public static synchronized void getColorValueDetail() {
         Field[] fieldss = R.color.class.getDeclaredFields();
         // fields =new int[fieldss.length];
-        for (int i = 0; i < fieldss.length; i++) {
-            int id = c.getResources().getIdentifier(fieldss[i].getName(), "color", c.getPackageName());
-            if (CL.nfields_byName.containsKey(fieldss[i].getName())) {
-                CL.fields.add(fieldss[i].getName());
-                CL.fields_value.add(c.getResources().getString(id));
-                CL.fields_id.put(fieldss[i].getName(), id);
-
+        for (Field field : fieldss) {
+            int id = c.getResources().getIdentifier(field.getName(), "color", c.getPackageName());
+            if (DriverCL.nfields_byName.containsKey(field.getName())) {
+                DriverCL.fields.add(field.getName());
+                DriverCL.fields_value.add(c.getResources().getString(id));
+                DriverCL.fields_id.put(field.getName(), id);
             } else {
-                Systems.out.println("Imissedthepunchrefree" + fieldss[i].getName());
+                DriverSystems.out.println("Imissedthepunchrefree" + field.getName());
             }
         }
-
-        for (Map.Entry<String, String> entry : CL.nfields_byName.entrySet()) {
+        for (Map.Entry<String, String> entry : DriverCL.nfields_byName.entrySet()) {
             String h = entry.getKey();
             String value = entry.getValue();
-            CL.nfields_byID.put(CL.fields_id.get(h), CL.nfields_byName.get(h));
+            DriverCL.nfields_byID.put(DriverCL.fields_id.get(h), DriverCL.nfields_byName.get(h));
             // do stuff
         }
-
     }
 }

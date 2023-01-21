@@ -8,19 +8,15 @@ import android.widget.TextView;
 
 import com.taximobility.R;
 import com.taximobility.driver.utils.DriverNC;
-import com.taximobility.interfaces.AlertListener;
+import com.taximobility.driver.interfaces.AlertListener;
 import com.taximobility.util.Utility;
 
 public class DriverSettingsAct extends MainActivityDriver implements View.OnClickListener {
-
 
     private TextView bt_privacysettings,notification_settings,log_out_txt,edit_profile_txt;
     private ImageView slider;
     private TextView HeadTitle;
     private RelativeLayout slide_lay;
-
-
-
 
     @Override
     public int setLayout() {
@@ -37,54 +33,34 @@ public class DriverSettingsAct extends MainActivityDriver implements View.OnClic
         slider = findViewById(R.id.slideImg);
         HeadTitle = findViewById(R.id.headerTxt);
         slide_lay=findViewById(R.id.slide_lay);
-
         slide_lay.setBackgroundColor(getResources().getColor(R.color.button_accept));
-
         HeadTitle.setText(DriverNC.getResources().getString(R.string.settings));
 
-
-        log_out_txt.setOnClickListener(new View.OnClickListener() {
+        log_out_txt.setOnClickListener(view -> Utility.actionSheet(DriverSettingsAct.this, DriverNC.getResources().getString(R.string.confirmlogout), DriverNC.getResources().getString(R.string.menu_logout), DriverNC.getResources().getString(R.string.cancel), false, new AlertListener() {
             @Override
-            public void onClick(View view) {
-                Utility.actionSheet(DriverSettingsAct.this, DriverNC.getResources().getString(R.string.confirmlogout), DriverNC.getResources().getString(R.string.menu_logout), DriverNC.getResources().getString(R.string.cancel), false, new AlertListener() {
-                    @Override
-                    public void onSuccess() {
-                        if (view == log_out_txt) {
-                            logout(DriverSettingsAct.this);
-                        }
-                    }
-
-                    @Override
-                    public void onFailure() {
-
-                    }
-                });
+            public void onSuccess() {
+                if (view == log_out_txt) {
+                    logout(DriverSettingsAct.this);
+                }
             }
+
+            @Override
+            public void onFailure() {
+
+            }
+        }));
+
+        bt_privacysettings.setOnClickListener(view -> {
+            Intent deleteAcc = new Intent(DriverSettingsAct.this, DeleteAccountActivityDriver.class);
+            startActivity(deleteAcc);
         });
 
-        bt_privacysettings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent deleteAcc = new Intent(DriverSettingsAct.this, DeleteAccountActivityDriver.class);
-                startActivity(deleteAcc);
-            }
+        edit_profile_txt.setOnClickListener(v -> {
+            Intent profile = new Intent(DriverSettingsAct.this, DriverMeAct.class);
+            startActivity(profile);
         });
 
-        edit_profile_txt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent profile = new Intent(DriverSettingsAct.this, DriverMeAct.class);
-                startActivity(profile);
-            }
-        });
-
-        slider.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
-
+        slider.setOnClickListener(view -> onBackPressed());
 
     }
 
@@ -97,7 +73,6 @@ public class DriverSettingsAct extends MainActivityDriver implements View.OnClic
     public void onPointerCaptureChanged(boolean hasCapture) {
 
     }
-
 
 //    @Override
 //    public void onClick(View view) {

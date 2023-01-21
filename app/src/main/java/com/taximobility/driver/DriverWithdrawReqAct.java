@@ -34,8 +34,7 @@ public class DriverWithdrawReqAct extends MainActivityDriver implements DriverCl
 
     public static DriverWithdrawReqAct withdrawAct;
 
-    TextView reqId, brandType, companyName, withdrawAmount, waitTimeCost,
-            reqDate, status, paymentmode, transactionID, comments, btn_back;
+    TextView reqId, brandType, companyName, withdrawAmount, waitTimeCost, reqDate, status, paymentmode, transactionID, comments, btn_back;
 
     ImageView img_attachment;
 
@@ -50,7 +49,6 @@ public class DriverWithdrawReqAct extends MainActivityDriver implements DriverCl
         return R.layout.driver_withdrawreq;
     }
 
-
     /**
      * Initialize the views on layout and variable declarations
      */
@@ -59,8 +57,7 @@ public class DriverWithdrawReqAct extends MainActivityDriver implements DriverCl
 
         try {
 
-            DirverColorchange.ChangeColor((ViewGroup) (((ViewGroup) DriverWithdrawReqAct.this
-                    .findViewById(android.R.id.content)).getChildAt(0)), DriverWithdrawReqAct.this);
+            DirverColorchange.ChangeColor((ViewGroup) (((ViewGroup) DriverWithdrawReqAct.this.findViewById(android.R.id.content)).getChildAt(0)), DriverWithdrawReqAct.this);
 
             DriverCommonData.mActivitylist.add(this);
             DriverCommonData.sContext = this;
@@ -88,19 +85,10 @@ public class DriverWithdrawReqAct extends MainActivityDriver implements DriverCl
             img_attachment = findViewById(R.id.imgattachment);
             btn_back = findViewById(R.id.slideImg);
 
-            btn_back.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    startActivity(new Intent(DriverWithdrawReqAct.this, DriverWithdrawHistoryAct.class));
-                }
-            });
-
+            btn_back.setOnClickListener(v -> startActivity(new Intent(DriverWithdrawReqAct.this, DriverWithdrawHistoryAct.class)));
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
         new requestingDriverApi();
     }
 
@@ -122,7 +110,7 @@ public class DriverWithdrawReqAct extends MainActivityDriver implements DriverCl
                 if (isOnline()) {
                     new DriverAPIService_Retrofit_JSON(DriverWithdrawReqAct.this, this, j, false).execute(driverTripRequesting);
                 } else {
-                    Toast.makeText(DriverWithdrawReqAct.this,"" + DriverNC.getResources().getString(R.string.check_net_connection), Toast.LENGTH_LONG).show();
+                    Toast.makeText(DriverWithdrawReqAct.this, "" + DriverNC.getResources().getString(R.string.check_net_connection), Toast.LENGTH_LONG).show();
 //                    dialog1 = Driver_Utils.alert_view(DriverWithdrawReqAct.this, "" + DriverNC.getResources().getString(R.string.message), "" + DriverNC.getResources().getString(R.string.check_net_connection), "" + DriverNC.getResources().getString(R.string.ok), "", true, DriverWithdrawReqAct.this, "");
                 }
             } catch (Exception e) {
@@ -170,11 +158,11 @@ public class DriverWithdrawReqAct extends MainActivityDriver implements DriverCl
                         }
 
                     } else {
-                        Toast.makeText(DriverWithdrawReqAct.this,"" + object.getString("message"), Toast.LENGTH_LONG).show();
+                        Toast.makeText(DriverWithdrawReqAct.this, "" + object.getString("message"), Toast.LENGTH_LONG).show();
 //                        dialog1 = Driver_Utils.alert_view(DriverWithdrawReqAct.this, "" + DriverNC.getResources().getString(R.string.message), "" + object.getString("message"), "" + DriverNC.getResources().getString(R.string.ok), "", true, DriverWithdrawReqAct.this, "");
                     }
                 } else {
-                    runOnUiThread(() -> Toast.makeText(DriverWithdrawReqAct.this,"" + DriverNC.getResources().getString(R.string.check_net_connection), Toast.LENGTH_LONG).show());
+                    runOnUiThread(() -> Toast.makeText(DriverWithdrawReqAct.this, "" + DriverNC.getResources().getString(R.string.check_net_connection), Toast.LENGTH_LONG).show());
 //                            dialog1 = Driver_Utils.alert_view(DriverWithdrawReqAct.this, "" + DriverNC.getResources().getString(R.string.message), "" + DriverNC.getResources().getString(R.string.check_net_connection), "" + DriverNC.getResources().getString(R.string.ok), "", true, DriverWithdrawReqAct.this, ""));
                 }
             } catch (Exception ex) {
@@ -190,8 +178,7 @@ public class DriverWithdrawReqAct extends MainActivityDriver implements DriverCl
 
     @Override
     protected void onDestroy() {
-        if (dialog1 != null)
-            Driver_Utils.closeDialog(dialog1);
+        if (dialog1 != null) Driver_Utils.closeDialog(dialog1);
         super.onDestroy();
     }
 }

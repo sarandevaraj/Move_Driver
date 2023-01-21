@@ -24,12 +24,9 @@ public class LoggerModel {
     public String request;
     public String response;
 
-
-
     @Override
     public boolean equals(Object obj) {
-        if (obj == this)
-            return true;
+        if (obj == this) return true;
 
         LoggerModel loggerModel = (LoggerModel) obj;
 

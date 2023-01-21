@@ -3,13 +3,13 @@ package com.taximobility.roomDB;
 import androidx.lifecycle.LiveData;
 import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
+
 import android.content.Context;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
-
-import com.taximobility.util.Systems;
+import com.taximobility.driver.utils.DriverSystems;
 import com.taximobility.util.TaxiUtil;
 
 import org.json.JSONException;
@@ -26,14 +26,13 @@ import java.util.Locale;
 
 public class LoggerRepository {
     //    public final LiveData<PagedList<LoggerModel>> loggerList;
-    private LoggerDao mWordDao;
-    private LiveData<List<LoggerModel>> mAllWords;
+    private final LoggerDao mWordDao;
+    private final LiveData<List<LoggerModel>> mAllWords;
 
     public LoggerRepository(Context application) {
         LoggerDatabase db = LoggerDatabase.getDatabase(application);
         mWordDao = db.loggerDao();
         mAllWords = mWordDao.loadAllUsers();
-
     }
 
     // Room executes all queries on a separate thread.
@@ -41,7 +40,6 @@ public class LoggerRepository {
     public LiveData<List<LoggerModel>> getAllWords() {
         return mAllWords;
     }
-
 
     public LiveData<List<String>> loadDistinctApi() {
         return mWordDao.loadDistinctApi();
@@ -113,15 +111,14 @@ public class LoggerRepository {
     public void createApiLog(String data, String requestJson, String url, String apiType, long respTime) {
         String request = "";
         long reqsTime = 0;
-        Systems.out.println("JsonKeyyy " + data);
+        DriverSystems.out.println("JsonKeyyy " + data);
         if (requestJson != null) {
             String[] reqJson = requestJson.split("___");
             request = reqJson[0];
             reqsTime = Long.parseLong(reqJson[1]);
         }
 
-
-        String responseStatus = "";
+        String responseStatus;
         try {
             JSONObject response = new JSONObject("" + data);
             if (response.has("STATUS")) {
@@ -130,15 +127,11 @@ public class LoggerRepository {
                 responseStatus = response.getString("status");
             } else {
                 String res = TaxiUtil.tostring(response);
-                if (res.length() < 500)
-                    responseStatus = res;
-                else
-                    responseStatus = res.substring(0, 500);
-
+                if (res.length() < 500) responseStatus = res;
+                else responseStatus = res.substring(0, 500);
             }
 
             LoggerModel loggerModel = new LoggerModel();
-
             loggerModel.apiType = apiType;
             loggerModel.time = getDate(new Date().getTime());
             loggerModel.requested_time = getDate(reqsTime);
@@ -163,7 +156,7 @@ public class LoggerRepository {
      * @param respTime - Time at server responded
      */
     public void createApiLog(String data, String request, String url, long reqTime, long respTime) {
-        String responseStatus = "";
+        String responseStatus;
         try {
             JSONObject response = new JSONObject("" + data);
             if (response.has("STATUS")) {
@@ -173,16 +166,14 @@ public class LoggerRepository {
             } else {
                 if (TaxiUtil.tostring(response).length() < 100)
                     responseStatus = TaxiUtil.tostring(response);
-                else
-                    responseStatus = TaxiUtil.tostring(response).substring(0, 500);
+                else responseStatus = TaxiUtil.tostring(response).substring(0, 500);
             }
             Uri path = Uri.parse(url);
 
             LoggerModel loggerModel = new LoggerModel();
             if (path.getBooleanQueryParameter("type", false))
                 loggerModel.apiType = path.getQueryParameter("type");
-            else
-                loggerModel.apiType = path.getPath();
+            else loggerModel.apiType = path.getPath();
 
             loggerModel.time = getDate(new Date().getTime());
             loggerModel.requested_time = getDate(reqTime);
@@ -206,9 +197,7 @@ public class LoggerRepository {
 
     public LiveData<PagedList<LoggerModel>> logsByApiType(String apiType) {
 
-        PagedList.Config config = new PagedList.Config.Builder()
-                .setEnablePlaceholders(true)
-                .setPageSize(5)
+        PagedList.Config config = new PagedList.Config.Builder().setEnablePlaceholders(true).setPageSize(5)
                 /*.setInitialLoadSizeHint(3) */ // default: page size * 3
                 .build();
 
@@ -222,7 +211,7 @@ public class LoggerRepository {
 
     private static class insertAsyncTask extends AsyncTask<LoggerModel, Void, Void> {
 
-        private LoggerDao mLoggerDao;
+        private final LoggerDao mLoggerDao;
 
         insertAsyncTask(LoggerDao dao) {
             mLoggerDao = dao;
@@ -237,7 +226,7 @@ public class LoggerRepository {
 
     private static class deleteAsyncTask extends AsyncTask<LoggerModel, Void, Void> {
 
-        private LoggerDao mLoggerDao;
+        private final LoggerDao mLoggerDao;
 
         deleteAsyncTask(LoggerDao dao) {
             mLoggerDao = dao;
@@ -252,7 +241,7 @@ public class LoggerRepository {
 
     private static class updateAsyncTask extends AsyncTask<Bundle, Void, Void> {
 
-        private LoggerDao mLoggerDao;
+        private final LoggerDao mLoggerDao;
 
         updateAsyncTask(LoggerDao dao) {
             mLoggerDao = dao;
@@ -267,5 +256,4 @@ public class LoggerRepository {
             return null;
         }
     }
-
 }

@@ -44,11 +44,11 @@ interface DriverErrorLogDao {
     fun getAllApiErrorLogs(): List<DriverApiErrorModel>
 
     @Query("DELETE FROM apiErrorModel WHERE timeStamp < :date ")
-    fun deleteAllApiErrorLogs(date:String)
+    fun deleteAllApiErrorLogs(date: String)
 
     @Query("SELECT COUNT(timeStamp) FROM apiErrorModel WHERE error = :error and timeStamp = :currTime")
-    fun getCount(error:String,currTime:String):Int
+    fun getCount(error: String, currTime: String): Int
 
     @Query("UPDATE apiErrorModel set sendStatus = :status WHERE ids = :id")
-    fun updateSendStatus(status:Int,id:Int)
+    fun updateSendStatus(status: Int, id: Int)
 }

@@ -3,11 +3,8 @@ package com.taximobility.driver.service;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-
-import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 
 import javax.net.ssl.X509TrustManager;
@@ -19,17 +16,11 @@ public class DriverHttpsTrustManager implements X509TrustManager {
     private static final X509Certificate[] _AcceptedIssuers = new X509Certificate[]{};
 
     @Override
-    public void checkClientTrusted(
-            java.security.cert.X509Certificate[] x509Certificates, String s)
-            throws java.security.cert.CertificateException {
-
+    public void checkClientTrusted(java.security.cert.X509Certificate[] x509Certificates, String s) throws java.security.cert.CertificateException {
     }
 
     @Override
-    public void checkServerTrusted(
-            java.security.cert.X509Certificate[] x509Certificates, String s)
-            throws java.security.cert.CertificateException {
-
+    public void checkServerTrusted(java.security.cert.X509Certificate[] x509Certificates, String s) throws java.security.cert.CertificateException {
     }
 
     @Override
@@ -45,17 +36,8 @@ public class DriverHttpsTrustManager implements X509TrustManager {
         return true;
     }
 
-
-
     public static void allowAllSSL() {
-        HttpsURLConnection.setDefaultHostnameVerifier(new HostnameVerifier() {
-
-            @Override
-            public boolean verify(String arg0, SSLSession arg1) {
-                return true;
-            }
-
-        });
+        HttpsURLConnection.setDefaultHostnameVerifier((arg0, arg1) -> true);
 
         SSLContext context = null;
         if (trustManagers == null) {
@@ -71,8 +53,6 @@ public class DriverHttpsTrustManager implements X509TrustManager {
             e.printStackTrace();
         }
 
-        HttpsURLConnection.setDefaultSSLSocketFactory(context
-                .getSocketFactory());
+        HttpsURLConnection.setDefaultSSLSocketFactory(context.getSocketFactory());
     }
-
 }

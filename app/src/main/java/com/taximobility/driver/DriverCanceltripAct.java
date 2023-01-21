@@ -43,8 +43,7 @@ public class DriverCanceltripAct extends MainActivityDriver implements OnClickLi
         // TODO Auto-generated method stub
         DriverFontHelper.applyFont(DriverCanceltripAct.this, findViewById(R.id.canceltrip));
 
-        DirverColorchange.ChangeColor((ViewGroup) (((ViewGroup) DriverCanceltripAct.this
-                .findViewById(android.R.id.content)).getChildAt(0)), DriverCanceltripAct.this);
+        DirverColorchange.ChangeColor((ViewGroup) (((ViewGroup) DriverCanceltripAct.this.findViewById(android.R.id.content)).getChildAt(0)), DriverCanceltripAct.this);
 
         unlockScreen();
         DriverCommonData.mActivitylist.add(this);

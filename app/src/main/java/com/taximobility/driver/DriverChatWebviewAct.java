@@ -56,7 +56,7 @@ public class DriverChatWebviewAct extends DriverBaseActivity {
     private ValueCallback<Uri> mUM;
     private ValueCallback<Uri[]> mUMA;
     private final static int FCR = 1;
-    private boolean isFromEarningsAct = false;
+    private final boolean isFromEarningsAct = false;
 
     @SuppressLint("SetJavaScriptEnabled")
     @Override
@@ -93,9 +93,7 @@ public class DriverChatWebviewAct extends DriverBaseActivity {
         simpleWebView.setWebViewClient(new MyWebViewClient());
         simpleWebView.setWebChromeClient(new WebChromeClient() {
             //For Android 5.0+
-            public boolean onShowFileChooser(
-                    WebView webView, ValueCallback<Uri[]> filePathCallback,
-                    FileChooserParams fileChooserParams) {
+            public boolean onShowFileChooser(WebView webView, ValueCallback<Uri[]> filePathCallback, FileChooserParams fileChooserParams) {
                 if (mUMA != null) {
                     mUMA.onReceiveValue(null);
                 }
@@ -115,9 +113,7 @@ public class DriverChatWebviewAct extends DriverBaseActivity {
                         mCM = "file:" + photoFile.getAbsolutePath();
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                             takePictureIntent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                            imageUri = FileProvider.getUriForFile(DriverChatWebviewAct.this,
-                                    DriverChatWebviewAct.this.getPackageName().concat(".files_root"),
-                                    photoFile);
+                            imageUri = FileProvider.getUriForFile(DriverChatWebviewAct.this, DriverChatWebviewAct.this.getPackageName().concat(".files_root"), photoFile);
                         } else {
                             imageUri = Uri.fromFile(photoFile);
                         }
@@ -148,9 +144,7 @@ public class DriverChatWebviewAct extends DriverBaseActivity {
         lang_Str = DriverSessionSave.getSession("Lang", DriverChatWebviewAct.this);
 
         if (!TextUtils.isEmpty(Id)) {
-            link_1 = DriverSessionSave.getSession("chat_node_url", DriverChatWebviewAct.this) + "?name=" + DriverSessionSave.getSession("Name", DriverChatWebviewAct.this) + "("
-                    + DriverSessionSave.getSession("Id", DriverChatWebviewAct.this) + ")&id=" + Id + "&image=" + DriverSessionSave.getSession("d_image_name", DriverChatWebviewAct.this)
-                    + "&type=D" + "&chat_type=" + chat_type + "&to_type=" + to_type;
+            link_1 = DriverSessionSave.getSession("chat_node_url", DriverChatWebviewAct.this) + "?name=" + DriverSessionSave.getSession("Name", DriverChatWebviewAct.this) + "(" + DriverSessionSave.getSession("Id", DriverChatWebviewAct.this) + ")&id=" + Id + "&image=" + DriverSessionSave.getSession("d_image_name", DriverChatWebviewAct.this) + "&type=D" + "&chat_type=" + chat_type + "&to_type=" + to_type;
         }
 
         if (TextUtils.isEmpty(link_1.trim())) {
@@ -158,13 +152,9 @@ public class DriverChatWebviewAct extends DriverBaseActivity {
                 + DriverSessionSave.getSession("Id", DriverChatWebviewAct.this)+")&id=Job_ID_"+DriverSessionSave.getSession("trip_id", DriverChatWebviewAct.this)+"&image="+ DriverSessionSave.getSession("d_image_name",DriverChatWebviewAct.this)
                 +"&type=D";*/
             if (type.equals("3")) {
-                link_1 = DriverSessionSave.getSession("chat_node_url", DriverChatWebviewAct.this) + "?name=" + DriverSessionSave.getSession("Name", DriverChatWebviewAct.this) + "("
-                        + DriverSessionSave.getSession("Id", DriverChatWebviewAct.this) + ")&id=Driver_Chat_Id_" + DriverSessionSave.getSession("Id", DriverChatWebviewAct.this) + "&image=" + DriverSessionSave.getSession("d_image_name", DriverChatWebviewAct.this)
-                        + "&type=D" + "&chat_type=2" + "&to_type=A";
+                link_1 = DriverSessionSave.getSession("chat_node_url", DriverChatWebviewAct.this) + "?name=" + DriverSessionSave.getSession("Name", DriverChatWebviewAct.this) + "(" + DriverSessionSave.getSession("Id", DriverChatWebviewAct.this) + ")&id=Driver_Chat_Id_" + DriverSessionSave.getSession("Id", DriverChatWebviewAct.this) + "&image=" + DriverSessionSave.getSession("d_image_name", DriverChatWebviewAct.this) + "&type=D" + "&chat_type=2" + "&to_type=A";
             } else {
-                link_1 = DriverSessionSave.getSession("chat_node_url", DriverChatWebviewAct.this) + "?name=" + DriverSessionSave.getSession("Name", DriverChatWebviewAct.this) + "("
-                        + DriverSessionSave.getSession("Id", DriverChatWebviewAct.this) + ")&id=Job_ID_" + trip_id + "&image=" + DriverSessionSave.getSession("d_image_name", DriverChatWebviewAct.this)
-                        + "&type=D" + "&chat_type=1" + "&to_type=P";
+                link_1 = DriverSessionSave.getSession("chat_node_url", DriverChatWebviewAct.this) + "?name=" + DriverSessionSave.getSession("Name", DriverChatWebviewAct.this) + "(" + DriverSessionSave.getSession("Id", DriverChatWebviewAct.this) + ")&id=Job_ID_" + trip_id + "&image=" + DriverSessionSave.getSession("d_image_name", DriverChatWebviewAct.this) + "&type=D" + "&chat_type=1" + "&to_type=P";
 
             }
         }
@@ -218,8 +208,7 @@ public class DriverChatWebviewAct extends DriverBaseActivity {
     public void showDialog() {
         try {
             if (DriverNetworkStatus.isOnline(DriverChatWebviewAct.this)) {
-                if (mDialog != null)
-                    mDialog.dismiss();
+                if (mDialog != null) mDialog.dismiss();
                 View view = View.inflate(DriverChatWebviewAct.this, R.layout.driver_progress_bar, null);
                 mDialog = new Dialog(DriverChatWebviewAct.this, R.style.dialogwinddow);
                 DirverColorchange.ChangeColor((ViewGroup) view, DriverChatWebviewAct.this);
@@ -232,9 +221,7 @@ public class DriverChatWebviewAct extends DriverBaseActivity {
                 }
                 ImageView iv = mDialog.findViewById(R.id.giff);
                 DrawableImageViewTarget imageViewTarget = new DrawableImageViewTarget(iv);
-                Glide.with(DriverChatWebviewAct.this)
-                        .load(R.raw.driver_loading_anim)
-                        .into(imageViewTarget);
+                Glide.with(DriverChatWebviewAct.this).load(R.raw.driver_loading_anim).into(imageViewTarget);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -277,9 +264,7 @@ public class DriverChatWebviewAct extends DriverBaseActivity {
 
     public void closeDialog() {
         try {
-            if (mDialog != null)
-                if (mDialog.isShowing())
-                    mDialog.dismiss();
+            if (mDialog != null) if (mDialog.isShowing()) mDialog.dismiss();
         } catch (Exception e) {
             e.printStackTrace();
         }

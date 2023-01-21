@@ -2,7 +2,9 @@ package com.taximobility.driver.utils;
 
 import android.content.Context;
 import android.os.Handler;
+
 import androidx.core.view.VelocityTrackerCompat;
+
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -28,9 +30,8 @@ public class DriverStreetMapWrapperLayout extends RelativeLayout {
     private float lastSpan = -1;
     private static boolean bookingPage;
     private int bottomOffsetPixels;
-    private Handler handler = new Handler();
+    private final Handler handler = new Handler();
     private final Handler handler1 = new Handler();
-
     private ScaleGestureDetector scaleGestureDetector;
     private GestureDetector gestureDetector;
     private VelocityTracker mVelocityTracker;
@@ -53,12 +54,7 @@ public class DriverStreetMapWrapperLayout extends RelativeLayout {
     public void init(GoogleMap map, int bottomOffsetPixels, boolean bookingpage) {
         bookingPage = bookingpage;
         mHandler = new Handler();
-        mRunnable = new Runnable() {
-            @Override
-            public void run() {
-                setmMapIsTouched(true);
-            }
-        };
+        mRunnable = () -> setmMapIsTouched(true);
         scaleGestureDetector = new ScaleGestureDetector(getContext(), new ScaleGestureDetector.OnScaleGestureListener() {
             @Override
             public boolean onScale(ScaleGestureDetector detector) {
@@ -162,10 +158,8 @@ public class DriverStreetMapWrapperLayout extends RelativeLayout {
                         mVelocityTracker.addMovement(ev);
                         mVelocityTracker.computeCurrentVelocity(100);
 
-                        float velocityx = VelocityTrackerCompat.getXVelocity(mVelocityTracker,
-                                pointerId);
-                        float velocityy = VelocityTrackerCompat.getYVelocity(mVelocityTracker,
-                                pointerId);
+                        float velocityx = VelocityTrackerCompat.getXVelocity(mVelocityTracker, pointerId);
+                        float velocityy = VelocityTrackerCompat.getYVelocity(mVelocityTracker, pointerId);
                         //   setmMapIsTouched(true);
                         if (bookingPage & fingers == 1) {
 
@@ -199,12 +193,7 @@ public class DriverStreetMapWrapperLayout extends RelativeLayout {
 
     private void enableScrolling() {
         if (googleMap != null && !googleMap.getUiSettings().isScrollGesturesEnabled()) {
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    googleMap.getUiSettings().setAllGesturesEnabled(true);
-                }
-            }, 50);
+            handler.postDelayed(() -> googleMap.getUiSettings().setAllGesturesEnabled(true), 50);
         }
     }
 

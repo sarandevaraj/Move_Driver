@@ -1,6 +1,5 @@
 package com.taximobility.driver.utils
 
-
 import android.content.Context
 import android.graphics.Typeface
 import android.text.TextUtils
@@ -12,22 +11,19 @@ import com.taximobility.R
 import com.taximobility.driver.data.BookLaterData
 import java.util.*
 
-
 class DriverListViewEX : LinearLayout {
     @JvmOverloads
     constructor(
-            context: Context,
-            attrs: AttributeSet? = null,
-            defStyleAttr: Int = 0)
-            : super(context, attrs, defStyleAttr)
+        context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
+    ) : super(context, attrs, defStyleAttr)
 
-   /* @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    constructor(
-            context: Context,
-            attrs: AttributeSet?,
-            defStyleAttr: Int,
-            defStyleRes: Int)
-            : super(context, attrs, defStyleAttr, defStyleRes)*/
+    /* @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+     constructor(
+             context: Context,
+             attrs: AttributeSet?,
+             defStyleAttr: Int,
+             defStyleRes: Int)
+             : super(context, attrs, defStyleAttr, defStyleRes)*/
 
     private lateinit var stopArray: ArrayList<HashMap<String, String>>
 
@@ -49,7 +45,8 @@ class DriverListViewEX : LinearLayout {
             stopArray.removeAt(stopArray.size - 1)
             for (i in 0 until stopArray.size) {
                 println("ARRRAR data ${stopArray[i]["KEY"]}")
-                val data = BookLaterData(stopArray[i]["KEY"].toString(), stopArray[i]["VALUE"].toString())
+                val data =
+                    BookLaterData(stopArray[i]["KEY"].toString(), stopArray[i]["VALUE"].toString())
                 createLayout(data, i)
             }
         }
@@ -61,7 +58,12 @@ class DriverListViewEX : LinearLayout {
         if (lang == "ar" || lang == "fa") {
             val mainLayout = LinearLayout(context)
             val mainLayParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
-            mainLayParams.setMargins(resources.getDimension(R.dimen.dp_5).toInt(), resources.getDimension(R.dimen.dp_5).toInt(), resources.getDimension(R.dimen.dp_5).toInt(), resources.getDimension(R.dimen.dp_5).toInt())
+            mainLayParams.setMargins(
+                resources.getDimension(R.dimen.dp_5).toInt(),
+                resources.getDimension(R.dimen.dp_5).toInt(),
+                resources.getDimension(R.dimen.dp_5).toInt(),
+                resources.getDimension(R.dimen.dp_5).toInt()
+            )
             mainLayout.layoutParams = mainLayParams
             mainLayout.orientation = HORIZONTAL
 
@@ -110,7 +112,12 @@ class DriverListViewEX : LinearLayout {
 
             val mainLayout = LinearLayout(context)
             val mainLayParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
-            mainLayParams.setMargins(resources.getDimension(R.dimen.dp_5).toInt(), resources.getDimension(R.dimen.dp_5).toInt(), resources.getDimension(R.dimen.dp_5).toInt(), resources.getDimension(R.dimen.dp_5).toInt())
+            mainLayParams.setMargins(
+                resources.getDimension(R.dimen.dp_5).toInt(),
+                resources.getDimension(R.dimen.dp_5).toInt(),
+                resources.getDimension(R.dimen.dp_5).toInt(),
+                resources.getDimension(R.dimen.dp_5).toInt()
+            )
             mainLayout.layoutParams = mainLayParams
             mainLayout.orientation = HORIZONTAL
 

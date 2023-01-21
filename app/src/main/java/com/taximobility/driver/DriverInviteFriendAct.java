@@ -16,6 +16,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import com.taximobility.R;
 import com.taximobility.driver.data.DriverCommonData;
 import com.taximobility.driver.interfaces.DriverAPIResult;
@@ -109,12 +111,9 @@ public class DriverInviteFriendAct extends MainActivityDriver implements OnClick
 
         ImageView iv = findViewById(R.id.giff);
         DrawableImageViewTarget imageViewTarget = new DrawableImageViewTarget(iv);
-        Glide.with(DriverInviteFriendAct.this)
-                .load(R.raw.driver_loading_anim)
-                .into(imageViewTarget);
+        Glide.with(DriverInviteFriendAct.this).load(R.raw.driver_loading_anim).into(imageViewTarget);
 
-        DirverColorchange.ChangeColor((ViewGroup) (((ViewGroup) DriverInviteFriendAct.this
-                .findViewById(android.R.id.content)).getChildAt(0)), DriverInviteFriendAct.this);
+        DirverColorchange.ChangeColor((ViewGroup) (((ViewGroup) DriverInviteFriendAct.this.findViewById(android.R.id.content)).getChildAt(0)), DriverInviteFriendAct.this);
 
         SlideImg = findViewById(R.id.leftIconTxt);
 
@@ -133,12 +132,7 @@ public class DriverInviteFriendAct extends MainActivityDriver implements OnClick
             pendingAction = PendingAction.valueOf(name);
         }
 
-        SlideImg.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        SlideImg.setOnClickListener(v -> finish());
         // Can we present the share dialog for regular links?
         String Profileimgepath = DriverSessionSave.getSession("ProfileImage", DriverInviteFriendAct.this);
         if (!DriverAppCacheImage.loadBitmap(Profileimgepath, profileImg)) {
@@ -150,7 +144,10 @@ public class DriverInviteFriendAct extends MainActivityDriver implements OnClick
             refamount = Double.parseDouble(DriverSessionSave.getSession("RefAmount", DriverInviteFriendAct.this));
         referalamtTxt.setText("" + DriverSessionSave.getSession("site_currency", DriverInviteFriendAct.this) + "" + String.format(Locale.UK, "%.2f", refamount));
         Package pack = DriverInviteFriendAct.this.getClass().getPackage();
-        String packtxt = pack.toString();
+        String packtxt = null;
+        if (pack != null) {
+            packtxt = pack.toString();
+        }
         packarr = packtxt.split(" ");
         invitesubject = "" + DriverNC.getResources().getString(R.string.invite_friend);
         //check referal amount
@@ -224,11 +221,7 @@ public class DriverInviteFriendAct extends MainActivityDriver implements OnClick
                     e.printStackTrace();
                 }
             } else {
-                runOnUiThread(new Runnable() {
-                    public void run() {
-                        DriverCToast.ShowToast(DriverInviteFriendAct.this, DriverNC.getString(R.string.server_error));
-                    }
-                });
+                runOnUiThread(() -> DriverCToast.ShowToast(DriverInviteFriendAct.this, DriverNC.getString(R.string.server_error)));
             }
         }
     }
@@ -263,7 +256,7 @@ public class DriverInviteFriendAct extends MainActivityDriver implements OnClick
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
 
         super.onSaveInstanceState(outState);
         outState.putString(PENDING_ACTION_BUNDLE_KEY, pendingAction.name());

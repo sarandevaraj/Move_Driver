@@ -12,7 +12,6 @@ import com.taximobility.driver.utils.DriverCL;
 public class Drawables_program {
     public static View shift_bg_grey(View v) {
 
-
         GradientDrawable drawable = (GradientDrawable) v.getBackground();
         GradientDrawable gdDefault = new GradientDrawable();
         gdDefault.setColor(DriverCL.getColor(R.color.shiftoffcolor));
@@ -23,7 +22,6 @@ public class Drawables_program {
     }
 
     public static View shift_on(View v) {
-
 
         GradientDrawable drawable = (GradientDrawable) v.getBackground();
         GradientDrawable gdDefault = new GradientDrawable();

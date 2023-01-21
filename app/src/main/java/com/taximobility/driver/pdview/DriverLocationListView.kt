@@ -11,7 +11,6 @@ import com.taximobility.R
 import com.taximobility.driver.route.DriverStopData
 import com.taximobility.driver.utils.DriverNC
 
-
 class DriverLocationListView : LinearLayout, DriverCollapseInterface {
     override fun collapsed(collapsed: Boolean) {
         isCollapsed = collapsed
@@ -24,24 +23,21 @@ class DriverLocationListView : LinearLayout, DriverCollapseInterface {
 
     @JvmOverloads
     constructor(
-            context: Context,
-            attrs: AttributeSet? = null,
-            defStyleAttr: Int = 0)
-            : super(context, attrs, defStyleAttr)
+        context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
+    ) : super(context, attrs, defStyleAttr)
 
-   /* @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    constructor(
-            context: Context,
-            attrs: AttributeSet?,
-            defStyleAttr: Int,
-            defStyleRes: Int)
-            : super(context, attrs, defStyleAttr, defStyleRes)*/
+    /* @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+     constructor(
+             context: Context,
+             attrs: AttributeSet?,
+             defStyleAttr: Int,
+             defStyleRes: Int)
+             : super(context, attrs, defStyleAttr, defStyleRes)*/
 
     private lateinit var driverStopArray: ArrayList<DriverStopData>
 
     var type: String = ""
     var lang: String = ""
-
 
     init {
         orientation = VERTICAL
@@ -67,15 +63,14 @@ class DriverLocationListView : LinearLayout, DriverCollapseInterface {
 
     private fun createStop(driverStopData: DriverStopData) {
 
-
         if (lang == "ar" || lang == "fa") {
-
-
             val edtStop = AppCompatTextView(context)
             edtStop.isFocusableInTouchMode = false
             edtStop.hint = DriverNC.getString(R.string.search_stop_hint)
             edtStop.id = driverStopData.id
-            val layParams = LayoutParams(LayoutParams.MATCH_PARENT, resources.getDimension(R.dimen.stop_lay_height).toInt())
+            val layParams = LayoutParams(
+                LayoutParams.MATCH_PARENT, resources.getDimension(R.dimen.stop_lay_height).toInt()
+            )
             layParams.setMargins(0, 0, 0, resources.getDimension(R.dimen.stop_space_lay).toInt())
             edtStop.setPadding(resources.getDimension(R.dimen.stop_space_lay).toInt(), 0, 0, 0)
             edtStop.layoutParams = layParams
@@ -84,8 +79,6 @@ class DriverLocationListView : LinearLayout, DriverCollapseInterface {
             edtStop.ellipsize = TextUtils.TruncateAt.MARQUEE
             edtStop.marqueeRepeatLimit = -1
             edtStop.isSelected = true
-
-
             edtStop.text = driverStopData.placeName
             addView(edtStop)
             when {
@@ -93,7 +86,7 @@ class DriverLocationListView : LinearLayout, DriverCollapseInterface {
                     edtStop.setBackgroundColor(Color.parseColor("#ffffff"))
                     edtStop.setTextColor(Color.parseColor("#3d3d3d"))
                 }
-                type.equals("SCHEDULE",ignoreCase = true) -> {
+                type.equals("SCHEDULE", ignoreCase = true) -> {
                     edtStop.setBackgroundColor(Color.parseColor("#ffffff"))
                     edtStop.setTextColor(Color.parseColor("#3d3d3d"))
                 }
@@ -107,7 +100,9 @@ class DriverLocationListView : LinearLayout, DriverCollapseInterface {
             edtStop.isFocusableInTouchMode = false
             edtStop.hint = DriverNC.getString(R.string.search_stop_hint)
             edtStop.id = driverStopData.id
-            val layParams = LayoutParams(LayoutParams.MATCH_PARENT, resources.getDimension(R.dimen.stop_lay_height).toInt())
+            val layParams = LayoutParams(
+                LayoutParams.MATCH_PARENT, resources.getDimension(R.dimen.stop_lay_height).toInt()
+            )
             layParams.setMargins(0, 0, 0, resources.getDimension(R.dimen.stop_space_lay).toInt())
             edtStop.setPadding(resources.getDimension(R.dimen.stop_space_lay).toInt(), 0, 0, 0)
             edtStop.layoutParams = layParams
@@ -126,7 +121,7 @@ class DriverLocationListView : LinearLayout, DriverCollapseInterface {
                     edtStop.setBackgroundColor(Color.parseColor("#ffffff"))
                     edtStop.setTextColor(Color.parseColor("#3d3d3d"))
                 }
-                type.equals("SCHEDULE",ignoreCase = true) -> {
+                type.equals("SCHEDULE", ignoreCase = true) -> {
                     edtStop.setBackgroundColor(Color.parseColor("#ffffff"))
                     edtStop.setTextColor(Color.parseColor("#3d3d3d"))
                 }
@@ -136,7 +131,5 @@ class DriverLocationListView : LinearLayout, DriverCollapseInterface {
                 }
             }
         }
-
     }
-
 }

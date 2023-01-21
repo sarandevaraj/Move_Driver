@@ -19,9 +19,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class AddonsAdapter extends RecyclerView.Adapter<AddonsAdapter.ViewHolder> {
-    private Context context;
-    private ArrayList<AddonsData> data;
-    private int type = 0;
+    private final Context context;
+    private final ArrayList<AddonsData> data;
+    private final int type;
 
     public AddonsAdapter(Context context, ArrayList<AddonsData> addonsData, int selected_type) {
         this.context = context;
@@ -51,10 +51,7 @@ public class AddonsAdapter extends RecyclerView.Adapter<AddonsAdapter.ViewHolder
             holder.tv_price.setText(DriverSessionSave.getSession("site_currency", context) + "" + String.format(Locale.UK, "%.2f", Float.valueOf(data.get(position).preference_fare)));
             holder.tv_type.setText(data.get(position).preference_name);
         }
-
-
     }
-
 
     @Override
     public int getItemCount() {
@@ -65,10 +62,9 @@ public class AddonsAdapter extends RecyclerView.Adapter<AddonsAdapter.ViewHolder
         return data;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView addon_name, tv_type, tv_price;
         LinearLayout ll_addon_price;
-
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -77,6 +73,5 @@ public class AddonsAdapter extends RecyclerView.Adapter<AddonsAdapter.ViewHolder
             tv_price = itemView.findViewById(R.id.tv_price);
             ll_addon_price = itemView.findViewById(R.id.ll_addon_price);
         }
-
     }
 }

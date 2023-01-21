@@ -84,7 +84,9 @@ public class DriverSelectDropLocationAct extends MainActivityDriver implements V
         if (getIntent() != null && getIntent().getParcelableExtra("dropLocation") != null)
             dropLocation = getIntent().getParcelableExtra("dropLocation");
         SupportMapFragment mapFrag = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-        mapFrag.getMapAsync(this);
+        if (mapFrag != null) {
+            mapFrag.getMapAsync(this);
+        }
     }
 
     @Override
@@ -145,12 +147,9 @@ public class DriverSelectDropLocationAct extends MainActivityDriver implements V
         if (dropLocation != null && dropLocation.latitude != 0.0) {
             cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(dropLocation.latitude, dropLocation.longitude), 16f);
         } else if (!DriverSessionSave.getSession(DriverCommonData.SOS_LAST_LAT, DriverSelectDropLocationAct.this).equals("")) {
-            cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(
-                    Double.parseDouble(DriverSessionSave.getSession(DriverCommonData.SOS_LAST_LAT, DriverSelectDropLocationAct.this))
-                    , Double.parseDouble(DriverSessionSave.getSession(DriverCommonData.SOS_LAST_LNG, DriverSelectDropLocationAct.this))), 16f);
+            cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(Double.parseDouble(DriverSessionSave.getSession(DriverCommonData.SOS_LAST_LAT, DriverSelectDropLocationAct.this)), Double.parseDouble(DriverSessionSave.getSession(DriverCommonData.SOS_LAST_LNG, DriverSelectDropLocationAct.this))), 16f);
         }
-        if (cameraUpdate != null)
-            googleMap.moveCamera(cameraUpdate);
+        if (cameraUpdate != null) googleMap.moveCamera(cameraUpdate);
 
         googleMap.setOnMapClickListener(this);
     }
@@ -159,12 +158,9 @@ public class DriverSelectDropLocationAct extends MainActivityDriver implements V
     public void onMapClick(LatLng latLng) {
         if (googleMap != null) {
             googleMap.clear();
-            googleMap.addMarker(new MarkerOptions()
-                    .position(latLng)
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+            googleMap.addMarker(new MarkerOptions().position(latLng).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
             Complete_trip.setVisibility(View.VISIBLE);
-            if (address != null)
-                address.cancel(true);
+            if (address != null) address.cancel(true);
             address = new Address_s(DriverSelectDropLocationAct.this, new LatLng(latLng.latitude, latLng.longitude));
             address.execute();
         }
@@ -179,8 +175,8 @@ public class DriverSelectDropLocationAct extends MainActivityDriver implements V
         String Address = "";
         Geocoder geocoder;
         List<android.location.Address> addresses = null;
-        private double latitude;
-        private double longitude;
+        private final double latitude;
+        private final double longitude;
 
         public Address_s(Context context, LatLng position) {
             showLoading(DriverSelectDropLocationAct.this);
@@ -283,8 +279,7 @@ public class DriverSelectDropLocationAct extends MainActivityDriver implements V
                     DropAddress = Address;
                     droplatitude = latitude;
                     droplongitude = longitude;
-                } else
-                    DropAddress = "Tap your current Location on Map";
+                } else DropAddress = "Tap your current Location on Map";
                 droplongitude = 0.0;
                 droplatitude = 0.0;
                 GEOCODE_EXPIRY = true;
@@ -297,11 +292,9 @@ public class DriverSelectDropLocationAct extends MainActivityDriver implements V
                 droplongitude = 0.0;
                 droplatitude = 0.0;
                 GEOCODE_EXPIRY = true;
-                if (mContext != null)
-                    if (!DriverNetworkStatus.isOnline(mContext))
-                        DriverCToast.ShowToast(mContext, DriverNC.getString(R.string.check_internet));
-                    else
-                        DriverCToast.ShowToast(mContext, DriverNC.getString(R.string.c_tryagain));
+                if (mContext != null) if (!DriverNetworkStatus.isOnline(mContext))
+                    DriverCToast.ShowToast(mContext, DriverNC.getString(R.string.check_internet));
+                else DriverCToast.ShowToast(mContext, DriverNC.getString(R.string.c_tryagain));
                 DriverSelectDropLocationAct.setfetch_address();
             }
         }
@@ -331,10 +324,8 @@ public class DriverSelectDropLocationAct extends MainActivityDriver implements V
 
             @Override
             public void getResult(boolean isSuccess, String result) {
-                if (result != null)
-                    setLocation(result);
+                if (result != null) setLocation(result);
             }
         }
-
     }
 }

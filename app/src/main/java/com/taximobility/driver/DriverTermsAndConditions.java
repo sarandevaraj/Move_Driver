@@ -2,7 +2,9 @@ package com.taximobility.driver;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
+
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -37,8 +39,7 @@ public class DriverTermsAndConditions extends DriverBaseActivity {
      */
     @SuppressLint("NewApi")
     public void Initialize() {
-        DirverColorchange.ChangeColor((ViewGroup) (((ViewGroup) this
-                .findViewById(android.R.id.content)).getChildAt(0)), DriverTermsAndConditions.this);
+        DirverColorchange.ChangeColor((ViewGroup) (((ViewGroup) this.findViewById(android.R.id.content)).getChildAt(0)), DriverTermsAndConditions.this);
         DriverCommonData.sContext = this;
         DriverCommonData.mActivitylist.add(this);
         DriverFontHelper.applyFont(this, findViewById(R.id.terms_contain));
@@ -46,13 +47,7 @@ public class DriverTermsAndConditions extends DriverBaseActivity {
         back_text = findViewById(R.id.slideImg);
         back_text.setVisibility(View.VISIBLE);
 
-        back_text.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                onBackPressed();
-            }
-        });
+        back_text.setOnClickListener(v -> onBackPressed());
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
@@ -68,8 +63,6 @@ public class DriverTermsAndConditions extends DriverBaseActivity {
 
         }
     }
-
-
 
 
     @Override

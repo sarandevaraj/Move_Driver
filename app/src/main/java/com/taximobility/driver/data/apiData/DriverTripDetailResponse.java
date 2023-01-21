@@ -14,7 +14,7 @@ public class DriverTripDetailResponse {
     public Integer status;
     public String site_currency;
 
-    public class Detail{
+    public class Detail {
         //outstation
         public String trip_type;
         public String base_fare, paid_amount, promotion, tax;
@@ -68,18 +68,18 @@ public class DriverTripDetailResponse {
         public String driver_image, subtotal, tax_fare;
         public String passenger_image;
         public String total_preference_fare;
-        public String service_id ;
-        public String product_name  ;
-        public String product_weight  ;
-        public String product_size ;
-        public String delivery_person_name , delivery_phone_number , delivery_date_time ;
-        public String delivery_notes ;
+        public String service_id;
+        public String product_name;
+        public String product_weight;
+        public String product_size;
+        public String delivery_person_name, delivery_phone_number, delivery_date_time;
+        public String delivery_notes;
         public String driver_longtitute;
         public String driver_latitute;
         public String driver_status, nightfare, eveningfare;
         public String delivery_fare;
         public String per_kg_price;
-        public String driver_rating, distance_fare, distance_fare_metric, tax_percentage, trip_minutes, fare_per_minute, minutes_fare, waiting_fare_minutes, actual_paid_amount,given_tips, promocode_fare, payment_type_label, map_image, fare_calculation_type;
+        public String driver_rating, distance_fare, distance_fare_metric, tax_percentage, trip_minutes, fare_per_minute, minutes_fare, waiting_fare_minutes, actual_paid_amount, given_tips, promocode_fare, payment_type_label, map_image, fare_calculation_type;
         public List<String> split_fare_details = new ArrayList<>();
         public ArrayList<DriverStopData> stops;
         public String cancellation_fee;

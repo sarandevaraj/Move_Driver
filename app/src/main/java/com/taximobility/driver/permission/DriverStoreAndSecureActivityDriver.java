@@ -9,14 +9,12 @@ import com.taximobility.driver.MainActivityDriver;
 
 import com.taximobility.driver.utils.DriverFontHelper;
 
-
 public class DriverStoreAndSecureActivityDriver extends MainActivityDriver implements View.OnClickListener {
 
     private TextView collect_information_desc_tv, information_usage_desc_tv, protect_information_desc_tv, know_information_desc_tv;
     private Boolean isCollectInformation = false, isInformationUsage = false, isProtectInformation = false, isKnowInformation = false;
     private ImageView collect_information_iv, information_usage_iv, protect_information_iv, know_information_iv, back_btn;
-    private TextView tvProtectYourData,headerTxt,tvUseData,tvPrivacyPolicy,tvCollectData,tvUseItFor,tvRights;
-
+    private TextView tvProtectYourData, headerTxt, tvUseData, tvPrivacyPolicy, tvCollectData, tvUseItFor, tvRights;
 
     @Override
     public int setLayout() {
@@ -37,13 +35,13 @@ public class DriverStoreAndSecureActivityDriver extends MainActivityDriver imple
         know_information_desc_tv = findViewById(R.id.know_information_desc_tv);
         DriverFontHelper.applyFont(this, findViewById(R.id.storeAndSecureParentLay));
 
-        headerTxt=findViewById(R.id.headerTxt);
-        tvUseData=findViewById(R.id.tvUseData);
-        tvPrivacyPolicy=findViewById(R.id.tvPrivacyPolicy);
-        tvCollectData=findViewById(R.id.tvCollectData);
-        tvUseItFor=findViewById(R.id.tvUseItFor);
-        tvProtectYourData=findViewById(R.id.tvProtectYourData);
-        tvRights=findViewById(R.id.tvRights);
+        headerTxt = findViewById(R.id.headerTxt);
+        tvUseData = findViewById(R.id.tvUseData);
+        tvPrivacyPolicy = findViewById(R.id.tvPrivacyPolicy);
+        tvCollectData = findViewById(R.id.tvCollectData);
+        tvUseItFor = findViewById(R.id.tvUseItFor);
+        tvProtectYourData = findViewById(R.id.tvProtectYourData);
+        tvRights = findViewById(R.id.tvRights);
 //        headerTxt.setTypeface(MyApplication.getInstance().getTypeFace(0));
 //        tvUseData.setTypeface(MyApplication.getInstance().getTypeFace(0));
 //        tvPrivacyPolicy.setTypeface(MyApplication.getInstance().getTypeFace(0));
@@ -57,21 +55,18 @@ public class DriverStoreAndSecureActivityDriver extends MainActivityDriver imple
         protect_information_iv.setOnClickListener(this);
         know_information_iv.setOnClickListener(this);
 
-
-
         back_btn.setOnClickListener(view -> onBackPressed());
     }
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.collect_information_iv:{
-                if(isCollectInformation) {
+        switch (view.getId()) {
+            case R.id.collect_information_iv: {
+                if (isCollectInformation) {
                     collect_information_desc_tv.setMaxLines(2);
                     collect_information_iv.setImageDrawable(getResources().getDrawable(R.drawable.driver_plus_icon));
                     isCollectInformation = false;
-                }
-                else {
+                } else {
                     collect_information_desc_tv.setMaxLines(Integer.MAX_VALUE);
                     collect_information_iv.setImageDrawable(getResources().getDrawable(R.drawable.driver_minus_icon));
                     isCollectInformation = true;
@@ -79,13 +74,12 @@ public class DriverStoreAndSecureActivityDriver extends MainActivityDriver imple
                 break;
             }
 
-            case R.id.information_usage_iv:{
-                if(isInformationUsage) {
+            case R.id.information_usage_iv: {
+                if (isInformationUsage) {
                     information_usage_desc_tv.setMaxLines(2);
                     information_usage_iv.setImageDrawable(getResources().getDrawable(R.drawable.driver_plus_icon));
                     isInformationUsage = false;
-                }
-                else {
+                } else {
                     information_usage_desc_tv.setMaxLines(Integer.MAX_VALUE);
                     information_usage_iv.setImageDrawable(getResources().getDrawable(R.drawable.driver_minus_icon));
                     isInformationUsage = true;
@@ -93,13 +87,12 @@ public class DriverStoreAndSecureActivityDriver extends MainActivityDriver imple
                 break;
             }
 
-            case R.id.protect_information_iv:{
-                if(isProtectInformation) {
+            case R.id.protect_information_iv: {
+                if (isProtectInformation) {
                     protect_information_desc_tv.setMaxLines(2);
                     protect_information_iv.setImageDrawable(getResources().getDrawable(R.drawable.driver_plus_icon));
                     isProtectInformation = false;
-                }
-                else {
+                } else {
                     protect_information_desc_tv.setMaxLines(Integer.MAX_VALUE);
                     protect_information_iv.setImageDrawable(getResources().getDrawable(R.drawable.driver_minus_icon));
                     isProtectInformation = true;
@@ -107,21 +100,18 @@ public class DriverStoreAndSecureActivityDriver extends MainActivityDriver imple
                 break;
             }
 
-            case R.id.know_information_iv:{
-                if(isKnowInformation) {
+            case R.id.know_information_iv: {
+                if (isKnowInformation) {
                     know_information_desc_tv.setMaxLines(2);
                     know_information_iv.setImageDrawable(getResources().getDrawable(R.drawable.driver_plus_icon));
                     isKnowInformation = false;
-                }
-                else {
+                } else {
                     know_information_desc_tv.setMaxLines(Integer.MAX_VALUE);
                     know_information_iv.setImageDrawable(getResources().getDrawable(R.drawable.driver_minus_icon));
                     isKnowInformation = true;
                 }
                 break;
             }
-
         }
     }
-
 }

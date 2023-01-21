@@ -14,7 +14,7 @@ public class DriverGetTripDetailResponse {
 
     public String status;
 
-    public class Detail {
+    public static class Detail {
         public String map_image;
 
         public String driver_image;
@@ -143,7 +143,6 @@ public class DriverGetTripDetailResponse {
         public String job_ref;
 
     }
-
 
     @NonNull
     @Override

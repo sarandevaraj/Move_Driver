@@ -33,7 +33,6 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.Property;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -44,6 +43,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatImageView;
@@ -110,7 +110,7 @@ import com.taximobility.driver.utils.DriverRoundedImageView;
 import com.taximobility.driver.utils.DriverSessionSave;
 import com.taximobility.driver.utils.DriverSystems;
 import com.taximobility.driver.utils.Driver_Utils;
-import com.taximobility.interfaces.AlertListener;
+import com.taximobility.driver.interfaces.AlertListener;
 import com.taximobility.util.SessionSave;
 import com.taximobility.util.Utility;
 
@@ -136,7 +136,6 @@ import static com.taximobility.driver.service.LocationUpdate.currentAccuracy;
 import static com.taximobility.driver.service.LocationUpdate.localDistance;
 import static com.taximobility.driver.service.LocationUpdate.runningFor;
 import static com.taximobility.driver.service.LocationUpdate.slabAccuracy;
-
 
 /**
  * This class will be called once the trip is accepted.Here we can start,end trip etc.
@@ -173,10 +172,10 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
 
     private GoogleMap map;
     private DriverRoute route = null;
-    private DriverNonActivity nonactiityobj = new DriverNonActivity();
+    private final DriverNonActivity nonactiityobj = new DriverNonActivity();
     private Button butt_onboard;
     private DriverRoundedImageView proimg;
-    private String dummydata = "";
+    private final String dummydata = "";
     private DriverMapWrapperLayout mapWrapperLayout;
     private Location mLastLocation;
     private Float waitingHr;
@@ -211,7 +210,7 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
     private ImageView pickup_pin;
     private CardView drop_lay, card_view_pickup;
     private TextView order_details;
-    private TextView contact_txt, backup,back_up ,mapInfoTxt, chatTxt;
+    private TextView contact_txt, backup, back_up, mapInfoTxt, chatTxt;
     private TextView CurrentlocationTxt, pickup_location_txt, txt_pickup, txt_drop;
     private TextView droplocationTxt, tv_notes, TripcancelTxt;
     private TextView nodataTxt, passengerphoneTxt, passnameTxt, speedTxt, vichle_name;
@@ -283,7 +282,7 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
     Double amount_tobe_paid = 0.0;
     Double amount_used_from_wallet = 0.0;
     private String base_fare = "";
-    private String promotax = "";
+    private final String promotax = "";
     private String Cvv;
     private String cmpTax = "";
     private String f_minutes_traveled;
@@ -291,10 +290,10 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
     private String fare_calculation_type = "3";
     private String pending_cancel_amount = "";
     private String call_masking_ph_no = "";
-    private ArrayList<AddonsData> addonsData = new ArrayList<>();
+    private final ArrayList<AddonsData> addonsData = new ArrayList<>();
     private AddonsInfoAlert addonsInfoAlert;
 
-    private String service_id = "";
+    private final String service_id = "";
     private String product_name = "";
     private String product_weight = "";
     private String product_size = "";
@@ -320,14 +319,12 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
                             LOCATION_UPDATE_STOPPED = true;
                             ROUTE_DRAW_ON_START = false;
                             if (MainActivityDriver.mMyStatus.getOnstatus().equalsIgnoreCase("Complete") || MainActivityDriver.mMyStatus.getOnstatus().equalsIgnoreCase("Arrivd")) {
-                                if (route != null)
-                                    route.removePolyLines();
+                                if (route != null) route.removePolyLines();
                                 pickUpDropMarker();
                                 ArrayList<LatLng> pp = new ArrayList<>();
                                 pp.add(pickupLatLng);
                                 pp.add(dropLatLng);
-                                if (viaLatlng != null)
-                                    pp.add(viaLatlng);
+                                if (viaLatlng != null) pp.add(viaLatlng);
 
                                 if (pickupLatLng != null && pickupLatLng.latitude != 0.0 && pickupLatLng.longitude != 0.0) {
                                     p_marker = map.addMarker(new MarkerOptions().position(new LatLng(pickupLatLng.latitude, pickupLatLng.longitude)).title("" + DriverNC.getResources().getString(R.string.pickuploc)).icon(BitmapDescriptorFactory.fromResource(R.drawable.driver_flag_green)).draggable(false));
@@ -336,14 +333,11 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
                                     d_marker = map.addMarker(new MarkerOptions().position(new LatLng(dropLatLng.latitude, dropLatLng.longitude)).title("" + DriverNC.getResources().getString(R.string.droploc)).icon(BitmapDescriptorFactory.fromResource(R.drawable.driver_flag_red)).draggable(false));
 //                                    route.setUpPolyLine(map, OngoingAct.this, pp.get(0), pp.get(1));
 
-                                    new Handler().postDelayed(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            if (mroute != null && !mroute.isEmpty() && !mroute.equalsIgnoreCase("0"))
-                                                route.drawRouteFromPolyline(map, mroute, stopListData);
-                                            else
-                                                route.setUpPolyLine(map, DriverOngoingAct.this, pp.get(0), pp.get(1), stopListData);
-                                        }
+                                    new Handler().postDelayed(() -> {
+                                        if (mroute != null && !mroute.isEmpty() && !mroute.equalsIgnoreCase("0"))
+                                            route.drawRouteFromPolyline(map, mroute, stopListData);
+                                        else
+                                            route.setUpPolyLine(map, DriverOngoingAct.this, pp.get(0), pp.get(1), stopListData);
                                     }, 500);
                                 }
                             } else if (MainActivityDriver.mMyStatus.getOnstatus().equalsIgnoreCase("On")) {
@@ -361,18 +355,14 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
                                 ArrayList<LatLng> pp = new ArrayList<>();
                                 pp.add(pickupLatLng);
                                 pp.add(dropLatLng);
-                                if (viaLatlng != null)
-                                    pp.add(viaLatlng);
+                                if (viaLatlng != null) pp.add(viaLatlng);
                                 try {
                                     if (pp != null && map != null) {
-                                        new Handler().postDelayed(new Runnable() {
-                                            @Override
-                                            public void run() {
-                                                if (mroute != null && !mroute.isEmpty() && !mroute.equalsIgnoreCase("0"))
-                                                    route.drawRouteFromPolyline(map, mroute, stopListData);
-                                                else
-                                                    route.setUpPolyLine(map, DriverOngoingAct.this, pp.get(0), pp.get(1), stopListData);
-                                            }
+                                        new Handler().postDelayed(() -> {
+                                            if (mroute != null && !mroute.isEmpty() && !mroute.equalsIgnoreCase("0"))
+                                                route.drawRouteFromPolyline(map, mroute, stopListData);
+                                            else
+                                                route.setUpPolyLine(map, DriverOngoingAct.this, pp.get(0), pp.get(1), stopListData);
                                         }, 500);
 
 //                                        route.setUpPolyLine(map, OngoingAct.this, pp.get(0), pp.get(1));
@@ -382,12 +372,7 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
                                 }
                             }
 
-                            new Handler().postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    LOCATION_UPDATE_STOPPED = false;
-                                }
-                            }, 50000);
+                            new Handler().postDelayed(() -> LOCATION_UPDATE_STOPPED = false, 50000);
                         }
 
                     } catch (final Exception e) {
@@ -404,9 +389,7 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
 
                     ImageView iv = mProgressdialog.findViewById(R.id.giff);
                     DrawableImageViewTarget imageViewTarget = new DrawableImageViewTarget(iv);
-                    Glide.with(DriverOngoingAct.this)
-                            .load(R.raw.driver_loading_anim)
-                            .into(imageViewTarget);
+                    Glide.with(DriverOngoingAct.this).load(R.raw.driver_loading_anim).into(imageViewTarget);
 
                     mHandler.sendEmptyMessage(1);
                     break;
@@ -419,12 +402,9 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
                     break;
                 case 5:
                     try {
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                if (mroute != null && !mroute.isEmpty() && !mroute.equalsIgnoreCase("0"))
-                                    route.drawRouteFromPolyline(map, mroute, stopListData);
-                            }
+                        new Handler().postDelayed(() -> {
+                            if (mroute != null && !mroute.isEmpty() && !mroute.equalsIgnoreCase("0"))
+                                route.drawRouteFromPolyline(map, mroute, stopListData);
                         }, 500);
 //                        route.setUpPolyLine(map, OngoingAct.this, pickupLatLng, dropLatLng);
 //                        route.drawRoute(map, OngoingAct.this, pickupLatLng, dropLatLng, "en", Color.parseColor("#00BFFF"));
@@ -482,18 +462,12 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
      * @param grantResults
      */
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, int[] grantResults) {
         switch (requestCode) {
             case MY_PERMISSIONS_REQUEST_CALL:
                 // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            ensureCall();
-                        }
-                    });
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    runOnUiThread(() -> ensureCall());
 
                 }
                 break;
@@ -520,7 +494,7 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
      * Call passenger
      */
     private void ensureCall() {
-        Utility.actionSheet(DriverOngoingAct.this,DriverNC.getResources().getString(R.string.confirm_call), DriverNC.getResources().getString(R.string.call), DriverNC.getResources().getString(R.string.cancel), false, new AlertListener() {
+        Utility.actionSheet(DriverOngoingAct.this, DriverNC.getResources().getString(R.string.confirm_call), DriverNC.getResources().getString(R.string.call), DriverNC.getResources().getString(R.string.cancel), false, new AlertListener() {
             @Override
             public void onSuccess() {
                 try {
@@ -661,10 +635,9 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
                     e.printStackTrace();
                 }
             }
-            if (status != null)
-                if (status.equals("11")) {
-                    startActivity(new Intent(DriverOngoingAct.this, DriverOngoingAct.class));
-                }
+            if (status != null) if (status.equals("11")) {
+                startActivity(new Intent(DriverOngoingAct.this, DriverOngoingAct.class));
+            }
             if (alert_msg != null && alert_msg.length() != 0)
                 DriverCToast.ShowToast(DriverOngoingAct.this, "" + alert_msg);
 //                dialog1 = Driver_Utils.alert_view(DriverOngoingAct.this, "" + DriverNC.getResources().getString(R.string.message), "" + alert_msg, "" + DriverNC.getResources().getString(R.string.ok), "", true, DriverOngoingAct.this, "4");
@@ -684,81 +657,71 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
         if (SessionSave.getSession(DriverCommonData.SOS_ENABLED, this, false)) {
             btn_emergency_contact.setVisibility(View.GONE);
         }
-        btn_emergency_contact.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Utility.actionSheet(DriverOngoingAct.this, DriverNC.getResources().getString(R.string.send_emergency_alert), DriverNC.getResources().getString(R.string.yes), DriverNC.getResources().getString(R.string.no), false, new AlertListener() {
-                    @Override
-                    public void onSuccess() {
-                        startSOSService();
-                    }
-                    @Override
-                    public void onFailure() {
-
-                    }
-                });
-                /*
-                final View view1 = View.inflate(DriverOngoingAct.this, R.layout.driver_emergency_alert, null);
-                Dialog emergency_dialog = new Dialog(DriverOngoingAct.this, R.style.dialogwinddow);
-                emergency_dialog.setContentView(view1);
-                emergency_dialog.setCancelable(true);
-                emergency_dialog.show();
-                final Button button_success = emergency_dialog.findViewById(R.id.button_success);
-                final Button button_failure = emergency_dialog.findViewById(R.id.button_failure);
-                button_success.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        emergency_dialog.dismiss();
-                        startSOSService();
-                    }
-                });
-                button_failure.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        emergency_dialog.dismiss();
-                    }
-                });
-
-                 */
-            }
-        });
-
-
-        contact_txt.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (contact_lay.isShown()) {
-                    stop_recyclerView.setVisibility(View.VISIBLE);
-                    pickUpDropViewDriver.setVisibility(View.GONE);
-                    contact_lay.setVisibility(View.GONE);
-                    pickup_drop_lay.setVisibility(View.GONE);
-                    contact_txt.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.driver_user_unfocus, 0);
-                    setCurrentLocationPosition(0, 5, 10, 150);
-                    if (haspreference) {
-                        preference.setVisibility(View.VISIBLE);
-                    }
-
-
-                } else {
-
-                    stop_recyclerView.setVisibility(View.GONE);
-                    pickUpDropViewDriver.setVisibility(View.VISIBLE);
-                    contact_lay.setVisibility(View.VISIBLE);
-                    drop_lay.setVisibility(View.GONE);
-                    pickup_location_txt.setVisibility(View.INVISIBLE);
-                    pickup_drop_lay.setVisibility(View.VISIBLE);
-                    contact_txt.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.driver_user_focus, 0);
-                    DriverMapWrapperLayout.setmMapIsTouched(true);
-                    setCurrentLocationPosition(0, 50, 10, 100);
+        btn_emergency_contact.setOnClickListener(view -> {
+            Utility.actionSheet(DriverOngoingAct.this, DriverNC.getResources().getString(R.string.send_emergency_alert), DriverNC.getResources().getString(R.string.yes), DriverNC.getResources().getString(R.string.no), false, new AlertListener() {
+                @Override
+                public void onSuccess() {
+                    startSOSService();
                 }
+
+                @Override
+                public void onFailure() {
+
+                }
+            });
+            /*
+            final View view1 = View.inflate(DriverOngoingAct.this, R.layout.driver_emergency_alert, null);
+            Dialog emergency_dialog = new Dialog(DriverOngoingAct.this, R.style.dialogwinddow);
+            emergency_dialog.setContentView(view1);
+            emergency_dialog.setCancelable(true);
+            emergency_dialog.show();
+            final Button button_success = emergency_dialog.findViewById(R.id.button_success);
+            final Button button_failure = emergency_dialog.findViewById(R.id.button_failure);
+            button_success.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    emergency_dialog.dismiss();
+                    startSOSService();
+                }
+            });
+            button_failure.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    emergency_dialog.dismiss();
+                }
+            });
+
+             */
+        });
+
+
+        contact_txt.setOnClickListener(v -> {
+            if (contact_lay.isShown()) {
+                stop_recyclerView.setVisibility(View.VISIBLE);
+                pickUpDropViewDriver.setVisibility(View.GONE);
+                contact_lay.setVisibility(View.GONE);
+                pickup_drop_lay.setVisibility(View.GONE);
+                contact_txt.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.driver_user_unfocus, 0);
+                setCurrentLocationPosition(0, 5, 10, 150);
+                if (haspreference) {
+                    preference.setVisibility(View.VISIBLE);
+                }
+
+
+            } else {
+
+                stop_recyclerView.setVisibility(View.GONE);
+                pickUpDropViewDriver.setVisibility(View.VISIBLE);
+                contact_lay.setVisibility(View.VISIBLE);
+                drop_lay.setVisibility(View.GONE);
+                pickup_location_txt.setVisibility(View.INVISIBLE);
+                pickup_drop_lay.setVisibility(View.VISIBLE);
+                contact_txt.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.driver_user_focus, 0);
+                DriverMapWrapperLayout.setmMapIsTouched(true);
+                setCurrentLocationPosition(0, 50, 10, 100);
             }
         });
-        order_details.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                orderDetailDialog();
-            }
-        });
+        order_details.setOnClickListener(view -> orderDetailDialog());
 
 
         mov_cur_loc.setOnClickListener(v -> {
@@ -775,8 +738,7 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
         } else {
             metricss = " miles/hr";
         }
-        LocalBroadcastManager.getInstance(DriverOngoingAct.this).registerReceiver(listener,
-                new IntentFilter(LocationUpdate.WAITING_TIME));
+        LocalBroadcastManager.getInstance(DriverOngoingAct.this).registerReceiver(listener, new IntentFilter(LocationUpdate.WAITING_TIME));
         // to handle the whether the waiting time is auto or manual
 
         //set waiting time image if waiting time is manual
@@ -802,40 +764,37 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
             }
         }
 
-        ssWaitingTime_img.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!DriverSessionSave.getSession(DriverCommonData.WAITING_TIME, DriverOngoingAct.this, false)) {
-                    DriverCommonData.km_calc = 0;
-                    if (!DriverSessionSave.getSession("trip_id", DriverOngoingAct.this).equals("")) {
+        ssWaitingTime_img.setOnClickListener(view -> {
+            if (!DriverSessionSave.getSession(DriverCommonData.WAITING_TIME, DriverOngoingAct.this, false)) {
+                DriverCommonData.km_calc = 0;
+                if (!DriverSessionSave.getSession("trip_id", DriverOngoingAct.this).equals("")) {
 //                        WaitingTimerRun.startTimerService(OngoingAct.this);
 //                        myHandler.postDelayed(r, 0);
 
-                        if (localBroadcastManager != null) {
-                            Intent localIntent = new Intent(WAITING_TIME_RUN);
-                            localIntent.putExtra(DriverCommonData.WAITING_TIME_START_STOP, DriverCommonData.WAITING_TIME_START);
-                            localBroadcastManager.sendBroadcast(localIntent);
-                        }
-                        ssWaitingTime_img.setImageResource(R.drawable.driver_ic_pause_circle);
-                        DriverSessionSave.saveSession(DriverCommonData.WAITING_TIME, true, DriverOngoingAct.this);
-
-                        waitingTimeTxt.setText(String.format(Locale.UK, DriverCommonData.getDateForWaitingTime(DriverSessionSave.getWaitingTime(DriverOngoingAct.this))));
-                    }
-                } else {
-                    DriverSystems.out.println("timer started ongoing" + DriverSessionSave.getWaitingTime(DriverOngoingAct.this));
-
-//                    stopService(new Intent(OngoingAct.this, WaitingTimerRun.class));
-                    DriverSessionSave.saveSession(DriverCommonData.WAITING_TIME, false, DriverOngoingAct.this);
                     if (localBroadcastManager != null) {
                         Intent localIntent = new Intent(WAITING_TIME_RUN);
-                        localIntent.putExtra(DriverCommonData.WAITING_TIME_START_STOP, DriverCommonData.WAITING_TIME_STOP);
+                        localIntent.putExtra(DriverCommonData.WAITING_TIME_START_STOP, DriverCommonData.WAITING_TIME_START);
                         localBroadcastManager.sendBroadcast(localIntent);
                     }
-                    ssWaitingTime_img.setImageResource(R.drawable.driver_ic_play_circle);
-                    DriverCommonData.km_calc = 1;
+                    ssWaitingTime_img.setImageResource(R.drawable.driver_ic_pause_circle);
+                    DriverSessionSave.saveSession(DriverCommonData.WAITING_TIME, true, DriverOngoingAct.this);
 
                     waitingTimeTxt.setText(String.format(Locale.UK, DriverCommonData.getDateForWaitingTime(DriverSessionSave.getWaitingTime(DriverOngoingAct.this))));
                 }
+            } else {
+                DriverSystems.out.println("timer started ongoing" + DriverSessionSave.getWaitingTime(DriverOngoingAct.this));
+
+//                    stopService(new Intent(OngoingAct.this, WaitingTimerRun.class));
+                DriverSessionSave.saveSession(DriverCommonData.WAITING_TIME, false, DriverOngoingAct.this);
+                if (localBroadcastManager != null) {
+                    Intent localIntent = new Intent(WAITING_TIME_RUN);
+                    localIntent.putExtra(DriverCommonData.WAITING_TIME_START_STOP, DriverCommonData.WAITING_TIME_STOP);
+                    localBroadcastManager.sendBroadcast(localIntent);
+                }
+                ssWaitingTime_img.setImageResource(R.drawable.driver_ic_play_circle);
+                DriverCommonData.km_calc = 1;
+
+                waitingTimeTxt.setText(String.format(Locale.UK, DriverCommonData.getDateForWaitingTime(DriverSessionSave.getWaitingTime(DriverOngoingAct.this))));
             }
         });
         ViewEnabledWithDelay(3000, butt_onboard);
@@ -871,25 +830,19 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
 
         butt_onboard.setVisibility(View.VISIBLE);
         // This onclick method used to hide the passenger info view.
-        mapInfoTxt.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(final View v) {
+        mapInfoTxt.setOnClickListener(v -> {
 
-                tripInfo.setVisibility(View.VISIBLE);
-                infoLayout.setVisibility(View.GONE);
-            }
+            tripInfo.setVisibility(View.VISIBLE);
+            infoLayout.setVisibility(View.GONE);
         });
 
 
-        chatTxt.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(final View v) {
+        chatTxt.setOnClickListener(v -> {
 
-                Intent in = new Intent(DriverOngoingAct.this, DriverChatWebviewAct.class);
-                in.putExtra("type", "2");
-                in.putExtra("trip_id", DriverSessionSave.getSession("trip_id", DriverOngoingAct.this));
-                startActivity(in);
-            }
+            Intent in = new Intent(DriverOngoingAct.this, DriverChatWebviewAct.class);
+            in.putExtra("type", "2");
+            in.putExtra("trip_id", DriverSessionSave.getSession("trip_id", DriverOngoingAct.this));
+            startActivity(in);
         });
         // This onclick method used to show the passenger info view.
         // Following set of code to initialize and google map.
@@ -897,18 +850,11 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
         // This onclick method used to make a call to passenger.
 
         addonsInfoAlert = new AddonsInfoAlert();
-        preference.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                addonsInfoAlert.AddonsInfo(DriverOngoingAct.this, addonsData);
-            }
-        });
+        preference.setOnClickListener(view -> addonsInfoAlert.AddonsInfo(DriverOngoingAct.this, addonsData));
 
 
-        lay_call.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                ensureCall();
+        lay_call.setOnClickListener(v -> {
+            ensureCall();
 
 //                try {
 //                    JSONObject j = new JSONObject();
@@ -917,137 +863,124 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
 //                    new getMaskedPhoneNumber(Url, j);
 
 /*
-                   if (MainActivityDriver.mMyStatus.getpassengerphone().length() == 0)
-                       Toast.makeText(DriverOngoingAct.this,"" + DriverNC.getResources().getString(R.string.invalid_mobile_number),Toast.LENGTH_LONG).show();
+               if (MainActivityDriver.mMyStatus.getpassengerphone().length() == 0)
+                   Toast.makeText(DriverOngoingAct.this,"" + DriverNC.getResources().getString(R.string.invalid_mobile_number),Toast.LENGTH_LONG).show();
 //                        dialog1 = Driver_Utils.alert_view(DriverOngoingAct.this, "" + DriverNC.getResources().getString(R.string.message), "" + DriverNC.getResources().getString(R.string.invalid_mobile_number), "" + DriverNC.getResources().getString(R.string.ok), "", true, DriverOngoingAct.this, "4");
-                    else {
-                        final Intent callIntent = new Intent(Intent.ACTION_CALL);
-                        callIntent.setData(Uri.parse("tel:" + MainActivityDriver.mMyStatus.getpassengerphone()));
-                        if (ActivityCompat.checkSelfPermission(DriverOngoingAct.this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(DriverOngoingAct.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                            Utility.actionSheet(DriverOngoingAct.this, NC.getResources().getString(R.string.str_phone), NC.getResources().getString(R.string.yes), NC.getResources().getString(R.string.no), false, new AlertListener() {
-                                @Override
-                                public void onSuccess() {
-                                    try {
-                                        ActivityCompat.requestPermissions(DriverOngoingAct.this,
-                                                new String[]{Manifest.permission.CALL_PHONE, Manifest.permission.READ_PHONE_STATE},
-                                                MY_PERMISSIONS_REQUEST_CALL);
-                                    } catch (Exception e) {
-                                        // TODO: handle exception
-                                        e.printStackTrace();
-                                    }
-                                }
-
-                                @Override
-                                public void onFailure() {
-
-                                }
-                            });
-                            /*
-                            dialog1 = Driver_Utils.alert_view_dialog(DriverOngoingAct.this, "", NC.getResources().getString(R.string.str_phone), NC.getResources().getString(R.string.yes), NC.getResources().getString(R.string.no), true, new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int i) {
+                else {
+                    final Intent callIntent = new Intent(Intent.ACTION_CALL);
+                    callIntent.setData(Uri.parse("tel:" + MainActivityDriver.mMyStatus.getpassengerphone()));
+                    if (ActivityCompat.checkSelfPermission(DriverOngoingAct.this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(DriverOngoingAct.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                        Utility.actionSheet(DriverOngoingAct.this, NC.getResources().getString(R.string.str_phone), NC.getResources().getString(R.string.yes), NC.getResources().getString(R.string.no), false, new AlertListener() {
+                            @Override
+                            public void onSuccess() {
+                                try {
                                     ActivityCompat.requestPermissions(DriverOngoingAct.this,
                                             new String[]{Manifest.permission.CALL_PHONE, Manifest.permission.READ_PHONE_STATE},
                                             MY_PERMISSIONS_REQUEST_CALL);
-                                    dialog.dismiss();
+                                } catch (Exception e) {
+                                    // TODO: handle exception
+                                    e.printStackTrace();
                                 }
-                            }, new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int i) {
-                                    dialog.dismiss();
-                                }
-                            }, "");
-                            */
-                /*
-                        } else {
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    ensureCall();
-                               }
-                            });
+                            }
 
-                        }
+                            @Override
+                            public void onFailure() {
+
+                            }
+                        });
+                        /*
+                        dialog1 = Driver_Utils.alert_view_dialog(DriverOngoingAct.this, "", NC.getResources().getString(R.string.str_phone), NC.getResources().getString(R.string.yes), NC.getResources().getString(R.string.no), true, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int i) {
+                                ActivityCompat.requestPermissions(DriverOngoingAct.this,
+                                        new String[]{Manifest.permission.CALL_PHONE, Manifest.permission.READ_PHONE_STATE},
+                                        MY_PERMISSIONS_REQUEST_CALL);
+                                dialog.dismiss();
+                            }
+                        }, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int i) {
+                                dialog.dismiss();
+                            }
+                        }, "");
+                        */
+            /*
+                    } else {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                ensureCall();
+                           }
+                        });
+
                     }
+                }
 //                } catch (Exception e) {
 //                    e.printStackTrace();
 //                }
 
-                 */
-            }
+             */
         });
         // This onclick method used to cancel the current ongoing trip.
-        TripcancelTxt.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                Utility.actionSheet(DriverOngoingAct.this, DriverNC.getResources().getString(R.string.cancel_in_going_trip), DriverNC.getResources().getString(R.string.yes), DriverNC.getResources().getString(R.string.no), false, new AlertListener() {
-                    @Override
-                    public void onSuccess() {
-                        try {
-                            // TODO Auto-generated method stub
-                            if (DriverSessionSave.getSession("status", DriverOngoingAct.this).equalsIgnoreCase("A"))
-                                DriverCToast.ShowToast(DriverOngoingAct.this, "" + DriverNC.getResources().getString(R.string.you_are_in_trip));
+        TripcancelTxt.setOnClickListener(v -> {
+            Utility.actionSheet(DriverOngoingAct.this, DriverNC.getResources().getString(R.string.cancel_in_going_trip), DriverNC.getResources().getString(R.string.yes), DriverNC.getResources().getString(R.string.no), false, new AlertListener() {
+                @Override
+                public void onSuccess() {
+                    try {
+                        // TODO Auto-generated method stub
+                        if (DriverSessionSave.getSession("status", DriverOngoingAct.this).equalsIgnoreCase("A"))
+                            DriverCToast.ShowToast(DriverOngoingAct.this, "" + DriverNC.getResources().getString(R.string.you_are_in_trip));
 //                        dialog1 = Driver_Utils.alert_view(DriverOngoingAct.this, "" + DriverNC.getResources().getString(R.string.message), "" + DriverNC.getResources().getString(R.string.you_are_in_trip), "" + DriverNC.getResources().getString(R.string.ok), "", true, DriverOngoingAct.this, "4");
-                            else if (DriverSessionSave.getSession("trip_id", DriverOngoingAct.this).length() == 0)
-                                finish();
-                            else {
-                                nonactiityobj.stopServicefromNonActivity(DriverOngoingAct.this);
-                                JSONObject j = new JSONObject();
-                                j.put("pass_logid", DriverSessionSave.getSession("trip_id", DriverOngoingAct.this));
-                                j.put("driver_id", DriverSessionSave.getSession("Id", DriverOngoingAct.this));
-                                j.put("taxi_id", DriverSessionSave.getSession("taxi_id", DriverOngoingAct.this));
-                                j.put("company_id", DriverSessionSave.getSession("company_id", DriverOngoingAct.this));
-                                j.put("driver_reply", "C");
-                                j.put("field", "");
-                                j.put("flag", "1");
-                                if (MainActivityDriver.mMyStatus.getOnstatus().equalsIgnoreCase("Arrivd"))
-                                    j.put("driver_arrived", 1);
-                                else
-                                    j.put("driver_arrived", 0);
-                                final String canceltrip_url = "type=driver_reply";
-                                new CancelTrip(canceltrip_url, j);
-                            }
-                        } catch (Exception e) {
-                            // TODO: handle exception
-                            e.printStackTrace();
+                        else if (DriverSessionSave.getSession("trip_id", DriverOngoingAct.this).length() == 0)
+                            finish();
+                        else {
+                            nonactiityobj.stopServicefromNonActivity(DriverOngoingAct.this);
+                            JSONObject j = new JSONObject();
+                            j.put("pass_logid", DriverSessionSave.getSession("trip_id", DriverOngoingAct.this));
+                            j.put("driver_id", DriverSessionSave.getSession("Id", DriverOngoingAct.this));
+                            j.put("taxi_id", DriverSessionSave.getSession("taxi_id", DriverOngoingAct.this));
+                            j.put("company_id", DriverSessionSave.getSession("company_id", DriverOngoingAct.this));
+                            j.put("driver_reply", "C");
+                            j.put("field", "");
+                            j.put("flag", "1");
+                            if (MainActivityDriver.mMyStatus.getOnstatus().equalsIgnoreCase("Arrivd"))
+                                j.put("driver_arrived", 1);
+                            else j.put("driver_arrived", 0);
+                            final String canceltrip_url = "type=driver_reply";
+                            new CancelTrip(canceltrip_url, j);
                         }
+                    } catch (Exception e) {
+                        // TODO: handle exception
+                        e.printStackTrace();
                     }
+                }
 
-                    @Override
-                    public void onFailure() {
+                @Override
+                public void onFailure() {
 
-                    }
-                });
+                }
+            });
 //                dialog1 = Driver_Utils.alert_view(DriverOngoingAct.this, DriverNC.getResources().getString(R.string.message), DriverNC.getResources().getString(R.string.cancel_in_going_trip), DriverNC.getResources().getString(R.string.yes), DriverNC.getResources().getString(R.string.no), true, DriverOngoingAct.this, "3");
-            }
         });
         // This onclick method used to move from this activity to home activity.
-        back_up.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                backup.performClick();
-            }
-        });
-        backup.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(final View v) {
+        back_up.setOnClickListener(view -> backup.performClick());
+        backup.setOnClickListener(v -> {
 
-                showLoading(DriverOngoingAct.this);
-                try {
-                    stopLocationUpdates();
-                    map = null;
-                    if (c_marker != null && a_marker != null) {
-                        c_marker = null;
-                        a_marker = null;
-                    }
-                } catch (Exception ex) {
-                    ex.printStackTrace();
+            showLoading(DriverOngoingAct.this);
+            try {
+                stopLocationUpdates();
+                map = null;
+                if (c_marker != null && a_marker != null) {
+                    c_marker = null;
+                    a_marker = null;
                 }
-                backup.setEnabled(false);
-                Intent jobintent = new Intent(DriverOngoingAct.this, DriverMyStatus.class);
-                startActivity(jobintent);
-                finish();
+            } catch (Exception ex) {
+                ex.printStackTrace();
             }
+            backup.setEnabled(false);
+            Intent jobintent = new Intent(DriverOngoingAct.this, DriverMyStatus.class);
+            startActivity(jobintent);
+            finish();
         });
         // This onclick method used to move navigator application with pickup and drop place lat/lng.
         navigator_layout.setOnClickListener(v -> {
@@ -1056,7 +989,7 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
                 if (mMyStatus.getOnstatus().equalsIgnoreCase("Complete")) {
                     if (pickupLatLng.latitude != 0.0 && pickupLatLng.longitude != 0.0) {
 
-                        String locationurl = "";
+                        String locationurl;
                         if (stopListData != null && stopListData.size() > 0) {
                             if (stopListData.size() == 1) {
                                 //http://maps.google.com/maps?saddr=
@@ -1080,7 +1013,7 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
                         }
                     }
                 } else {
-                    String locationurl = "";
+                    String locationurl;
                     if (MainActivityDriver.mMyStatus.getOnstatus().equalsIgnoreCase("On")) {
                         if (mLastLocation.getLatitude() != pickupLatLng.latitude) {
                             locationurl = "https://www.google.com/maps/dir/?api=1&origin=" + mLastLocation.getLatitude() + "," + mLastLocation.getLongitude() + "&destination=" + pickupLatLng.latitude + "," + pickupLatLng.longitude + "&travelmode=driving";
@@ -1225,12 +1158,7 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
         v_date_time.setText(delivery_date_time);
         order_description_details.setText(delivery_notes);
 
-        close_btn.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                orderDialog.dismiss();
-            }
-        });
+        close_btn.setOnClickListener(view1 -> orderDialog.dismiss());
 
 
     }
@@ -1264,13 +1192,10 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
                     }
                     bearing = location.getBearing();
                     bearings = location.getBearing();
-                    if (map != null)
-                        zoom = map.getCameraPosition().zoom;
+                    if (map != null) zoom = map.getCameraPosition().zoom;
 
-                    if (bearing >= 0)
-                        bearing = bearing + 90;
-                    else
-                        bearing = bearing - 90;
+                    if (bearing >= 0) bearing = bearing + 90;
+                    else bearing = bearing - 90;
 
                     try {
                         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
@@ -1297,12 +1222,8 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
                                     c_marker = map.addMarker(new MarkerOptions().position(listPoint.get(0)).rotation(0).anchor(0.5f, 0.5f).title("" + Address).icon(BitmapDescriptorFactory.fromResource(R.drawable.driver_img)));
                                     c_marker.setVisible(true);
                                     if (map != null) {
-                                        CameraPosition camPos = CameraPosition
-                                                .builder(
-                                                        map.getCameraPosition() // current Camera
-                                                )
-                                                .bearing(bearings)
-                                                .build();
+                                        CameraPosition camPos = CameraPosition.builder(map.getCameraPosition() // current Camera
+                                        ).bearing(bearings).build();
 
                                         if (DriverMapWrapperLayout.ismMapIsTouched()) {
                                             map.animateCamera(CameraUpdateFactory.newCameraPosition(camPos));
@@ -1317,29 +1238,25 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
                                     }
                                     if (DriverGpsStatus.ischecked == 0) {
                                         DriverGpsStatus.ischecked = 1;
-                                        a_marker = map.addMarker(new MarkerOptions().position(latLng).rotation(0).anchor(0.5f, 0.5f).title("" + Address).icon(BitmapDescriptorFactory.fromResource(R.drawable.driver_img)));
+                                        if (map != null) {
+                                            a_marker = map.addMarker(new MarkerOptions().position(latLng).rotation(0).anchor(0.5f, 0.5f).title("" + Address).icon(BitmapDescriptorFactory.fromResource(R.drawable.driver_img)));
+                                        }
                                         a_marker.setVisible(true);
 
-                                        CameraPosition camPos = CameraPosition
-                                                .builder(
-                                                        map.getCameraPosition() // current Camera
-                                                )
-                                                .bearing(bearings)
-                                                .build();
+                                        CameraPosition camPos = CameraPosition.builder(map.getCameraPosition() // current Camera
+                                        ).bearing(bearings).build();
                                         map.animateCamera(CameraUpdateFactory.newCameraPosition(camPos));
 
 
                                     } else {
 
-                                        a_marker = map.addMarker(new MarkerOptions().position(listPoint.get(0)).rotation(0).anchor(0.5f, 0.5f).title("" + Address).icon(BitmapDescriptorFactory.fromResource(R.drawable.driver_img)));
+                                        if (map != null) {
+                                            a_marker = map.addMarker(new MarkerOptions().position(listPoint.get(0)).rotation(0).anchor(0.5f, 0.5f).title("" + Address).icon(BitmapDescriptorFactory.fromResource(R.drawable.driver_img)));
+                                        }
                                         a_marker.setVisible(true);
 
-                                        CameraPosition camPos = CameraPosition
-                                                .builder(
-                                                        map.getCameraPosition() // current Camera
-                                                )
-                                                .bearing(bearings)
-                                                .build();
+                                        CameraPosition camPos = CameraPosition.builder(map.getCameraPosition() // current Camera
+                                        ).bearing(bearings).build();
                                         map.animateCamera(CameraUpdateFactory.newCameraPosition(camPos));
 
 
@@ -1372,15 +1289,11 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
 
     /**
      * View enabling in display with delay
-     *
-     * @param i
-     * @param butt_onboard
      */
     public void ViewEnabledWithDelay(int i, Button butt_onboard) {
         butt_onboard.setEnabled(false);
         new Handler().postDelayed(() -> {
-            if (butt_onboard != null)
-                butt_onboard.setEnabled(true);
+            if (butt_onboard != null) butt_onboard.setEnabled(true);
         }, i);
     }
 
@@ -1388,7 +1301,7 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
     private void RetryLocationPopUp() {
         cancelLoading();
         if (retryCount > 2) {
-            Utility.actionSheetCancel(DriverOngoingAct.this, DriverNC.getString(R.string.address_cant_fetch),DriverNC.getString(R.string.retry), DriverNC.getString(R.string.use_map), false, new AlertListener() {
+            Utility.actionSheetCancel(DriverOngoingAct.this, DriverNC.getString(R.string.address_cant_fetch), DriverNC.getString(R.string.retry), DriverNC.getString(R.string.use_map), false, new AlertListener() {
                 @Override
                 public void onSuccess() {
                     retryCount++;
@@ -1416,7 +1329,7 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
 
              */
         } else {
-            Utility.actionSheetCancel(DriverOngoingAct.this, DriverNC.getString(R.string.address_cant_fetch),DriverNC.getString(R.string.retry), "", false, new AlertListener() {
+            Utility.actionSheetCancel(DriverOngoingAct.this, DriverNC.getString(R.string.address_cant_fetch), DriverNC.getString(R.string.retry), "", false, new AlertListener() {
                 @Override
                 public void onSuccess() {
                     retryCount++;
@@ -1468,12 +1381,11 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
 
     @SuppressLint("MissingPermission")
     public void getCurrentLocation(int locationRequestType) {
-        fusedLocationClient.getLastLocation()
-                .addOnSuccessListener(this, location -> {
-                    if (location != null) {
-                        handleLastLocation(location, locationRequestType);
-                    }
-                });
+        fusedLocationClient.getLastLocation().addOnSuccessListener(this, location -> {
+            if (location != null) {
+                handleLastLocation(location, locationRequestType);
+            }
+        });
         startLocationUpdates();
     }
 
@@ -1504,8 +1416,7 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
                     final LatLng coordinate = new LatLng(latitude1, longitude1);
                     if (map != null)
                         map.moveCamera(CameraUpdateFactory.newLatLngZoom(coordinate, zoom));
-                    if (mapWrapperLayout != null)
-                        mapWrapperLayout.setVisibility(View.VISIBLE);
+                    if (mapWrapperLayout != null) mapWrapperLayout.setVisibility(View.VISIBLE);
                 }
                 break;
             case LOCATION_REQUEST_TYPE_COMPLETE_TRIP:
@@ -1543,9 +1454,7 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
             try {
 // Customise the styling of the base map using a JSON object defined
 // in a raw resource file.
-                boolean success = map.setMapStyle(
-                        MapStyleOptions.loadRawResourceStyle(
-                                DriverOngoingAct.this, R.raw.driver_map_style));
+                boolean success = map.setMapStyle(MapStyleOptions.loadRawResourceStyle(DriverOngoingAct.this, R.raw.driver_map_style));
 
                 if (!success) {
                     DriverSystems.out.println("Style parsing failed.");
@@ -1564,17 +1473,15 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
 //                        imagepath = DriverSessionSave.getSession("noimage_base", DriverOngoingAct.this);
 //                    Picasso.get().load(imagepath).placeholder(getResources().getDrawable(R.drawable.driver_loadingimage)).error(getResources().getDrawable(R.drawable.driver_noimage)).into(proimg);
 
-                    if (imagepath != null && imagepath.length() > 0) {
-                        Picasso.get().load(imagepath).error(R.drawable.loadingimage).placeholder(R.drawable.loadingimage).into(proimg);
-                    } else {
-                        if (DriverSessionSave.getSession("passenger_name", DriverOngoingAct.this) != "") {
-                            ProfileImageSetupClass.setupProfileImage(
-                                    DriverSessionSave.getSession("passenger_name", DriverOngoingAct.this), proimg
-                            );
+                        if (imagepath != null && imagepath.length() > 0) {
+                            Picasso.get().load(imagepath).error(R.drawable.loadingimage).placeholder(R.drawable.loadingimage).into(proimg);
                         } else {
-                            Picasso.get().load(R.drawable.loadingimage).into(proimg);
+                            if (DriverSessionSave.getSession("passenger_name", DriverOngoingAct.this) != "") {
+                                ProfileImageSetupClass.setupProfileImage(DriverSessionSave.getSession("passenger_name", DriverOngoingAct.this), proimg);
+                            } else {
+                                Picasso.get().load(R.drawable.loadingimage).into(proimg);
+                            }
                         }
-                    }
 
 
                     MapsInitializer.initialize(DriverOngoingAct.this);
@@ -1681,8 +1588,7 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
                         j.put("flag", "1");
                         if (MainActivityDriver.mMyStatus.getOnstatus().equalsIgnoreCase("Arrivd"))
                             j.put("driver_arrived", 1);
-                        else
-                            j.put("driver_arrived", 0);
+                        else j.put("driver_arrived", 0);
                         final String canceltrip_url = "type=driver_reply";
                         new CancelTrip(canceltrip_url, j);
                     }
@@ -1769,8 +1675,7 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
 //            myHandler.removeCallbacks(r);
             float h = 0.0f;
             waitingTime = DriverCommonData.getDateForWaitingTime(DriverSessionSave.getWaitingTime(DriverOngoingAct.this));
-            if (waitingTime.equals(""))
-                waitingTime = "00:00:00";
+            if (waitingTime.equals("")) waitingTime = "00:00:00";
             String waitNoArabic = DriverFontHelper.convertfromArabic(waitingTime);
             DriverSystems.out.println("Errror in okkkk" + waitNoArabic + "---" + waitingTime);
             String[] split = waitNoArabic.split(":");
@@ -1804,15 +1709,12 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
      * Starting the location updates
      */
     protected void startLocationUpdates() {
-        if (ActivityCompat.checkSelfPermission(DriverOngoingAct.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED ||
-                ActivityCompat.checkSelfPermission(DriverOngoingAct.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(DriverOngoingAct.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(DriverOngoingAct.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
             Utility.actionSheet(DriverOngoingAct.this, DriverNC.getResources().getString(R.string.str_loc), DriverNC.getResources().getString(R.string.yes), DriverNC.getResources().getString(R.string.no), false, new AlertListener() {
                 @Override
                 public void onSuccess() {
-                    ActivityCompat.requestPermissions(DriverOngoingAct.this,
-                            new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION},
-                            MY_PERMISSIONS_REQUEST_GPS);
+                    ActivityCompat.requestPermissions(DriverOngoingAct.this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSIONS_REQUEST_GPS);
                 }
 
                 @Override
@@ -1856,8 +1758,7 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
 
     @Override
     protected void onDestroy() {
-        if (dialog1 != null)
-            Driver_Utils.closeDialog(dialog1);
+        if (dialog1 != null) Driver_Utils.closeDialog(dialog1);
 
         super.onDestroy();
         stopLocationUpdates();
@@ -1924,22 +1825,19 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        } else
-            Address = "";
+        } else Address = "";
     }
 
     private void pickUpDropMarker() {
         try {
             if (map != null) {
                 if (p_latitude != null && p_latitude != 0.0 && p_longtitude != null && p_longtitude != 0.0) {
-                    if (p_marker != null)
-                        p_marker.remove();
+                    if (p_marker != null) p_marker.remove();
                     p_marker = map.addMarker(new MarkerOptions().position(new LatLng(p_latitude, p_longtitude)).title("" + DriverNC.getResources().getString(R.string.pickuploc)).icon(BitmapDescriptorFactory.fromResource(R.drawable.driver_flag_green)).draggable(false));
                     pickupLatLng = new LatLng(p_latitude, p_longtitude);
                 }
                 if (d_latitude != null && d_latitude != 0.0 && d_longtitude != null && d_longtitude != 0.0) {
-                    if (d_marker != null)
-                        d_marker.remove();
+                    if (d_marker != null) d_marker.remove();
                     int px = getResources().getDimensionPixelSize(R.dimen.map_dot_marker_size);
                     Bitmap mDotMarkerBitmap = Bitmap.createBitmap(px, px, Bitmap.Config.ARGB_8888);
                     Canvas canvas = new Canvas(mDotMarkerBitmap);
@@ -1972,19 +1870,19 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
 
     }
 
-    public void Call_arrived(){
+    public void Call_arrived() {
         butt_onboard.performClick();
     }
+
     /**
      * Initially update the trip details based on get_trip_detail response.
      */
     private void init() {
 
-        DirverColorchange.ChangeColor((ViewGroup) (((ViewGroup) DriverOngoingAct.this
-                .findViewById(android.R.id.content)).getChildAt(0)), DriverOngoingAct.this);
+        DirverColorchange.ChangeColor((ViewGroup) (((ViewGroup) DriverOngoingAct.this.findViewById(android.R.id.content)).getChildAt(0)), DriverOngoingAct.this);
         DriverSystems.out.println("_________________OOOO" + MainActivityDriver.mMyStatus.getOnstatus());
         if (MainActivityDriver.mMyStatus.getOnstatus().equalsIgnoreCase("on")) {
-            if(SessionSave.getSession("is_enabled_ive_arrived", DriverOngoingAct.this).equals("0")) {
+            if (SessionSave.getSession("is_enabled_ive_arrived", DriverOngoingAct.this).equals("0")) {
                 Call_arrived();
             }
             HeadTitle.setText("" + DriverNC.getResources().getString(R.string.pickup_passenger));
@@ -2006,13 +1904,11 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
                     txt_drop.setText(Html.fromHtml(drop));
                     //droplocationTxt.setText(Html.fromHtml(drop));
                 }
-            } else
-                droplocationTxt.setVisibility(View.GONE);
+            } else droplocationTxt.setVisibility(View.GONE);
             if (!MainActivityDriver.mMyStatus.getpassengerNotes().equals("")) {
                 final String notes = MainActivityDriver.mMyStatus.getpassengerNotes();
                 tv_notes.setText(Html.fromHtml(notes));
-            } else
-                tv_notes.setVisibility(View.GONE);
+            } else tv_notes.setVisibility(View.GONE);
             if (MainActivityDriver.mMyStatus.getOnpickupLatitude().length() != 0)
                 p_latitude = Double.parseDouble(MainActivityDriver.mMyStatus.getOnpickupLatitude());
             if (MainActivityDriver.mMyStatus.getOnpickupLongitude().length() != 0)
@@ -2044,13 +1940,11 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
                     //droplocationTxt.setText(Html.fromHtml(drop));
                     txt_drop.setText(Html.fromHtml(drop));
                 }
-            } else
-                droplocationTxt.setVisibility(View.GONE);
+            } else droplocationTxt.setVisibility(View.GONE);
             if (!MainActivityDriver.mMyStatus.getpassengerNotes().equals("")) {
                 final String notes = MainActivityDriver.mMyStatus.getpassengerNotes();
                 tv_notes.setText(Html.fromHtml(notes));
-            } else
-                tv_notes.setVisibility(View.GONE);
+            } else tv_notes.setVisibility(View.GONE);
             if (MainActivityDriver.mMyStatus.getOnpickupLatitude().length() != 0)
                 p_latitude = Double.parseDouble(MainActivityDriver.mMyStatus.getOnpickupLatitude());
             if (MainActivityDriver.mMyStatus.getOnpickupLongitude().length() != 0)
@@ -2090,13 +1984,11 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
                     // droplocationTxt.setText(Html.fromHtml(drop));
                     txt_drop.setText(Html.fromHtml(drop));
                 }
-            } else
-                droplocationTxt.setVisibility(View.GONE);
+            } else droplocationTxt.setVisibility(View.GONE);
             if (!MainActivityDriver.mMyStatus.getpassengerNotes().equals("")) {
                 final String notes = MainActivityDriver.mMyStatus.getpassengerNotes();
                 tv_notes.setText(Html.fromHtml(notes));
-            } else
-                tv_notes.setVisibility(View.GONE);
+            } else tv_notes.setVisibility(View.GONE);
             if (MainActivityDriver.mMyStatus.getOnpickupLatitude().length() != 0)
                 p_latitude = Double.parseDouble(MainActivityDriver.mMyStatus.getOnpickupLatitude());
             if (MainActivityDriver.mMyStatus.getOnpickupLongitude().length() != 0)
@@ -2149,8 +2041,7 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
 
         List<ActivityManager.RunningTaskInfo> taskList = mngr.getRunningTasks(10);
 
-        if (taskList.get(0).numActivities == 1 &&
-                taskList.get(0).topActivity.getClassName().equals(this.getClass().getName())) {
+        if (taskList.get(0).numActivities == 1 && taskList.get(0).topActivity.getClassName().equals(this.getClass().getName())) {
             Log.i(TAG, "This is last activity in the stack");
             startActivity(new Intent(DriverOngoingAct.this, DriverMyStatus.class));
             finish();
@@ -2192,12 +2083,7 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
      * Marker Animation with array of latlng
      */
     public void animateMarker() {
-        TypeEvaluator<LatLng> typeEvaluator = new TypeEvaluator<LatLng>() {
-            @Override
-            public LatLng evaluate(float fraction, LatLng startValue, LatLng endValue) {
-                return _latLngInterpolator.interpolate(fraction, startValue, endValue);
-            }
-        };
+        TypeEvaluator<LatLng> typeEvaluator = (fraction, startValue, endValue) -> _latLngInterpolator.interpolate(fraction, startValue, endValue);
         Property<Marker, LatLng> property = Property.of(Marker.class, LatLng.class, "position");
 
 
@@ -2311,9 +2197,6 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
      * Method to create views dynamically if ArrayList<StopData> value not available (ie., Normal flow)
      * <p>
      * New ArrayList of StopData values created with pickup and drop(if available) and dynamic views created based on that ArrayList
-     *
-     * @param p_pickloc
-     * @param p_droploc
      */
     private ArrayList<DriverStopData> createPickAndStopView(String p_pickloc, String p_latitude, String p_longtitude, String p_droploc, String d_latitude, String d_longtitude) {
         ArrayList<DriverStopData> pickUpDropList = new ArrayList<>();
@@ -2327,7 +2210,7 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
 
     private void setDelayForCancel() {
         if (!DriverSessionSave.getSession(DriverCommonData.DRIVER_ARRIVED_TIME, this).isEmpty()) {
-            long enableTime = 0L, driverArrivedTime = 0L, currentTime = 0L;
+            long enableTime = 0L, driverArrivedTime = 0L, currentTime;
             try {
                 driverArrivedTime = Long.parseLong(DriverSessionSave.getSession(DriverCommonData.DRIVER_ARRIVED_TIME, this));
                 enableTime = Long.parseLong(DriverSessionSave.getSession(DriverCommonData.SHOW_CANCEL_BUTTON, this)) * (1000 * 60); //300000
@@ -2342,15 +2225,9 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
             } else {
                 DriverSystems.out.println("setDelayForCancel(): 2 " + (enableTime - (currentTime - driverArrivedTime)));
                 TripcancelTxt.setVisibility(View.GONE);
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        TripcancelTxt.setVisibility(View.GONE);
-                    }
-                }, enableTime - (currentTime - driverArrivedTime));
+                new Handler().postDelayed(() -> TripcancelTxt.setVisibility(View.GONE), enableTime - (currentTime - driverArrivedTime));
             }
-        } else
-            TripcancelTxt.setVisibility(View.GONE);
+        } else TripcancelTxt.setVisibility(View.GONE);
     }
 
     /**
@@ -2380,10 +2257,8 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
                     bearing = mLastLocation.getBearing();
                     currentLatLng = new LatLng(latitude1, longitude1);
                 }
-                if (bearing >= 0)
-                    bearing = bearing + 90;
-                else
-                    bearing = bearing - 90;
+                if (bearing >= 0) bearing = bearing + 90;
+                else bearing = bearing - 90;
                 map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
                 bearing = 0;
                 pickUpDropMarker();
@@ -2416,7 +2291,7 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
                     butt_onboard.setEnabled(false);
                     new DriverAPIService_Retrofit_JSON(DriverOngoingAct.this, this, data, false).execute(url);
                 } else {
-                    DriverCToast.ShowToast(DriverOngoingAct.this, "" +  DriverNC.getResources().getString(R.string.check_net_connection));
+                    DriverCToast.ShowToast(DriverOngoingAct.this, "" + DriverNC.getResources().getString(R.string.check_net_connection));
 //                    dialog1 = Driver_Utils.alert_view(DriverOngoingAct.this, "" + DriverNC.getResources().getString(R.string.message), "" + DriverNC.getResources().getString(R.string.check_net_connection), "" + DriverNC.getResources().getString(R.string.ok), "", true, DriverOngoingAct.this, "4");
                 }
             } catch (Exception e) {
@@ -2471,12 +2346,7 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
                         nonactiityobj.startServicefromNonActivity(DriverOngoingAct.this);
                     }
                 } else {
-                    runOnUiThread(new Runnable() {
-                        public void run() {
-
-                            ShowToast(DriverOngoingAct.this, DriverNC.getString(R.string.server_error));
-                        }
-                    });
+                    runOnUiThread(() -> ShowToast(DriverOngoingAct.this, DriverNC.getString(R.string.server_error)));
                 }
             } catch (final Exception e) {
                 e.printStackTrace();
@@ -2504,7 +2374,7 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
                     butt_onboard.setEnabled(false);
                     new DriverAPIService_Retrofit_JSON(DriverOngoingAct.this, this, data, false).execute(url);
                 } else {
-                    DriverCToast.ShowToast(DriverOngoingAct.this, "" + DriverNC.getResources().getString(R.string.check_net_connection) );
+                    DriverCToast.ShowToast(DriverOngoingAct.this, "" + DriverNC.getResources().getString(R.string.check_net_connection));
 //                    dialog1 = Driver_Utils.alert_view(DriverOngoingAct.this, "" + DriverNC.getResources().getString(R.string.message), "" + DriverNC.getResources().getString(R.string.check_net_connection), "" + DriverNC.getResources().getString(R.string.ok), "", true, DriverOngoingAct.this, "4");
                 }
             } catch (Exception e) {
@@ -2579,8 +2449,7 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
                             p_longtitude = longitude1;
                         }
                         if (pickupLatLng != null && pickupLatLng.latitude != 0.0 && pickupLatLng.longitude != 0.0) {
-                            if (p_marker != null)
-                                p_marker.remove();
+                            if (p_marker != null) p_marker.remove();
                             p_marker = map.addMarker(new MarkerOptions().position(new LatLng(pickupLatLng.latitude, pickupLatLng.longitude)).title("" + DriverNC.getResources().getString(R.string.pickuploc)).icon(BitmapDescriptorFactory.fromResource(R.drawable.driver_flag_green)).draggable(false));
                         }
                         if (!MainActivityDriver.mMyStatus.getPassengerOndropLocation().equals("")) {
@@ -2623,12 +2492,7 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
                         finish();
                     }
                 } else {
-                    runOnUiThread(new Runnable() {
-                        public void run() {
-
-                            ShowToast(DriverOngoingAct.this, DriverNC.getString(R.string.server_error));
-                        }
-                    });
+                    runOnUiThread(() -> ShowToast(DriverOngoingAct.this, DriverNC.getString(R.string.server_error)));
                 }
             } catch (final Exception e) {
                 e.printStackTrace();
@@ -2647,7 +2511,7 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
                     butt_onboard.setEnabled(false);
                     new DriverAPIService_Retrofit_JSON(DriverOngoingAct.this, this, "", true).execute(url);
                 } else {
-                    DriverCToast.ShowToast(DriverOngoingAct.this, "" +  DriverNC.getResources().getString(R.string.check_net_connection));
+                    DriverCToast.ShowToast(DriverOngoingAct.this, "" + DriverNC.getResources().getString(R.string.check_net_connection));
 //                    dialog1 = Driver_Utils.alert_view(DriverOngoingAct.this, "" + DriverNC.getResources().getString(R.string.message), "" + DriverNC.getResources().getString(R.string.check_net_connection), "" + DriverNC.getResources().getString(R.string.ok), "", true, DriverOngoingAct.this, "4");
                 }
             } catch (Exception e) {
@@ -2666,11 +2530,7 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
                 if (isSuccess) {
                     DriverSessionSave.saveSession("Ongoing", "farecal", DriverOngoingAct.this);
                 } else {
-                    runOnUiThread(new Runnable() {
-                        public void run() {
-                            ShowToast(DriverOngoingAct.this, DriverNC.getString(R.string.server_error));
-                        }
-                    });
+                    runOnUiThread(() -> ShowToast(DriverOngoingAct.this, DriverNC.getString(R.string.server_error)));
                 }
             } catch (final Exception e) {
                 e.printStackTrace();
@@ -2808,12 +2668,7 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
 //                        dialog1 = Driver_Utils.alert_view(DriverOngoingAct.this, "" + DriverNC.getResources().getString(R.string.message), "" + json.getString("message"), "" + DriverNC.getResources().getString(R.string.ok), "", true, DriverOngoingAct.this, "4");
                     }
                 } else {
-                    runOnUiThread(new Runnable() {
-                        public void run() {
-
-                            ShowToast(DriverOngoingAct.this, DriverNC.getString(R.string.server_error));
-                        }
-                    });
+                    runOnUiThread(() -> ShowToast(DriverOngoingAct.this, DriverNC.getString(R.string.server_error)));
                 }
             } catch (final Exception e) {
                 e.printStackTrace();
@@ -2835,8 +2690,7 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
                 JSONObject obj = new JSONObject(result);
                 JSONObject json = obj.getJSONObject("detail");
                 trip_type = json.getString("trip_type");
-                if (json.has("promo_type"))
-                    promo_type = json.getString("promo_type");
+                if (json.has("promo_type")) promo_type = json.getString("promo_type");
                 if (json.has("existing_wallet_amount")) {
                     existing_wallet_amount = json.getString("existing_wallet_amount");
                 }
@@ -2845,8 +2699,7 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
                 }
 
                 os_distance = json.getDouble("distance");
-                if (json.has("os_duration"))
-                    os_duration = (json.getDouble("os_duration") / 60);
+                if (json.has("os_duration")) os_duration = (json.getDouble("os_duration") / 60);
                 os_fare = Double.parseDouble(json.getString("trip_fare"));
 
                 os_tax = (json.getDouble("company_tax"));
@@ -2907,26 +2760,19 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
                 if (json.has("pending_cancel_amount"))
                     pending_cancel_amount = json.getString("pending_cancel_amount");
                 fare_calculation_type = json.getString("fare_calculation_type");
-                if (f_walletamt.length() != 0)
-                    m_walletamt = Double.parseDouble(f_walletamt);
+                if (f_walletamt.length() != 0) m_walletamt = Double.parseDouble(f_walletamt);
                 f_walletamt = String.format(Locale.UK, "%.2f", m_walletamt);
-                if (f_payamt.length() != 0)
-                    m_payamt = Double.parseDouble(f_payamt);
+                if (f_payamt.length() != 0) m_payamt = Double.parseDouble(f_payamt);
                 f_payamt = String.format(Locale.UK, "%.2f", m_payamt);
-                if (f_waitingcost.length() != 0)
-                    m_waitingcost = Double.parseDouble(f_waitingcost);
+                if (f_waitingcost.length() != 0) m_waitingcost = Double.parseDouble(f_waitingcost);
                 f_waitingcost = String.format(Locale.UK, "%.2f", m_waitingcost);
-                if (f_totalfare.length() != 0)
-                    m_totalfare = Double.parseDouble(f_totalfare);
+                if (f_totalfare.length() != 0) m_totalfare = Double.parseDouble(f_totalfare);
                 f_totalfare = String.format(Locale.UK, "%.2f", m_totalfare);
-                if (f_distance.length() != 0)
-                    m_distance = Double.parseDouble(f_distance);
+                if (f_distance.length() != 0) m_distance = Double.parseDouble(f_distance);
                 f_distance = String.format(Locale.UK, "%.2f", m_distance);
-                if (f_tripfare.length() != 0)
-                    m_tripfare = Double.parseDouble(f_tripfare);
+                if (f_tripfare.length() != 0) m_tripfare = Double.parseDouble(f_tripfare);
                 f_tripfare = String.format(Locale.UK, "%.2f", m_tripfare);
-                if (f_taxamount.length() != 0)
-                    m_taxamount = Double.parseDouble(f_taxamount);
+                if (f_taxamount.length() != 0) m_taxamount = Double.parseDouble(f_taxamount);
                 f_taxamount = String.format(Locale.UK, "%.2f", m_taxamount);
                 p_dis = String.valueOf(promo_percentage);
 
@@ -2942,7 +2788,7 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
                 }
                 callurl();
             } catch (JSONException e) {
-                DriverSystems.out.println("errorToCovert " + e.toString());
+                DriverSystems.out.println("errorToCovert " + e);
                 e.printStackTrace();
             }
         }
@@ -3179,7 +3025,7 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
                     butt_onboard.setEnabled(false);
                     new DriverAPIService_Retrofit_JSON(DriverOngoingAct.this, this, data, false).execute(url);
                 } else {
-                    DriverCToast.ShowToast(DriverOngoingAct.this, "" +  DriverNC.getResources().getString(R.string.check_net_connection));
+                    DriverCToast.ShowToast(DriverOngoingAct.this, "" + DriverNC.getResources().getString(R.string.check_net_connection));
 //                    dialog1 = Driver_Utils.alert_view(DriverOngoingAct.this, "" + DriverNC.getResources().getString(R.string.message), "" + DriverNC.getResources().getString(R.string.check_net_connection), "" + DriverNC.getResources().getString(R.string.ok), "", true, DriverOngoingAct.this, "4");
                 }
             } catch (Exception e) {
@@ -3235,12 +3081,7 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
 //                        dialog1 = Driver_Utils.alert_view(DriverOngoingAct.this, "" + DriverNC.getResources().getString(R.string.message), "" + msg, "" + DriverNC.getResources().getString(R.string.ok), "", true, DriverOngoingAct.this, "4");
                     }
                 } else {
-                    runOnUiThread(new Runnable() {
-                        public void run() {
-
-                            ShowToast(DriverOngoingAct.this, DriverNC.getString(R.string.server_error));
-                        }
-                    });
+                    runOnUiThread(() -> ShowToast(DriverOngoingAct.this, DriverNC.getString(R.string.server_error)));
                 }
             } catch (final Exception e) {
                 e.printStackTrace();
@@ -3277,7 +3118,7 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
                     butt_onboard.setEnabled(false);
                     new DriverAPIService_Retrofit_JSON(DriverOngoingAct.this, this, data, false).execute(url);
                 } else {
-                    DriverCToast.ShowToast(DriverOngoingAct.this, "" +  DriverNC.getResources().getString(R.string.check_net_connection));
+                    DriverCToast.ShowToast(DriverOngoingAct.this, "" + DriverNC.getResources().getString(R.string.check_net_connection));
 //                    dialog1 = Driver_Utils.alert_view(DriverOngoingAct.this, "" + DriverNC.getResources().getString(R.string.message), "" + DriverNC.getResources().getString(R.string.check_net_connection), "" + DriverNC.getResources().getString(R.string.ok), "", true, DriverOngoingAct.this, "4");
                 }
             } catch (Exception e) {
@@ -3371,10 +3212,7 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
                             }
 
                             DriverSystems.out.println("statusss" + p_driverstatus + "__" + p_travelstatus + "___" + DriverSessionSave.getSession(DriverCommonData.IS_CORPORATE_BOOKING, DriverOngoingAct.this));
-                            if ((p_driverstatus.equalsIgnoreCase("F")
-                                    || p_driverstatus.equalsIgnoreCase("B") ||
-                                    (p_driverstatus.equalsIgnoreCase("A")))
-                                    && !p_travelstatus.equalsIgnoreCase("5")) {
+                            if ((p_driverstatus.equalsIgnoreCase("F") || p_driverstatus.equalsIgnoreCase("B") || (p_driverstatus.equalsIgnoreCase("A"))) && !p_travelstatus.equalsIgnoreCase("5")) {
                                 if (p_travelstatus.equalsIgnoreCase("3")) {
                                     HeadTitle.setText(DriverNC.getResources().getString(R.string.waitingpassenger));
                                     view_line_trip.setVisibility(View.GONE);
@@ -3457,7 +3295,7 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
                                 MainActivityDriver.mMyStatus.setpassengerNotes(p_notes);
                                 MainActivityDriver.mMyStatus.setpassengerphone(p_phone);
                                 init();
-                                String imagepath = "";
+                                String imagepath;
                                 if (!DriverSessionSave.getSession("p_image", DriverOngoingAct.this).equals("")) {
                                     imagepath = "" + DriverSessionSave.getSession("p_image", DriverOngoingAct.this);
                                     Log.i("Imagepath in session", DriverSessionSave.getSession("p_image", DriverOngoingAct.this));
@@ -3469,10 +3307,8 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
                                     if (imagepath != null && imagepath.length() > 0) {
                                         Picasso.get().load(imagepath).error(R.drawable.loadingimage).placeholder(R.drawable.loadingimage).into(proimg);
                                     } else {
-                                        if (p_name != "") {
-                                            ProfileImageSetupClass.setupProfileImage(
-                                                    p_name, proimg
-                                            );
+                                        if (!p_name.equals("")) {
+                                            ProfileImageSetupClass.setupProfileImage(p_name, proimg);
                                         } else {
                                             Picasso.get().load(R.drawable.loadingimage).into(proimg);
                                         }
@@ -3506,14 +3342,11 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
                                 startActivity(i);
                                 finish();
                             }
-                            tripInfo.post(new Runnable() {
-                                @Override
-                                public void run() {
+                            tripInfo.post(() -> {
 
-                                    layoutheight = tripInfo.getHeight() - 20;
-                                    if (map != null) {
-                                        map.setPadding(0, layoutheight, 0, 120);
-                                    }
+                                layoutheight = tripInfo.getHeight() - 20;
+                                if (map != null) {
+                                    map.setPadding(0, layoutheight, 0, 120);
                                 }
                             });
                         }
@@ -3534,11 +3367,7 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
                     }
                 } else {
 
-                    runOnUiThread(new Runnable() {
-                        public void run() {
-                            ShowToast(DriverOngoingAct.this, DriverNC.getString(R.string.server_error));
-                        }
-                    });
+                    runOnUiThread(() -> ShowToast(DriverOngoingAct.this, DriverNC.getString(R.string.server_error)));
                     Intent i = new Intent(DriverOngoingAct.this, DriverTripHistoryAct.class);
                     startActivity(i);
                     finish();
@@ -3563,7 +3392,7 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
                 if (isOnline()) {
                     new DriverAPIService_Retrofit_JSON(DriverOngoingAct.this, this, data, false).execute(url);
                 } else {
-                    DriverCToast.ShowToast(DriverOngoingAct.this, "" +  DriverNC.getResources().getString(R.string.check_net_connection));
+                    DriverCToast.ShowToast(DriverOngoingAct.this, "" + DriverNC.getResources().getString(R.string.check_net_connection));
 //                    dialog1 = Driver_Utils.alert_view(DriverOngoingAct.this, "" + DriverNC.getResources().getString(R.string.message), "" + DriverNC.getResources().getString(R.string.check_net_connection), "" + DriverNC.getResources().getString(R.string.ok), "", true, DriverOngoingAct.this, "4");
                 }
             } catch (Exception e) {
@@ -3592,11 +3421,7 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
                         }
                     }
                 } else {
-                    runOnUiThread(new Runnable() {
-                        public void run() {
-                            ShowToast(DriverOngoingAct.this, DriverNC.getString(R.string.server_error));
-                        }
-                    });
+                    runOnUiThread(() -> ShowToast(DriverOngoingAct.this, DriverNC.getString(R.string.server_error)));
 
                 }
             } catch (final Exception e) {

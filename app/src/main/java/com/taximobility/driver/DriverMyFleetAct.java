@@ -1,8 +1,6 @@
 package com.taximobility.driver;
 
-
 import android.content.Intent;
-import android.view.View;
 import android.widget.ImageView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,7 +14,7 @@ import com.taximobility.driver.service.DriverAPIService_Retrofit_JSON;
 import com.taximobility.driver.utils.DriverCToast;
 import com.taximobility.driver.utils.DriverNC;
 import com.taximobility.driver.utils.DriverSessionSave;
-import com.taximobility.interfaces.AlertListener;
+import com.taximobility.driver.interfaces.AlertListener;
 import com.taximobility.util.Utility;
 
 import org.json.JSONArray;
@@ -26,21 +24,18 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class DriverMyFleetAct extends MainActivityDriver {
     RecyclerView myFleetRv;
     ImageView add_fleet;
     DriverMyFleetListAdapter fleetListAdapter;
     String modelArray = "";
     String ownerName = "";
-    private List<DriverFleetData> fleetList = new ArrayList<>();
-
+    private final List<DriverFleetData> fleetList = new ArrayList<>();
 
     @Override
     public int setLayout() {
         return R.layout.driver_my_fleet_act;
     }
-
 
     @Override
     public void Initialize() {
@@ -53,25 +48,16 @@ public class DriverMyFleetAct extends MainActivityDriver {
         String url = "type=driver_Taxidetails";
         new FleetList(url);
 
-
         fleetListAdapter = new DriverMyFleetListAdapter(DriverMyFleetAct.this, fleetList);
         myFleetRv.setAdapter(fleetListAdapter);
 
-        findViewById(R.id.slideImg).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+        findViewById(R.id.slideImg).setOnClickListener(v -> onBackPressed());
 
-        add_fleet.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(DriverMyFleetAct.this, DriverAddFleetAct.class);
-                intent.putExtra("model_details", modelArray);
-                intent.putExtra("owner_name", ownerName);
-                startActivity(intent);
-            }
+        add_fleet.setOnClickListener(view -> {
+            Intent intent = new Intent(DriverMyFleetAct.this, DriverAddFleetAct.class);
+            intent.putExtra("model_details", modelArray);
+            intent.putExtra("owner_name", ownerName);
+            startActivity(intent);
         });
     }
 
@@ -94,7 +80,6 @@ public class DriverMyFleetAct extends MainActivityDriver {
                 // TODO: handle exception
                 e.printStackTrace();
             }
-
         }
 
         @Override
@@ -147,8 +132,6 @@ public class DriverMyFleetAct extends MainActivityDriver {
                 e.printStackTrace();
             }
         }
-
-
     }
 
     public void setPrimaryFleet(final String fleetid) {
@@ -175,10 +158,7 @@ public class DriverMyFleetAct extends MainActivityDriver {
         }, (dialog, which) -> dialog.dismiss(), "");
 
          */
-
-
     }
-
 
     class PrimaryFleet implements DriverAPIResult {
         String msg = "";
@@ -191,7 +171,7 @@ public class DriverMyFleetAct extends MainActivityDriver {
                 j.put("taxi_id", fleetid);
 
                 if (isOnline()) {
-                    new DriverAPIService_Retrofit_JSON(DriverMyFleetAct.this, this, j, false,3000).execute(url);
+                    new DriverAPIService_Retrofit_JSON(DriverMyFleetAct.this, this, j, false, 3000).execute(url);
                 } else {
                     DriverCToast.ShowToast(DriverMyFleetAct.this, "" + DriverNC.getResources().getString(R.string.check_net_connection));
 //                    dialog1 = Driver_Utils.alert_view(DriverMyFleetAct.this, "" + DriverNC.getResources().getString(R.string.message), "" + DriverNC.getResources().getString(R.string.check_net_connection), "" + DriverNC.getResources().getString(R.string.ok), "", true, DriverMyFleetAct.this, "");
@@ -200,7 +180,6 @@ public class DriverMyFleetAct extends MainActivityDriver {
                 // TODO: handle exception
                 e.printStackTrace();
             }
-
         }
 
         @Override

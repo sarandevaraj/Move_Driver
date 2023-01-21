@@ -14,7 +14,6 @@ import com.squareup.picasso.Picasso;
 
 import java.util.Locale;
 
-
 /**
  * This class is used to Show trip details for driver
  */
@@ -48,8 +47,7 @@ public class DriverTripDetails extends MainActivityDriver {
         DriverCommonData.current_act = "TripDetails";
         imgView = findViewById(R.id.driverImg);
 
-        DirverColorchange.ChangeColor((ViewGroup) (((ViewGroup) DriverTripDetails.this
-                .findViewById(android.R.id.content)).getChildAt(0)), DriverTripDetails.this);
+        DirverColorchange.ChangeColor((ViewGroup) (((ViewGroup) DriverTripDetails.this.findViewById(android.R.id.content)).getChildAt(0)), DriverTripDetails.this);
 
         DriverFontHelper.applyFont(this, findViewById(R.id.id_tripdetails));
         back = findViewById(R.id.slideImg);

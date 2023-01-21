@@ -16,7 +16,7 @@ public class CompanyDomainResponse {
 
     public ANDROIDPaths androidPaths;
 
-    public String baseurl, api_base,driver_baseurl;
+    public String baseurl, api_base, driver_baseurl;
 
     public String apikey;
 
@@ -38,19 +38,17 @@ public class CompanyDomainResponse {
         public String static_image;
     }
 
-    public class Passenger_language {
+    public static class Passenger_language {
         public String language, design_type, language_code;
 
         public String url;
 
-
     }
 
-    public class Driver_language {
+    public static class Driver_language {
         public String language;
 
         public String url;
-
 
     }
 }

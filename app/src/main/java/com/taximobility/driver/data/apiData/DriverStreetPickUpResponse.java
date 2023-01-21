@@ -1,6 +1,4 @@
-
 package com.taximobility.driver.data.apiData;
-
 
 public class DriverStreetPickUpResponse {
 

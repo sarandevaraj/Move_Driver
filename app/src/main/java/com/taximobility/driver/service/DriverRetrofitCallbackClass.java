@@ -1,12 +1,13 @@
 package com.taximobility.driver.service;
 
 import android.content.Context;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
 
 public class DriverRetrofitCallbackClass<T> implements Callback<T> {
 
@@ -74,7 +75,7 @@ public class DriverRetrofitCallbackClass<T> implements Callback<T> {
     }
 
     @Override
-    public void onResponse(Call<T> call, Response<T> response) {
+    public void onResponse(@NonNull Call<T> call, @NonNull Response<T> response) {
         // Cache this response in case the view isn't available yet
         mResponse = response;
         mCall = call;
@@ -88,7 +89,7 @@ public class DriverRetrofitCallbackClass<T> implements Callback<T> {
     }
 
     @Override
-    public void onFailure(Call<T> call, Throwable t) {
+    public void onFailure(@NonNull Call<T> call, @NonNull Throwable t) {
         // Cache this throwable, in case the view isn't available yet
         mThrowable = t;
         mCall = call;

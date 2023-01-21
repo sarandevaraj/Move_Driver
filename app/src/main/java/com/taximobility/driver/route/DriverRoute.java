@@ -33,6 +33,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
 import okhttp3.ResponseBody;
@@ -69,16 +70,12 @@ public class DriverRoute {
 
             List<LatLng> blackLatLng = blackPolyLine.getPoints();
             List<LatLng> greyLatLng = greyPolyLine.getPoints();
-
             greyLatLng.clear();
             greyLatLng.addAll(blackLatLng);
             blackLatLng.clear();
-
             blackPolyLine.setPoints(blackLatLng);
             greyPolyLine.setPoints(greyLatLng);
-
             blackPolyLine.setZIndex(2);
-
             drawMarker();
         }
 
@@ -90,11 +87,9 @@ public class DriverRoute {
         @Override
         public void onAnimationRepeat(Animator animator) {
 
-
         }
     };
     private int requestedType = 0;
-
 
     public DriverRoute(DriverDistanceMatrixInterface matrixInterface) {
         this.matrixInterface = matrixInterface;
@@ -106,11 +101,6 @@ public class DriverRoute {
 
     /**
      * Entry point to draw route
-     *
-     * @param map
-     * @param mcontext
-     * @param source
-     * @param destination
      */
     public void setUpPolyLine(final GoogleMap map, final FragmentActivity mcontext, final LatLng source, final LatLng destination, ArrayList<LatLng> points) {
         this.mMap = map;
@@ -123,9 +113,7 @@ public class DriverRoute {
             if (source != null && destination != null) {
                 new GetGoogleRouteLog(source, destination, points).execute();
             }
-
     }
-
 
     public void getRouteFromGoogle(double P_latitude, double P_longitude, double D_latitude, double D_longitude, ArrayList<LatLng> wayPoints) {
         String wayPointsUrl = makeDirectionUrl(P_latitude, P_longitude, D_latitude, D_longitude, wayPoints);
@@ -137,21 +125,26 @@ public class DriverRoute {
 
         coreResponse.enqueue(new DriverRetrofitCallbackClass<>(mContext, new Callback<ResponseBody>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
+            public void onResponse(@NonNull Call<ResponseBody> call, @NonNull retrofit2.Response<ResponseBody> response) {
                 String data = null;
                 if (response.isSuccessful()) {
                     try {
 
-                        JSONObject gson = new JSONObject(response.body().string());
-                        DriverSystems.out.println("routee onResponse " + gson.getString("status") + requestedType);
-                        if (!gson.getString("status").equalsIgnoreCase("OK")) {
-                            if (gson.has("status") && !gson.getString("status").equalsIgnoreCase("OK") && gson.has("error_message")) {
-                                String msg = gson.getString("error_message");
-                                DriverCToast.ShowToast(mContext, msg);
+                        JSONObject gson = null;
+                        if (response.body() != null) {
+                            gson = new JSONObject(response.body().string());
+                        }
+                        if (gson != null) {
+                            DriverSystems.out.println("routee onResponse " + gson.getString("status") + requestedType);
+                            if (!gson.getString("status").equalsIgnoreCase("OK")) {
+                                if (gson.has("status") && !gson.getString("status").equalsIgnoreCase("OK") && gson.has("error_message")) {
+                                    String msg = gson.getString("error_message");
+                                    DriverCToast.ShowToast(mContext, msg);
+                                }
+                            } else {
+                                saveGoogleLog(P_latitude + "," + P_longitude + D_latitude + "," + D_longitude, gson.toString());
+                                drawRoutePolyline(parsePolylineFromPoints(gson));
                             }
-                        } else {
-                            saveGoogleLog(P_latitude + "," + P_longitude + D_latitude + "," + D_longitude, gson.toString());
-                            drawRoutePolyline(parsePolylineFromPoints(gson));
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -161,22 +154,18 @@ public class DriverRoute {
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
                 t.printStackTrace();
             }
         }));
-
     }
 
     /**
      * Get a list of latlng from polyline by decode
-     *
-     * @param jObject
-     * @return
      */
     public List<LatLng> parsePolylineFromPoints(JSONObject jObject) {
-        JSONArray jRoutes = null;
-        JSONObject jOverviewPoly = null;
+        JSONArray jRoutes;
+        JSONObject jOverviewPoly;
 
         List path = new ArrayList<LatLng>();
 
@@ -203,17 +192,12 @@ public class DriverRoute {
         drawRoutePolyline(decodePoly(overViewPolyLine));
     }
 
-
     public String getOverViewPolyLine() {
         return overViewPolyLine;
     }
 
-
     /**
      * latlng list from points
-     *
-     * @param st
-     * @return
      */
     public String unescapeJavaString(String st) {
 
@@ -222,18 +206,15 @@ public class DriverRoute {
         for (int i = 0; i < st.length(); i++) {
             char ch = st.charAt(i);
             if (ch == '\\') {
-                char nextChar = (i == st.length() - 1) ? '\\' : st
-                        .charAt(i + 1);
+                char nextChar = (i == st.length() - 1) ? '\\' : st.charAt(i + 1);
                 // Octal escape?
                 if (nextChar >= '0' && nextChar <= '7') {
                     String code = "" + nextChar;
                     i++;
-                    if ((i < st.length() - 1) && st.charAt(i + 1) >= '0'
-                            && st.charAt(i + 1) <= '7') {
+                    if ((i < st.length() - 1) && st.charAt(i + 1) >= '0' && st.charAt(i + 1) <= '7') {
                         code += st.charAt(i + 1);
                         i++;
-                        if ((i < st.length() - 1) && st.charAt(i + 1) >= '0'
-                                && st.charAt(i + 1) <= '7') {
+                        if ((i < st.length() - 1) && st.charAt(i + 1) >= '0' && st.charAt(i + 1) <= '7') {
                             code += st.charAt(i + 1);
                             i++;
                         }
@@ -272,9 +253,7 @@ public class DriverRoute {
                             ch = 'u';
                             break;
                         }
-                        int code = Integer.parseInt(
-                                "" + st.charAt(i + 2) + st.charAt(i + 3)
-                                        + st.charAt(i + 4) + st.charAt(i + 5), 16);
+                        int code = Integer.parseInt("" + st.charAt(i + 2) + st.charAt(i + 3) + st.charAt(i + 4) + st.charAt(i + 5), 16);
                         sb.append(Character.toChars(code));
                         i += 5;
                         continue;
@@ -317,10 +296,8 @@ public class DriverRoute {
             lng += (result & 1) != 0 ? ~(result >> 1) : result >> 1;
             path.add(new LatLng((double) lat * 1.0E-5D, (double) lng * 1.0E-5D));
         }
-
         return path;
     }
-
 
     public String makeDirectionUrl(double p_latitude, double p_longitude, double d_latitude, double d_longitude, ArrayList<LatLng> points) {
         way_point = new StringBuilder();
@@ -353,7 +330,6 @@ public class DriverRoute {
         return way_point.toString();
     }
 
-
     public String makeDirectionUrl(ArrayList<LatLng> points) {
         way_point = new StringBuilder();
 
@@ -378,7 +354,6 @@ public class DriverRoute {
         }
         return way_point.toString();
     }
-
 
     void drawRoutePolyline(List<LatLng> result) {
         ArrayList<LatLng> points = null;
@@ -405,7 +380,6 @@ public class DriverRoute {
         }
     }
 
-
     private void animatePolyLine(long duration) {
 
         ValueAnimator animator = ValueAnimator.ofInt(0, 100);
@@ -426,18 +400,14 @@ public class DriverRoute {
                 }
             }
         });
-
         animator.addListener(polyLineAnimationListener);
         animator.start();
-
     }
 
     public void drawMarker() {
         if (wayPoints != null && wayPoints.size() > 2) {
             for (int i = 1; i < wayPoints.size() - 1; i++) {
-                mMap.addMarker(new MarkerOptions()
-                        .position(wayPoints.get(i))
-                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.driver_drop_dot)));
+                mMap.addMarker(new MarkerOptions().position(wayPoints.get(i)).icon(BitmapDescriptorFactory.fromResource(R.drawable.driver_drop_dot)));
             }
         }
     }
@@ -461,7 +431,6 @@ public class DriverRoute {
                 }
             }
 
-
             double approx_travel_time = time / 60;
             double approx_travel_dist = distance / 1000;
 
@@ -476,7 +445,6 @@ public class DriverRoute {
             model.distance = approx_travel_dist;
             model.routeResult = routeResult;
             model.distanceResult = "";
-
             mRepository.insertGoogleLog(model);
 
         } catch (JSONException e) {
@@ -485,20 +453,20 @@ public class DriverRoute {
     }
 
     public void removePolyLines() {
-        if (blackPolyLine != null)
-            blackPolyLine.remove();
-        if (greyPolyLine != null)
-            greyPolyLine.remove();
+        if (blackPolyLine != null) blackPolyLine.remove();
+        if (greyPolyLine != null) greyPolyLine.remove();
     }
 
     /**
      * Check whether available in DB
      */
     private class GetGoogleRouteLog extends AsyncTask<Void, Void, GoogleMapModel> {
-        private double P_latitude, P_longitude, D_latitude, D_longitude;
-        private String from = "";
-        private String to = "";
-
+        private final double P_latitude;
+        private final double P_longitude;
+        private final double D_latitude;
+        private final double D_longitude;
+        private String from;
+        private String to;
 
         public GetGoogleRouteLog(LatLng source, LatLng destination, ArrayList<LatLng> points) {
             this.P_latitude = source.latitude;
@@ -529,7 +497,6 @@ public class DriverRoute {
             } else {
                 DriverSystems.out.println("routee onPostExecute called ");
                 getRouteFromGoogle(P_latitude, P_longitude, D_latitude, D_longitude, wayPoints);
-
             }
         }
     }

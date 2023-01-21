@@ -19,10 +19,10 @@ import java.util.Locale;
  */
 public class DriverXYMarkerView extends MarkerView {
 
-    private TextView tvContent;
-    private IAxisValueFormatter xAxisValueFormatter;
+    private final TextView tvContent;
+    private final IAxisValueFormatter xAxisValueFormatter;
 
-    private DecimalFormat format;
+    private final DecimalFormat format;
     String currencySymbol;
 
     public DriverXYMarkerView(Context context, IAxisValueFormatter xAxisValueFormatter, String currencySymbol) {

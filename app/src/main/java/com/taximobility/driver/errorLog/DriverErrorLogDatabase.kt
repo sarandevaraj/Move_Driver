@@ -6,7 +6,7 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import android.content.Context
 
-@Database(entities = [DriverApiErrorModel::class], version = 1,exportSchema = false)
+@Database(entities = [DriverApiErrorModel::class], version = 1, exportSchema = false)
 @TypeConverters(DriverConverter::class)
 abstract class DriverErrorLogDatabase : RoomDatabase() {
     abstract fun errorLogDao(): DriverErrorLogDao
@@ -16,12 +16,14 @@ abstract class DriverErrorLogDatabase : RoomDatabase() {
         private lateinit var driverErrorLogDatabase: DriverErrorLogDatabase
 
         @JvmStatic
-        fun getDatabase(context: Context): DriverErrorLogDatabase{
-                synchronized(DriverErrorLogDatabase::class.java) {
-                        driverErrorLogDatabase = Room.databaseBuilder(context.applicationContext,
-                                DriverErrorLogDatabase::class.java, "errorLogDatabase")
-                                .build()
-                }
+        fun getDatabase(context: Context): DriverErrorLogDatabase {
+            synchronized(DriverErrorLogDatabase::class.java) {
+                driverErrorLogDatabase = Room.databaseBuilder(
+                    context.applicationContext,
+                    DriverErrorLogDatabase::class.java,
+                    "errorLogDatabase"
+                ).build()
+            }
             return driverErrorLogDatabase
         }
     }

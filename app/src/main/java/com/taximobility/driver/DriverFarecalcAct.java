@@ -56,8 +56,7 @@ import com.taximobility.driver.utils.DriverNetworkStatus;
 import com.taximobility.driver.utils.DriverSessionSave;
 import com.taximobility.driver.utils.DriverSystems;
 import com.taximobility.driver.utils.Driver_Utils;
-import com.taximobility.features.CToast;
-import com.taximobility.interfaces.AlertListener;
+import com.taximobility.driver.interfaces.AlertListener;
 import com.taximobility.util.AppController;
 import com.taximobility.util.SessionSave;
 import com.taximobility.util.Utility;
@@ -69,6 +68,7 @@ import org.json.JSONObject;
 import java.text.DecimalFormat;
 import java.util.Locale;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
@@ -117,8 +117,8 @@ public class DriverFarecalcAct extends MainActivityDriver implements DriverClick
     private String f_taxamount;
     private String f_tripfare;
     private String f_farediscount = "";
-    private String promotax = "";
-    private String promoamt = "";
+    private final String promotax = "";
+    private final String promoamt = "";
     private String f_paymodid = "";
     private String p_dis = "";
     private String f_walletamt = "";
@@ -214,7 +214,7 @@ public class DriverFarecalcAct extends MainActivityDriver implements DriverClick
     DriverNonActivity nonactiityobj = new DriverNonActivity();
 
 
-    private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
 
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -321,8 +321,7 @@ public class DriverFarecalcAct extends MainActivityDriver implements DriverClick
     // Initialize the views on layout
     @Override
     public void Initialize() {
-        DirverColorchange.ChangeColor((ViewGroup) (((ViewGroup) DriverFarecalcAct.this
-                .findViewById(android.R.id.content)).getChildAt(0)), DriverFarecalcAct.this);
+        DirverColorchange.ChangeColor((ViewGroup) (((ViewGroup) DriverFarecalcAct.this.findViewById(android.R.id.content)).getChildAt(0)), DriverFarecalcAct.this);
         btn_emergency = findViewById(R.id.btn_emergency);
         btn_emergency.setVisibility(View.GONE);
       /*  if (SessionSave.getSession(CommonData.SOS_ENABLED, this, false)) {
@@ -336,6 +335,7 @@ public class DriverFarecalcAct extends MainActivityDriver implements DriverClick
                 public void onSuccess() {
                     startSOSService();
                 }
+
                 @Override
                 public void onFailure() {
 
@@ -508,8 +508,7 @@ public class DriverFarecalcAct extends MainActivityDriver implements DriverClick
                     if (details.getStringExtra("from") != null && details.getStringExtra("from").equalsIgnoreCase("direct")) {
                         message = details.getStringExtra("message");
 
-                        if (details.getBooleanExtra("from_split", false))
-                            fromStreetPickUp = true;
+                        if (details.getBooleanExtra("from_split", false)) fromStreetPickUp = true;
 
                         // This for update the fare calculator page with API result.
                         setFareCalculatorScreen();
@@ -536,8 +535,7 @@ public class DriverFarecalcAct extends MainActivityDriver implements DriverClick
 //            // If Directly comes from end trip page(OngoingAct)
                 if (details.getStringExtra("from") != null && details.getStringExtra("from").equalsIgnoreCase("direct")) {
                     message = details.getStringExtra("message");
-                    if (details.getBooleanExtra("from_split", false))
-                        fromStreetPickUp = true;
+                    if (details.getBooleanExtra("from_split", false)) fromStreetPickUp = true;
 
                     // This for update the fare calculator page with API result.
                     setFareCalculatorScreen();
@@ -787,8 +785,7 @@ public class DriverFarecalcAct extends MainActivityDriver implements DriverClick
     protected void onDestroy() {
         // TODO Auto-generated method stub
         unregisterReceiver(mMessageReceiver);
-        if (dialog1 != null)
-            Driver_Utils.closeDialog(dialog1);
+        if (dialog1 != null) Driver_Utils.closeDialog(dialog1);
         super.onDestroy();
 
         if (keyboardListenersAttached) {
@@ -820,8 +817,7 @@ public class DriverFarecalcAct extends MainActivityDriver implements DriverClick
                 JSONObject obj = new JSONObject(message);
                 JSONObject json = obj.getJSONObject("detail");
                 trip_type = json.getString("trip_type");
-                if (json.has("promo_type"))
-                    promo_type = json.getString("promo_type");
+                if (json.has("promo_type")) promo_type = json.getString("promo_type");
                 if (json.has("existing_wallet_amount")) {
                     existing_wallet_amount = json.getString("existing_wallet_amount");
                 }
@@ -838,8 +834,7 @@ public class DriverFarecalcAct extends MainActivityDriver implements DriverClick
                     layoutOutstation.setVisibility(View.GONE);
                     waiting_lay.setVisibility(View.VISIBLE);
                     fabInfo.setVisibility(View.GONE);
-                    if (!trip_type.equals("2"))
-                        setNormalTripFareScreen();
+                    if (!trip_type.equals("2")) setNormalTripFareScreen();
                 }
 
                 os_distance = json.getDouble("distance");
@@ -943,14 +938,12 @@ public class DriverFarecalcAct extends MainActivityDriver implements DriverClick
                 if (f_eveningfare_applicable.equalsIgnoreCase("1")/* && (trip_type.equals("2") || trip_type.equals("3"))*/) {
                     eve_fare.setText("" + f_eveningfare);
                     eve_fare_lay.setVisibility(View.VISIBLE);
-                } else
-                    eve_fare_lay.setVisibility(View.GONE);
+                } else eve_fare_lay.setVisibility(View.GONE);
 
                 if (f_nightfareapplicable.equalsIgnoreCase("1") /*&& (trip_type.equals("2") || trip_type.equals("3"))*/) {
                     night_fare.setText("" + f_nightfare);
                     night_fare_lay.setVisibility(View.VISIBLE);
-                } else
-                    night_fare_lay.setVisibility(View.GONE);
+                } else night_fare_lay.setVisibility(View.GONE);
 
                 try {
 
@@ -964,26 +957,19 @@ public class DriverFarecalcAct extends MainActivityDriver implements DriverClick
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                if (f_walletamt.length() != 0)
-                    m_walletamt = Double.parseDouble(f_walletamt);
+                if (f_walletamt.length() != 0) m_walletamt = Double.parseDouble(f_walletamt);
                 f_walletamt = String.format(Locale.UK, "%.2f", m_walletamt);
-                if (f_payamt.length() != 0)
-                    m_payamt = Double.parseDouble(f_payamt);
+                if (f_payamt.length() != 0) m_payamt = Double.parseDouble(f_payamt);
                 f_payamt = String.format(Locale.UK, "%.2f", m_payamt);
-                if (f_waitingcost.length() != 0)
-                    m_waitingcost = Double.parseDouble(f_waitingcost);
+                if (f_waitingcost.length() != 0) m_waitingcost = Double.parseDouble(f_waitingcost);
                 f_waitingcost = String.format(Locale.UK, "%.2f", m_waitingcost);
-                if (f_totalfare.length() != 0)
-                    m_totalfare = Double.parseDouble(f_totalfare);
+                if (f_totalfare.length() != 0) m_totalfare = Double.parseDouble(f_totalfare);
                 f_totalfare = String.format(Locale.UK, "%.2f", m_totalfare);
-                if (f_distance.length() != 0)
-                    m_distance = Double.parseDouble(f_distance);
+                if (f_distance.length() != 0) m_distance = Double.parseDouble(f_distance);
                 f_distance = String.format(Locale.UK, "%.2f", m_distance);
-                if (f_tripfare.length() != 0)
-                    m_tripfare = Double.parseDouble(f_tripfare);
+                if (f_tripfare.length() != 0) m_tripfare = Double.parseDouble(f_tripfare);
                 f_tripfare = String.format(Locale.UK, "%.2f", m_tripfare);
-                if (f_taxamount.length() != 0)
-                    m_taxamount = Double.parseDouble(f_taxamount);
+                if (f_taxamount.length() != 0) m_taxamount = Double.parseDouble(f_taxamount);
                 f_taxamount = String.format(Locale.UK, "%.2f", m_taxamount);
                 if (f_waitingtime.equals("0")) {
                     idwaitingcost.setText("" + DriverNC.getResources().getString(R.string.waiting_cost) + "(" + "00:00" + ")");
@@ -992,8 +978,7 @@ public class DriverFarecalcAct extends MainActivityDriver implements DriverClick
                 }
                 if (!cmpTax.trim().equals("0"))
                     txtCmp.setText("" + DriverNC.getResources().getString(R.string.tax) + cmpTax + "" + DriverNC.getResources().getString(R.string.tax_percent));
-                else
-                    tax_lay.setVisibility(View.VISIBLE);
+                else tax_lay.setVisibility(View.VISIBLE);
                 farecalTxt.setText(f_totalfare);
                 v_trip_fare.setText("" + DriverSessionSave.getSession("site_currency", DriverFarecalcAct.this) + " " + f_tripfare);
                 p_dis = String.valueOf(promo_percentage);
@@ -1074,10 +1059,9 @@ public class DriverFarecalcAct extends MainActivityDriver implements DriverClick
                 }
 
                 if (DriverSessionSave.getSession(DriverCommonData.BALANCE_CREDIT_OPTION, DriverFarecalcAct.this).equals("1") && !fromStreetPickUp) {
-                    if(SessionSave.getSession("customer_wallet_transaction", DriverFarecalcAct.this).equals("1"))
+                    if (SessionSave.getSession("customer_wallet_transaction", DriverFarecalcAct.this).equals("1"))
                         pay_back_lay.setVisibility(View.VISIBLE);
-                    else
-                        pay_back_lay.setVisibility(View.GONE);
+                    else pay_back_lay.setVisibility(View.GONE);
                 } else {
                     pay_back_lay.setVisibility(View.GONE);
                 }
@@ -1109,10 +1093,9 @@ public class DriverFarecalcAct extends MainActivityDriver implements DriverClick
                     String paymentModeDefault = ary.getJSONObject(i).getString("pay_mod_default");
                     String paymentMode_Id = ary.getJSONObject(i).getString("pay_mod_id");
                     if (paymentMode_Id.equalsIgnoreCase("5")) {
-                        if(SessionSave.getSession("customer_wallet_transaction", DriverFarecalcAct.this).equals("1"))
+                        if (SessionSave.getSession("customer_wallet_transaction", DriverFarecalcAct.this).equals("1"))
                             radiowalletButton.setVisibility(View.VISIBLE);
-                        else
-                            radiowalletButton.setVisibility(View.GONE);
+                        else radiowalletButton.setVisibility(View.GONE);
                         if (paymentModeDefault.equals("1")) {
                             radiowalletButton.setTextColor(Color.DKGRAY);
                         }
@@ -1123,18 +1106,16 @@ public class DriverFarecalcAct extends MainActivityDriver implements DriverClick
                             //  radiocashButton.setTextColor(Color.DKGRAY);
                         }
                     } else if (paymentMode_Id.equalsIgnoreCase("2")) {
-                        if(SessionSave.getSession("customer_wallet_transaction", DriverFarecalcAct.this).equals("1"))
+                        if (SessionSave.getSession("customer_wallet_transaction", DriverFarecalcAct.this).equals("1"))
                             card_lay.setVisibility(View.VISIBLE);
-                        else
-                            card_lay.setVisibility(View.GONE);
+                        else card_lay.setVisibility(View.GONE);
                         if (paymentModeDefault.equals("1")) {
                             //  radiocardButton.setTextColor(Color.DKGRAY);
                         }
                     } else if (paymentMode_Id.equalsIgnoreCase("3")) {
-                        if(SessionSave.getSession("customer_wallet_transaction", DriverFarecalcAct.this).equals("1"))
+                        if (SessionSave.getSession("customer_wallet_transaction", DriverFarecalcAct.this).equals("1"))
                             uncard_lay.setVisibility(View.VISIBLE);
-                        else
-                            uncard_lay.setVisibility(View.GONE);
+                        else uncard_lay.setVisibility(View.GONE);
                         if (paymentModeDefault.equals("1")) {
                             //  radiouncardButton.setTextColor(Color.DKGRAY);
                         }
@@ -1279,7 +1260,7 @@ public class DriverFarecalcAct extends MainActivityDriver implements DriverClick
                 amount_tobe_paid = Double.parseDouble(f_payamt) - Double.parseDouble(existing_wallet_amount);
                 amount_used_from_wallet = Double.parseDouble(f_payamt);
                 DriverSessionSave.saveSession(DriverCommonData.AMOUNT_USED_FROM_WALLET, "" + amount_used_from_wallet, DriverFarecalcAct.this);
-                Utility.actionSheet(DriverFarecalcAct.this,  "You have insufficient wallet amount", DriverNC.getResources().getString(R.string.ok), DriverNC.getResources().getString(R.string.cancell), false, new AlertListener() {
+                Utility.actionSheet(DriverFarecalcAct.this, "You have insufficient wallet amount", DriverNC.getResources().getString(R.string.ok), DriverNC.getResources().getString(R.string.cancell), false, new AlertListener() {
                     @Override
                     public void onSuccess() {
                         Intent in = new Intent(DriverFarecalcAct.this, DriverWebviewAct.class);
@@ -1370,36 +1351,34 @@ public class DriverFarecalcAct extends MainActivityDriver implements DriverClick
 //                        @Override
 //                        public void onClick(DialogInterface dialog, int which) {
 //                            dialog.dismiss();
-                            Intent payintent = new Intent(DriverFarecalcAct.this, DriverPayuncardAct.class);
-                            Bundle bun = new Bundle();
-                            bun.putString("info", "Uncard");
-                            bun.putString("message", message);
-                            bun.putString("service_id", complete_service_id);
-                            if (trip_type.equals("3")) {
-                                if (!DriverSessionSave.getSession("Lang", DriverFarecalcAct.this).equals("en")) {
-                                    bun.putString("f_fare", amountpayTxt.getText().toString());
-                                    bun.putString("f_tips", Double.toString(f_tips));
-                                    bun.putString("f_total", amountpayTxt.getText().toString());
-                                } else {
-                                    bun.putString("f_fare", DriverFontHelper.convertfromArabic(amountpayTxt.getText().toString()));
-                                    bun.putString("f_tips", DriverFontHelper.convertfromArabic(Double.toString(f_tips)));
-                                    bun.putString("f_total", DriverFontHelper.convertfromArabic(amountpayTxt.getText().toString()));
-                                }
-                            } else {
-                                if (!DriverSessionSave.getSession("Lang", DriverFarecalcAct.this).equals("en")) {
-                                    bun.putString("f_fare", DriverFontHelper.convertfromArabic(f_payamt));
-                                    bun.putString("f_tips", DriverFontHelper.convertfromArabic(Double.toString(f_tips)));
-                                    bun.putString("f_total", DriverFontHelper.convertfromArabic(Double.toString(f_total)));
-                                } else {
-                                    bun.putString("f_fare", f_payamt);
-                                    bun.putString("f_tips", Double.toString(f_tips));
-                                    bun.putString("f_total", Double.toString(f_total));
-                                }
-                            }
-                            payintent.putExtras(bun);
-                            startActivity(payintent);
-
-
+                    Intent payintent = new Intent(DriverFarecalcAct.this, DriverPayuncardAct.class);
+                    Bundle bun = new Bundle();
+                    bun.putString("info", "Uncard");
+                    bun.putString("message", message);
+                    bun.putString("service_id", complete_service_id);
+                    if (trip_type.equals("3")) {
+                        if (!DriverSessionSave.getSession("Lang", DriverFarecalcAct.this).equals("en")) {
+                            bun.putString("f_fare", amountpayTxt.getText().toString());
+                            bun.putString("f_tips", Double.toString(f_tips));
+                            bun.putString("f_total", amountpayTxt.getText().toString());
+                        } else {
+                            bun.putString("f_fare", DriverFontHelper.convertfromArabic(amountpayTxt.getText().toString()));
+                            bun.putString("f_tips", DriverFontHelper.convertfromArabic(Double.toString(f_tips)));
+                            bun.putString("f_total", DriverFontHelper.convertfromArabic(amountpayTxt.getText().toString()));
+                        }
+                    } else {
+                        if (!DriverSessionSave.getSession("Lang", DriverFarecalcAct.this).equals("en")) {
+                            bun.putString("f_fare", DriverFontHelper.convertfromArabic(f_payamt));
+                            bun.putString("f_tips", DriverFontHelper.convertfromArabic(Double.toString(f_tips)));
+                            bun.putString("f_total", DriverFontHelper.convertfromArabic(Double.toString(f_total)));
+                        } else {
+                            bun.putString("f_fare", f_payamt);
+                            bun.putString("f_tips", Double.toString(f_tips));
+                            bun.putString("f_total", Double.toString(f_total));
+                        }
+                    }
+                    payintent.putExtras(bun);
+                    startActivity(payintent);
 
 
 //                        }
@@ -1648,9 +1627,7 @@ public class DriverFarecalcAct extends MainActivityDriver implements DriverClick
      */
     public void closeDialog() {
         try {
-            if (mDialog != null)
-                if (mDialog.isShowing())
-                    mDialog.dismiss();
+            if (mDialog != null) if (mDialog.isShowing()) mDialog.dismiss();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1670,9 +1647,7 @@ public class DriverFarecalcAct extends MainActivityDriver implements DriverClick
 
                 ImageView iv = mDialog.findViewById(R.id.giff);
                 DrawableImageViewTarget imageViewTarget = new DrawableImageViewTarget(iv);
-                Glide.with(DriverFarecalcAct.this)
-                        .load(R.raw.driver_loading_anim)
-                        .into(imageViewTarget);
+                Glide.with(DriverFarecalcAct.this).load(R.raw.driver_loading_anim).into(imageViewTarget);
 
             }
         } catch (Exception e) {
@@ -1700,11 +1675,11 @@ public class DriverFarecalcAct extends MainActivityDriver implements DriverClick
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, int[] grantResults) {
         if (requestCode == REQUEST_READ_PHONE_STATE) {// If request is cancelled, the result arrays are empty.
             if (grantResults.length > 0) {
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-              //      startSOSService();
+                    //      startSOSService();
                 }
             }
         }
@@ -1712,7 +1687,7 @@ public class DriverFarecalcAct extends MainActivityDriver implements DriverClick
 
     @Override
     public void onBackPressed() {
-        CToast.ShowToast(context, DriverNC.getString(R.string.pls_complete_the_payment));
+        DriverCToast.ShowToast(context, DriverNC.getString(R.string.pls_complete_the_payment));
 //        Intent intent = new Intent(DriverFarecalcAct.this, DriverMyStatus.class);
 //        startActivity(intent);
 //        finish();
@@ -1777,7 +1752,7 @@ public class DriverFarecalcAct extends MainActivityDriver implements DriverClick
                 }
                 new DriverAPIService_Retrofit_JSON(DriverFarecalcAct.this, this, data, false).execute(url);
             } else {
-                CToast.ShowToast(context, "" + DriverNC.getResources().getString(R.string.check_internet));
+                DriverCToast.ShowToast(context, "" + DriverNC.getResources().getString(R.string.check_internet));
 //                dialog1 = Driver_Utils.alert_view(DriverFarecalcAct.this, "", "" + DriverNC.getResources().getString(R.string.check_internet), DriverNC.getResources().getString(R.string.ok),
 //                        "", true, DriverFarecalcAct.this, "");
 
@@ -1832,7 +1807,7 @@ public class DriverFarecalcAct extends MainActivityDriver implements DriverClick
                         msg = json.getString("message");
                         lay_fare.setVisibility(View.VISIBLE);
 
-                        CToast.ShowToast(context, "" + msg);
+                        DriverCToast.ShowToast(context, "" + msg);
 //                        dialog1 = Driver_Utils.alert_view(DriverFarecalcAct.this, "", "" + msg, DriverNC.getResources().getString(R.string.ok),
 //                                "", true, DriverFarecalcAct.this, "");
 
@@ -1840,14 +1815,14 @@ public class DriverFarecalcAct extends MainActivityDriver implements DriverClick
                     } else if (json.getInt("status") == 0) {
                         msg = json.getString("message");
                         lay_fare.setVisibility(View.VISIBLE);
-                        CToast.ShowToast(context, "" + msg);
+                        DriverCToast.ShowToast(context, "" + msg);
 //                        dialog1 = Driver_Utils.alert_view(DriverFarecalcAct.this, "", "" + msg, DriverNC.getResources().getString(R.string.ok),
 //                                "", true, DriverFarecalcAct.this, "");
 
 
                     } else if (json.getInt("status") == -1) {
                         msg = json.getString("message");
-                        CToast.ShowToast(context, "" + msg);
+                        DriverCToast.ShowToast(context, "" + msg);
 //                        dialog1 = Driver_Utils.alert_view(DriverFarecalcAct.this, "", "" + msg, DriverNC.getResources().getString(R.string.ok),
 //                                "", true, DriverFarecalcAct.this, "");
 
@@ -1879,7 +1854,7 @@ public class DriverFarecalcAct extends MainActivityDriver implements DriverClick
                         msg = json.getString("message");
                         lay_fare.setVisibility(View.VISIBLE);
 
-                        CToast.ShowToast(context, "" + msg);
+                        DriverCToast.ShowToast(context, "" + msg);
 //                        dialog1 = Driver_Utils.alert_view(DriverFarecalcAct.this, "", "" + msg, DriverNC.getResources().getString(R.string.ok),
 //                                "", true, DriverFarecalcAct.this, "");
 
@@ -1895,7 +1870,6 @@ public class DriverFarecalcAct extends MainActivityDriver implements DriverClick
 
 
     }
-
 
 
     /**

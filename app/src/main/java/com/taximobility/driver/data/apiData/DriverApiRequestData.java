@@ -1,5 +1,7 @@
 package com.taximobility.driver.data.apiData;
 
+import androidx.annotation.NonNull;
+
 import com.taximobility.driver.data.DriverWayPointsData;
 import com.taximobility.driver.route.DriverStopData;
 
@@ -88,6 +90,7 @@ public class DriverApiRequestData {
             this.driver_id = driver_id;
         }
 
+        @NonNull
         @Override
         public String toString() {
             return "ClassPojo [driver_id = " + driver_id + "]";

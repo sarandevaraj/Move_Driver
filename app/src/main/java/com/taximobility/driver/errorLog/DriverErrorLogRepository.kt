@@ -58,35 +58,34 @@ class DriverErrorLogRepository private constructor(val mContext: Context) {
     }
 */
 
-
     fun insertAllApiErrorLogs(driverApiErrorModel: DriverApiErrorModel) {
         println("Log check   ___1")
-        if(DriverSessionSave.getSession(DriverCommonData.ERROR_LOGS,mContext,false)) {
+        if (DriverSessionSave.getSession(DriverCommonData.ERROR_LOGS, mContext, false)) {
             GetCount(driverApiErrorModel, DriverCommonData.getCurrentTimeForLogger()).execute()
         }
     }
 
-    private inner class GetCount(val driverApiErrorModel: DriverApiErrorModel, val timeStamp:String) : AsyncTask<Unit, Unit, Unit>() {
+    private inner class GetCount(
+        val driverApiErrorModel: DriverApiErrorModel, val timeStamp: String
+    ) : AsyncTask<Unit, Unit, Unit>() {
         var count: Int = 0
         override fun doInBackground(vararg params: Unit?) {
             errorLogDao.run {
                 println("Log check   ___3")
-                count = getCount(driverApiErrorModel.error,timeStamp)
+                count = getCount(driverApiErrorModel.error, timeStamp)
             }
         }
 
         override fun onPostExecute(result: Unit?) {
             super.onPostExecute(result)
             println("Log check   ___3")
-            if (count == 0)
-                InsertApiErrorLogs(driverApiErrorModel).execute()
+            if (count == 0) InsertApiErrorLogs(driverApiErrorModel).execute()
         }
     }
 
-
     private inner class GetAllApiErrorLogs : AsyncTask<Unit, Unit, List<DriverApiErrorModel>?>() {
         override fun doInBackground(vararg params: Unit?): List<DriverApiErrorModel>? {
-            var allErrorLogDrivers: List<DriverApiErrorModel>? = null
+            var allErrorLogDrivers: List<DriverApiErrorModel>?
             errorLogDao.run {
                 allErrorLogDrivers = getAllApiErrorLogs()
                 println("Log check   ___4" + allErrorLogDrivers!!.size)
@@ -102,7 +101,8 @@ class DriverErrorLogRepository private constructor(val mContext: Context) {
         }
     }
 
-    private inner class InsertApiErrorLogs(private val driverApiErrorModel: DriverApiErrorModel) : AsyncTask<Unit, Unit, Unit>() {
+    private inner class InsertApiErrorLogs(private val driverApiErrorModel: DriverApiErrorModel) :
+        AsyncTask<Unit, Unit, Unit>() {
         override fun doInBackground(vararg params: Unit?) {
             errorLogDao.run {
                 insertApiErrorLog(driverApiErrorModel)
@@ -117,13 +117,12 @@ class DriverErrorLogRepository private constructor(val mContext: Context) {
         }
     }
 
-
-
-    private inner class UpdateApiErrorLogs(val status: Int, val ids: Int) : AsyncTask<Unit, Unit, Unit>() {
+    private inner class UpdateApiErrorLogs(val status: Int, val ids: Int) :
+        AsyncTask<Unit, Unit, Unit>() {
         override fun doInBackground(vararg params: Unit?) {
             errorLogDao.run {
                 println("Log check   ___8")
-                updateSendStatus(status,ids)
+                updateSendStatus(status, ids)
             }
         }
 
@@ -133,8 +132,7 @@ class DriverErrorLogRepository private constructor(val mContext: Context) {
         }
     }
 
-
-    private inner class DeleteApiErrorLogs(val date:String) : AsyncTask<Unit, Unit, Unit>() {
+    private inner class DeleteApiErrorLogs(val date: String) : AsyncTask<Unit, Unit, Unit>() {
         override fun doInBackground(vararg params: Unit?) {
             errorLogDao.run {
                 deleteAllApiErrorLogs(date)
@@ -153,17 +151,17 @@ class DriverErrorLogRepository private constructor(val mContext: Context) {
         println("List  size ${driverApiErrorLogs!!.size}")
 //        for (i in 0..apiErrorLogs!!.size - 1) {
         val data = JSONObject(Gson().toJson(driverApiErrorLogs[0]))
-            data1.put("ERROR", data)
+        data1.put("ERROR", data)
         println("Log check   ___12")
 //        }
 //        val client = ServiceGenerator(mContext, false).createService(CoreClient::class.java)
         val client = AppController.getInstance().apiManagerWithEncryptBaseUrl_driver
-        val body = data1.toString().toRequestBody("application/json; charset=utf-8".toMediaTypeOrNull())
+        val body =
+            data1.toString().toRequestBody("application/json; charset=utf-8".toMediaTypeOrNull())
 
         val coreResponse = client.errorLogUpdate(body)
         coreResponse.enqueue(DriverRetrofitCallbackClass(mContext, object : Callback<ResponseBody> {
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-
                 UpdateApiErrorLogs(1, driverApiErrorLogs[0].ids).execute()
             }
 
@@ -173,7 +171,6 @@ class DriverErrorLogRepository private constructor(val mContext: Context) {
         }))
     }
 /*
-
     private inner class GetAllGpsErrorLogs() : AsyncTask<Unit, Unit, List<GpsModel>?>() {
         override fun doInBackground(vararg params: Unit?): List<GpsModel>? {
             var allErrorLogs: List<GpsModel>? = null
@@ -189,15 +186,9 @@ class DriverErrorLogRepository private constructor(val mContext: Context) {
             GetAllNetworkErrorLogs(result).execute()
         }
     }
-
-
-
 */
 
-
 /*
-
-
     private inner class GetAllNetworkErrorLogs(val gpsErrorLogs: List<GpsModel>?) : AsyncTask<Unit, Unit, List<NetworkModel>?>() {
         override fun doInBackground(vararg params: Unit?): List<NetworkModel>? {
             var allErrorLogs: List<NetworkModel>? = null

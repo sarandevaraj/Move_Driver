@@ -59,7 +59,7 @@ import com.taximobility.driver.utils.DriverNC;
 import com.taximobility.driver.utils.DriverSessionSave;
 import com.taximobility.driver.utils.DriverSystems;
 import com.taximobility.driver.utils.Driver_Utils;
-import com.taximobility.interfaces.AlertListener;
+import com.taximobility.driver.interfaces.AlertListener;
 import com.taximobility.util.Utility;
 import com.yalantis.ucrop.UCrop;
 
@@ -290,24 +290,18 @@ public class DriverMeAct extends MainActivityDriver implements OnClickListener, 
 //                }
 //            }, 2000L);
 //        });
-        bt_delete_acc.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent deleteAcc = new Intent(DriverMeAct.this, DeleteAccountActivityDriver.class);
-                startActivity(deleteAcc);
-            }
+        bt_delete_acc.setOnClickListener(view1 -> {
+            Intent deleteAcc = new Intent(DriverMeAct.this, DeleteAccountActivityDriver.class);
+            startActivity(deleteAcc);
         });
 
 
-        emergency_contact_txt.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        emergency_contact_txt.setOnClickListener(view12 -> {
 
-                DriverSessionSave.saveSession("sos_id", DriverSessionSave.getSession("Id", DriverMeAct.this), DriverMeAct.this);
-                DriverSessionSave.saveSession("user_type", "d", DriverMeAct.this);
+            DriverSessionSave.saveSession("sos_id", DriverSessionSave.getSession("Id", DriverMeAct.this), DriverMeAct.this);
+            DriverSessionSave.saveSession("user_type", "d", DriverMeAct.this);
 
- //               startActivity(new Intent(DriverMeAct.this, SOSActivity.class));
-            }
+            //               startActivity(new Intent(DriverMeAct.this, SOSActivity.class));
         });
 
 
@@ -408,16 +402,13 @@ public class DriverMeAct extends MainActivityDriver implements OnClickListener, 
             }
         });
 
-        btn_back.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        btn_back.setOnClickListener(v -> {
 
-                Intent in = new Intent(DriverMeAct.this, DriverMyStatus.class);
-                startActivity(in);
-                finish();
+            Intent in = new Intent(DriverMeAct.this, DriverMyStatus.class);
+            startActivity(in);
+            finish();
 
 
-            }
         });
 
 
@@ -594,7 +585,7 @@ public class DriverMeAct extends MainActivityDriver implements OnClickListener, 
 
     private void EnableHuaweiProtectedApps() {
         try {
-            String cmd = "";
+            String cmd;
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 cmd = "am start -n com.huawei.systemmanager/.appcontrol.activity.StartupAppControlActivity";
             } else {
@@ -847,9 +838,9 @@ public class DriverMeAct extends MainActivityDriver implements OnClickListener, 
 
                 try {
                     if (ActivityCompat.checkSelfPermission(DriverMeAct.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED ||
-                             ActivityCompat.checkSelfPermission(DriverMeAct.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                            ActivityCompat.checkSelfPermission(DriverMeAct.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
 
-                        Utility.actionSheet(DriverMeAct.this,  DriverNC.getResources().getString(R.string.str_media), DriverNC.getResources().getString(R.string.yes), "", false, new AlertListener() {
+                        Utility.actionSheet(DriverMeAct.this, DriverNC.getResources().getString(R.string.str_media), DriverNC.getResources().getString(R.string.yes), "", false, new AlertListener() {
                             @Override
                             public void onSuccess() {
                                 ActivityCompat.requestPermissions(DriverMeAct.this,
@@ -960,9 +951,7 @@ public class DriverMeAct extends MainActivityDriver implements OnClickListener, 
 //                        dialog1 = Driver_Utils.alert_view(DriverMeAct.this, "" + DriverNC.getResources().getString(R.string.message), "" + DriverNC.getResources().getString(R.string.image_failed), "" + DriverNC.getResources().getString(R.string.ok), "", true, DriverMeAct.this, "");
                     }
                 });
-                fileDialog.setOnDismissListener(dialog -> {
-                    fileimg.setImageResource(R.drawable.driver_no_file);
-                });
+                fileDialog.setOnDismissListener(dialog -> fileimg.setImageResource(R.drawable.driver_no_file));
             } else if (v == btntaxidetail) {
                 showtaxiDetails();
             } else if (v == me_layout) {
@@ -977,7 +966,7 @@ public class DriverMeAct extends MainActivityDriver implements OnClickListener, 
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, int[] grantResults) {
         if (requestCode == MY_PERMISSIONS_REQUEST_CAMERA) {// If request is cancelled, the result arrays are empty.
             if (grantResults.length > 0
                     && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -1042,7 +1031,7 @@ public class DriverMeAct extends MainActivityDriver implements OnClickListener, 
 
     private void getCamera() {
 
-        Utility.actionSheet(DriverMeAct.this,"" + DriverNC.getResources().getString(R.string.choose_an_image),"" + DriverNC.getResources().getString(R.string.camera),"" +  DriverNC.getResources().getString(R.string.gallery), false, new AlertListener() {
+        Utility.actionSheet(DriverMeAct.this, "" + DriverNC.getResources().getString(R.string.choose_an_image), "" + DriverNC.getResources().getString(R.string.camera), "" + DriverNC.getResources().getString(R.string.gallery), false, new AlertListener() {
             @Override
             public void onSuccess() {
                 Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -1073,6 +1062,7 @@ public class DriverMeAct extends MainActivityDriver implements OnClickListener, 
                 }
 
             }
+
             @Override
             public void onFailure() {
                 final Intent intent = new Intent();
@@ -1223,12 +1213,9 @@ public class DriverMeAct extends MainActivityDriver implements OnClickListener, 
             final TextView assigntoTxt = tDialog.findViewById(R.id.assigntoTxt);
             final Button close_dialog = tDialog.findViewById(R.id.close_dialog);
 
-            close_dialog.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    tDialog.dismiss();
-                }
-            });
+            if (close_dialog != null) {
+                close_dialog.setOnClickListener(view1 -> tDialog.dismiss());
+            }
             modelTxt.setText(taxi_model);
             taxinoTxt.setText(taxi_no);
             assignfromTxt.setText("" + (taxi_map_from));
@@ -1407,7 +1394,7 @@ public class DriverMeAct extends MainActivityDriver implements OnClickListener, 
                             DriverSessionSave.saveSession("referal", details.getString("driver_referral_settings"), getApplicationContext());
 
 
-                     //   HeadTitle.setTypeface(HeadTitle.getTypeface(), Typeface.BOLD);
+                        //   HeadTitle.setTypeface(HeadTitle.getTypeface(), Typeface.BOLD);
 
 
                         walletamountr = details.getInt("driver_wallet_amount");
@@ -1461,7 +1448,7 @@ public class DriverMeAct extends MainActivityDriver implements OnClickListener, 
                         Intent locationService = new Intent(DriverMeAct.this, LocationUpdate.class);
                         stopService(new Intent(locationService));
                         clearsession(DriverMeAct.this);
-                        Utility.actionSheet(DriverMeAct.this, json.getString("message"),DriverNC.getResources().getString(R.string.ok), DriverNC.getResources().getString(R.string.cancel), false, new AlertListener() {
+                        Utility.actionSheet(DriverMeAct.this, json.getString("message"), DriverNC.getResources().getString(R.string.ok), DriverNC.getResources().getString(R.string.cancel), false, new AlertListener() {
                             @Override
                             public void onSuccess() {
                                 int length = DriverCommonData.mActivitylist.size();
@@ -1514,7 +1501,7 @@ public class DriverMeAct extends MainActivityDriver implements OnClickListener, 
                             invitefriends_bottom.setVisibility(View.VISIBLE);
                         else {
                             invitefriends_bottom.setVisibility(View.GONE);
-                           // findViewById(R.id.inviteView).setVisibility(View.GONE);
+                            // findViewById(R.id.inviteView).setVisibility(View.GONE);
                         }
                         subscription.setVisibility(View.GONE);
                     } else {
@@ -1572,9 +1559,7 @@ public class DriverMeAct extends MainActivityDriver implements OnClickListener, 
                 encodedImage = Base64.encodeToString(image, Base64.DEFAULT);
             } catch (final Exception e) {
                 // TODO: handle exception
-                runOnUiThread(() -> {
-                    DriverCToast.ShowToast(DriverMeAct.this, DriverNC.getResources().getString(R.string.image_failed));
-                });
+                runOnUiThread(() -> DriverCToast.ShowToast(DriverMeAct.this, DriverNC.getResources().getString(R.string.image_failed)));
             }
             return mBitmap;
         }

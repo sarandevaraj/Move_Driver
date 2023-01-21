@@ -57,9 +57,7 @@ public class DriverChangepassAct extends MainActivityDriver implements OnClickLi
         DoneBtn.setVisibility(View.GONE);
 
 
-
-        DirverColorchange.ChangeColor((ViewGroup) (((ViewGroup) DriverChangepassAct.this
-                .findViewById(android.R.id.content)).getChildAt(0)), DriverChangepassAct.this);
+        DirverColorchange.ChangeColor((ViewGroup) (((ViewGroup) DriverChangepassAct.this.findViewById(android.R.id.content)).getChildAt(0)), DriverChangepassAct.this);
 
         setonclickListener();
     }
@@ -150,11 +148,7 @@ public class DriverChangepassAct extends MainActivityDriver implements OnClickLi
                     e.printStackTrace();
                 }
             } else {
-                runOnUiThread(new Runnable() {
-                    public void run() {
-                        DriverCToast.ShowToast(DriverChangepassAct.this, DriverNC.getString(R.string.server_error));
-                    }
-                });
+                runOnUiThread(() -> DriverCToast.ShowToast(DriverChangepassAct.this, DriverNC.getString(R.string.server_error)));
 
             }
         }

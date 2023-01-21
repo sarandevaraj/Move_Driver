@@ -8,7 +8,10 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.provider.Settings;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
@@ -17,11 +20,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.taximobility.driver.utils.DriverCToast;
 import com.taximobility.driver.utils.DriverNC;
-import com.taximobility.features.CToast;
+import com.taximobility.driver.utils.DriverSystems;
 import com.taximobility.util.FontHelper;
 import com.taximobility.util.SessionSave;
-import com.taximobility.util.Systems;
 import com.taximobility.util.TaxiUtil;
 import com.taximobility.util.Utility;
 import com.bumptech.glide.Glide;
@@ -29,12 +32,7 @@ import com.bumptech.glide.request.target.DrawableImageViewTarget;
 import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 
-import org.json.JSONObject;
-
 import java.util.Locale;
-
-import static com.taximobility.util.ConstantsKt.LOGOUT;
-import static com.taximobility.util.ConstantsKt.PASS_ID;
 
 /**
  * <p>
@@ -53,7 +51,6 @@ public abstract class MainActivity extends AppCompatActivity {
     boolean i = false;
     public Bundle BsavedInstanceState;
     public static String APP_VERSION;
-
     Dialog dialog;
 
     public enum ValidateAction {
@@ -68,16 +65,14 @@ public abstract class MainActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         if (!SessionSave.getSession("facebook_key", MainActivity.this).equals(""))
             FacebookSdk.setApplicationId(SessionSave.getSession("facebook_key", MainActivity.this));
-        else
-            FacebookSdk.setApplicationId(getString(R.string.facebookAppId));
+        else FacebookSdk.setApplicationId(getString(R.string.facebookAppId));
 //        FacebookSdk.sdkInitialize(this.getApplicationContext());
 //        Fabric.with(this, new Crashlytics());
-        Systems.out.println("appVersionnnn" + APP_VERSION);
+        DriverSystems.out.println("appVersionnnn" + APP_VERSION);
         if (APP_VERSION == null) {
             APP_VERSION = BuildConfig.VERSION_NAME;
         }
         setView();
-
     }
 
 
@@ -89,22 +84,18 @@ public abstract class MainActivity extends AppCompatActivity {
         int view = setLayout();
         if (view != 0) {
             setContentView(view);
-
             priorChanges();
             Initialize();
-
             try {
-                if (mshowDialog.isShowing())
-                    mshowDialog.dismiss();
+                if (mshowDialog.isShowing()) mshowDialog.dismiss();
             } catch (Exception e) {
                 // TODO: handle exception
             }
         }
     }
 
-
     @Override
-    public View onCreateView(View parent, String name, Context context, AttributeSet attrs) {
+    public View onCreateView(View parent, @NonNull String name, @NonNull Context context, @NonNull AttributeSet attrs) {
         View v = super.onCreateView(parent, name, context, attrs);
         return v;
     }
@@ -129,11 +120,7 @@ public abstract class MainActivity extends AppCompatActivity {
      */
     public void alert_view(Context mContext, String title, String message, String success_txt, String failure_txt) {
         try {
-
-
-            dialog = Utility.alert_view_dialog(MainActivity.this, "" + title, "" + message,
-                    "" + success_txt, "", true, (dialog, which) -> dialog.dismiss(), (dialog, which) -> dialog.dismiss(), "");
-
+            dialog = Utility.alert_view_dialog(MainActivity.this, "" + title, "" + message, "" + success_txt, "", true, (dialog, which) -> dialog.dismiss(), (dialog, which) -> dialog.dismiss(), "");
         } catch (Exception e) {
             // TODO: handle exception
             e.printStackTrace();
@@ -141,9 +128,7 @@ public abstract class MainActivity extends AppCompatActivity {
     }
 
     public void cancelLoading() {
-        if (mshowDialog != null)
-            if (mshowDialog.isShowing())
-                mshowDialog.dismiss();
+        if (mshowDialog != null) if (mshowDialog.isShowing()) mshowDialog.dismiss();
     }
 
     /**
@@ -155,11 +140,8 @@ public abstract class MainActivity extends AppCompatActivity {
             mgpsDialog = new Dialog(mContext, R.style.NewDialog);
             mgpsDialog.setContentView(view);
             FontHelper.applyFont(mContext, mgpsDialog.findViewById(R.id.alert_id));
-
-
             mgpsDialog.setCancelable(false);
-            if (!mgpsDialog.isShowing())
-                mgpsDialog.show();
+            if (!mgpsDialog.isShowing()) mgpsDialog.show();
             final TextView title_text = mgpsDialog.findViewById(R.id.title_text);
             final TextView message_text = mgpsDialog.findViewById(R.id.message_text);
             final Button button_success = mgpsDialog.findViewById(R.id.button_success);
@@ -172,13 +154,10 @@ public abstract class MainActivity extends AppCompatActivity {
                 Intent mIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                 mContext.startActivity(mIntent);
             });
-            button_failure.setOnClickListener(v -> {
-                mgpsDialog.dismiss();
-            });
+            button_failure.setOnClickListener(v -> mgpsDialog.dismiss());
         } else {
             try {
-                if (mgpsDialog != null && mgpsDialog.isShowing())
-                    mgpsDialog.dismiss();
+                if (mgpsDialog != null && mgpsDialog.isShowing()) mgpsDialog.dismiss();
             } catch (Exception e) {
                 // TODO: handle exception
                 e.printStackTrace();
@@ -194,7 +173,7 @@ public abstract class MainActivity extends AppCompatActivity {
         return isValidEmail(string);
     }
 
-    public final static boolean isValidEmail(CharSequence target) {
+    public static boolean isValidEmail(CharSequence target) {
         if (target == null) {
             return false;
         } else {
@@ -206,7 +185,7 @@ public abstract class MainActivity extends AppCompatActivity {
      * This is method for show the toast
      */
     public void ShowToast(Context context, String s) {
-        CToast.ShowToast(context, s);
+        DriverCToast.ShowToast(context, s);
     }
 
     /**
@@ -263,7 +242,6 @@ public abstract class MainActivity extends AppCompatActivity {
     public void setLocale() {
         if (SessionSave.getSession("Lang", MainActivity.this).equals("")) {
             SessionSave.saveSession("Lang", "en", MainActivity.this);
-
         }
         if (SessionSave.getSession("Lang_Country", MainActivity.this).equals("")) {
             SessionSave.saveSession("Lang_Country", "en_US", MainActivity.this);
@@ -276,7 +254,6 @@ public abstract class MainActivity extends AppCompatActivity {
         config.locale = new Locale(language, arry[1]);
         Locale.setDefault(new Locale(language, arry[1]));
         MainActivity.this.getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
-
     }
 
     /**
@@ -299,8 +276,7 @@ public abstract class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        if (dialog != null)
-            Utility.closeDialog(dialog);
+        if (dialog != null) Utility.closeDialog(dialog);
         super.onDestroy();
     }
 
@@ -314,8 +290,7 @@ public abstract class MainActivity extends AppCompatActivity {
             case isValueNULL:
                 if (TextUtils.isEmpty(stringtovalidate))
                     message = "" + DriverNC.getResources().getString(R.string.enter_the_mobile_number);
-                else
-                    result = true;
+                else result = true;
                 break;
             case isValidPassword:
                 if (TextUtils.isEmpty(stringtovalidate))
@@ -324,104 +299,86 @@ public abstract class MainActivity extends AppCompatActivity {
                     message = "" + DriverNC.getResources().getString(R.string.password_min_character);
                 else if (stringtovalidate.length() > 32)
                     message = "" + DriverNC.getResources().getString(R.string.password_max_character);
-                else
-                    result = true;
+                else result = true;
                 break;
             case isValidSalutation:
                 if (TextUtils.isEmpty(stringtovalidate) || stringtovalidate == null)
                     message = "" + DriverNC.getResources().getString(R.string.please_select_your_salutation);
-                else
-                    result = true;
+                else result = true;
                 break;
             case isValidFirstname:
                 if (TextUtils.isEmpty(stringtovalidate) || stringtovalidate.length() < 3)
                     message = "" + DriverNC.getResources().getString(R.string.enter_the_first_name);
-                else
-                    result = true;
+                else result = true;
                 break;
             case isValidLastname:
                 if (TextUtils.isEmpty(stringtovalidate))
                     message = "" + DriverNC.getResources().getString(R.string.enter_the_last_name);
-                else
-                    result = true;
+                else result = true;
                 break;
             case isValidCard:
                 if (TextUtils.isEmpty(stringtovalidate))
                     message = "" + DriverNC.getResources().getString(R.string.enter_the_card_number);
                 else if (stringtovalidate.length() < 9 || stringtovalidate.length() > 16)
                     message = "" + DriverNC.getResources().getString(R.string.enter_the_valid_card_number);
-                else
-                    result = true;
+                else result = true;
                 break;
             case isValidExpiry:
                 if (TextUtils.isEmpty(stringtovalidate))
                     message = "" + DriverNC.getResources().getString(R.string.enter_the_expiry_date);
-                else
-                    result = true;
+                else result = true;
                 break;
             case isValidMail:
                 if (SessionSave.getSession(TaxiUtil.SKIP_PASSENGER_EMAIL, MainActivity.this, false)) {
-                    if (TextUtils.isEmpty(stringtovalidate))
-                        result = true;
+                    if (TextUtils.isEmpty(stringtovalidate)) result = true;
                     else if (!validdmail(stringtovalidate))
                         message = "" + DriverNC.getResources().getString(R.string.enter_the_valid_email);
-                    else
-                        result = true;
+                    else result = true;
                 } else {
                     if (TextUtils.isEmpty(stringtovalidate))
                         message = "" + DriverNC.getResources().getString(R.string.enter_the_email);
                     else if (!validdmail(stringtovalidate))
                         message = "" + DriverNC.getResources().getString(R.string.enter_the_valid_email);
-                    else
-                        result = true;
+                    else result = true;
                 }
                 break;
             case isValidConfirmPassword:
                 if (TextUtils.isEmpty(stringtovalidate))
                     message = "" + DriverNC.getResources().getString(R.string.enter_the_confirmation_password);
-                else
-                    result = true;
+                else result = true;
                 break;
             case isNullPromoCode:
                 if (TextUtils.isEmpty(stringtovalidate))
                     message = "" + DriverNC.getResources().getString(R.string.reg_enterprcode);
-                else
-                    result = true;
+                else result = true;
                 break;
             case isNullMonth:
                 if (TextUtils.isEmpty(stringtovalidate))
                     message = "" + DriverNC.getResources().getString(R.string.reg_expmonth);
-                else
-                    result = true;
+                else result = true;
                 break;
             case isNullYear:
                 if (TextUtils.isEmpty(stringtovalidate))
                     message = "" + DriverNC.getResources().getString(R.string.reg_expyear);
-                else
-                    result = true;
+                else result = true;
                 break;
             case isValidCvv:
                 if (TextUtils.isEmpty(stringtovalidate))
                     message = "" + DriverNC.getResources().getString(R.string.enter_the_valid_CVV);
-                else
-                    result = true;
+                else result = true;
                 break;
             case isNullCardname:
                 if (TextUtils.isEmpty(stringtovalidate))
                     message = "" + DriverNC.getResources().getString(R.string.reg_entercardname);
-                else
-                    result = true;
+                else result = true;
                 break;
             case isValidphone:
                 if (TextUtils.isEmpty(stringtovalidate))
                     message = "" + DriverNC.getResources().getString(R.string.enter_the_confirmation_phoneno);
                 else if (stringtovalidate.length() < 6 || stringtovalidate.length() > 15)
                     message = "" + DriverNC.getResources().getString(R.string.enter_the_confirmation_phoneno);
-                else
-                    result = true;
+                else result = true;
                 break;
-
-
         }
         if (!message.equals("")) {
             ShowToast(con, message);
@@ -435,8 +392,7 @@ public abstract class MainActivity extends AppCompatActivity {
     public void showLoading(Context context) {
         try {
             if (context != null) {
-                if (mshowDialog != null)
-                    mshowDialog.dismiss();
+                if (mshowDialog != null) mshowDialog.dismiss();
                 View view = View.inflate(context, R.layout.progress_bar, null);
                 mshowDialog = new Dialog(context, R.style.dialogwinddow);
                 mshowDialog.setContentView(view);
@@ -445,9 +401,7 @@ public abstract class MainActivity extends AppCompatActivity {
 
                 ImageView iv = mshowDialog.findViewById(R.id.giff);
                 DrawableImageViewTarget imageViewTarget = new DrawableImageViewTarget(iv);
-                Glide.with(MainActivity.this)
-                        .load(R.raw.loading_anim)
-                        .into(imageViewTarget);
+                Glide.with(MainActivity.this).load(R.raw.loading_anim).into(imageViewTarget);
             }
         } catch (Exception e) {
             e.printStackTrace();

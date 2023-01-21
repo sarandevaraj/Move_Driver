@@ -9,25 +9,17 @@ import com.taximobility.driver.service.DriverCoreClient;
 import com.taximobility.driver.utils.DriverSessionSave;
 
 import androidx.multidex.MultiDexApplication;
-//import com.mapbox.mapboxsdk.Mapbox;
-
 
 /**
  * Created by developer on 15/2/18.
  */
 
-
 public class DriverMyApplication extends MultiDexApplication {
 
     private static DriverMyApplication mInstance;
-
-
     private DriverCoreClient apiManagerWithBaseUrl_driver, checkCompanyDomainapiManager_driver, googleapiManager_driver;
     private DriverCoreClient  nodeApiManagerWithTimeOut_driver;
-
-    private long nodeTimeOut_driver = 0L;
-
-
+    private final long nodeTimeOut_driver = 0L;
 
     @Override
     public void onCreate() {
@@ -69,8 +61,4 @@ public class DriverMyApplication extends MultiDexApplication {
         DriverSessionSave.saveSession(DriverCommonData.GOOGLE_KEY, apiKey, this);
         Places.initialize(this, apiKey);
     }
-
-
-
-
 }

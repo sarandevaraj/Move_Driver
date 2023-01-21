@@ -71,8 +71,7 @@ public class DriverWayPointsData {
         this.droplng = droplng;
     }
 
-    private double pickuplat, pickuplng,
-            droplat, droplng;
+    private double pickuplat, pickuplng, droplat, droplng;
     private double dist = 0.0;
 
     public String getTime() {

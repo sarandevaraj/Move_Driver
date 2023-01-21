@@ -94,18 +94,18 @@ public class DriverNotificationAct extends MainActivityDriver implements OnMapRe
     private TextView remnTimeTxt, secTxt;
     private TextView passNameTxt, pickupLocTxt, dropLocTxt;
     private TextView minTxt, slideImg, text_notes;
-    private TextView model_name_txt, tv_tripType,backupTxt, HeadTitle, txt_notes,txt_order;
-    private TextView approxment_fare,km_txt;
+    private TextView model_name_txt, tv_tripType, backupTxt, HeadTitle, txt_notes, txt_order;
+    private TextView approxment_fare, km_txt;
     //layout declaration
     private LinearLayout noteslayout, droplayout, pick_lay;
-    private Button accept_trip,Rightlay ;
+    private Button accept_trip, Rightlay;
     // Class members declarations.
     private String trip_id = "", pickup, drop, bookedby;
     private String passenger_phone, cityname, passenger_name, notes;
     private String model_name, trip_type;
-    private String service_id = "";
-    private String product_name = "" ;
-    private String product_weight = "" ;
+    private final String service_id = "";
+    private String product_name = "";
+    private String product_weight = "";
     private String product_size = "";
     private String delivery_person_name = "", delivery_phone_number = "", delivery_date_time = "";
     private String delivery_notes = "";
@@ -152,8 +152,7 @@ public class DriverNotificationAct extends MainActivityDriver implements OnMapRe
     // Initialize the views on layout
     @Override
     public void Initialize() {
-        DirverColorchange.ChangeColor((ViewGroup) (((ViewGroup) DriverNotificationAct.this
-                .findViewById(android.R.id.content)).getChildAt(0)), DriverNotificationAct.this);
+        DirverColorchange.ChangeColor((ViewGroup) (((ViewGroup) DriverNotificationAct.this.findViewById(android.R.id.content)).getChildAt(0)), DriverNotificationAct.this);
 
         try {
             getWindow().addFlags(LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -215,35 +214,18 @@ public class DriverNotificationAct extends MainActivityDriver implements OnMapRe
                     return;
                 });
 
-                accept_trip.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        donutProgress.performClick();
+                accept_trip.setOnClickListener(v -> donutProgress.performClick());
+
+
+                txt_notes.setOnClickListener(view -> {
+                    if (notes.length() != 0 && !notes.contains("null")) {
+                        Toast.makeText(DriverNotificationAct.this, notes, Toast.LENGTH_LONG).show();
                     }
+
+
                 });
 
-
-                    txt_notes.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            if (notes.length() != 0 && !notes.contains("null")) {
-                                Toast.makeText(DriverNotificationAct.this, notes, Toast.LENGTH_LONG).show();
-                            }
-
-
-                        }
-                    });
-
-                txt_order.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        orderDetailDialog();
-                    }
-                });
-
-
-
-
+                txt_order.setOnClickListener(view -> orderDetailDialog());
 
 
                 // DriverFontHelper.applyFont(this, passNameTxt, "Roboto_Medium.ttf");
@@ -275,7 +257,7 @@ public class DriverNotificationAct extends MainActivityDriver implements OnMapRe
                             if (details.has("pickup_time"))
                                 pickup_time_txt.setText(details.getString("pickup_time"));
                         } else {
-                           // pickupTime_layout.setVisibility(View.GONE);
+                            // pickupTime_layout.setVisibility(View.GONE);
                         }
                     }
                     model_name = details.getString("model_name");
@@ -286,14 +268,20 @@ public class DriverNotificationAct extends MainActivityDriver implements OnMapRe
                     if (tripdetails.has("trip_type")) {
                         trip_type = tripdetails.getString("trip_type");
 
-                        if (trip_type.equals("0"))
-                            tv_tripType.setText(DriverNC.getString(R.string.trip_type_normal));
-                        else if (trip_type.equals("2"))
-                            tv_tripType.setText(DriverNC.getString(R.string.trip_type_rental));
-                        else if (trip_type.equals("3"))
-                            tv_tripType.setText(DriverNC.getString(R.string.trip_type_outstation));
-                        else if (trip_type.equals("22"))
-                            tv_tripType.setText(DriverNC.getString(R.string.corporate_trip));
+                        switch (trip_type) {
+                            case "0":
+                                tv_tripType.setText(DriverNC.getString(R.string.trip_type_normal));
+                                break;
+                            case "2":
+                                tv_tripType.setText(DriverNC.getString(R.string.trip_type_rental));
+                                break;
+                            case "3":
+                                tv_tripType.setText(DriverNC.getString(R.string.trip_type_outstation));
+                                break;
+                            case "22":
+                                tv_tripType.setText(DriverNC.getString(R.string.corporate_trip));
+                                break;
+                        }
                     }
 
                     pickup = details.getString("pickupplace");
@@ -304,10 +292,10 @@ public class DriverNotificationAct extends MainActivityDriver implements OnMapRe
                     String dropLongitude = details.getString("drop_longitude");
 
 
-                    if (details.has("service_id") && details.getString("service_id").equals("2")){
+                    if (details.has("service_id") && details.getString("service_id").equals("2")) {
                         txt_order.setVisibility(View.VISIBLE);
                         txt_notes.setVisibility(View.GONE);
-                    }else{
+                    } else {
                         txt_order.setVisibility(View.GONE);
                         txt_notes.setVisibility(View.VISIBLE);
                     }
@@ -321,8 +309,6 @@ public class DriverNotificationAct extends MainActivityDriver implements OnMapRe
                     delivery_notes = details.has("delivery_notes") ? details.getString("delivery_notes") : "";
 
 
-
-
                     pickup = pickup.trim();
                     if (pickup.length() != 0)
                         pickup = Character.toUpperCase(pickup.charAt(0)) + pickup.substring(1);
@@ -330,12 +316,10 @@ public class DriverNotificationAct extends MainActivityDriver implements OnMapRe
                     drop = drop.trim();
                     if (drop.length() != 0 || !drop.equals(""))
                         drop = Character.toUpperCase(drop.charAt(0)) + drop.substring(1);
-                    else
-                        droplayout.setVisibility(View.GONE);
+                    else droplayout.setVisibility(View.GONE);
 
                     JSONArray stops = null;
-                    if (details.has("stops"))
-                        stops = details.getJSONArray("stops");
+                    if (details.has("stops")) stops = details.getJSONArray("stops");
 
                     if (stops != null && stops.length() > 0) {
                         parseStop(stops.toString());
@@ -371,10 +355,8 @@ public class DriverNotificationAct extends MainActivityDriver implements OnMapRe
                     if (profile_image != null && profile_image.length() > 0) {
                         Picasso.get().load(profile_image).error(R.drawable.loadingimage).placeholder(R.drawable.loadingimage).into(proimg);
                     } else {
-                        if (passenger_name != "") {
-                            ProfileImageSetupClass.setupProfileImage(
-                                    passenger_name, proimg
-                            );
+                        if (!passenger_name.equals("")) {
+                            ProfileImageSetupClass.setupProfileImage(passenger_name, proimg);
                         } else {
                             Picasso.get().load(R.drawable.loadingimage).into(proimg);
                         }
@@ -436,13 +418,10 @@ public class DriverNotificationAct extends MainActivityDriver implements OnMapRe
                             j.put("reject_type", "0");
                             final String Url = "type=reject_trip";
 
-                            new Handler().postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    if (!ACCEPT_TRIP_IN_PROGRESS) {
-                                        DriverSystems.out.println("NOTIFY onFinish");
-                                        new TripReject(Url, j);
-                                    }
+                            new Handler().postDelayed(() -> {
+                                if (!ACCEPT_TRIP_IN_PROGRESS) {
+                                    DriverSystems.out.println("NOTIFY onFinish");
+                                    new TripReject(Url, j);
                                 }
                             }, 2000);
 
@@ -564,12 +543,7 @@ public class DriverNotificationAct extends MainActivityDriver implements OnMapRe
         v_date_time.setText(delivery_date_time);
         order_description_details.setText(delivery_notes);
 
-        close_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                orderDialog.dismiss();
-            }
-        });
+        close_btn.setOnClickListener(view1 -> orderDialog.dismiss());
 
 
     }
@@ -584,8 +558,7 @@ public class DriverNotificationAct extends MainActivityDriver implements OnMapRe
     public void ViewEnabledWithDelay(int i, View butt_onboard) {
         butt_onboard.setEnabled(false);
         new Handler().postDelayed(() -> {
-            if (butt_onboard != null)
-                butt_onboard.setEnabled(true);
+            if (butt_onboard != null) butt_onboard.setEnabled(true);
         }, i);
     }
 
@@ -627,12 +600,7 @@ public class DriverNotificationAct extends MainActivityDriver implements OnMapRe
         intent.putExtras(extras);
         startActivity(intent);
         finish();
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                DriverCToast.ShowToast(getBaseContext(), msg);
-            }
-        });
+        runOnUiThread(() -> DriverCToast.ShowToast(getBaseContext(), msg));
 
     }
 
@@ -766,8 +734,7 @@ public class DriverNotificationAct extends MainActivityDriver implements OnMapRe
                         DriverSessionSave.saveSession("speedwaiting", "", DriverNotificationAct.this);
                         MainActivityDriver.mMyStatus.settripId(trip_id);
                         DriverSessionSave.saveSession("trip_id", "" + trip_id, DriverNotificationAct.this);
-                        DriverSessionSave.saveSession("status", "B",
-                                DriverNotificationAct.this);
+                        DriverSessionSave.saveSession("status", "B", DriverNotificationAct.this);
                         DriverSessionSave.saveSession(DriverCommonData.IS_STREET_PICKUP, false, DriverNotificationAct.this);
                         DriverSessionSave.saveSession("bookedby", "" + bookedby, DriverNotificationAct.this);
                         showLoading(DriverNotificationAct.this);

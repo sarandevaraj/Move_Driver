@@ -29,32 +29,28 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.DrawableImageViewTarget;
-//import com.taximobility.Login.CardRegisterAct;
-//import com.taximobility.Login.VerificationActivity;
-import com.taximobility.data.apiData.ApiRequestData;
 import com.taximobility.data.apiData.CompanyDomainResponse;
 import com.taximobility.driver.DriverMyStatus;
 import com.taximobility.driver.DriverOngoingAct;
 import com.taximobility.driver.DriverTripHistoryAct;
 import com.taximobility.driver.DriverUserLoginAct;
 import com.taximobility.driver.data.DriverCommonData;
+import com.taximobility.driver.data.apiData.DriverApiRequestData;
+import com.taximobility.driver.interfaces.DriverAPIResult;
 import com.taximobility.driver.utils.DriverCL;
+import com.taximobility.driver.utils.DriverCToast;
 import com.taximobility.driver.utils.DriverNC;
 import com.taximobility.driver.utils.DriverSessionSave;
 import com.taximobility.driver.utils.DriverSystems;
-import com.taximobility.features.CToast;
-import com.taximobility.interfaces.APIResult;
 
 import com.taximobility.service.APIService_Retrofit_JSON_NoProgress;
 import com.taximobility.service.BackgroundCoreConfig;
 import com.taximobility.service.CoreClient;
 import com.taximobility.service.RetrofitCallbackClass;
 import com.taximobility.util.AppController;
-import com.taximobility.util.CL;
 import com.taximobility.util.FontHelper;
 import com.taximobility.util.NetworkStatus;
 import com.taximobility.util.SessionSave;
-import com.taximobility.util.Systems;
 import com.taximobility.util.TaxiUtil;
 import com.taximobility.util.Utility;
 
@@ -80,6 +76,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -90,7 +87,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.taximobility.MainActivity.mgpsDialog;
-import static com.taximobility.features.CToast.ShowToast;
 import static com.taximobility.util.ConstantsKt.API_BASE;
 import static com.taximobility.util.ConstantsKt.DEFAULT_CITY_NAME;
 import static com.taximobility.util.ConstantsKt.IS_BUISNESS_KEY;
@@ -114,12 +110,10 @@ public class SplashActivity extends AppCompatActivity {
     public static HashMap<String, Integer> fields_id = new HashMap<>();
     public FrameLayout splashLayout;
     ProgressBar progressBar1;
-
-
     TextView status_text;
     private Dialog loadingDialog;
-    private boolean askDomain = true;
-    private boolean isLocationasked = false;
+    private final boolean askDomain = true;
+    private final boolean isLocationasked = false;
     private Dialog urlPopup;
     private long getCore_Utc;
     private String getCoreLangTime;
@@ -128,7 +122,6 @@ public class SplashActivity extends AppCompatActivity {
     private RelativeLayout relativelay;
     private RelativeLayout access_key_lay;
     private ImageView access_logo;
-
 
     private Dialog dialog;
     public static int ACTION_MANAGE_OVERLAY_PERMISSION_REQUEST_CODE = 5469;
@@ -156,23 +149,21 @@ public class SplashActivity extends AppCompatActivity {
         try {
             if (curVersion != 0)
                 if (SessionSave.getSession(String.valueOf(curVersion), this).trim().equals("")) {
-
                     SessionSave.saveSession("base_url", "", SplashActivity.this);
                     SessionSave.saveSession("api_key", "", SplashActivity.this);
                     SessionSave.saveSession("encode", "", SplashActivity.this);
                     SessionSave.saveSession("image_path", "", SplashActivity.this);
                     SessionSave.saveSession(String.valueOf(curVersion), "No", SplashActivity.this);
-
                 }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        setContentView(R.layout.splashlay);relativelay = (RelativeLayout) findViewById(R.id.relativelay);
-        access_key_lay =(RelativeLayout) findViewById(R.id.access_key_lay);
+        setContentView(R.layout.splashlay);
+        relativelay = (RelativeLayout) findViewById(R.id.relativelay);
+        access_key_lay = (RelativeLayout) findViewById(R.id.access_key_lay);
         access_logo = findViewById(R.id.access_logo);
         //  setContentView(R.layout.splashlay);
-
 
         FontHelper.applyFont(SplashActivity.this, findViewById(R.id.relativelay));
 
@@ -218,8 +209,6 @@ public class SplashActivity extends AppCompatActivity {
             } else
                 ifPermissionGranted();
         }*/
-
-
 //        getKeyHash("SHA");
 //        getKeyHash("MD5");
     }
@@ -228,9 +217,9 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        System.out.println("Resume Override.... v "+SessionSave.getSession("isLocationasked",SplashActivity.this,false));
+        System.out.println("Resume Override.... v " + SessionSave.getSession("isLocationasked", SplashActivity.this, false));
         if (NetworkStatus.isOnline(SplashActivity.this)) {
-            if (!SessionSave.getSession("isLocationasked",SplashActivity.this,false)) {
+            if (!SessionSave.getSession("isLocationasked", SplashActivity.this, false)) {
                 checkLocationPermission();
                 SessionSave.saveSession("isLocationasked", true, SplashActivity.this);
             } else {
@@ -238,15 +227,11 @@ public class SplashActivity extends AppCompatActivity {
                 //  connectGoogleApi();
                 callApi();
             }
-        } else
-            errorInSplash(DriverNC.getString(R.string.check_internet_connection));
+        } else errorInSplash(DriverNC.getString(R.string.check_internet_connection));
         SessionSave.saveSession("isFromSplash", true, SplashActivity.this);
     }
 
     /*
-
-
-
             private void getKeyHash(String hashStretagy) {
                 PackageInfo info;
                 try {
@@ -273,9 +258,7 @@ public class SplashActivity extends AppCompatActivity {
 
         if (ActivityCompat.checkSelfPermission(SplashActivity.this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(SplashActivity.this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
-            ActivityCompat.requestPermissions(SplashActivity.this, new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION, android.Manifest.permission.ACCESS_FINE_LOCATION},
-                    MY_PERMISSIONS_REQUEST_GPS);
-
+            ActivityCompat.requestPermissions(SplashActivity.this, new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION, android.Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSIONS_REQUEST_GPS);
         }
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 //            if (!Settings.canDrawOverlays(this)) {
@@ -293,8 +276,7 @@ public class SplashActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        if (dialog != null)
-            Utility.closeDialog(dialog);
+        if (dialog != null) Utility.closeDialog(dialog);
         super.onDestroy();
     }
 
@@ -304,20 +286,14 @@ public class SplashActivity extends AppCompatActivity {
                 getAndStoreStringValues(SessionSave.getSession("wholekey", SplashActivity.this));
                 getAndStoreColorValues(SessionSave.getSession("wholekeyColor", SplashActivity.this));
             }*/
-            if (NetworkStatus.isOnline(SplashActivity.this))
-                MovetoNavigatorPanel();
-            else
-                errorInSplash(DriverNC.getString(R.string.check_internet_connection));
+            if (NetworkStatus.isOnline(SplashActivity.this)) MovetoNavigatorPanel();
+            else errorInSplash(DriverNC.getString(R.string.check_internet_connection));
         } else {
             if (askDomain) {
                 cancelLoading();
-                if (NetworkStatus.isOnline(SplashActivity.this))
-                    getUrl();
-                else
-                    errorInSplash(DriverNC.getString(R.string.check_internet_connection));
-            } else
-                urlApi("", "", "");
-
+                if (NetworkStatus.isOnline(SplashActivity.this)) getUrl();
+                else errorInSplash(DriverNC.getString(R.string.check_internet_connection));
+            } else urlApi("", "", "");
         }
     }
 
@@ -354,7 +330,7 @@ public class SplashActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        String mUUID = "";
+        String mUUID;
         if (!UUID.randomUUID().toString().equals("")) {
             mUUID = UUID.randomUUID().toString();
         } else {
@@ -365,7 +341,7 @@ public class SplashActivity extends AppCompatActivity {
         SessionSave.saveSession(TaxiUtil.DEVICE_ID, mUUID, SplashActivity.this);
 
         CoreClient client = AppController.getInstance().getCheckCompanyDomainapiManager(url);
-        ApiRequestData.BaseUrl request = new ApiRequestData.BaseUrl();
+        DriverApiRequestData.BaseUrl request = new DriverApiRequestData.BaseUrl();
         request.company_domain = key;
         request.company_main_domain = /*"taximobility.com"*/str_domain;
         request.device_type = "1";
@@ -378,7 +354,7 @@ public class SplashActivity extends AppCompatActivity {
         Call<CompanyDomainResponse> response = client.callData(TaxiUtil.COMPANY_KEY, request);
         response.enqueue(new RetrofitCallbackClass<CompanyDomainResponse>(SplashActivity.this, new Callback<CompanyDomainResponse>() {
             @Override
-            public void onResponse(Call<CompanyDomainResponse> call, Response<CompanyDomainResponse> response) {
+            public void onResponse(@NonNull Call<CompanyDomainResponse> call, @NonNull Response<CompanyDomainResponse> response) {
                 CompanyDomainResponse cr = response.body();
                 cancelLoading();
                 if (cr != null && SplashActivity.this != null) {
@@ -399,17 +375,12 @@ public class SplashActivity extends AppCompatActivity {
                                 SessionSave.saveSession("api_key", cr.apikey, SplashActivity.this);
                                 SessionSave.saveSession("image_path", cr.androidPaths.static_image, SplashActivity.this);
                                 SessionSave.saveSession("encode", cr.encode, SplashActivity.this);
-                                //
                             }
-
-//
                             if (cr.https_base_url != null) {
                                 TaxiUtil.API_BASE_URL = cr.https_base_url;
                             } else {
                                 TaxiUtil.API_BASE_URL = cr.baseurl;
                             }
-
-
                             String totalLanguage = "";
                             String defaultLanguage = cr.default_language;
                             if (cr.androidPaths.passenger_language != null) {
@@ -420,17 +391,15 @@ public class SplashActivity extends AppCompatActivity {
                                     SessionSave.saveSession("LANGTemp" + i, cr.androidPaths.passenger_language.get(i).design_type, SplashActivity.this);
                                     SessionSave.saveSession("LANGCode" + i, cr.androidPaths.passenger_language.get(i).language_code, SplashActivity.this);
                                     SessionSave.saveSession(cr.androidPaths.passenger_language.get(i).language, cr.androidPaths.passenger_language.get(i).url, SplashActivity.this);
-
-
-                                    Systems.out.println("******" + i + "__" + cr.androidPaths.passenger_language.get(i).language);
+                                    DriverSystems.out.println("******" + i + "__" + cr.androidPaths.passenger_language.get(i).language);
                                     if (cr.androidPaths.passenger_language.get(i).language_code.equalsIgnoreCase(defaultLanguage)) {
-                                        Systems.out.println("******ccc" + i + "__" + cr.androidPaths.passenger_language.get(i).language);
+                                        DriverSystems.out.println("******ccc" + i + "__" + cr.androidPaths.passenger_language.get(i).language);
                                         SessionSave.saveSession(LANG, cr.androidPaths.passenger_language.get(i).language_code, SplashActivity.this);
                                         SessionSave.saveSession("LANGTempDef", cr.androidPaths.passenger_language.get(i).design_type, SplashActivity.this);
                                         SessionSave.saveSession("LANGDef", cr.androidPaths.passenger_language.get(i).language, SplashActivity.this);
                                     }
                                 }
-                                Systems.out.println("******" + SessionSave.getSession("LANGDef", SplashActivity.this).trim().equals("") + "__");
+                                DriverSystems.out.println("******" + SessionSave.getSession("LANGDef", SplashActivity.this).trim().equals("") + "__");
                                 if (SessionSave.getSession("LANGDef", SplashActivity.this).trim().equals(""))
                                     SessionSave.saveSession("LANGDef", SessionSave.getSession("LANG0", SplashActivity.this), SplashActivity.this);
                                 if (SessionSave.getSession("LANGTempDef", SplashActivity.this).trim().equals(""))
@@ -456,7 +425,7 @@ public class SplashActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<CompanyDomainResponse> call, Throwable t) {
+            public void onFailure(@NonNull Call<CompanyDomainResponse> call, @NonNull Throwable t) {
                 cancelLoading();
                 errorInSplash(DriverNC.getString(R.string.server_error));
             }
@@ -467,7 +436,6 @@ public class SplashActivity extends AppCompatActivity {
         if (VersionCheck()) {
             versionAlert(SplashActivity.this);
         } else {
-
             Intent i = null;
             startService(new Intent(SplashActivity.this, BackgroundCoreConfig.class));
             if (SessionSave.getSession(PASS_ID, SplashActivity.this).equals("")) {
@@ -476,9 +444,8 @@ public class SplashActivity extends AppCompatActivity {
                     startActivity(i);
                     finish();
                 } else {*/
-
                 if (!SessionSave.getSession("IsOTPSend", SplashActivity.this).equals("")) {
-                    Systems.out.println("detail_v5");
+                    DriverSystems.out.println("detail_v5");
 //                    i = new Intent(SplashActivity.this, VerificationActivity.class);
                 } else {
                     i = new Intent(SplashActivity.this, DriverUserLoginAct.class);
@@ -487,9 +454,7 @@ public class SplashActivity extends AppCompatActivity {
                 startActivity(i);
                 overridePendingTransition(0, 0);
                 finish();
-
                 //   }
-
             } else {
                 //if has trip doesn't move from splash
 
@@ -506,7 +471,6 @@ public class SplashActivity extends AppCompatActivity {
             }
         }
     }
-
 
     private synchronized void getAndStoreColorValues(String result) {
         try {
@@ -525,12 +489,10 @@ public class SplashActivity extends AppCompatActivity {
                     chhh++;
 
                     Element element2 = (Element) node;
-                    CL.nfields_byName.put(element2.getAttribute("name"), element2.getTextContent());
                     DriverCL.nfields_byName.put(element2.getAttribute("name"), element2.getTextContent());
-
+                    DriverCL.nfields_byName.put(element2.getAttribute("name"), element2.getTextContent());
                 }
             }
-
             // getColorValueDetail();
         } catch (Exception e) {
             e.printStackTrace();
@@ -541,36 +503,32 @@ public class SplashActivity extends AppCompatActivity {
 
     synchronized void getColorValueDetail() {
         Field[] fieldss = R.color.class.getDeclaredFields();
-        for (int i = 0; i < fieldss.length; i++) {
-            int id = getResources().getIdentifier(fieldss[i].getName(), "color", getPackageName());
+        for (Field field : fieldss) {
+            int id = getResources().getIdentifier(field.getName(), "color", getPackageName());
 
-            if (CL.nfields_byName.containsKey(fieldss[i].getName())) {
-                CL.fields.add(fieldss[i].getName());
-                CL.fields_value.add(getResources().getString(id));
-                CL.fields_id.put(fieldss[i].getName(), id);
-            }
-
-
-            if (DriverCL.nfields_byName.containsKey(fieldss[i].getName())) {
-                DriverCL.fields.add(fieldss[i].getName());
+            if (DriverCL.nfields_byName.containsKey(field.getName())) {
+                DriverCL.fields.add(field.getName());
                 DriverCL.fields_value.add(getResources().getString(id));
-                DriverCL.fields_id.put(fieldss[i].getName(), id);
+                DriverCL.fields_id.put(field.getName(), id);
             }
-        }
-
-
-        for (Map.Entry<String, String> entry : CL.nfields_byName.entrySet()) {
-            String h = entry.getKey();
-            String value = entry.getValue();
-            CL.nfields_byID.put(CL.fields_id.get(h), CL.nfields_byName.get(h));
+            if (DriverCL.nfields_byName.containsKey(field.getName())) {
+                DriverCL.fields.add(field.getName());
+                DriverCL.fields_value.add(getResources().getString(id));
+                DriverCL.fields_id.put(field.getName(), id);
+            }
         }
 
         for (Map.Entry<String, String> entry : DriverCL.nfields_byName.entrySet()) {
             String h = entry.getKey();
             String value = entry.getValue();
-            DriverCL.nfields_byID.put(CL.fields_id.get(h), DriverCL.nfields_byName.get(h));
+            DriverCL.nfields_byID.put(DriverCL.fields_id.get(h), DriverCL.nfields_byName.get(h));
         }
 
+        for (Map.Entry<String, String> entry : DriverCL.nfields_byName.entrySet()) {
+            String h = entry.getKey();
+            String value = entry.getValue();
+            DriverCL.nfields_byID.put(DriverCL.fields_id.get(h), DriverCL.nfields_byName.get(h));
+        }
     }
 
     public void versionAlert(final Context mContext) {
@@ -582,74 +540,62 @@ public class SplashActivity extends AppCompatActivity {
             } else {
                 negativeBtnText = DriverNC.getResources().getString(R.string.version_up_later);
             }
-
-            dialog = Utility.alert_view_dialog(SplashActivity.this, "" + DriverNC.getResources().getString(R.string.version_up_title),
-                    "" + DriverNC.getResources().getString(R.string.version_up_message),
-                    "" + DriverNC.getResources().getString(R.string.version_up_now), negativeBtnText, false, new DialogInterface.OnClickListener() {
+            dialog = Utility.alert_view_dialog(SplashActivity.this, "" + DriverNC.getResources().getString(R.string.version_up_title), "" + DriverNC.getResources().getString(R.string.version_up_message), "" + DriverNC.getResources().getString(R.string.version_up_now), negativeBtnText, false, (dialog, which) -> {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + mContext.getPackageName()));
+                mContext.startActivity(intent);
+                dialog.dismiss();
+            }, (dialog, which) -> {
+                dialog.dismiss();
+                if (forceUpdate) {
+                    SplashActivity.this.finish();
+                } else {
+                    startService(new Intent(SplashActivity.this, BackgroundCoreConfig.class));
+                    new Handler().postDelayed(new Runnable() {
                         @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + mContext.getPackageName()));
-                            mContext.startActivity(intent);
-                            dialog.dismiss();
-                        }
-                    }, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                            if (forceUpdate) {
-                                SplashActivity.this.finish();
-                            } else {
-                                startService(new Intent(SplashActivity.this, BackgroundCoreConfig.class));
-                                new Handler().postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        // TODO Auto-generated method stub
-                                        Intent i = null;
-                                        if (SessionSave.getSession(PASS_ID, SplashActivity.this).equals("")) {
-                                           /* if (SessionSave.getSession(TaxiUtil.USER_PRIVACY_POLICY, SplashActivity.this).equals("")) {
-                                                i = new Intent(SplashActivity.this, DevicePermissionActivity.class);
-                                                startActivity(i);
-                                                finish();
-                                            } else {*/
+                        public void run() {
+                            // TODO Auto-generated method stub
+                            Intent i = null;
+                            if (SessionSave.getSession(PASS_ID, SplashActivity.this).equals("")) {
+                                       /* if (SessionSave.getSession(TaxiUtil.USER_PRIVACY_POLICY, SplashActivity.this).equals("")) {
+                                            i = new Intent(SplashActivity.this, DevicePermissionActivity.class);
+                                            startActivity(i);
+                                            finish();
+                                        } else {*/
 
-                                            if (!SessionSave.getSession("IsOTPSend", SplashActivity.this).equals("")) {
-                                                Systems.out.println("detail_v6");
+                                if (!SessionSave.getSession("IsOTPSend", SplashActivity.this).equals("")) {
+                                    DriverSystems.out.println("detail_v6");
 //                                                i = new Intent(SplashActivity.this, VerificationActivity.class);
 //                                                startActivity(i);
 //                                                overridePendingTransition(0, 0);
 //                                                finish();
-                                            } else {
-                                                i = new Intent(SplashActivity.this, DriverUserLoginAct.class);
-                                                startActivity(i);
-                                                overridePendingTransition(0, 0);
-                                                finish();
-                                            }
-
-                                            //    }
-
-                                        } else {
-                                            if (SessionSave.getSession("trip_id", SplashActivity.this).equals("")) {
-                                                if (!SessionSave.getSession("PLAT", SplashActivity.this).equalsIgnoreCase("") && !SessionSave.getSession("PLAT", SplashActivity.this).equalsIgnoreCase("0.0")) {
-                                                    DivertToHomeScreen();
-                                                }
-                                            } else {
-                                                if (!SessionSave.getSession("PLAT", SplashActivity.this).equalsIgnoreCase("") && !SessionSave.getSession("PLAT", SplashActivity.this).equalsIgnoreCase("0.0")) {
-                                                    DivertToHomeScreen();
-                                                }
-                                            }
-                                        }
+                                } else {
+                                    i = new Intent(SplashActivity.this, DriverUserLoginAct.class);
+                                    startActivity(i);
+                                    overridePendingTransition(0, 0);
+                                    finish();
+                                }
+                                //    }
+                            } else {
+                                if (SessionSave.getSession("trip_id", SplashActivity.this).equals("")) {
+                                    if (!SessionSave.getSession("PLAT", SplashActivity.this).equalsIgnoreCase("") && !SessionSave.getSession("PLAT", SplashActivity.this).equalsIgnoreCase("0.0")) {
+                                        DivertToHomeScreen();
                                     }
-                                }, 200);
+                                } else {
+                                    if (!SessionSave.getSession("PLAT", SplashActivity.this).equalsIgnoreCase("") && !SessionSave.getSession("PLAT", SplashActivity.this).equalsIgnoreCase("0.0")) {
+                                        DivertToHomeScreen();
+                                    }
+                                }
                             }
                         }
-                    }, "");
+                    }, 200);
+                }
+            }, "");
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public void DivertToHomeScreen() {
-
 
 //        if (SessionSave.getSession("is_driver", SplashActivity.this).equals("")) {
 //            if (SessionSave.getSession(TaxiUtil.NEED_TO_COMPLETE_CARD_REG, SplashActivity.this, false)
@@ -677,9 +623,8 @@ public class SplashActivity extends AppCompatActivity {
 //                }, 2000);
 //            }
 //        } else {
-            driverStatus();
+        driverStatus();
 //        }
-
     }
 
     private boolean VersionCheck() {
@@ -733,56 +678,45 @@ public class SplashActivity extends AppCompatActivity {
     private synchronized void getAndStoreStringValues(String result) {
 
         try {
-
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             InputStream is = new ByteArrayInputStream(result.getBytes(StandardCharsets.UTF_8));
             Document doc = dBuilder.parse(is);
             Element element = doc.getDocumentElement();
             element.normalize();
-
             NodeList nList = doc.getElementsByTagName("*");
-
             int chhh = 0;
             for (int i = 0; i < nList.getLength(); i++) {
-
                 Node node = nList.item(i);
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
                     chhh++;
-
                     Element element2 = (Element) node;
 //                    DriverNC.nfields_byName.put(element2.getAttribute("name"), element2.getTextContent());
                     DriverNC.nfields_byName.put(element2.getAttribute("name"), element2.getTextContent());
-
                 }
             }
             getValueDetail();
         } catch (Exception e) {
-            Systems.out.println("string error" + e.getLocalizedMessage());
+            DriverSystems.out.println("string error" + e.getLocalizedMessage());
             e.printStackTrace();
         }
     }
 
     synchronized void getValueDetail() {
         Field[] fieldss = R.string.class.getDeclaredFields();
-        for (int i = 0; i < fieldss.length; i++) {
-            int id = getResources().getIdentifier(fieldss[i].getName(), "string", getPackageName());
-            if (DriverNC.nfields_byName.containsKey(fieldss[i].getName())) {
-                fields.add(fieldss[i].getName());
+        for (Field field : fieldss) {
+            int id = getResources().getIdentifier(field.getName(), "string", getPackageName());
+            if (DriverNC.nfields_byName.containsKey(field.getName())) {
+                fields.add(field.getName());
                 fields_value.add(getResources().getString(id));
-                fields_id.put(fieldss[i].getName(), id);
-
+                fields_id.put(field.getName(), id);
             }
-
-
-            if (DriverNC.nfields_byName.containsKey(fieldss[i].getName())) {
-                fields.add(fieldss[i].getName());
+            if (DriverNC.nfields_byName.containsKey(field.getName())) {
+                fields.add(field.getName());
                 fields_value.add(getResources().getString(id));
-                fields_id.put(fieldss[i].getName(), id);
-
+                fields_id.put(field.getName(), id);
             }
         }
-
 //        for (Map.Entry<String, String> entry : NC.nfields_byName.entrySet()) {
 //            String h = entry.getKey();
 //            String value = entry.getValue();
@@ -794,9 +728,7 @@ public class SplashActivity extends AppCompatActivity {
             String h = entry.getKey();
             String value = entry.getValue();
             DriverNC.nfields_byID.put(fields_id.get(h), DriverNC.nfields_byName.get(h));
-            // do stuff
         }
-
     }
 
     public void setEditTextMaxLength(int length, EditText edt_text) {
@@ -874,10 +806,8 @@ public class SplashActivity extends AppCompatActivity {
         setEditTextMaxLength(maxLength, mail);
         View for_sepa = findViewById(R.id.for_sep);
         for_sepa.setVisibility(View.GONE);
-
-        final Button Cancel =findViewById(R.id.cancelbtn);
+        final Button Cancel = findViewById(R.id.cancelbtn);
         Cancel.setVisibility(View.GONE);
-
 
         OK.setOnClickListener(new View.OnClickListener() {
             private String Email;
@@ -885,7 +815,6 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onClick(final View v) {
                 try {
-
                     Email = mail.getText().toString();
                     if (!TextUtils.isEmpty(Email) && Email.length() >= 3) {
                         urlApi(Email, "", "");
@@ -894,7 +823,7 @@ public class SplashActivity extends AppCompatActivity {
                         access_logo.setVisibility(View.GONE);
                         relativelay.setVisibility(View.VISIBLE);
                     } else {
-                        ShowToast(SplashActivity.this, "Please enter valid Account ID");
+                        DriverCToast.ShowToast(SplashActivity.this, "Please enter valid Account ID");
                     }
                 } catch (Exception e) {
                     // TODO: handle exception
@@ -903,16 +832,13 @@ public class SplashActivity extends AppCompatActivity {
             }
         });
         /* }*/
-
     }
 
     @Override
     protected void onStop() {
 
-        if (mgpsDialog != null && mgpsDialog.isShowing())
-            mgpsDialog.cancel();
-        if (loadingDialog != null && loadingDialog.isShowing())
-            loadingDialog.dismiss();
+        if (mgpsDialog != null && mgpsDialog.isShowing()) mgpsDialog.cancel();
+        if (loadingDialog != null && loadingDialog.isShowing()) loadingDialog.dismiss();
 //        if (mGoogleApiClient != null)
 //            mGoogleApiClient.disconnect();
         cancelLoading();
@@ -922,16 +848,13 @@ public class SplashActivity extends AppCompatActivity {
     public void ifPermissionGranted() {
 
         if (isGpsEnabled(SplashActivity.this)) {
-
             //buildGoogleApiClient();
             if (NetworkStatus.isOnline(SplashActivity.this)) {
-                Systems.out.println("Init Called");
+                DriverSystems.out.println("Init Called");
                 init();
                 //  connectGoogleApi();
                 //  callApi();
-            } else
-                errorInSplash(DriverNC.getString(R.string.check_internet_connection));
-
+            } else errorInSplash(DriverNC.getString(R.string.check_internet_connection));
         } else {
             gpsalert(SplashActivity.this, false);
         }
@@ -955,7 +878,6 @@ public class SplashActivity extends AppCompatActivity {
                 }
                 TaxiUtil.mDevice_id = mUUID;
             }
-
 //            TaxiUtil.mDevice_id = Settings.Secure.getString(SplashActivity.this.getContentResolver(), Settings.Secure.ANDROID_ID);
             System.out.println("DEVOCE ID __" + mUUID);
             if (!TaxiUtil.mDevice_id.equals("")) {
@@ -967,13 +889,9 @@ public class SplashActivity extends AppCompatActivity {
                 SessionSave.saveSession(LANG, "en", SplashActivity.this);
                 SessionSave.saveSession("Lang_Country", "en_GB", SplashActivity.this);
             }
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
         if (SessionSave.getSession(LANG, SplashActivity.this).equals("")) {
             SessionSave.saveSession(LANG, "en", SplashActivity.this);
             SessionSave.saveSession("Lang_Country", "en_GB", SplashActivity.this);
@@ -981,9 +899,8 @@ public class SplashActivity extends AppCompatActivity {
         // check google play services for accept google map
     }
 
-
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == MY_PERMISSIONS_REQUEST_GPS) {
             if (grantResults.length > 0) {
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -1002,31 +919,13 @@ public class SplashActivity extends AppCompatActivity {
 
     public void gpsalert(final Context mContext, boolean isconnect) {
         if (!isconnect) {
-
-
-            dialog = Utility.alert_view_dialog(SplashActivity.this, "" + DriverNC.getString(R.string.location_disable),
-                    "" + DriverNC.getString(R.string.location_enable),
-                    "" + DriverNC.getResources().getString(R.string.ok), "", false, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Intent mIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                            mContext.startActivity(mIntent);
-                        }
-                    }, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-
-                        }
-                    }, "");
-
+            dialog = Utility.alert_view_dialog(SplashActivity.this, "" + DriverNC.getString(R.string.location_disable), "" + DriverNC.getString(R.string.location_enable), "" + DriverNC.getResources().getString(R.string.ok), "", false, (dialog, which) -> {
+                Intent mIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                mContext.startActivity(mIntent);
+            }, (dialog, which) -> dialog.dismiss(), "");
         } else {
-
-
             try {
-
-                if (mgpsDialog != null && mgpsDialog.isShowing())
-                    mgpsDialog.dismiss();
+                if (mgpsDialog != null && mgpsDialog.isShowing()) mgpsDialog.dismiss();
             } catch (Exception e) {
                 // TODO: handle exception
                 e.printStackTrace();
@@ -1036,53 +935,41 @@ public class SplashActivity extends AppCompatActivity {
 
     public void showDialog() {
         try {
-            Systems.out.println("---rotae4" + NetworkStatus.isOnline(this));
+            DriverSystems.out.println("---rotae4" + NetworkStatus.isOnline(this));
             if (NetworkStatus.isOnline(this)) {
-                if (loadingDialog != null && loadingDialog.isShowing())
-                    loadingDialog.dismiss();
+                if (loadingDialog != null && loadingDialog.isShowing()) loadingDialog.dismiss();
                 View view = View.inflate(this, R.layout.progress_bar, null);
                 loadingDialog = new Dialog(this, R.style.dialogwinddow);
                 loadingDialog.setContentView(view);
                 loadingDialog.setCancelable(false);
-                if (this != null)
-                    loadingDialog.show();
-
+                if (this != null) loadingDialog.show();
                 ImageView iv = loadingDialog.findViewById(R.id.giff);
                 DrawableImageViewTarget imageViewTarget = new DrawableImageViewTarget(iv);
-                Glide.with(this)
-                        .load(R.raw.loading_anim)
-                        .into(imageViewTarget);
-
+                Glide.with(this).load(R.raw.loading_anim).into(imageViewTarget);
             } else {
                 errorInSplash(DriverNC.getString(R.string.check_internet_connection));
-
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     public void errorInSplash(String message) {
         try {
-            dialog = Utility.alert_view_dialog(SplashActivity.this, "" + DriverNC.getString(R.string.message),
-                    "" + message,
-                    "" + DriverNC.getString(R.string.try_again), "" + DriverNC.getString(R.string.cancel),
-                    false, (dialog, which) -> {
-                        dialog.dismiss();
-                        Intent intent = getIntent();
-                        finish();
-                        startActivity(intent);
-                    }, (dialog, which) -> {
-                        Activity activity = SplashActivity.this;
-
-                        final Intent intent = new Intent(Intent.ACTION_MAIN);
-                        intent.addCategory(Intent.CATEGORY_HOME);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        activity.startActivity(intent);
-                        activity.finish();
-                        dialog.dismiss();
-                    }, "");
+            dialog = Utility.alert_view_dialog(SplashActivity.this, "" + DriverNC.getString(R.string.message), "" + message, "" + DriverNC.getString(R.string.try_again), "" + DriverNC.getString(R.string.cancel), false, (dialog, which) -> {
+                dialog.dismiss();
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
+            }, (dialog, which) -> {
+                Activity activity = SplashActivity.this;
+                final Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.addCategory(Intent.CATEGORY_HOME);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                activity.startActivity(intent);
+                activity.finish();
+                dialog.dismiss();
+            }, "");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1090,8 +977,7 @@ public class SplashActivity extends AppCompatActivity {
 
     public void cancelLoading() {
         if (loadingDialog != null && SplashActivity.this != null)
-            if (loadingDialog.isShowing())
-                loadingDialog.dismiss();
+            if (loadingDialog.isShowing()) loadingDialog.dismiss();
     }
 
     public boolean isGpsEnabled(Context context) {
@@ -1135,7 +1021,7 @@ public class SplashActivity extends AppCompatActivity {
      * @param message - To intimate user by showing alert message
      */
     private void forceLogout(String message) {
-        CToast.ShowToast(SplashActivity.this, message);
+        DriverCToast.ShowToast(SplashActivity.this, message);
         TaxiUtil.API_BASE_URL = "";
         SessionSave.saveSession("base_url", "", SplashActivity.this);
         SessionSave.saveSession(PASS_ID, "", SplashActivity.this);
@@ -1144,17 +1030,15 @@ public class SplashActivity extends AppCompatActivity {
         finish();
     }
 
-    private class CoreConfigCall implements APIResult {
+    private class CoreConfigCall implements DriverAPIResult {
         CoreConfigCall(final String url) {
             showDialog();
-
             new APIService_Retrofit_JSON_NoProgress(SplashActivity.this, this, "", true).execute("type=getcoreconfig");
         }
 
         @Override
         public void getResult(final boolean isSuccess, final String result) {
             cancelLoading();
-
             if (isSuccess) {
                 try {
                     final JSONObject json = new JSONObject(result);
@@ -1164,14 +1048,14 @@ public class SplashActivity extends AppCompatActivity {
                             SessionSave.saveSession(TaxiUtil.GETCORE_LASTUPDATE, json.getString("gt_lst_time"), SplashActivity.this);
                         final JSONArray array = json.getJSONArray("detail");
 
-                        if(array.getJSONObject(0).has("customer_wallet_transaction")){
+                        if (array.getJSONObject(0).has("customer_wallet_transaction")) {
                             SessionSave.saveSession("customer_wallet_transaction", array.getJSONObject(0).getString("customer_wallet_transaction"), SplashActivity.this);
-                            System.out.println("customer_wallet_transaction check " + SessionSave.getSession("customer_wallet_transaction",SplashActivity.this));
+                            System.out.println("customer_wallet_transaction check " + SessionSave.getSession("customer_wallet_transaction", SplashActivity.this));
                         }
 
-                        if(array.getJSONObject(0).has("is_enabled_ive_arrived")){
+                        if (array.getJSONObject(0).has("is_enabled_ive_arrived")) {
                             SessionSave.saveSession("is_enabled_ive_arrived", array.getJSONObject(0).getString("is_enabled_ive_arrived"), SplashActivity.this);
-                            System.out.println("is_enabled_ive_arrived check " + SessionSave.getSession("is_enabled_ive_arrived",SplashActivity.this));
+                            System.out.println("is_enabled_ive_arrived check " + SessionSave.getSession("is_enabled_ive_arrived", SplashActivity.this));
                         }
 
                         if (array.getJSONObject(0).has(TaxiUtil.KM_RESTRICT))
@@ -1185,7 +1069,6 @@ public class SplashActivity extends AppCompatActivity {
                         SessionSave.saveSession(TaxiUtil.BALANCE_CREDIT_OPTION, array.getJSONObject(0).optString(TaxiUtil.BALANCE_CREDIT_OPTION, "1"), SplashActivity.this);
 
                         SessionSave.saveSession(TaxiUtil.PASSENGER_TIPS_ENABLE, array.getJSONObject(0).optString(TaxiUtil.PASSENGER_TIPS_ENABLE, "1"), SplashActivity.this);
-
 
                         if (array.getJSONObject(0).has(TaxiUtil.IS_STOP_ENABLED))
                             SessionSave.saveSession(TaxiUtil.IS_STOP_ENABLED, array.getJSONObject(0).getString(TaxiUtil.IS_STOP_ENABLED).equals("1"), SplashActivity.this);
@@ -1203,31 +1086,24 @@ public class SplashActivity extends AppCompatActivity {
                         } else {
                             SessionSave.saveSession(TaxiUtil.NODE_URL, json.getString("mobile_socket_http_url"), SplashActivity.this);
                             SessionSave.saveSession(DriverCommonData.DRIVER_NODE_URL, json.getString("mobile_socket_http_url"), SplashActivity.this);
-
                         }
 
-                        if (array.getJSONObject(0).has("is_run_golang") && array.getJSONObject(0).getString("is_run_golang").equals("true")
-                                && array.getJSONObject(0).has("mobile_golang_nearest_url")) {
+                        if (array.getJSONObject(0).has("is_run_golang") && array.getJSONObject(0).getString("is_run_golang").equals("true") && array.getJSONObject(0).has("mobile_golang_nearest_url")) {
                             SessionSave.saveSession(TaxiUtil.RUN_GO_LANG, array.getJSONObject(0).getString("is_run_golang"), SplashActivity.this);
                             SessionSave.saveSession(TaxiUtil.NODE_URL, array.getJSONObject(0).getString("mobile_golang_nearest_url"), SplashActivity.this);
-
                         }
 
-                        if (array.getJSONObject(0).has("is_dlh_golang") && array.getJSONObject(0).getString("is_dlh_golang").equals("true")
-                                && array.getJSONObject(0).has("mobile_golang_url")) {
+                        if (array.getJSONObject(0).has("is_dlh_golang") && array.getJSONObject(0).getString("is_dlh_golang").equals("true") && array.getJSONObject(0).has("mobile_golang_url")) {
                             SessionSave.saveSession(DriverCommonData.RUN_GO_LANG, array.getJSONObject(0).getString("is_dlh_golang"), SplashActivity.this);
                             SessionSave.saveSession(DriverCommonData.DRIVER_NODE_URL, array.getJSONObject(0).getString("mobile_golang_url"), SplashActivity.this);
 //                            SessionSave.saveSession("driver_node_url", json.getString("mobile_socket_http_url"), SplashActivity.this);
                         }
 
-
                         if (json.has("chat_node_url")) {
                             SessionSave.saveSession(TaxiUtil.CHAT_NODE_URL, json.getString("chat_node_url"), SplashActivity.this);
-
                         }
                         if (json.has("call_masking_enable")) {
                             SessionSave.saveSession(TaxiUtil.CALL_MASKING_ENABLE, json.getString("call_masking_enable"), SplashActivity.this);
-
                         }
 
                         if (json.has("dispatcher_phone_number")) {
@@ -1235,7 +1111,7 @@ public class SplashActivity extends AppCompatActivity {
                         }
                         if (array.getJSONObject(0).has("is_driver_auto_accept")) {
                             DriverSessionSave.saveSession("is_driver_auto_accept", array.getJSONObject(0).getString("is_driver_auto_accept"), SplashActivity.this);
-                            System.out.println("Check Trip auto accept : "+DriverSessionSave.getSession("is_driver_auto_accept",SplashActivity.this));
+                            System.out.println("Check Trip auto accept : " + DriverSessionSave.getSession("is_driver_auto_accept", SplashActivity.this));
                         }
                         if (array.getJSONObject(0).has("pickupsuggestion_url"))
                             SessionSave.saveSession("pickupsuggestion_url", array.getJSONObject(0).getString("pickupsuggestion_url"), SplashActivity.this);
@@ -1261,9 +1137,7 @@ public class SplashActivity extends AppCompatActivity {
                         // SessionSave.saveSession("facebook_share", "https://www.facebook.com/adropapp", SplashActivity.this);
 
                         SessionSave.saveSession("twitter_share", array.getJSONObject(0).getString("twitter_share"), SplashActivity.this);
-
                         //SessionSave.saveSession("twitter_share", "https://twitter.com/adropapp", SplashActivity.this);
-
 
                         SessionSave.saveSession("About", array.getJSONObject(0).getString("aboutpage_description"), SplashActivity.this);
                         SessionSave.saveSession("Currency", array.getJSONObject(0).getString("site_currency") + " ", SplashActivity.this);
@@ -1288,8 +1162,7 @@ public class SplashActivity extends AppCompatActivity {
                             SessionSave.saveSession("Metric_type", "m", SplashActivity.this);
                         else if (SessionSave.getSession("Metric", SplashActivity.this).equalsIgnoreCase("KM"))
                             SessionSave.saveSession("Metric_type", "k", SplashActivity.this);
-                        else
-                            SessionSave.saveSession("Metric_type", "k", SplashActivity.this);
+                        else SessionSave.saveSession("Metric_type", "k", SplashActivity.this);
 
                         if (array.getJSONObject(0).has("sos_msg"))
                             SessionSave.saveSession("sos_message", array.getJSONObject(0).getString("sos_msg"), SplashActivity.this);
@@ -1318,9 +1191,7 @@ public class SplashActivity extends AppCompatActivity {
 
                         SessionSave.saveSession(TaxiUtil.GOOGLE_KEY, googleApiKey, SplashActivity.this);
 
-
                         SessionSave.saveSession(SERVICE_DETAILS, array.getJSONObject(0).getString("service_details"), SplashActivity.this);
-
 
                         if (array.getJSONObject(0).has("android_mapbox_key")) {
                             SessionSave.saveSession(TaxiUtil.MAP_BOX_TOKEN, array.getJSONObject(0).getString("android_mapbox_key"), SplashActivity.this);
@@ -1335,7 +1206,6 @@ public class SplashActivity extends AppCompatActivity {
 //                        if (!SessionSave.getSession(TaxiUtil.MAP_BOX_TOKEN, SplashActivity.this).equals(""))
 //                            Mapbox.getInstance(SplashActivity.this, SessionSave.getSession(TaxiUtil.MAP_BOX_TOKEN, SplashActivity.this));
 
-
                         if (array.getJSONObject(0).has("map_settings") && array.getJSONObject(0).getJSONObject("map_settings").has("is_google_distance")) {
                             SessionSave.saveSession(TaxiUtil.isGoogleDistance, array.getJSONObject(0).getJSONObject("map_settings").getString("is_google_distance").equals("1"), SplashActivity.this);
                             SessionSave.saveSession(TaxiUtil.isGoogleRouteGeo, array.getJSONObject(0).getJSONObject("map_settings").getString("is_google_direction").equals("1"), SplashActivity.this);
@@ -1348,13 +1218,9 @@ public class SplashActivity extends AppCompatActivity {
                             SessionSave.saveSession(TaxiUtil.isGoogleGeocoder, true, SplashActivity.this);
                             SessionSave.saveSession(TaxiUtil.isNeedtoDrawRoute, true, SplashActivity.this);
                             SessionSave.saveSession(TaxiUtil.isNeedtoFetchAddress, true, SplashActivity.this);
-
                         }
-
-
                         JSONArray jsonarray = new JSONArray(array.getJSONObject(0).getString("passenger_payment_option"));
                         SessionSave.saveSession("pay_mod_name", jsonarray.getJSONObject(0).getString("pay_mod_name"), SplashActivity.this);
-
                         getCore_Utc = array.getJSONObject(0).getLong("utc_time");
                         SessionSave.saveSession("current_time", getCore_Utc, SplashActivity.this);
                         SessionSave.saveSession("current_time_local", array.getJSONObject(0).getLong("current_time"), SplashActivity.this);
@@ -1376,7 +1242,7 @@ public class SplashActivity extends AppCompatActivity {
                                     deflanAvail = true;
                                 }
                             }
-                            Systems.out.println("___________defff" + deflanAvail);
+                            DriverSystems.out.println("___________defff" + deflanAvail);
                             if (SessionSave.getSession("LANGDef", SplashActivity.this).trim().equals("") || !deflanAvail) {
                                 SessionSave.saveSession("LANGDef", SessionSave.getSession("LANG0", SplashActivity.this), SplashActivity.this);
                                 SessionSave.saveSession("LANGTempDef", SessionSave.getSession("LANGTemp0", SplashActivity.this), SplashActivity.this);
@@ -1392,20 +1258,20 @@ public class SplashActivity extends AppCompatActivity {
                         }
                         //android_passenger_language
                         if (!SessionSave.getSession(TaxiUtil.PASSENGER_LANGUAGE_TIME, SplashActivity.this).trim().equals(getCoreLangTime)) {
-                            Systems.out.println("___________defffcs");
+                            DriverSystems.out.println("___________defffcs");
                             new SplashActivity.callString(getCoreColorTime);
                         } else if (!SessionSave.getSession(TaxiUtil.PASSENGER_COLOR_TIME, SplashActivity.this).trim().equals(getCoreColorTime)) {
                             new SplashActivity.callColor(getCoreLangTime);
-                            Systems.out.println("___________defffcc");
+                            DriverSystems.out.println("___________defffcc");
                         } else if (VersionCheck()) {
-                            Systems.out.println("___________defffver");
+                            DriverSystems.out.println("___________defffver");
                             versionAlert(SplashActivity.this);
                         } else {
                             new Handler().postDelayed(() -> {
-                                Intent i = null;
+                                Intent i;
                                 if (SessionSave.getSession(PASS_ID, SplashActivity.this).equals("")) {
                                     if (!SessionSave.getSession("IsOTPSend", SplashActivity.this).equals("")) {
-                                        Systems.out.println("detail_v9");
+                                        DriverSystems.out.println("detail_v9");
 //                                        i = new Intent(SplashActivity.this, VerificationActivity.class);
 //                                        i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 //                                        startActivity(i);
@@ -1431,10 +1297,8 @@ public class SplashActivity extends AppCompatActivity {
                             }, 200);
                         }
                     } else if (json.getInt("status") == -101) {
-                        if (json.has("message"))
-                            forceLogout(json.getString("message"));
-                        else
-                            forceLogout(DriverNC.getString(R.string.server_error));
+                        if (json.has("message")) forceLogout(json.getString("message"));
+                        else forceLogout(DriverNC.getString(R.string.server_error));
                     } else if (json.getInt("status") == 0) {
                         //no changes made
                     } else {
@@ -1451,7 +1315,7 @@ public class SplashActivity extends AppCompatActivity {
         }
     }
 
-    private class callColor implements APIResult {
+    private class callColor implements DriverAPIResult {
         public callColor(final String url) {
             // TODO Auto-generated constructor stub
             new APIService_Retrofit_JSON_NoProgress(SplashActivity.this, this, null, true, SessionSave.getSession("colorcode", SplashActivity.this), true).execute();
@@ -1467,7 +1331,7 @@ public class SplashActivity extends AppCompatActivity {
                 getAndStoreColorValues(result);
                 SessionSave.saveSession("wholekeyColor", result, SplashActivity.this);
                 new Handler().postDelayed(() -> {
-                    Intent i = null;
+                    Intent i;
 
                    /* if (SessionSave.getSession(TaxiUtil.USER_PRIVACY_POLICY, SplashActivity.this).equals("")) {
                         i = new Intent(SplashActivity.this, DevicePermissionActivity.class);
@@ -1477,7 +1341,7 @@ public class SplashActivity extends AppCompatActivity {
                     if (SessionSave.getSession(PASS_ID, SplashActivity.this).equals("")) {
 
                         if (!SessionSave.getSession("IsOTPSend", SplashActivity.this).equals("")) {
-                            Systems.out.println("detail_v7");
+                            DriverSystems.out.println("detail_v7");
 //                            i = new Intent(SplashActivity.this, VerificationActivity.class);
 //                            i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 //                            startActivity(i);
@@ -1503,17 +1367,14 @@ public class SplashActivity extends AppCompatActivity {
                             }
                         }
                     }
-
                     //  }
                 }, 200);
 
-            } else
-                errorInSplash(DriverNC.getString(R.string.server_con_error));
-
+            } else errorInSplash(DriverNC.getString(R.string.server_con_error));
         }
     }
 
-    private class callString implements APIResult {
+    private class callString implements DriverAPIResult {
         String color_time;
 
         public callString(final String color_time) {
@@ -1532,7 +1393,6 @@ public class SplashActivity extends AppCompatActivity {
                     config.locale = new Locale(arry[0], arry[1]);
                     Locale.setDefault(new Locale(arry[0], arry[1]));
                 }
-
             }
             new APIService_Retrofit_JSON_NoProgress(SplashActivity.this, this, null, true, urls, true).execute();
         }
@@ -1549,11 +1409,11 @@ public class SplashActivity extends AppCompatActivity {
                 else {
                     if (TaxiUtil.isCurrentTimeZone(getCore_Utc)) {
                         new Handler().postDelayed(() -> {
-                            Intent i = null;
+                            Intent i;
                             if (SessionSave.getSession(PASS_ID, SplashActivity.this).equals("")) {
 
                                 if (!SessionSave.getSession("IsOTPSend", SplashActivity.this).equals("")) {
-                                    Systems.out.println("detail_v8");
+                                    DriverSystems.out.println("detail_v8");
 //                                    i = new Intent(SplashActivity.this, VerificationActivity.class);
 //                                    i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 //                                    startActivity(i);
@@ -1566,7 +1426,6 @@ public class SplashActivity extends AppCompatActivity {
                                     overridePendingTransition(0, 0);
                                     finish();
                                 }
-
                             } else {
                                 if (SessionSave.getSession("trip_id", SplashActivity.this).equals("")) {
                                     if (!SessionSave.getSession("PLAT", SplashActivity.this).equalsIgnoreCase("") && !SessionSave.getSession("PLAT", SplashActivity.this).equalsIgnoreCase("0.0")) {
@@ -1574,7 +1433,6 @@ public class SplashActivity extends AppCompatActivity {
                                     }
                                 } else {
                                     if (!SessionSave.getSession("PLAT", SplashActivity.this).equalsIgnoreCase("") && !SessionSave.getSession("PLAT", SplashActivity.this).equalsIgnoreCase("0.0")) {
-
                                         DivertToHomeScreen();
                                     }
                                 }
@@ -1585,9 +1443,7 @@ public class SplashActivity extends AppCompatActivity {
                         errorInSplash(DriverNC.getString(R.string.date_change));
                     }
                 }
-            } else
-                errorInSplash(DriverNC.getString(R.string.server_con_error));
-
+            } else errorInSplash(DriverNC.getString(R.string.server_con_error));
         }
     }
 
@@ -1603,8 +1459,6 @@ public class SplashActivity extends AppCompatActivity {
                        /* if (json.has("mobile_socket_http_url")) {
                             SessionSave.saveSession(CommonData.NODE_URL, json.getString("mobile_socket_http_url"), SplashAct.this);
                         }*/
-
-
         if (json.has("https_node_url")) {
             DriverSessionSave.saveSession(DriverCommonData.NODE_URL, json.getString("https_node_url"), SplashActivity.this);
         }
@@ -1638,7 +1492,6 @@ public class SplashActivity extends AppCompatActivity {
             DriverSessionSave.saveSession(DriverCommonData.LAST_FORCEUPDATE_VERSION, "0", SplashActivity.this);
 
         DriverSessionSave.saveSession("country_iso_code", jArry.getJSONObject(0).getString("country_iso_code"), SplashActivity.this);
-
 
         DriverSessionSave.saveSession("android_web_key", jArry.getJSONObject(0).getString("android_google_api_key"), SplashActivity.this);
 
@@ -1682,7 +1535,6 @@ public class SplashActivity extends AppCompatActivity {
             DriverSessionSave.saveSession(DriverCommonData.isNeedtofetchAddress, true, SplashActivity.this);
         }
 
-
         if (jArry.getJSONObject(0).has("sos_msg"))
             DriverSessionSave.saveSession("sos_message", jArry.getJSONObject(0).getString("sos_msg"), SplashActivity.this);
 
@@ -1695,20 +1547,16 @@ public class SplashActivity extends AppCompatActivity {
             DriverSessionSave.saveSession("Metric", jArry.getJSONObject(i).getString("metric"), SplashActivity.this);
         }
 
-
         try {
             getCoreLangTime = json.getJSONObject("language_color_status").getString("android_driver_language");
             getCoreColorTime = json.getJSONObject("language_color_status").getString("android_driver_colorcode");
             getCore_Utc = jArry.getJSONObject(0).getLong("utc_time");
 
-
             boolean deflanAvail = false;
             String totalLanguage = "";
             JSONArray pArray = json.getJSONObject("language_color").getJSONObject("android").getJSONArray("driver_language");
             for (int i = 0; i < pArray.length(); i++) {
-
                 totalLanguage += pArray.getJSONObject(i).getString("language").replaceAll(".xml", "") + "____";
-
                 DriverSessionSave.saveSession("LANG" + i, pArray.getJSONObject(i).getString("language"), SplashActivity.this);
                 DriverSessionSave.saveSession("LANGTemp" + i, pArray.getJSONObject(i).getString("design_type"), SplashActivity.this);
                 DriverSessionSave.saveSession("LANGCode" + i, pArray.getJSONObject(i).getString("language_code"), SplashActivity.this);
@@ -1716,12 +1564,10 @@ public class SplashActivity extends AppCompatActivity {
                 if (!DriverSessionSave.getSession("LANGDef", SplashActivity.this).equals("") && pArray.getJSONObject(i).getString("language").contains(DriverSessionSave.getSession("LANGDef", SplashActivity.this))) {
                     deflanAvail = true;
                 }
-
             }
             DriverSystems.out.println("___________defff" + deflanAvail);
             if (DriverSessionSave.getSession("LANGDef", SplashActivity.this).trim().equals("") || !deflanAvail) {
                 DriverSessionSave.saveSession("LANGDef", DriverSessionSave.getSession("LANG0", SplashActivity.this), SplashActivity.this);
-
                 DriverSessionSave.saveSession("LANGTempDef", DriverSessionSave.getSession("LANGTemp0", SplashActivity.this), SplashActivity.this);
                 DriverSessionSave.saveSession("Lang", pArray.getJSONObject(0).getString("language_code").replaceAll(".xml", ""), SplashActivity.this);
                 String url = DriverSessionSave.getSession(DriverSessionSave.getSession("LANG" + 0, SplashActivity.this), SplashActivity.this);
@@ -1729,7 +1575,6 @@ public class SplashActivity extends AppCompatActivity {
             }
 
             DriverSessionSave.saveSession("lang_json", totalLanguage, SplashActivity.this);
-
             DriverSessionSave.saveSession("colorcode", json.getJSONObject("language_color").getJSONObject("android").getString("driverColorCode"), SplashActivity.this);
 
         } catch (JSONException e) {
@@ -1739,7 +1584,7 @@ public class SplashActivity extends AppCompatActivity {
 
     public void driverStatus() {
 
-        Intent i = null;
+        Intent i;
         if (DriverSessionSave.getSession("Id", SplashActivity.this).equals("")) {
             i = new Intent(SplashActivity.this, DriverUserLoginAct.class);
             startActivity(i);
@@ -1756,9 +1601,9 @@ public class SplashActivity extends AppCompatActivity {
 //                        }
 //                    }, 2000);
 //                } else {
-                    i = new Intent(SplashActivity.this, DriverUserLoginAct.class);
-                    startActivity(i);
-                    finish();
+                i = new Intent(SplashActivity.this, DriverUserLoginAct.class);
+                startActivity(i);
+                finish();
 //                }
 
             } else {
@@ -1779,8 +1624,6 @@ public class SplashActivity extends AppCompatActivity {
                     }
                 }
             }
-
         }
     }
-
 }

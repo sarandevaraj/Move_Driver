@@ -2,7 +2,6 @@ package com.taximobility.util;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
@@ -14,12 +13,6 @@ import com.google.gson.Gson;
 //import com.taximobility.data.FavouriteDriverData;
 //import com.taximobility.data.HelpData;
 //import com.taximobility.data.SplitStatusData;
-import com.taximobility.driver.DriverUserLoginAct;
-import com.taximobility.features.CToast;
-import com.taximobility.interfaces.APIResult;
-import com.taximobility.service.APIService_Retrofit_JSON;
-
-import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -118,21 +111,17 @@ public class TaxiUtil {
     public static final String CALL_MASKING_ENABLE = "call_masking_enable";
     public static final String NODE_TOKEN = "node_token";
     public static final String NODE_DOMAIN = "mobile_socket_http_domain";
-
     public static final String AUTH_KEY = "auth_key";
     public static final String AUTH_KEY1 = "auth_key";
     public static final String DEVICE_ID = "device_id";
     public static final String COMPANY_DOMAIN = "company_main_domain";
     public static final String DOMAIN_URL = "domain_url";
     public static final String USER_KEY = "user_key";
-
     public static final String CORPORATE_PASSENGER = "corporate_passenger"; // "1" corporate user "0" normal user
     public static final String CORPORATE_COMPANY_ID = "corporate_company_id";
     public static final String CORPORATE_COMPANY_NAME = "corporate_company_name";
     public static final String CORPORATE_COMPANY_BLOCK = "corporate_company_block"; // block "1" unblock "0"
-
     public static String mDevice_id_constant = "123456";
-
 
     public static <T> T fromJson(String data, Class<T> classn) {
         return new Gson().fromJson(data, classn);
@@ -289,7 +278,6 @@ public class TaxiUtil {
     public static String tostring(Object s) {
         return new Gson().toJson(s);
     }
-
 
     public static String getCurrentTimeForFourSquare() {
         Calendar c = Calendar.getInstance();

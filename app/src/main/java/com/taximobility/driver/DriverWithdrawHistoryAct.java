@@ -43,53 +43,38 @@ import java.util.HashMap;
 
 /**
  * Created by developer on 5/10/16.
- */
-
-
-/**
  * This class is used to view withdraw history for both referal and trip
  */
 public class DriverWithdrawHistoryAct extends MainActivityDriver implements DriverClickInterface {
-
 
     private ArrayList<HashMap<String, String>> data;
     private ListView list;
     private TextView back_home, btn_referal, btn_trip, btn_back;
     private ImageView btn_filter;
-
     private TextView txt_view;
-
-    private TextView txt_fromdate, txt_todate,noDataTxt;
-
+    private TextView txt_fromdate, txt_todate, noDataTxt;
     Spinner Statusspn;
     private int viewType = 1;
-
     private int _hour = 0;
     private int _min = 0;
     private int _date = 0;
     private int _month = 0;
     private int _year = 0;
     private String _ampm = "AM";
-
-    private String fromtime = " 00:00";
-    private String totime = " 23:59";
-
+    private final String fromtime = " 00:00";
+    private final String totime = " 23:59";
     int temp_status = 0;
-
-
     private Dialog dt_mDialog;
     private LinearLayout no_data_txt;
     RelativeLayout lay_list;
     private View trip_underline;
     private View referl_underline;
-
     private Dialog dialog1;
 
     @Override
     public int setLayout() {
         return R.layout.driver_listview;
     }
-
 
     /**
      * Initialize the views on layout
@@ -109,9 +94,7 @@ public class DriverWithdrawHistoryAct extends MainActivityDriver implements Driv
         lay_list = findViewById(R.id.lay_list);
         noDataTxt = findViewById(R.id.no_datatxt);
 
-
-        DirverColorchange.ChangeColor((ViewGroup) (((ViewGroup) DriverWithdrawHistoryAct.this
-                .findViewById(android.R.id.content)).getChildAt(0)), DriverWithdrawHistoryAct.this);
+        DirverColorchange.ChangeColor((ViewGroup) (((ViewGroup) DriverWithdrawHistoryAct.this.findViewById(android.R.id.content)).getChildAt(0)), DriverWithdrawHistoryAct.this);
 
         /*ImageView iv = findViewById(R.id.progress_history);
         DrawableImageViewTarget imageViewTarget = new DrawableImageViewTarget(iv);
@@ -119,15 +102,12 @@ public class DriverWithdrawHistoryAct extends MainActivityDriver implements Driv
                 .load(R.raw.driver_loading_anim)
                 .into(imageViewTarget);*/
 
-
         btn_filter.setVisibility(View.INVISIBLE);
-
 
         btn_referal.setOnClickListener(v -> {
 
             viewType = 1;
-            if (data != null)
-                data.clear();
+            if (data != null) data.clear();
             list.setAdapter(null);
             btn_filter.setVisibility(View.INVISIBLE);
             SetWithdrawList();
@@ -136,8 +116,7 @@ public class DriverWithdrawHistoryAct extends MainActivityDriver implements Driv
         btn_trip.setOnClickListener(v -> {
 
             viewType = 2;
-            if (data != null)
-                data.clear();
+            if (data != null) data.clear();
             list.setAdapter(null);
             btn_filter.setVisibility(View.GONE);
             SetWithdrawList();
@@ -170,8 +149,7 @@ public class DriverWithdrawHistoryAct extends MainActivityDriver implements Driv
             Statusspn = view.findViewById(R.id.statusspn);
 
 
-            ArrayAdapter adapter = ArrayAdapter.createFromResource(
-                    this, R.array.Status, android.R.layout.simple_spinner_item);
+            ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.Status, android.R.layout.simple_spinner_item);
 
             adapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
             Statusspn.setAdapter(adapter);
@@ -207,7 +185,7 @@ public class DriverWithdrawHistoryAct extends MainActivityDriver implements Driv
                     mcancelDialog.dismiss();
                     new FilterDriverApi(txt_fromdate.getText().toString(), txt_todate.getText().toString(), temp_status);
                 } else {
-                    Toast.makeText(DriverWithdrawHistoryAct.this,"" + DriverNC.getResources().getString(R.string.please_choosedate), Toast.LENGTH_LONG).show();
+                    Toast.makeText(DriverWithdrawHistoryAct.this, "" + DriverNC.getResources().getString(R.string.please_choosedate), Toast.LENGTH_LONG).show();
 //                    dialog1 = Driver_Utils.alert_view(DriverWithdrawHistoryAct.this, "" + DriverNC.getResources().getString(R.string.message), "" + DriverNC.getResources().getString(R.string.please_choosedate), "" + DriverNC.getResources().getString(R.string.ok), "", true, DriverWithdrawHistoryAct.this, "");
                 }
 
@@ -224,8 +202,7 @@ public class DriverWithdrawHistoryAct extends MainActivityDriver implements Driv
 
     @Override
     protected void onDestroy() {
-        if (dialog1 != null)
-            Driver_Utils.closeDialog(dialog1);
+        if (dialog1 != null) Driver_Utils.closeDialog(dialog1);
         super.onDestroy();
     }
 
@@ -235,8 +212,7 @@ public class DriverWithdrawHistoryAct extends MainActivityDriver implements Driv
 
         viewType = 1;
 
-        if (data != null)
-            data.clear();
+        if (data != null) data.clear();
         btn_filter.setVisibility(View.INVISIBLE);
         SetWithdrawList();
     }
@@ -357,21 +333,17 @@ public class DriverWithdrawHistoryAct extends MainActivityDriver implements Driv
             try {
                 JSONObject j = new JSONObject();
                 j.put("driver_id", DriverSessionSave.getSession("Id", DriverWithdrawHistoryAct.this));
-                if (fromdate.contains("yyyy-mm-dd"))
-                    j.put("from", "");
-                else
-                    j.put("from", fromdate + fromtime);
-                if (todate.contains("yyyy-mm-dd"))
-                    j.put("to", "");
-                else
-                    j.put("to", todate + totime);
+                if (fromdate.contains("yyyy-mm-dd")) j.put("from", "");
+                else j.put("from", fromdate + fromtime);
+                if (todate.contains("yyyy-mm-dd")) j.put("to", "");
+                else j.put("to", todate + totime);
                 j.put("status", status);
 
                 String driverTripRequesting = "type=search_driver_withdraw_list";
                 if (isOnline()) {
                     new DriverAPIService_Retrofit_JSON(DriverWithdrawHistoryAct.this, this, j, false).execute(driverTripRequesting);
                 } else {
-                    Toast.makeText(DriverWithdrawHistoryAct.this,"" + DriverNC.getResources().getString(R.string.check_net_connection), Toast.LENGTH_LONG).show();
+                    Toast.makeText(DriverWithdrawHistoryAct.this, "" + DriverNC.getResources().getString(R.string.check_net_connection), Toast.LENGTH_LONG).show();
 //                    dialog1 = Driver_Utils.alert_view(DriverWithdrawHistoryAct.this, "" + DriverNC.getResources().getString(R.string.message), "" + DriverNC.getResources().getString(R.string.check_net_connection), "" + DriverNC.getResources().getString(R.string.ok), "", true, DriverWithdrawHistoryAct.this, "");
                 }
             } catch (Exception e) {
@@ -421,7 +393,7 @@ public class DriverWithdrawHistoryAct extends MainActivityDriver implements Driv
                     }
                 } else {
 
-                    runOnUiThread(() -> Toast.makeText(DriverWithdrawHistoryAct.this,"" + DriverNC.getResources().getString(R.string.check_net_connection), Toast.LENGTH_LONG).show());
+                    runOnUiThread(() -> Toast.makeText(DriverWithdrawHistoryAct.this, "" + DriverNC.getResources().getString(R.string.check_net_connection), Toast.LENGTH_LONG).show());
 //                            dialog1 = Driver_Utils.alert_view(DriverWithdrawHistoryAct.this, "" + DriverNC.getResources().getString(R.string.message), "" + DriverNC.getResources().getString(R.string.check_net_connection), "" + DriverNC.getResources().getString(R.string.ok), "", true, DriverWithdrawHistoryAct.this, ""));
                 }
             } catch (Exception ex) {
@@ -445,7 +417,7 @@ public class DriverWithdrawHistoryAct extends MainActivityDriver implements Driv
                 if (isOnline()) {
                     new DriverAPIService_Retrofit_JSON(DriverWithdrawHistoryAct.this, this, j, false).execute(driverTripRequesting);
                 } else {
-                    Toast.makeText(DriverWithdrawHistoryAct.this,"" + DriverNC.getResources().getString(R.string.check_net_connection), Toast.LENGTH_LONG).show();
+                    Toast.makeText(DriverWithdrawHistoryAct.this, "" + DriverNC.getResources().getString(R.string.check_net_connection), Toast.LENGTH_LONG).show();
 //                    dialog1 = Driver_Utils.alert_view(DriverWithdrawHistoryAct.this, "" + DriverNC.getResources().getString(R.string.message), "" + DriverNC.getResources().getString(R.string.check_net_connection), "" + DriverNC.getResources().getString(R.string.ok), "", true, DriverWithdrawHistoryAct.this, "");
                 }
             } catch (Exception e) {
@@ -485,7 +457,7 @@ public class DriverWithdrawHistoryAct extends MainActivityDriver implements Driv
                         } else {
                             no_data_txt.setVisibility(View.GONE);
                             lay_list.setVisibility(View.VISIBLE);
-                           // findViewById(R.id.progress_history).setVisibility(View.GONE);
+                            // findViewById(R.id.progress_history).setVisibility(View.GONE);
                         }
                     } else {
                         noDataTxt.setText(R.string.no_trips_available);
@@ -494,7 +466,7 @@ public class DriverWithdrawHistoryAct extends MainActivityDriver implements Driv
                     }
                 } else {
 
-                    runOnUiThread(() -> Toast.makeText(DriverWithdrawHistoryAct.this,"" + DriverNC.getResources().getString(R.string.check_net_connection), Toast.LENGTH_LONG).show());
+                    runOnUiThread(() -> Toast.makeText(DriverWithdrawHistoryAct.this, "" + DriverNC.getResources().getString(R.string.check_net_connection), Toast.LENGTH_LONG).show());
 //                            dialog1 = Driver_Utils.alert_view(DriverWithdrawHistoryAct.this, "" + DriverNC.getResources().getString(R.string.message), "" + DriverNC.getResources().getString(R.string.check_net_connection), "" + DriverNC.getResources().getString(R.string.ok), "", true, DriverWithdrawHistoryAct.this, ""));
                 }
             } catch (Exception ex) {
@@ -519,7 +491,7 @@ public class DriverWithdrawHistoryAct extends MainActivityDriver implements Driv
                 if (isOnline()) {
                     new DriverAPIService_Retrofit_JSON(DriverWithdrawHistoryAct.this, this, j, false).execute(driverTripRequesting);
                 } else {
-                    Toast.makeText(DriverWithdrawHistoryAct.this,"" + DriverNC.getResources().getString(R.string.check_net_connection), Toast.LENGTH_LONG).show();
+                    Toast.makeText(DriverWithdrawHistoryAct.this, "" + DriverNC.getResources().getString(R.string.check_net_connection), Toast.LENGTH_LONG).show();
 //                    dialog1 = Driver_Utils.alert_view(DriverWithdrawHistoryAct.this, "" + DriverNC.getResources().getString(R.string.message), "" + DriverNC.getResources().getString(R.string.check_net_connection), "" + DriverNC.getResources().getString(R.string.ok), "", true, DriverWithdrawHistoryAct.this, "");
                 }
             } catch (Exception e) {
@@ -561,12 +533,12 @@ public class DriverWithdrawHistoryAct extends MainActivityDriver implements Driv
                             // findViewById(R.id.progress_history).setVisibility(View.GONE);
                         }
                     } else {
-                        Toast.makeText(DriverWithdrawHistoryAct.this,"" +object.getString("message"), Toast.LENGTH_LONG).show();
+                        Toast.makeText(DriverWithdrawHistoryAct.this, "" + object.getString("message"), Toast.LENGTH_LONG).show();
 //                        dialog1 = Driver_Utils.alert_view(DriverWithdrawHistoryAct.this, "" + DriverNC.getResources().getString(R.string.message), "" + object.getString("message"), "" + DriverNC.getResources().getString(R.string.ok), "", true, DriverWithdrawHistoryAct.this, "");
                     }
                 } else {
 
-                    runOnUiThread(() -> Toast.makeText(DriverWithdrawHistoryAct.this,"" + DriverNC.getResources().getString(R.string.check_net_connection), Toast.LENGTH_LONG).show());
+                    runOnUiThread(() -> Toast.makeText(DriverWithdrawHistoryAct.this, "" + DriverNC.getResources().getString(R.string.check_net_connection), Toast.LENGTH_LONG).show());
 //                            dialog1 = Driver_Utils.alert_view(DriverWithdrawHistoryAct.this, "" + DriverNC.getResources().getString(R.string.message), "" + DriverNC.getResources().getString(R.string.check_net_connection), "" + DriverNC.getResources().getString(R.string.ok), "", true, DriverWithdrawHistoryAct.this, ""));
                 }
             } catch (Exception ex) {

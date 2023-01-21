@@ -12,20 +12,17 @@ public class DriverEndStreetPickupResponse {
     public Detail detail;
     public String status;
 
-    public class GatewayDetail {
-
+    public static class GatewayDetail {
         public String pay_mod_id;
         public String pay_mod_name;
         public String pay_mod_default;
-
     }
 
     public class Detail {
-
         public String trip_id;
         public String distance;
         public String trip_fare;
-        public String amt,nightfare_applicable, distance_fare, new_base_fare, new_distance_fare, passenger_name, passenger_image, waiting_fare, distance_fare_metric,subtotal,promocode_fare,tax_fare;
+        public String amt, nightfare_applicable, distance_fare, new_base_fare, new_distance_fare, passenger_name, passenger_image, waiting_fare, distance_fare_metric, subtotal, promocode_fare, tax_fare;
         public String nightfare;
         public String eveningfare_applicable;
         public String eveningfare;
@@ -55,8 +52,6 @@ public class DriverEndStreetPickupResponse {
         public String passenger_discount;
         public String cancellation_fee;
         public String street_pickup, credit_card_status, fare_calculation_type;
-
-
         public String os_distance_unit;
         public String os_duration;
         public String os_additional_fare_per_hour;
@@ -67,8 +62,5 @@ public class DriverEndStreetPickupResponse {
         public String trip_type;
         public String trip_start_time = "";
         public String trip_end_time = "";
-
     }
-
-
 }

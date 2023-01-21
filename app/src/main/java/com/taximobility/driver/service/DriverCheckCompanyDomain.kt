@@ -17,18 +17,24 @@ class DriverCheckCompanyDomain {
         val client = AppController.getInstance().getCheckCompanyDomainapiManager_driver(baseUrl)
         val request = DriverApiRequestData.BaseUrl()
         request.company_domain = DriverSessionSave.getSession(DriverCommonData.ACCESS_KEY, context)
-        request.company_main_domain = DriverSessionSave.getSession(DriverCommonData.COMPANY_DOMAIN, context)
+        request.company_main_domain =
+            DriverSessionSave.getSession(DriverCommonData.COMPANY_DOMAIN, context)
         request.device_type = "1"
         val response = client.callData(DriverServiceGenerator.COMPANY_KEY, request)
 
         response.enqueue(object : Callback<DriverCompanyDomainResponse> {
 
-            override fun onResponse(call: Call<DriverCompanyDomainResponse>, response: Response<DriverCompanyDomainResponse>) {
+            override fun onResponse(
+                call: Call<DriverCompanyDomainResponse>,
+                response: Response<DriverCompanyDomainResponse>
+            ) {
                 try {
                     if (response.isSuccessful) {
                         val cr = response.body()
                         if (cr!!.auth_key != "" && cr.auth_key != null) {
-                            DriverSessionSave.saveSession(DriverCommonData.AUTH_KEY, cr.auth_key, context)
+                            DriverSessionSave.saveSession(
+                                DriverCommonData.AUTH_KEY, cr.auth_key, context
+                            )
                         } /*else {
 //                            CToast.ShowToast(context, NC.getString(R.string.server_error))
                         }*/
@@ -36,14 +42,11 @@ class DriverCheckCompanyDomain {
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
-
             }
 
             override fun onFailure(call: Call<DriverCompanyDomainResponse>, t: Throwable) {
                 t.printStackTrace()
             }
-
         })
-
     }
 }

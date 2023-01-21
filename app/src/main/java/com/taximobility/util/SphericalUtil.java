@@ -1,21 +1,4 @@
-/*
- * Copyright 2013 Google Inc.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.taximobility.util;
-
 
 import com.google.android.gms.maps.model.LatLng;
 
@@ -53,9 +36,7 @@ public class SphericalUtil {
         double toLat = toRadians(to.latitude);
         double toLng = toRadians(to.longitude);
         double dLng = toLng - fromLng;
-        double heading = atan2(
-                sin(dLng) * cos(toLat),
-                cos(fromLat) * sin(toLat) - sin(fromLat) * cos(toLat) * cos(dLng));
+        double heading = atan2(sin(dLng) * cos(toLat), cos(fromLat) * sin(toLat) - sin(fromLat) * cos(toLat) * cos(dLng));
         return wrap(toDegrees(heading), -180, 180);
     }
 
@@ -78,9 +59,7 @@ public class SphericalUtil {
         double sinFromLat = sin(fromLat);
         double cosFromLat = cos(fromLat);
         double sinLat = cosDistance * sinFromLat + sinDistance * cosFromLat * cos(heading);
-        double dLng = atan2(
-                sinDistance * cosFromLat * sin(heading),
-                cosDistance - sinFromLat * sinLat);
+        double dLng = atan2(sinDistance * cosFromLat * sin(heading), cosDistance - sinFromLat * sinLat);
         return new LatLng(toDegrees(asin(sinLat)), toDegrees(fromLng + dLng));
     }
 
@@ -124,8 +103,7 @@ public class SphericalUtil {
             // No solution which would make sense in LatLng-space.
             return null;
         }
-        double fromLngRadians = toRadians(to.longitude) -
-                atan2(n3, n1 * cos(fromLatRadians) - n2 * sin(fromLatRadians));
+        double fromLngRadians = toRadians(to.longitude) - atan2(n3, n1 * cos(fromLatRadians) - n2 * sin(fromLatRadians));
         return new LatLng(toDegrees(fromLatRadians), toDegrees(fromLngRadians));
     }
 
@@ -179,8 +157,7 @@ public class SphericalUtil {
      * on the unit sphere.
      */
     static double computeAngleBetween(LatLng from, LatLng to) {
-        return distanceRadians(toRadians(from.latitude), toRadians(from.longitude),
-                toRadians(to.latitude), toRadians(to.longitude));
+        return distanceRadians(toRadians(from.latitude), toRadians(from.longitude), toRadians(to.latitude), toRadians(to.longitude));
     }
 
     /**
@@ -293,9 +270,4 @@ public class SphericalUtil {
     static double mod(double x, double m) {
         return ((x % m) + m) % m;
     }
-
-
-
-
-
 }

@@ -9,14 +9,14 @@ import android.util.Log;
 import com.taximobility.R;
 import com.taximobility.driver.DriverUserLoginAct;
 import com.taximobility.driver.data.DriverCommonData;
+import com.taximobility.driver.interfaces.DriverAPIResult;
+import com.taximobility.driver.utils.DriverCL;
+import com.taximobility.driver.utils.DriverCToast;
 import com.taximobility.driver.utils.DriverNC;
 import com.taximobility.driver.utils.DriverSessionSave;
-import com.taximobility.features.CToast;
-import com.taximobility.interfaces.APIResult;
+import com.taximobility.driver.utils.DriverSystems;
 import com.taximobility.util.AppController;
-import com.taximobility.util.CL;
 import com.taximobility.util.SessionSave;
-import com.taximobility.util.Systems;
 import com.taximobility.util.TaxiUtil;
 
 import org.json.JSONArray;
@@ -50,8 +50,6 @@ import static com.taximobility.util.ConstantsKt.PASS_ID;
 import static com.taximobility.util.ConstantsKt.PASS_PAYMENT_OPTION;
 import static com.taximobility.util.ConstantsKt.SERVICE_DETAILS;
 
-//import com.mapbox.mapboxsdk.Mapbox;
-
 /**
  * Created by product team on 22/2/18.
  */
@@ -74,7 +72,7 @@ public class BackgroundCoreConfig extends IntentService {
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
         currentIntent = intent;
-        Systems.out.println("_callingrrrrgeee3");
+        DriverSystems.out.println("_callingrrrrgeee3");
         Long tsLong = System.currentTimeMillis() / 1000;
         String ts = tsLong.toString();
         TaxiUtil.API_BASE_URL = SessionSave.getSession("base_url", BackgroundCoreConfig.this);
@@ -90,45 +88,38 @@ public class BackgroundCoreConfig extends IntentService {
 
     private synchronized void getAndStoreStringValues(String result) {
         try {
-
-
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             InputStream is = new ByteArrayInputStream(result.getBytes(StandardCharsets.UTF_8));
             Document doc = dBuilder.parse(is);
             Element element = doc.getDocumentElement();
             element.normalize();
-
             NodeList nList = doc.getElementsByTagName("*");
 
             int chhh = 0;
             for (int i = 0; i < nList.getLength(); i++) {
-
                 Node node = nList.item(i);
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
                     chhh++;
-
                     Element element2 = (Element) node;
                     DriverNC.nfields_byName.put(element2.getAttribute("name"), element2.getTextContent());
-
                 }
             }
             getValueDetail();
         } catch (Exception e) {
-            Systems.out.println("string error" + e.getLocalizedMessage());
+            DriverSystems.out.println("string error" + e.getLocalizedMessage());
             e.printStackTrace();
         }
     }
 
     synchronized void getValueDetail() {
         Field[] fieldss = R.string.class.getDeclaredFields();
-        for (int i = 0; i < fieldss.length; i++) {
-            int id = getResources().getIdentifier(fieldss[i].getName(), "string", getPackageName());
-            if (DriverNC.nfields_byName.containsKey(fieldss[i].getName())) {
-                fields.add(fieldss[i].getName());
+        for (Field field : fieldss) {
+            int id = getResources().getIdentifier(field.getName(), "string", getPackageName());
+            if (DriverNC.nfields_byName.containsKey(field.getName())) {
+                fields.add(field.getName());
                 fields_value.add(getResources().getString(id));
-                fields_id.put(fieldss[i].getName(), id);
-
+                fields_id.put(field.getName(), id);
             }
         }
 
@@ -136,9 +127,7 @@ public class BackgroundCoreConfig extends IntentService {
             String h = entry.getKey();
             String value = entry.getValue();
             DriverNC.nfields_byID.put(fields_id.get(h), DriverNC.nfields_byName.get(h));
-            // do stuff
         }
-
     }
 
     private synchronized void getAndStoreColorValues(String result) {
@@ -152,17 +141,13 @@ public class BackgroundCoreConfig extends IntentService {
             NodeList nList = doc.getElementsByTagName("*");
             int chhh = 0;
             for (int i = 0; i < nList.getLength(); i++) {
-
                 Node node = nList.item(i);
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
                     chhh++;
-
                     Element element2 = (Element) node;
-                    CL.nfields_byName.put(element2.getAttribute("name"), element2.getTextContent());
-
+                    DriverCL.nfields_byName.put(element2.getAttribute("name"), element2.getTextContent());
                 }
             }
-
             getColorValueDetail();
         } catch (Exception e) {
             e.printStackTrace();
@@ -171,26 +156,23 @@ public class BackgroundCoreConfig extends IntentService {
 
     synchronized void getColorValueDetail() {
         Field[] fieldss = R.color.class.getDeclaredFields();
-        for (int i = 0; i < fieldss.length; i++) {
-            int id = getResources().getIdentifier(fieldss[i].getName(), "color", getPackageName());
-
-            if (CL.nfields_byName.containsKey(fieldss[i].getName())) {
-                CL.fields.add(fieldss[i].getName());
-                CL.fields_value.add(getResources().getString(id));
-                CL.fields_id.put(fieldss[i].getName(), id);
+        for (Field field : fieldss) {
+            int id = getResources().getIdentifier(field.getName(), "color", getPackageName());
+            if (DriverCL.nfields_byName.containsKey(field.getName())) {
+                DriverCL.fields.add(field.getName());
+                DriverCL.fields_value.add(getResources().getString(id));
+                DriverCL.fields_id.put(field.getName(), id);
             }
         }
 
-
-        for (Map.Entry<String, String> entry : CL.nfields_byName.entrySet()) {
+        for (Map.Entry<String, String> entry : DriverCL.nfields_byName.entrySet()) {
             String h = entry.getKey();
             String value = entry.getValue();
-            CL.nfields_byID.put(CL.fields_id.get(h), CL.nfields_byName.get(h));
+            DriverCL.nfields_byID.put(DriverCL.fields_id.get(h), DriverCL.nfields_byName.get(h));
         }
-
     }
 
-    private class CoreConfigCall implements APIResult {
+    private class CoreConfigCall implements DriverAPIResult {
         public CoreConfigCall(final String url) {
             // TODO Auto-generated constructor stub
             new APIService_Retrofit_JSON_NoProgress(BackgroundCoreConfig.this, this, "", true).execute("type=getcoreconfig");
@@ -202,14 +184,14 @@ public class BackgroundCoreConfig extends IntentService {
 
             if (isSuccess) {
                 try {
-                    Systems.out.println("_callingrrrrgeee");
+                    DriverSystems.out.println("_callingrrrrgeee");
                     final JSONObject json = new JSONObject(result);
                     if (json.getInt("status") == 1) {
                         if (json.has("gt_lst_time"))
                             SessionSave.saveSession(TaxiUtil.GETCORE_LASTUPDATE, json.getString("gt_lst_time"), BackgroundCoreConfig.this);
                         final JSONArray array = json.getJSONArray("detail");
 
-                        if(array.getJSONObject(0).has("customer_wallet_transaction")){
+                        if (array.getJSONObject(0).has("customer_wallet_transaction")) {
                             SessionSave.saveSession("customer_wallet_transaction", array.getJSONObject(0).getString("customer_wallet_transaction"), BackgroundCoreConfig.this);
                             System.out.println("customer_wallet_transaction check " + SessionSave.getSession("customer_wallet_transaction", BackgroundCoreConfig.this));
                         }
@@ -217,9 +199,9 @@ public class BackgroundCoreConfig extends IntentService {
                             DriverSessionSave.saveSession("is_driver_auto_accept", array.getJSONObject(0).getString("is_driver_auto_accept"), BackgroundCoreConfig.this);
                         }
 
-                        if(array.getJSONObject(0).has("is_enabled_ive_arrived")){
+                        if (array.getJSONObject(0).has("is_enabled_ive_arrived")) {
                             SessionSave.saveSession("is_enabled_ive_arrived", array.getJSONObject(0).getString("is_enabled_ive_arrived"), BackgroundCoreConfig.this);
-                            System.out.println("is_enabled_ive_arrived check " + SessionSave.getSession("is_enabled_ive_arrived",BackgroundCoreConfig.this));
+                            System.out.println("is_enabled_ive_arrived check " + SessionSave.getSession("is_enabled_ive_arrived", BackgroundCoreConfig.this));
                         }
 
                         if (array.getJSONObject(0).has(TaxiUtil.KM_RESTRICT))
@@ -233,7 +215,6 @@ public class BackgroundCoreConfig extends IntentService {
                         SessionSave.saveSession(TaxiUtil.BALANCE_CREDIT_OPTION, array.getJSONObject(0).optString(TaxiUtil.BALANCE_CREDIT_OPTION, "1"), BackgroundCoreConfig.this);
 
                         SessionSave.saveSession(TaxiUtil.PASSENGER_TIPS_ENABLE, array.getJSONObject(0).optString(TaxiUtil.PASSENGER_TIPS_ENABLE, "1"), BackgroundCoreConfig.this);
-
 
                         if (array.getJSONObject(0).has(TaxiUtil.IS_STOP_ENABLED))
                             SessionSave.saveSession(TaxiUtil.IS_STOP_ENABLED, array.getJSONObject(0).getString(TaxiUtil.IS_STOP_ENABLED).equals("1"), BackgroundCoreConfig.this);
@@ -251,31 +232,24 @@ public class BackgroundCoreConfig extends IntentService {
                         } else {
                             SessionSave.saveSession(TaxiUtil.NODE_URL, json.getString("mobile_socket_http_url"), BackgroundCoreConfig.this);
                             SessionSave.saveSession(DriverCommonData.DRIVER_NODE_URL, json.getString("mobile_socket_http_url"), BackgroundCoreConfig.this);
-
                         }
 
-                        if (array.getJSONObject(0).has("is_run_golang") && array.getJSONObject(0).getString("is_run_golang").equals("true")
-                                && array.getJSONObject(0).has("mobile_golang_nearest_url")) {
+                        if (array.getJSONObject(0).has("is_run_golang") && array.getJSONObject(0).getString("is_run_golang").equals("true") && array.getJSONObject(0).has("mobile_golang_nearest_url")) {
                             SessionSave.saveSession(TaxiUtil.RUN_GO_LANG, array.getJSONObject(0).getString("is_run_golang"), BackgroundCoreConfig.this);
                             SessionSave.saveSession(TaxiUtil.NODE_URL, array.getJSONObject(0).getString("mobile_golang_nearest_url"), BackgroundCoreConfig.this);
-
                         }
 
-                        if (array.getJSONObject(0).has("is_dlh_golang") && array.getJSONObject(0).getString("is_dlh_golang").equals("true")
-                                && array.getJSONObject(0).has("mobile_golang_url")) {
+                        if (array.getJSONObject(0).has("is_dlh_golang") && array.getJSONObject(0).getString("is_dlh_golang").equals("true") && array.getJSONObject(0).has("mobile_golang_url")) {
                             SessionSave.saveSession(DriverCommonData.RUN_GO_LANG, array.getJSONObject(0).getString("is_dlh_golang"), BackgroundCoreConfig.this);
                             SessionSave.saveSession(DriverCommonData.DRIVER_NODE_URL, array.getJSONObject(0).getString("mobile_golang_url"), BackgroundCoreConfig.this);
 //                            SessionSave.saveSession("driver_node_url", json.getString("mobile_socket_http_url"), BackgroundCoreConfig.this);
                         }
 
-
                         if (json.has("chat_node_url")) {
                             SessionSave.saveSession(TaxiUtil.CHAT_NODE_URL, json.getString("chat_node_url"), BackgroundCoreConfig.this);
-
                         }
                         if (json.has("call_masking_enable")) {
                             SessionSave.saveSession(TaxiUtil.CALL_MASKING_ENABLE, json.getString("call_masking_enable"), BackgroundCoreConfig.this);
-
                         }
 
                         if (json.has("dispatcher_phone_number")) {
@@ -309,7 +283,6 @@ public class BackgroundCoreConfig extends IntentService {
 
                         //SessionSave.saveSession("twitter_share", "https://twitter.com/adropapp", BackgroundCoreConfig.this);
 
-
                         SessionSave.saveSession("About", array.getJSONObject(0).getString("aboutpage_description"), BackgroundCoreConfig.this);
                         SessionSave.saveSession("Currency", array.getJSONObject(0).getString("site_currency") + " ", BackgroundCoreConfig.this);
                         SessionSave.saveSession("AdminMail", array.getJSONObject(0).getString("admin_email"), BackgroundCoreConfig.this);
@@ -333,8 +306,7 @@ public class BackgroundCoreConfig extends IntentService {
                             SessionSave.saveSession("Metric_type", "m", BackgroundCoreConfig.this);
                         else if (SessionSave.getSession("Metric", BackgroundCoreConfig.this).equalsIgnoreCase("KM"))
                             SessionSave.saveSession("Metric_type", "k", BackgroundCoreConfig.this);
-                        else
-                            SessionSave.saveSession("Metric_type", "k", BackgroundCoreConfig.this);
+                        else SessionSave.saveSession("Metric_type", "k", BackgroundCoreConfig.this);
 
                         if (array.getJSONObject(0).has("sos_msg"))
                             SessionSave.saveSession("sos_message", array.getJSONObject(0).getString("sos_msg"), BackgroundCoreConfig.this);
@@ -362,10 +334,7 @@ public class BackgroundCoreConfig extends IntentService {
                         }
 
                         SessionSave.saveSession(TaxiUtil.GOOGLE_KEY, googleApiKey, BackgroundCoreConfig.this);
-
-
                         SessionSave.saveSession(SERVICE_DETAILS, array.getJSONObject(0).getString("service_details"), BackgroundCoreConfig.this);
-
 
                         if (array.getJSONObject(0).has("android_mapbox_key")) {
                             SessionSave.saveSession(TaxiUtil.MAP_BOX_TOKEN, array.getJSONObject(0).getString("android_mapbox_key"), BackgroundCoreConfig.this);
@@ -380,7 +349,6 @@ public class BackgroundCoreConfig extends IntentService {
 //                        if (!SessionSave.getSession(TaxiUtil.MAP_BOX_TOKEN, BackgroundCoreConfig.this).equals(""))
 //                            Mapbox.getInstance(BackgroundCoreConfig.this, SessionSave.getSession(TaxiUtil.MAP_BOX_TOKEN, BackgroundCoreConfig.this));
 
-
                         if (array.getJSONObject(0).has("map_settings") && array.getJSONObject(0).getJSONObject("map_settings").has("is_google_distance")) {
                             SessionSave.saveSession(TaxiUtil.isGoogleDistance, array.getJSONObject(0).getJSONObject("map_settings").getString("is_google_distance").equals("1"), BackgroundCoreConfig.this);
                             SessionSave.saveSession(TaxiUtil.isGoogleRouteGeo, array.getJSONObject(0).getJSONObject("map_settings").getString("is_google_direction").equals("1"), BackgroundCoreConfig.this);
@@ -393,9 +361,7 @@ public class BackgroundCoreConfig extends IntentService {
                             SessionSave.saveSession(TaxiUtil.isGoogleGeocoder, true, BackgroundCoreConfig.this);
                             SessionSave.saveSession(TaxiUtil.isNeedtoDrawRoute, true, BackgroundCoreConfig.this);
                             SessionSave.saveSession(TaxiUtil.isNeedtoFetchAddress, true, BackgroundCoreConfig.this);
-
                         }
-
 
                         JSONArray jsonarray = new JSONArray(array.getJSONObject(0).getString("passenger_payment_option"));
                         SessionSave.saveSession("pay_mod_name", jsonarray.getJSONObject(0).getString("pay_mod_name"), BackgroundCoreConfig.this);
@@ -421,7 +387,7 @@ public class BackgroundCoreConfig extends IntentService {
                                     deflanAvail = true;
                                 }
                             }
-                            Systems.out.println("___________defff" + deflanAvail);
+                            DriverSystems.out.println("___________defff" + deflanAvail);
                             if (SessionSave.getSession("LANGDef", BackgroundCoreConfig.this).trim().equals("") || !deflanAvail) {
                                 SessionSave.saveSession("LANGDef", SessionSave.getSession("LANG0", BackgroundCoreConfig.this), BackgroundCoreConfig.this);
                                 SessionSave.saveSession("LANGTempDef", SessionSave.getSession("LANGTemp0", BackgroundCoreConfig.this), BackgroundCoreConfig.this);
@@ -437,17 +403,15 @@ public class BackgroundCoreConfig extends IntentService {
                         }
                         //android_passenger_language
                         if (!SessionSave.getSession(TaxiUtil.PASSENGER_LANGUAGE_TIME, BackgroundCoreConfig.this).trim().equals(getCoreLangTime)) {
-                            Systems.out.println("___________defffcs");
+                            DriverSystems.out.println("___________defffcs");
                             new callString(getCoreColorTime);
                         } else if (!SessionSave.getSession(TaxiUtil.PASSENGER_COLOR_TIME, BackgroundCoreConfig.this).trim().equals(getCoreColorTime)) {
                             new callColor(getCoreLangTime);
-                            Systems.out.println("___________defffcc");
+                            DriverSystems.out.println("___________defffcc");
                         }
                     } else if (json.getInt("status") == -101) {
-                        if (json.has("message"))
-                            forceLogout(json.getString("message"));
-                        else
-                            forceLogout(DriverNC.getString(R.string.server_error));
+                        if (json.has("message")) forceLogout(json.getString("message"));
+                        else forceLogout(DriverNC.getString(R.string.server_error));
                     } else if (json.getInt("status") == 0) {
                         //no changes made
                     } else {
@@ -464,7 +428,7 @@ public class BackgroundCoreConfig extends IntentService {
         }
     }
 
-    private class callString implements APIResult {
+    private class callString implements DriverAPIResult {
         String color_time;
 
         public callString(final String color_time) {
@@ -484,7 +448,6 @@ public class BackgroundCoreConfig extends IntentService {
                     config.locale = new Locale(arry[0], arry[1]);
                     Locale.setDefault(new Locale(arry[0], arry[1]));
                 }
-
             }
             new APIService_Retrofit_JSON_NoProgress(BackgroundCoreConfig.this, this, null, true, urls, true).execute();
         }
@@ -498,19 +461,15 @@ public class BackgroundCoreConfig extends IntentService {
                 SessionSave.saveSession("wholekey", result, BackgroundCoreConfig.this);
                 if (SessionSave.getSession("wholekeyColor", BackgroundCoreConfig.this).trim().equals("") || !SessionSave.getSession(TaxiUtil.PASSENGER_COLOR_TIME, BackgroundCoreConfig.this).equals(color_time))
                     new callColor("");
-
-            } else
-                errorInSplash(DriverNC.getString(R.string.server_con_error));
-
+            } else errorInSplash(DriverNC.getString(R.string.server_con_error));
         }
     }
 
-    private class callColor implements APIResult {
+    private class callColor implements DriverAPIResult {
         public callColor(final String url) {
             // TODO Auto-generated constructor stub
 
             new APIService_Retrofit_JSON_NoProgress(BackgroundCoreConfig.this, this, null, true, SessionSave.getSession("colorcode", BackgroundCoreConfig.this), true).execute();
-
             Log.e("link__color", SessionSave.getSession("colorcode", BackgroundCoreConfig.this));
         }
 
@@ -521,9 +480,7 @@ public class BackgroundCoreConfig extends IntentService {
                 SessionSave.saveSession(TaxiUtil.PASSENGER_COLOR_TIME, getCoreColorTime, BackgroundCoreConfig.this);
                 getAndStoreColorValues(result);
                 SessionSave.saveSession("wholekeyColor", result, BackgroundCoreConfig.this);
-            } else
-                errorInSplash(DriverNC.getString(R.string.server_con_error));
-
+            } else errorInSplash(DriverNC.getString(R.string.server_con_error));
         }
     }
 
@@ -533,7 +490,7 @@ public class BackgroundCoreConfig extends IntentService {
      * @param message - To intimate user by showing alert message
      */
     private void forceLogout(String message) {
-        CToast.ShowToast(BackgroundCoreConfig.this, message);
+        DriverCToast.ShowToast(BackgroundCoreConfig.this, message);
         TaxiUtil.API_BASE_URL = "";
         SessionSave.saveSession("base_url", "", BackgroundCoreConfig.this);
         SessionSave.saveSession(PASS_ID, "", BackgroundCoreConfig.this);

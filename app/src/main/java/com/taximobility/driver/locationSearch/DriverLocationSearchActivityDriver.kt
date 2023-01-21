@@ -18,7 +18,7 @@ class DriverLocationSearchActivityDriver : DriverBaseActivity(), DriverSetPlaceR
 
     private lateinit var driverLocationSearchFragment: DriverLocationSearchFragmentDriverDriver
     private lateinit var listener: DriverOnLocationSearched
-    private lateinit var edLocation:EditText
+    private lateinit var edLocation: EditText
     override fun onPlaceSelected(driverPlacesDetail: DriverPlacesDetail) {
         setResult(RESULT_OK, Intent().apply {
             putExtras(Bundle().apply {
@@ -34,11 +34,15 @@ class DriverLocationSearchActivityDriver : DriverBaseActivity(), DriverSetPlaceR
         super.onCreate(savedInstanceState)
         setContentView(R.layout.driver_activity_location_search)
         edLocation = findViewById(R.id.edLocation)
-        DirverColorchange.ChangeColor((this@DriverLocationSearchActivityDriver
-                .findViewById(android.R.id.content) as ViewGroup).getChildAt(0) as ViewGroup, this@DriverLocationSearchActivityDriver)
+        DirverColorchange.ChangeColor(
+            (this@DriverLocationSearchActivityDriver.findViewById(android.R.id.content) as ViewGroup).getChildAt(
+                0
+            ) as ViewGroup, this@DriverLocationSearchActivityDriver
+        )
         driverLocationSearchFragment = DriverLocationSearchFragmentDriverDriver()
         listener = driverLocationSearchFragment
-        supportFragmentManager.beginTransaction().add(R.id.searchFrag, driverLocationSearchFragment).commitNow()
+        supportFragmentManager.beginTransaction().add(R.id.searchFrag, driverLocationSearchFragment)
+            .commitNow()
 
         isFourSquare = DriverSessionSave.getSession("isFourSquare", this) == "1"
     }

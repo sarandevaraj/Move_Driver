@@ -3,7 +3,6 @@ package com.taximobility.driver;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -61,11 +60,10 @@ public class DriverJobdoneAct extends MainActivityDriver {
         Bundle bun = getIntent().getExtras();
         DriverSessionSave.saveSession("status", "F", getApplicationContext());
         nonactiityobj.startServicefromNonActivity(DriverJobdoneAct.this);
-       // DriverFontHelper.applyFont(this, findViewById(R.id.inner_content));
+        // DriverFontHelper.applyFont(this, findViewById(R.id.inner_content));
         DriverCommonData.current_act = "JobdoneAct";
 
-        DirverColorchange.ChangeColor((ViewGroup) (((ViewGroup) DriverJobdoneAct.this
-                .findViewById(android.R.id.content)).getChildAt(0)), DriverJobdoneAct.this);
+        DirverColorchange.ChangeColor((ViewGroup) (((ViewGroup) DriverJobdoneAct.this.findViewById(android.R.id.content)).getChildAt(0)), DriverJobdoneAct.this);
 
         Glide.with(DriverJobdoneAct.this).load(DriverSessionSave.getSession("image_path", DriverJobdoneAct.this) + "eReceiptCash.png").into((ImageView) findViewById(R.id.currency_symbol));
         if (bun != null) {
@@ -120,23 +118,17 @@ public class DriverJobdoneAct extends MainActivityDriver {
             }
         }
         // This for close this activity and move to dashboard activity.
-        back_main.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                showLoading(DriverJobdoneAct.this);
-                startActivity(new Intent(getApplicationContext(), DriverMyStatus.class));
-                finish();
-            }
+        back_main.setOnClickListener(v -> {
+            // TODO Auto-generated method stub
+            showLoading(DriverJobdoneAct.this);
+            startActivity(new Intent(getApplicationContext(), DriverMyStatus.class));
+            finish();
         });
-        back.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        back.setOnClickListener(v -> {
 
-                showLoading(DriverJobdoneAct.this);
-                startActivity(new Intent(getApplicationContext(), DriverMyStatus.class));
-                finish();
-            }
+            showLoading(DriverJobdoneAct.this);
+            startActivity(new Intent(getApplicationContext(), DriverMyStatus.class));
+            finish();
         });
     }
 

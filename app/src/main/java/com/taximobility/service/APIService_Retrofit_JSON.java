@@ -6,13 +6,15 @@ import android.content.Context;
 import android.view.View;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
+
 import com.taximobility.R;
-import com.taximobility.features.CToast;
-import com.taximobility.interfaces.APIResult;
+import com.taximobility.driver.interfaces.DriverAPIResult;
+import com.taximobility.driver.utils.DriverCToast;
+import com.taximobility.driver.utils.DriverSystems;
 import com.taximobility.util.AppController;
 import com.taximobility.util.NetworkStatus;
 import com.taximobility.util.SessionSave;
-import com.taximobility.util.Systems;
 import com.taximobility.util.TaxiUtil;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.DrawableImageViewTarget;
@@ -41,29 +43,28 @@ public class APIService_Retrofit_JSON {
     public Dialog mProgressdialog;
     public Context mContext;
     private boolean isSuccess = true;
-    private boolean GetMethod;
+    private final boolean GetMethod;
     private Dialog mDialog;
     private JSONObject data;
-    public APIResult response;
+    public DriverAPIResult response;
     public boolean wholeURL;
     String result = "";
     private String url_type;
     boolean dont_encode;
 
-    public APIService_Retrofit_JSON(Context ctx, APIResult res, JSONObject j, boolean getmethod) {
+    public APIService_Retrofit_JSON(Context ctx, DriverAPIResult res, JSONObject j, boolean getmethod) {
         mContext = ctx;
         response = res;
         this.data = j;
         GetMethod = getmethod;
     }
 
-    public APIService_Retrofit_JSON(Context ctx, APIResult res, String j, boolean getmethod) {
+    public APIService_Retrofit_JSON(Context ctx, DriverAPIResult res, String j, boolean getmethod) {
         mContext = ctx;
         response = res;
         JSONObject jobj = null;
         try {
-            if (!getmethod)
-                jobj = new JSONObject(j);
+            if (!getmethod) jobj = new JSONObject(j);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -71,37 +72,34 @@ public class APIService_Retrofit_JSON {
         GetMethod = getmethod;
     }
 
-
-    public APIService_Retrofit_JSON(Context ctx, APIResult res, JSONObject j, boolean getmethod, String url) {
+    public APIService_Retrofit_JSON(Context ctx, DriverAPIResult res, JSONObject j, boolean getmethod, String url) {
         mContext = ctx;
         response = res;
         this.data = j;
         GetMethod = getmethod;
         String[] type = url.split("type=");
-        if (type.length > 1)
-            url_type = type[1];
+        if (type.length > 1) url_type = type[1];
         else {
             wholeURL = true;
             url_type = url;
         }
     }
 
-    public APIService_Retrofit_JSON(Context ctx, APIResult res, JSONObject j, boolean getmethod, String url, boolean dont_encode) {
+    public APIService_Retrofit_JSON(Context ctx, DriverAPIResult res, JSONObject j, boolean getmethod, String url, boolean dont_encode) {
         mContext = ctx;
         response = res;
         this.data = j;
         GetMethod = getmethod;
         this.dont_encode = dont_encode;
         String[] type = url.split("type=");
-        if (type.length > 1)
-            url_type = type[1];
+        if (type.length > 1) url_type = type[1];
         else {
             wholeURL = true;
             url_type = url;
         }
     }
 
-    public APIService_Retrofit_JSON(Context ctx, APIResult res, boolean getmethod, String url) {
+    public APIService_Retrofit_JSON(Context ctx, DriverAPIResult res, boolean getmethod, String url) {
         mContext = ctx;
         response = res;
         this.data = null;
@@ -111,13 +109,13 @@ public class APIService_Retrofit_JSON {
         url_type = url;
     }
 
-    public APIService_Retrofit_JSON(Context ctx, APIResult res, boolean getmethod) {
+    public APIService_Retrofit_JSON(Context ctx, DriverAPIResult res, boolean getmethod) {
         mContext = ctx;
         response = res;
         GetMethod = getmethod;
     }
 
-    public APIService_Retrofit_JSON(Context ctx, APIResult res, JSONObject j, boolean getmethod, int i) {
+    public APIService_Retrofit_JSON(Context ctx, DriverAPIResult res, JSONObject j, boolean getmethod, int i) {
         mContext = ctx;
         response = res;
         this.data = j;
@@ -140,36 +138,27 @@ public class APIService_Retrofit_JSON {
                     if (mContext instanceof Activity) {
                         Activity activity = ((Activity) mContext);
                         if (activity.getCurrentFocus() != null) {
-                            if (mDialog != null && mDialog.isShowing())
-                                mDialog.dismiss();
+                            if (mDialog != null && mDialog.isShowing()) mDialog.dismiss();
                             View view = View.inflate(mContext, R.layout.progress_bar, null);
                             mDialog = new Dialog(mContext, R.style.dialogwinddow);
                             mDialog.setContentView(view);
                             mDialog.setCancelable(false);
-
                             mDialog.show();
-
                             ImageView iv = mDialog.findViewById(R.id.giff);
                             DrawableImageViewTarget imageViewTarget = new DrawableImageViewTarget(iv);
-                            Glide.with(mContext)
-                                    .load(R.raw.loading_anim)
-                                    .into(imageViewTarget);
+                            Glide.with(mContext).load(R.raw.loading_anim).into(imageViewTarget);
                         }
                     }
                 }
-
             }
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
-
     }
 
     public void closeDialog() {
         try {
-            if (mDialog != null)
-                if (mDialog.isShowing())
-                    mDialog.dismiss();
+            if (mDialog != null) if (mDialog.isShowing()) mDialog.dismiss();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -185,12 +174,11 @@ public class APIService_Retrofit_JSON {
             //return result;
         } else {
             if (GetMethod) {
-                CoreClient client = null;
+                CoreClient client;
                 if (timeOut == 0) {
                     if (dont_encode)
                         client = AppController.getInstance().getApiManagerWithoutEncryptBaseUrl();
-                    else
-                        client = AppController.getInstance().getApiManagerWithEncryptBaseUrl();
+                    else client = AppController.getInstance().getApiManagerWithEncryptBaseUrl();
 //                    client = new ServiceGenerator(mContext, dont_encode).createService(CoreClient.class);
                 } else {
 //                    client = new ServiceGenerator(mContext, dont_encode, timeOut).createService(CoreClient.class);
@@ -199,17 +187,14 @@ public class APIService_Retrofit_JSON {
                     else
                         client = AppController.getInstance().getApiManagerWithTimeoutWithEncrypt(timeOut);
                 }
-                Call<ResponseBody> coreResponse = null;
+                Call<ResponseBody> coreResponse;
                 if (!wholeURL) {
-                    coreResponse = client.coreDetailsg("no-cache", TaxiUtil.COMPANY_KEY,
-                            url_type, SessionSave.getSession(TaxiUtil.GETCORE_LASTUPDATE, mContext).equals("") ? "0" : SessionSave.getSession(TaxiUtil.GETCORE_LASTUPDATE, mContext)
-                            , SessionSave.getSession(TaxiUtil.ACCESS_KEY, mContext));
-                } else
-                    coreResponse = client.getWhole("no-cache", url_type);
+                    coreResponse = client.coreDetailsg("no-cache", TaxiUtil.COMPANY_KEY, url_type, SessionSave.getSession(TaxiUtil.GETCORE_LASTUPDATE, mContext).equals("") ? "0" : SessionSave.getSession(TaxiUtil.GETCORE_LASTUPDATE, mContext), SessionSave.getSession(TaxiUtil.ACCESS_KEY, mContext));
+                } else coreResponse = client.getWhole("no-cache", url_type);
                 coreResponse.enqueue(new RetrofitCallbackClass<ResponseBody>(mContext, new Callback<ResponseBody>() {
                     @Override
-                    public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
-                        String data = null;
+                    public void onResponse(@NonNull Call<ResponseBody> call, @NonNull retrofit2.Response<ResponseBody> response) {
+                        String data;
                         closeDialog();
                         if (response.isSuccessful()) {
                             try {
@@ -220,38 +205,37 @@ public class APIService_Retrofit_JSON {
                                 } else {
                                     if (APIService_Retrofit_JSON.this.response != null)
                                         APIService_Retrofit_JSON.this.response.getResult(false, null);
-                                    CToast.ShowToast(mContext, mContext.getString(R.string.server_error));
+                                    DriverCToast.ShowToast(mContext, mContext.getString(R.string.server_error));
                                 }
                             } catch (Exception e) {
                                 e.printStackTrace();
                                 if (APIService_Retrofit_JSON.this.response != null)
                                     APIService_Retrofit_JSON.this.response.getResult(false, null);
-                                CToast.ShowToast(mContext, mContext.getString(R.string.server_error));
+                                DriverCToast.ShowToast(mContext, mContext.getString(R.string.server_error));
                             }
                         } else {
                             if (APIService_Retrofit_JSON.this.response != null)
                                 APIService_Retrofit_JSON.this.response.getResult(false, null);
-                            CToast.ShowToast(mContext, mContext.getString(R.string.server_error));
+                            DriverCToast.ShowToast(mContext, mContext.getString(R.string.server_error));
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
                         if (APIService_Retrofit_JSON.this.response != null)
                             APIService_Retrofit_JSON.this.response.getResult(false, null);
-                        CToast.ShowToast(mContext, mContext.getString(R.string.server_error));
+                        DriverCToast.ShowToast(mContext, mContext.getString(R.string.server_error));
                         t.printStackTrace();
                         closeDialog();
                     }
                 }));
 
             } else {
-                CoreClient client = null;
+                CoreClient client;
                 if (timeOut == 0) {
                     if (dont_encode)
                         client = AppController.getInstance().getApiManagerWithoutEncryptBaseUrl();
-                    else
-                        client = AppController.getInstance().getApiManagerWithEncryptBaseUrl();
+                    else client = AppController.getInstance().getApiManagerWithEncryptBaseUrl();
 //                    client = new ServiceGenerator(mContext, dont_encode).createService(CoreClient.class);
                 } else {
 //                    client = new ServiceGenerator(mContext, dont_encode, timeOut).createService(CoreClient.class);
@@ -261,12 +245,12 @@ public class APIService_Retrofit_JSON {
                         client = AppController.getInstance().getApiManagerWithTimeoutWithEncrypt(timeOut);
                 }
                 RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), (data).toString());
-                Systems.out.println("calling");
-                Call<ResponseBody> coreResponse = client.updateUser(TaxiUtil.COMPANY_KEY, body, url_type, SessionSave.getSession("Lang", mContext),SessionSave.getSession("PASS_ID", mContext));
+                DriverSystems.out.println("calling");
+                Call<ResponseBody> coreResponse = client.updateUser(TaxiUtil.COMPANY_KEY, body, url_type, SessionSave.getSession("Lang", mContext), SessionSave.getSession("PASS_ID", mContext));
                 coreResponse.enqueue(new RetrofitCallbackClass<ResponseBody>(mContext, new Callback<ResponseBody>() {
                     @Override
-                    public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
-                        String data = null;
+                    public void onResponse(@NonNull Call<ResponseBody> call, @NonNull retrofit2.Response<ResponseBody> response) {
+                        String data;
                         closeDialog();
                         if (response.isSuccessful()) {
                             try {
@@ -277,48 +261,41 @@ public class APIService_Retrofit_JSON {
                                 } else {
                                     if (APIService_Retrofit_JSON.this.response != null)
                                         APIService_Retrofit_JSON.this.response.getResult(false, null);
-                                    CToast.ShowToast(mContext, mContext.getString(R.string.server_error));
+                                    DriverCToast.ShowToast(mContext, mContext.getString(R.string.server_error));
                                 }
                             } catch (Exception e) {
                                 e.printStackTrace();
                                 if (APIService_Retrofit_JSON.this.response != null)
                                     APIService_Retrofit_JSON.this.response.getResult(false, null);
-                                CToast.ShowToast(mContext, mContext.getString(R.string.server_error));
+                                DriverCToast.ShowToast(mContext, mContext.getString(R.string.server_error));
                             }
                         } else {
                             if (APIService_Retrofit_JSON.this.response != null)
                                 APIService_Retrofit_JSON.this.response.getResult(false, null);
-                            CToast.ShowToast(mContext, mContext.getString(R.string.server_error));
+                            DriverCToast.ShowToast(mContext, mContext.getString(R.string.server_error));
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
                         if (APIService_Retrofit_JSON.this.response != null)
                             APIService_Retrofit_JSON.this.response.getResult(false, null);
-                        CToast.ShowToast(mContext, mContext.getString(R.string.server_error));
+                        DriverCToast.ShowToast(mContext, mContext.getString(R.string.server_error));
                         t.printStackTrace();
                         closeDialog();
                     }
                 }));
             }
-
         }
-
     }
-
 
     public void execute(String url) {
         String[] type = url.split("=");
         this.url_type = type[1];
         onPreExecute();
-
     }
 
     public void execute() {
-
         onPreExecute();
-
     }
-
 }

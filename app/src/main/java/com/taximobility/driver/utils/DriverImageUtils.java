@@ -28,10 +28,7 @@ public class DriverImageUtils {
         final int REQUIRED_SIZE = 100;
         int width_tmp = o.outWidth, height_tmp = o.outHeight;
         int scale = 1;
-        while (true) {
-            if (width_tmp / 2 < REQUIRED_SIZE || height_tmp / 2 < REQUIRED_SIZE) {
-                break;
-            }
+        while (width_tmp / 2 >= REQUIRED_SIZE && height_tmp / 2 >= REQUIRED_SIZE) {
             width_tmp /= 2;
             height_tmp /= 2;
             scale *= 2;
@@ -74,7 +71,7 @@ public class DriverImageUtils {
     }
 
     public static int getAngle(String file) {
-        File mfile = null;
+        File mfile;
         int angle = 0;
         try {
             mfile = new File(file);
@@ -88,7 +85,7 @@ public class DriverImageUtils {
                 angle = 270;
             }
         } catch (FileNotFoundException ex) {
-            Log.i("File Not found", "" + ex.toString());
+            Log.i("File Not found", "" + ex);
         } catch (Exception ex) {
             ex.printStackTrace();
         }

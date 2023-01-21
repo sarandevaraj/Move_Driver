@@ -22,32 +22,38 @@ import java.util.*
 import java.util.concurrent.TimeUnit
 import kotlin.math.cos
 
-
-class DriverGooglePlaceRepository(val mContext: Context, val listener: DriverPlaceSearchList) : DriverOnLocationSearched, Filterable {
+class DriverGooglePlaceRepository(val mContext: Context, val listener: DriverPlaceSearchList) :
+    DriverOnLocationSearched, Filterable {
     private var mResultList: ArrayList<DriverPlacesDetail>? = null
     private var mBounds: RectangularBounds? = null
-
     private var placesClient: PlacesClient
     private val token: AutocompleteSessionToken
 
     init {
         if (DriverSessionSave.getSession(DriverCommonData.SOS_LAST_LAT, mContext) != "") {
             try {
-                val lat = java.lang.Double.parseDouble(DriverSessionSave.getSession(DriverCommonData.SOS_LAST_LAT, mContext))
-                val lon = java.lang.Double.parseDouble(DriverSessionSave.getSession(DriverCommonData.SOS_LAST_LNG, mContext))
+                val lat = java.lang.Double.parseDouble(
+                    DriverSessionSave.getSession(
+                        DriverCommonData.SOS_LAST_LAT, mContext
+                    )
+                )
+                val lon = java.lang.Double.parseDouble(
+                    DriverSessionSave.getSession(
+                        DriverCommonData.SOS_LAST_LNG, mContext
+                    )
+                )
                 mBounds = RectangularBounds.newInstance(
-                        getBoundingBox(lat, lon, 50000).southwest,
-                        getBoundingBox(lat, lon, 50000).northeast)
+                    getBoundingBox(lat, lon, 50000).southwest,
+                    getBoundingBox(lat, lon, 50000).northeast
+                )
             } catch (e: NumberFormatException) {
                 e.printStackTrace()
             }
-
-        } else
-            mBounds = null
+        } else mBounds = null
 
         if (!Places.isInitialized())
-         //   Places.initialize(mContext, SessionSave.getSession(CommonData.GOOGLE_KEY, mContext))
-            Places.initialize(mContext,mContext.resources.getString(R.string.googleID))
+        //   Places.initialize(mContext, SessionSave.getSession(CommonData.GOOGLE_KEY, mContext))
+            Places.initialize(mContext, mContext.resources.getString(R.string.googleID))
         placesClient = Places.createClient(mContext)
         token = AutocompleteSessionToken.newInstance()
     }
@@ -61,7 +67,6 @@ class DriverGooglePlaceRepository(val mContext: Context, val listener: DriverPla
                     if (mResultList != null) {
                         results.values = mResultList
                         results.count = mResultList?.size ?: 0
-
                     }
                 }
                 return results
@@ -127,26 +132,25 @@ class DriverGooglePlaceRepository(val mContext: Context, val listener: DriverPla
             it.build()
         }
 
-        val task = placesClient.findAutocompletePredictions(request).addOnSuccessListener { response ->
-            for (prediction in response.autocompletePredictions) {
-                resultList.add(DriverPlacesDetail().apply {
-                    setLabel_name(prediction.getPrimaryText(null).toString())
-                    setLocation_name(prediction.getSecondaryText(null).toString())
-                    setPlaceId(prediction.placeId)
-                    setPlaceType(0)
-                })
-            }
+        val task =
+            placesClient.findAutocompletePredictions(request).addOnSuccessListener { response ->
+                for (prediction in response.autocompletePredictions) {
+                    resultList.add(DriverPlacesDetail().apply {
+                        setLabel_name(prediction.getPrimaryText(null).toString())
+                        setLocation_name(prediction.getSecondaryText(null).toString())
+                        setPlaceId(prediction.placeId)
+                        setPlaceType(0)
+                    })
+                }
 
-            if (resultList.count() > 0)
-                listener.setPlaceList(resultList)
-            else
+                if (resultList.count() > 0) listener.setPlaceList(resultList)
+                else listener.setPlaceList(null)
+
+            }.addOnFailureListener { exception ->
+                exception.printStackTrace()
+                resultList.clear()
                 listener.setPlaceList(null)
-
-        }.addOnFailureListener { exception ->
-            exception.printStackTrace()
-            resultList.clear()
-            listener.setPlaceList(null)
-        }
+            }
         try {
             Tasks.await(task, 5, TimeUnit.SECONDS)
         } catch (e: Exception) {
@@ -155,7 +159,9 @@ class DriverGooglePlaceRepository(val mContext: Context, val listener: DriverPla
         return resultList
     }
 
-    private fun getBoundingBox(pLatitude: Double, pLongitude: Double, pDistanceInMeters: Int): LatLngBounds {
+    private fun getBoundingBox(
+        pLatitude: Double, pLongitude: Double, pDistanceInMeters: Int
+    ): LatLngBounds {
 
         val boundingBox = DoubleArray(4)
 
@@ -164,8 +170,7 @@ class DriverGooglePlaceRepository(val mContext: Context, val listener: DriverPla
         val degLatKm = 110.574235
         val degLongKm = 110.572833 * cos(latRadian)
         val deltaLat = pDistanceInMeters.toDouble() / 1000.0 / degLatKm
-        val deltaLong = pDistanceInMeters.toDouble() / 1000.0 /
-                degLongKm
+        val deltaLong = pDistanceInMeters.toDouble() / 1000.0 / degLongKm
 
         val minLat = pLatitude - deltaLat
         val minLong = pLongitude - deltaLong

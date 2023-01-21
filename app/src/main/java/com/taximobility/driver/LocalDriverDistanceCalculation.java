@@ -46,7 +46,6 @@ public class LocalDriverDistanceCalculation implements DriverDistanceMatrixInter
         LatLng from = new LatLng(lat1, lon1);
         LatLng to = new LatLng(lat2, lon2);
 
-
         //Calculating the distance in meters
 
         double distance = DriverDistanceMatrixUtil.INSTANCE.calculateDistance(DriverSessionSave.getSession("Metric", localcontext).trim(), from, to);
@@ -64,23 +63,17 @@ public class LocalDriverDistanceCalculation implements DriverDistanceMatrixInter
                     // This is where you do your work in the UI thread.
                     // Your worker tells you in the message what to do.
                     String savingTripDetail = "";
-                    savingTripDetail += DriverSessionSave.getSession(DriverSessionSave.getSession("trip_id", localcontext) + "data", localcontext) + "\n\n\n<br><br>" + "Distance**85#&nbsp;" + DriverSessionSave.getDistance(localcontext) + "&nbsp;&nbsp;Trip&nbsp;" + DriverSessionSave.getSession("trip_id", localcontext) + "&nbsp;&nbsp;Speed&nbsp;" + "&nbsp;&nbsp;Time&nbsp;" + DateFormat.getTimeInstance().format(new Date()) +
-                            "&nbsp;&nbsp;old&nbsp;&nbsp;" + lat1 + "&nbsp;" + lon1 + "&nbsp;&nbsp;New&nbsp;&nbsp;" + lat2
-                            + "&nbsp;" + lon2
-                            + "&nbsp;&nbsp;Read way&nbsp;&nbsp;" + DriverSessionSave.ReadGoogleWaypoints(localcontext);
+                    savingTripDetail += DriverSessionSave.getSession(DriverSessionSave.getSession("trip_id", localcontext) + "data", localcontext) + "\n\n\n<br><br>" + "Distance**85#&nbsp;" + DriverSessionSave.getDistance(localcontext) + "&nbsp;&nbsp;Trip&nbsp;" + DriverSessionSave.getSession("trip_id", localcontext) + "&nbsp;&nbsp;Speed&nbsp;" + "&nbsp;&nbsp;Time&nbsp;" + DateFormat.getTimeInstance().format(new Date()) + "&nbsp;&nbsp;old&nbsp;&nbsp;" + lat1 + "&nbsp;" + lon1 + "&nbsp;&nbsp;New&nbsp;&nbsp;" + lat2 + "&nbsp;" + lon2 + "&nbsp;&nbsp;Read way&nbsp;&nbsp;" + DriverSessionSave.ReadGoogleWaypoints(localcontext);
 
                     DriverSessionSave.saveSession(DriverSessionSave.getSession("trip_id", localcontext) + "data", savingTripDetail, localcontext);
-
                 }
             };
             mHandler.sendEmptyMessage(0);
         }
-
     }
 
     @Override
     public void onDistanceCalled(LatLng pick, LatLng drop, double distance, double time, String result, String status) {
-
 
         if (status.equalsIgnoreCase("OK")) {
             DriverSessionSave.setGoogleDistance(DriverSessionSave.getGoogleDistance(localcontext) + distance, localcontext);

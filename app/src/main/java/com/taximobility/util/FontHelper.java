@@ -12,6 +12,8 @@ import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import androidx.annotation.NonNull;
+
 import com.taximobility.R;
 
 import java.lang.reflect.Field;
@@ -42,7 +44,6 @@ public class FontHelper {
             e.printStackTrace();
         }
     }
-
 
     public static void applyBold(final Context context, final View root) {
         try {
@@ -77,7 +78,7 @@ public class FontHelper {
 
         // Affects opened state of the spinner
         @Override
-        public View getDropDownView(int position, View convertView, ViewGroup parent) {
+        public View getDropDownView(int position, View convertView, @NonNull ViewGroup parent) {
             View view = super.getDropDownView(position, convertView, parent);
             FontHelper.applyFont(context, view);
             return view;
@@ -104,7 +105,7 @@ public class FontHelper {
 
         // Affects opened state of the spinner
         @Override
-        public View getDropDownView(int position, View convertView, ViewGroup parent) {
+        public View getDropDownView(int position, View convertView, @NonNull ViewGroup parent) {
             View view = super.getDropDownView(position, convertView, parent);
             FontHelper.applyFont(context, view);
             return view;
@@ -197,16 +198,13 @@ public class FontHelper {
                                 v1.invalidate();
                             } catch (Exception e) {
                                 //TODO catch.
-                                //If java cant find field then it will catch here and app wont crash.
                             }
                         }
                     }
                 } catch (Exception e) {
                     //TODO catch.
-                    //If java cant find field then it will catch here and app wont crash.
                 }
             }
-
     }
 
     public static String convertfromArabic(String value) {

@@ -1,8 +1,8 @@
 package com.taximobility.service;
 
-import com.taximobility.data.apiData.ApiRequestData;
 import com.taximobility.data.apiData.CompanyDomainResponse;
 import com.google.gson.JsonObject;
+import com.taximobility.driver.data.apiData.DriverApiRequestData;
 
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
@@ -55,7 +55,7 @@ public interface CoreClient {
 //    Call<StandardResponse> helpSubmit(@Path(value = "owner", encoded = true) String owner, @Body ApiRequestData.HelpSubmit body, @Query("lang") String lang);
 
     @POST("{owner}" + "?type=check_companydomain")
-    Call<CompanyDomainResponse> callData(@Path(value = "owner", encoded = true) String owner, @Body ApiRequestData.BaseUrl body);
+    Call<CompanyDomainResponse> callData(@Path(value = "owner", encoded = true) String owner, @Body DriverApiRequestData.BaseUrl body);
 
     @GET
     Call<JsonObject> getJsonbyWholeUrl(@Header("Cache-Control") String cacheControl, @Url String url);
@@ -65,7 +65,6 @@ public interface CoreClient {
 
     @POST("get_driver_current_location")
     Call<ResponseBody> getDriverCurrentLocation(@Body RequestBody body);
-
 
     @POST
     Call<ResponseBody> urlCheck(@Url String url, @Body RequestBody body);
@@ -88,10 +87,8 @@ public interface CoreClient {
 //    @POST("?type=cancel_trip")
 //    Call<CancelTripResponseData> callCancelTripApi(@Body CancelTripRequestData body);
 //
-//
 //    @POST("?type=add_favourite")
 //    Call<AddFavouriteData> addFavourite(@Body RequestBody body, @Query(value = "lang", encoded = true) String langCode);
-//
 //
 //    @POST("nearestdriver_list")
 //    Call<NearestDriverDatas> nodeUpdates(@Body RequestBody body, @Query(value = "lang", encoded = true)String langCode);
@@ -102,10 +99,8 @@ public interface CoreClient {
 //    @POST("?type=savebooking")
 //    Call<SaveBookingResponse> saveBookingData(@Body RequestBody body, @Query(value = "lang", encoded = true)String langCode);
 //
-//
 //    @POST("?type=delete_favourite")
 //    Call<DeleteFavouriteData> deleteFavourite(@Body RequestBody body, @Query(value = "lang", encoded = true) String langCode);
-//
 //
 //    @POST("?type=check_valid_promocode")
 //    Call<CheckPromoCodeData> checkProcode(@Body RequestBody body, @Query(value = "lang", encoded = true)String langCode);
@@ -113,14 +108,9 @@ public interface CoreClient {
 //    @POST("?type=getPassengerInfo")
 //    Call<PassengerInfoData> getPassengerInfo(@Body RequestBody body, @Query(value = "lang", encoded = true)String langCode);
 
-
     @POST("?type=getService_models")
     Call<ResponseBody> getServiceModels(@Body RequestBody body, @Query(value = "lang", encoded = true)String langCode);
 
     @POST("?type=get_preferences")
     Call<ResponseBody> getPreferences(@Body RequestBody body, @Query(value = "lang", encoded = true)String langCode);
-
-
-
-
 }

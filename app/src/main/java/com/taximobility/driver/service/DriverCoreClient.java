@@ -33,12 +33,10 @@ import retrofit2.http.Url;
 public interface DriverCoreClient {
 
     @GET("{owner}")
-    Call<ResponseBody> coreDetails(@Path(value = "owner", encoded = true) String owner,@Header("Cache-Control") String cacheControl, @Query("type") String url, @Query(value = "gt_lst_time", encoded = true) String encode,@Query(value = "dn", encoded = true) String auth_key);
-
+    Call<ResponseBody> coreDetails(@Path(value = "owner", encoded = true) String owner, @Header("Cache-Control") String cacheControl, @Query("type") String url, @Query(value = "gt_lst_time", encoded = true) String encode, @Query(value = "dn", encoded = true) String auth_key);
 
     @POST("{owner}")
     Call<ResponseBody> updateUser(@Path(value = "owner", encoded = true) String owner, @Body RequestBody body, @Query("type") String url, @Query(value = "lang", encoded = true) String lang);
-
 
     @POST("{owner}" + "?type=driver_booking_list")
     Call<DriverUpcomingResponse> callData(@Path(value = "owner", encoded = true) String owner, @Body DriverApiRequestData.UpcomingRequest body, @Query("lang") String lang);
@@ -68,7 +66,6 @@ public interface DriverCoreClient {
     @POST("{owner}" + "?type=get_trip_detail")
     Call<DriverGetTripDetailResponse> getTripDetail(@Path(value = "owner", encoded = true) String owner, @Body DriverApiRequestData.TripDetailRequest body, @Query("lang") String lang);
 
-
     @POST("{owner}" + "?type=street_pickup_tripfare_update")
     Call<DriverStreetCompleteResponse> completeStreetPickUpdate(@Path(value = "owner", encoded = true) String owner, @Body DriverApiRequestData.StreetPickComplete body, @Query("lang") String lang);
 
@@ -81,7 +78,6 @@ public interface DriverCoreClient {
     @GET
     Call<JsonObject> getJsonbyWholeUrl(@Header("Cache-Control") String cacheControl, @Url String url);
 
-
     @POST("?type=settlement_history")
     Call<DriverSettlementHistoryData> settlement_historyCall(@Body DriverApiRequestData.SettlementHistory body, @Query(value = "lang", encoded = true) String langCode);
 
@@ -91,20 +87,17 @@ public interface DriverCoreClient {
     @POST("?type=settlement_request_amount")
     Call<DriverSettlementReqData> settlement_reqCall(@Body DriverApiRequestData.SettlementReq body, @Query(value = "lang", encoded = true) String langCode);
 
-
     @POST("driver_location_history_update")
-    Call<ResponseBody> nodeUpdate(@Body RequestBody body, @Query(value = "h", encoded = true) String hours,@Query(value = "t", encoded = true) String timeUpdate);
+    Call<ResponseBody> nodeUpdate(@Body RequestBody body, @Query(value = "h", encoded = true) String hours, @Query(value = "t", encoded = true) String timeUpdate);
 
     @POST("locationUpdate")
-    Call<ResponseBody> goLangUpdate(@Body RequestBody body, @Query(value = "h", encoded = true) String hours,@Query(value = "t", encoded = true) String timeUpdate);
+    Call<ResponseBody> goLangUpdate(@Body RequestBody body, @Query(value = "h", encoded = true) String hours, @Query(value = "t", encoded = true) String timeUpdate);
 
     @POST("auth")
     Call<ResponseBody> nodeAuth(@Body RequestBody body);
 
-
     @POST
     Call<ResponseBody> urlCheck(@Url String url, @Body RequestBody body);
-
 
     @POST
     Call<ResponseBody> detail_infoCall(@Url String url, @Body DriverDetailInfo body, @Query(value = "lang", encoded = true) String langCode);
@@ -112,12 +105,10 @@ public interface DriverCoreClient {
     @POST("?type=error_logs")
     Call<ResponseBody> errorLogUpdate(@Body RequestBody body);
 
-
     @GET
     Call<ResponseBody> getPolylineDataWithWayPoint(@Url String url, @Query("origin") String origin, @Query("destination") String destination, @Query(value = "waypoints", encoded = true) String waypoints, @Query("key") String key);
 
-
     @GET
-    Call<Object> requestExplore(@Url String url,@Query("v") String v, @Query("ll") String ll, @Query("query") String query, @Query("oauth_token") String oauth_token);
+    Call<Object> requestExplore(@Url String url, @Query("v") String v, @Query("ll") String ll, @Query("query") String query, @Query("oauth_token") String oauth_token);
 
 }

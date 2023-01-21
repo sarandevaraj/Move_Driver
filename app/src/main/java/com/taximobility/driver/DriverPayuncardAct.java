@@ -36,7 +36,6 @@ import com.taximobility.driver.utils.DriverFourDigitCardFormatWatcher;
 import com.taximobility.driver.utils.DriverNC;
 import com.taximobility.driver.utils.DriverSessionSave;
 import com.taximobility.driver.utils.Driver_Utils;
-import com.taximobility.features.CToast;
 import com.taximobility.service.CoreClient;
 import com.taximobility.service.RetrofitCallbackClass;
 import com.taximobility.util.AppController;
@@ -54,7 +53,6 @@ import java.util.Calendar;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
 
 /**
  * This class  is used to complete the payment by new card
@@ -89,7 +87,7 @@ public class DriverPayuncardAct extends MainActivityDriver implements OnClickLis
     private int mDay;
     private int mYear;
     private static final int DATE_DIALOG_ID = 0;
-    private String f_paymodid = "3";
+    private final String f_paymodid = "3";
     private String group_id;
     private String account_id;
     private String info;
@@ -107,8 +105,7 @@ public class DriverPayuncardAct extends MainActivityDriver implements OnClickLis
     private String delivery_fare = "0", per_kg_price = "0";
     private WebView webviewww;
     private Dialog mDialog;
-    private String order_id="";
-
+    private String order_id = "";
 
     /**
      * set layout to the activity
@@ -127,8 +124,7 @@ public class DriverPayuncardAct extends MainActivityDriver implements OnClickLis
         Bundle bun = getIntent().getExtras();
         DriverCommonData.current_act = "PayuncardAct";
         DriverFontHelper.applyFont(this, findViewById(R.id.id_paylay));
-        DirverColorchange.ChangeColor((ViewGroup) (((ViewGroup) DriverPayuncardAct.this
-                .findViewById(android.R.id.content)).getChildAt(0)), DriverPayuncardAct.this);
+        DirverColorchange.ChangeColor((ViewGroup) (((ViewGroup) DriverPayuncardAct.this.findViewById(android.R.id.content)).getChildAt(0)), DriverPayuncardAct.this);
         if (bun != null) {
             HeadTitle = findViewById(R.id.signup_title);
             cardEdt = findViewById(R.id.cardEdt);
@@ -252,7 +248,6 @@ public class DriverPayuncardAct extends MainActivityDriver implements OnClickLis
         }
     }
 
-
     /**
      * FareUpdate API response parsing.
      */
@@ -266,7 +261,6 @@ public class DriverPayuncardAct extends MainActivityDriver implements OnClickLis
                 }*/
                 new DriverAPIService_Retrofit_JSON(DriverPayuncardAct.this, this, data, false, 3000).execute(url);
             }
-
         }
 
         @Override
@@ -297,14 +291,12 @@ public class DriverPayuncardAct extends MainActivityDriver implements OnClickLis
     }
 
     private void redirectwebpage(String url) {
-
         webviewww.setVisibility(View.VISIBLE);
         webviewww.loadUrl(url);
         //showDialog();
         WebSettings webSettings = webviewww.getSettings();
         webSettings.setJavaScriptEnabled(true);
         webviewww.setWebViewClient(new MyWebViewClient());
-
     }
 
     private class MyWebViewClient extends WebViewClient {
@@ -319,10 +311,8 @@ public class DriverPayuncardAct extends MainActivityDriver implements OnClickLis
                     SearchApiCall(url);
                     //showDialog();
                 } else {
-                    CToast.ShowToast(DriverPayuncardAct.this, "Payment Failed");
+                    DriverCToast.ShowToast(DriverPayuncardAct.this, "Payment Failed");
                 }
-
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -332,34 +322,32 @@ public class DriverPayuncardAct extends MainActivityDriver implements OnClickLis
         @Override
         public void onPageFinished(WebView view, String url) {
             super.onPageFinished(view, url);
-            try {
+//            try {
                 //closeDialog();
-            } catch (Exception exception) {
-                exception.printStackTrace();
-            }
+//            } catch (Exception exception) {
+//                exception.printStackTrace();
+//            }
         }
     }
-
 
     private void SearchApiCall(String url) {
         if (NetworkStatus.isOnline(DriverPayuncardAct.this)) {
             String baseUrl = url;
             CoreClient polyline = AppController.getInstance().getApiManagerWithoutEncryptBaseUrl();
-            polyline.getJsonbyWholeUrl("no-cache", baseUrl)
-                    .enqueue(new RetrofitCallbackClass<JsonObject>(DriverPayuncardAct.this, new Callback<JsonObject>() {
-                        @Override
-                        public void onResponse(@NonNull Call<JsonObject> call, @NonNull Response<JsonObject> response) {
-                            //closeDialog();
-                            if (response.isSuccessful()) {
-                                String result = response.body().toString();
-                                String msg="";
-                                try {
-                                    JSONObject json = new JSONObject(result);
-                                    if (json.getInt("status") == 1) {
+            polyline.getJsonbyWholeUrl("no-cache", baseUrl).enqueue(new RetrofitCallbackClass<JsonObject>(DriverPayuncardAct.this, new Callback<JsonObject>() {
+                @Override
+                public void onResponse(@NonNull Call<JsonObject> call, @NonNull Response<JsonObject> response) {
+                    //closeDialog();
+                    if (response.isSuccessful()) {
+                        String result = response.body().toString();
+                        String msg = "";
+                        try {
+                            JSONObject json = new JSONObject(result);
+                            if (json.getInt("status") == 1) {
 
-                                        order_id=json.getString("order_id");
-                                        callurl();
-                                       // CToast.ShowToast(DriverPayuncardAct.this, json.getString("message"));
+                                order_id = json.getString("order_id");
+                                callurl();
+                                // CToast.ShowToast(DriverPayuncardAct.this, json.getString("message"));
 //                                        DriverCommonData.travel_km = 0;
 //                                        msg= json.getString("message");
 //                                        DriverSessionSave.setGoogleDistance(0f, DriverPayuncardAct.this);
@@ -373,41 +361,34 @@ public class DriverPayuncardAct extends MainActivityDriver implements OnClickLis
 //                                        startActivity(jobintent);
 
 
-                                    }else {
-                                        msg = json.getString("message");
-                                    }
-                                   // dialog1 = Driver_Utils.alert_view(DriverPayuncardAct.this, "" + DriverNC.getResources().getString(R.string.message), "" + msg, "" + DriverNC.getResources().getString(R.string.ok), "", true, DriverPayuncardAct.this, "");
-
-
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-
-
                             } else {
-                                CToast.ShowToast(DriverPayuncardAct.this, DriverNC.getString(R.string.server_con_error));
+                                msg = json.getString("message");
                             }
+                            // dialog1 = Driver_Utils.alert_view(DriverPayuncardAct.this, "" + DriverNC.getResources().getString(R.string.message), "" + msg, "" + DriverNC.getResources().getString(R.string.ok), "", true, DriverPayuncardAct.this, "");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
+                    } else {
+                        DriverCToast.ShowToast(DriverPayuncardAct.this, DriverNC.getString(R.string.server_con_error));
+                    }
+                }
 
-                        @Override
-                        public void onFailure(@NonNull Call<JsonObject> call, Throwable t) {
-                            // ShowToast.center(DriverPayuncardAct.this, t.getLocalizedMessage());
-                        }
-                    }));
+                @Override
+                public void onFailure(@NonNull Call<JsonObject> call, @NonNull Throwable t) {
+                    // ShowToast.center(DriverPayuncardAct.this, t.getLocalizedMessage());
+                }
+            }));
         } else {
-            CToast.ShowToast(DriverPayuncardAct.this, DriverNC.getString(R.string.check_internet_connection));
+            DriverCToast.ShowToast(DriverPayuncardAct.this, DriverNC.getString(R.string.check_internet_connection));
         }
-
     }
-
 
     public void showDialog() {
         try {
             if (NetworkStatus.isOnline(DriverPayuncardAct.this)) {
                 if (DriverPayuncardAct.this != null) {
 
-                    if (mDialog != null && mDialog.isShowing())
-                        mDialog.dismiss();
+                    if (mDialog != null && mDialog.isShowing()) mDialog.dismiss();
                     View view = View.inflate(DriverPayuncardAct.this, R.layout.progress_bar, null);
                     mDialog = new Dialog(DriverPayuncardAct.this, R.style.dialogwinddow);
                     mDialog.setContentView(view);
@@ -417,24 +398,17 @@ public class DriverPayuncardAct extends MainActivityDriver implements OnClickLis
 
                     ImageView iv = mDialog.findViewById(R.id.giff);
                     DrawableImageViewTarget imageViewTarget = new DrawableImageViewTarget(iv);
-                    Glide.with(DriverPayuncardAct.this)
-                            .load(R.raw.loading_anim)
-                            .into(imageViewTarget);
+                    Glide.with(DriverPayuncardAct.this).load(R.raw.loading_anim).into(imageViewTarget);
                 }
-
-
             }
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
-
     }
 
     public void closeDialog() {
         try {
-            if (mDialog != null)
-                if (mDialog.isShowing())
-                    mDialog.dismiss();
+            if (mDialog != null) if (mDialog.isShowing()) mDialog.dismiss();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -451,8 +425,7 @@ public class DriverPayuncardAct extends MainActivityDriver implements OnClickLis
 
     @Override
     protected void onDestroy() {
-        if (dialog1 != null)
-            Driver_Utils.closeDialog(dialog1);
+        if (dialog1 != null) Driver_Utils.closeDialog(dialog1);
         super.onDestroy();
     }
 
@@ -504,13 +477,13 @@ public class DriverPayuncardAct extends MainActivityDriver implements OnClickLis
 
 
                 } else if (creditcard_cvv.length() < 3) {
-                    DriverCToast.ShowToast(DriverPayuncardAct.this, "" +  DriverNC.getResources().getString(R.string.ent_chk_cvv));
+                    DriverCToast.ShowToast(DriverPayuncardAct.this, "" + DriverNC.getResources().getString(R.string.ent_chk_cvv));
 //                    dialog1 = Driver_Utils.alert_view(DriverPayuncardAct.this, "", "" + DriverNC.getResources().getString(R.string.ent_chk_cvv), DriverNC.getResources().getString(R.string.ok),
 //                            "", true, DriverPayuncardAct.this, "");
 
 
                 } else if (creditcard_cvv.length() > 4) {
-                    DriverCToast.ShowToast(DriverPayuncardAct.this, "" +  DriverNC.getResources().getString(R.string.ent_chk_cvv));
+                    DriverCToast.ShowToast(DriverPayuncardAct.this, "" + DriverNC.getResources().getString(R.string.ent_chk_cvv));
 //                    dialog1 = Driver_Utils.alert_view(DriverPayuncardAct.this, "", "" + DriverNC.getResources().getString(R.string.ent_chk_cvv), DriverNC.getResources().getString(R.string.ok),
 //                            "", true, DriverPayuncardAct.this, "");
 
@@ -548,7 +521,7 @@ public class DriverPayuncardAct extends MainActivityDriver implements OnClickLis
             JSONObject j = new JSONObject();
             j.put("trip_id", f_tripid);
             j.put("distance", f_distance);
-            j.put("order_id",order_id);
+            j.put("order_id", order_id);
             j.put("actual_distance", MainActivityDriver.mMyStatus.getdistance());
             j.put("actual_amount", "" + f_total);
             j.put("trip_fare", f_tripfare);
@@ -613,7 +586,6 @@ public class DriverPayuncardAct extends MainActivityDriver implements OnClickLis
                 }
                 new DriverAPIService_Retrofit_JSON(DriverPayuncardAct.this, this, data, false, 3000).execute(url);
             }
-
         }
 
         @Override
@@ -655,7 +627,7 @@ public class DriverPayuncardAct extends MainActivityDriver implements OnClickLis
     /**
      * Date picker
      */
-    private DatePickerDialog.OnDateSetListener mDateSetListner = new DatePickerDialog.OnDateSetListener() {
+    private final DatePickerDialog.OnDateSetListener mDateSetListner = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
             mYear = year;
@@ -690,7 +662,9 @@ public class DriverPayuncardAct extends MainActivityDriver implements OnClickLis
                         if ("mDayPicker".equals(datePickerField.getName()) || "mDaySpinner".equals(datePickerField.getName())) {
                             datePickerField.setAccessible(true);
                             Object dayPicker = datePickerField.get(datePicker);
-                            ((View) dayPicker).setVisibility(View.GONE);
+                            if (dayPicker != null) {
+                                ((View) dayPicker).setVisibility(View.GONE);
+                            }
                         }
                     }
                 }

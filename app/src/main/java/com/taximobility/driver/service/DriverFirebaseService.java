@@ -45,6 +45,7 @@ import com.taximobility.util.AppController;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 
@@ -52,12 +53,6 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-//import com.taximobility.driver.utils.DeviceUtils;
-
-/**
- * Created by developer on 30/8/17.
- */
 
 /**
  * Created by developer on 30/8/17.
@@ -68,11 +63,10 @@ public class DriverFirebaseService extends FirebaseMessagingService {
     public static MainActivityDriver MAIN_ACT;
     Notification.Builder builder;
     private NotificationManager mNotificationManager;
-
     public static final int BOOKLATER_NOTIFICATION_ID = 123;
 
     @Override
-    public void onNewToken(String s) {
+    public void onNewToken(@NonNull String s) {
         super.onNewToken(s);
         DriverSystems.out.println("MyFirebaseIIDServicesD" + "onNewToken");
         if (s != null && !TextUtils.isEmpty(s)) {
@@ -82,7 +76,7 @@ public class DriverFirebaseService extends FirebaseMessagingService {
     }
 
     @Override
-    public void onMessageReceived(RemoteMessage remoteMessage) {
+    public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
         DriverSystems.out.println("MyFirebaseIIDServicesD" + remoteMessage.getData());
         onHandleIntent(remoteMessage);
@@ -98,14 +92,12 @@ public class DriverFirebaseService extends FirebaseMessagingService {
 
 
     protected void onHandleIntent(RemoteMessage remoteMessage) {// Handling gcm message from
-        String message = "";
+        String message;
         String unique = "";
         try {
-
             message = remoteMessage.getData().get("message");
-            if (!message.isEmpty()) {
+            if (message != null && !message.isEmpty()) {
                 JSONObject jsonObject = new JSONObject(message);
-
 
                 if (jsonObject.getString("status").equals("14")) {
                     if (jsonObject.getString("display").equals("1")) {
@@ -141,7 +133,7 @@ public class DriverFirebaseService extends FirebaseMessagingService {
                     }
                     generateNotification(this, message, DriverUserLoginAct.class);
                 } else if (jsonObject.getInt("status") == 7 || jsonObject.getInt("status") == 10) {
-                    String cancelmsg = "";
+                    String cancelmsg;
                     cancelmsg = jsonObject.getString("message");
                     if (cancelmsg.contains("_")) {
                         cancelmsg = DriverNC.getString(R.string.trip_cancelled);
@@ -175,13 +167,12 @@ public class DriverFirebaseService extends FirebaseMessagingService {
                     cancelIntent.setComponent(cn);
                     startActivity(cancelIntent);
 
-
                 } else if (jsonObject.getString("status").equals("99")) {
                     JSONObject json = new JSONObject(message);
                     sendNotification(json.getString("message"));
                     Intent ongoing = new Intent();
                     Bundle extras = new Bundle();
-                    String lTaximobilityutlmsg = "";
+                    String lTaximobilityutlmsg;
                     lTaximobilityutlmsg = json.getString("message");
                     extras.putString("alert_message", lTaximobilityutlmsg);
                     extras.putString("status", json.getString("status"));
@@ -195,14 +186,11 @@ public class DriverFirebaseService extends FirebaseMessagingService {
                     sendInfo(getApplicationContext(), unique);
 
                     generateNotification(this, message, DriverSplashAct.class);
-                    new Handler(Looper.getMainLooper()).post(new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                Toast.makeText(getApplicationContext(), jsonObject.getString("message"), Toast.LENGTH_LONG).show();
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
+                    new Handler(Looper.getMainLooper()).post(() -> {
+                        try {
+                            Toast.makeText(getApplicationContext(), jsonObject.getString("message"), Toast.LENGTH_LONG).show();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
                     });
 
@@ -221,9 +209,7 @@ public class DriverFirebaseService extends FirebaseMessagingService {
                     generateNotification(this, message, DriverSplashAct.class);
                     final Intent i = new Intent(getApplicationContext(), LocationUpdate.class);
                     stopService(i);
-                    if (!DriverSessionSave.getSession("driver_type", getApplicationContext()).equals("D")
-                            && !DriverSessionSave.getSession(DriverCommonData.SHIFT_OUT, getApplicationContext(), false)
-                            && !DriverSessionSave.getSession(DriverCommonData.LOGOUT, getApplicationContext(), false))
+                    if (!DriverSessionSave.getSession("driver_type", getApplicationContext()).equals("D") && !DriverSessionSave.getSession(DriverCommonData.SHIFT_OUT, getApplicationContext(), false) && !DriverSessionSave.getSession(DriverCommonData.LOGOUT, getApplicationContext(), false))
                         LocationUpdate.startLocationService(getApplicationContext());
                 } else if (jsonObject.getString("status").equals("55")) {
                     JSONObject json = new JSONObject(message);
@@ -239,8 +225,7 @@ public class DriverFirebaseService extends FirebaseMessagingService {
                     ComponentName cn = new ComponentName(getApplicationContext(), DriverOngoingAct.class);
                     ongoing.setComponent(cn);
                     getApplication().startActivity(ongoing);
-                } else
-                    generateNotification(this, message, DriverSplashAct.class);
+                } else generateNotification(this, message, DriverSplashAct.class);
 
             }
         } catch (Exception e) {
@@ -265,10 +250,9 @@ public class DriverFirebaseService extends FirebaseMessagingService {
         }
     }
 
-    @SuppressWarnings("deprecation")
     public void generateNotification(Context context, String message, Class<?> class1) {
 
-        String Message = "";
+        String Message;
         try {
             final JSONObject jo = new JSONObject(message);
             if (jo.getString("status").equals("25") || jo.getString("status").equals("15")) {
@@ -292,22 +276,13 @@ public class DriverFirebaseService extends FirebaseMessagingService {
                 showNotification(context, Message, message);
                 if (MAIN_ACT != null) {
                     Handler h = new Handler();
-                    if (h != null)
-                        h.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                MAIN_ACT.checkGCM();
-                            }
-                        });
+                    if (h != null) h.post(() -> MAIN_ACT.checkGCM());
 
                 }
                 Intent i = new Intent(DriverFirebaseService.this, DriverUserLoginAct.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT | Intent.FLAG_ACTIVITY_NO_ANIMATION | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(i);
-            } else if (jo.getString("status").equals("42") || jo.getString("status").equals("45")
-                    || jo.getString("status").equals("41")
-                    || jo.getString("status").equals("45")
-                    || jo.getString("status").equals("44")) {
+            } else if (jo.getString("status").equals("42") || jo.getString("status").equals("45") || jo.getString("status").equals("41") || jo.getString("status").equals("45") || jo.getString("status").equals("44")) {
                 Message = jo.getString("message");
                 showNotification(context, Message, message);
             } else if (jo.getString("status").equals("14")) {
@@ -332,10 +307,7 @@ public class DriverFirebaseService extends FirebaseMessagingService {
             e.printStackTrace();
             DriverErrorLogRepository.getRepository(getApplicationContext()).insertAllApiErrorLogs(new DriverApiErrorModel(0, DriverCommonData.getCurrentTimeForLogger(), "type=FirebaseService", DriverExceptionConverter.INSTANCE.buildStackTraceString(e.getStackTrace()), DriverUtils.INSTANCE.driverInfo(getApplicationContext()), null, getApplicationContext().getClass().getSimpleName(), 0));
         }
-
-
     }
-
 
     private void showNotification(Context context, String Message, String data) {
 
@@ -359,16 +331,7 @@ public class DriverFirebaseService extends FirebaseMessagingService {
             notificationChannel.setLightColor(Color.RED);
             mNotificationManager.createNotificationChannel(notificationChannel);
 
-            builder = new Notification.Builder(this, NOTIFICATION_CHANNEL_ID)
-                    .setContentText(Message)
-                    .setContentTitle(title)
-                    .setOngoing(true)
-                    .setBadgeIconType(NotificationCompat.BADGE_ICON_SMALL)
-                    .setSmallIcon(R.drawable.driver_notification_icon)
-                    .setColor(ContextCompat.getColor(getBaseContext(), R.color.button_accept))
-                    .setContentIntent(pendingIntent)
-                    .setLargeIcon(((BitmapDrawable) ContextCompat.getDrawable(this, R.drawable.ic_launcher)).getBitmap())
-                    .setWhen(System.currentTimeMillis());
+            builder = new Notification.Builder(this, NOTIFICATION_CHANNEL_ID).setContentText(Message).setContentTitle(title).setOngoing(true).setBadgeIconType(NotificationCompat.BADGE_ICON_SMALL).setSmallIcon(R.drawable.driver_notification_icon).setColor(ContextCompat.getColor(getBaseContext(), R.color.button_accept)).setContentIntent(pendingIntent).setLargeIcon(((BitmapDrawable) ContextCompat.getDrawable(this, R.drawable.ic_launcher)).getBitmap()).setWhen(System.currentTimeMillis());
         } else {
             builder = new Notification.Builder(context);
             builder.setAutoCancel(false);
@@ -396,7 +359,6 @@ public class DriverFirebaseService extends FirebaseMessagingService {
         }
     }
 
-
     private void showNotificationBookLater(Context context, String Message, String message, Intent intent) {
 
         mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -417,15 +379,7 @@ public class DriverFirebaseService extends FirebaseMessagingService {
             notificationChannel.setLightColor(Color.RED);
             mNotificationManager.createNotificationChannel(notificationChannel);
 
-            builder = new Notification.Builder(this, NOTIFICATION_CHANNEL_ID)
-                    .setContentText(Message)
-                    .setContentTitle(title)
-                    .setOngoing(true)
-                    .setAutoCancel(true)
-                    .setSmallIcon(R.drawable.ic_launcher)
-                    .setContentIntent(pendingIntent)
-                    .setLargeIcon(((BitmapDrawable) getResources().getDrawable(R.drawable.ic_launcher)).getBitmap())
-                    .setWhen(System.currentTimeMillis());
+            builder = new Notification.Builder(this, NOTIFICATION_CHANNEL_ID).setContentText(Message).setContentTitle(title).setOngoing(true).setAutoCancel(true).setSmallIcon(R.drawable.ic_launcher).setContentIntent(pendingIntent).setLargeIcon(((BitmapDrawable) getResources().getDrawable(R.drawable.ic_launcher)).getBitmap()).setWhen(System.currentTimeMillis());
         } else {
             builder = new Notification.Builder(context);
             builder.setAutoCancel(true);
@@ -454,7 +408,6 @@ public class DriverFirebaseService extends FirebaseMessagingService {
         }
     }
 
-
     private void sendInfo(Context context, String unique) {
 
         String base_url = DriverSessionSave.getSession("base_url", context);
@@ -469,7 +422,7 @@ public class DriverFirebaseService extends FirebaseMessagingService {
 
             @Override
 
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
                 try {
                     if (response.isSuccessful()) {
                     }
@@ -480,12 +433,9 @@ public class DriverFirebaseService extends FirebaseMessagingService {
 
             @Override
 
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
                 t.printStackTrace();
-
             }
-
         });
-
     }
 }

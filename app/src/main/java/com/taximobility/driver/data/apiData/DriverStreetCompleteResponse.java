@@ -5,19 +5,13 @@ package com.taximobility.driver.data.apiData;
  */
 public class DriverStreetCompleteResponse {
 
-
     public String message;
     public Detail detail;
     public String status;
 
-
     public class Detail {
-
-
         public String fare;
         public String pickup;
         public String trip_id;
-
     }
-
 }

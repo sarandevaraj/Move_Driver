@@ -138,14 +138,13 @@ public class DriverSessionSave {
                 jsonObject.put("droplat", dest.latitude);
                 jsonObject.put("droplng", dest.longitude);
                 jsonArray.put(jsonObject);
-                DriverSystems.out.println("waypoints storing" + jsonArray.toString());
+                DriverSystems.out.println("waypoints storing" + jsonArray);
                 editor.putString("wayPoints", jsonArray.toString());
             } catch (JSONException e) {
                 e.printStackTrace();
             }
 
-        } else
-            editor.clear();
+        } else editor.clear();
         editor.commit();
     }
 
@@ -156,7 +155,7 @@ public class DriverSessionSave {
             DriverWayPointsData[] wayPointsData;
             SharedPreferences prefs = mContext.getSharedPreferences("wayPoints", 0);
             jsonArray = new JSONArray(prefs.getString("wayPoints", "[]"));
-            DriverSystems.out.println("waypoints reading" + jsonArray.toString());
+            DriverSystems.out.println("waypoints reading" + jsonArray);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -188,14 +187,13 @@ public class DriverSessionSave {
                 jsonObject.put("trip_id", DriverSessionSave.getSession("trip_id", mContext));
                 jsonObject.put("time", DateFormat.getTimeInstance().format(new Date()));
                 jsonArray.put(jsonObject);
-                DriverSystems.out.println("waypoints storing" + jsonArray.toString());
+                DriverSystems.out.println("waypoints storing" + jsonArray);
                 editor.putString("localwayPoints", jsonArray.toString());
             } catch (JSONException e) {
                 e.printStackTrace();
             }
 
-        } else
-            editor.clear();
+        } else editor.clear();
         editor.commit();
     }
 
@@ -205,7 +203,7 @@ public class DriverSessionSave {
         try {
             SharedPreferences prefs = mContext.getSharedPreferences("localwayPoints", 0);
             jsonArray = new JSONArray(prefs.getString("localwayPoints", "[]"));
-            DriverSystems.out.println("waypoints reading" + jsonArray.toString());
+            DriverSystems.out.println("waypoints reading" + jsonArray);
             for (int i = 0; i < ReadGoogleWaypoints(mContext).length(); i++) {
                 JSONObject jj = ReadGoogleWaypoints(mContext).getJSONObject(i);
                 jsonArray.put(jj);
@@ -275,7 +273,7 @@ public class DriverSessionSave {
             DriverWayPointsData[] wayPointsData;
             SharedPreferences prefs = mContext.getSharedPreferences("wayPoints", 0);
             jsonArray = new JSONArray(prefs.getString("wayPoints" + id, "[]"));
-            DriverSystems.out.println("waypoints reading" + jsonArray.toString());
+            DriverSystems.out.println("waypoints reading" + jsonArray);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -304,14 +302,13 @@ public class DriverSessionSave {
                 jsonObject.put("droplat", dest.latitude);
                 jsonObject.put("droplng", dest.longitude);
                 jsonArray.put(jsonObject);
-                DriverSystems.out.println("waypoints storing" + jsonArray.toString());
+                DriverSystems.out.println("waypoints storing" + jsonArray);
                 editor.putString("wayPoints" + id, jsonArray.toString());
             } catch (JSONException e) {
                 e.printStackTrace();
             }
 
-        } else
-            editor.clear();
+        } else editor.clear();
         editor.commit();
     }
 

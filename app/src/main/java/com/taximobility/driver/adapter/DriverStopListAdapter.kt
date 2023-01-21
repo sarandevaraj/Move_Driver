@@ -9,11 +9,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.taximobility.R
 
-class DriverStopListAdapter(private val mContext: Context, private var data: ArrayList<String>) : RecyclerView.Adapter<DriverStopListAdapter.CustomViewHolder>() {
+class DriverStopListAdapter(private val mContext: Context, private var data: ArrayList<String>) :
+    RecyclerView.Adapter<DriverStopListAdapter.CustomViewHolder>() {
     init {
         setisExpanded(false)
     }
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
         val inflater = LayoutInflater.from(mContext)
@@ -24,7 +24,6 @@ class DriverStopListAdapter(private val mContext: Context, private var data: Arr
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
-
 
         if (position == 0 && !isExpanded && data.size != 1) {
             holder.collapseIv.visibility = View.VISIBLE
@@ -43,17 +42,13 @@ class DriverStopListAdapter(private val mContext: Context, private var data: Arr
         holder.stopTxt.post {
             holder.stopTxt.isSelected = true
         }
-
     }
-
 
     override fun getItemCount(): Int {
         return if (!isExpanded) {
             1
-        } else
-            data.size
+        } else data.size
     }
-
 
     /**
      * View holder class member this contains in every row in list.
@@ -68,15 +63,10 @@ class DriverStopListAdapter(private val mContext: Context, private var data: Arr
                 notifyDataSetChanged()
             }
         }
-
     }
 
-
     var isExpanded = false
-
     fun setisExpanded(expand: Boolean) {
         isExpanded = expand
     }
-
-
 }

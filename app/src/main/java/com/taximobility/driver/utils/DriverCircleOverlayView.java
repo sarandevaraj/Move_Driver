@@ -16,7 +16,6 @@ import android.widget.LinearLayout;
 
 import com.taximobility.R;
 
-
 /**
  * Created by hiren on 10/01/16.
  */

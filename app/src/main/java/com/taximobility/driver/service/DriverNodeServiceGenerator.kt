@@ -32,7 +32,6 @@ import javax.net.ssl.TrustManager
 import javax.net.ssl.TrustManagerFactory
 import javax.net.ssl.X509TrustManager
 
-
 object DriverNodeServiceGenerator {
     private lateinit var httpClient: OkHttpClient.Builder
     private lateinit var builder: Retrofit.Builder
@@ -43,26 +42,22 @@ object DriverNodeServiceGenerator {
         // set your desired log level
         logging.level = HttpLoggingInterceptor.Level.BODY
 
-        httpClient = OkHttpClient.Builder()
-                .connectTimeout(timeOut, TimeUnit.SECONDS).readTimeout(30, TimeUnit.SECONDS)/*.certificatePinner(certificatePinner)*/
+        httpClient = OkHttpClient.Builder().connectTimeout(timeOut, TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS)/*.certificatePinner(certificatePinner)*/
 
         val d = DecryptInterceptor(context)
         httpClient.interceptors().add(b)
 
-
         httpClient.addInterceptor(d)
-        if (BuildConfig.DEBUG)
-            httpClient.interceptors().add(logging)
+        if (BuildConfig.DEBUG) httpClient.interceptors().add(logging)
         // initSSL(context)
-        DriverHttpsTrustManager.allowAllSSL();
+        DriverHttpsTrustManager.allowAllSSL()
 
-
-        builder = Retrofit.Builder()
-                .baseUrl(base_url)
-                .addConverterFactory(GsonConverterFactory.create()).client(httpClient.build())
+        builder =
+            Retrofit.Builder().baseUrl(base_url).addConverterFactory(GsonConverterFactory.create())
+                .client(httpClient.build())
         return builder.build()
     }
-
 
     private fun initSSL(context: Context) {
         var sslContext: SSLContext? = null
@@ -80,12 +75,21 @@ object DriverNodeServiceGenerator {
             e.printStackTrace()
         }
         if (sslContext != null) {
-            systemDefaultTrustManager()?.let { httpClient.sslSocketFactory(sslContext.socketFactory, it) }
+            systemDefaultTrustManager()?.let {
+                httpClient.sslSocketFactory(
+                    sslContext.socketFactory, it
+                )
+            }
         }
     }
 
-
-    @Throws(CertificateException::class, IOException::class, KeyStoreException::class, KeyManagementException::class, NoSuchAlgorithmException::class)
+    @Throws(
+        CertificateException::class,
+        IOException::class,
+        KeyStoreException::class,
+        KeyManagementException::class,
+        NoSuchAlgorithmException::class
+    )
     private fun createCertificate(trustedCertificateIS: InputStream): SSLContext? {
         val cf: CertificateFactory = CertificateFactory.getInstance("X.509")
         val ca: Certificate
@@ -112,7 +116,8 @@ object DriverNodeServiceGenerator {
 
     private fun systemDefaultTrustManager(): X509TrustManager? {
         return try {
-            val trustManagerFactory: TrustManagerFactory = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm())
+            val trustManagerFactory: TrustManagerFactory =
+                TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm())
             trustManagerFactory.init(null as KeyStore?)
             val trustManagers: Array<TrustManager> = trustManagerFactory.trustManagers
             check(!(trustManagers.size != 1 || trustManagers[0] !is X509TrustManager)) { "Unexpected default trust managers:" + trustManagers.contentToString() }
@@ -124,31 +129,30 @@ object DriverNodeServiceGenerator {
 
     class RequestInterceptor internal constructor(internal var c: Context) : Interceptor {
 
-
         @Throws(IOException::class)
         override fun intercept(chain: Interceptor.Chain): Response {
             val originalRequest = chain.request()
             var builder: Request.Builder = originalRequest.newBuilder()
             if (originalRequest.method.equals("POST", ignoreCase = true)) {
                 builder = originalRequest.newBuilder()
-                        .method(originalRequest.method, originalRequest.body)
+                    .method(originalRequest.method, originalRequest.body)
             }
-            builder.addHeader("domain", DriverSessionSave.getSession(DriverCommonData.NODE_DOMAIN, c))
+            builder.addHeader(
+                "domain", DriverSessionSave.getSession(DriverCommonData.NODE_DOMAIN, c)
+            )
             builder.addHeader("Authorization", "FNpfuspyEAzhjfoh2ONpWK0rsnClVL6OCaasqDQtWdI=")
             builder.addHeader("Content-type", "application/json")
             builder.addHeader("version", "${BuildConfig.VERSION_CODE}")
             builder.addHeader("token", DriverSessionSave.getSession(DriverCommonData.NODE_TOKEN, c))
             val originalHttpUrl = originalRequest.url
 
-
             val url = originalHttpUrl.newBuilder()
 
-                    .addQueryParameter("pv", "" + BuildConfig.VERSION_CODE)
-                    .addQueryParameter("i", DriverSessionSave.getSession("Id", c))
-                    .addQueryParameter("lang", DriverSessionSave.getSession("Lang", c))
-                    .addQueryParameter("dt", "a")
-                    .addQueryParameter("s", DriverInternetSpeedChecker.getDownloadSpeed())
-                    .build()
+                .addQueryParameter("pv", "" + BuildConfig.VERSION_CODE)
+                .addQueryParameter("i", DriverSessionSave.getSession("Id", c))
+                .addQueryParameter("lang", DriverSessionSave.getSession("Lang", c))
+                .addQueryParameter("dt", "a")
+                .addQueryParameter("s", DriverInternetSpeedChecker.getDownloadSpeed()).build()
 
             builder.url(url)
 
@@ -164,14 +168,18 @@ object DriverNodeServiceGenerator {
                 body_value = ""
             }
 
-            val logs = url.toString() + " - " + originalRequest.method + " - " + body_value + " - domain: " + DriverSessionSave.getSession(DriverCommonData.NODE_DOMAIN, c) + " - Authorization: " + "FNpfuspyEAzhjfoh2ONpWK0rsnClVL6OCaasqDQtWdI=" + " - Content-type: " + "application/json" + " - version: " + "${BuildConfig.VERSION_CODE}" + " - token: " + DriverSessionSave.getSession(DriverCommonData.NODE_TOKEN, c)
+            val logs =
+                url.toString() + " - " + originalRequest.method + " - " + body_value + " - domain: " + DriverSessionSave.getSession(
+                    DriverCommonData.NODE_DOMAIN, c
+                ) + " - Authorization: " + "FNpfuspyEAzhjfoh2ONpWK0rsnClVL6OCaasqDQtWdI=" + " - Content-type: " + "application/json" + " - version: " + "${BuildConfig.VERSION_CODE}" + " - token: " + DriverSessionSave.getSession(
+                    DriverCommonData.NODE_TOKEN, c
+                )
             DriverSessionSave.saveAPI(logs, c)
 
             return chain.proceed(builder.build())
         }
 
     }
-
 
     class DecryptInterceptor internal constructor(internal var c: Context) : Interceptor {
         override fun intercept(chain: Interceptor.Chain): Response {
@@ -184,7 +192,7 @@ object DriverNodeServiceGenerator {
                 val data = response.body
                 if (data != null) {
                     val cryptedStream = data.byteStream()
-                    var decrypted: String? = null
+                    val decrypted: String?
                     val result = ByteArrayOutputStream()
                     val buffer = ByteArray(1024)
                     var length: Int = cryptedStream.read(buffer)
@@ -200,25 +208,17 @@ object DriverNodeServiceGenerator {
 
                         newResponse.body(decrypted.toResponseBody(contentType?.toMediaTypeOrNull()))
                         val ress = newResponse.build()
-                        return if (DriverCheckStatus(JSONObject(decrypted), c).isNormal())
-                            ress
-                        else
-                            response
+                        return if (DriverCheckStatus(JSONObject(decrypted), c).isNormal()) ress
+                        else response
                     } catch (e: Exception) {
                         e.printStackTrace()
                     }
-
-
                 }
-
             }
             return response
         }
-
-
     }
 
-//
 //    fun <S> createService(serviceClass: Class<S>): S {
 //        val retrofit = builder.client(httpClient.build()).build()
 //        return retrofit.create(serviceClass)

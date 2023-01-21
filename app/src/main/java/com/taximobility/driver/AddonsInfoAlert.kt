@@ -13,12 +13,12 @@ import com.taximobility.driver.data.apiData.AddonsData
 import com.taximobility.driver.utils.DirverColorchange.ChangeColor
 import com.taximobility.util.FontHelper
 
-
 class AddonsInfoAlert() {
     fun AddonsInfo(context: Activity, addonsList: ArrayList<AddonsData>) {
 
         val mBottomSheetDialog = BottomSheetDialog(context)
-        val sheetView: View = context.getLayoutInflater().inflate(R.layout.driver_addon_dialog, null)
+        val sheetView: View =
+            context.getLayoutInflater().inflate(R.layout.driver_addon_dialog, null)
         mBottomSheetDialog.setContentView(sheetView)
         mBottomSheetDialog.setCancelable(true)
         mBottomSheetDialog.show()
@@ -32,13 +32,8 @@ class AddonsInfoAlert() {
         val cancel = sheetView.findViewById<TextView>(R.id.btn_cancel)
         val pointSize = Point()
         context.windowManager.defaultDisplay.getSize(pointSize)
-        cancel.setOnClickListener { cancel ->
-
+        cancel.setOnClickListener { _ ->
             mBottomSheetDialog.cancel()
         }
-
-
     }
-
-
 }

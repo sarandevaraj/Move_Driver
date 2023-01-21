@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -18,20 +17,14 @@ import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,9 +46,7 @@ import com.taximobility.driver.utils.DriverNetworkStatus;
 import com.taximobility.driver.utils.DriverSessionSave;
 import com.taximobility.driver.utils.DriverSystems;
 import com.taximobility.driver.utils.Driver_Utils;
-import com.taximobility.interfaces.APIResult;
-import com.taximobility.interfaces.AlertListener;
-import com.taximobility.service.APIService_Retrofit_JSON;
+import com.taximobility.driver.interfaces.AlertListener;
 import com.taximobility.util.Colorchange;
 import com.taximobility.util.FontHelper;
 import com.taximobility.util.SessionSave;
@@ -74,11 +65,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import androidx.appcompat.app.AppCompatActivity;
 
 import static com.taximobility.driver.data.DriverCommonData.USER_KEY;
-import static com.taximobility.util.ConstantsKt.CREDIT_CARD;
-import static com.taximobility.util.ConstantsKt.PASS_ID;
-import static com.taximobility.util.ConstantsKt.PASS_NAME;
-
-//import com.taximobility.driver.utils.DeviceUtils;
 
 /**
  * This is the main Login page
@@ -99,7 +85,7 @@ public class DriverUserLoginAct extends MainActivityDriver implements DriverClic
     private JSONObject jsonDriver;
     private boolean isReferalSuccess;
     private Dialog dialog1;
-    private String Auth_key = "";
+    private final String Auth_key = "";
 
     // Set the layout to activity.
     @Override
@@ -128,7 +114,7 @@ public class DriverUserLoginAct extends MainActivityDriver implements DriverClic
 
 
         if (alert_msg != null && alert_msg.length() != 0)
-            Toast.makeText(DriverUserLoginAct.this,"" + alert_msg, Toast.LENGTH_LONG).show();
+            Toast.makeText(DriverUserLoginAct.this, "" + alert_msg, Toast.LENGTH_LONG).show();
 //            dialog1 = Driver_Utils.alert_view(DriverUserLoginAct.this, "" + DriverNC.getResources().getString(R.string.message), "" + alert_msg, "" + DriverNC.getResources().getString(R.string.ok), "", true, DriverUserLoginAct.this, "");
 
 
@@ -322,7 +308,7 @@ public class DriverUserLoginAct extends MainActivityDriver implements DriverClic
             phone = PhoneEdt.getText().toString().trim();
             try {
 
-                if (validations(ValidateAction.isValueNULL, DriverUserLoginAct.this, phone)){
+                if (validations(ValidateAction.isValueNULL, DriverUserLoginAct.this, phone)) {
                     if (validations(ValidateAction.isValidPassword, DriverUserLoginAct.this, PasswordEdt.getText().toString().trim())) {
                         SessionSave.saveSession("base_url", SessionSave.getSession("driver_base_url", DriverUserLoginAct.this), DriverUserLoginAct.this);
                         final String url = "type=driver_login";
@@ -356,8 +342,7 @@ public class DriverUserLoginAct extends MainActivityDriver implements DriverClic
     }
 
     private void setSpannableTextView(TextView view) {
-        SpannableStringBuilder spanTxt = new SpannableStringBuilder(
-                DriverNC.getString(R.string.terms_condition) + " ");
+        SpannableStringBuilder spanTxt = new SpannableStringBuilder(DriverNC.getString(R.string.terms_condition) + " ");
         spanTxt.append(DriverNC.getString(R.string.terms_condition2));
         spanTxt.setSpan(new ClickableSpan() {
             @Override
@@ -572,20 +557,17 @@ public class DriverUserLoginAct extends MainActivityDriver implements DriverClic
 
         try {
             Intent intent = new Intent();
-            intent.setComponent(new ComponentName("com.iqoo.secure",
-                    "com.iqoo.secure.ui.phoneoptimize.AddWhiteListActivity"));
+            intent.setComponent(new ComponentName("com.iqoo.secure", "com.iqoo.secure.ui.phoneoptimize.AddWhiteListActivity"));
             context.startActivity(intent);
         } catch (Exception e) {
             try {
                 Intent intent = new Intent();
-                intent.setComponent(new ComponentName("com.vivo.permissionmanager",
-                        "com.vivo.permissionmanager.activity.BgStartUpManagerActivity"));
+                intent.setComponent(new ComponentName("com.vivo.permissionmanager", "com.vivo.permissionmanager.activity.BgStartUpManagerActivity"));
                 context.startActivity(intent);
             } catch (Exception ex) {
                 try {
                     Intent intent = new Intent();
-                    intent.setClassName("com.iqoo.secure",
-                            "com.iqoo.secure.ui.phoneoptimize.BgStartUpManager");
+                    intent.setClassName("com.iqoo.secure", "com.iqoo.secure.ui.phoneoptimize.BgStartUpManager");
                     context.startActivity(intent);
                 } catch (Exception exx) {
                     ex.printStackTrace();
@@ -596,8 +578,7 @@ public class DriverUserLoginAct extends MainActivityDriver implements DriverClic
 
     private String getUserSerial() {
 //noinspection ResourceType
-        @SuppressLint("WrongConstant")
-        Object userManager = getSystemService("user");
+        @SuppressLint("WrongConstant") Object userManager = getSystemService("user");
         if (null == userManager) return "";
 
         try {
@@ -661,8 +642,7 @@ public class DriverUserLoginAct extends MainActivityDriver implements DriverClic
             View forgetView = DriverUserLoginAct.this.getLayoutInflater().inflate(R.layout.driver_referal_popup, null);
             mBottomSheetDialog.setContentView(forgetView);
             mBottomSheetDialog.setCancelable(true);
-            if (!mBottomSheetDialog.isShowing())
-                mBottomSheetDialog.show();
+            if (!mBottomSheetDialog.isShowing()) mBottomSheetDialog.show();
             FontHelper.applyFont(DriverUserLoginAct.this, forgetView.findViewById(R.id.inner_content));
             Colorchange.ChangeColor(forgetView.findViewById(R.id.inner_content), DriverUserLoginAct.this);
             forgetView.findViewById(R.id.f_textview);
@@ -751,19 +731,14 @@ public class DriverUserLoginAct extends MainActivityDriver implements DriverClic
     /**
      * Alert view for referal code
      */
-    public void alert_views(AppCompatActivity m,
-                            String title,
-                            String message,
-                            String success_txt,
-                            String failure_txt) {
+    public void alert_views(AppCompatActivity m, String title, String message, String success_txt, String failure_txt) {
 
 
 //changed
         Utility.actionSheet(DriverUserLoginAct.this, message, success_txt, failure_txt, false, new AlertListener() {
             @Override
             public void onSuccess() {
-                if (isReferalSuccess)
-                    pop_up(jsonDriver);
+                if (isReferalSuccess) pop_up(jsonDriver);
                 else referalPopup();
             }
 
@@ -799,8 +774,7 @@ public class DriverUserLoginAct extends MainActivityDriver implements DriverClic
 
     @Override
     protected void onDestroy() {
-        if (dialog1 != null)
-            Driver_Utils.closeDialog(dialog1);
+        if (dialog1 != null) Driver_Utils.closeDialog(dialog1);
         super.onDestroy();
     }
 
@@ -815,16 +789,14 @@ public class DriverUserLoginAct extends MainActivityDriver implements DriverClic
                 startActivity(in);
                 LocationUpdate.startLocationService(DriverUserLoginAct.this);
                 finish();
-                if (mDialog != null)
-                    mDialog.dismiss();
+                if (mDialog != null) mDialog.dismiss();
             } else if (DriverSessionSave.getSession("travel_status", DriverUserLoginAct.this).equals("2")) {
                 DriverSessionSave.saveSession("status", "A", DriverUserLoginAct.this);
                 Intent in = new Intent(DriverUserLoginAct.this, DriverOngoingAct.class);
                 startActivity(in);
                 LocationUpdate.startLocationService(DriverUserLoginAct.this);
                 finish();
-                if (mDialog != null && DriverUserLoginAct.this != null)
-                    mDialog.dismiss();
+                if (mDialog != null && DriverUserLoginAct.this != null) mDialog.dismiss();
             } else {
                 final Intent i = new Intent(DriverUserLoginAct.this, DriverMyStatus.class);
                 DriverSessionSave.saveSession("need_animation", true, DriverUserLoginAct.this);
@@ -834,8 +806,7 @@ public class DriverUserLoginAct extends MainActivityDriver implements DriverClic
                 startActivity(i);
                 finish();
                 overridePendingTransition(0, 0);
-                if (mDialog != null)
-                    mDialog.dismiss();
+                if (mDialog != null) mDialog.dismiss();
             }
         } else {
             final Intent i = new Intent(DriverUserLoginAct.this, DriverMyStatus.class);
@@ -846,8 +817,7 @@ public class DriverUserLoginAct extends MainActivityDriver implements DriverClic
             startActivity(i);
             finish();
             overridePendingTransition(0, 0);
-            if (mDialog != null)
-                mDialog.dismiss();
+            if (mDialog != null) mDialog.dismiss();
         }
     }
 
@@ -923,7 +893,7 @@ public class DriverUserLoginAct extends MainActivityDriver implements DriverClic
     public void loggedInOtherDevice(String msg) {
         try {
 
-            Utility.actionSheetCancel(DriverUserLoginAct.this,msg, DriverNC.getResources().getString(R.string.ok), DriverNC.getResources().getString(R.string.cancel), false, new AlertListener() {
+            Utility.actionSheetCancel(DriverUserLoginAct.this, msg, DriverNC.getResources().getString(R.string.ok), DriverNC.getResources().getString(R.string.cancel), false, new AlertListener() {
                 @Override
                 public void onSuccess() {
                     if (DriverNetworkStatus.isOnline(DriverUserLoginAct.this)) {
@@ -987,7 +957,7 @@ public class DriverUserLoginAct extends MainActivityDriver implements DriverClic
                 DriverSystems.out.println("actvty_from_webview");
                 if (data != null) {
                     String bookdriver_msg = data.getStringExtra("bok_driver");
-                    Toast.makeText(DriverUserLoginAct.this,"" + bookdriver_msg, Toast.LENGTH_LONG).show();
+                    Toast.makeText(DriverUserLoginAct.this, "" + bookdriver_msg, Toast.LENGTH_LONG).show();
 //                    dialog1 = Driver_Utils.alert_view_dialog(DriverUserLoginAct.this, "",
 //                            "" + bookdriver_msg,
 //                            "" + DriverNC.getResources().getString(R.string.ok), "",
@@ -1029,7 +999,7 @@ public class DriverUserLoginAct extends MainActivityDriver implements DriverClic
     }
 
     private void showAlertView(String message) {
-        Toast.makeText(DriverUserLoginAct.this,"" + message, Toast.LENGTH_LONG).show();
+        Toast.makeText(DriverUserLoginAct.this, "" + message, Toast.LENGTH_LONG).show();
 //        dialog1 = Driver_Utils.alert_view_dialog(DriverUserLoginAct.this,
 //                "",
 //                "" + message,
@@ -1059,8 +1029,7 @@ public class DriverUserLoginAct extends MainActivityDriver implements DriverClic
                     intent.putExtra("content", result);
                     if (type.equals("T"))
                         bundle.putString("name", DriverNC.getString(R.string.terms_condition2));
-                    else
-                        bundle.putString("name", DriverNC.getString(R.string.privacy_policy));
+                    else bundle.putString("name", DriverNC.getString(R.string.privacy_policy));
                     bundle.putBoolean("status", true);
                     intent.putExtras(bundle);
                     startActivity(intent);
@@ -1082,7 +1051,7 @@ public class DriverUserLoginAct extends MainActivityDriver implements DriverClic
             if (isOnline()) {
                 new DriverAPIService_Retrofit_JSON(DriverUserLoginAct.this, this, data, false).execute(url);
             } else {
-                Toast.makeText(DriverUserLoginAct.this,"" +  DriverNC.getResources().getString(R.string.check_net_connection), Toast.LENGTH_LONG).show();
+                Toast.makeText(DriverUserLoginAct.this, "" + DriverNC.getResources().getString(R.string.check_net_connection), Toast.LENGTH_LONG).show();
 //                dialog1 = Driver_Utils.alert_view(DriverUserLoginAct.this, "" + DriverNC.getResources().getString(R.string.message), "" + DriverNC.getResources().getString(R.string.check_net_connection), "" + DriverNC.getResources().getString(R.string.ok), "", true, DriverUserLoginAct.this, "");
             }
         }
@@ -1093,10 +1062,10 @@ public class DriverUserLoginAct extends MainActivityDriver implements DriverClic
                 try {
                     final JSONObject json = new JSONObject(result);
                     if (json.getInt("status") == 1)
-                        Toast.makeText(DriverUserLoginAct.this,"" + json.getString("message"), Toast.LENGTH_LONG).show();
+                        Toast.makeText(DriverUserLoginAct.this, "" + json.getString("message"), Toast.LENGTH_LONG).show();
 //                        dialog1 = Driver_Utils.alert_view(DriverUserLoginAct.this, "" + DriverNC.getResources().getString(R.string.message), "" + json.getString("message"), "" + DriverNC.getResources().getString(R.string.ok), "", true, DriverUserLoginAct.this, "");
                     else
-                        Toast.makeText(DriverUserLoginAct.this,"" + json.getString("message"), Toast.LENGTH_LONG).show();
+                        Toast.makeText(DriverUserLoginAct.this, "" + json.getString("message"), Toast.LENGTH_LONG).show();
 //                        dialog1 = Driver_Utils.alert_view(DriverUserLoginAct.this, "" + DriverNC.getResources().getString(R.string.message), "" + json.getString("message"), "" + DriverNC.getResources().getString(R.string.ok), "", true, DriverUserLoginAct.this, "");
                 } catch (final JSONException e) {
                     e.printStackTrace();
@@ -1554,7 +1523,7 @@ public class DriverUserLoginAct extends MainActivityDriver implements DriverClic
             if (isOnline()) {
                 new DriverAPIService_Retrofit_JSON(DriverUserLoginAct.this, this, data, false).execute(url);
             } else {
-                Toast.makeText(DriverUserLoginAct.this,"" + DriverNC.getResources().getString(R.string.check_net_connection), Toast.LENGTH_LONG).show();
+                Toast.makeText(DriverUserLoginAct.this, "" + DriverNC.getResources().getString(R.string.check_net_connection), Toast.LENGTH_LONG).show();
 //                dialog1 = Driver_Utils.alert_view(DriverUserLoginAct.this, "" + DriverNC.getResources().getString(R.string.message), "" + DriverNC.getResources().getString(R.string.check_net_connection), "" + DriverNC.getResources().getString(R.string.ok), "", true, DriverUserLoginAct.this, "");
             }
         }
@@ -1674,10 +1643,8 @@ public class DriverUserLoginAct extends MainActivityDriver implements DriverClic
                         if (isFirst.equals("1")) {
                             if ((Integer.parseInt(DriverSessionSave.getSession("referal", DriverUserLoginAct.this))) == 1)
                                 referalPopup();
-                            else
-                                pop_up(jsonDriver);
-                        } else
-                            pop_up(jsonDriver);
+                            else pop_up(jsonDriver);
+                        } else pop_up(jsonDriver);
 
                     } else if (json.getInt("status") == -5)
                         DriverCToast.ShowToast(DriverUserLoginAct.this, "" + json.getString("message"));
@@ -1685,8 +1652,7 @@ public class DriverUserLoginAct extends MainActivityDriver implements DriverClic
                         loggedInOtherDevice(json.getString("message"));
                     } else if (json.getInt("status") == 100) {
 //                        Userselection_Dialog();
-                    } else
-                        showAlertView(json.getString("message"));
+                    } else showAlertView(json.getString("message"));
 
                     DoneBtn.setEnabled(true);
                 } else {

@@ -7,13 +7,13 @@ import android.content.Intent;
 import android.location.LocationManager;
 import android.provider.Settings;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.taximobility.MainActivity;
 import com.taximobility.R;
 import com.taximobility.driver.utils.DriverNC;
+import com.taximobility.driver.utils.DriverSystems;
 
 import java.util.Objects;
 
@@ -32,7 +32,7 @@ public class GpsStatus extends BroadcastReceiver {
         if (Objects.requireNonNull(intent.getAction()).matches("android.location.PROVIDERS_CHANGED")) {
             mContext = context;
             try {
-                Systems.out.println("Gps");
+                DriverSystems.out.println("Gps");
                 if (!isGpsEnabled(mContext)) {
 //                    if (TaxiUtil.sContext != null && TaxiUtil.sContext instanceof MainHomeFragmentActivity)
 //                        MainHomeFragmentActivity.gpsalert(TaxiUtil.sContext, false);
@@ -52,15 +52,13 @@ public class GpsStatus extends BroadcastReceiver {
         }
     }
 
-
     public void gpsalert(boolean isconnect, String title, String message, String success_txt, String failure_txt) {
         if (!isconnect) {
             final View view = View.inflate(TaxiUtil.sContext, R.layout.alert_view, null);
             mDialog = new Dialog(TaxiUtil.sContext, R.style.NewDialog);
             mDialog.setContentView(view);
             mDialog.setCancelable(false);
-            if (!mDialog.isShowing())
-                mDialog.show();
+            if (!mDialog.isShowing()) mDialog.show();
             final TextView title_text = mDialog.findViewById(R.id.title_text);
             final TextView message_text = mDialog.findViewById(R.id.message_text);
             final Button button_success = mDialog.findViewById(R.id.button_success);
@@ -69,20 +67,14 @@ public class GpsStatus extends BroadcastReceiver {
             title_text.setText(title);
             message_text.setText(message);
             button_success.setText(success_txt);
-            button_success.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(final View v) {
-                    // TODO Auto-generated method stub
-                    Intent mIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                    TaxiUtil.sContext.startActivity(mIntent);
-                }
+            button_success.setOnClickListener(v -> {
+                // TODO Auto-generated method stub
+                Intent mIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                TaxiUtil.sContext.startActivity(mIntent);
             });
-            button_failure.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(final View v) {
-                    // TODO Auto-generated method stub
-                    mDialog.dismiss();
-                }
+            button_failure.setOnClickListener(v -> {
+                // TODO Auto-generated method stub
+                mDialog.dismiss();
             });
         } else {
             try {
@@ -106,6 +98,5 @@ public class GpsStatus extends BroadcastReceiver {
     public boolean isNetworkEnabled(Context context) {
         LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         return locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-
     }
 }

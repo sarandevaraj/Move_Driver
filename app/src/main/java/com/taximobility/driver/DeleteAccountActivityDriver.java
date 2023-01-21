@@ -30,8 +30,7 @@ public class DeleteAccountActivityDriver extends MainActivityDriver {
 
     @Override
     public void Initialize() {
-        DirverColorchange.ChangeColor((ViewGroup) (((ViewGroup) DeleteAccountActivityDriver.this
-                .findViewById(android.R.id.content)).getChildAt(0)), DeleteAccountActivityDriver.this);
+        DirverColorchange.ChangeColor((ViewGroup) (((ViewGroup) DeleteAccountActivityDriver.this.findViewById(android.R.id.content)).getChildAt(0)), DeleteAccountActivityDriver.this);
 
         DriverFontHelper.applyFont(this, findViewById(R.id.content));
 
@@ -41,19 +40,11 @@ public class DeleteAccountActivityDriver extends MainActivityDriver {
         btn_back = findViewById(R.id.slideImg);
         btn_back.setVisibility(View.VISIBLE);
         HeadTitle.setText(DriverNC.getString(R.string.privacy_settings));
-        btn_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
-        deleteacc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent in = new Intent(DeleteAccountActivityDriver.this, DriverWebviewAct.class);
-                in.putExtra("type", "delete");
-                startActivity(in);
-            }
+        btn_back.setOnClickListener(view -> onBackPressed());
+        deleteacc.setOnClickListener(view -> {
+            Intent in = new Intent(DeleteAccountActivityDriver.this, DriverWebviewAct.class);
+            in.putExtra("type", "delete");
+            startActivity(in);
         });
 
 

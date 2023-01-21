@@ -1,6 +1,5 @@
 package com.taximobility.driver;
 
-
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
@@ -11,18 +10,14 @@ import android.widget.LinearLayout;
 
 import com.taximobility.R;
 
-
 public class NewGraphView extends LinearLayout {
 
     private MyCustomObjectListener listener = null;
     private boolean isClicked = false;
     private int prevPos = 0;
-
-
     private int mUnSelectColor;
     private int selectedColor;
     private Drawable bgdrawable;
-
 
     public NewGraphView(Context context) {
         super(context);
@@ -62,20 +57,14 @@ public class NewGraphView extends LinearLayout {
         } else {
             width = desiredWidth;
         }
-
         //Measure Height
         height = desiredHeight;
-
-
         setMeasuredDimension(width, heightSize);
     }
 
-
     void init(Context context) {
         View.inflate(context, R.layout.graph_view, this);
-
         setPeekValues(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
-
     }
 
     void init(Context context, AttributeSet attrs) {
@@ -97,7 +86,7 @@ public class NewGraphView extends LinearLayout {
             float f7
     ) {
 
-        float peekHeight = 0.0f;
+        float peekHeight;
 
 
         for (int i = 0; i < 7; i++) {
@@ -128,7 +117,6 @@ public class NewGraphView extends LinearLayout {
                     throw new IllegalStateException("Unexpected value: " + i);
             }
 
-
             final LinearLayout parentLayout = (LinearLayout) getChildAt(0);
 
             final LinearLayout dayLayout = (LinearLayout) parentLayout.getChildAt(i);
@@ -144,35 +132,29 @@ public class NewGraphView extends LinearLayout {
             final float finalPeekHeight = peekHeight;
             final int finalI = i;
 
-            dayLayout.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
+            dayLayout.setOnClickListener(v -> {
 
-                    if (!isClicked) {
-                        prevPos = finalI;
-                        isClicked = true;
-                    } else {
-                        LinearLayout prevDayLayout = (LinearLayout) parentLayout.getChildAt(prevPos);
-                        prevDayLayout.setBackground(null);
-                        LinearLayout progressLayout = (LinearLayout) prevDayLayout.getChildAt(0);
-                        View viewTwo = progressLayout.getChildAt(1);
-                        viewTwo.setBackgroundColor(mUnSelectColor);
-                        prevPos = finalI;
-                    }
-                    dayLayout.setBackground(bgdrawable);
-                    if (listener != null) {
-                        listener.getValue(finalPeekHeight);
-                    }
+                if (!isClicked) {
+                    prevPos = finalI;
+                    isClicked = true;
+                } else {
+                    LinearLayout prevDayLayout = (LinearLayout) parentLayout.getChildAt(prevPos);
+                    prevDayLayout.setBackground(null);
+                    LinearLayout progressLayout1 = (LinearLayout) prevDayLayout.getChildAt(0);
+                    View viewTwo1 = progressLayout1.getChildAt(1);
+                    viewTwo1.setBackgroundColor(mUnSelectColor);
+                    prevPos = finalI;
+                }
+                dayLayout.setBackground(bgdrawable);
+                if (listener != null) {
+                    listener.getValue(finalPeekHeight);
+                }
 
-                    viewTwo.setBackgroundColor(selectedColor);
-                    if (listener != null) {
-                        listener.getXY(dayLayout.getX(), dayLayout.getY());
-                    }
-
-
+                viewTwo.setBackgroundColor(selectedColor);
+                if (listener != null) {
+                    listener.getXY(dayLayout.getX(), dayLayout.getY());
                 }
             });
-
 
             LayoutParams paramOne = new LayoutParams(
                     LayoutParams.MATCH_PARENT,
@@ -202,9 +184,7 @@ public class NewGraphView extends LinearLayout {
             viewTwo.setLayoutParams(paramTwo);
             viewTwo.startAnimation(translateAnimation);
             progressLayout.setVisibility(View.VISIBLE);
-
         }
-
         invalidate();
     }
 
@@ -219,20 +199,9 @@ public class NewGraphView extends LinearLayout {
     public void setCustomObjectListener(MyCustomObjectListener listener) {
         this.listener = listener;
     }
-
 }
 
-
-
-
-
-
-
 //  paste in attrs.xml
-
-
-
-
 
 // set value for  graph
 
@@ -245,18 +214,17 @@ public class NewGraphView extends LinearLayout {
 //        true
 //        }
 //        }
-//
-//
+
 //// get value using listener
-//
+
 //        graphView.setCustomObjectListener(object : NewGraphView.MyCustomObjectListener {
 //
 //        override fun getValue(peekHeight: Float) {
 //        Toast.makeText(context, peekHeight.toString(), Toast.LENGTH_SHORT).show()
 //        }
-//
+
 //        override fun getXY(xValue: Float, yValue: Float) {
 ////                Toast.makeText(context, xValue.toString(), Toast.LENGTH_SHORT).show()
-//
+
 //        }
 //        })

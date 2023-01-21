@@ -17,6 +17,7 @@ class DriverShowAlertAct : MainActivityDriver() {
 
 
     private var messages: String = ""
+
     /**
      * setting the layout
      */
@@ -38,20 +39,21 @@ class DriverShowAlertAct : MainActivityDriver() {
 
         DriverFontHelper.applyFont(this@DriverShowAlertAct, findViewById<View>(R.id.canceltrip))
 
-        DirverColorchange.ChangeColor((this@DriverShowAlertAct
-                .findViewById<View>(android.R.id.content) as ViewGroup).getChildAt(0) as ViewGroup, this@DriverShowAlertAct)
+        DirverColorchange.ChangeColor(
+            (this@DriverShowAlertAct.findViewById<View>(android.R.id.content) as ViewGroup).getChildAt(
+                0
+            ) as ViewGroup, this@DriverShowAlertAct
+        )
 
         message.text = messages
         button1.text = DriverNC.getString(R.string.ok)
         button1.setOnClickListener {
             if (moveToPlaystore) {
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$packageName"))
+                val intent =
+                    Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$packageName"))
                 startActivity(intent)
-            } else
-                finish()
+            } else finish()
         }
 
     }
-
-
 }

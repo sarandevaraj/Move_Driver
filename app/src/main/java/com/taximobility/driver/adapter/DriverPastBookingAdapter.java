@@ -34,7 +34,6 @@ public class DriverPastBookingAdapter extends RecyclerView.Adapter<DriverPastBoo
     private final List<DriverUpcomingResponse.PastBooking> data;
     private final Context mContext;
 
-
     public DriverPastBookingAdapter(Context c, List<DriverUpcomingResponse.PastBooking> data) {
         this.mContext = c;
         this.data = data;
@@ -44,9 +43,8 @@ public class DriverPastBookingAdapter extends RecyclerView.Adapter<DriverPastBoo
     @Override
     public CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(mContext);
-        View view = null;
+        View view;
         view = inflater.inflate(R.layout.driver_past_booking_item, parent, false);
-
         return new CustomViewHolder(view);
     }
 
@@ -57,9 +55,7 @@ public class DriverPastBookingAdapter extends RecyclerView.Adapter<DriverPastBoo
             Picasso.get().load(data.get(position).profile_image).into(holder.driver_image);
         } else {
             if (!data.get(position).passenger_name.equals("")) {
-                ProfileImageSetupClass.setupProfileImage(
-                        data.get(position).passenger_name, holder.driver_image
-                );
+                ProfileImageSetupClass.setupProfileImage(data.get(position).passenger_name, holder.driver_image);
             } else {
                 Picasso.get().load(R.drawable.loadingimage).into(holder.driver_image);
             }
@@ -85,9 +81,7 @@ public class DriverPastBookingAdapter extends RecyclerView.Adapter<DriverPastBoo
         holder.trip_amt.setText(DriverSessionSave.getSession("site_currency", mContext) + " " + data.get(position).distance_fare_km);
         if (data.get(position).travel_status.equals("1"))
             holder.trip_com_canl.setText(DriverNC.getString(R.string.completed));
-        else
-            holder.trip_com_canl.setText(DriverNC.getString(R.string.cancelled));
-
+        else holder.trip_com_canl.setText(DriverNC.getString(R.string.cancelled));
 
         if (data.get(position).travel_status.trim().equals("1")) {
             holder.book_lay.setOnClickListener(view -> {
@@ -102,15 +96,12 @@ public class DriverPastBookingAdapter extends RecyclerView.Adapter<DriverPastBoo
         } else {
             holder.trip_status.setText(DriverNC.getString(R.string.cancelled));
         }
-
-
     }
 
     @Override
     public int getItemCount() {
         return data.size();
     }
-
 
     /**
      * View holder class member this contains in every row in list.
@@ -141,7 +132,6 @@ public class DriverPastBookingAdapter extends RecyclerView.Adapter<DriverPastBoo
             trip_amt = v.findViewById(R.id.trip_amt);
             trip_com_canl = v.findViewById(R.id.trip_com_canl);
             icon_arrow = v.findViewById(R.id.icon_arrow);
-
         }
     }
 }

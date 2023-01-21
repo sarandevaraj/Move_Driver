@@ -15,8 +15,8 @@ import java.util.Locale;
  */
 public class DriverMyAxisValueFormatter implements IAxisValueFormatter, IValueFormatter {
 
-    private DecimalFormat mFormat;
-    private String currency;
+    private final DecimalFormat mFormat;
+    private final String currency;
 
     public DriverMyAxisValueFormatter(String currency) {
 

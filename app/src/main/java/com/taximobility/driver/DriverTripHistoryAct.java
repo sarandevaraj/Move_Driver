@@ -18,10 +18,6 @@ import androidx.annotation.Nullable;
 
 /**
  * Created by developer on 15/11/16.
- */
-
-
-/**
  * This is class is used to show driver trip history
  */
 public class DriverTripHistoryAct extends DriverBaseActivity {
@@ -41,9 +37,7 @@ public class DriverTripHistoryAct extends DriverBaseActivity {
         setTitle(getString(R.string.mybookings));
         backtext.setOnClickListener(v -> onBackPressed());
 
-
-        DirverColorchange.ChangeColor((ViewGroup) (((ViewGroup) DriverTripHistoryAct.this
-                .findViewById(android.R.id.content)).getChildAt(0)), DriverTripHistoryAct.this);
+        DirverColorchange.ChangeColor((ViewGroup) (((ViewGroup) DriverTripHistoryAct.this.findViewById(android.R.id.content)).getChildAt(0)), DriverTripHistoryAct.this);
 
         boolean isFromFareScreen = false;
         String tripId = "";
@@ -65,7 +59,6 @@ public class DriverTripHistoryAct extends DriverBaseActivity {
             getSupportFragmentManager().beginTransaction().add(R.id.mainFrag, ff).commit();
         } else
             getSupportFragmentManager().beginTransaction().add(R.id.mainFrag, new DriverTripHistory()).commit();
-
     }
 
     @Override
@@ -98,7 +91,6 @@ public class DriverTripHistoryAct extends DriverBaseActivity {
     protected void onDestroy() {
         unregisterReceiver(networkStatus);
         super.onDestroy();
-
     }
 
     @Override

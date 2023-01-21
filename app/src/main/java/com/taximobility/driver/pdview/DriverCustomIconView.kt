@@ -11,21 +11,15 @@ import com.taximobility.R
 import com.taximobility.driver.utils.DriverCircleOverlayView.dpToPx
 
 class DriverCustomIconView @JvmOverloads constructor(
-        context: Context,
-        attrs: AttributeSet? = null,
-        defStyle: Int = 0,
-        defStyleRes: Int = 0) : View(context, attrs, defStyle), DriverCollapseInterface {
+    context: Context, attrs: AttributeSet? = null, defStyle: Int = 0, defStyleRes: Int = 0
+) : View(context, attrs, defStyle), DriverCollapseInterface {
     override fun collapsed(collapsed: Boolean) {
-        length = if (collapsed && expandedLength > 2)
-            2
-        else
-            expandedLength
+        length = if (collapsed && expandedLength > 2) 2
+        else expandedLength
         invalidate()
     }
 
     private var paint: Paint
-
-
     private var singleLayHeight: Int
     private var spaceBetweenLayout: Int
     private var pointHeight: Int
@@ -39,19 +33,18 @@ class DriverCustomIconView @JvmOverloads constructor(
 
     init {
         var underlineHeight = 0
-        if (includeUnderline)
-            underlineHeight = resources.getDimension(R.dimen.underline_view_height).toInt()
+        if (includeUnderline) underlineHeight =
+            resources.getDimension(R.dimen.underline_view_height).toInt()
 
         singleLayHeight = resources.getDimension(R.dimen.stop_lay_height).toInt() + underlineHeight
         spaceBetweenLayout = resources.getDimension(R.dimen.stop_space_lay).toInt()
         pointHeight = resources.getDimension(R.dimen.stop_icon_lay).toInt()
-        canvasHeight = (singleLayHeight * length) + (spaceBetweenLayout * (length - 1)) + (underlineHeight * (length - 1))
+        canvasHeight =
+            (singleLayHeight * length) + (spaceBetweenLayout * (length - 1)) + (underlineHeight * (length - 1))
         marginTop = (singleLayHeight / 2) - (pointHeight / 2)
         linkLineHeight = singleLayHeight + spaceBetweenLayout - pointHeight + underlineHeight
         linkLineWidth = dpToPx(2)
         paint = Paint()
-
-
     }
 
 
@@ -59,7 +52,6 @@ class DriverCustomIconView @JvmOverloads constructor(
         this.length = length
         expandedLength = length
         invalidate()
-
     }
 
     override fun onDraw(canvas: Canvas?) {
@@ -73,40 +65,66 @@ class DriverCustomIconView @JvmOverloads constructor(
 
                 if (i == 1) {
                     paint.color = ContextCompat.getColor(context, R.color.sub_heading_light)
-                    canvas.drawCircle(widthoffset.toFloat(), yOffset.toFloat() + (pointHeight / 2), (pointHeight / 2).toFloat(), paint)
+                    canvas.drawCircle(
+                        widthoffset.toFloat(),
+                        yOffset.toFloat() + (pointHeight / 2),
+                        (pointHeight / 2).toFloat(),
+                        paint
+                    )
 
                     yOffset += pointHeight
                     if (i != length) {
-                        canvas.drawRect(Rect(widthoffset - (linkLineWidth / 2), yOffset, widthoffset + (linkLineWidth / 2), yOffset + (linkLineHeight / 2)), paint)
+                        canvas.drawRect(
+                            Rect(
+                                widthoffset - (linkLineWidth / 2),
+                                yOffset,
+                                widthoffset + (linkLineWidth / 2),
+                                yOffset + (linkLineHeight / 2)
+                            ), paint
+                        )
 
                         yOffset += linkLineHeight / 2
                         paint.color = ContextCompat.getColor(context, R.color.invite_gray)
-                        canvas.drawRect(Rect(widthoffset - (linkLineWidth / 2), yOffset, widthoffset + (linkLineWidth / 2), yOffset + (linkLineHeight / 2)), paint)
+                        canvas.drawRect(
+                            Rect(
+                                widthoffset - (linkLineWidth / 2),
+                                yOffset,
+                                widthoffset + (linkLineWidth / 2),
+                                yOffset + (linkLineHeight / 2)
+                            ), paint
+                        )
                         yOffset += linkLineHeight / 2
                     }
-
-
                 } else {
-
-
-                    if (i == length)
-                        canvas.drawRect(Rect(widthoffset - (pointHeight / 2), yOffset, widthoffset + (pointHeight / 2), yOffset + pointHeight), paint)
-                    else
-                        canvas.drawCircle(widthoffset.toFloat(), yOffset.toFloat() + (pointHeight / 2), (pointHeight / 2).toFloat(), paint)
+                    if (i == length) canvas.drawRect(
+                        Rect(
+                            widthoffset - (pointHeight / 2),
+                            yOffset,
+                            widthoffset + (pointHeight / 2),
+                            yOffset + pointHeight
+                        ), paint
+                    )
+                    else canvas.drawCircle(
+                        widthoffset.toFloat(),
+                        yOffset.toFloat() + (pointHeight / 2),
+                        (pointHeight / 2).toFloat(),
+                        paint
+                    )
                     yOffset += pointHeight
                     if (i != length) {
-                        canvas.drawRect(Rect(widthoffset - (linkLineWidth / 2), yOffset, widthoffset + (linkLineWidth / 2), yOffset + linkLineHeight), paint)
+                        canvas.drawRect(
+                            Rect(
+                                widthoffset - (linkLineWidth / 2),
+                                yOffset,
+                                widthoffset + (linkLineWidth / 2),
+                                yOffset + linkLineHeight
+                            ), paint
+                        )
 
                         yOffset += linkLineHeight
                     }
-
                 }
-
             }
-
-
         }
-
     }
-
 }

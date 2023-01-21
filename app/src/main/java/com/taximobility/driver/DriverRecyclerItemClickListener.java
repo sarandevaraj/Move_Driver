@@ -1,7 +1,10 @@
 package com.taximobility.driver;
 
 import android.content.Context;
+
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -10,7 +13,7 @@ import android.view.View;
  * Created by developer on 5/4/17.
  */
 public class DriverRecyclerItemClickListener implements RecyclerView.OnItemTouchListener {
-    private OnItemClickListener mListener;
+    private final OnItemClickListener mListener;
 
     public interface OnItemClickListener {
         void onItemClick(View view, int position);
@@ -39,7 +42,7 @@ public class DriverRecyclerItemClickListener implements RecyclerView.OnItemTouch
     }
 
     @Override
-    public void onTouchEvent(RecyclerView view, MotionEvent motionEvent) {
+    public void onTouchEvent(@NonNull RecyclerView view, @NonNull MotionEvent motionEvent) {
     }
 
     @Override

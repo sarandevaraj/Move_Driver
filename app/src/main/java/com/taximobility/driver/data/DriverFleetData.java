@@ -93,8 +93,4 @@ public class DriverFleetData {
     public void setprimaryFleet(String details_taxi_no) {
         this.primaryFleet = details_taxi_no;
     }
-
-
-
-
 }

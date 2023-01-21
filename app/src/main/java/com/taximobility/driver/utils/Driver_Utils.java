@@ -1,6 +1,5 @@
 package com.taximobility.driver.utils;
 
-
 import android.animation.Animator;
 import android.app.Dialog;
 import android.app.Notification;
@@ -91,36 +90,19 @@ public class Driver_Utils {
     }
 
 
-    public static AlertDialog alert_view(final Context mContext, String title, String message,
-                                         String success_txt, String failure_txt,
-                                         Boolean cancelable_val, final DriverClickInterface dialogInterface, final String s) {
+    public static AlertDialog alert_view(final Context mContext, String title, String message, String success_txt, String failure_txt, Boolean cancelable_val, final DriverClickInterface dialogInterface, final String s) {
         if (mContext != null) {
-            AlertDialog.Builder dialog = new AlertDialog.Builder(mContext,R.style.MyDialogTheme);
+            AlertDialog.Builder dialog = new AlertDialog.Builder(mContext, R.style.MyDialogTheme);
             dialog.setCancelable(cancelable_val);
             dialog.setMessage(message);
-            dialog.setPositiveButton(success_txt, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int id) {
-                    dialogInterface.positiveButtonClick(dialog, id, s);
-                }
-            })
-                    .setNegativeButton(failure_txt, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int id) {
-                            dialogInterface.negativeButtonClick(dialog, id, s);
-                        }
-                    });
+            dialog.setPositiveButton(success_txt, (dialog1, id) -> dialogInterface.positiveButtonClick(dialog1, id, s)).setNegativeButton(failure_txt, (dialog12, id) -> dialogInterface.negativeButtonClick(dialog12, id, s));
 
-            if (alert != null && alert.isShowing())
-                alert.dismiss();
+            if (alert != null && alert.isShowing()) alert.dismiss();
             alert = dialog.create();
-            alert.setOnShowListener(new DialogInterface.OnShowListener() {
-                @Override
-                public void onShow(DialogInterface arg0) {
-                    if (mContext != null && alert != null) {
-                        alert.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(DriverCL.getColor(R.color.button_accept));
-                        alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(DriverCL.getColor(R.color.black));
-                    }
+            alert.setOnShowListener(arg0 -> {
+                if (mContext != null && alert != null) {
+                    alert.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(DriverCL.getColor(R.color.button_accept));
+                    alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(DriverCL.getColor(R.color.black));
                 }
             });
             alert.show();
@@ -141,8 +123,6 @@ public class Driver_Utils {
         }
     }
 
-
-
     public static void closeGPSDialog() {
         try {
             DriverSystems.out.println("closeDialogCalling");
@@ -155,51 +135,40 @@ public class Driver_Utils {
         }
     }
 
-
-    public static Dialog alert_view_dialog(final Context mContext, String title, String message,
-                                           String success_txt, String failure_txt,
-                                           Boolean cancelable_val, final DialogInterface.OnClickListener postive_dialogInterface, final DialogInterface.OnClickListener negative_dialogInterface, final String s) {
+    public static Dialog alert_view_dialog(final Context mContext, String title, String message, String success_txt, String failure_txt, Boolean cancelable_val, final DialogInterface.OnClickListener postive_dialogInterface, final DialogInterface.OnClickListener negative_dialogInterface, final String s) {
         if (mContext != null) {
-            AlertDialog.Builder dialog = new AlertDialog.Builder(mContext,R.style.MyDialogTheme);
+            AlertDialog.Builder dialog = new AlertDialog.Builder(mContext, R.style.MyDialogTheme);
             dialog.setCancelable(cancelable_val);
             dialog.setMessage(message);
-            dialog.setPositiveButton(success_txt, postive_dialogInterface)
-                    .setNegativeButton(failure_txt, negative_dialogInterface);
-            if (alert != null && alert.isShowing())
-                alert.dismiss();
+            dialog.setPositiveButton(success_txt, postive_dialogInterface).setNegativeButton(failure_txt, negative_dialogInterface);
+            if (alert != null && alert.isShowing()) alert.dismiss();
             alert = dialog.create();
-            alert.setOnShowListener(
-                    arg0 -> {
-                        if (mContext != null && alert != null) {
-                            alert.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(DriverCL.getColor(R.color.button_accept));
-                            alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(DriverCL.getColor(R.color.black));
-                        }
-                    });
+            alert.setOnShowListener(arg0 -> {
+                if (mContext != null && alert != null) {
+                    alert.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(DriverCL.getColor(R.color.button_accept));
+                    alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(DriverCL.getColor(R.color.black));
+                }
+            });
             alert.show();
 
         }
         return alert;
     }
 
-
-    public static void alert_view_dialog_GPS(final AppCompatActivity mContext, String title, String message,
-                                             String success_txt, String failure_txt,
-                                             Boolean cancelable_val, final DialogInterface.OnClickListener postive_dialogInterface, final DialogInterface.OnClickListener negative_dialogInterface, final String s) {
+    public static void alert_view_dialog_GPS(final AppCompatActivity mContext, String title, String message, String success_txt, String failure_txt, Boolean cancelable_val, final DialogInterface.OnClickListener postive_dialogInterface, final DialogInterface.OnClickListener negative_dialogInterface, final String s) {
         if (mContext != null) {
-            AlertDialog.Builder dialog = new AlertDialog.Builder(mContext,R.style.MyDialogTheme);
+            AlertDialog.Builder dialog = new AlertDialog.Builder(mContext, R.style.MyDialogTheme);
             dialog.setCancelable(cancelable_val);
             dialog.setMessage(message);
-            dialog.setPositiveButton(success_txt, postive_dialogInterface)
-                    .setNegativeButton(failure_txt, negative_dialogInterface);
+            dialog.setPositiveButton(success_txt, postive_dialogInterface).setNegativeButton(failure_txt, negative_dialogInterface);
 
             gpsAlert = dialog.create();
-            gpsAlert.setOnShowListener(
-                    arg0 -> {
-                        if (mContext != null && gpsAlert != null) {
-                            gpsAlert.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(DriverCL.getColor(R.color.button_accept));
-                            gpsAlert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(DriverCL.getColor(R.color.black));
-                        }
-                    });
+            gpsAlert.setOnShowListener(arg0 -> {
+                if (mContext != null && gpsAlert != null) {
+                    gpsAlert.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(DriverCL.getColor(R.color.button_accept));
+                    gpsAlert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(DriverCL.getColor(R.color.black));
+                }
+            });
             gpsAlert.show();
 
         }
@@ -209,8 +178,6 @@ public class Driver_Utils {
     private final static int busyIdleLimit = 900000;//15 mins
     private final static int activeDriverIdleLimit = 3600000;//1 hour
     private final static int alertInterval = 300000;//5 mins
-
-
     private final static int idleNotification = 201;
     private static long lastNotifiedTime = -1;
 
@@ -219,8 +186,7 @@ public class Driver_Utils {
         if (DriverSessionSave.getSession("status", context).equals("F")) {
             if ((System.currentTimeMillis() - DriverBaseActivity.getLastInteractionTime()) > (freeDriverIdleLimit - alertInterval))
                 generateNotifications(context, getString(R.string.idle_stop), DriverSplashAct.class, false, idleNotification);
-            if (DriverSessionSave.getSession(DriverCommonData.ACTIVITY_BG, context).equals("1") &&
-                    (System.currentTimeMillis() - DriverBaseActivity.getLastInteractionTime()) > (freeDriverIdleLimit))
+            if (DriverSessionSave.getSession(DriverCommonData.ACTIVITY_BG, context).equals("1") && (System.currentTimeMillis() - DriverBaseActivity.getLastInteractionTime()) > (freeDriverIdleLimit))
 //                return false;
                 return true;
         } else if (DriverSessionSave.getSession("status", context).equals("B")) {
@@ -234,13 +200,10 @@ public class Driver_Utils {
                     generateNotifications(context, getString(R.string.trip_stop), DriverSplashAct.class, false, idleNotification);
             }
         }
-
         return true;
     }
 
-
-    public static void generateNotifications(Context context, String message, Class<?> class1,
-                                             boolean cancelable, int Notification_ID) {
+    public static void generateNotifications(Context context, String message, Class<?> class1, boolean cancelable, int Notification_ID) {
         lastNotifiedTime = System.currentTimeMillis();
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         String title = getString(R.string.app_name);
@@ -248,7 +211,7 @@ public class Driver_Utils {
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_IMMUTABLE);
         String NOTIFICATION_CHANNEL_ID = "my_channel_id_01";
         Notification myNotication;
-        Notification.Builder builder = null;
+        Notification.Builder builder;
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, "My Notifications", NotificationManager.IMPORTANCE_HIGH);
@@ -258,28 +221,9 @@ public class Driver_Utils {
             notificationChannel.setLightColor(Color.RED);
             notificationManager.createNotificationChannel(notificationChannel);
 
-            builder = new Notification.Builder(context, NOTIFICATION_CHANNEL_ID)
-                    .setContentText(message)
-                    .setContentTitle(title)
-                    .setOngoing(true)
-                    .setSmallIcon(getNotificationIcon())
-                    .setContentIntent(pendingIntent)
-                    .setLargeIcon(((BitmapDrawable) ContextCompat.getDrawable(context, R.drawable.driver_ic_launcher)).getBitmap())
-                    .setStyle(new Notification.BigTextStyle()
-                            .bigText(message))
-                    .setWhen(System.currentTimeMillis());
+            builder = new Notification.Builder(context, NOTIFICATION_CHANNEL_ID).setContentText(message).setContentTitle(title).setOngoing(true).setSmallIcon(getNotificationIcon()).setContentIntent(pendingIntent).setLargeIcon(((BitmapDrawable) ContextCompat.getDrawable(context, R.drawable.driver_ic_launcher)).getBitmap()).setStyle(new Notification.BigTextStyle().bigText(message)).setWhen(System.currentTimeMillis());
         } else {
-            builder = new Notification.Builder(context)
-                    .setAutoCancel(true)
-                    .setTicker(context.getResources().getString(R.string.common_name))
-                    .setContentTitle(title)
-                    .setContentText(message)
-                    .setContentIntent(pendingIntent)
-                    .setOngoing(true)
-                    .setSmallIcon(getNotificationIcon())
-                    .setStyle(new Notification.BigTextStyle()
-                            .bigText(message))
-                    .setLargeIcon(((BitmapDrawable) context.getResources().getDrawable(R.drawable.driver_ic_launcher)).getBitmap());
+            builder = new Notification.Builder(context).setAutoCancel(true).setTicker(context.getResources().getString(R.string.common_name)).setContentTitle(title).setContentText(message).setContentIntent(pendingIntent).setOngoing(true).setSmallIcon(getNotificationIcon()).setStyle(new Notification.BigTextStyle().bigText(message)).setLargeIcon(((BitmapDrawable) context.getResources().getDrawable(R.drawable.driver_ic_launcher)).getBitmap());
 
         }
 
@@ -300,6 +244,4 @@ public class Driver_Utils {
         boolean useWhiteIcon = (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP);
         return useWhiteIcon ? R.drawable.driver_small_logo : R.drawable.driver_ic_launcher;
     }
-
-
 }

@@ -2,7 +2,7 @@ package com.taximobility.driver.data;
 
 public class DriverWalletHistoryData {
 
-    String updated_balance,comments,created_date,amt,sign;
+    String updated_balance, comments, created_date, amt, sign;
 
     public String getUpdated_balance() {
         return updated_balance;

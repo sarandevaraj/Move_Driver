@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 
 public class PromoDataList {
-    public class PromoData {
+    public static class PromoData {
         private String message;
         private String status;
 

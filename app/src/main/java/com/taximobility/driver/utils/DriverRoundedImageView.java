@@ -64,8 +64,7 @@ public class DriverRoundedImageView extends AppCompatImageView {
             float _h_rate = 1.0f * radius / bmp.getHeight();
             float _rate = Math.max(_w_rate, _h_rate);
             sbmp = Bitmap.createScaledBitmap(bmp, (int) (bmp.getWidth() * _rate), (int) (bmp.getHeight() * _rate), false);
-        } else
-            sbmp = bmp;
+        } else sbmp = bmp;
         Bitmap output = Bitmap.createBitmap(sbmp.getWidth(), sbmp.getHeight(), Config.ARGB_8888);
         Canvas canvas = new Canvas(output);
         final int color = 0xffa19774;

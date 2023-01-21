@@ -30,7 +30,6 @@ import retrofit2.Response;
 
 import static com.taximobility.driver.utils.DriverNC.getResources;
 
-
 public class DriverGetAddressFromLatLng extends AsyncTask<String, String, GeocoderModel> {
     private final MapLoggerRepository mRepository;
     public Context mContext;
@@ -39,13 +38,10 @@ public class DriverGetAddressFromLatLng extends AsyncTask<String, String, Geocod
     Geocoder geocoder;
     List<android.location.Address> addresses = null;
     List<android.location.Address> list = null;
-    private double latitude;
-    private double longitude;
-
-    private String type_str = "";
-
-
-    private DriverGetAddress getAddress_listener;
+    private final double latitude;
+    private final double longitude;
+    private String type_str;
+    private final DriverGetAddress getAddress_listener;
 
     public DriverGetAddressFromLatLng(Context context, LatLng position, DriverGetAddress getAddress_listener, String type) {
 
@@ -72,9 +68,8 @@ public class DriverGetAddressFromLatLng extends AsyncTask<String, String, Geocod
     protected GeocoderModel doInBackground(String... params) {
         // TODO Auto-generated method stub
         boolean isStrictMapBox = false;
-        if (params != null && params.length > 0)
-            isStrictMapBox = params[0].equals("mapbox");
-        GeocoderModel model = null;
+        if (params != null && params.length > 0) isStrictMapBox = params[0].equals("mapbox");
+        GeocoderModel model;
         if (DriverSessionSave.getSession(DriverCommonData.isGoogleGeocoder, mContext, false))
             model = mRepository.getGeocodeModel("" + latitude + "," + longitude, DriverCommonData.isGoogleGeocode);
         else
@@ -144,46 +139,44 @@ public class DriverGetAddressFromLatLng extends AsyncTask<String, String, Geocod
         String url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + lati + "," + longi + "&sensor=false" + "&key=" + getResources().getString(R.string.googleID);
 //        CoreClient polyline = new ServiceGenerator(mContext, true).createService(CoreClient.class);
         DriverCoreClient polyline = AppController.getInstance().getApiManagerWithoutEncryptBaseUrl_driver();
-        polyline.getJsonbyWholeUrl("no-cache", url)
-                .enqueue(new DriverRetrofitCallbackClass<>(mContext, new Callback<JsonObject>() {
-                    @Override
-                    public void onResponse(@NonNull Call<JsonObject> call, @NonNull Response<JsonObject> response) {
-                        if (response.isSuccessful()) {
-                            String result = response.body().toString();
-                            DriverSystems.out.println("geocodeeee result " + result);
-                            if (result != null && result.length() > 0)
-                                if (getAddress_listener != null) {
-                                    try {
-                                        JSONObject object = new JSONObject("" + result);
-                                        if (object.has("status") && !object.getString("status").equalsIgnoreCase("OK") && object.has("error_message")) {
-                                            String msg = object.getString("error_message");
-                                            DriverCToast.ShowToast(mContext, msg);
-                                            return;
-                                        }
-                                        JSONArray array = object.getJSONArray("results");
-                                        object = array.getJSONObject(0);
-                                        String address = null;
-                                        if (!object.getString("formatted_address").equalsIgnoreCase(""))
-                                            address = object.getString("formatted_address").replaceAll("null", "").replaceAll(", ,", "").replaceAll(", ,", "");
-                                        DriverSystems.out.println("formatted_address " + address);
-                                        saveGeocodeLog("" + lati + "," + longi, address, DriverCommonData.isGoogleGeocode);
-                                        getAddress_listener.setaddress(lati, longi, address, type_str);
-                                    } catch (Exception e) {
-                                        e.printStackTrace();
-                                        DriverSystems.out.println("map_box" + Thread.currentThread().getId());
-                                        new DriverGetAddressFromLatLng(mContext, mPosition, getAddress_listener, type_str).execute("mapbox");
-                                    }
-                                }
-                        } else {
+        polyline.getJsonbyWholeUrl("no-cache", url).enqueue(new DriverRetrofitCallbackClass<>(mContext, new Callback<JsonObject>() {
+            @Override
+            public void onResponse(@NonNull Call<JsonObject> call, @NonNull Response<JsonObject> response) {
+                if (response.isSuccessful()) {
+                    String result = response.body().toString();
+                    DriverSystems.out.println("geocodeeee result " + result);
+                    if (result != null && result.length() > 0) if (getAddress_listener != null) {
+                        try {
+                            JSONObject object = new JSONObject("" + result);
+                            if (object.has("status") && !object.getString("status").equalsIgnoreCase("OK") && object.has("error_message")) {
+                                String msg = object.getString("error_message");
+                                DriverCToast.ShowToast(mContext, msg);
+                                return;
+                            }
+                            JSONArray array = object.getJSONArray("results");
+                            object = array.getJSONObject(0);
+                            String address = null;
+                            if (!object.getString("formatted_address").equalsIgnoreCase(""))
+                                address = object.getString("formatted_address").replaceAll("null", "").replaceAll(", ,", "").replaceAll(", ,", "");
+                            DriverSystems.out.println("formatted_address " + address);
+                            saveGeocodeLog("" + lati + "," + longi, address, DriverCommonData.isGoogleGeocode);
+                            getAddress_listener.setaddress(lati, longi, address, type_str);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            DriverSystems.out.println("map_box" + Thread.currentThread().getId());
                             new DriverGetAddressFromLatLng(mContext, mPosition, getAddress_listener, type_str).execute("mapbox");
                         }
                     }
+                } else {
+                    new DriverGetAddressFromLatLng(mContext, mPosition, getAddress_listener, type_str).execute("mapbox");
+                }
+            }
 
-                    @Override
-                    public void onFailure(@NonNull Call<JsonObject> call, Throwable t) {
-                        t.printStackTrace();
-                    }
-                }));
+            @Override
+            public void onFailure(@NonNull Call<JsonObject> call, @NonNull Throwable t) {
+                t.printStackTrace();
+            }
+        }));
     }
 
     private GeocoderModel saveGeocodeLog(String latLngKey, String result, int type) {
@@ -199,8 +192,9 @@ public class DriverGetAddressFromLatLng extends AsyncTask<String, String, Geocod
 
     private class GetGeocodeLog extends AsyncTask<Void, Void, GeocoderModel> {
 
-        private double P_latitude, P_longitude;
-        private int type;
+        private final double P_latitude;
+        private final double P_longitude;
+        private final int type;
 
         public GetGeocodeLog(double p_latitude, double p_longitude, int type) {
             this.P_latitude = p_latitude;

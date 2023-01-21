@@ -12,22 +12,16 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
-import android.provider.Settings;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.TextView;
 
 import com.mayan.sospluginmodlue.service.SOSService;
 import com.taximobility.R;
 import com.taximobility.driver.DriverSplashAct;
-import com.taximobility.driver.DriverStreetPickUpAct;
-import com.taximobility.driver.data.DriverCommonData;
-import com.taximobility.interfaces.AlertListener;
+import com.taximobility.driver.interfaces.AlertListener;
 import com.taximobility.util.Utility;
 
 import java.io.IOException;
@@ -92,9 +86,7 @@ public class DriverNetworkStatus extends BroadcastReceiver {
                 e.printStackTrace();
             }
         }
-            System.out.println("Network status"+intent.getAction());
-
-
+        System.out.println("Network status" + intent.getAction());
     }
 
     public void isConnect(final Context mContext, final boolean isconnect) {
@@ -102,7 +94,7 @@ public class DriverNetworkStatus extends BroadcastReceiver {
         try {
 
             if (!isconnect) {
-                Utility.actionSheet((Activity) mContext,"" + DriverNC.getResources().getString(R.string.check_net_connection),"" + DriverNC.getResources().getString(R.string.c_tryagain),"" + DriverNC.getResources().getString(R.string.cancell), false, new AlertListener() {
+                Utility.actionSheet((Activity) mContext, "" + DriverNC.getResources().getString(R.string.check_net_connection), "" + DriverNC.getResources().getString(R.string.c_tryagain), "" + DriverNC.getResources().getString(R.string.cancell), false, new AlertListener() {
                     @Override
                     public void onSuccess() {
                         if (DriverNetworkStatus.isOnline(mContext)) {
@@ -118,6 +110,7 @@ public class DriverNetworkStatus extends BroadcastReceiver {
                             DriverCToast.ShowToast(mContext, DriverNC.getResources().getString(R.string.check_net_connection));
                         }
                     }
+
                     @Override
                     public void onFailure() {
                         Activity activity = (Activity) mContext;
@@ -195,8 +188,7 @@ public class DriverNetworkStatus extends BroadcastReceiver {
                  */
             } else {
                 try {
-                    if (sDialog != null)
-                        sDialog.dismiss();
+                    if (sDialog != null) sDialog.dismiss();
                     sDialog = null;
                 } catch (Exception e) {
                     // TODO: handle exception
@@ -226,41 +218,33 @@ public class DriverNetworkStatus extends BroadcastReceiver {
 
     private void errorInSplash(String message) {
         try {
-            new Handler(Looper.getMainLooper()).post(new Runnable() {
-                @Override
-                public void run() {
-                    if (appContext instanceof AppCompatActivity && !((AppCompatActivity) appContext).isFinishing()) {
-                        if (errorDialog != null && errorDialog.isShowing()) {
-                            errorDialog.dismiss();
-                        }
-                        final View view = View.inflate(appContext, R.layout.driver_no_internet_lay, null);
-                        errorDialog = new Dialog(appContext, R.style.Theme_Transparent1);
-                        errorDialog.setContentView(view);
-                        errorDialog.setCancelable(false);
-                        errorDialog.setCanceledOnTouchOutside(false);
-                        Window window = errorDialog.getWindow();
-                        window.setGravity(Gravity.TOP);
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-                            window.setStatusBarColor(Color.BLACK);
-                        }
-                        AppCompatButton btn_emergency = errorDialog.findViewById(R.id.btn_emergency);
+            new Handler(Looper.getMainLooper()).post(() -> {
+                if (appContext instanceof AppCompatActivity && !((AppCompatActivity) appContext).isFinishing()) {
+                    if (errorDialog != null && errorDialog.isShowing()) {
+                        errorDialog.dismiss();
+                    }
+                    final View view = View.inflate(appContext, R.layout.driver_no_internet_lay, null);
+                    errorDialog = new Dialog(appContext, R.style.Theme_Transparent1);
+                    errorDialog.setContentView(view);
+                    errorDialog.setCancelable(false);
+                    errorDialog.setCanceledOnTouchOutside(false);
+                    Window window = errorDialog.getWindow();
+                    window.setGravity(Gravity.TOP);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                        window.setStatusBarColor(Color.BLACK);
+                    }
+                    AppCompatButton btn_emergency = errorDialog.findViewById(R.id.btn_emergency);
 //                        if (DriverSessionSave.getSession(DriverCommonData.SOS_ENABLED, appContext, false)) {
 //                            btn_emergency.setVisibility(View.VISIBLE);
 //                        }
-                        btn_emergency.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                startSOSService(appContext);
-                            }
-                        });
-                        errorDialog.show();
-                    } else {
-                        try {
-                            errorDialog.dismiss();
-                        } catch (Exception e) {
-                            // TODO: handle exception
-                        }
+                    btn_emergency.setOnClickListener(view1 -> startSOSService(appContext));
+                    errorDialog.show();
+                } else {
+                    try {
+                        errorDialog.dismiss();
+                    } catch (Exception e) {
+                        // TODO: handle exception
                     }
                 }
             });
@@ -311,9 +295,7 @@ public class DriverNetworkStatus extends BroadcastReceiver {
                 } else {
                     return false;
                 }
-            } catch (MalformedURLException e1) {
-                return false;
-            } catch (IOException e) {
+            } catch (IOException e1) {
                 return false;
             }
             // return isURLReachable(mContext);

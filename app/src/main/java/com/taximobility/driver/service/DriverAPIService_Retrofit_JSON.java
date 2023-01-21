@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
+
 import com.taximobility.R;
 import com.taximobility.driver.data.DriverCommonData;
 import com.taximobility.driver.interfaces.DriverAPIResult;
@@ -34,7 +36,7 @@ public class DriverAPIService_Retrofit_JSON {
     private boolean dont_encode;
     public Context mContext;
     private boolean isSuccess = true;
-    private boolean GetMethod;
+    private final boolean GetMethod;
     private Dialog mDialog;
     private JSONObject data;
     public DriverAPIResult response;
@@ -73,8 +75,7 @@ public class DriverAPIService_Retrofit_JSON {
         response = res;
         JSONObject jobj = null;
         try {
-            if (!getmethod)
-                jobj = new JSONObject(j);
+            if (!getmethod) jobj = new JSONObject(j);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -90,8 +91,7 @@ public class DriverAPIService_Retrofit_JSON {
         this.dont_encode = dont_encode;
         GetMethod = getmethod;
         String[] type = url.split("type=");
-        if (type.length > 1)
-            url_type = type[1];
+        if (type.length > 1) url_type = type[1];
         else {
             wholeURL = true;
             url_type = url;
@@ -115,16 +115,14 @@ public class DriverAPIService_Retrofit_JSON {
     public void showDialog() {
         try {
             if (DriverNetworkStatus.isOnline(mContext)) {
-                if (mDialog != null && mContext != null)
-                    mDialog.dismiss();
+                if (mDialog != null && mContext != null) mDialog.dismiss();
                 View view = View.inflate(mContext, R.layout.driver_progress_bar, null);
                 mDialog = new Dialog(mContext, R.style.dialogwinddow);
                 DirverColorchange.ChangeColor((ViewGroup) view, mContext);
                 mDialog.setContentView(view);
                 mDialog.setCancelable(false);
                 try {
-                    if (mContext != null)
-                        mDialog.show();
+                    if (mContext != null) mDialog.show();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -132,9 +130,7 @@ public class DriverAPIService_Retrofit_JSON {
 
                 ImageView iv = mDialog.findViewById(R.id.giff);
                 DrawableImageViewTarget imageViewTarget = new DrawableImageViewTarget(iv);
-                Glide.with(mContext)
-                        .load(R.raw.driver_loading_anim)
-                        .into(imageViewTarget);
+                Glide.with(mContext).load(R.raw.driver_loading_anim).into(imageViewTarget);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -144,9 +140,7 @@ public class DriverAPIService_Retrofit_JSON {
 
     public void closeDialog() {
         try {
-            if (mDialog != null)
-                if (mDialog.isShowing())
-                    mDialog.dismiss();
+            if (mDialog != null) if (mDialog.isShowing()) mDialog.dismiss();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -170,17 +164,14 @@ public class DriverAPIService_Retrofit_JSON {
                     client = AppController.getInstance().getApiManagerWithEncryptBaseUrl_driver();
                 }
 //                client = new ServiceGenerator(mContext, dont_encode).createService(CoreClient.class);
-                Call<ResponseBody> coreResponse = null;
+                Call<ResponseBody> coreResponse;
                 if (!wholeURL)
-                    coreResponse = client.coreDetails("", "no-cache",
-                            url_type, DriverSessionSave.getSession(DriverCommonData.GETCORE_LASTUPDATE, mContext).equals("") ? "0" : DriverSessionSave.getSession(DriverCommonData.GETCORE_LASTUPDATE, mContext)
-                            , DriverSessionSave.getSession(DriverCommonData.ACCESS_KEY, mContext));
-                else
-                    coreResponse = client.getWhole("no-cache", url_type);
+                    coreResponse = client.coreDetails("", "no-cache", url_type, DriverSessionSave.getSession(DriverCommonData.GETCORE_LASTUPDATE, mContext).equals("") ? "0" : DriverSessionSave.getSession(DriverCommonData.GETCORE_LASTUPDATE, mContext), DriverSessionSave.getSession(DriverCommonData.ACCESS_KEY, mContext));
+                else coreResponse = client.getWhole("no-cache", url_type);
                 coreResponse.enqueue(new DriverRetrofitCallbackClass<>(mContext, new Callback<ResponseBody>() {
                     @Override
-                    public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
-                        String data = null;
+                    public void onResponse(@NonNull Call<ResponseBody> call, @NonNull retrofit2.Response<ResponseBody> response) {
+                        String data;
                         closeDialog();
                         if (response.isSuccessful()) {
                             try {
@@ -207,7 +198,7 @@ public class DriverAPIService_Retrofit_JSON {
                     }
 
                     @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
                         if (DriverAPIService_Retrofit_JSON.this.response != null)
                             DriverAPIService_Retrofit_JSON.this.response.getResult(false, null);
                         DriverCToast.ShowToast(mContext, DriverNC.getString(R.string.server_error));
@@ -236,8 +227,8 @@ public class DriverAPIService_Retrofit_JSON {
                 Call<ResponseBody> coreResponse = client.updateUser(DriverServiceGenerator.COMPANY_KEY, body, url_type, DriverSessionSave.getSession("Lang", mContext));
                 coreResponse.enqueue(new DriverRetrofitCallbackClass<>(mContext, new Callback<ResponseBody>() {
                     @Override
-                    public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
-                        String data = null;
+                    public void onResponse(@NonNull Call<ResponseBody> call, @NonNull retrofit2.Response<ResponseBody> response) {
+                        String data;
                         closeDialog();
                         if (response.isSuccessful()) {
                             try {
@@ -264,7 +255,7 @@ public class DriverAPIService_Retrofit_JSON {
                     }
 
                     @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
                         if (DriverAPIService_Retrofit_JSON.this.response != null)
                             DriverAPIService_Retrofit_JSON.this.response.getResult(false, null);
                         DriverCToast.ShowToast(mContext, DriverNC.getString(R.string.server_error));
@@ -273,22 +264,16 @@ public class DriverAPIService_Retrofit_JSON {
                     }
                 }));
             }
-
         }
-
     }
-
 
     public void execute(String url) {
         String[] type = url.split("=");
         this.url_type = type[1];
         onPreExecute();
-
     }
 
     public void execute() {
-
         onPreExecute();
-
     }
 }

@@ -43,8 +43,7 @@ import com.taximobility.driver.utils.DriverCToast;
 import com.taximobility.driver.utils.DriverNC;
 import com.taximobility.driver.utils.DriverSessionSave;
 import com.taximobility.driver.utils.DriverSystems;
-import com.taximobility.features.CToast;
-import com.taximobility.interfaces.AlertListener;
+import com.taximobility.driver.interfaces.AlertListener;
 import com.taximobility.util.Colorchange;
 import com.taximobility.util.Utility;
 import com.yalantis.ucrop.UCrop;
@@ -83,7 +82,7 @@ public class DriverAddFleetAct extends AppCompatActivity implements DriverClickI
     private AlertDialog alertDialog;
     private String file_name = "";
     private String encodedImage = "";
-    private String destinationFileName = "profileImage";
+    private final String destinationFileName = "profileImage";
     private static final int MY_PERMISSIONS_REQUEST_CAMERA = 113;
     private ModellistAdapter modellistAdapter;
     private ArrayList<ModelListInfo> modelListInfos;
@@ -134,73 +133,56 @@ public class DriverAddFleetAct extends AppCompatActivity implements DriverClickI
         save_btn = findViewById(R.id.save_btn);
         vehicle_owner_name.setText(owner_name);
 
-        select_model.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        select_model.setOnClickListener(view -> openModellist());
 
-                openModellist();
 
+        save_btn.setOnClickListener(view -> {
+            if (vehicle_number.getText().toString().trim().isEmpty()) {
+                DriverCToast.ShowToast(DriverAddFleetAct.this, DriverNC.getResources().getString(R.string.enter_the_num));
+            } else if (select_model.getText().toString().trim().isEmpty()) {
+                DriverCToast.ShowToast(DriverAddFleetAct.this, DriverNC.getResources().getString(R.string.select_the_model));
+            } else if (vehicle_manufacturer.getText().toString().trim().isEmpty()) {
+                DriverCToast.ShowToast(DriverAddFleetAct.this, DriverNC.getResources().getString(R.string.enter_vehicle_manufacturer));
+            } else if (upload_vehicle_img.getText().toString().trim().isEmpty()) {
+                DriverCToast.ShowToast(DriverAddFleetAct.this, DriverNC.getResources().getString(R.string.upload_image_file));
+            } else {
+                String url = "type=saveNewFleet";
+                new AddFleet(url);
             }
         });
 
 
-        save_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (vehicle_number.getText().toString().trim().isEmpty()) {
-                    CToast.ShowToast(DriverAddFleetAct.this, DriverNC.getResources().getString(R.string.enter_the_num));
-                } else if (select_model.getText().toString().trim().isEmpty()) {
-                    CToast.ShowToast(DriverAddFleetAct.this, DriverNC.getResources().getString(R.string.select_the_model));
-                } else if (vehicle_manufacturer.getText().toString().trim().isEmpty()) {
-                    CToast.ShowToast(DriverAddFleetAct.this, DriverNC.getResources().getString(R.string.enter_vehicle_manufacturer));
-                } else if (upload_vehicle_img.getText().toString().trim().isEmpty()) {
-                    CToast.ShowToast(DriverAddFleetAct.this, DriverNC.getResources().getString(R.string.upload_image_file));
-                } else {
-                    String url = "type=saveNewFleet";
-                    new AddFleet(url);
-                }
-            }
-        });
+        upload_img.setOnClickListener(view -> {
+            try {
+                if (ActivityCompat.checkSelfPermission(DriverAddFleetAct.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(DriverAddFleetAct.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
 
+                    Utility.actionSheet(DriverAddFleetAct.this, DriverNC.getResources().getString(R.string.str_media), DriverNC.getResources().getString(R.string.yes), "", false, new AlertListener() {
+                        @Override
+                        public void onSuccess() {
+                            ActivityCompat.requestPermissions(DriverAddFleetAct.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, MY_PERMISSIONS_REQUEST_CAMERA);
+                        }
 
-        upload_img.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    if (ActivityCompat.checkSelfPermission(DriverAddFleetAct.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED ||
-                            ActivityCompat.checkSelfPermission(DriverAddFleetAct.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                        @Override
+                        public void onFailure() {
 
-                        Utility.actionSheet(DriverAddFleetAct.this,  DriverNC.getResources().getString(R.string.str_media), DriverNC.getResources().getString(R.string.yes), "", false, new AlertListener() {
-                            @Override
-                            public void onSuccess() {
-                                ActivityCompat.requestPermissions(DriverAddFleetAct.this,
-                                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                                        MY_PERMISSIONS_REQUEST_CAMERA);
-                            }
+                        }
+                    });
+                    /*
+                    dialog1 = Driver_Utils.alert_view_dialog(DriverAddFleetAct.this, "", DriverNC.getResources().getString(R.string.str_media), DriverNC.getResources().getString(R.string.yes), "", true, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int i) {
+                            ActivityCompat.requestPermissions(DriverAddFleetAct.this,
+                                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                                    MY_PERMISSIONS_REQUEST_CAMERA);
+                            dialog.dismiss();
+                        }
+                    }, (dialogInterface, i) -> dialogInterface.dismiss(), "");
 
-                            @Override
-                            public void onFailure() {
+                     */
+                } else getCamera();
+            } catch (Exception e) {
 
-                            }
-                        });
-                        /*
-                        dialog1 = Driver_Utils.alert_view_dialog(DriverAddFleetAct.this, "", DriverNC.getResources().getString(R.string.str_media), DriverNC.getResources().getString(R.string.yes), "", true, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int i) {
-                                ActivityCompat.requestPermissions(DriverAddFleetAct.this,
-                                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                                        MY_PERMISSIONS_REQUEST_CAMERA);
-                                dialog.dismiss();
-                            }
-                        }, (dialogInterface, i) -> dialogInterface.dismiss(), "");
-
-                         */
-                    } else
-                        getCamera();
-                } catch (Exception e) {
-
-                    // TODO: handle exception
-                }
+                // TODO: handle exception
             }
         });
     }
@@ -230,7 +212,7 @@ public class DriverAddFleetAct extends AppCompatActivity implements DriverClickI
 
     private void getCamera() {
 
-        Utility.actionSheet(DriverAddFleetAct.this,"" + DriverNC.getResources().getString(R.string.choose_an_image),"" + DriverNC.getResources().getString(R.string.camera),"" +  DriverNC.getResources().getString(R.string.gallery), false, new AlertListener() {
+        Utility.actionSheet(DriverAddFleetAct.this, "" + DriverNC.getResources().getString(R.string.choose_an_image), "" + DriverNC.getResources().getString(R.string.camera), "" + DriverNC.getResources().getString(R.string.gallery), false, new AlertListener() {
             @Override
             public void onSuccess() {
                 Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -248,9 +230,7 @@ public class DriverAddFleetAct extends AppCompatActivity implements DriverClickI
 
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                             takePictureIntent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                            imageUri = FileProvider.getUriForFile(DriverAddFleetAct.this,
-                                    DriverAddFleetAct.this.getPackageName().concat(".files_root"),
-                                    photoFile);
+                            imageUri = FileProvider.getUriForFile(DriverAddFleetAct.this, DriverAddFleetAct.this.getPackageName().concat(".files_root"), photoFile);
                         } else {
                             imageUri = Uri.fromFile(photoFile);
                         }
@@ -260,6 +240,7 @@ public class DriverAddFleetAct extends AppCompatActivity implements DriverClickI
                     }
                 }
             }
+
             @Override
             public void onFailure() {
                 final Intent intent = new Intent();
@@ -318,11 +299,9 @@ public class DriverAddFleetAct extends AppCompatActivity implements DriverClickI
         // Create an image file name
         String imageFileName = getDateForCreateImageFile();
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        File image = File.createTempFile(
-                imageFileName,  /* prefix */
+        File image = File.createTempFile(imageFileName,  /* prefix */
                 ".jpg",         /* suffix */
-                storageDir      /* directory */
-        );
+                storageDir      /* directory */);
 
         return image;
     }
@@ -339,9 +318,7 @@ public class DriverAddFleetAct extends AppCompatActivity implements DriverClickI
                     case 0:
                         try {
                             file_name = getRealPathFromURI(data.getDataString());
-                            UCrop uCrop = UCrop.of(Uri.fromFile(new File(getRealPathFromURI(data.getDataString()))), Uri.fromFile(new File(DriverAddFleetAct.this.getCacheDir(), destinationFileName)))
-                                    .useSourceImageAspectRatio().withAspectRatio(1, 1)
-                                    .withMaxResultSize(400, 400);
+                            UCrop uCrop = UCrop.of(Uri.fromFile(new File(getRealPathFromURI(data.getDataString()))), Uri.fromFile(new File(DriverAddFleetAct.this.getCacheDir(), destinationFileName))).useSourceImageAspectRatio().withAspectRatio(1, 1).withMaxResultSize(400, 400);
                             UCrop.Options options = new UCrop.Options();
                             options.setToolbarColor(ContextCompat.getColor(DriverAddFleetAct.this, R.color.appbg));
                             options.setStatusBarColor(ContextCompat.getColor(DriverAddFleetAct.this, R.color.header_text));
@@ -350,15 +327,13 @@ public class DriverAddFleetAct extends AppCompatActivity implements DriverClickI
                             uCrop.withOptions(options);
                             uCrop.start(DriverAddFleetAct.this);
                         } catch (final Exception e) {
+                            e.printStackTrace();
                         }
                         break;
                     case 1:
                         try {
                             file_name = imageUri.getPath();
-                            UCrop.of(imageUri, Uri.fromFile(new File(DriverAddFleetAct.this.getCacheDir(), destinationFileName)))
-                                    .withAspectRatio(1, 1)
-                                    .withMaxResultSize(2000, 2000)
-                                    .start(DriverAddFleetAct.this);
+                            UCrop.of(imageUri, Uri.fromFile(new File(DriverAddFleetAct.this.getCacheDir(), destinationFileName))).withAspectRatio(1, 1).withMaxResultSize(2000, 2000).start(DriverAddFleetAct.this);
                         } catch (final Exception e) {
                             e.printStackTrace();
                         }
@@ -366,6 +341,7 @@ public class DriverAddFleetAct extends AppCompatActivity implements DriverClickI
                 }
             }
         } catch (final Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -373,8 +349,7 @@ public class DriverAddFleetAct extends AppCompatActivity implements DriverClickI
 
         final Uri contentUri = Uri.parse(contentURI);
         final Cursor cursor = getContentResolver().query(contentUri, null, null, null, null);
-        if (cursor == null)
-            return contentUri.getPath();
+        if (cursor == null) return contentUri.getPath();
         else {
             cursor.moveToFirst();
             final int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
@@ -425,9 +400,7 @@ public class DriverAddFleetAct extends AppCompatActivity implements DriverClickI
 
             ImageView iv = mDialog.findViewById(R.id.giff);
             DrawableImageViewTarget imageViewTarget = new DrawableImageViewTarget(iv);
-            Glide.with(DriverAddFleetAct.this)
-                    .load(R.raw.driver_loading_anim)
-                    .into(imageViewTarget);
+            Glide.with(DriverAddFleetAct.this).load(R.raw.driver_loading_anim).into(imageViewTarget);
         }
 
         @Override
@@ -445,9 +418,7 @@ public class DriverAddFleetAct extends AppCompatActivity implements DriverClickI
                 encodedImage = Base64.encodeToString(image, Base64.DEFAULT);
             } catch (final Exception e) {
                 // TODO: handle exception
-                runOnUiThread(() -> {
-                    DriverCToast.ShowToast(DriverAddFleetAct.this, DriverNC.getResources().getString(R.string.image_failed));
-                });
+                runOnUiThread(() -> DriverCToast.ShowToast(DriverAddFleetAct.this, DriverNC.getResources().getString(R.string.image_failed)));
             }
             return mBitmap;
         }
@@ -457,8 +428,7 @@ public class DriverAddFleetAct extends AppCompatActivity implements DriverClickI
             // TODO Auto-generated method stub
             super.onPostExecute(result);
             try {
-                if (DriverAddFleetAct.this != null && mDialog.isShowing())
-                    mDialog.dismiss();
+                if (DriverAddFleetAct.this != null && mDialog.isShowing()) mDialog.dismiss();
                 upload_vehicle_img.setText(file_name);
                 //vehicle_img.setBackgroundResource(0);
                 if (result != null)
@@ -487,7 +457,7 @@ public class DriverAddFleetAct extends AppCompatActivity implements DriverClickI
                 if (isOnline()) {
                     new DriverAPIService_Retrofit_JSON(DriverAddFleetAct.this, this, j, false).execute(url);
                 } else {
-                    DriverCToast.ShowToast(DriverAddFleetAct.this,"" + DriverNC.getResources().getString(R.string.check_net_connection));
+                    DriverCToast.ShowToast(DriverAddFleetAct.this, "" + DriverNC.getResources().getString(R.string.check_net_connection));
 //                    dialog1 = Driver_Utils.alert_view(DriverAddFleetAct.this, "" + DriverNC.getResources().getString(R.string.message), "" + DriverNC.getResources().getString(R.string.check_net_connection), "" + DriverNC.getResources().getString(R.string.ok), "", true, DriverAddFleetAct.this, "");
                 }
             } catch (Exception e) {
@@ -531,11 +501,10 @@ public class DriverAddFleetAct extends AppCompatActivity implements DriverClickI
         ConnectivityManager connectivity = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
         if (connectivity != null) {
             NetworkInfo[] info = connectivity.getAllNetworkInfo();
-            if (info != null)
-                for (NetworkInfo networkInfo : info)
-                    if (networkInfo.getState() == NetworkInfo.State.CONNECTED) {
-                        return true;
-                    }
+            if (info != null) for (NetworkInfo networkInfo : info)
+                if (networkInfo.getState() == NetworkInfo.State.CONNECTED) {
+                    return true;
+                }
         }
         return false;
     }
@@ -543,7 +512,7 @@ public class DriverAddFleetAct extends AppCompatActivity implements DriverClickI
     private class ModellistAdapter extends RecyclerView.Adapter<ModellistAdapter.ViewHolder> {
 
         Context context;
-        private List<ModelListInfo> modelListData;
+        private final List<ModelListInfo> modelListData;
 
 
         public ModellistAdapter(Context context, List<ModelListInfo> data) {
@@ -555,7 +524,7 @@ public class DriverAddFleetAct extends AppCompatActivity implements DriverClickI
         @Override
         public ModellistAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             LayoutInflater inflater = LayoutInflater.from(DriverAddFleetAct.this);
-            View view = null;
+            View view;
             view = inflater.inflate(R.layout.model_list, parent, false);
             Colorchange.ChangeColor((ViewGroup) view, DriverAddFleetAct.this);
             return new ModellistAdapter.ViewHolder(view);

@@ -1,6 +1,6 @@
 package com.taximobility.driver.utils
 
-object DriverExceptionConverter{
+object DriverExceptionConverter {
 
     fun buildStackTraceString(elements: Array<StackTraceElement>?): String {
         val sb = StringBuilder()

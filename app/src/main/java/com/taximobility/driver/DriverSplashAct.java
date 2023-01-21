@@ -21,6 +21,8 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.taximobility.BuildConfig;
 import com.taximobility.R;
@@ -43,7 +45,7 @@ import com.taximobility.driver.utils.DriverNetworkStatus;
 import com.taximobility.driver.utils.DriverSessionSave;
 import com.taximobility.driver.utils.DriverSystems;
 import com.taximobility.driver.utils.Driver_Utils;
-import com.taximobility.interfaces.AlertListener;
+import com.taximobility.driver.interfaces.AlertListener;
 import com.taximobility.util.AppController;
 import com.taximobility.util.SessionSave;
 import com.taximobility.util.Utility;
@@ -74,9 +76,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-//import com.mapbox.mapboxsdk.Mapbox;
-
-
 /**
  * taximobilityapps@gmail.com
  * call2Taxi4travel
@@ -99,7 +98,6 @@ public class DriverSplashAct extends MainActivityDriver {
     private String getCoreColorTime;
     private FrameLayout splashLayout;
     private Dialog myDialog;
-
 
     @Override
     public int setLayout() {
@@ -276,9 +274,8 @@ public class DriverSplashAct extends MainActivityDriver {
                 startActivity(i);
                 finish();
             } else {
-                if (myDialog != null && myDialog.isShowing())
-                    myDialog.dismiss();
-                Toast.makeText(context,getIntent().getStringExtra("alert_message"),Toast.LENGTH_LONG);
+                if (myDialog != null && myDialog.isShowing()) myDialog.dismiss();
+                Toast.makeText(context, getIntent().getStringExtra("alert_message"), Toast.LENGTH_LONG);
                 DriverSplashAct.this.finish();
 //                myDialog = Driver_Utils.alert_view_dialog(DriverSplashAct.this, "" +
 //                                DriverNC.getString(R.string.message),
@@ -293,8 +290,7 @@ public class DriverSplashAct extends MainActivityDriver {
 //                            }
 //                        }, null, "");
             }
-        } else
-            LoadDataForsplash();
+        } else LoadDataForsplash();
     }
 
 
@@ -316,43 +312,39 @@ public class DriverSplashAct extends MainActivityDriver {
         } else */
         if (DriverNetworkStatus.isOnline(DriverSplashAct.this)) {
 
-            new Handler().postDelayed(new Runnable() {
-
-                @Override
-                public void run() {
+            new Handler().postDelayed(() -> {
 
 
-                    getGPS();
+                getGPS();
 
 
-                   /* if (ActivityCompat.checkSelfPermission(SplashAct.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ||
-                            ActivityCompat.checkSelfPermission(SplashAct.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+               /* if (ActivityCompat.checkSelfPermission(SplashAct.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ||
+                        ActivityCompat.checkSelfPermission(SplashAct.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
-                        dialog1 = Utils.alert_view_dialog(SplashAct.this, "", NC.getResources().getString(R.string.str_loc), NC.getResources().getString(R.string.yes), NC.getResources().getString(R.string.no), false, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int i) {
-                                ActivityCompat.requestPermissions(SplashAct.this,
-                                        new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION},
-                                        MY_PERMISSIONS_REQUEST_GPS);
-
-                            }
-                        }, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int i) {
-                                dialog.dismiss();
-                                finish();
-                            }
-                        }, "");
-                    } else {
-                        if (ActivityCompat.checkSelfPermission(SplashAct.this, android.Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+                    dialog1 = Utils.alert_view_dialog(SplashAct.this, "", NC.getResources().getString(R.string.str_loc), NC.getResources().getString(R.string.yes), NC.getResources().getString(R.string.no), false, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int i) {
                             ActivityCompat.requestPermissions(SplashAct.this,
-                                    new String[]{Manifest.permission.SEND_SMS, Manifest.permission.READ_PHONE_STATE},
-                                    REQUEST_READ_PHONE_STATE);
-                        } else {
-                            getGPS();
+                                    new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION},
+                                    MY_PERMISSIONS_REQUEST_GPS);
+
                         }
-                    }*/
-                }
+                    }, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int i) {
+                            dialog.dismiss();
+                            finish();
+                        }
+                    }, "");
+                } else {
+                    if (ActivityCompat.checkSelfPermission(SplashAct.this, android.Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+                        ActivityCompat.requestPermissions(SplashAct.this,
+                                new String[]{Manifest.permission.SEND_SMS, Manifest.permission.READ_PHONE_STATE},
+                                REQUEST_READ_PHONE_STATE);
+                    } else {
+                        getGPS();
+                    }
+                }*/
             }, 100);
 
         }
@@ -515,7 +507,7 @@ public class DriverSplashAct extends MainActivityDriver {
 
     private void EnableHuaweiProtectedApps() {
         try {
-            String cmd = "";
+            String cmd;
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 cmd = "am start -n com.huawei.systemmanager/.appcontrol.activity.StartupAppControlActivity";
             } else {
@@ -537,20 +529,17 @@ public class DriverSplashAct extends MainActivityDriver {
 
         try {
             Intent intent = new Intent();
-            intent.setComponent(new ComponentName("com.iqoo.secure",
-                    "com.iqoo.secure.ui.phoneoptimize.AddWhiteListActivity"));
+            intent.setComponent(new ComponentName("com.iqoo.secure", "com.iqoo.secure.ui.phoneoptimize.AddWhiteListActivity"));
             context.startActivity(intent);
         } catch (Exception e) {
             try {
                 Intent intent = new Intent();
-                intent.setComponent(new ComponentName("com.vivo.permissionmanager",
-                        "com.vivo.permissionmanager.activity.BgStartUpManagerActivity"));
+                intent.setComponent(new ComponentName("com.vivo.permissionmanager", "com.vivo.permissionmanager.activity.BgStartUpManagerActivity"));
                 context.startActivity(intent);
             } catch (Exception ex) {
                 try {
                     Intent intent = new Intent();
-                    intent.setClassName("com.iqoo.secure",
-                            "com.iqoo.secure.ui.phoneoptimize.BgStartUpManager");
+                    intent.setClassName("com.iqoo.secure", "com.iqoo.secure.ui.phoneoptimize.BgStartUpManager");
                     context.startActivity(intent);
                 } catch (Exception exx) {
                     ex.printStackTrace();
@@ -561,8 +550,7 @@ public class DriverSplashAct extends MainActivityDriver {
 
     private String getUserSerial() {
 //noinspection ResourceType
-        @SuppressLint("WrongConstant")
-        Object userManager = getSystemService("user");
+        @SuppressLint("WrongConstant") Object userManager = getSystemService("user");
         if (null == userManager) return "";
 
         try {
@@ -606,8 +594,7 @@ public class DriverSplashAct extends MainActivityDriver {
         if (isOnline()) {
             if (!(VersionCheck())) {
                 callApi();
-            } else
-                versionAlert(DriverSplashAct.this);
+            } else versionAlert(DriverSplashAct.this);
         } else {
             DriverCToast.ShowToast(DriverSplashAct.this, "" + DriverNC.getResources().getString(R.string.check_net_connection));
         }
@@ -617,10 +604,8 @@ public class DriverSplashAct extends MainActivityDriver {
         DriverSystems.out.println("____" + id++);
 
         if (DriverSessionSave.getSession("base_url", DriverSplashAct.this).trim().equals(""))
-            if (askDomain)
-                getUrl();
-            else
-                urlApi("", "", "");
+            if (askDomain) getUrl();
+            else urlApi("", "", "");
         else {
             setLocale();
             getAndStoreStringValues(DriverSessionSave.getSession("wholekey", DriverSplashAct.this));
@@ -630,10 +615,8 @@ public class DriverSplashAct extends MainActivityDriver {
 
                 MoveToNavigatorPanel();
             } else {
-                if (askDomain)
-                    getUrl();
-                else
-                    urlApi("", "", "");
+                if (askDomain) getUrl();
+                else urlApi("", "", "");
 
             }
         }
@@ -647,7 +630,7 @@ public class DriverSplashAct extends MainActivityDriver {
 //            startActivity(i);
 //            finish();
 //        } else
-            if (DriverSessionSave.getSession("Id", DriverSplashAct.this).equals("")) {
+        if (DriverSessionSave.getSession("Id", DriverSplashAct.this).equals("")) {
             i = new Intent(DriverSplashAct.this, DriverUserLoginAct.class);
             startActivity(i);
             finish();
@@ -746,8 +729,7 @@ public class DriverSplashAct extends MainActivityDriver {
 
     @Override
     protected void onDestroy() {
-        if (dialog1 != null)
-            Driver_Utils.closeDialog(dialog1);
+        if (dialog1 != null) Driver_Utils.closeDialog(dialog1);
         super.onDestroy();
     }
 
@@ -801,8 +783,7 @@ public class DriverSplashAct extends MainActivityDriver {
 //            });
 //        } else {
         final View view = View.inflate(DriverSplashAct.this, R.layout.driver_forgot_popup, null);
-        if (mDialog != null && mDialog.isShowing())
-            mDialog.cancel();
+        if (mDialog != null && mDialog.isShowing()) mDialog.cancel();
         mDialog = new Dialog(DriverSplashAct.this, R.style.NewDialog);
         mDialog.setContentView(view);
         mDialog.setCancelable(false);
@@ -881,7 +862,7 @@ public class DriverSplashAct extends MainActivityDriver {
             e.printStackTrace();
         }
         DriverSessionSave.saveSession(DriverCommonData.FIREBASE_KEY, "0", DriverSplashAct.this);
-        String mUUID = "";
+        String mUUID;
         if (!UUID.randomUUID().toString().equals("")) {
             mUUID = UUID.randomUUID().toString();
         } else {
@@ -905,7 +886,7 @@ public class DriverSplashAct extends MainActivityDriver {
         Call<DriverCompanyDomainResponse> response = client.callData(DriverServiceGenerator.COMPANY_KEY, request);
         response.enqueue(new DriverRetrofitCallbackClass<>(DriverSplashAct.this, new Callback<DriverCompanyDomainResponse>() {
             @Override
-            public void onResponse(Call<DriverCompanyDomainResponse> call, Response<DriverCompanyDomainResponse> response) {
+            public void onResponse(@NonNull Call<DriverCompanyDomainResponse> call, @NonNull Response<DriverCompanyDomainResponse> response) {
                 cancelLoading();
                 if (response.isSuccessful() && response.body() != null) {
                     DriverCompanyDomainResponse cr = response.body();
@@ -955,8 +936,7 @@ public class DriverSplashAct extends MainActivityDriver {
                                     DriverSessionSave.saveSession("Lang", cr.androidPaths.driver_language.get(0).language_code.replaceAll(".xml", ""), DriverSplashAct.this);
                             }
                             DriverSessionSave.saveSession("colorcode", cr.androidPaths.colorcode, DriverSplashAct.this);
-                            if (mDialog != null)
-                                mDialog.dismiss();
+                            if (mDialog != null) mDialog.dismiss();
                             String url = "type=getcoreconfig";
                             new CoreConfigCall(url);
 
@@ -972,7 +952,7 @@ public class DriverSplashAct extends MainActivityDriver {
             }
 
             @Override
-            public void onFailure(Call<DriverCompanyDomainResponse> call, Throwable t) {
+            public void onFailure(@NonNull Call<DriverCompanyDomainResponse> call, @NonNull Throwable t) {
                 cancelLoading();
 //                CToast.ShowToast(SplashAct.this, NC.getString(R.string.server_error));
                 alert_view_company(DriverSplashAct.this, DriverNC.getString(R.string.message), DriverNC.getString(R.string.server_error), DriverNC.getString(R.string.ok), DriverNC.getString(R.string.cancel));
@@ -1197,7 +1177,7 @@ public class DriverSplashAct extends MainActivityDriver {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, int[] grantResults) {
         switch (requestCode) {
             case MY_PERMISSIONS_REQUEST_GPS: {
                 // If request is cancelled, the result arrays are empty.
@@ -1276,7 +1256,7 @@ public class DriverSplashAct extends MainActivityDriver {
                 if (DriverSessionSave.getSession("wholekeyColor", DriverSplashAct.this).trim().equals("") || !DriverSessionSave.getSession(DriverCommonData.PASSENGER_COLOR_TIME, DriverSplashAct.this).equals(getCoreColorTime))
                     new callColor("");
                 else {
-                    Intent i = null;
+                    Intent i;
 //                    if (CommonData.isCurrentTimeZone(getCore_Utc)) {
 
 //                    if (DriverSessionSave.getSession("user_privacy_policy", DriverSplashAct.this).equals("")) {
@@ -1285,33 +1265,33 @@ public class DriverSplashAct extends MainActivityDriver {
 //                        finish();
 //                    } else {
 
-                        if (DriverSessionSave.getSession("Id", DriverSplashAct.this).equals("")) {
-                            i = new Intent(DriverSplashAct.this, DriverUserLoginAct.class);
+                    if (DriverSessionSave.getSession("Id", DriverSplashAct.this).equals("")) {
+                        i = new Intent(DriverSplashAct.this, DriverUserLoginAct.class);
+                        startActivity(i);
+                        finish();
+                    } else {
+                        if (DriverSessionSave.getSession("trip_id", DriverSplashAct.this).equals("")) {
+                            i = new Intent(DriverSplashAct.this, DriverMyStatus.class);
                             startActivity(i);
                             finish();
                         } else {
-                            if (DriverSessionSave.getSession("trip_id", DriverSplashAct.this).equals("")) {
-                                i = new Intent(DriverSplashAct.this, DriverMyStatus.class);
+                            if (DriverSessionSave.getSession("travel_status", DriverSplashAct.this).equals("5")) {
+                                i = new Intent(DriverSplashAct.this, DriverTripHistoryAct.class);
                                 startActivity(i);
                                 finish();
                             } else {
-                                if (DriverSessionSave.getSession("travel_status", DriverSplashAct.this).equals("5")) {
-                                    i = new Intent(DriverSplashAct.this, DriverTripHistoryAct.class);
+                                if (DriverSessionSave.getSession(DriverCommonData.IS_STREET_PICKUP, DriverSplashAct.this, false)) {
+                                    i = new Intent(DriverSplashAct.this, DriverStreetPickUpAct.class);
                                     startActivity(i);
                                     finish();
                                 } else {
-                                    if (DriverSessionSave.getSession(DriverCommonData.IS_STREET_PICKUP, DriverSplashAct.this, false)) {
-                                        i = new Intent(DriverSplashAct.this, DriverStreetPickUpAct.class);
-                                        startActivity(i);
-                                        finish();
-                                    } else {
-                                        i = new Intent(DriverSplashAct.this, DriverOngoingAct.class);
-                                        startActivity(i);
-                                        finish();
-                                    }
+                                    i = new Intent(DriverSplashAct.this, DriverOngoingAct.class);
+                                    startActivity(i);
+                                    finish();
                                 }
                             }
                         }
+                    }
 
 //                    }
 //                    } else {
@@ -1358,25 +1338,25 @@ public class DriverSplashAct extends MainActivityDriver {
 //                    startActivity(i);
 //                    finish();
 //                } else {
-                    if (DriverSessionSave.getSession("Id", DriverSplashAct.this).equals("")) {
-                        i = new Intent(DriverSplashAct.this, DriverUserLoginAct.class);
+                if (DriverSessionSave.getSession("Id", DriverSplashAct.this).equals("")) {
+                    i = new Intent(DriverSplashAct.this, DriverUserLoginAct.class);
+                    startActivity(i);
+                    finish();
+                } else {
+                    if (DriverSessionSave.getSession("trip_id", DriverSplashAct.this).equals("")) {
+                        i = new Intent(DriverSplashAct.this, DriverMyStatus.class);
+                        startActivity(i);
+                        finish();
+                    } else if (DriverSessionSave.getSession(DriverCommonData.IS_STREET_PICKUP, DriverSplashAct.this, false)) {
+                        i = new Intent(DriverSplashAct.this, DriverStreetPickUpAct.class);
                         startActivity(i);
                         finish();
                     } else {
-                        if (DriverSessionSave.getSession("trip_id", DriverSplashAct.this).equals("")) {
-                            i = new Intent(DriverSplashAct.this, DriverMyStatus.class);
-                            startActivity(i);
-                            finish();
-                        } else if (DriverSessionSave.getSession(DriverCommonData.IS_STREET_PICKUP, DriverSplashAct.this, false)) {
-                            i = new Intent(DriverSplashAct.this, DriverStreetPickUpAct.class);
-                            startActivity(i);
-                            finish();
-                        } else {
-                            i = new Intent(DriverSplashAct.this, DriverOngoingAct.class);
-                            startActivity(i);
-                            finish();
-                        }
+                        i = new Intent(DriverSplashAct.this, DriverOngoingAct.class);
+                        startActivity(i);
+                        finish();
                     }
+                }
 
 //                }
 
@@ -1438,10 +1418,10 @@ public class DriverSplashAct extends MainActivityDriver {
                         }
                         if (jArry.getJSONObject(0).has("is_driver_auto_accept")) {
                             DriverSessionSave.saveSession("is_driver_auto_accept", jArry.getJSONObject(0).getString("is_driver_auto_accept"), DriverSplashAct.this);
-                            System.out.println("Check Trip auto accept : "+DriverSessionSave.getSession("is_driver_auto_accept",DriverSplashAct.this));
+                            System.out.println("Check Trip auto accept : " + DriverSessionSave.getSession("is_driver_auto_accept", DriverSplashAct.this));
                         }
 
-                        if(jArry.getJSONObject(0).has("customer_wallet_transaction")){
+                        if (jArry.getJSONObject(0).has("customer_wallet_transaction")) {
                             SessionSave.saveSession("customer_wallet_transaction", jArry.getJSONObject(0).getString("customer_wallet_transaction"), DriverSplashAct.this);
                             System.out.println("customer_wallet_transaction check " + SessionSave.getSession("customer_wallet_transaction", DriverSplashAct.this));
                         }
@@ -1562,7 +1542,7 @@ public class DriverSplashAct extends MainActivityDriver {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        Intent i = null;
+                        Intent i;
 
                         if (!DriverSessionSave.getSession(DriverCommonData.PASSENGER_LANGUAGE_TIME, DriverSplashAct.this).trim().equals(getCoreLangTime)) {
                             new callString(getCoreColorTime);
@@ -1576,27 +1556,27 @@ public class DriverSplashAct extends MainActivityDriver {
 //                                startActivity(i);
 //                                finish();
 //                            } else {
-                                if (DriverSessionSave.getSession("Id", DriverSplashAct.this).equals("")) {
-                                    i = new Intent(DriverSplashAct.this, DriverUserLoginAct.class);
+                            if (DriverSessionSave.getSession("Id", DriverSplashAct.this).equals("")) {
+                                i = new Intent(DriverSplashAct.this, DriverUserLoginAct.class);
+                                startActivity(i);
+                                finish();
+                            } else {
+                                if (DriverSessionSave.getSession("trip_id", DriverSplashAct.this).equals("")) {
+                                    i = new Intent(DriverSplashAct.this, DriverMyStatus.class);
                                     startActivity(i);
                                     finish();
                                 } else {
-                                    if (DriverSessionSave.getSession("trip_id", DriverSplashAct.this).equals("")) {
-                                        i = new Intent(DriverSplashAct.this, DriverMyStatus.class);
+                                    if (DriverSessionSave.getSession("travel_status", DriverSplashAct.this).equals("5")) {
+                                        i = new Intent(DriverSplashAct.this, DriverTripHistoryAct.class);
                                         startActivity(i);
                                         finish();
                                     } else {
-                                        if (DriverSessionSave.getSession("travel_status", DriverSplashAct.this).equals("5")) {
-                                            i = new Intent(DriverSplashAct.this, DriverTripHistoryAct.class);
-                                            startActivity(i);
-                                            finish();
-                                        } else {
-                                            i = new Intent(DriverSplashAct.this, DriverOngoingAct.class);
-                                            startActivity(i);
-                                            finish();
-                                        }
+                                        i = new Intent(DriverSplashAct.this, DriverOngoingAct.class);
+                                        startActivity(i);
+                                        finish();
                                     }
                                 }
+                            }
 
 //                            }
                            /* } else {
@@ -1609,10 +1589,8 @@ public class DriverSplashAct extends MainActivityDriver {
                     } else if (json.getInt("status") == 0) {
                         //no changes made
                     } else if (json.getInt("status") == -101) {
-                        if (json.has("message"))
-                            forceLogout(json.getString("message"));
-                        else
-                            forceLogout(DriverNC.getString(R.string.server_error));
+                        if (json.has("message")) forceLogout(json.getString("message"));
+                        else forceLogout(DriverNC.getString(R.string.server_error));
                     } else {
                         errorInSplash(json.getString("message"));
                     }
@@ -1630,7 +1608,7 @@ public class DriverSplashAct extends MainActivityDriver {
                     errorInSplash(DriverNC.getString(R.string.server_error));
                 }
             } else {
-                Utility.actionSheetCancel(DriverSplashAct.this,DriverNC.getString(R.string.server_error), DriverNC.getString(R.string.c_tryagain), DriverNC.getResources().getString(R.string.cancel), false, new AlertListener() {
+                Utility.actionSheetCancel(DriverSplashAct.this, DriverNC.getString(R.string.server_error), DriverNC.getString(R.string.c_tryagain), DriverNC.getResources().getString(R.string.cancel), false, new AlertListener() {
                     @Override
                     public void onSuccess() {
                         String url = "type=getcoreconfig";

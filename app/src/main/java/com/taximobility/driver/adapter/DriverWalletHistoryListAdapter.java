@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,8 +30,9 @@ public class DriverWalletHistoryListAdapter extends RecyclerView.Adapter<DriverW
         this.data = data;
     }
 
+    @NonNull
     @Override
-    public CustomViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(mContext);
         View view = inflater.inflate(R.layout.driver_wallet_history_item, parent, false);
         return new CustomViewHolder(view);
@@ -38,9 +40,6 @@ public class DriverWalletHistoryListAdapter extends RecyclerView.Adapter<DriverW
 
     /**
      * binds view to recyclerview
-     *
-     * @param holder
-     * @param position
      */
 
     @Override
@@ -56,18 +55,14 @@ public class DriverWalletHistoryListAdapter extends RecyclerView.Adapter<DriverW
         if (sign.equals("-")) {
             if (android.os.Build.VERSION.SDK_INT >= 23) {
                 mTextView.setTextColor(ContextCompat.getColor(mContext, R.color.pickup_red));
-
             } else {
                 mTextView.setTextColor(mContext.getResources().getColor(R.color.pickup_red));
-
             }
         } else {
             if (android.os.Build.VERSION.SDK_INT >= 23) {
                 mTextView.setTextColor(ContextCompat.getColor(mContext, R.color.colorFontGreen));
-
             } else {
                 mTextView.setTextColor(mContext.getResources().getColor(R.color.colorFontGreen));
-
             }
         }
     }
@@ -77,7 +72,7 @@ public class DriverWalletHistoryListAdapter extends RecyclerView.Adapter<DriverW
         return data.size();
     }
 
-    public class CustomViewHolder extends RecyclerView.ViewHolder {
+    public static class CustomViewHolder extends RecyclerView.ViewHolder {
         TextView name_txt, mobile_number;
         TextView pdate;
 
@@ -86,7 +81,6 @@ public class DriverWalletHistoryListAdapter extends RecyclerView.Adapter<DriverW
             name_txt = v.findViewById(R.id.name_txt);
             mobile_number = v.findViewById(R.id.mobile_number);
             pdate = v.findViewById(R.id.pdate);
-
         }
     }
 }

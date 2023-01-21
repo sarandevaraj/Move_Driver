@@ -13,7 +13,7 @@ public class DriverLocationDb extends SQLiteOpenHelper {
     public double HTotdistanceKM = 0.0;
     public final double Rad = 6372.8; // In kilometers
     private String distanceKM = "";
-    private Context con;
+    private final Context con;
 
     public DriverLocationDb(Context context) {
         super(context, "DB", null, 1);
@@ -30,10 +30,6 @@ public class DriverLocationDb extends SQLiteOpenHelper {
 
     /**
      * insert location into off_locations table
-     *
-     * @param trip_id
-     * @param locations
-     * @param distance
      */
     public void insert_locations(String trip_id, String locations, String distance) {
         // TODO Auto-generated method stub
@@ -74,9 +70,6 @@ public class DriverLocationDb extends SQLiteOpenHelper {
 
     /**
      * read locations from table
-     *
-     * @param trip_id
-     * @return
      */
     public String getlocation_detail(String trip_id) {
         String offline_loc = "";
@@ -86,8 +79,7 @@ public class DriverLocationDb extends SQLiteOpenHelper {
         if (cur.moveToFirst()) {
             do {
                 offline_loc += cur.getString(2);
-            }
-            while (cur.moveToNext());
+            } while (cur.moveToNext());
         }
         cur.close();
         data.close();
@@ -96,9 +88,6 @@ public class DriverLocationDb extends SQLiteOpenHelper {
 
     /**
      * get distance of trip from table
-     *
-     * @param trip_id
-     * @return
      */
     public String getdistance(String trip_id) {
         String offline_distance = "";
@@ -115,8 +104,7 @@ public class DriverLocationDb extends SQLiteOpenHelper {
         if (cur.moveToFirst()) {
             do {
                 offline_distance = cur.getString(2);
-            }
-            while (cur.moveToNext());
+            } while (cur.moveToNext());
         }
         cur.close();
         data.close();
@@ -185,11 +173,6 @@ public class DriverLocationDb extends SQLiteOpenHelper {
 
     /**
      * haver shine formula for calculate the distance
-     *
-     * @param lat1
-     * @param lon1
-     * @param lat2
-     * @param lon2
      */
     public void haversine(double lat1, double lon1, double lat2, double lon2) {
         // TODO Auto-generated method stub

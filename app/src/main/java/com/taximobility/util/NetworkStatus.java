@@ -19,6 +19,7 @@ import android.view.WindowManager;
 
 import com.mayan.sospluginmodlue.service.SOSService;
 import com.taximobility.R;
+import com.taximobility.driver.utils.DriverSystems;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -47,13 +48,13 @@ public class NetworkStatus extends BroadcastReceiver {
 
             mContext = context;
             try {
-                Systems.out.println("_____________netChange onReceive");
+                DriverSystems.out.println("_____________netChange onReceive");
                 if (isOnline(mContext)) {
-                    Systems.out.println("_____________netChange*$");
+                    DriverSystems.out.println("_____________netChange*$");
                     Intent i = new Intent(TaxiUtil.ACTIVITY_ACTION);
                     LocalBroadcastManager.getInstance(mContext).sendBroadcast(i);
                 } else {
-                    Systems.out.println("_____________netChange*!!");
+                    DriverSystems.out.println("_____________netChange*!!");
                     DivertToNoInternetScreen();
                 }
             } catch (Exception e) {
@@ -69,8 +70,8 @@ public class NetworkStatus extends BroadcastReceiver {
             if (connectivity != null) {
                 NetworkInfo[] info = connectivity.getAllNetworkInfo();
                 if (info != null)
-                    for (int i = 0; i < info.length; i++)
-                        if (info[i].getState() == NetworkInfo.State.CONNECTED) {
+                    for (NetworkInfo networkInfo : info)
+                        if (networkInfo.getState() == NetworkInfo.State.CONNECTED) {
                             CloseNoInternetScreen();
                             return true;
                         }
@@ -108,12 +109,10 @@ public class NetworkStatus extends BroadcastReceiver {
             }
         }
 
-
         protected void onPostExecute(Boolean result) {
-            Systems.out.println("connection_reachable " + result);
+            DriverSystems.out.println("connection_reachable " + result);
         }
     }
-
 
     static public boolean isURLReachable(Context context) {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -157,41 +156,33 @@ public class NetworkStatus extends BroadcastReceiver {
 
     private void errorInSplash(String message) {
         try {
-            new Handler(Looper.getMainLooper()).post(new Runnable() {
-                @Override
-                public void run() {
-                    if (appContext != null && appContext instanceof AppCompatActivity && !((AppCompatActivity) appContext).isFinishing()) {
-                        if (errorDialog != null && errorDialog.isShowing()) {
-                            errorDialog.dismiss();
-                        }
-                        final View view = View.inflate(appContext, R.layout.no_internet_lay, null);
-                        errorDialog = new Dialog(appContext, R.style.Theme_Transparent1);
-                        errorDialog.setContentView(view);
-                        errorDialog.setCancelable(false);
-                        errorDialog.setCanceledOnTouchOutside(false);
-                        Window window = errorDialog.getWindow();
-                        window.setGravity(Gravity.TOP);
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-                            window.setStatusBarColor(Color.BLACK);
-                        }
-                        AppCompatButton btn_emergency = errorDialog.findViewById(R.id.btn_emergency);
-                        if (SessionSave.getSession(TaxiUtil.sosEnable, appContext, false)) {
-                            btn_emergency.setVisibility(View.VISIBLE);
-                        }
-                        btn_emergency.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                startSOSService(appContext);
-                            }
-                        });
-                        errorDialog.show();
-                    } else {
-                        try {
-                            errorDialog.dismiss();
-                        } catch (Exception e) {
-                            // TODO: handle exception
-                        }
+            new Handler(Looper.getMainLooper()).post(() -> {
+                if (appContext != null && appContext instanceof AppCompatActivity && !((AppCompatActivity) appContext).isFinishing()) {
+                    if (errorDialog != null && errorDialog.isShowing()) {
+                        errorDialog.dismiss();
+                    }
+                    final View view = View.inflate(appContext, R.layout.no_internet_lay, null);
+                    errorDialog = new Dialog(appContext, R.style.Theme_Transparent1);
+                    errorDialog.setContentView(view);
+                    errorDialog.setCancelable(false);
+                    errorDialog.setCanceledOnTouchOutside(false);
+                    Window window = errorDialog.getWindow();
+                    window.setGravity(Gravity.TOP);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                        window.setStatusBarColor(Color.BLACK);
+                    }
+                    AppCompatButton btn_emergency = errorDialog.findViewById(R.id.btn_emergency);
+                    if (SessionSave.getSession(TaxiUtil.sosEnable, appContext, false)) {
+                        btn_emergency.setVisibility(View.VISIBLE);
+                    }
+                    btn_emergency.setOnClickListener(view1 -> startSOSService(appContext));
+                    errorDialog.show();
+                } else {
+                    try {
+                        errorDialog.dismiss();
+                    } catch (Exception e) {
+                        // TODO: handle exception
                     }
                 }
             });
@@ -208,13 +199,10 @@ public class NetworkStatus extends BroadcastReceiver {
     }
 
     private static void CloseNoInternetScreen() {
-        new Handler(Looper.getMainLooper()).post(new Runnable() {
-            @Override
-            public void run() {
-                if (errorDialog != null && errorDialog.isShowing()) {
+        new Handler(Looper.getMainLooper()).post(() -> {
+            if (errorDialog != null && errorDialog.isShowing()) {
 
-                    errorDialog.dismiss();
-                }
+                errorDialog.dismiss();
             }
         });
 

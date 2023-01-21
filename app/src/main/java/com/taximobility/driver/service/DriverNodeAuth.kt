@@ -20,9 +20,9 @@ import retrofit2.Response
 
 class DriverNodeAuth private constructor() {
 
-
     companion object {
         private var isAuthCallInProgress = false
+
         // For Singleton instantiation
         @Volatile
         private var instance: DriverNodeAuth? = null
@@ -46,44 +46,66 @@ class DriverNodeAuth private constructor() {
                     } else {
                         data.put("device_id", DriverCommonData.mDevice_id_constant)
                     }*/
-                    data.put("device_id", Settings.Secure.getString(context.contentResolver, Settings.Secure.ANDROID_ID))
+                    data.put(
+                        "device_id", Settings.Secure.getString(
+                            context.contentResolver, Settings.Secure.ANDROID_ID
+                        )
+                    )
                 } catch (e: JSONException) {
                     e.printStackTrace()
                 }
 
 //                val client = NodeServiceGenerator(context, false, SessionSave.getSession(CommonData.NODE_URL, context), 30).createService(CoreClient::class.java)
-                val client = AppController.getInstance().getNodeApiManagerWithTimeOut_driver(DriverSessionSave.getSession(DriverCommonData.DRIVER_NODE_URL, context), 30)
+                val client = AppController.getInstance().getNodeApiManagerWithTimeOut_driver(
+                    DriverSessionSave.getSession(
+                        DriverCommonData.DRIVER_NODE_URL, context
+                    ), 30
+                )
 
-                val body = data.toString().toRequestBody("application/json; charset=utf-8".toMediaTypeOrNull())
+                val body = data.toString()
+                    .toRequestBody("application/json; charset=utf-8".toMediaTypeOrNull())
 
                 val coreResponse = client.nodeAuth(body)
-                coreResponse.enqueue(DriverRetrofitCallbackClass(context, object : Callback<ResponseBody> {
-                    override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-                        val data: String?
-                        isAuthCallInProgress = false
+                coreResponse.enqueue(
+                    DriverRetrofitCallbackClass(context, object : Callback<ResponseBody> {
+                        override fun onResponse(
+                            call: Call<ResponseBody>, response: Response<ResponseBody>
+                        ) {
+                            val data: String?
+                            isAuthCallInProgress = false
 
-                        if (response.isSuccessful) {
-                            try {
-                                if (response.body() != null) {
-                                    data = response.body()!!.string()
-                                    val json = JSONObject(data)
-                                    DriverSessionSave.saveSession(DriverCommonData.NODE_TOKEN, json.getString("token"), context)
+                            if (response.isSuccessful) {
+                                try {
+                                    if (response.body() != null) {
+                                        data = response.body()!!.string()
+                                        val json = JSONObject(data)
+                                        DriverSessionSave.saveSession(
+                                            DriverCommonData.NODE_TOKEN,
+                                            json.getString("token"),
+                                            context
+                                        )
+                                    }
+                                } catch (e: Exception) {
+                                    e.printStackTrace()
+                                    DriverCToast.ShowToast(
+                                        context, DriverNC.getString(R.string.server_error)
+                                    )
                                 }
-                            } catch (e: Exception) {
-                                e.printStackTrace()
-                                DriverCToast.ShowToast(context, DriverNC.getString(R.string.server_error))
-                            }
-                        } else
-                            DriverCToast.ShowToast(context, DriverNC.getString(R.string.server_error))
+                            } else DriverCToast.ShowToast(
+                                context, DriverNC.getString(R.string.server_error)
+                            )
 
-                    }
+                        }
 
-                    override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                        t.printStackTrace()
-                        isAuthCallInProgress = false
-                        DriverCToast.ShowToast(context, DriverNC.getString(R.string.server_error))
-                    }
-                }))
+                        override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                            t.printStackTrace()
+                            isAuthCallInProgress = false
+                            DriverCToast.ShowToast(
+                                context, DriverNC.getString(R.string.server_error)
+                            )
+                        }
+                    })
+                )
             } else {
                 DriverCToast.ShowToast(context, DriverNC.getString(R.string.check_net_connection))
             }

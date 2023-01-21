@@ -19,9 +19,9 @@ import java.util.HashMap;
  * This adapter class is used to show withdraw referal history
  */
 public class DriverWithdraw_referalhistory_adapter extends BaseAdapter {
-    private Context mContext;
-    private ArrayList<HashMap<String, String>> mList;
-    private ArrayList<Integer> Bg = new ArrayList<>();
+    private final Context mContext;
+    private final ArrayList<HashMap<String, String>> mList;
+    private final ArrayList<Integer> Bg = new ArrayList<>();
 
     // constructor
     public DriverWithdraw_referalhistory_adapter(Context context, ArrayList<HashMap<String, String>> list) {
@@ -34,7 +34,6 @@ public class DriverWithdraw_referalhistory_adapter extends BaseAdapter {
     public int getCount() {
         return mList.size();
     }
-
 
     // It returns the item detail with select position.
     @Override
@@ -63,11 +62,9 @@ public class DriverWithdraw_referalhistory_adapter extends BaseAdapter {
                 holder.layout = convertView.findViewById(R.id.main);
 
                 convertView.setTag(holder);
-
             } else {
                 holder = (ViewHolder) convertView.getTag();
             }
-
             holder.request_taxi.setText("" + mList.get(position).get("wallet_request_date"));
             holder.request_amount.setText("" + DriverSessionSave.getSession("site_currency", mContext) + " " + mList.get(position).get("wallet_request_amount"));
             holder.status.setText("" + mList.get(position).get("status"));
@@ -79,7 +76,6 @@ public class DriverWithdraw_referalhistory_adapter extends BaseAdapter {
         return convertView;
     }
 
-
     /**
      * View holder class member this contains in every row in list.
      */
@@ -88,6 +84,5 @@ public class DriverWithdraw_referalhistory_adapter extends BaseAdapter {
         TextView request_amount;
         TextView request_taxi;
         TextView status;
-
     }
 }

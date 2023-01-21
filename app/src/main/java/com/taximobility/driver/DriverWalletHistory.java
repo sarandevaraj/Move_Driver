@@ -1,6 +1,5 @@
 package com.taximobility.driver;
 
-
 import android.app.Dialog;
 import android.util.Log;
 import android.view.View;
@@ -19,7 +18,6 @@ import com.taximobility.driver.utils.DriverCToast;
 import com.taximobility.driver.utils.DriverNC;
 import com.taximobility.driver.utils.DriverNetworkStatus;
 import com.taximobility.driver.utils.DriverSessionSave;
-import com.taximobility.driver.utils.Driver_Utils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,6 +26,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -36,13 +35,12 @@ public class DriverWalletHistory extends MainActivityDriver {
     int start = 0;
     DriverWalletHistoryListAdapter past_booking_adapter;
     RecyclerView history_recyclerView;
-    private List<DriverWalletHistoryData> pastData = new ArrayList<>();
+    private final List<DriverWalletHistoryData> pastData = new ArrayList<>();
     TextView no_data;
     Dialog loadingDialog;
     private Dialog dialog1;
     private int limit = 10;
     private int prevLimt;
-
 
     @Override
     public int setLayout() {
@@ -57,13 +55,7 @@ public class DriverWalletHistory extends MainActivityDriver {
         history_recyclerView.setLayoutManager(llm);
         past_booking_adapter = new DriverWalletHistoryListAdapter(DriverWalletHistory.this, pastData);
         history_recyclerView.setAdapter(past_booking_adapter);
-        findViewById(R.id.back_text).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
-
+        findViewById(R.id.back_text).setOnClickListener(v -> onBackPressed());
 
         no_data = findViewById(R.id.nodataTxt);
         showDialog();
@@ -82,19 +74,18 @@ public class DriverWalletHistory extends MainActivityDriver {
 
         history_recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
             }
 
             @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                     if (dy > 0) //check for scroll down
                     {
                         int visibleItemCount = llm.getChildCount();
                         int totalItemCount = llm.getItemCount();
                         int pastVisiblesItems = llm.findFirstVisibleItemPosition();
                         Log.v("...", "Last Item Wow !" + visibleItemCount + "___" + pastVisiblesItems + "___" + totalItemCount);
-
 
                         if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
                             // loading = false;
@@ -124,11 +115,7 @@ public class DriverWalletHistory extends MainActivityDriver {
                     }
             }
         });
-
-
-
     }
-
 
     private class callWalletHistory implements DriverAPIResult {
         public callWalletHistory(String url, JSONObject data) {
@@ -146,11 +133,7 @@ public class DriverWalletHistory extends MainActivityDriver {
                 pastData.clear();
                 try {
                     final JSONObject json = new JSONObject(result);
-
                     closeDialog();
-
-
-
                     if (json.getInt("status") == 1) {
 
                         JSONArray mWalletArray = json.getJSONArray("result");
@@ -164,10 +147,7 @@ public class DriverWalletHistory extends MainActivityDriver {
                             mWalletHistoryData.setUpdated_balance(mJsonObject.getString("updated_balance"));
                             pastData.add(mWalletHistoryData);
                         }
-
-
                     }
-
                 } catch (final JSONException e) {
                     e.printStackTrace();
                 } finally {
@@ -180,31 +160,22 @@ public class DriverWalletHistory extends MainActivityDriver {
                         history_recyclerView.setAdapter(past_booking_adapter);
                         past_booking_adapter.notifyDataSetChanged();
                     }
-
-
                 }
             } else {
-                runOnUiThread(new Runnable() {
-                    public void run() {
-                        DriverCToast.ShowToast(DriverWalletHistory.this, getString(R.string.server_error));
-                    }
-                });
+                runOnUiThread(() -> DriverCToast.ShowToast(DriverWalletHistory.this, getString(R.string.server_error)));
             }
         }
     }
 
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-
         finish();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
     }
 
     @Override
@@ -215,9 +186,7 @@ public class DriverWalletHistory extends MainActivityDriver {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
     }
-
 
     public void showDialog() {
         try {
@@ -228,20 +197,17 @@ public class DriverWalletHistory extends MainActivityDriver {
                 loadingDialog = new Dialog(DriverWalletHistory.this, R.style.dialogwinddow);
                 loadingDialog.setContentView(view);
                 loadingDialog.setCancelable(false);
-                if (this != null)
-                    loadingDialog.show();
+                loadingDialog.show();
 
                 ImageView iv = loadingDialog.findViewById(R.id.giff);
                 DrawableImageViewTarget imageViewTarget = new DrawableImageViewTarget(iv);
                 Glide.with(this)
                         .load(R.raw.driver_loading_anim)
                         .into(imageViewTarget);
-
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     //method to close dialog
@@ -255,6 +221,4 @@ public class DriverWalletHistory extends MainActivityDriver {
             e.printStackTrace();
         }
     }
-
-
 }

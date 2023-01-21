@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.res.Configuration;
 
 import com.taximobility.R;
-import com.taximobility.driver.DriverSplashAct;
 import com.taximobility.driver.DriverUserLoginAct;
 import com.taximobility.driver.data.DriverCommonData;
 import com.taximobility.driver.interfaces.DriverAPIResult;
@@ -73,7 +72,6 @@ public class DriverBackgroundCoreConfig extends IntentService {
             DriverSessionSave.saveSession("Lang_Country", "en_GB", DriverBackgroundCoreConfig.this);
         }
 
-
         Configuration config = new Configuration();
         String langcountry = DriverSessionSave.getSession("Lang_Country", DriverBackgroundCoreConfig.this);
         String language = DriverSessionSave.getSession("Lang", DriverBackgroundCoreConfig.this);
@@ -124,7 +122,6 @@ public class DriverBackgroundCoreConfig extends IntentService {
                 DriverNC.fields.add(field.getName());
                 DriverNC.fields_value.add(getResources().getString(id));
                 DriverNC.fields_id.put(field.getName(), id);
-
             }
         }
         for (Map.Entry<String, String> entry : DriverNC.nfields_byName.entrySet()) {
@@ -132,7 +129,6 @@ public class DriverBackgroundCoreConfig extends IntentService {
             DriverNC.nfields_byID.put(DriverNC.fields_id.get(h), DriverNC.nfields_byName.get(h));
             // do stuff
         }
-
     }
 
     /**
@@ -146,7 +142,6 @@ public class DriverBackgroundCoreConfig extends IntentService {
             Document doc = dBuilder.parse(is);
             Element element = doc.getDocumentElement();
             element.normalize();
-
             NodeList nList = doc.getElementsByTagName("*");
 
             DriverSystems.out.println("lislength" + nList.getLength());
@@ -156,7 +151,6 @@ public class DriverBackgroundCoreConfig extends IntentService {
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
                     Element element2 = (Element) node;
                     DriverCL.nfields_byName.put(element2.getAttribute("name"), element2.getTextContent());
-
                 }
             }
             getColorValueDetail();
@@ -177,7 +171,6 @@ public class DriverBackgroundCoreConfig extends IntentService {
                 DriverCL.fields.add(field.getName());
                 DriverCL.fields_value.add(getResources().getString(id));
                 DriverCL.fields_id.put(field.getName(), id);
-
             }
         }
 
@@ -186,7 +179,6 @@ public class DriverBackgroundCoreConfig extends IntentService {
             String value = entry.getValue();
             DriverCL.nfields_byID.put(DriverCL.fields_id.get(h), DriverCL.nfields_byName.get(h));
         }
-
     }
 
     /**
@@ -245,7 +237,6 @@ public class DriverBackgroundCoreConfig extends IntentService {
             } else {
             }
         }
-
     }
 
     /**
@@ -253,21 +244,15 @@ public class DriverBackgroundCoreConfig extends IntentService {
      */
     private class callColor implements DriverAPIResult {
         public callColor(final String url) {
-
             new DriverAPIService_Retrofit_JSON_NoProgress(DriverBackgroundCoreConfig.this, this, null, true, DriverSessionSave.getSession("colorcode", DriverBackgroundCoreConfig.this).replace("DriverAppColor", "driverAppColors"), true).execute();
-
-
         }
 
         @Override
         public void getResult(boolean isSuccess, String result) {
-
             if (isSuccess) {
                 getAndStoreColorValues(result);
                 DriverSessionSave.saveSession("wholekeyColor", result, DriverBackgroundCoreConfig.this);
-
             }
-
         }
     }
 
@@ -289,7 +274,6 @@ public class DriverBackgroundCoreConfig extends IntentService {
                     final JSONObject json = new JSONObject(result);
                     if (json.getInt("status") == 1) {
 
-
                         if (json.has("gt_lst_time"))
                             DriverSessionSave.saveSession(DriverCommonData.GETCORE_LASTUPDATE, json.getString("gt_lst_time"), DriverBackgroundCoreConfig.this);
 
@@ -303,7 +287,7 @@ public class DriverBackgroundCoreConfig extends IntentService {
                         }
                         JSONArray jArry = json.getJSONArray("detail");
 
-                        if(jArry.getJSONObject(0).has("customer_wallet_transaction")){
+                        if (jArry.getJSONObject(0).has("customer_wallet_transaction")) {
                             SessionSave.saveSession("customer_wallet_transaction", jArry.getJSONObject(0).getString("customer_wallet_transaction"), DriverBackgroundCoreConfig.this);
                             System.out.println("customer_wallet_transaction check " + SessionSave.getSession("customer_wallet_transaction", DriverBackgroundCoreConfig.this));
                         }
@@ -356,13 +340,10 @@ public class DriverBackgroundCoreConfig extends IntentService {
 
                         if (json.has("chat_node_url")) {
                             SessionSave.saveSession(TaxiUtil.CHAT_NODE_URL, json.getString("chat_node_url"), DriverBackgroundCoreConfig.this);
-
                         }
                         if (json.has("call_masking_enable")) {
                             SessionSave.saveSession(TaxiUtil.CALL_MASKING_ENABLE, json.getString("chat_node_url"), DriverBackgroundCoreConfig.this);
-
                         }
-
 
                         if (json.has("dispatcher_phone_number")) {
                             SessionSave.saveSession("dispatcher_phone_number", json.getString("dispatcher_phone_number"), DriverBackgroundCoreConfig.this);
@@ -380,7 +361,6 @@ public class DriverBackgroundCoreConfig extends IntentService {
                             DriverSessionSave.saveSession(DriverCommonData.HELP_URL, json.getString(DriverCommonData.HELP_URL), DriverBackgroundCoreConfig.this);
                         }
 
-
                         if (jArry.getJSONObject(0).has("sos_setting"))
                             DriverSessionSave.saveSession(DriverCommonData.SOS_ENABLED, jArry.getJSONObject(0).getString("sos_setting").equals("1"), DriverBackgroundCoreConfig.this);
                         if (jArry.getJSONObject(0).has("map_settings") && jArry.getJSONObject(0).getJSONObject("map_settings").has("is_google_distance")) {
@@ -390,14 +370,12 @@ public class DriverBackgroundCoreConfig extends IntentService {
                             DriverSessionSave.saveSession(DriverCommonData.isNeedtoDrawRoute, jArry.getJSONObject(0).getJSONObject("map_settings").getString("enable_route").equals("1"), DriverBackgroundCoreConfig.this);
                             DriverSessionSave.saveSession(DriverCommonData.isNeedtofetchAddress, jArry.getJSONObject(0).getJSONObject("map_settings").getString("display_current_location").equals("1"), DriverBackgroundCoreConfig.this);
 
-
                         } else {
                             DriverSessionSave.saveSession(DriverCommonData.isGoogleDistance, true, DriverBackgroundCoreConfig.this);
                             DriverSessionSave.saveSession(DriverCommonData.isGoogleRoute, true, DriverBackgroundCoreConfig.this);
                             DriverSessionSave.saveSession(DriverCommonData.isGoogleGeocoder, true, DriverBackgroundCoreConfig.this);
                             DriverSessionSave.saveSession(DriverCommonData.isNeedtoDrawRoute, true, DriverBackgroundCoreConfig.this);
                             DriverSessionSave.saveSession(DriverCommonData.isNeedtofetchAddress, true, DriverBackgroundCoreConfig.this);
-
                         }
                         int length = jArry.length();
                         for (int i = 0; i < length; i++) {
@@ -448,24 +426,19 @@ public class DriverBackgroundCoreConfig extends IntentService {
                     } else if (json.getInt("status") == 0) {
                         //no changes made
                     } else if (json.getInt("status") == -101) {
-                        if (json.has("message"))
-                            forceLogout(json.getString("message"));
-                        else
-                            forceLogout(DriverNC.getString(R.string.server_error));
+                        if (json.has("message")) forceLogout(json.getString("message"));
+                        else forceLogout(DriverNC.getString(R.string.server_error));
                     }
-                } catch (final JSONException e) {
+                } catch (final JSONException | NullPointerException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
-                } catch (final NullPointerException e) {
-                    // TODO: handle exception
-                    e.printStackTrace();
-                } catch (Exception e) {
+                } // TODO: handle exception
+                catch (Exception e) {
                     // TODO: handle exception
                     e.printStackTrace();
                 }
             } else {
             }
         }
-
     }
 }

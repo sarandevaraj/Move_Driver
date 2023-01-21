@@ -11,44 +11,37 @@ import kotlinx.android.synthetic.main.driver_activity_map_zoom.*
 import kotlin.math.max
 import kotlin.math.min
 
-
 class DriverMapZoomAct : DriverBaseActivity() {
     private var mScaleGestureDetector: ScaleGestureDetector? = null
     private var mScaleFactor = 1.0f
-    private lateinit var ivImageZoom:ImageView
+    private lateinit var ivImageZoom: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-       /* Fresco.initialize(this)*/
+        /* Fresco.initialize(this)*/
         setContentView(R.layout.driver_activity_map_zoom)
 
-         ivImageZoom = findViewById(R.id.photoDrawView)
+        ivImageZoom = findViewById(R.id.photoDrawView)
         mScaleGestureDetector = ScaleGestureDetector(this, ScaleListener())
-   //     val imageViewTarget = DrawableImageViewTarget(giff)
-       /* Glide.with(this)
-                .load(R.raw.loading_anim)
-                .into(imageViewTarget)*/
+        //     val imageViewTarget = DrawableImageViewTarget(giff)
+        /* Glide.with(this)
+                 .load(R.raw.loading_anim)
+                 .into(imageViewTarget)*/
         if (intent != null && intent.getStringExtra("IMAGE_URI") != null) {
             val imageUrl = intent.getStringExtra("IMAGE_URI")
             println("MapZoomAct ____$imageUrl")
             imageUrl?.run {
-            //   photoDrawView.setPhotoUri(Uri.parse(imageUrl), this@MapZoomAct, loadingLayout, tool_bar_lay)
+                //   photoDrawView.setPhotoUri(Uri.parse(imageUrl), this@MapZoomAct, loadingLayout, tool_bar_lay)
 
             }
-            Glide.with(this)
-                    .load(Uri.parse(imageUrl))
-                    .into(ivImageZoom)
+            Glide.with(this).load(Uri.parse(imageUrl)).into(ivImageZoom)
         }
     }
-
-
 
     override fun onTouchEvent(motionEvent: MotionEvent?): Boolean {
         mScaleGestureDetector?.onTouchEvent(motionEvent)
         return true
     }
-
-
 
     override fun onResume() {
         super.onResume()

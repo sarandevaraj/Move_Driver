@@ -3,7 +3,6 @@ package com.taximobility.driver.pdview
 import android.annotation.SuppressLint
 import android.content.Context
 import androidx.core.content.ContextCompat
-import androidx.appcompat.widget.AppCompatImageView
 import android.text.TextUtils
 import android.util.AttributeSet
 import android.view.Gravity
@@ -47,8 +46,8 @@ class DriverPickupDropView @JvmOverloads constructor(
                 upDownImageView.setText("Less")
             } else {
                 if (driverStopArray.size > 2) {
-                    var count: Int = 0
-                    count = driverStopArray.size - 2;
+                    val count: Int
+                    count = driverStopArray.size - 2
                     upDownImageView.setText("Tap to" + " " + count + " " + "More Stop")
                     upDownImageView.visibility = View.VISIBLE
                 } else {
@@ -75,7 +74,6 @@ class DriverPickupDropView @JvmOverloads constructor(
                     textView.marqueeRepeatLimit = -1
                     textView.isSelected = true
                 }
-
             }
         }
     }
@@ -91,7 +89,6 @@ class DriverPickupDropView @JvmOverloads constructor(
         customIconView.layoutParams = customMarkerParams
         customIconView.visibility = View.VISIBLE
     }
-
 
     fun setData(driverStopArray: ArrayList<DriverStopData>, type: String, language: String) {
         lang = language
@@ -145,8 +142,5 @@ class DriverPickupDropView @JvmOverloads constructor(
         if (type.equals("ONGOING", ignoreCase = true)) {
             locationListView.setBackgroundColor(ContextCompat.getColor(context, R.color.light_gray))
         }
-
     }
-
-
 }

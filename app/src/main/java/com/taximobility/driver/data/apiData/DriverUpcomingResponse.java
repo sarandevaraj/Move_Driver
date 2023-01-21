@@ -3,7 +3,6 @@ package com.taximobility.driver.data.apiData;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class DriverUpcomingResponse {
 
     public String message;
@@ -11,14 +10,11 @@ public class DriverUpcomingResponse {
     public Integer status;
 
     public class Detail {
-
         public List<PastBooking> pending_booking = new ArrayList<>();
         public List<PastBooking> past_booking = new ArrayList<>();
-
     }
 
     public class PastBooking {
-
         public String passengers_log_id;
         public String pickup_location;
         public String drop_location;
@@ -49,5 +45,4 @@ public class DriverUpcomingResponse {
         public String approx_fare;
         public String approx_distance;
     }
-
 }

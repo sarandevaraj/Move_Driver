@@ -1,10 +1,8 @@
 package com.taximobility.driver.utils;
 
-
 import android.util.Log;
 
 import com.taximobility.BuildConfig;
-
 
 /**
  * Created by developer on 26/4/18.

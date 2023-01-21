@@ -2,9 +2,10 @@ package com.taximobility.driver;
 
 import android.os.Bundle;
 import android.os.PersistableBundle;
+
 import androidx.annotation.Nullable;
+
 import android.text.Html;
-import android.view.View;
 import android.widget.TextView;
 
 import com.taximobility.R;
@@ -29,8 +30,6 @@ public class DummyActivityDriver extends DriverBaseActivity implements DriverDis
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);
-
-
     }
 
     @Override
@@ -38,8 +37,7 @@ public class DummyActivityDriver extends DriverBaseActivity implements DriverDis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.driver_dummytest);
 
-        if (getIntent() != null)
-            trip_id = getIntent().getStringExtra("trip_id");
+        if (getIntent() != null) trip_id = getIntent().getStringExtra("trip_id");
         if (trip_id != null && trip_id.equals(""))
             trip_id = DriverSessionSave.getSession("trip_id", DummyActivityDriver.this);
         DriverSystems.out.println("Trip_idddd" + trip_id);
@@ -47,20 +45,13 @@ public class DummyActivityDriver extends DriverBaseActivity implements DriverDis
 //        UpdateLocation.distanceUpdate(DummyActivity.this);
         ((TextView) findViewById(R.id.text)).setText(Html.fromHtml(DriverSessionSave.getSession(trip_id + "data", DummyActivityDriver.this)));
 
-        findViewById(R.id.start).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        findViewById(R.id.start).setOnClickListener(view -> {
 //                UpdateLocation.startLocationService(DummyActivity.this);
 //                UpdateLocation.distanceUpdate(DummyActivity.this);
-            }
         });
-        findViewById(R.id.stop).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        findViewById(R.id.stop).setOnClickListener(view -> {
 //                stopService(new Intent(DummyActivity.this, UpdateLocation.class));
-            }
         });
-
     }
 
     @Override
@@ -84,12 +75,10 @@ public class DummyActivityDriver extends DriverBaseActivity implements DriverDis
                     if (wayPointsData.getDist() == 0.0) {
                         DriverSystems.out.println("WayDistance" + wayPointsData.getDist());
                     }
-
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
     }
-
 }

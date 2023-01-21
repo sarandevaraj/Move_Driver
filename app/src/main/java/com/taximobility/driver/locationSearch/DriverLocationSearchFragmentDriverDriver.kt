@@ -17,16 +17,13 @@ import com.taximobility.driver.utils.DriverSessionSave
 import org.json.JSONArray
 import java.util.*
 
-
 /**
  * A simple [Fragment] subclass.
  * create an instance of this fragment.
- *
  */
-//private const val ARG_PARAM1 = "param1"
-//private const val ARG_PARAM2 = "param2"
 
-class DriverLocationSearchFragmentDriverDriver : Fragment(), DriverOnLocationSearched, DriverPlaceSearchList {
+class DriverLocationSearchFragmentDriverDriver : Fragment(), DriverOnLocationSearched,
+    DriverPlaceSearchList {
     override fun onItemClicked(driverPlacesDetail: DriverPlacesDetail) {
         //No need to handle anything here
     }
@@ -41,10 +38,8 @@ class DriverLocationSearchFragmentDriverDriver : Fragment(), DriverOnLocationSea
 
     private lateinit var driverOnPlaceSearchedListener: DriverOnLocationSearched
     override fun onLocationSearched(queryString: String) {
-        if (queryString.length > 2)
-            driverOnPlaceSearchedListener.onLocationSearched(queryString)
-        else
-            mAutoCompleteAdapterDriver.submitList(favouritesList)
+        if (queryString.length > 2) driverOnPlaceSearchedListener.onLocationSearched(queryString)
+        else mAutoCompleteAdapterDriver.submitList(favouritesList)
     }
 
     private var isFourSquare = false
@@ -52,15 +47,16 @@ class DriverLocationSearchFragmentDriverDriver : Fragment(), DriverOnLocationSea
     private lateinit var mAutoCompleteAdapterDriver: DriverPlacesAutoCompleteAdapter
     private var favouritesList: ArrayList<DriverPlacesDetail> = ArrayList()
     private lateinit var rvLocationItems: RecyclerView
-    private lateinit var imgPoweredBy:AppCompatImageView
+    private lateinit var imgPoweredBy: AppCompatImageView
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View? {
         val mView = inflater.inflate(R.layout.driver_fragment_location_search, container, false)
         DirverColorchange.ChangeColor(mView as ViewGroup, requireActivity())
         rvLocationItems = mView.findViewById(R.id.rvLocationItems)
         imgPoweredBy = mView.findViewById(R.id.imgPoweredBy)
-        return  mView
+        return mView
     }
 
     override fun onAttach(context: Context) {
@@ -82,30 +78,37 @@ class DriverLocationSearchFragmentDriverDriver : Fragment(), DriverOnLocationSea
             }
             driverOnPlaceSearchedListener = if (isFourSquare) {
                 imgPoweredBy.visibility = View.GONE
-                DriverFourSquarePlaceRepository(context, this@DriverLocationSearchFragmentDriverDriver)
+                DriverFourSquarePlaceRepository(
+                    context, this@DriverLocationSearchFragmentDriverDriver
+                )
             } else {
                 imgPoweredBy.visibility = View.VISIBLE
                 DriverGooglePlaceRepository(context, this@DriverLocationSearchFragmentDriverDriver)
             }
-
 
             mAutoCompleteAdapterDriver = DriverPlacesAutoCompleteAdapter(context)
             mAutoCompleteAdapterDriver.submitList(favouritesList)
             rvLocationItems.adapter = mAutoCompleteAdapterDriver
 
             rvLocationItems.addOnItemTouchListener(
-                    DriverRecyclerItemClickListener(context, DriverRecyclerItemClickListener.OnItemClickListener { views, position ->
+                DriverRecyclerItemClickListener(context,
+                    DriverRecyclerItemClickListener.OnItemClickListener { views, position ->
                         val view = activity?.currentFocus
                         if (view != null) {
-                            val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                            val imm =
+                                context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 
                             if (imm.isAcceptingText) {
-                                val im = context.getSystemService(AppCompatActivity.INPUT_METHOD_SERVICE) as InputMethodManager
+                                val im =
+                                    context.getSystemService(AppCompatActivity.INPUT_METHOD_SERVICE) as InputMethodManager
                                 im.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0)
                             }
                         }
-                        if (mAutoCompleteAdapterDriver.getItem(position) != null)
-                            driverOnPlaceSearchedListener.onItemClicked(mAutoCompleteAdapterDriver.getItem(position))
+                        if (mAutoCompleteAdapterDriver.getItem(position) != null) driverOnPlaceSearchedListener.onItemClicked(
+                            mAutoCompleteAdapterDriver.getItem(
+                                position
+                            )
+                        )
                     })
             )
         }
@@ -115,7 +118,8 @@ class DriverLocationSearchFragmentDriverDriver : Fragment(), DriverOnLocationSea
         val favouritesList = ArrayList<DriverPlacesDetail>()
         if (!DriverSessionSave.getSession("popular_places", context).isNullOrEmpty()) {
             try {
-                val popularPlaces = JSONArray(DriverSessionSave.getSession("popular_places", context))
+                val popularPlaces =
+                    JSONArray(DriverSessionSave.getSession("popular_places", context))
                 for (i in 0 until popularPlaces.length()) {
                     val jo = popularPlaces.getJSONObject(i)
                     favouritesList.add(DriverPlacesDetail().apply {

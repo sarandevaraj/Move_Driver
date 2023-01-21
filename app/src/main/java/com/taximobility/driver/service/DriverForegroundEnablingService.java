@@ -22,12 +22,11 @@ public class DriverForegroundEnablingService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        if (LocationUpdate.instance == null)
-            try {
-                stopForeground(true);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        if (LocationUpdate.instance == null) try {
+            stopForeground(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
             /*throw new RuntimeException(LocationUpdate.class.getSimpleName() + " not running");*/
         else {
             //Set both services to foreground using the same notification id, resulting in just one notification
@@ -43,7 +42,6 @@ public class DriverForegroundEnablingService extends Service {
         }
         return START_STICKY;
     }
-
 
     private void startForeground(Service service) {
         service.startForeground(10, getNotification());
@@ -61,7 +59,7 @@ public class DriverForegroundEnablingService extends Service {
         String NOTIFICATION_CHANNEL_ID = "my_channel_id_01";
         int notifyId = 10;
         Notification notification;
-        Notification.Builder builder = null;
+        Notification.Builder builder;
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             Notification.Action action = new Notification.Action.Builder(Icon.createWithResource(this, R.drawable.driver_ic_launcher), DriverNC.getString(R.string.notiy_lanch_app), activityPendingIntent).build();
@@ -71,29 +69,13 @@ public class DriverForegroundEnablingService extends Service {
             notificationChannel.enableLights(true);
             notificationChannel.setLightColor(Color.RED);
             notificationManager.createNotificationChannel(notificationChannel);
-            builder = new Notification.Builder(this, NOTIFICATION_CHANNEL_ID)
-                    .addAction(action)
-                    .setContentText(DriverNC.getString(R.string.app_running))
-                    .setContentTitle(getResources().getString(R.string.app_name))
-                    .setOngoing(true)
-                    .setSmallIcon(R.drawable.driver_small_logo)
-                    .setWhen(System.currentTimeMillis());
+            builder = new Notification.Builder(this, NOTIFICATION_CHANNEL_ID).addAction(action).setContentText(DriverNC.getString(R.string.app_running)).setContentTitle(getResources().getString(R.string.app_name)).setOngoing(true).setSmallIcon(R.drawable.driver_small_logo).setWhen(System.currentTimeMillis());
         } else {
-            builder = new Notification.Builder(this)
-                    .addAction(0, DriverNC.getString(R.string.notiy_lanch_app) + ""/* + getTripStatus()*/,
-                            activityPendingIntent)
-                    .setContentText(DriverNC.getString(R.string.app_running))
-                    .setContentTitle(getResources().getString(R.string.app_name))
-                    .setOngoing(true)
-                    .setPriority(Notification.PRIORITY_HIGH)
-                    .setSmallIcon(R.drawable.driver_small_logo)
-                    .setWhen(System.currentTimeMillis());
+            builder = new Notification.Builder(this).addAction(0, DriverNC.getString(R.string.notiy_lanch_app) + ""/* + getTripStatus()*/, activityPendingIntent).setContentText(DriverNC.getString(R.string.app_running)).setContentTitle(getResources().getString(R.string.app_name)).setOngoing(true).setPriority(Notification.PRIORITY_HIGH).setSmallIcon(R.drawable.driver_small_logo).setWhen(System.currentTimeMillis());
         }
 
         notification = builder.build();
         notificationManager.notify(notifyId, notification);
         return notification;
     }
-
-
 }

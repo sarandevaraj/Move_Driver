@@ -51,18 +51,19 @@ class DriverSettlementDetail : DriverBaseActivity(), DriverDatePicker_CardExpiry
 
     var infoObj: DriverSettlementReqData.Info? = null
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.driver_settlement_lay)
-        DirverColorchange.ChangeColor((this@DriverSettlementDetail
-                .findViewById(android.R.id.content) as ViewGroup).getChildAt(0) as ViewGroup, this@DriverSettlementDetail)
+        DirverColorchange.ChangeColor(
+            (this@DriverSettlementDetail.findViewById(android.R.id.content) as ViewGroup).getChildAt(
+                0
+            ) as ViewGroup, this@DriverSettlementDetail
+        )
 
         args.putString("KEY", "0")
 
         leftIcon.visibility = View.VISIBLE
-
 
         header_titleTxt.text = DriverNC.getString(R.string.settlement_request)
 
@@ -81,19 +82,19 @@ class DriverSettlementDetail : DriverBaseActivity(), DriverDatePicker_CardExpiry
         to_txt.text = toDate
 
         callRequestApi("", "")
-
     }
 
     override fun onResume() {
 
         super.onResume()
 
-        txt_header_amount.text = DriverNC.getString(R.string.amount) + "(" + DriverSessionSave.getSession("site_currency", this@DriverSettlementDetail).trim() + ")"
+        txt_header_amount.text =
+            DriverNC.getString(R.string.amount) + "(" + DriverSessionSave.getSession(
+                "site_currency", this@DriverSettlementDetail
+            ).trim() + ")"
 
         leftIcon.setOnClickListener {
-
             finish()
-
         }
 
         from_txt_lay.setOnClickListener {
@@ -144,7 +145,7 @@ class DriverSettlementDetail : DriverBaseActivity(), DriverDatePicker_CardExpiry
 
             val endDateValue = sdf.parse(dateStr2)
 
-            val diff = endDateValue.time - startDateValue.time
+            val diff = endDateValue!!.time - startDateValue!!.time
 
             val numberOfDays: Int = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS).toInt()
 
@@ -170,9 +171,11 @@ class DriverSettlementDetail : DriverBaseActivity(), DriverDatePicker_CardExpiry
 
                     if (dialogs != null) {
 
-                        dialogs.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(this@DriverSettlementDetail.resources.getColor(R.color.button_accept))
+                        dialogs.getButton(AlertDialog.BUTTON_NEGATIVE)
+                            .setTextColor(this@DriverSettlementDetail.resources.getColor(R.color.button_accept))
 
-                        dialogs.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(this@DriverSettlementDetail.resources.getColor(R.color.black))
+                        dialogs.getButton(AlertDialog.BUTTON_POSITIVE)
+                            .setTextColor(this@DriverSettlementDetail.resources.getColor(R.color.black))
 
                     }
 
@@ -211,69 +214,86 @@ class DriverSettlementDetail : DriverBaseActivity(), DriverDatePicker_CardExpiry
 
         req.info = infoObj
 
-        val call = client.settlement_paymentCall(req, DriverSessionSave.getSession("Lang", this@DriverSettlementDetail))
+        val call = client.settlement_paymentCall(
+            req, DriverSessionSave.getSession("Lang", this@DriverSettlementDetail)
+        )
 
         showLoading()
 
-        call.enqueue(DriverRetrofitCallbackClass(this@DriverSettlementDetail, object : Callback<DriverSettlementPaymentData> {
+        call.enqueue(
+            DriverRetrofitCallbackClass(this@DriverSettlementDetail,
+                object : Callback<DriverSettlementPaymentData> {
 
-            override fun onResponse(call: Call<DriverSettlementPaymentData>, response: Response<DriverSettlementPaymentData>) {
+                    override fun onResponse(
+                        call: Call<DriverSettlementPaymentData>,
+                        response: Response<DriverSettlementPaymentData>
+                    ) {
 
-                cancelLoading()
+                        cancelLoading()
 
-                if (response.isSuccessful) {
+                        if (response.isSuccessful) {
 
-                    val data = response.body()
+                            val data = response.body()
 
-                    val builder = AlertDialog.Builder(this@DriverSettlementDetail)
+                            val builder = AlertDialog.Builder(this@DriverSettlementDetail)
 
-                    builder.setTitle("")
+                            builder.setTitle("")
 
-                    builder.setMessage(data?.message)
+                            builder.setMessage(data?.message)
 
-                    builder.setPositiveButton(DriverNC.getString(R.string.ok)) { dialog, which ->
+                            builder.setPositiveButton(DriverNC.getString(R.string.ok)) { dialog, which ->
 
-                        dialog.dismiss()
+                                dialog.dismiss()
 
-                        if (data?.status == 1) {
+                                if (data?.status == 1) {
 
-                            startActivity(Intent(this@DriverSettlementDetail, SettlementHistoryActivityDriver::class.java))
+                                    startActivity(
+                                        Intent(
+                                            this@DriverSettlementDetail,
+                                            SettlementHistoryActivityDriver::class.java
+                                        )
+                                    )
+
+                                }
+
+                            }
+
+                            builder.setCancelable(false)
+
+                            val dialogs: AlertDialog = builder.create()
+
+                            dialogs.setOnShowListener {
+
+                                if (dialogs != null) {
+
+                                    dialogs.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(
+                                        this@DriverSettlementDetail.resources.getColor(R.color.button_accept)
+                                    )
+
+                                    dialogs.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(
+                                        this@DriverSettlementDetail.resources.getColor(R.color.black)
+                                    )
+
+                                }
+
+                            }
+
+                            dialogs.show()
 
                         }
 
                     }
 
-                    builder.setCancelable(false)
+                    override fun onFailure(call: Call<DriverSettlementPaymentData>, t: Throwable) {
 
-                    val dialogs: AlertDialog = builder.create()
+                        cancelLoading()
 
-                    dialogs.setOnShowListener {
-
-                        if (dialogs != null) {
-
-                            dialogs.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(this@DriverSettlementDetail.resources.getColor(R.color.button_accept))
-
-                            dialogs.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(this@DriverSettlementDetail.resources.getColor(R.color.black))
-
-                        }
+                        t.printStackTrace()
 
                     }
 
-                    dialogs.show()
-
-                }
-
-            }
-
-            override fun onFailure(call: Call<DriverSettlementPaymentData>, t: Throwable) {
-
-                cancelLoading()
-
-                t.printStackTrace()
-
-            }
-
-        }))
+                })
+        )
 
     }
 
@@ -307,157 +327,192 @@ class DriverSettlementDetail : DriverBaseActivity(), DriverDatePicker_CardExpiry
 
         req.end_date = to
 
-        val call = client.settlement_reqCall(req, DriverSessionSave.getSession("Lang", this@DriverSettlementDetail))
+        val call = client.settlement_reqCall(
+            req, DriverSessionSave.getSession("Lang", this@DriverSettlementDetail)
+        )
 
-        call.enqueue(DriverRetrofitCallbackClass(this@DriverSettlementDetail, object : Callback<DriverSettlementReqData> {
+        call.enqueue(
+            DriverRetrofitCallbackClass(this@DriverSettlementDetail,
+                object : Callback<DriverSettlementReqData> {
 
 
-            @SuppressLint("WrongConstant")
-            override fun onResponse(call: Call<DriverSettlementReqData>, response: Response<DriverSettlementReqData>) {
+                    @SuppressLint("WrongConstant")
+                    override fun onResponse(
+                        call: Call<DriverSettlementReqData>,
+                        response: Response<DriverSettlementReqData>
+                    ) {
 
-                cancelLoading()
+                        cancelLoading()
 
-                val settlementData = response.body()
+                        val settlementData = response.body()
 
-                if (response.isSuccessful) {
+                        if (response.isSuccessful) {
 
-                    if (settlementData?.status == 1) {
+                            if (settlementData?.status == 1) {
 
-                        layout_content.visibility = View.VISIBLE
+                                layout_content.visibility = View.VISIBLE
 
-                        txt_nodata.visibility = View.GONE
+                                txt_nodata.visibility = View.GONE
 
-                        infoObj = settlementData.info
+                                infoObj = settlementData.info
 
-                        txt_req.text = settlementData.details?.hints?.replace("#AMOUNT".toRegex(), DriverSessionSave.getSession("site_currency", this@DriverSettlementDetail) + "" + settlementData.details?.total_amount_driver)
+                                txt_req.text = settlementData.details?.hints?.replace(
+                                    "#AMOUNT".toRegex(), DriverSessionSave.getSession(
+                                        "site_currency", this@DriverSettlementDetail
+                                    ) + "" + settlementData.details?.total_amount_driver
+                                )
 
-                        if (settlementData.details.start_date != null) {
+                                if (settlementData.details.start_date != null) {
 
-                            from_txt.text = getDate(settlementData.details.start_date.toLong())
+                                    from_txt.text =
+                                        getDate(settlementData.details.start_date.toLong())
+
+                                } else {
+
+                                    from_txt.text = fromDate
+
+                                }
+
+                                if (settlementData.details.end_date != null) {
+
+                                    to_txt.text = getDate(settlementData.details.end_date.toLong())
+
+                                } else {
+
+                                    to_txt.text = toDate
+
+                                }
+
+                                tv_tax_value.text = DriverSessionSave.getSession(
+                                    "site_currency", this@DriverSettlementDetail
+                                ) + "" + settlementData.details.tax
+
+                                txt_total_val.text = DriverSessionSave.getSession(
+                                    "site_currency", this@DriverSettlementDetail
+                                ) + "" + settlementData.details?.total_earning
+                                2
+                                txt_net_earnings_val.text = DriverSessionSave.getSession(
+                                    "site_currency", this@DriverSettlementDetail
+                                ) + "" + settlementData.details?.wallet_amount
+
+                                txt_cash_val.text = DriverSessionSave.getSession(
+                                    "site_currency", this@DriverSettlementDetail
+                                ) + "" + settlementData.details?.cash_collected
+
+                                txt_card_val.text = DriverSessionSave.getSession(
+                                    "site_currency", this@DriverSettlementDetail
+                                ) + "" + settlementData.details?.card_payment
+
+                                txt_admin.text = "" + settlementData.details?.settlement_type
+
+                                txt_admin_value.text = DriverSessionSave.getSession(
+                                    "site_currency", this@DriverSettlementDetail
+                                ) + "" + settlementData.details?.total_amount_driver
+
+                                txt_req_sent.text =
+                                    DriverNC.getString(R.string.last_req) + settlementData.details?.last_request_date
+
+                                tv_drivercommission_value.text = DriverSessionSave.getSession(
+                                    "site_currency", this@DriverSettlementDetail
+                                ) + "" + settlementData.details?.driver_commission_amount
+
+                                val adminCommission: Float? =
+                                    settlementData.details?.admin_commission_amount?.toFloat()
+
+                                if (adminCommission != null && adminCommission > 0) {
+
+                                    card_view.visibility = View.VISIBLE
+
+                                    admincommission_lay.visibility = View.VISIBLE
+
+                                    tv_admincommission_value.text = DriverSessionSave.getSession(
+                                        "site_currency", this@DriverSettlementDetail
+                                    ) + "" + settlementData.details?.admin_commission_amount
+
+                                } else {
+
+                                    card_view.visibility = View.GONE
+
+                                    admincommission_lay.visibility = View.GONE
+
+                                }
+
+                                if (settlementData.details.list != null && settlementData.details.list.size > 0) {
+
+                                    menu_header_lay.visibility = View.VISIBLE
+
+                                    txt_request_payment.visibility = View.VISIBLE
+
+                                    val mAdapter = DriverPendingHistoryAdapter(
+                                        this@DriverSettlementDetail, settlementData.details?.list
+                                    )
+
+                                    rv_settlement.layoutManager = LinearLayoutManager(
+                                        this@DriverSettlementDetail, LinearLayout.VERTICAL, false
+                                    )
+
+                                    rv_settlement.adapter = mAdapter
+
+                                } else {
+
+                                    menu_header_lay.visibility = View.GONE
+
+                                    txt_request_payment.visibility = View.GONE
+
+                                }
+
+                                if (settlementData.details.show_button == 1) {
+
+                                    txt_req_admin.visibility = View.VISIBLE
+
+                                    txt_req_sent.visibility = View.VISIBLE
+
+                                } else {
+
+                                    txt_req_admin.visibility = View.GONE
+
+                                    txt_req_sent.visibility = View.GONE
+
+                                }
+
+                            } else {
+
+                                layout_content.visibility = View.GONE
+
+                                txt_nodata.visibility = View.VISIBLE
+
+                                txt_nodata.text = settlementData?.message
+
+                            }
 
                         } else {
 
-                            from_txt.text = fromDate
+                            layout_content.visibility = View.GONE
+
+                            txt_nodata.visibility = View.VISIBLE
+
+                            txt_nodata.text = DriverNC.getString(R.string.please_check_internet)
 
                         }
 
-                        if (settlementData.details.end_date != null) {
+                    }
 
-                            to_txt.text = getDate(settlementData.details.end_date.toLong())
+                    override fun onFailure(call: Call<DriverSettlementReqData>, t: Throwable) {
 
-                        } else {
+                        t.printStackTrace()
 
-                            to_txt.text = toDate
-
-                        }
-
-                        tv_tax_value.text = DriverSessionSave.getSession("site_currency", this@DriverSettlementDetail) + "" + settlementData.details.tax
-
-                        txt_total_val.text = DriverSessionSave.getSession("site_currency", this@DriverSettlementDetail) + "" + settlementData.details?.total_earning
-2
-                        txt_net_earnings_val.text = DriverSessionSave.getSession("site_currency", this@DriverSettlementDetail) + "" + settlementData.details?.wallet_amount
-
-                        txt_cash_val.text = DriverSessionSave.getSession("site_currency", this@DriverSettlementDetail) + "" + settlementData.details?.cash_collected
-
-                        txt_card_val.text = DriverSessionSave.getSession("site_currency", this@DriverSettlementDetail) + "" + settlementData.details?.card_payment
-
-                        txt_admin.text = "" + settlementData.details?.settlement_type
-
-                        txt_admin_value.text = DriverSessionSave.getSession("site_currency", this@DriverSettlementDetail) + "" + settlementData.details?.total_amount_driver
-
-                        txt_req_sent.text = DriverNC.getString(R.string.last_req) + settlementData.details?.last_request_date
-
-                        tv_drivercommission_value.text = DriverSessionSave.getSession("site_currency", this@DriverSettlementDetail) + "" + settlementData.details?.driver_commission_amount
-
-                        val adminCommission: Float? = settlementData.details?.admin_commission_amount?.toFloat()
-
-                        if (adminCommission != null && adminCommission > 0) {
-
-                            card_view.visibility = View.VISIBLE
-
-                            admincommission_lay.visibility = View.VISIBLE
-
-                            tv_admincommission_value.text = DriverSessionSave.getSession("site_currency", this@DriverSettlementDetail) + "" + settlementData.details?.admin_commission_amount
-
-                        } else {
-
-                            card_view.visibility = View.GONE
-
-                            admincommission_lay.visibility = View.GONE
-
-                        }
-
-                        if (settlementData.details.list != null && settlementData.details.list.size > 0) {
-
-                            menu_header_lay.visibility = View.VISIBLE
-
-                            txt_request_payment.visibility = View.VISIBLE
-
-                            val mAdapter = DriverPendingHistoryAdapter(this@DriverSettlementDetail, settlementData.details?.list)
-
-                            rv_settlement.layoutManager = LinearLayoutManager(this@DriverSettlementDetail, LinearLayout.VERTICAL, false)
-
-                            rv_settlement.adapter = mAdapter
-
-                        } else {
-
-                            menu_header_lay.visibility = View.GONE
-
-                            txt_request_payment.visibility = View.GONE
-
-                        }
-
-                        if (settlementData.details.show_button == 1) {
-
-                            txt_req_admin.visibility = View.VISIBLE
-
-                            txt_req_sent.visibility = View.VISIBLE
-
-                        } else {
-
-                            txt_req_admin.visibility = View.GONE
-
-                            txt_req_sent.visibility = View.GONE
-
-                        }
-
-                    } else {
+                        cancelLoading()
 
                         layout_content.visibility = View.GONE
 
                         txt_nodata.visibility = View.VISIBLE
 
-                        txt_nodata.text = settlementData?.message
+                        txt_nodata.text = DriverNC.getString(R.string.please_check_internet)
 
                     }
 
-                } else {
-
-                    layout_content.visibility = View.GONE
-
-                    txt_nodata.visibility = View.VISIBLE
-
-                    txt_nodata.text = DriverNC.getString(R.string.please_check_internet)
-
-                }
-
-            }
-
-            override fun onFailure(call: Call<DriverSettlementReqData>, t: Throwable) {
-
-                t.printStackTrace()
-
-                cancelLoading()
-
-                layout_content.visibility = View.GONE
-
-                txt_nodata.visibility = View.VISIBLE
-
-                txt_nodata.text = DriverNC.getString(R.string.please_check_internet)
-
-            }
-
-        }))
+                })
+        )
 
     }
 
@@ -475,7 +530,9 @@ class DriverSettlementDetail : DriverBaseActivity(), DriverDatePicker_CardExpiry
 
             from_txt_lay.isClickable = true
 
-            datePic = StringBuilder().append(mYear).append("-").append(checkDigit(mMonth)).append("-").append(checkDigit(day)).append(" ").toString()
+            datePic =
+                StringBuilder().append(mYear).append("-").append(checkDigit(mMonth)).append("-")
+                    .append(checkDigit(day)).append(" ").toString()
 
             if (checkDateBefore(to_txt.text.toString(), datePic)) {
 
@@ -491,7 +548,9 @@ class DriverSettlementDetail : DriverBaseActivity(), DriverDatePicker_CardExpiry
 
             to_txt_lay.isClickable = true
 
-            datePic = StringBuilder().append(mYear).append("-").append(checkDigit(mMonth)).append("-").append(checkDigit(day)).append(" ").toString()
+            datePic =
+                StringBuilder().append(mYear).append("-").append(checkDigit(mMonth)).append("-")
+                    .append(checkDigit(day)).append(" ").toString()
 
             if (checkDateAfter(datePic, from_txt.text.toString())) {
 
@@ -533,7 +592,7 @@ class DriverSettlementDetail : DriverBaseActivity(), DriverDatePicker_CardExpiry
 
         val dateStart = sdf.parse(date_Start)
 
-        return dateStart.before(dateEnd)
+        return dateStart!!.before(dateEnd)
 
     }
 
@@ -545,7 +604,7 @@ class DriverSettlementDetail : DriverBaseActivity(), DriverDatePicker_CardExpiry
 
         val dateStart = sdf.parse(date_Start)
 
-        return dateEnd.after(dateStart)
+        return dateEnd!!.after(dateStart)
 
     }
 

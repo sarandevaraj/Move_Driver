@@ -6,7 +6,7 @@ import java.util.*
 object DriverInternetSpeedChecker {
     private lateinit var mDownloadSpeedOutput: String
     private lateinit var mUnits: String
-    fun getDownloadSpeed():String {
+    fun getDownloadSpeed(): String {
 
         val mRxBytesPrevious = TrafficStats.getTotalRxBytes()
         try {
@@ -29,14 +29,12 @@ object DriverInternetSpeedChecker {
             mDownloadSpeed >= 1000000 -> {
                 mDownloadSpeedWithDecimals = mDownloadSpeed.toFloat() / 1000000.toFloat()
                 mUnits = " MB"
-
             }
             else -> {
                 mDownloadSpeedWithDecimals = mDownloadSpeed.toFloat() / 1000.toFloat()
                 mUnits = " KB"
             }
         }
-
 
         mDownloadSpeedOutput = if (mUnits != " KB" && mDownloadSpeedWithDecimals < 100) {
             String.format(Locale.US, "%.1f", mDownloadSpeedWithDecimals)

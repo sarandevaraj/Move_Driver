@@ -49,7 +49,6 @@ public class DriverServiceGenerator {
     private static OkHttpClient.Builder httpClient;
     private static Retrofit.Builder builder;
 
-
     public static Retrofit getRetrofitWithoutEncryptBaseUrl(Context context) {
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         Base64EncodeRequestInterceptor requestInterceptor = new Base64EncodeRequestInterceptor(DriverSessionSave.getSession("api_key", context), context);
@@ -60,20 +59,15 @@ public class DriverServiceGenerator {
 
         httpClient.addInterceptor(requestInterceptor);
         System.out.println("Driver_Test" + " " + DriverSessionSave.getSession("base_url", context));
-        if (BuildConfig.DEBUG)
-            httpClient.interceptors().add(logging);
-        builder = new Retrofit.Builder()
-                .baseUrl(DriverSessionSave.getSession("base_url", context))
-                .addConverterFactory(GsonConverterFactory.create()).client(httpClient.build());
+        if (BuildConfig.DEBUG) httpClient.interceptors().add(logging);
+        builder = new Retrofit.Builder().baseUrl(DriverSessionSave.getSession("base_url", context)).addConverterFactory(GsonConverterFactory.create()).client(httpClient.build());
         return builder.build();
     }
-
 
     public static Retrofit getRetrofitWithEncryptBaseUrl(Context context) {
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         // set your desired log level
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
-
 
         Base64EncodeRequestInterceptor requestInterceptor = new Base64EncodeRequestInterceptor(DriverSessionSave.getSession("api_key", context), context);
         DecryptedPayloadInterceptor responseInterceptor = new DecryptedPayloadInterceptor(context);
@@ -82,12 +76,8 @@ public class DriverServiceGenerator {
         httpClient.addInterceptor(responseInterceptor);
         httpClient.addInterceptor(requestInterceptor);
 
-
-        if (BuildConfig.DEBUG)
-            httpClient.interceptors().add(logging);
-        builder = new Retrofit.Builder()
-                .baseUrl(DriverSessionSave.getSession("base_url", context))
-                .addConverterFactory(GsonConverterFactory.create()).client(httpClient.build());
+        if (BuildConfig.DEBUG) httpClient.interceptors().add(logging);
+        builder = new Retrofit.Builder().baseUrl(DriverSessionSave.getSession("base_url", context)).addConverterFactory(GsonConverterFactory.create()).client(httpClient.build());
         return builder.build();
     }
 
@@ -96,7 +86,6 @@ public class DriverServiceGenerator {
         // set your desired log level
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
 
-
         Base64EncodeRequestInterceptor requestInterceptor = new Base64EncodeRequestInterceptor(DriverSessionSave.getSession("api_key", context), context);
         DecryptedPayloadInterceptor responseInterceptor = new DecryptedPayloadInterceptor(context);
         httpClient = new OkHttpClient.Builder().connectTimeout(time_out, TimeUnit.SECONDS).readTimeout(time_out, TimeUnit.SECONDS);
@@ -104,12 +93,8 @@ public class DriverServiceGenerator {
         httpClient.addInterceptor(responseInterceptor);
         httpClient.addInterceptor(requestInterceptor);
 
-
-        if (BuildConfig.DEBUG)
-            httpClient.interceptors().add(logging);
-        builder = new Retrofit.Builder()
-                .baseUrl(DriverSessionSave.getSession("base_url", context))
-                .addConverterFactory(GsonConverterFactory.create()).client(httpClient.build());
+        if (BuildConfig.DEBUG) httpClient.interceptors().add(logging);
+        builder = new Retrofit.Builder().baseUrl(DriverSessionSave.getSession("base_url", context)).addConverterFactory(GsonConverterFactory.create()).client(httpClient.build());
         return builder.build();
     }
 
@@ -128,15 +113,12 @@ public class DriverServiceGenerator {
             httpClient.addNetworkInterceptor(new StethoInterceptor());
             httpClient.interceptors().add(logging);
         }*/
-        if (BuildConfig.DEBUG)
-            httpClient.interceptors().add(logging);
+        if (BuildConfig.DEBUG) httpClient.interceptors().add(logging);
 
         httpClient.addInterceptor(responseInterceptor);
         httpClient.addInterceptor(requestInterceptor);
 
-        builder = new Retrofit.Builder()
-                .baseUrl(url)
-                .addConverterFactory(GsonConverterFactory.create()).client(httpClient.build());
+        builder = new Retrofit.Builder().baseUrl(url).addConverterFactory(GsonConverterFactory.create()).client(httpClient.build());
         return builder.build();
     }
 
@@ -166,8 +148,7 @@ public class DriverServiceGenerator {
                 }
 
                 try {
-                    if (!result.toString("UTF-8").isEmpty())
-                        decrypted = result.toString("UTF-8");
+                    if (!result.toString("UTF-8").isEmpty()) decrypted = result.toString("UTF-8");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -187,8 +168,7 @@ public class DriverServiceGenerator {
                 } catch (Exception e) {
                     e.printStackTrace();
                 } finally {
-                    if (cryptedStream != null)
-                        cryptedStream.close();
+                    if (cryptedStream != null) cryptedStream.close();
                 }
                 Response ress = newResponse.build();
                 String url_type = String.valueOf(ress.request().url());
@@ -196,8 +176,7 @@ public class DriverServiceGenerator {
                     if (url_type.contains("driverapi")) {
                         if (new DriverCheckStatus(new JSONObject(decrypted), c).isNormal())
                             return ress;
-                        else
-                            return response;
+                        else return response;
                     } else return ress;
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -208,69 +187,50 @@ public class DriverServiceGenerator {
         }
     }
 
-
     public static class Base64EncodeRequestInterceptor implements Interceptor {
         String companyKey = "FNpfuspyEAzhjfoh2ONpWK0rsnClVL6OCaasqDQtWdI=";
         //        String companyKey = "eBU2X1fY+P5G7/nR1S2AsUW7dOaU6KXM3S+b4vYYFs4=";
-        private Context mContext;
+        private final Context mContext;
 
         Base64EncodeRequestInterceptor(String key, Context mContext) {
-            if (!key.trim().isEmpty())
-                companyKey = key;
-
+            if (!key.trim().isEmpty()) companyKey = key;
             this.mContext = mContext;
         }
-
-
         @NotNull
         @Override
         public Response intercept(Chain chain) throws IOException {
             Request originalRequest = chain.request();
             Request.Builder builder = originalRequest.newBuilder();
             if (originalRequest.method().equalsIgnoreCase("POST")) {
-                builder = originalRequest.newBuilder()
-                        .method(originalRequest.method(), originalRequest.body());
+                builder = originalRequest.newBuilder().method(originalRequest.method(), originalRequest.body());
             }
 
             builder.addHeader("authkey", DriverSessionSave.getSession(AUTH_KEY, mContext));
 //            builder.addHeader("token", SessionSave.getSession(DEVICE_ID, mContext));
             builder.addHeader("userAuth", DriverSessionSave.getSession(USER_KEY, mContext));
 
-
             System.out.println("authkey : " + " " + SessionSave.getSession(AUTH_KEY, mContext));
             System.out.println("userauth : " + " " + SessionSave.getSession(USER_KEY, mContext));
             HttpUrl originalHttpUrl = originalRequest.url();
-            HttpUrl url = originalHttpUrl.newBuilder()
-                    .addQueryParameter("dt", "a")
-                    .addQueryParameter("i", DriverSessionSave.getSession("Id", mContext))
-                    .addQueryParameter("pv", "" + BuildConfig.VERSION_CODE)
-                    .addQueryParameter("k", DriverSessionSave.getSession(DriverCommonData.FIREBASE_KEY, mContext))
-                    .addQueryParameter("s", DriverInternetSpeedChecker.INSTANCE.getDownloadSpeed())
-                    .build();
+            HttpUrl url = originalHttpUrl.newBuilder().addQueryParameter("dt", "a").addQueryParameter("i", DriverSessionSave.getSession("Id", mContext)).addQueryParameter("pv", "" + BuildConfig.VERSION_CODE).addQueryParameter("k", DriverSessionSave.getSession(DriverCommonData.FIREBASE_KEY, mContext)).addQueryParameter("s", DriverInternetSpeedChecker.INSTANCE.getDownloadSpeed()).build();
 
             builder.url(url);
-
             String body_value = "";
             try {
 
                 if (originalRequest.body() != null) {
                     final RequestBody body = originalRequest.body();
                     final Buffer buffer = new Buffer();
-                    if (body != null)
-                        body.writeTo(buffer);
+                    if (body != null) body.writeTo(buffer);
                     body_value = buffer.readUtf8();
                 }
 
             } catch (final IOException e) {
+                e.printStackTrace();
             }
             String logs = url + " - " + originalRequest.method() + " - " + body_value + " - auth: " + SessionSave.getSession(AUTH_KEY, mContext) + " - user_auth: " + SessionSave.getSession(USER_KEY, mContext);
             DriverSessionSave.saveAPI(logs, mContext);
-
-
             return chain.proceed(builder.build());
         }
-
     }
-
-
 }

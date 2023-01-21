@@ -10,6 +10,7 @@ import com.taximobility.driver.utils.DriverSystems;
 public class DriverCallReceiver extends BroadcastReceiver {
 
     static String phoneState = "";
+
     @Override
     public void onReceive(Context context, Intent intent) {
         if (intent.getAction().matches("android.intent.action.PHONE_STATE")) {
@@ -22,8 +23,7 @@ public class DriverCallReceiver extends BroadcastReceiver {
     }
 
     public static boolean phoneState() {
-        if (phoneState == null || phoneState == "")
-            return true;
+        if (phoneState == null || phoneState.equals("")) return true;
         return phoneState.equals(TelephonyManager.EXTRA_STATE_IDLE);
     }
 }

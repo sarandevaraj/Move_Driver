@@ -1,7 +1,10 @@
 package com.taximobility.driver.locationSearch;
 
 import android.content.Context;
+
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,24 +24,24 @@ import java.util.ArrayList;
 public class DriverPlacesAutoCompleteAdapter extends RecyclerView.Adapter<DriverPlacesAutoCompleteAdapter.PredictionHolder> {
 
     private ArrayList<DriverPlacesDetail> mResultList;
-    private Context mContext;
+    private final Context mContext;
 
     public DriverPlacesAutoCompleteAdapter(Context context) {
         mContext = context;
     }
 
+    @NonNull
     @Override
-    public PredictionHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public PredictionHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater layoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View convertView = layoutInflater.inflate(R.layout.driver_place_search_list_item, viewGroup, false);
         return new PredictionHolder(convertView);
     }
 
     @Override
-    public void onBindViewHolder(PredictionHolder mPredictionHolder, final int i) {
+    public void onBindViewHolder(@NonNull PredictionHolder mPredictionHolder, final int i) {
         DriverPlacesDetail placesDetail = null;
-        if (mResultList != null)
-            placesDetail = mResultList.get(i);
+        if (mResultList != null) placesDetail = mResultList.get(i);
 
 
         if (placesDetail != null) {
@@ -49,12 +52,8 @@ public class DriverPlacesAutoCompleteAdapter extends RecyclerView.Adapter<Driver
                 mPredictionHolder.imgPlaceType.setImageResource(R.drawable.driver_ic_location_black_24dp);
             } else {
                 if (placesDetail.getAndroid_image_unfocus() != null) {
-                    Glide.with(mContext)
-                            .load(placesDetail.getAndroid_image_unfocus())
-                            .apply(RequestOptions.placeholderOf(R.drawable.driver_ic_location_black_24dp).error(R.drawable.driver_ic_location_black_24dp))
-                            .into(mPredictionHolder.imgPlaceType);
-                } else
-                    mPredictionHolder.imgPlaceType.setImageResource(R.drawable.driver_ic_recent);
+                    Glide.with(mContext).load(placesDetail.getAndroid_image_unfocus()).apply(RequestOptions.placeholderOf(R.drawable.driver_ic_location_black_24dp).error(R.drawable.driver_ic_location_black_24dp)).into(mPredictionHolder.imgPlaceType);
+                } else mPredictionHolder.imgPlaceType.setImageResource(R.drawable.driver_ic_recent);
             }
         }
     }
@@ -73,9 +72,10 @@ public class DriverPlacesAutoCompleteAdapter extends RecyclerView.Adapter<Driver
         return mResultList != null ? mResultList.get(position) : null;
     }
 
-    class PredictionHolder extends RecyclerView.ViewHolder {
-        private TextView tvPlaceName, tvAddress;
-        private ImageView imgPlaceType;
+    static class PredictionHolder extends RecyclerView.ViewHolder {
+        private final TextView tvPlaceName;
+        private final TextView tvAddress;
+        private final ImageView imgPlaceType;
 
         PredictionHolder(View itemView) {
             super(itemView);
@@ -83,6 +83,5 @@ public class DriverPlacesAutoCompleteAdapter extends RecyclerView.Adapter<Driver
             tvAddress = itemView.findViewById(R.id.tvAddress);
             imgPlaceType = itemView.findViewById(R.id.imgPlaceType);
         }
-
     }
 }

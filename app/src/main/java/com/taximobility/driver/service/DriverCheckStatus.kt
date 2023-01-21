@@ -47,10 +47,14 @@ import org.json.JSONObject
 class DriverCheckStatus(val json: JSONObject, val context: Context) {
 
     fun isNormal(): Boolean {
-        var normal = true
+        val normal: Boolean
 
         if (json.has("token"))
-            DriverSessionSave.saveSession(DriverCommonData.NODE_TOKEN, json.getString("token"), context)
+            DriverSessionSave.saveSession(
+                DriverCommonData.NODE_TOKEN,
+                json.getString("token"),
+                context
+            )
 
         var statusCode = 0
         if (json.has("status"))
@@ -71,12 +75,26 @@ class DriverCheckStatus(val json: JSONObject, val context: Context) {
             601 -> {
                 normal = false
 //                SessionSave.saveSession("base_url", message, context)
-                message?.let { CheckUrl().update(context, json.getString("domain"), it, "base_url") }
+                message?.let {
+                    CheckUrl().update(
+                        context,
+                        json.getString("domain"),
+                        it,
+                        "base_url"
+                    )
+                }
             }
             602 -> {
                 normal = false
 //                SessionSave.saveSession(CommonData.NODE_URL, message, context)
-                message?.let { CheckUrl().update(context, json.getString("domain"), it, DriverCommonData.NODE_URL) }
+                message?.let {
+                    CheckUrl().update(
+                        context,
+                        json.getString("domain"),
+                        it,
+                        DriverCommonData.NODE_URL
+                    )
+                }
 
             }
             603 -> {
@@ -94,7 +112,8 @@ class DriverCheckStatus(val json: JSONObject, val context: Context) {
                 cancelIntent.putExtras(bun)
                 cancelIntent.action = Intent.ACTION_MAIN
                 cancelIntent.addCategory(Intent.CATEGORY_LAUNCHER)
-                cancelIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT or Intent.FLAG_ACTIVITY_NO_ANIMATION or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                cancelIntent.flags =
+                    Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT or Intent.FLAG_ACTIVITY_NO_ANIMATION or Intent.FLAG_ACTIVITY_SINGLE_TOP
                 val cn = ComponentName(context, DriverShowAlertAct::class.java)
                 cancelIntent.component = cn
                 context.stopService(Intent(context, LocationUpdate::class.java))
@@ -111,7 +130,8 @@ class DriverCheckStatus(val json: JSONObject, val context: Context) {
                 cancelIntent.putExtras(bun)
                 cancelIntent.action = Intent.ACTION_MAIN
                 cancelIntent.addCategory(Intent.CATEGORY_LAUNCHER)
-                cancelIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK /*or Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT or Intent.FLAG_ACTIVITY_NO_ANIMATION or Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK*/
+                cancelIntent.flags =
+                    Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK /*or Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT or Intent.FLAG_ACTIVITY_NO_ANIMATION or Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK*/
                 val cn = ComponentName(context, DriverSplashAct::class.java)
                 cancelIntent.component = cn
                 context.startActivity(cancelIntent)
@@ -126,7 +146,8 @@ class DriverCheckStatus(val json: JSONObject, val context: Context) {
                 cancelIntent.putExtras(bun)
                 cancelIntent.action = Intent.ACTION_MAIN
                 cancelIntent.addCategory(Intent.CATEGORY_LAUNCHER)
-                cancelIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT or Intent.FLAG_ACTIVITY_NO_ANIMATION or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                cancelIntent.flags =
+                    Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT or Intent.FLAG_ACTIVITY_NO_ANIMATION or Intent.FLAG_ACTIVITY_SINGLE_TOP
                 val cn = ComponentName(context, DriverShowAlertAct::class.java)
                 cancelIntent.component = cn
                 context.stopService(Intent(context, LocationUpdate::class.java))
@@ -142,7 +163,8 @@ class DriverCheckStatus(val json: JSONObject, val context: Context) {
                 cancelIntent.putExtras(bun)
                 cancelIntent.action = Intent.ACTION_MAIN
                 cancelIntent.addCategory(Intent.CATEGORY_LAUNCHER)
-                cancelIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK /*or Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT or Intent.FLAG_ACTIVITY_NO_ANIMATION or Intent.FLAG_ACTIVITY_SINGLE_TOP*/
+                cancelIntent.flags =
+                    Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK /*or Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT or Intent.FLAG_ACTIVITY_NO_ANIMATION or Intent.FLAG_ACTIVITY_SINGLE_TOP*/
                 val cn = ComponentName(context, DriverUserLoginAct::class.java)
                 cancelIntent.component = cn
                 context.startActivity(cancelIntent)
@@ -152,12 +174,8 @@ class DriverCheckStatus(val json: JSONObject, val context: Context) {
                 normal = false
 //                SendDriverDeviceInfo().sendInfo(context, "-1")
             }
-
             else -> normal = true
-
         }
-
-
         return normal
     }
 
@@ -177,7 +195,6 @@ class DriverCheckStatus(val json: JSONObject, val context: Context) {
 //        context.stopService(Intent(context, WaitingTimerRun::class.java))
     }
 
-
     fun updateAuthKey() {
         if (json.has("auth_key")) {
             val authKey = json.getString(AUTH_KEY)
@@ -187,8 +204,12 @@ class DriverCheckStatus(val json: JSONObject, val context: Context) {
 
         if (json.has(DriverCommonData.USER_KEY)) {
             if (json.getString(DriverCommonData.USER_KEY) != "" && json.getString(DriverCommonData.USER_KEY) != null)
-                DriverSessionSave.saveSession(DriverCommonData.USER_KEY, json.getString(DriverCommonData.USER_KEY), context)
-            println("AUTH_KEY_USER_KEY"+" "+ json.getString(TaxiUtil.USER_KEY) )
+                DriverSessionSave.saveSession(
+                    DriverCommonData.USER_KEY,
+                    json.getString(DriverCommonData.USER_KEY),
+                    context
+                )
+            println("AUTH_KEY_USER_KEY" + " " + json.getString(TaxiUtil.USER_KEY))
 
         }
 
@@ -222,7 +243,8 @@ class DriverCheckStatus(val json: JSONObject, val context: Context) {
         val cancelIntent = Intent()
         cancelIntent.action = Intent.ACTION_MAIN
         cancelIntent.addCategory(Intent.CATEGORY_LAUNCHER)
-        cancelIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK /*or Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT or Intent.FLAG_ACTIVITY_NO_ANIMATION or Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK*/
+        cancelIntent.flags =
+            Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK /*or Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT or Intent.FLAG_ACTIVITY_NO_ANIMATION or Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK*/
         val cn = ComponentName(context, DriverUserLoginAct::class.java)
         cancelIntent.component = cn
         context.startActivity(cancelIntent)
@@ -241,7 +263,8 @@ class DriverCheckStatus(val json: JSONObject, val context: Context) {
         val cancelIntent = Intent()
         cancelIntent.action = Intent.ACTION_MAIN
         cancelIntent.addCategory(Intent.CATEGORY_LAUNCHER)
-        cancelIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK /*or Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT or Intent.FLAG_ACTIVITY_NO_ANIMATION or Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK*/
+        cancelIntent.flags =
+            Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK /*or Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT or Intent.FLAG_ACTIVITY_NO_ANIMATION or Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK*/
         val cn = ComponentName(context, DriverUserLoginAct::class.java)
         cancelIntent.component = cn
         context.startActivity(cancelIntent)

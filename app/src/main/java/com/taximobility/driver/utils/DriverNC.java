@@ -18,12 +18,10 @@ public class DriverNC {
 
     public static HashMap<String, Integer> fields_id = new HashMap<>();
 
-
     static DriverNC NC = null;
 
     static DriverNC getInstance() {
-        if (NC == null)
-            NC = new DriverNC();
+        if (NC == null) NC = new DriverNC();
         return NC;
     }
 
@@ -45,9 +43,6 @@ public class DriverNC {
                 e.printStackTrace();
                 return "";
             }
-        } else
-            return nfields_byID.get(c);
+        } else return nfields_byID.get(c);
     }
-
-
 }

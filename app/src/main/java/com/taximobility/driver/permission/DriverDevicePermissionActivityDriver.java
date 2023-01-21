@@ -3,10 +3,8 @@ package com.taximobility.driver.permission;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.text.Html;
 import android.text.SpannableStringBuilder;
 import android.text.TextPaint;
@@ -16,7 +14,6 @@ import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.TextView;
 
-import com.taximobility.BuildConfig;
 import com.taximobility.R;
 import com.taximobility.driver.MainActivityDriver;
 import com.taximobility.driver.DriverTermsAndConditions;
@@ -29,12 +26,12 @@ import com.taximobility.driver.utils.DriverFontHelper;
 import com.taximobility.driver.utils.DriverNC;
 import com.taximobility.driver.utils.DriverSessionSave;
 import com.taximobility.driver.utils.DriverSystems;
-import com.taximobility.driver.utils.Driver_Utils;
 
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatCheckBox;
 import androidx.appcompat.widget.AppCompatTextView;
@@ -50,17 +47,15 @@ public class DriverDevicePermissionActivityDriver extends MainActivityDriver {
     private static final String ACCESS_FINE_LOCATION_PERMISSION = Manifest.permission.ACCESS_FINE_LOCATION;
     private static final String READ_EXTERNAL_STOARGE_PERMISSSION = Manifest.permission.READ_EXTERNAL_STORAGE;
     private static final String WRITE_EXTERNAL_STOARGE_PERMISSSION = Manifest.permission.WRITE_EXTERNAL_STORAGE;
-//    private static final String READ_CONTACTS = Manifest.permission.READ_CONTACTS;
+    //    private static final String READ_CONTACTS = Manifest.permission.READ_CONTACTS;
     private static final String READ_PHONE_STATE = Manifest.permission.READ_PHONE_STATE;
-  private static final String CALL_PHONE = Manifest.permission.CALL_PHONE;
+    private static final String CALL_PHONE = Manifest.permission.CALL_PHONE;
     private static final int COMMON_REQUEST_CODE = 1000;
     private static final int FROM_RATIONALE = 1;
     private static final int NORMAL = 2;
-
     private ArrayList<String> permissionsList;
     boolean isEnable = true;
     private String location, mandatory;
-
 
     @Override
     public int setLayout() {
@@ -78,20 +73,15 @@ public class DriverDevicePermissionActivityDriver extends MainActivityDriver {
         buttonProceed = findViewById(R.id.buttonProceed);
         storeDataView = findViewById(R.id.storeDataView);
         termsCheckBox = findViewById(R.id.termsCheckBox);
-
         loc_mandatory = findViewById(R.id.loc_mandatory);
         tv_contacts = findViewById(R.id.tv_contacts);
         tv_device_info = findViewById(R.id.tv_device_info);
         tv_call_permission = findViewById(R.id.tv_call_permission);
         tv_storage_gallery = findViewById(R.id.tv_storage_gallery);
-
         DriverFontHelper.applyFont(this, findViewById(R.id.id_privacy_parent_lay));
-
         location = getColoredSpanned(DriverNC.getString(R.string.location), DriverCL.getColor(R.color.black));
         mandatory = getColoredSpanned(DriverNC.getString(R.string.mandatory), DriverCL.getColor(R.color.colorAccent));
-
         loc_mandatory.setText(Html.fromHtml(location.concat(" ").concat(mandatory)));
-
 
 //        loc_mandatory.setTypeface(MyApplication.getInstance().getTypeFace(0));
 //        tv_contacts.setTypeface(MyApplication.getInstance().getTypeFace(0));
@@ -99,12 +89,9 @@ public class DriverDevicePermissionActivityDriver extends MainActivityDriver {
 //        tv_call_permission.setTypeface(MyApplication.getInstance().getTypeFace(0));
 //        tv_storage_gallery.setTypeface(MyApplication.getInstance().getTypeFace(0));
 
-        accessLocationCheckBox.setOnCheckedChangeListener((buttonView, isChecked) ->
-                {
-                    DriverCToast.ShowToast(context, DriverNC.getString(R.string.location_permission_required) + " " + DriverNC.getString(R.string.without_loc));
-                }
+        accessLocationCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> DriverCToast.ShowToast(context, DriverNC.getString(R.string.location_permission_required) + " " + DriverNC.getString(R.string.without_loc))
 
-            );
+        );
 //                        Driver_Utils.alert_view_dialog(DriverDevicePermissionActivityDriver.this, DriverNC.getString(R.string.location_permission_required), DriverNC.getString(R.string.without_loc), DriverNC.getString(R.string.ok), "", true, (dialog, i) -> {
 //
 //                    dialog.dismiss();
@@ -116,10 +103,7 @@ public class DriverDevicePermissionActivityDriver extends MainActivityDriver {
 //                }, "")
 //        );
 
-
-        buttonProceed.setOnClickListener(View ->
-        {
-
+        buttonProceed.setOnClickListener(View -> {
             permissionsList = new ArrayList<>();
 
             if (ContextCompat.checkSelfPermission(DriverDevicePermissionActivityDriver.this, ACCESS_COARSE_LOCATION_PERMISSION) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(DriverDevicePermissionActivityDriver.this, ACCESS_FINE_LOCATION_PERMISSION) != PackageManager.PERMISSION_GRANTED) {
@@ -127,12 +111,10 @@ public class DriverDevicePermissionActivityDriver extends MainActivityDriver {
                 permissionsList.add(ACCESS_FINE_LOCATION_PERMISSION);
                 permissionsList.add(CALL_PHONE);
             }
-
             if (accessStorageCheckBox.isChecked()) {
                 permissionsList.add(READ_EXTERNAL_STOARGE_PERMISSSION);
                 permissionsList.add(WRITE_EXTERNAL_STOARGE_PERMISSSION);
                 permissionsList.add(CALL_PHONE);
-
             }
 /*
             if (accessCallPhoneCheckBox.isChecked())
@@ -141,25 +123,14 @@ public class DriverDevicePermissionActivityDriver extends MainActivityDriver {
             if (readContactsCheckBox.isChecked())
                 permissionsList.add(READ_CONTACTS);*/
 
-            if (readDeviceInformationCheckbox.isChecked())
-                permissionsList.add(READ_PHONE_STATE);
+            if (readDeviceInformationCheckbox.isChecked()) permissionsList.add(READ_PHONE_STATE);
 
-            if (termsCheckBox.isChecked())
-                CheckPermissions(permissionsList);
+            if (termsCheckBox.isChecked()) CheckPermissions(permissionsList);
             else
                 ShowToast(DriverDevicePermissionActivityDriver.this, DriverNC.getString(R.string.agreed_checkbox));
-
-
         });
-
-        storeDataView.setOnClickListener(View ->
-        {
-            startActivity(new Intent(DriverDevicePermissionActivityDriver.this, DriverStoreAndSecureActivityDriver.class));
-        });
-
+        storeDataView.setOnClickListener(View -> startActivity(new Intent(DriverDevicePermissionActivityDriver.this, DriverStoreAndSecureActivityDriver.class)));
         setSpannableTextView(findViewById(R.id.spannable_txt));
-
-
     }
 
     private String getColoredSpanned(String text, int color) {
@@ -169,24 +140,17 @@ public class DriverDevicePermissionActivityDriver extends MainActivityDriver {
 
     private void CheckPermissions(ArrayList<String> permissionsList) {
 
-
         if (Build.VERSION.SDK_INT >= 23) {
             for (int i = 0; i < permissionsList.size(); i++) {
                 if (ContextCompat.checkSelfPermission(DriverDevicePermissionActivityDriver.this, permissionsList.get(i)) != PackageManager.PERMISSION_GRANTED) {
                     isEnable = false;
                     break;
-                } else
-                    isEnable = true;
+                } else isEnable = true;
             }
-        } else
-            isEnable = true;
+        } else isEnable = true;
 
-        if (!isEnable)
-            makeRequest(permissionsList);
-        else
-            moveToLoginScreen();
-
-
+        if (!isEnable) makeRequest(permissionsList);
+        else moveToLoginScreen();
     }
 
     private void makeRequest(ArrayList<String> permissionsList) {
@@ -198,18 +162,13 @@ public class DriverDevicePermissionActivityDriver extends MainActivityDriver {
 
         if (permissionStringList.length > 0)
             ActivityCompat.requestPermissions(DriverDevicePermissionActivityDriver.this, permissionStringList, COMMON_REQUEST_CODE);
-        else
-            moveToLoginScreen();
-
+        else moveToLoginScreen();
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, int[] grantResults) {
         if (requestCode == COMMON_REQUEST_CODE) {
-
-
             if (ContextCompat.checkSelfPermission(DriverDevicePermissionActivityDriver.this, ACCESS_COARSE_LOCATION_PERMISSION) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(DriverDevicePermissionActivityDriver.this, ACCESS_FINE_LOCATION_PERMISSION) != PackageManager.PERMISSION_GRANTED) {
-
                 if (permissionsList != null) {
 
                     if (permissionsList.size() > 0) {
@@ -225,15 +184,10 @@ public class DriverDevicePermissionActivityDriver extends MainActivityDriver {
                             userAlertView(NORMAL);
                         }
                     }
-
                 }
-
-
             } else {
                 moveToLoginScreen();
             }
-
-
         }
     }
 
@@ -244,10 +198,7 @@ public class DriverDevicePermissionActivityDriver extends MainActivityDriver {
         startActivity(i);
     }
 
-
     private void userAlertView(int checkRationaleOrNormal) {
-
-
 //        Driver_Utils.alert_view_dialog(DriverDevicePermissionActivityDriver.this, checkRationaleOrNormal == 2 ? DriverNC.getString(R.string.location_permission_denied) : DriverNC.getString(R.string.location_permission_required), checkRationaleOrNormal == 1 ? DriverNC.getString(R.string.above_permission_settings) : DriverNC.getString(R.string.deny_permission), checkRationaleOrNormal == 2 ? DriverNC.getString(R.string.retry) : DriverNC.getString(R.string.edit_permissions), checkRationaleOrNormal == 2 ? DriverNC.getString(R.string.privacy_exit_app) : DriverNC.getString(R.string.exit_anyway), true, (dialog, i) -> {
 //            if (checkRationaleOrNormal == 2) {
 //                CheckPermissions(permissionsList);
@@ -269,8 +220,7 @@ public class DriverDevicePermissionActivityDriver extends MainActivityDriver {
     }
 
     private void setSpannableTextView(TextView view) {
-        SpannableStringBuilder spanTxt = new SpannableStringBuilder(
-                DriverNC.getString(R.string.by_clicking_proceed) + " ");
+        SpannableStringBuilder spanTxt = new SpannableStringBuilder(DriverNC.getString(R.string.by_clicking_proceed) + " ");
         spanTxt.setSpan(new ForegroundColorSpan(DriverCL.getColor(R.color.quantum_grey500)), spanTxt.length() - DriverNC.getString(R.string.by_clicking_proceed).length() - 1, spanTxt.length(), 0);
         spanTxt.append(DriverNC.getString(R.string.terms_condition2));
         spanTxt.setSpan(new ClickableSpan() {
@@ -287,10 +237,9 @@ public class DriverDevicePermissionActivityDriver extends MainActivityDriver {
                 new ShowWebpage(url, null, "T");
             }
         }, spanTxt.length() - DriverNC.getString(R.string.terms_condition2).length(), spanTxt.length(), 0);
-        spanTxt.append(" " + DriverNC.getString(R.string.and));
+        spanTxt.append(" ").append(DriverNC.getString(R.string.and));
         spanTxt.setSpan(new ForegroundColorSpan(DriverCL.getColor(R.color.quantum_grey500)), spanTxt.length() - DriverNC.getString(R.string.and).length(), spanTxt.length(), 0);
-        spanTxt.append(" " + DriverNC.getString(R.string.privacy_policy));
-
+        spanTxt.append(" ").append(DriverNC.getString(R.string.privacy_policy));
 
         spanTxt.setSpan(new ClickableSpan() {
             @Override
@@ -331,8 +280,7 @@ public class DriverDevicePermissionActivityDriver extends MainActivityDriver {
                     intent.putExtra("content", result);
                     if (type.equals("T"))
                         bundle.putString("name", DriverNC.getString(R.string.terms_condition2));
-                    else
-                        bundle.putString("name", DriverNC.getString(R.string.privacy_policy));
+                    else bundle.putString("name", DriverNC.getString(R.string.privacy_policy));
                     bundle.putBoolean("status", true);
                     intent.putExtras(bundle);
                     startActivity(intent);
@@ -345,5 +293,4 @@ public class DriverDevicePermissionActivityDriver extends MainActivityDriver {
             }
         }
     }
-
 }

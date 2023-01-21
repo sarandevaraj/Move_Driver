@@ -44,6 +44,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Random;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -55,16 +56,10 @@ import retrofit2.Response;
 
 /**
  * Created by developer on 2/11/16.
- */
-
-
-/**
  * This class is used to show driver trip details
  */
 public class DriverTripDetailNewFrag extends Fragment {
-    private TextView details_trip_id, distance, dfare,
-            vdfare, waiting, wcost, vWait, sub, tax, promo, total,
-            wallet, cash, tips, min_fare, min_fare_per, min_total_fare, pay_type;
+    private TextView details_trip_id, distance, dfare, vdfare, waiting, wcost, vWait, sub, tax, promo, total, wallet, cash, tips, min_fare, min_fare_per, min_total_fare, pay_type;
     private String trip_id = " ";
     private ImageView trip_map_view;
     private DriverRoundedImageView driverImg;
@@ -85,16 +80,13 @@ public class DriverTripDetailNewFrag extends Fragment {
     private TextView distance_fare_txt;
     private TextView payment_type_c;
     private RecyclerView rc_addons;
-
     //outstation receipt variables
     private TextView tv_additional_time;
     private TextView tv_additional_distance;
     private LinearLayout layoutNormal, normal_trip_lay, outstation_trip_lay;
     private LinearLayout layoutOutstation;
-
     private TextView baseFare, waitingFare, walletAmount, paidAmount, paymentType;
     private TextView night_val, evefare_val, promotion_val, tax_val, taxLabel, tripcost_val, subtotal_val, nettotal_val, trip_type, additional_dist_lable;
-
     private LinearLayout Nightfare;
     private LinearLayout Eveningfare;
     private int count = 0;
@@ -105,7 +97,6 @@ public class DriverTripDetailNewFrag extends Fragment {
     private LinearLayout addons_lay, order_details;
     private TextView tv_total_addon_fare;
     private TextView v_product_name, v_product_weight, v_product_size, v_name, v_date_time, order_description_details;
-
     private DriverPickupDropView pickUpDropLayout;
     private TextView txt_pickup, txt_drop;
     private boolean isFromFareScreen = false;
@@ -114,8 +105,8 @@ public class DriverTripDetailNewFrag extends Fragment {
     private TextView cancel_fee;
     private LinearLayout cancelFareLay;
     //for outstation and rental
-    private TextView cancelFeeVal,tv_delivery_fare;
-    private LinearLayout cancelFareLayOut, walletLayout, menu_chat_helpline,ll_delivery;
+    private TextView cancelFeeVal, tv_delivery_fare;
+    private LinearLayout cancelFareLayOut, walletLayout, menu_chat_helpline, ll_delivery;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -139,9 +130,7 @@ public class DriverTripDetailNewFrag extends Fragment {
         DirverColorchange.ChangeColor((ViewGroup) v, getActivity());
         ImageView iv = v.findViewById(R.id.giff);
         DrawableImageViewTarget imageViewTarget = new DrawableImageViewTarget(iv);
-        Glide.with(getActivity())
-                .load(R.raw.driver_loading_anim)
-                .into(imageViewTarget);
+        Glide.with(getActivity()).load(R.raw.driver_loading_anim).into(imageViewTarget);
         //    pickUpDropLayout = v.findViewById(R.id.pd_view);
         tv_additional_time = v.findViewById(R.id.additonal_time_fare);
         tv_additional_distance = v.findViewById(R.id.additonal_distance_fare);
@@ -161,7 +150,6 @@ public class DriverTripDetailNewFrag extends Fragment {
         cancelFeeVal = v.findViewById(R.id.cancelFeeVal);
         cancelFareLayOut = v.findViewById(R.id.cancelFareLayOut);
         //    walletLayout = v.findViewById(R.id.walletLayout);
-
         layoutNormal = v.findViewById(R.id.layout_normalreceipt);
         layoutOutstation = v.findViewById(R.id.layout_outstationreceipt);
         baseFare = v.findViewById(R.id.BaseFare);
@@ -184,7 +172,6 @@ public class DriverTripDetailNewFrag extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rc_addons.setLayoutManager(layoutManager);
-
         distance_lay = v.findViewById(R.id.distance_lay);
         miniutes_lay = v.findViewById(R.id.miniutes_lay);
         distance_fare_txt = v.findViewById(R.id.distance_fare_txt);
@@ -229,17 +216,12 @@ public class DriverTripDetailNewFrag extends Fragment {
         View bottomSheet = v.findViewById(R.id.tripdetails_scroll);
         mBottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
         //   payment_type_c = v.findViewById(R.id.payment_type_c);
-
         txt_pickup = v.findViewById(R.id.txt_pickup);
         txt_drop = v.findViewById(R.id.txt_drop);
         trip_total_amount = v.findViewById(R.id.trip_total_amount);
         menu_chat_helpline = v.findViewById(R.id.menu_chat_helpline);
         ll_delivery = v.findViewById(R.id.ll_delivery);
         tv_delivery_fare = v.findViewById(R.id.tv_delivery_fare);
-
-
-
-
 
       /*  driverImg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -252,7 +234,6 @@ public class DriverTripDetailNewFrag extends Fragment {
                     startActivity(i);
                     count = 0;
                 }
-
             }
         });*/
 
@@ -261,7 +242,7 @@ public class DriverTripDetailNewFrag extends Fragment {
             public void onClick(View view) {
                 Intent in = new Intent(requireActivity(), DriverChatWebviewAct.class);
                 in.putExtra("trip_id", trip_id);
-                in.putExtra("type",  "2");
+                in.putExtra("type", "2");
                 startActivity(in);
             }
         });
@@ -273,8 +254,7 @@ public class DriverTripDetailNewFrag extends Fragment {
                 mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
             });
             showFare(tripDetailResponse);
-        } else
-            callDetail();
+        } else callDetail();
 
         trip_map_view.setOnClickListener(v1 -> {
             Intent intent = new Intent(getActivity(), DriverMapZoomAct.class);
@@ -284,26 +264,15 @@ public class DriverTripDetailNewFrag extends Fragment {
         return v;
     }
 
-
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-
-
-        try {
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
     }
-
 
     /**
      * TripDetail method API call and response parsing.
@@ -316,7 +285,7 @@ public class DriverTripDetailNewFrag extends Fragment {
         Call<DriverTripDetailResponse> LoginResponse = client.callData(DriverServiceGenerator.COMPANY_KEY, request, DriverSessionSave.getSession("Lang", getActivity()));
         LoginResponse.enqueue(new DriverRetrofitCallbackClass<>(getActivity(), new Callback<DriverTripDetailResponse>() {
             @Override
-            public void onResponse(Call<DriverTripDetailResponse> call, Response<DriverTripDetailResponse> response) {
+            public void onResponse(@NonNull Call<DriverTripDetailResponse> call, @NonNull Response<DriverTripDetailResponse> response) {
                 loading.setVisibility(View.GONE);
                 if (getView() != null && response.isSuccessful()) {
                     DriverTripDetailResponse data = response.body();
@@ -330,23 +299,17 @@ public class DriverTripDetailNewFrag extends Fragment {
                                 layoutOutstation.setVisibility(View.VISIBLE);
                                 Nightfare.setVisibility(View.GONE);
                                 Eveningfare.setVisibility(View.GONE);
-
                                 base_fare_lay.setVisibility(View.GONE);
-
                                 if (data.detail.trip_type.equals("3"))
                                     trip_type.setText(DriverNC.getString(R.string.trip_type_outstation));//+ " Trip"
                                 else if (data.detail.trip_type.equals("2"))
                                     trip_type.setText(DriverNC.getString(R.string.trip_type_rental));//+ " Trip"
-
                                 additional_dist_lable.setText(DriverNC.getString(R.string.additonal_distance_fare) + " " + data.detail.metric.toLowerCase());
-
                                 tv_additional_distance.setText(DriverSessionSave.getSession("site_currency", getActivity()) + "" + data.detail.additional_distance_fare);
                                 tv_additional_time.setText(DriverSessionSave.getSession("site_currency", getActivity()) + "" + data.detail.additional_time_fare);
                                 baseFare.setText(DriverSessionSave.getSession("site_currency", getActivity()) + "" + String.format(Locale.UK, "%.2f", Float.valueOf(data.detail.base_fare)));
-
                                 subtotal_val.setText(DriverSessionSave.getSession("site_currency", getActivity()) + "" + String.format(Locale.UK, "%.2f", Float.parseFloat(data.detail.additional_distance_fare) + Float.valueOf(data.detail.additional_time_fare) + Float.parseFloat(data.detail.base_fare)));
                                 promotion_val.setText("- " + DriverSessionSave.getSession("site_currency", getActivity()) + "" + String.format(Locale.UK, "%.2f", Float.valueOf(data.detail.promotion)));
-
                                 float subTotal = Float.parseFloat(data.detail.additional_distance_fare) + Float.parseFloat(data.detail.additional_time_fare) + Float.parseFloat(data.detail.base_fare);
                                 float withoutPromo = Float.parseFloat(data.detail.promotion);
                                 tripcost_val.setText(DriverSessionSave.getSession("site_currency", getActivity()) + "" + String.format(Locale.UK, "%.2f", (subTotal - withoutPromo)));
@@ -354,38 +317,29 @@ public class DriverTripDetailNewFrag extends Fragment {
                                 taxLabel.setText(DriverNC.getString(R.string.Tax) + " (" + data.detail.tax_percentage + "%)");
                                 nettotal_val.setText(DriverSessionSave.getSession("site_currency", getActivity()) + "" + String.format(Locale.UK, "%.2f", ((subTotal - withoutPromo)) + (Float.parseFloat(data.detail.tax_fare))));
                                 walletAmount.setText("- " + DriverSessionSave.getSession("site_currency", getActivity()) + "" + String.format(Locale.UK, "%.2f", Float.valueOf(data.detail.used_wallet_amount)));
-
                                 paidAmount.setText(DriverSessionSave.getSession("site_currency", getActivity()) + "" + String.format(Locale.UK, "%.2f", (Float.valueOf(data.detail.paid_amount))));
                                 paymentType.setText(data.detail.payment_type_label);
-
                                 details_trip_id.setText(DriverNC.getString(R.string.trip_id) + ": " + data.detail.trip_id);
                                 user.setText(data.detail.driver_name);
                                 fares.setText(DriverSessionSave.getSession("site_currency", getActivity()) + data.detail.paid_amount);
                                 //   Picasso.get().load(data.detail.driver_image).resize(100, 100).into(driverImg);
-
                                 if (data.detail.driver_image != null && data.detail.driver_image.length() > 0) {
                                     Picasso.get().load(data.detail.driver_image).placeholder(getResources().getDrawable(R.drawable.driver_loadingimage)).error(getResources().getDrawable(R.drawable.driver_noimage)).into(driverImg);
                                 } else {
-                                    if (data.detail.driver_name != "") {
-                                        ProfileImageSetupClass.setupProfileImage(
-                                                data.detail.driver_name, driverImg
-                                        );
+                                    if (!data.detail.driver_name.equals("")) {
+                                        ProfileImageSetupClass.setupProfileImage(data.detail.driver_name, driverImg);
                                     } else {
                                         Picasso.get().load(R.drawable.loadingimage).into(driverImg);
                                     }
                                 }
                                 Picasso.get().load(data.detail.map_image).into(trip_map_view);
                                 mapImageUri = data.detail.map_image;
-
                                 createPickAndStopView(data.detail.current_location, data.detail.pickup_latitude, data.detail.pickup_longitude, data.detail.drop_location, data.detail.drop_latitude, data.detail.drop_longitude);
-
                                 if (data.detail.pending_cancel_amount != null && (Float.parseFloat(data.detail.pending_cancel_amount) > 0.0)) {
                                     cancelFeeVal.setText(DriverSessionSave.getSession("site_currency", getActivity()) + (data.detail.pending_cancel_amount));
                                 } else {
                                     cancelFareLayOut.setVisibility(View.GONE);
                                 }
-
-
                                 int driver_rating = (int) Float.parseFloat(data.detail.rating);
                                 if (driver_rating == 0)
                                     driverRat.setImageResource(R.drawable.driver_star6);
@@ -399,12 +353,9 @@ public class DriverTripDetailNewFrag extends Fragment {
                                     driverRat.setImageResource(R.drawable.driver_star4);
                                 else if (driver_rating == 5)
                                     driverRat.setImageResource(R.drawable.driver_star5);
-
                             } else {
                                 showFare(data);
-
                             }
-
                             if (data.detail.payment_type != null && data.detail.payment_type.equals("5")) {
                                 //  walletLayout.setVisibility(View.VISIBLE);
                             } else {
@@ -422,7 +373,7 @@ public class DriverTripDetailNewFrag extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<DriverTripDetailResponse> call, Throwable t) {
+            public void onFailure(@NonNull Call<DriverTripDetailResponse> call, @NonNull Throwable t) {
                 t.printStackTrace();
                 loading.setVisibility(View.GONE);
                 Toast.makeText(getActivity(), DriverNC.getString(R.string.server_error), Toast.LENGTH_LONG).show();
@@ -432,15 +383,19 @@ public class DriverTripDetailNewFrag extends Fragment {
 
     private void showFare(DriverTripDetailResponse data) {
 
-
-        if (data.detail.payment_type == "1") {
-            paid_type_txt.setText("Cash");
-        } else if (data.detail.payment_type == "2") {
-            paid_type_txt.setText("card");
-        } else if (data.detail.payment_type == "3") {
-            paid_type_txt.setText("New Card");
-        } else if (data.detail.payment_type == "5") {
-            paid_type_txt.setText("Wallet");
+        switch (data.detail.payment_type) {
+            case "1":
+                paid_type_txt.setText("Cash");
+                break;
+            case "2":
+                paid_type_txt.setText("card");
+                break;
+            case "3":
+                paid_type_txt.setText("New Card");
+                break;
+            case "5":
+                paid_type_txt.setText("Wallet");
+                break;
         }
 
         txt_pickup.setText(data.detail.current_location);
@@ -455,10 +410,8 @@ public class DriverTripDetailNewFrag extends Fragment {
 //        txt_drop.setMarqueeRepeatLimit(-1);
 //        txt_drop.setSelected(true);
 
-        ((DriverTripHistoryAct) getActivity()).setTitle("Trip Details #"+data.detail.trip_id);
-        getActivity().getWindow().setSoftInputMode(
-                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-
+        ((DriverTripHistoryAct) getActivity()).setTitle("Trip Details #" + data.detail.trip_id);
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         loading.setVisibility(View.GONE);
         normal_trip_lay.setVisibility(View.VISIBLE);
@@ -476,10 +429,8 @@ public class DriverTripDetailNewFrag extends Fragment {
         if (data.detail.passenger_image != null && data.detail.passenger_image.length() > 0) {
             Picasso.get().load(data.detail.passenger_image).placeholder(getResources().getDrawable(R.drawable.driver_loadingimage)).error(getResources().getDrawable(R.drawable.driver_noimage)).into(driverImg);
         } else {
-            if (data.detail.passenger_name != "") {
-                ProfileImageSetupClass.setupProfileImage(
-                        data.detail.passenger_name, driverImg
-                );
+            if (!data.detail.passenger_name.equals("")) {
+                ProfileImageSetupClass.setupProfileImage(data.detail.passenger_name, driverImg);
             } else {
                 Picasso.get().load(R.drawable.loadingimage).into(driverImg);
             }
@@ -498,7 +449,6 @@ public class DriverTripDetailNewFrag extends Fragment {
         min_fare_per.setText(DriverSessionSave.getSession("site_currency", getActivity()) + " " + data.detail.fare_per_minute);
         min_total_fare.setText(DriverSessionSave.getSession("site_currency", getActivity()) + " " + (data.detail.minutes_fare));
         waiting.setText(String.valueOf(data.detail.waiting_time));
-
 
         if (data.detail.payment_type_label != null) {
             //   payment_type_c.setText(data.detail.payment_type_label);
@@ -532,13 +482,10 @@ public class DriverTripDetailNewFrag extends Fragment {
             order_details.setVisibility(View.GONE);
         }
 
-
         if (data.detail.delivery_fare != null && !TextUtils.isEmpty(data.detail.delivery_fare) && Double.parseDouble(data.detail.delivery_fare) > 0.0) {
             tv_delivery_fare.setText(SessionSave.getSession("site_currency", getActivity()) + (data.detail.delivery_fare));
             ll_delivery.setVisibility(View.VISIBLE);
-        } else
-            ll_delivery.setVisibility(View.GONE);
-
+        } else ll_delivery.setVisibility(View.GONE);
 
         v_product_name.setText(data.detail.product_name);
         v_product_weight.setText(data.detail.product_weight);
@@ -546,13 +493,11 @@ public class DriverTripDetailNewFrag extends Fragment {
         v_name.setText(data.detail.delivery_person_name);
         v_date_time.setText(data.detail.delivery_date_time);
         order_description_details.setText(data.detail.delivery_notes);
-
         wcost.setText(DriverSessionSave.getSession("site_currency", getActivity()) + " " + data.detail.waiting_fare_minutes);
         vWait.setText(DriverSessionSave.getSession("site_currency", getActivity()) + " " + (data.detail.waiting_fare));
         sub.setText(DriverSessionSave.getSession("site_currency", getActivity()) + " " + (data.detail.subtotal));
         tax.setText(DriverSessionSave.getSession("site_currency", getActivity()) + " " + (data.detail.tax_fare));
         tax_label.setText(DriverNC.getString(R.string.Tax) + " (" + data.detail.tax_percentage + "%)");
-
         promo.setText("- " + DriverSessionSave.getSession("site_currency", getActivity()) + " " + (data.detail.promocode_fare));
         total.setText(DriverSessionSave.getSession("site_currency", getActivity()) + " " + (data.detail.amt));
         trip_total_amount.setText(DriverSessionSave.getSession("site_currency", getActivity()) + " " + (data.detail.amt));
@@ -560,8 +505,7 @@ public class DriverTripDetailNewFrag extends Fragment {
 
         if (data.detail.actual_paid_amount != null)
             cash.setText(DriverSessionSave.getSession("site_currency", getActivity()) + " " + (data.detail.actual_paid_amount));
-        else
-            cash.setVisibility(View.GONE);
+        else cash.setVisibility(View.GONE);
 
         if (data.detail.given_tips != null)
             tips.setText(DriverSessionSave.getSession("site_currency", getActivity()) + " " + (data.detail.given_tips));
@@ -599,8 +543,7 @@ public class DriverTripDetailNewFrag extends Fragment {
                 if (Double.parseDouble(data.detail.nightfare) <= 0.0 && Double.parseDouble(data.detail.eveningfare) <= 0.0) {
                     eve_night_sep.setVisibility(View.GONE);
                 }
-            } else
-                eve_night_sep.setVisibility(View.GONE);
+            } else eve_night_sep.setVisibility(View.GONE);
 
         } else {
             eve_night_sep.setVisibility(View.GONE);
@@ -609,8 +552,7 @@ public class DriverTripDetailNewFrag extends Fragment {
 
         if (data.detail.eveningfare != null && !data.detail.eveningfare.isEmpty() && Double.parseDouble(data.detail.eveningfare) > 0.0) {
             evening_lay.setVisibility(View.VISIBLE);
-        } else
-            evening_lay.setVisibility(View.GONE);
+        } else evening_lay.setVisibility(View.GONE);
 
         if (data.detail.promocode_fare != null && !data.detail.promocode_fare.isEmpty() && !data.detail.promocode_fare.equals("0") && !data.detail.promocode_fare.equals("0.00")) {
             promo_lay.setVisibility(View.VISIBLE);
@@ -623,10 +565,8 @@ public class DriverTripDetailNewFrag extends Fragment {
         else if (!isFromFareScreen)
             createPickAndStopView(data.detail.current_location, data.detail.pickup_latitude, data.detail.pickup_longitude, data.detail.drop_location, data.detail.drop_latitude, data.detail.drop_longitude);
 */
-
         if (data.detail.payment_type != null) {
-            if (data.detail.payment_type.equals("1"))
-                cash.setVisibility(View.VISIBLE);
+            if (data.detail.payment_type.equals("1")) cash.setVisibility(View.VISIBLE);
                 //     pay_type.setCompoundDrawablesWithIntrinsicBounds(R.drawable.driver_cash, 0, 0, 0);
             else if (data.detail.payment_type.equals("5")) {
                 //   pay_type.setCompoundDrawablesWithIntrinsicBounds(R.drawable.driver_cash, 0, 0, 0);
@@ -634,9 +574,7 @@ public class DriverTripDetailNewFrag extends Fragment {
                 cash.setVisibility(View.GONE);
             } else
                 pay_type.setCompoundDrawablesWithIntrinsicBounds(R.drawable.driver_credit_card, 0, 0, 0);
-        } else if (isFromFareScreen)
-            paymentByLayout.setVisibility(View.GONE);
-
+        } else if (isFromFareScreen) paymentByLayout.setVisibility(View.GONE);
 
         if (data.detail.corporate_booking != null && data.detail.corporate_booking.equalsIgnoreCase("1") && !isFromFareScreen) {
             paymentByLayout.setVisibility(View.VISIBLE);
@@ -645,37 +583,21 @@ public class DriverTripDetailNewFrag extends Fragment {
             pay_type.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
         }
 
-
         if (data.detail.rating != null) {
             int driver_rating = (int) Float.parseFloat(data.detail.rating);
-            if (driver_rating == 0)
-                driverRat.setImageResource(R.drawable.driver_star6);
-            else if (driver_rating == 1)
-                driverRat.setImageResource(R.drawable.driver_star1);
-            else if (driver_rating == 2)
-                driverRat.setImageResource(R.drawable.driver_star2);
-            else if (driver_rating == 3)
-                driverRat.setImageResource(R.drawable.driver_star3);
-            else if (driver_rating == 4)
-                driverRat.setImageResource(R.drawable.driver_star4);
-            else if (driver_rating == 5)
-                driverRat.setImageResource(R.drawable.driver_star5);
-        } else
-            driverRat.setVisibility(View.GONE);
-
+            if (driver_rating == 0) driverRat.setImageResource(R.drawable.driver_star6);
+            else if (driver_rating == 1) driverRat.setImageResource(R.drawable.driver_star1);
+            else if (driver_rating == 2) driverRat.setImageResource(R.drawable.driver_star2);
+            else if (driver_rating == 3) driverRat.setImageResource(R.drawable.driver_star3);
+            else if (driver_rating == 4) driverRat.setImageResource(R.drawable.driver_star4);
+            else if (driver_rating == 5) driverRat.setImageResource(R.drawable.driver_star5);
+        } else driverRat.setVisibility(View.GONE);
     }
 
     /**
      * Method to create views dynamically if ArrayList<StopData> value not available (ie., Normal flow)
      * <p>
      * New ArrayList of StopData values created with pickup and drop(if available) and dynamic views created based on that ArrayList
-     *
-     * @param pickup_location
-     * @param pickup_latitude
-     * @param pickup_longitude
-     * @param drop_location
-     * @param drop_latitude
-     * @param drop_longitude
      */
     private void createPickAndStopView(String pickup_location, String pickup_latitude, String pickup_longitude, String drop_location, String drop_latitude, String drop_longitude) {
         ArrayList<DriverStopData> pickUpDropList = new ArrayList<>();

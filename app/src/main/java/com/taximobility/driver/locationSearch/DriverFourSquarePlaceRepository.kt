@@ -16,7 +16,8 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
 
-class DriverFourSquarePlaceRepository(val mContext: Context, val listener: DriverPlaceSearchList) : DriverOnLocationSearched {
+class DriverFourSquarePlaceRepository(val mContext: Context, val listener: DriverPlaceSearchList) :
+    DriverOnLocationSearched {
     private var exploreAsyncTask: ExploreAsyncTask? = null
 
     private var city: String = ""
@@ -34,10 +35,9 @@ class DriverFourSquarePlaceRepository(val mContext: Context, val listener: Drive
     override fun onItemClicked(driverPlacesDetail: DriverPlacesDetail) {
 
         listener.setPlaceDetail(DriverPlacesDetail().apply {
-            location_name = if (driverPlacesDetail.getPlaceType() == 1)
-                driverPlacesDetail.getLocation_name()
-            else
-                "${driverPlacesDetail.getLabel_name()}, ${driverPlacesDetail.getLocation_name()}"
+            location_name =
+                if (driverPlacesDetail.getPlaceType() == 1) driverPlacesDetail.getLocation_name()
+                else "${driverPlacesDetail.getLabel_name()}, ${driverPlacesDetail.getLocation_name()}"
             label_name = driverPlacesDetail.getLabel_name()
             latitude = driverPlacesDetail.getLatitude()
             longtitute = driverPlacesDetail.getLongtitute()
@@ -50,8 +50,15 @@ class DriverFourSquarePlaceRepository(val mContext: Context, val listener: Drive
         override fun doInBackground(vararg params: String) {
             val client = AppController.getInstance().apiManagerWithoutEncryptBaseUrl_driver
             val url = "https://api.foursquare.com/v2/" + "venues/suggestcompletion"
-            val coreResponse = client.requestExplore(url, DriverCommonData.getCurrentTimeForFourSquare(),
-                    DriverSessionSave.getSession(DriverCommonData.SOS_LAST_LAT, mContext) + "," + DriverSessionSave.getSession(DriverCommonData.SOS_LAST_LNG, mContext), params[0], DriverSessionSave.getSession("android_foursquare_api_key", mContext))
+            val coreResponse = client.requestExplore(
+                url,
+                DriverCommonData.getCurrentTimeForFourSquare(),
+                DriverSessionSave.getSession(
+                    DriverCommonData.SOS_LAST_LAT, mContext
+                ) + "," + DriverSessionSave.getSession(DriverCommonData.SOS_LAST_LNG, mContext),
+                params[0],
+                DriverSessionSave.getSession("android_foursquare_api_key", mContext)
+            )
             coreResponse.enqueue(DriverRetrofitCallbackClass(mContext, object : Callback<Any> {
                 override fun onResponse(call: Call<Any>, response: Response<Any>) {
                     val resultList = ArrayList<DriverPlacesDetail>()
@@ -60,7 +67,8 @@ class DriverFourSquarePlaceRepository(val mContext: Context, val listener: Drive
                         if (responseResult != null) {
                             val jsonResponse = JSONObject(responseResult)
                             if (jsonResponse.getJSONObject("meta").getInt("code") == 200) {
-                                val miniVenues = jsonResponse.getJSONObject("response").getJSONArray("minivenues")
+                                val miniVenues = jsonResponse.getJSONObject("response")
+                                    .getJSONArray("minivenues")
                                 for (i in 0 until miniVenues.length()) {
                                     val placeObject = miniVenues.getJSONObject(i)
                                     val placesDetail = DriverPlacesDetail()
@@ -82,15 +90,20 @@ class DriverFourSquarePlaceRepository(val mContext: Context, val listener: Drive
                                     placesDetail.setLabel_name(placeName)
                                     placesDetail.setPlaceId(placeObject.getString("id") ?: "")
                                     placesDetail.setPlaceType(0)
-                                    placesDetail.setLatitude(locationObject.getString("lat").toDouble())
-                                    placesDetail.setLongtitute(locationObject.getString("lng").toDouble())
+                                    placesDetail.setLatitude(
+                                        locationObject.getString("lat").toDouble()
+                                    )
+                                    placesDetail.setLongtitute(
+                                        locationObject.getString("lng").toDouble()
+                                    )
                                     resultList.add(placesDetail)
                                 }
                             }
                         }
-                    } else
-                        DriverCToast.ShowToast(mContext, DriverNC.getString(R.string.server_error))
-
+                    } else DriverCToast.ShowToast(
+                        mContext,
+                        DriverNC.getString(R.string.server_error)
+                    )
                     listener.setPlaceList(resultList)
                 }
 
@@ -101,6 +114,5 @@ class DriverFourSquarePlaceRepository(val mContext: Context, val listener: Drive
                 }
             }))
         }
-
     }
 }

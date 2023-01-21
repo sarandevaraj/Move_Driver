@@ -1,6 +1,5 @@
 package com.taximobility.driver.locationSearch;
 
-
 import android.os.Parcel;
 import android.os.Parcelable;
 

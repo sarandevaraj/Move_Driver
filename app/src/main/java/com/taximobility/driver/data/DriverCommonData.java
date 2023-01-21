@@ -52,7 +52,7 @@ public class DriverCommonData {
     public static final String MAP_BOX_TOKEN = "MAP_BOX_TOKEN";
     public static final String GOOGLE_KEY = "android_web_key";
     public static final String LOCAL_STORAGE = "local_storage";
-    public static  String NODE_URL = "node_url";
+    public static String NODE_URL = "node_url";
     public static final String DRIVER_NODE_URL = "driver_node_url";
     public static final String RUN_GO_LANG = "is_dlh_golang";
     public static final String NODE_DOMAIN = "node_domain";
@@ -73,7 +73,7 @@ public class DriverCommonData {
     public static final String WAITING_TIME_STOP = "STOP";
     public static final String FINAL_WAITING_TIME = "finalTime";
 
-    public static String mDevice_id =  "";
+    public static String mDevice_id = "";
     public static String mDevice_id_constant = "123456";
     public static double last_getlatitude = 0.0;
     public static double last_getlongitude = 0.0;
@@ -104,10 +104,8 @@ public class DriverCommonData {
      * @param context The {@link Context}.
      */
     public static boolean serviceIsRunningInForeground(Context context) {
-        ActivityManager manager = (ActivityManager) context.getSystemService(
-                Context.ACTIVITY_SERVICE);
-        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(
-                Integer.MAX_VALUE)) {
+        ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
             if (LocationUpdate.class.getName().equals(service.service.getClassName())) {
                 if (service.foreground) {
                     return true;

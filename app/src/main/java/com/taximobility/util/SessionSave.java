@@ -132,13 +132,11 @@ public class SessionSave {
 
     }
 
-
     public static boolean saveArray(String message, Context con) {
         SharedPreferences sp = con.getSharedPreferences("KEYARRAY", Context.MODE_PRIVATE);
         SharedPreferences.Editor mEdit1 = sp.edit();
         /* sKey is an array */
         mEdit1.putString("Status_size", message);
-
         return mEdit1.commit();
     }
 
@@ -147,15 +145,11 @@ public class SessionSave {
         SharedPreferences mSharedPreference1 = con.getSharedPreferences("KEYARRAY", Context.MODE_PRIVATE);
         sKey.clear();
         int size = mSharedPreference1.getInt("Status_size", 0);
-
         for (int i = 0; i < size; i++) {
             sKey.add(mSharedPreference1.getString("Status_" + i, null));
         }
-
         return sKey;
-
     }
-
 
     public static void ClearSessionOneTime(Context context) {
         SharedPreferences prefs = context.getSharedPreferences("KEY_ONE_TIME", Activity.MODE_PRIVATE);
@@ -188,12 +182,9 @@ public class SessionSave {
             } else {
                 SessionSave.saveSession(PASS_API, "", context);
             }
-
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
     }
 
     public static JSONArray getAPI(Context context) {
@@ -202,8 +193,6 @@ public class SessionSave {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
         return new JSONArray();
-
     }
 }

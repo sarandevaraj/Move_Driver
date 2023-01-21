@@ -34,6 +34,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -66,7 +67,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.mayan.sospluginmodlue.service.SOSService;
-import com.taximobility.interfaces.AlertListener;
+import com.taximobility.driver.interfaces.AlertListener;
 import com.taximobility.util.SessionSave;
 import com.squareup.picasso.Picasso;
 import com.taximobility.BuildConfig;
@@ -128,9 +129,6 @@ import static com.taximobility.driver.service.LocationUpdate.slabAccuracy;
 
 /**
  * Created by developer on 10/11/16.
- */
-
-/**
  * This class is used to show StreetPickUp Page from menu and allow to start trip by driver itself
  */
 public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverClickInterface, OnMapReadyCallback, DriverStreetPickupInterface, DriverLocalDistanceInterface, GoogleMap.OnCameraMoveStartedListener, DriverGetAddress {
@@ -139,9 +137,9 @@ public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverC
     private static final int MY_PERMISSIONS_REQUEST_GPS = 222;
     public static int z = 1;
     public static int retrycount = 1;
-    private static int UPDATE_INTERVAL = 5000; // 10 sec
-    private static int FATEST_INTERVAL = 1000; // 5 sec
-    private static int DISPLACEMENT = 1; // 10 meters
+    private static final int UPDATE_INTERVAL = 5000; // 10 sec
+    private static final int FATEST_INTERVAL = 1000; // 5 sec
+    private static final int DISPLACEMENT = 1; // 10 meters
     private static String LocationRequestedBy = "";
     private static DriverPickupupdate sendPickupPoints;
     private final int LOCATION_REQUEST_TYPE_RETRY = 1;
@@ -186,8 +184,7 @@ public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverC
     private Runnable callAddress;
     private DriverGetAddressFromLatLng address;
     private ViewGroup searchlay;
-    private FrameLayout
-            pickup_pinlay;
+    private FrameLayout pickup_pinlay;
     private ImageView drop_pin, pickup_pin, pick_fav, drop_close;
     private LinearLayout pickupp, dropppp, drop_fav, drop_lay_n;
     private TextView currentlocTxt, droplocEdt;
@@ -274,7 +271,7 @@ public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverC
     private Double droplng = 0.0;
     private Dialog r_mDialog;
     private DriverNetworkStatus networkStatus;
-    private float tilt_value = 70f;
+    private final float tilt_value = 70f;
     private View pickup_drop_Sep, view_line_trip;
     private boolean startClicked;
     private ImageView initial_drop_pin;
@@ -324,35 +321,33 @@ public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverC
         btn_emergency_contact.setVisibility(View.GONE);
 //        btn_emergency.setVisibility(View.VISIBLE);
 
-        btn_emergency_contact.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Utility.actionSheet(DriverStreetPickUpAct.this, DriverNC.getResources().getString(R.string.send_emergency_alert), DriverNC.getResources().getString(R.string.yes), DriverNC.getResources().getString(R.string.no), false, new AlertListener() {
-                    @Override
-                    public void onSuccess() {
-                        startSOSService();
-                    }
-                    @Override
-                    public void onFailure() {
-
-                    }
-                });
-                /*
-                final View view1 = View.inflate(DriverStreetPickUpAct.this, R.layout.driver_emergency_alert, null);
-                Dialog emergency_dialog = new Dialog(DriverStreetPickUpAct.this, R.style.dialogwinddow);
-                emergency_dialog.setContentView(view1);
-                emergency_dialog.setCancelable(true);
-                emergency_dialog.show();
-                final Button button_success = emergency_dialog.findViewById(R.id.button_success);
-                final Button button_failure = emergency_dialog.findViewById(R.id.button_failure);
-                button_success.setOnClickListener(view22 -> {
-                    emergency_dialog.dismiss();
+        btn_emergency_contact.setOnClickListener(view -> {
+            Utility.actionSheet(DriverStreetPickUpAct.this, DriverNC.getResources().getString(R.string.send_emergency_alert), DriverNC.getResources().getString(R.string.yes), DriverNC.getResources().getString(R.string.no), false, new AlertListener() {
+                @Override
+                public void onSuccess() {
                     startSOSService();
-                });
-                button_failure.setOnClickListener(view2 -> emergency_dialog.dismiss());
+                }
 
-                 */
-            }
+                @Override
+                public void onFailure() {
+
+                }
+            });
+            /*
+            final View view1 = View.inflate(DriverStreetPickUpAct.this, R.layout.driver_emergency_alert, null);
+            Dialog emergency_dialog = new Dialog(DriverStreetPickUpAct.this, R.style.dialogwinddow);
+            emergency_dialog.setContentView(view1);
+            emergency_dialog.setCancelable(true);
+            emergency_dialog.show();
+            final Button button_success = emergency_dialog.findViewById(R.id.button_success);
+            final Button button_failure = emergency_dialog.findViewById(R.id.button_failure);
+            button_success.setOnClickListener(view22 -> {
+                emergency_dialog.dismiss();
+                startSOSService();
+            });
+            button_failure.setOnClickListener(view2 -> emergency_dialog.dismiss());
+
+             */
         });
         btn_emergency.setOnClickListener(view -> btn_emergency_contact.performClick());
 
@@ -366,8 +361,7 @@ public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverC
 
         if (DriverSessionSave.getSession("Metric", DriverStreetPickUpAct.this).trim().equalsIgnoreCase("miles"))
             METRIC = "miles";
-        else
-            METRIC = "km";
+        else METRIC = "km";
 /*
         DirverColorchange.ChangeColor((ViewGroup) (((ViewGroup) DriverStreetPickUpAct.this
                 .findViewById(android.R.id.content)).getChildAt(0)), DriverStreetPickUpAct.this);*/
@@ -404,12 +398,9 @@ public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverC
         no_taxi_view = findViewById(R.id.no_taxi_view);
         no_taxi_assign = findViewById(R.id.no_taxi_assigned);
 
-        slideImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(DriverStreetPickUpAct.this, DriverMyStatus.class);
-                startActivity(intent);
-            }
+        slideImg.setOnClickListener(v -> {
+            Intent intent = new Intent(DriverStreetPickUpAct.this, DriverMyStatus.class);
+            startActivity(intent);
         });
 
         lay_pick_fav.setVisibility(View.VISIBLE);
@@ -463,9 +454,7 @@ public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverC
 
         ImageView iv = findViewById(R.id.nodataTxt);
         DrawableImageViewTarget imageViewTarget = new DrawableImageViewTarget(iv);
-        Glide.with(DriverStreetPickUpAct.this)
-                .load(R.raw.driver_loading_anim)
-                .into(imageViewTarget);
+        Glide.with(DriverStreetPickUpAct.this).load(R.raw.driver_loading_anim).into(imageViewTarget);
 
         //Glide.with(this).load(DriverSessionSave.getSession("image_path", this) + "streetPickupFocus.png").apply(RequestOptions.placeholderOf(R.drawable.driver_st_pickup_focus).error(R.drawable.driver_st_pickup_focus)).into((ImageView) findViewById(R.id.streetpick_iv));
 
@@ -488,68 +477,51 @@ public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverC
         ll_bottom.setVisibility(View.GONE);
 
 
-        btn_shift.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        btn_shift.setOnClickListener(v -> {
 
-                btn_shift.setClickable(false);
-                new RequestingCheckBox();
-            }
+            btn_shift.setClickable(false);
+            new RequestingCheckBox();
         });
-        botton_navi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (map != null && mLastLocation != null) {
-                    map.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude()), zoom));
-                    if (isTripStarted)
-                        botton_layout.setVisibility(View.VISIBLE);
-                    botton_navi.setVisibility(View.GONE);
-                    DriverStreetMapWrapperLayout.setmMapIsTouched(true);
-                }
-
+        botton_navi.setOnClickListener(view -> {
+            if (map != null && mLastLocation != null) {
+                map.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude()), zoom));
+                if (isTripStarted) botton_layout.setVisibility(View.VISIBLE);
+                botton_navi.setVisibility(View.GONE);
+                DriverStreetMapWrapperLayout.setmMapIsTouched(true);
             }
+
         });
 
-        slider_img.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (fare_details_lay.getVisibility() == View.VISIBLE) {
-                    fare_details_lay.setVisibility(View.GONE);
-                    fare_details_txt.setVisibility(View.GONE);
-                    fare_details_view.setVisibility(View.GONE);
-                    butt_start_end.setVisibility(View.GONE);
-                } else {
-                    fare_details_lay.setVisibility(View.VISIBLE);
-                    fare_details_txt.setVisibility(View.VISIBLE);
-                    fare_details_view.setVisibility(View.VISIBLE);
-                    butt_start_end.setVisibility(View.VISIBLE);
-                }
-
-            }
-        });
-
-        tripinprogress_lay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        slider_img.setOnClickListener(view -> {
+            if (fare_details_lay.getVisibility() == View.VISIBLE) {
+                fare_details_lay.setVisibility(View.GONE);
+                fare_details_txt.setVisibility(View.GONE);
+                fare_details_view.setVisibility(View.GONE);
+                butt_start_end.setVisibility(View.GONE);
+            } else {
                 fare_details_lay.setVisibility(View.VISIBLE);
                 fare_details_txt.setVisibility(View.VISIBLE);
                 fare_details_view.setVisibility(View.VISIBLE);
                 butt_start_end.setVisibility(View.VISIBLE);
             }
+
         });
-        fab_initial_currentloc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (map != null && mLastLocation != null) {
-                    map.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude()), zoom));
-                    fab_initial_currentloc.setVisibility(View.GONE);
-                    DriverStreetMapWrapperLayout.setmMapIsTouched(true);
-                }
+
+        tripinprogress_lay.setOnClickListener(view -> {
+            fare_details_lay.setVisibility(View.VISIBLE);
+            fare_details_txt.setVisibility(View.VISIBLE);
+            fare_details_view.setVisibility(View.VISIBLE);
+            butt_start_end.setVisibility(View.VISIBLE);
+        });
+        fab_initial_currentloc.setOnClickListener(v -> {
+            if (map != null && mLastLocation != null) {
+                map.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude()), zoom));
+                fab_initial_currentloc.setVisibility(View.GONE);
+                DriverStreetMapWrapperLayout.setmMapIsTouched(true);
             }
         });
 
-        LocalBroadcastManager.getInstance(DriverStreetPickUpAct.this).registerReceiver(listener,
-                new IntentFilter(LocationUpdate.WAITING_TIME));
+        LocalBroadcastManager.getInstance(DriverStreetPickUpAct.this).registerReceiver(listener, new IntentFilter(LocationUpdate.WAITING_TIME));
         if (DriverSessionSave.getSession(DriverCommonData.WAITING_TIME_MANUAL, DriverStreetPickUpAct.this, false)) {
             ssWaitingTime_img.setVisibility(View.VISIBLE);
         } else {
@@ -578,55 +550,49 @@ public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverC
         }
 
         DriverSystems.out.println("sTimer StreetPickup" + sTimer + "____" + DriverSessionSave.getWaitingTime(DriverStreetPickUpAct.this));
-        ssWaitingTime_img.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!DriverSessionSave.getSession(DriverCommonData.ST_WAITING_TIME, DriverStreetPickUpAct.this, false)) {
-                    DriverCommonData.km_calc = 0;
-                    if (!DriverSessionSave.getSession("trip_id", DriverStreetPickUpAct.this).equals("")) {
-                        if (localBroadcastManager != null) {
-                            Intent localIntent = new Intent(WAITING_TIME_RUN);
-                            localIntent.putExtra(DriverCommonData.WAITING_TIME_START_STOP, DriverCommonData.WAITING_TIME_START);
-                            localBroadcastManager.sendBroadcast(localIntent);
-                        }
-                        ssWaitingTime_img.setImageResource(R.drawable.driver_ic_pause_circle);
-                        DriverSessionSave.saveSession(DriverCommonData.ST_WAITING_TIME, true, DriverStreetPickUpAct.this);
-                    }
-                } else {
-
-                    DriverSystems.out.println("timer started ongoing" + DriverSessionSave.getWaitingTime(DriverStreetPickUpAct.this));
-//                    stopService(new Intent(StreetPickUpAct.this, WaitingTimerRun.class));
-                    DriverSessionSave.saveSession(DriverCommonData.ST_WAITING_TIME, false, DriverStreetPickUpAct.this);
-                    DriverCommonData.km_calc = 1;
-                    ssWaitingTime_img.setImageResource(R.drawable.driver_ic_play_circle);
+        ssWaitingTime_img.setOnClickListener(view -> {
+            if (!DriverSessionSave.getSession(DriverCommonData.ST_WAITING_TIME, DriverStreetPickUpAct.this, false)) {
+                DriverCommonData.km_calc = 0;
+                if (!DriverSessionSave.getSession("trip_id", DriverStreetPickUpAct.this).equals("")) {
                     if (localBroadcastManager != null) {
                         Intent localIntent = new Intent(WAITING_TIME_RUN);
-                        localIntent.putExtra(DriverCommonData.WAITING_TIME_START_STOP, DriverCommonData.WAITING_TIME_STOP);
+                        localIntent.putExtra(DriverCommonData.WAITING_TIME_START_STOP, DriverCommonData.WAITING_TIME_START);
                         localBroadcastManager.sendBroadcast(localIntent);
                     }
-                    //    myHandler.removeCallbacks(r);
+                    ssWaitingTime_img.setImageResource(R.drawable.driver_ic_pause_circle);
+                    DriverSessionSave.saveSession(DriverCommonData.ST_WAITING_TIME, true, DriverStreetPickUpAct.this);
                 }
+            } else {
+
+                DriverSystems.out.println("timer started ongoing" + DriverSessionSave.getWaitingTime(DriverStreetPickUpAct.this));
+//                    stopService(new Intent(StreetPickUpAct.this, WaitingTimerRun.class));
+                DriverSessionSave.saveSession(DriverCommonData.ST_WAITING_TIME, false, DriverStreetPickUpAct.this);
+                DriverCommonData.km_calc = 1;
+                ssWaitingTime_img.setImageResource(R.drawable.driver_ic_play_circle);
+                if (localBroadcastManager != null) {
+                    Intent localIntent = new Intent(WAITING_TIME_RUN);
+                    localIntent.putExtra(DriverCommonData.WAITING_TIME_START_STOP, DriverCommonData.WAITING_TIME_STOP);
+                    localBroadcastManager.sendBroadcast(localIntent);
+                }
+                //    myHandler.removeCallbacks(r);
             }
         });
-        botton_layout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String locationurl;
-                if (latitude1 != 0.0 && longitude1 != 0.0 && getDroplat() != 0.0 && getDroplat() != 0.0) {
-                    locationurl = "http://maps.google.com/maps?saddr=" + latitude1 + "," + longitude1 + "&daddr=" + getDroplat() + "," + getDroplng() + "";
-                    // final String locationurl = "http://maps.google.com/maps?saddr=" + SessionSave.getSession("Driver_locations", OngoingAct.this) + "&daddr=" + mMyStatus.getPassengerOndropLocation().replace("|", "") + "";
-                    Log.e("URL_Test", locationurl);
-                    final Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(locationurl));
-                    startActivity(intent);
-                } else {
-                    locationurl = "http://maps.google.com/maps?saddr=" + latitude1 + "," + longitude1;
-                    // final String locationurl = "http://maps.google.com/maps?saddr=" + SessionSave.getSession("Driver_locations", OngoingAct.this) + "&daddr=" + mMyStatus.getPassengerOndropLocation().replace("|", "") + "";
-                    Log.e("URL_Test", locationurl);
-
-                }
+        botton_layout.setOnClickListener(view -> {
+            String locationurl;
+            if (latitude1 != 0.0 && longitude1 != 0.0 && getDroplat() != 0.0 && getDroplat() != 0.0) {
+                locationurl = "http://maps.google.com/maps?saddr=" + latitude1 + "," + longitude1 + "&daddr=" + getDroplat() + "," + getDroplng() + "";
+                // final String locationurl = "http://maps.google.com/maps?saddr=" + SessionSave.getSession("Driver_locations", OngoingAct.this) + "&daddr=" + mMyStatus.getPassengerOndropLocation().replace("|", "") + "";
+                Log.e("URL_Test", locationurl);
                 final Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(locationurl));
                 startActivity(intent);
+            } else {
+                locationurl = "http://maps.google.com/maps?saddr=" + latitude1 + "," + longitude1;
+                // final String locationurl = "http://maps.google.com/maps?saddr=" + SessionSave.getSession("Driver_locations", OngoingAct.this) + "&daddr=" + mMyStatus.getPassengerOndropLocation().replace("|", "") + "";
+                Log.e("URL_Test", locationurl);
+
             }
+            final Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(locationurl));
+            startActivity(intent);
         });
 
         pickupp.setOnClickListener(v -> {
@@ -714,8 +680,7 @@ public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverC
             DriverSystems.out.println("__________" + z + "____" + DriverStreetPickUpAct.this);
             if (z == 1 && DriverStreetPickUpAct.this != null) {
                 try {
-                    if (address != null)
-                        address.cancel(true);
+                    if (address != null) address.cancel(true);
                     address = new DriverGetAddressFromLatLng(DriverStreetPickUpAct.this, new LatLng(P_latitude, P_longitude), DriverStreetPickUpAct.this, "");
                     address.execute();
                     System.out.println("Address : " + address.toString());
@@ -726,41 +691,33 @@ public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverC
             }
         };
         movetoCurrentloc();
-        start_trip.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                butt_start_end.performClick();
-            }
-        });
+        start_trip.setOnClickListener(v -> butt_start_end.performClick());
         butt_start_end.setOnClickListener(view -> {
             if (DriverNetworkStatus.isOnline(DriverStreetPickUpAct.this)) {
                 if (!currentlocTxt.getText().toString().trim().equals(DriverNC.getString(R.string.fetching_address)))
                     if (DriverSessionSave.getSession("trip_id", DriverStreetPickUpAct.this).trim().equals("")) {
                         LocationUpdate.ClearSession(DriverStreetPickUpAct.this);
-                        if (mLastLocation != null)
-                            if (!NeedToGetAddress(mLastLocation)) {
-                                if (!currentlocTxt.getText().toString().trim().equals(DriverNC.getString(R.string.tap_loc))) {
-                                    if (mLastLocation.hasAccuracy() && mLastLocation.getAccuracy() <= slabAccuracy)
-                                        callStartTrip();
-                                    else
-                                        showLowAccuracyAlert();
-                                } else {
-                                    if (mLastLocation.hasAccuracy() && mLastLocation.getAccuracy() <= slabAccuracy) {
-                                        P_latitude = mLastLocation.getLatitude();
-                                        P_longitude = mLastLocation.getLongitude();
-                                        handlerServercall1.postDelayed(callAddress, 0);
-                                        startClicked = true;
-                                        butt_start_end.setEnabled(false);
-                                    } else
-                                        showLowAccuracyAlert();
-                                }
+                        if (mLastLocation != null) if (!NeedToGetAddress(mLastLocation)) {
+                            if (!currentlocTxt.getText().toString().trim().equals(DriverNC.getString(R.string.tap_loc))) {
+                                if (mLastLocation.hasAccuracy() && mLastLocation.getAccuracy() <= slabAccuracy)
+                                    callStartTrip();
+                                else showLowAccuracyAlert();
                             } else {
-                                P_latitude = mLastLocation.getLatitude();
-                                P_longitude = mLastLocation.getLongitude();
-                                handlerServercall1.postDelayed(callAddress, 0);
-                                startClicked = true;
-                                butt_start_end.setEnabled(false);
+                                if (mLastLocation.hasAccuracy() && mLastLocation.getAccuracy() <= slabAccuracy) {
+                                    P_latitude = mLastLocation.getLatitude();
+                                    P_longitude = mLastLocation.getLongitude();
+                                    handlerServercall1.postDelayed(callAddress, 0);
+                                    startClicked = true;
+                                    butt_start_end.setEnabled(false);
+                                } else showLowAccuracyAlert();
                             }
+                        } else {
+                            P_latitude = mLastLocation.getLatitude();
+                            P_longitude = mLastLocation.getLongitude();
+                            handlerServercall1.postDelayed(callAddress, 0);
+                            startClicked = true;
+                            butt_start_end.setEnabled(false);
+                        }
                         else
                             Toast.makeText(DriverStreetPickUpAct.this, DriverNC.getString(R.string.c_tryagain), Toast.LENGTH_LONG).show();
 
@@ -816,8 +773,7 @@ public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverC
 
                 startActivity(farecal);
                 finish();
-            } else
-                callGetTripDetail();
+            } else callGetTripDetail();
         } else {
 
             tripDetails_lay.setVisibility(View.GONE);
@@ -830,26 +786,23 @@ public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverC
         }
 
         //fetchCurrentAddress();
-        tapCurrentLocation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                /*if (mLastLocation.getLatitude() != 0.0 && mLastLocation.getLongitude() != 0.0) {
-                    if (mLastLocationTemp != null) {
-                        if (NeedToGetAddresses(mLastLocation, new LatLng(mLastLocationTemp.latitude, mLastLocationTemp.longitude))) {
-                            mLastLocationTemp = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
-                            P_latitude = mLastLocationTemp.latitude;
-                            P_longitude = mLastLocationTemp.longitude;
-                            handlerServercall1.postDelayed(callAddress, 0);
-                        }
-                    } else {
+        tapCurrentLocation.setOnClickListener(view -> {
+            /*if (mLastLocation.getLatitude() != 0.0 && mLastLocation.getLongitude() != 0.0) {
+                if (mLastLocationTemp != null) {
+                    if (NeedToGetAddresses(mLastLocation, new LatLng(mLastLocationTemp.latitude, mLastLocationTemp.longitude))) {
                         mLastLocationTemp = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
                         P_latitude = mLastLocationTemp.latitude;
                         P_longitude = mLastLocationTemp.longitude;
                         handlerServercall1.postDelayed(callAddress, 0);
                     }
-                } else
-                    DriverCToast.ShowToast(DriverStreetPickUpAct.this, DriverNC.getString(R.string.low_gps_alert_message));*/
-            }
+                } else {
+                    mLastLocationTemp = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+                    P_latitude = mLastLocationTemp.latitude;
+                    P_longitude = mLastLocationTemp.longitude;
+                    handlerServercall1.postDelayed(callAddress, 0);
+                }
+            } else
+                DriverCToast.ShowToast(DriverStreetPickUpAct.this, DriverNC.getString(R.string.low_gps_alert_message));*/
         });
     }
 
@@ -888,9 +841,7 @@ public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverC
 
                 ImageView iv = mDialog.findViewById(R.id.giff);
                 DrawableImageViewTarget imageViewTarget = new DrawableImageViewTarget(iv);
-                Glide.with(DriverStreetPickUpAct.this)
-                        .load(R.raw.driver_loading_anim)
-                        .into(imageViewTarget);
+                Glide.with(DriverStreetPickUpAct.this).load(R.raw.driver_loading_anim).into(imageViewTarget);
 
             }
         } catch (Exception e) {
@@ -904,9 +855,7 @@ public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverC
      */
     public void closeDialog() {
         try {
-            if (mDialog != null)
-                if (mDialog.isShowing())
-                    mDialog.dismiss();
+            if (mDialog != null) if (mDialog.isShowing()) mDialog.dismiss();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -967,7 +916,7 @@ public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverC
     private void RetryLocationPopUp() {
         closeDialog();
         if (retrycount > 2) {
-            Utility.actionSheetCancel(DriverStreetPickUpAct.this, DriverNC.getString(R.string.address_cant_fetch),DriverNC.getString(R.string.retry), DriverNC.getString(R.string.use_map), false, new AlertListener() {
+            Utility.actionSheetCancel(DriverStreetPickUpAct.this, DriverNC.getString(R.string.address_cant_fetch), DriverNC.getString(R.string.retry), DriverNC.getString(R.string.use_map), false, new AlertListener() {
                 @Override
                 public void onSuccess() {
                     retrycount++;
@@ -998,7 +947,7 @@ public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverC
 
              */
         } else {
-            Utility.actionSheetCancel(DriverStreetPickUpAct.this, DriverNC.getString(R.string.address_cant_fetch),DriverNC.getString(R.string.retry), "", false, new AlertListener() {
+            Utility.actionSheetCancel(DriverStreetPickUpAct.this, DriverNC.getString(R.string.address_cant_fetch), DriverNC.getString(R.string.retry), "", false, new AlertListener() {
                 @Override
                 public void onSuccess() {
                     retrycount++;
@@ -1028,12 +977,11 @@ public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverC
 
     @SuppressLint("MissingPermission")
     public void getCurrentLocation(int locationRequestType) {
-        fusedLocationClient.getLastLocation()
-                .addOnSuccessListener(this, location -> {
-                    if (location != null) {
-                        handleLastLocation(location, locationRequestType);
-                    }
-                });
+        fusedLocationClient.getLastLocation().addOnSuccessListener(this, location -> {
+            if (location != null) {
+                handleLastLocation(location, locationRequestType);
+            }
+        });
         startLocationUpdates();
     }
 
@@ -1111,7 +1059,7 @@ public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverC
         Call<DriverGetTripDetailResponse> responsed = client.getTripDetail(DriverServiceGenerator.COMPANY_KEY, request, "en");
         responsed.enqueue(new DriverRetrofitCallbackClass<>(DriverStreetPickUpAct.this, new Callback<DriverGetTripDetailResponse>() {
             @Override
-            public void onResponse(Call<DriverGetTripDetailResponse> call, Response<DriverGetTripDetailResponse> response) {
+            public void onResponse(@NonNull Call<DriverGetTripDetailResponse> call, @NonNull Response<DriverGetTripDetailResponse> response) {
 
                 if (DriverStreetPickUpAct.this != null && response != null && response.body() != null) {
                     DriverGetTripDetailResponse data = response.body();
@@ -1198,8 +1146,7 @@ public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverC
                             DriverSessionSave.saveSession("Metric", data.detail.metric, DriverStreetPickUpAct.this);
                             if (DriverSessionSave.getSession("Metric", DriverStreetPickUpAct.this).trim().equalsIgnoreCase("miles"))
                                 METRIC = "miles";
-                            else
-                                METRIC = "km";
+                            else METRIC = "km";
 //                            }
 
                         } else {
@@ -1217,7 +1164,7 @@ public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverC
             }
 
             @Override
-            public void onFailure(Call<DriverGetTripDetailResponse> call, Throwable t) {
+            public void onFailure(@NonNull Call<DriverGetTripDetailResponse> call, @NonNull Throwable t) {
                 t.printStackTrace();
                 if (DriverStreetPickUpAct.this != null) {
                     DriverCToast.ShowToast(DriverStreetPickUpAct.this, DriverNC.getString(R.string.server_error));
@@ -1230,8 +1177,7 @@ public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverC
     protected void onDestroy() {
 //        myHandler.removeCallbacks(r);
         unregisterReceiver(networkStatus);
-        if (dialog1 != null)
-            Driver_Utils.closeDialog(dialog1);
+        if (dialog1 != null) Driver_Utils.closeDialog(dialog1);
         closeDialog();
         // unregister local broadcast
         LocalBroadcastManager.getInstance(this).unregisterReceiver(listener);
@@ -1289,7 +1235,7 @@ public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverC
         Call<DriverStreetPickUpResponse> response = client.startStreetTrip(DriverServiceGenerator.COMPANY_KEY, request, DriverSessionSave.getSession("Lang", DriverStreetPickUpAct.this));
         response.enqueue(new DriverRetrofitCallbackClass<>(DriverStreetPickUpAct.this, new Callback<DriverStreetPickUpResponse>() {
             @Override
-            public void onResponse(Call<DriverStreetPickUpResponse> call, Response<DriverStreetPickUpResponse> response) {
+            public void onResponse(@NonNull Call<DriverStreetPickUpResponse> call, @NonNull Response<DriverStreetPickUpResponse> response) {
                 closeDialog();
                 butt_start_end.setEnabled(true);
                 if (response.isSuccessful() && response.body() != null) {
@@ -1357,8 +1303,7 @@ public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverC
                             DriverSessionSave.saveSession("minute_fare", data.detail.minutes_fare, DriverStreetPickUpAct.this);
                             if (DriverSessionSave.getSession("Metric", DriverStreetPickUpAct.this).trim().equalsIgnoreCase("miles"))
                                 METRIC = "miles";
-                            else
-                                METRIC = "km";
+                            else METRIC = "km";
 
                             if (!getDroplocTxt().trim().equals("")) {
                                 map.clear();
@@ -1377,10 +1322,8 @@ public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverC
 
                                 map.addMarker(new MarkerOptions().position(new LatLng(getPickuplat(), getPickuplng())).icon(BitmapDescriptorFactory.fromResource(R.drawable.driver_flag_green)).draggable(false));
                                 map.addMarker(new MarkerOptions().position(new LatLng(getDroplat(), getDroplng())).icon(BitmapDescriptorFactory.fromResource(R.drawable.driver_flag_red)).draggable(true));
-                            } else
-                                lay_pick_fav.setVisibility(View.GONE);
-                            if (droplat == 0.0)
-                                dropGone();
+                            } else lay_pick_fav.setVisibility(View.GONE);
+                            if (droplat == 0.0) dropGone();
                             updateStartTripUI();
                         } else {
                             DriverCToast.ShowToast(DriverStreetPickUpAct.this, data.message);
@@ -1391,7 +1334,7 @@ public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverC
             }
 
             @Override
-            public void onFailure(Call<DriverStreetPickUpResponse> call, Throwable t) {
+            public void onFailure(@NonNull Call<DriverStreetPickUpResponse> call, @NonNull Throwable t) {
                 closeDialog();
                 butt_start_end.setEnabled(true);
                 DriverCToast.ShowToast(DriverStreetPickUpAct.this, DriverNC.getString(R.string.server_error));
@@ -1457,21 +1400,16 @@ public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverC
         btn_shift.setVisibility(View.GONE);
         slideImg.setVisibility(View.VISIBLE);
 
-        slideImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(DriverStreetPickUpAct.this, DriverMyStatus.class);
-                startActivity(intent);
-            }
+        slideImg.setOnClickListener(v -> {
+            Intent intent = new Intent(DriverStreetPickUpAct.this, DriverMyStatus.class);
+            startActivity(intent);
         });
 
-        if (lay_pick_fav != null)
-            lay_pick_fav.setVisibility(View.GONE);
+        if (lay_pick_fav != null) lay_pick_fav.setVisibility(View.GONE);
 
         if (map != null)
             map.addMarker(new MarkerOptions().position(new LatLng(getPickuplat(), getPickuplng())).icon(BitmapDescriptorFactory.fromResource(R.drawable.driver_flag_green)).draggable(false));
-        if (cTimer != null)
-            cTimer.start();
+        if (cTimer != null) cTimer.start();
 
     }
 
@@ -1488,8 +1426,7 @@ public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverC
         request.drop_latitude = String.valueOf(latitude1);
         request.drop_longitude = String.valueOf(longitude1);
         waitingTime = DriverCommonData.getDateForWaitingTime(DriverSessionSave.getWaitingTime(DriverStreetPickUpAct.this));
-        if (waitingTime.equals(""))
-            waitingTime = "00:00:00";
+        if (waitingTime.equals("")) waitingTime = "00:00:00";
         String waitNoArabic = DriverFontHelper.convertfromArabic(waitingTime);
         String[] split = waitNoArabic.split(":");
         int hr = Integer.parseInt(split[0]);
@@ -1515,9 +1452,8 @@ public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverC
         DriverWayPointsData data = new DriverWayPointsData();
         ArrayList<DriverWayPointsData> yourClassList = null;
         try {
-            Type listType =
-                    new TypeToken<ArrayList<DriverWayPointsData>>() {
-                    }.getType();
+            Type listType = new TypeToken<ArrayList<DriverWayPointsData>>() {
+            }.getType();
             yourClassList = new Gson().fromJson(jsonArray.toString(), listType);
         } catch (Exception e) {
             e.printStackTrace();
@@ -1528,7 +1464,7 @@ public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverC
 
         response.enqueue(new DriverRetrofitCallbackClass<>(DriverStreetPickUpAct.this, new Callback<DriverEndStreetPickupResponse>() {
             @Override
-            public void onResponse(Call<DriverEndStreetPickupResponse> call, Response<DriverEndStreetPickupResponse> response) {
+            public void onResponse(@NonNull Call<DriverEndStreetPickupResponse> call, @NonNull Response<DriverEndStreetPickupResponse> response) {
                 closeDialog();
                 butt_start_end.setEnabled(true);
                 if (response.isSuccessful() && response.body() != null) {
@@ -1537,8 +1473,7 @@ public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverC
                         if (data.status.equals("1") || data.status.equals("4")) {
                             DriverSessionSave.saveSession(DriverCommonData.ST_WAITING_TIME, false, DriverStreetPickUpAct.this);
                             DriverSessionSave.saveSession("travel_status", "", DriverStreetPickUpAct.this);
-                            if (cTimer != null)
-                                cTimer.cancel();
+                            if (cTimer != null) cTimer.cancel();
                             float h = 0.0f;
                             btn_shift.setVisibility(View.GONE);
                             final Intent farecal = new Intent(DriverStreetPickUpAct.this, DriverFarecalcAct.class);
@@ -1569,8 +1504,7 @@ public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverC
                             final Intent jobintent = new Intent(DriverStreetPickUpAct.this, DriverMyStatus.class);
                             startActivity(jobintent);
                             finish();
-                        } else
-                            DriverCToast.ShowToast(DriverStreetPickUpAct.this, data.message);
+                        } else DriverCToast.ShowToast(DriverStreetPickUpAct.this, data.message);
                     } else
                         DriverCToast.ShowToast(DriverStreetPickUpAct.this, DriverNC.getString(R.string.server_error));
                 } else
@@ -1578,7 +1512,7 @@ public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverC
             }
 
             @Override
-            public void onFailure(Call<DriverEndStreetPickupResponse> call, Throwable t) {
+            public void onFailure(@NonNull Call<DriverEndStreetPickupResponse> call, @NonNull Throwable t) {
                 butt_start_end.setEnabled(true);
                 t.printStackTrace();
                 closeDialog();
@@ -1658,8 +1592,7 @@ public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverC
             if (droplocEdt.getText().toString().trim().equals(DriverNC.getResources().getString(R.string.droploc).trim()))
                 dropLoc = "";
 
-            else
-                dropLoc = droplocEdt.getText().toString();
+            else dropLoc = droplocEdt.getText().toString();
         return dropLoc;
     }
 
@@ -1722,10 +1655,8 @@ public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverC
                         bearings = location.getBearing();
                         zoom = map.getCameraPosition().zoom;
 
-                        if (bearing >= 0)
-                            bearing = bearing + 90;
-                        else
-                            bearing = bearing - 90;
+                        if (bearing >= 0) bearing = bearing + 90;
+                        else bearing = bearing - 90;
 
 
                         animate(location);
@@ -1744,8 +1675,7 @@ public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverC
         pickup_pinlay.setVisibility(View.VISIBLE);
         pickup_drop_Sep.setVisibility(View.VISIBLE);
         pickup_pin.setVisibility(View.GONE);
-        if (lay_pick_fav != null)
-            lay_pick_fav.setVisibility(View.GONE);
+        if (lay_pick_fav != null) lay_pick_fav.setVisibility(View.GONE);
     }
 
     public void dropGone() {
@@ -1755,8 +1685,7 @@ public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverC
         pickup_pinlay.setVisibility(View.GONE);
         pickup_pin.setVisibility(View.VISIBLE);
         pickup_drop_Sep.setVisibility(View.GONE);
-        if (lay_pick_fav != null)
-            lay_pick_fav.setVisibility(View.VISIBLE);
+        if (lay_pick_fav != null) lay_pick_fav.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -1771,10 +1700,8 @@ public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverC
     @Override
     protected void onStop() {
         stopLocationUpdates();
-        if (handlerServercall1 != null)
-            handlerServercall1.removeCallbacks(callAddress);
-        if (cTimer != null)
-            cTimer.cancel();
+        if (handlerServercall1 != null) handlerServercall1.removeCallbacks(callAddress);
+        if (cTimer != null) cTimer.cancel();
         super.onStop();
     }
 
@@ -1782,16 +1709,14 @@ public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverC
      * Starting location updates
      */
     protected void startLocationUpdates() {
-        if (ActivityCompat.checkSelfPermission(DriverStreetPickUpAct.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ||
-                ActivityCompat.checkSelfPermission(DriverStreetPickUpAct.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(DriverStreetPickUpAct.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(DriverStreetPickUpAct.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
-            Utility.actionSheet(DriverStreetPickUpAct.this, DriverNC.getResources().getString(R.string.str_loc),  DriverNC.getResources().getString(R.string.yes), DriverNC.getResources().getString(R.string.no), false, new AlertListener() {
+            Utility.actionSheet(DriverStreetPickUpAct.this, DriverNC.getResources().getString(R.string.str_loc), DriverNC.getResources().getString(R.string.yes), DriverNC.getResources().getString(R.string.no), false, new AlertListener() {
                 @Override
                 public void onSuccess() {
-                    ActivityCompat.requestPermissions(DriverStreetPickUpAct.this,
-                            new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION},
-                            MY_PERMISSIONS_REQUEST_GPS);
+                    ActivityCompat.requestPermissions(DriverStreetPickUpAct.this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSIONS_REQUEST_GPS);
                 }
+
                 @Override
                 public void onFailure() {
 
@@ -1817,16 +1742,14 @@ public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverC
         try {
             if (DriverStreetPickUpAct.this != null) {
 
-                if ((ActivityCompat.checkSelfPermission(DriverStreetPickUpAct.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ||
-                        ActivityCompat.checkSelfPermission(DriverStreetPickUpAct.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
+                if ((ActivityCompat.checkSelfPermission(DriverStreetPickUpAct.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(DriverStreetPickUpAct.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
 
-                    Utility.actionSheet(DriverStreetPickUpAct.this, DriverNC.getResources().getString(R.string.str_loc),  DriverNC.getResources().getString(R.string.yes), DriverNC.getResources().getString(R.string.no), false, new AlertListener() {
+                    Utility.actionSheet(DriverStreetPickUpAct.this, DriverNC.getResources().getString(R.string.str_loc), DriverNC.getResources().getString(R.string.yes), DriverNC.getResources().getString(R.string.no), false, new AlertListener() {
                         @Override
                         public void onSuccess() {
-                            ActivityCompat.requestPermissions(DriverStreetPickUpAct.this,
-                                    new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION},
-                                    MY_PERMISSIONS_REQUEST_GPS);
+                            ActivityCompat.requestPermissions(DriverStreetPickUpAct.this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSIONS_REQUEST_GPS);
                         }
+
                         @Override
                         public void onFailure() {
                             finish();
@@ -1849,12 +1772,13 @@ public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverC
                      */
                 } else {
                     message = DriverNC.getString(R.string.change_network);
-                    Utility.actionSheetCancel(DriverStreetPickUpAct.this,message, DriverNC.getResources().getString(R.string.enable),"", false, new AlertListener() {
+                    Utility.actionSheetCancel(DriverStreetPickUpAct.this, message, DriverNC.getResources().getString(R.string.enable), "", false, new AlertListener() {
                         @Override
                         public void onSuccess() {
                             Intent mIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                             startActivity(mIntent);
                         }
+
                         @Override
                         public void onFailure() {
                             finish();
@@ -1928,12 +1852,8 @@ public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverC
                         c_marker.setVisible(true);
                         DriverSystems.out.println("bearing" + bearing);
 
-                        CameraPosition camPos = CameraPosition
-                                .builder(
-                                        map.getCameraPosition() // current Camera
-                                )
-                                .bearing(bearings)
-                                .build();
+                        CameraPosition camPos = CameraPosition.builder(map.getCameraPosition() // current Camera
+                        ).bearing(bearings).build();
 
                         //map.animateCamera(CameraUpdateFactory.newLatLngZoom(camPos, zoom));
                         if (DriverStreetMapWrapperLayout.ismMapIsTouched()) {
@@ -1954,12 +1874,8 @@ public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverC
                             a_marker = map.addMarker(new MarkerOptions().position(latLng).rotation(0).anchor(0.5f, 0.5f).title("" + Address).icon(BitmapDescriptorFactory.fromResource(R.drawable.driver_img)));
                             a_marker.setVisible(true);
 
-                            CameraPosition camPos = CameraPosition
-                                    .builder(
-                                            map.getCameraPosition() // current Camera
-                                    )
-                                    .bearing(bearings)
-                                    .build();
+                            CameraPosition camPos = CameraPosition.builder(map.getCameraPosition() // current Camera
+                            ).bearing(bearings).build();
                             map.animateCamera(CameraUpdateFactory.newCameraPosition(camPos));
 
 
@@ -1968,12 +1884,8 @@ public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverC
                             a_marker = map.addMarker(new MarkerOptions().position(listPoint.get(0)).rotation(0).anchor(0.5f, 0.5f).title("" + Address).icon(BitmapDescriptorFactory.fromResource(R.drawable.driver_img)));
                             a_marker.setVisible(true);
 
-                            CameraPosition camPos = CameraPosition
-                                    .builder(
-                                            map.getCameraPosition() // current Camera
-                                    )
-                                    .bearing(bearings)
-                                    .build();
+                            CameraPosition camPos = CameraPosition.builder(map.getCameraPosition() // current Camera
+                            ).bearing(bearings).build();
                             map.animateCamera(CameraUpdateFactory.newCameraPosition(camPos));
 
 
@@ -2060,7 +1972,7 @@ public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverC
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
 
             case MY_PERMISSIONS_REQUEST_GPS:
@@ -2117,8 +2029,7 @@ public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverC
                 }
             } else {
                 try {
-                    if (DriverStreetPickUpAct.this != null)
-                        startLocationUpdates();
+                    if (DriverStreetPickUpAct.this != null) startLocationUpdates();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -2167,16 +2078,15 @@ public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverC
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
-        fusedLocationClient.getLastLocation()
-                .addOnSuccessListener(this, location -> {
-                    if (location != null) {
-                        if (map != null) {
-                            LatLng ll = new LatLng(location.getLatitude(), location.getLongitude());
-                            mapWrapperLayout.init(map, getPixelsFromDp(DriverStreetPickUpAct.this, 39 + 20), true);
-                            map.moveCamera(CameraUpdateFactory.newLatLngZoom(ll, 16f));
-                        }
-                    }
-                });
+        fusedLocationClient.getLastLocation().addOnSuccessListener(this, location -> {
+            if (location != null) {
+                if (map != null) {
+                    LatLng ll = new LatLng(location.getLatitude(), location.getLongitude());
+                    mapWrapperLayout.init(map, getPixelsFromDp(DriverStreetPickUpAct.this, 39 + 20), true);
+                    map.moveCamera(CameraUpdateFactory.newLatLngZoom(ll, 16f));
+                }
+            }
+        });
     }
 
     @Override
@@ -2233,8 +2143,7 @@ public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverC
             try {
                 for (int i = 0; i < wayData.length(); i++) {
                     DriverWayPointsData wayPointsData = new Gson().fromJson(wayData.get(i).toString(), DriverWayPointsData.class);
-                    if (wayPointsData.getDist() == 0.0)
-                        distanceCalcInprogress = true;
+                    if (wayPointsData.getDist() == 0.0) distanceCalcInprogress = true;
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -2245,14 +2154,12 @@ public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverC
                 new Handler().postDelayed(() -> callEndTrip(), handlerTime);
             }
             cancelClicked = false;
-        } else
-            setDroplocTxt(Address);
+        } else setDroplocTxt(Address);
     }
 
     @Override
     public void updateFare(String distanceFare, Location ll) {
-        if (ll != null)
-            latlongfromService = ll;
+        if (ll != null) latlongfromService = ll;
         if (distanceFare != null)
             DriverSessionSave.saveSession("street_fare", distanceFare, DriverStreetPickUpAct.this);
         if (!DriverSessionSave.getSession("trip_id", DriverStreetPickUpAct.this).trim().equals("")) {
@@ -2260,8 +2167,7 @@ public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverC
                 distance_fare.setText(DriverSessionSave.getSession("site_currency", DriverStreetPickUpAct.this) + " " + distanceFare);
 
             waitingTime = DriverCommonData.getDateForWaitingTime(DriverSessionSave.getWaitingTime(DriverStreetPickUpAct.this));
-            if (waitingTime.equals(""))
-                waitingTime = "00:00:00";
+            if (waitingTime.equals("")) waitingTime = "00:00:00";
             fare_estimate.setText(String.format(Locale.UK, "%.2f", (DriverSessionSave.getDistance(DriverStreetPickUpAct.this) + DriverSessionSave.getGoogleDistance(DriverStreetPickUpAct.this))) + " " + METRIC.toLowerCase());
             DriverFontHelper.applyFont(DriverStreetPickUpAct.this, fare_estimate, "digital.ttf");
         }
@@ -2270,9 +2176,7 @@ public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverC
     public void alert_view(Context mContext, String title, String message, String success_txt, String failure_txt) {
 
         Toast.makeText(mContext, message, Toast.LENGTH_LONG).show();
-        if (alertDialog != null)
-            if (alertDialog.isShowing())
-                alertDialog.dismiss();
+        if (alertDialog != null) if (alertDialog.isShowing()) alertDialog.dismiss();
 //        final View view = View.inflate(mContext, R.layout.driver_alert_view, null);
 //        alertDialog = new Dialog(mContext, R.style.NewDialog);
 //        alertDialog.setContentView(view);
@@ -2300,11 +2204,10 @@ public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverC
         ConnectivityManager connectivity = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
         if (connectivity != null) {
             NetworkInfo[] info = connectivity.getAllNetworkInfo();
-            if (info != null)
-                for (NetworkInfo networkInfo : info)
-                    if (networkInfo.getState() == NetworkInfo.State.CONNECTED) {
-                        return true;
-                    }
+            if (info != null) for (NetworkInfo networkInfo : info)
+                if (networkInfo.getState() == NetworkInfo.State.CONNECTED) {
+                    return true;
+                }
         }
         return false;
     }
@@ -2317,7 +2220,7 @@ public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverC
             if (latlongfromService != null && !DriverSessionSave.getSession("trip_id", DriverStreetPickUpAct.this).equals("")) {
                 map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latlongfromService.getLatitude(), latlongfromService.getLongitude()), 16f));
                 animate(latlongfromService);
- //               fetchCurrentAddress();
+                //               fetchCurrentAddress();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -2348,16 +2251,13 @@ public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverC
     public void onCameraMoveStarted(int i) {
         if (!DriverStreetMapWrapperLayout.ismMapIsTouched()) {
             botton_layout.setVisibility(View.GONE);
-            if (isTripStarted)
-                botton_navi.setVisibility(View.VISIBLE);
-            else
-                fab_initial_currentloc.setVisibility(View.VISIBLE);
+            if (isTripStarted) botton_navi.setVisibility(View.VISIBLE);
+            else fab_initial_currentloc.setVisibility(View.VISIBLE);
         } else {
             if (isTripStarted) {
                 botton_layout.setVisibility(View.VISIBLE);
                 botton_navi.setVisibility(View.GONE);
-            } else
-                fab_initial_currentloc.setVisibility(View.GONE);
+            } else fab_initial_currentloc.setVisibility(View.GONE);
 
         }
     }
@@ -2387,8 +2287,7 @@ public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverC
                 DriverStreetPickUpAct.this.setPickuplocTxt(Address);
                 DriverStreetPickUpAct.this.setPickuplat(latitude);
                 DriverStreetPickUpAct.this.setPickuplng(longitude);
-                if (startClicked)
-                    callStartTrip();
+                if (startClicked) callStartTrip();
                 startClicked = false;
             } else {
                 DriverSessionSave.saveSession("drop_location", Address, DriverStreetPickUpAct.this);
@@ -2437,7 +2336,7 @@ public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverC
     }
 
     private void showLowAccuracyAlert() {
-        Toast.makeText(getApplicationContext(),DriverNC.getString(R.string.low_gps_alert_message), Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), DriverNC.getString(R.string.low_gps_alert_message), Toast.LENGTH_LONG).show();
 //        dialog1 = Driver_Utils.alert_view_dialog(this, null, DriverNC.getString(R.string.low_gps_alert_message), DriverNC.getString(R.string.ok), DriverNC.getString(R.string.cancel), true, new DialogInterface.OnClickListener() {
 //            @Override
 //            public void onClick(DialogInterface dialog, int which) {
@@ -2456,8 +2355,7 @@ public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverC
             try {
                 if (btn_shift.getText().toString().equals(DriverNC.getString(R.string.online)))
                     checked = "OUT";
-                else
-                    checked = "IN";
+                else checked = "IN";
 
                 JSONObject j = new JSONObject();
                 j.put("driver_id", DriverSessionSave.getSession("Id", DriverStreetPickUpAct.this));
@@ -2472,7 +2370,7 @@ public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverC
                     new DriverAPIService_Retrofit_JSON(DriverStreetPickUpAct.this, this, j, false).execute(requestingCheckBox);
                 else {
                     btn_shift.setClickable(true);
-                    Toast.makeText(DriverStreetPickUpAct.this,DriverNC.getResources().getString(R.string.check_net_connection), Toast.LENGTH_LONG).show();
+                    Toast.makeText(DriverStreetPickUpAct.this, DriverNC.getResources().getString(R.string.check_net_connection), Toast.LENGTH_LONG).show();
 //                    dialog1 = Driver_Utils.alert_view(DriverStreetPickUpAct.this, "" + DriverNC.getResources().getString(R.string.message), "" + DriverNC.getResources().getString(R.string.check_net_connection), "" + DriverNC.getResources().getString(R.string.ok), "", true, DriverStreetPickUpAct.this, "");
                 }
             } catch (Exception e) {
@@ -2494,7 +2392,7 @@ public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverC
                     JSONObject object = new JSONObject(result);
                     if (object.getInt("status") == 1) {
                         if (checked.equals("IN")) {
-                            Toast.makeText(DriverStreetPickUpAct.this,"" + object.getString("message"), Toast.LENGTH_LONG).show();
+                            Toast.makeText(DriverStreetPickUpAct.this, "" + object.getString("message"), Toast.LENGTH_LONG).show();
 //                            dialog1 = Driver_Utils.alert_view(DriverStreetPickUpAct.this, "" + DriverNC.getResources().getString(R.string.message), "" + object.getString("message"), "" + DriverNC.getResources().getString(R.string.ok), "", true, DriverStreetPickUpAct.this, "");
                             btn_shift.setText(DriverNC.getString(R.string.online));
                             Drawables_program.shift_on(btn_shift);
@@ -2504,7 +2402,7 @@ public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverC
                             DriverSessionSave.saveSession(DriverCommonData.SHIFT_OUT, false, DriverStreetPickUpAct.this);
                             nonactiityobj.startServicefromNonActivity(DriverStreetPickUpAct.this);
                         } else {
-                            Toast.makeText(DriverStreetPickUpAct.this,"" + object.getString("message"), Toast.LENGTH_LONG).show();
+                            Toast.makeText(DriverStreetPickUpAct.this, "" + object.getString("message"), Toast.LENGTH_LONG).show();
 //                            dialog1 = Driver_Utils.alert_view(DriverStreetPickUpAct.this, "" + DriverNC.getResources().getString(R.string.message), "" + object.getString("message"), "" + DriverNC.getResources().getString(R.string.ok), "", true, DriverStreetPickUpAct.this, "");
                             btn_shift.setText(DriverNC.getString(R.string.offline));
                             Drawables_program.shift_bg_grey(btn_shift);
@@ -2515,10 +2413,10 @@ public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverC
                             nonactiityobj.stopServicefromNonActivity(DriverStreetPickUpAct.this);
                         }
                     } else if (object.getInt("status") == -4) {
-                        Toast.makeText(DriverStreetPickUpAct.this,"" + object.getString("message"), Toast.LENGTH_LONG).show();
+                        Toast.makeText(DriverStreetPickUpAct.this, "" + object.getString("message"), Toast.LENGTH_LONG).show();
 //                        dialog1 = Driver_Utils.alert_view(DriverStreetPickUpAct.this, "" + DriverNC.getResources().getString(R.string.message), "" + object.getString("message"), "" + DriverNC.getResources().getString(R.string.ok), "", true, DriverStreetPickUpAct.this, "");
                     } else {
-                        Toast.makeText(DriverStreetPickUpAct.this,"" + object.getString("message"), Toast.LENGTH_LONG).show();
+                        Toast.makeText(DriverStreetPickUpAct.this, "" + object.getString("message"), Toast.LENGTH_LONG).show();
 //                        dialog1 = Driver_Utils.alert_view(DriverStreetPickUpAct.this, "" + DriverNC.getResources().getString(R.string.message), "" + object.getString("message"), "" + DriverNC.getResources().getString(R.string.ok), "", true, DriverStreetPickUpAct.this, "");
                         if (checked.equals("IN")) {
                             btn_shift.setText(DriverNC.getString(R.string.online));
@@ -2543,7 +2441,7 @@ public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverC
             } catch (Exception ex) {
                 ex.printStackTrace();
                 btn_shift.setClickable(true);
-                Toast.makeText(DriverStreetPickUpAct.this,"" +  DriverNC.getResources().getString(R.string.server_error), Toast.LENGTH_LONG).show();
+                Toast.makeText(DriverStreetPickUpAct.this, "" + DriverNC.getResources().getString(R.string.server_error), Toast.LENGTH_LONG).show();
 //                dialog1 = Driver_Utils.alert_view(DriverStreetPickUpAct.this, "" + DriverNC.getResources().getString(R.string.message), "" + DriverNC.getResources().getString(R.string.server_error), "" + DriverNC.getResources().getString(R.string.ok), "", true, DriverStreetPickUpAct.this, "");
             }
         }

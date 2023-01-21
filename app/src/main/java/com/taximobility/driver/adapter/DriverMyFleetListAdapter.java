@@ -16,7 +16,7 @@ import com.squareup.picasso.Picasso;
 import com.taximobility.R;
 import com.taximobility.driver.DriverMyFleetAct;
 import com.taximobility.driver.data.DriverFleetData;
-import com.taximobility.util.CL;
+import com.taximobility.driver.utils.DriverCL;
 
 import java.util.List;
 
@@ -28,7 +28,6 @@ public class DriverMyFleetListAdapter extends RecyclerView.Adapter<DriverMyFleet
 
     private final List<DriverFleetData> data;
     private final Context mContext;
-
 
     public DriverMyFleetListAdapter(Context c, List<DriverFleetData> data) {
         this.mContext = c;
@@ -43,15 +42,14 @@ public class DriverMyFleetListAdapter extends RecyclerView.Adapter<DriverMyFleet
         return new CustomViewHolder(view);
     }
 
-
     @Override
     public void onBindViewHolder(@NonNull CustomViewHolder holder, final int position) {
 
         if (data.get(position).getprimaryFleet().equals("1")) {
             holder.primary_txt.setText("Assigned");
-            holder.primary_txt.setTextColor(CL.getColor(mContext,R.color.green_new));
+            holder.primary_txt.setTextColor(DriverCL.getColor(mContext,R.color.green_new));
         } else {
-            holder.primary_txt.setTextColor(CL.getColor(mContext,R.color.white));
+            holder.primary_txt.setTextColor(DriverCL.getColor(mContext,R.color.white));
             holder.primary_txt.setText("Assign");
         }
 
@@ -61,7 +59,6 @@ public class DriverMyFleetListAdapter extends RecyclerView.Adapter<DriverMyFleet
         holder.to_date.setText(data.get(position).getdetails_mapping_enddate());
         Picasso.get().load(data.get(position).getfocus_image_android()).into(holder.taxi_img);
     }
-
 
     @Override
     public int getItemCount() {
@@ -84,12 +81,7 @@ public class DriverMyFleetListAdapter extends RecyclerView.Adapter<DriverMyFleet
             taxi_img = v.findViewById(R.id.taxi_img);
             primary_txt = v.findViewById(R.id.primary_txt);
             fleet_list_lay = v.findViewById(R.id.fleet_list_lay);
-
             primary_txt.setOnClickListener(view -> ((DriverMyFleetAct) mContext).setPrimaryFleet(data.get(getAdapterPosition()).getdetails_taxi_id()));
-
-
         }
     }
-
-
 }

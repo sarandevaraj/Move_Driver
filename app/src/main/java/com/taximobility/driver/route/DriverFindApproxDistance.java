@@ -19,12 +19,12 @@ import com.taximobility.util.AppController;
 import org.json.JSONObject;
 
 import androidx.annotation.NonNull;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.taximobility.driver.utils.DriverNC.getResources;
-
 
 /**
  * Created by developer on 23/5/18.
@@ -35,7 +35,7 @@ public class DriverFindApproxDistance {
     String to = "";
     Context mContext;
     private LatLng pickUp, drop;
-    private DriverDistanceMatrixInterface matrixInterface;
+    private final DriverDistanceMatrixInterface matrixInterface;
 
     private MapLoggerRepository mRepository;
 
@@ -56,50 +56,49 @@ public class DriverFindApproxDistance {
     }
 
     private void makeGoogleApiCall(double P_latitude, double P_longitude, double D_latitude, double D_longitude) {
-  //      String url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" + P_latitude + "," + P_longitude + "&destinations=" + D_latitude + "," + D_longitude + "&key=" + SessionSave.getSession(CommonData.GOOGLE_KEY, mContext);
+        //      String url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" + P_latitude + "," + P_longitude + "&destinations=" + D_latitude + "," + D_longitude + "&key=" + SessionSave.getSession(CommonData.GOOGLE_KEY, mContext);
         String url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" + P_latitude + "," + P_longitude + "&destinations=" + D_latitude + "," + D_longitude + "&key=" + getResources().getString(R.string.googleID);
         DriverCoreClient client = AppController.getInstance().getApiManagerWithoutEncryptBaseUrl_driver();
-        client.getJsonbyWholeUrl("no-cache", url)
-                .enqueue(new DriverRetrofitCallbackClass<>(mContext, new Callback<JsonObject>() {
-                    @Override
-                    public void onResponse(@NonNull Call<JsonObject> call, @NonNull Response<JsonObject> response) {
-                        if (response.isSuccessful()) {
-                            try {
-                                String result = response.body().toString();
-                                JSONObject object = new JSONObject(result);
-                                if (object.has("status") && !object.getString("status").equalsIgnoreCase("OK") && object.has("error_message")) {
-                                    String msg = object.getString("error_message");
-                                    DriverCToast.ShowToast(mContext, msg);
-                                    return;
-                                }
-                                DriverSessionSave.saveSessionOneTime(from.trim() + to.trim() + "D", result, mContext);
-                                JSONObject obj = new JSONObject(result).getJSONArray("rows").getJSONObject(0).getJSONArray("elements").getJSONObject(0);
-                                JSONObject ds = obj.getJSONObject("distance");
-                                String dis = ds.getString("value");
-                                JSONObject timee = obj.getJSONObject("duration");
-                                String time = timee.getString("value");
-                                double times = Double.parseDouble(time) / 60;
-                                double dist = Double.parseDouble(dis) / 1000;
-                                if (DriverSessionSave.getSession("Metric", mContext).trim().equalsIgnoreCase("miles")) {
-                                    dist = dist / 1.60934;
-                                }
-                                saveGoogleLog(from.trim() + to.trim(), times, dist, "", result);
-                                matrixInterface.onDistanceCalled(pickUp, drop, dist, times, result, "OK");
+        client.getJsonbyWholeUrl("no-cache", url).enqueue(new DriverRetrofitCallbackClass<>(mContext, new Callback<JsonObject>() {
+            @Override
+            public void onResponse(@NonNull Call<JsonObject> call, @NonNull Response<JsonObject> response) {
+                if (response.isSuccessful()) {
+                    try {
+                        String result = response.body().toString();
+                        JSONObject object = new JSONObject(result);
+                        if (object.has("status") && !object.getString("status").equalsIgnoreCase("OK") && object.has("error_message")) {
+                            String msg = object.getString("error_message");
+                            DriverCToast.ShowToast(mContext, msg);
+                            return;
+                        }
+                        DriverSessionSave.saveSessionOneTime(from.trim() + to.trim() + "D", result, mContext);
+                        JSONObject obj = new JSONObject(result).getJSONArray("rows").getJSONObject(0).getJSONArray("elements").getJSONObject(0);
+                        JSONObject ds = obj.getJSONObject("distance");
+                        String dis = ds.getString("value");
+                        JSONObject timee = obj.getJSONObject("duration");
+                        String time = timee.getString("value");
+                        double times = Double.parseDouble(time) / 60;
+                        double dist = Double.parseDouble(dis) / 1000;
+                        if (DriverSessionSave.getSession("Metric", mContext).trim().equalsIgnoreCase("miles")) {
+                            dist = dist / 1.60934;
+                        }
+                        saveGoogleLog(from.trim() + to.trim(), times, dist, "", result);
+                        matrixInterface.onDistanceCalled(pickUp, drop, dist, times, result, "OK");
 
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                                setFailureDistance(e.getLocalizedMessage());
-                            }
-
-                        } else setFailureDistance("Api Failed");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        setFailureDistance(e.getLocalizedMessage());
                     }
 
-                    @Override
-                    public void onFailure(@NonNull Call<JsonObject> call, Throwable t) {
-                        DriverCToast.ShowToast(mContext, t.getLocalizedMessage());
-                        setFailureDistance(t.getLocalizedMessage());
-                    }
-                }));
+                } else setFailureDistance("Api Failed");
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<JsonObject> call, @NonNull Throwable t) {
+                DriverCToast.ShowToast(mContext, t.getLocalizedMessage());
+                setFailureDistance(t.getLocalizedMessage());
+            }
+        }));
     }
 
     private void setFailureDistance(String message) {
@@ -121,7 +120,10 @@ public class DriverFindApproxDistance {
 
     private class GetGoogleLog extends AsyncTask<Void, Void, GoogleMapModel> {
 
-        private double P_latitude, P_longitude, D_latitude, D_longitude;
+        private final double P_latitude;
+        private final double P_longitude;
+        private final double D_latitude;
+        private final double D_longitude;
 
         public GetGoogleLog(double p_latitude, double p_longitude, double d_latitude, double d_longitude) {
             this.P_latitude = p_latitude;
@@ -130,11 +132,9 @@ public class DriverFindApproxDistance {
             this.D_longitude = d_longitude;
         }
 
-
         @Override
         protected GoogleMapModel doInBackground(Void... voids) {
             GoogleMapModel model = mRepository.getGoogleModel(from.trim() + to.trim());
-
             return model;
         }
 
@@ -148,6 +148,4 @@ public class DriverFindApproxDistance {
             }
         }
     }
-
-
 }

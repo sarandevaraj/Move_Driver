@@ -5,9 +5,6 @@ import android.text.TextWatcher;
 
 /**
  * Created by developer on 3/24/16.
- */
-
-/**
  * Formats the watched EditText to a credit card number
  */
 public class DriverFourDigitCardFormatWatcher implements TextWatcher {

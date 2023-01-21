@@ -14,12 +14,8 @@ import android.widget.TextView;
 
 import com.taximobility.R;
 
-
 /**
  * Created by developer on 29/11/16.
- */
-
-/**
  * Used to change color and string file for all ui components
  */
 public class DirverColorchange {
@@ -29,7 +25,6 @@ public class DirverColorchange {
             View view = parentLayout.getChildAt(count);
             int color = 0;
             Drawable background = view.getBackground();
-
 
             if (background instanceof ShapeDrawable) {
 
@@ -122,14 +117,12 @@ public class DirverColorchange {
                         break;
 
                 }
-
             }
-
 
             if (view instanceof TextView || view instanceof Button) {
                 try {
                     String tt = "";
-                    String text = "";
+                    String text;
                     if (view instanceof EditText) {
                         EditText tv = (EditText) (view);
 
@@ -139,13 +132,11 @@ public class DirverColorchange {
                                 String keyValue = DriverNC.fields.get(DriverNC.fields_value.indexOf(text));
                                 ((EditText) view).setHint(DriverNC.nfields_byName.get(keyValue));
 
-
                             } else {
                                 DriverSystems.out.println("null");
                             }
                         }
                         String hexColor = String.format("#%06X", (0xFFFFFF & tv.getCurrentHintTextColor()));
-
 
                         switch (hexColor.toUpperCase()) {
                             case "#F6F6F6":

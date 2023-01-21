@@ -12,12 +12,9 @@ import com.taximobility.driver.service.DriverCoreClient;
 import com.taximobility.driver.service.DriverNodeServiceGenerator;
 import com.taximobility.driver.service.DriverServiceGenerator;
 import com.taximobility.service.CoreClient;
-import com.taximobility.service.NodeServiceGenerator;
 import com.taximobility.service.ServiceGenerator;
 
 import com.google.android.libraries.places.api.Places;
-//import com.mapbox.mapboxsdk.Mapbox;
-
 
 /**
  * This class is for get the crash report from the app to registered mail id by using ACRA library.
@@ -27,17 +24,12 @@ import com.google.android.libraries.places.api.Places;
 public class AppController extends MultiDexApplication {
 
     private static AppController mInstance;
-
     private CoreClient apiManagerWithBaseUrl, checkCompanyDomainapiManager, googleapiManager, apiManagerWithTimeoutWithEncrypt;
     private CoreClient apiManagerWithTimeoutWithoutEncrypt, nodeApiManagerWithTimeOut;
-
     private long nodeTimeOut = 0L;
-
     private DriverCoreClient apiManagerWithBaseUrl_driver, checkCompanyDomainapiManager_driver, googleapiManager_driver;
     private DriverCoreClient nodeApiManagerWithTimeOut_driver;
-
     private long nodeTimeOut_driver = 0L;
-
 
     public static synchronized AppController getInstance() {
         return mInstance;
@@ -60,18 +52,14 @@ public class AppController extends MultiDexApplication {
 //        else
 //            Mapbox.getInstance(AppController.this, "pk.eyJ1IjoibmFuZGhpbmlzIiwiYSI6ImNqaGl0M3U0aDI5MXczYW8xZGY3bmxod3gifQ.CsQZTI8nf5ZDh8ES3Iu87g");
         mInstance = this;
-
         if (SessionSave.getSession(TaxiUtil.GOOGLE_KEY, this).equals(""))
             SessionSave.saveSession(TaxiUtil.GOOGLE_KEY, getString(R.string.googleID), this);
-
         setPlaceApiKey(SessionSave.getSession(TaxiUtil.GOOGLE_KEY, this));
     }
 
     public void handleUncaughtException(Thread thread, Throwable e) {
         String stackTrace = Log.getStackTraceString(e);
         String message = e.getMessage();
-
-
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("message/rfc822");
         intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"nagarajan.s@ndot.in"});
@@ -79,10 +67,7 @@ public class AppController extends MultiDexApplication {
         intent.putExtra(Intent.EXTRA_TEXT, stackTrace);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // required when starting from Application
         startActivity(intent);
-
-
     }
-
 
     /**
      * Get the API Manager for calling API with Base url
@@ -115,7 +100,6 @@ public class AppController extends MultiDexApplication {
         return apiManagerWithTimeoutWithEncrypt;
     }
 
-
     public CoreClient getApiManagerWithTimeoutWithoutEncrypt(int timeOut) {
         if (apiManagerWithTimeoutWithoutEncrypt == null) {
             apiManagerWithTimeoutWithoutEncrypt = ServiceGenerator.getRetrofitWithTimeOutWithoutEncrypt(this, timeOut).create(CoreClient.class);
@@ -129,7 +113,7 @@ public class AppController extends MultiDexApplication {
             nodeApiManagerWithTimeOut = null;
         }
         if (nodeApiManagerWithTimeOut == null) {
-            nodeApiManagerWithTimeOut = NodeServiceGenerator.INSTANCE.nodeGetRetrofitWithTimeOut(this, base_url, nodeTimeOut).create(CoreClient.class);
+//            nodeApiManagerWithTimeOut = NodeServiceGenerator.INSTANCE.nodeGetRetrofitWithTimeOut(this, base_url, nodeTimeOut).create(CoreClient.class);
         }
         return nodeApiManagerWithTimeOut;
     }
@@ -139,9 +123,7 @@ public class AppController extends MultiDexApplication {
         Places.initialize(this, apiKey);
     }
 
-
 //Driver
-
 
     public DriverCoreClient getCheckCompanyDomainapiManager_driver(String url) {
         checkCompanyDomainapiManager_driver = DriverServiceGenerator.getRetrofitEncryptUrl(this, url).create(DriverCoreClient.class);
@@ -183,6 +165,4 @@ public class AppController extends MultiDexApplication {
         }
         return nodeApiManagerWithTimeOut_driver;
     }
-
-
 }

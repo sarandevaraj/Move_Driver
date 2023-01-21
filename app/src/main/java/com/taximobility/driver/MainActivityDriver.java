@@ -16,10 +16,8 @@ import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -29,20 +27,17 @@ import com.taximobility.driver.data.DriverCommonData;
 import com.taximobility.driver.data.DriverMystatusData;
 import com.taximobility.driver.interfaces.DriverAPIResult;
 import com.taximobility.driver.interfaces.DriverClickInterface;
-import com.taximobility.driver.permission.DriverDevicePermissionActivityDriver;
-import com.taximobility.driver.permission.DriverStoreAndSecureActivityDriver;
 import com.taximobility.driver.service.DriverAPIService_Retrofit_JSON;
 import com.taximobility.driver.service.DriverNonActivity;
 import com.taximobility.driver.service.LocationUpdate;
 import com.taximobility.driver.utils.DriverCL;
-import com.taximobility.driver.utils.DriverFontHelper;
 import com.taximobility.driver.utils.DriverGpsStatus;
 import com.taximobility.driver.utils.DriverNC;
 import com.taximobility.driver.utils.DriverNetworkStatus;
 import com.taximobility.driver.utils.DriverSessionSave;
 import com.taximobility.driver.utils.DriverSystems;
 import com.taximobility.driver.utils.Driver_Utils;
-import com.taximobility.interfaces.AlertListener;
+import com.taximobility.driver.interfaces.AlertListener;
 import com.taximobility.util.SessionSave;
 import com.taximobility.util.Utility;
 
@@ -68,6 +63,7 @@ import java.util.regex.Pattern;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 /**
@@ -129,22 +125,20 @@ public abstract class MainActivityDriver extends DriverBaseActivity implements D
 
         if (!isconnect) {
 
-
             if (mContext instanceof DriverSplashAct) {
                 LinearLayout sub_can = mgpsDialog.findViewById(R.id.sub_can);
                 sub_can.setPadding(0, 10, 0, 10);
             }
-            String message = "";
-            if (!isNetworkEnabled(mContext))
-                message = DriverNC.getString(R.string.location_enable);
-            else
-                message = DriverNC.getString(R.string.change_network);
+            String message;
+            if (!isNetworkEnabled(mContext)) message = DriverNC.getString(R.string.location_enable);
+            else message = DriverNC.getString(R.string.change_network);
             Utility.actionSheetCancel(mContext, message, DriverNC.getResources().getString(R.string.enable), "", false, new AlertListener() {
                 @Override
                 public void onSuccess() {
                     Intent mIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                     mContext.startActivity(mIntent);
                 }
+
                 @Override
                 public void onFailure() {
 
@@ -187,7 +181,7 @@ public abstract class MainActivityDriver extends DriverBaseActivity implements D
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == MY_PERMISSIONS_REQUEST_GPS) {// If request is cancelled, the result arrays are empty.
             if (grantResults.length > 0) {
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -203,7 +197,6 @@ public abstract class MainActivityDriver extends DriverBaseActivity implements D
         }
     }
 
-
     public static boolean isGpsEnabled(Context context) {
         LocationManager locationManager = (LocationManager) context.getSystemService(LOCATION_SERVICE);
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
@@ -217,11 +210,9 @@ public abstract class MainActivityDriver extends DriverBaseActivity implements D
     private synchronized void getAndStoreColorValues(String result) {
         try {
 
-
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             InputStream is = new ByteArrayInputStream(result.getBytes(StandardCharsets.UTF_8));
-
 
             Document doc = dBuilder.parse(is);
             Element element = doc.getDocumentElement();
@@ -237,7 +228,6 @@ public abstract class MainActivityDriver extends DriverBaseActivity implements D
                     DriverCL.nfields_byName.put(element2.getAttribute("name"), element2.getTextContent());
                 }
             }
-
             getColorValueDetail();
         } catch (Exception e) {
             e.printStackTrace();
@@ -251,7 +241,6 @@ public abstract class MainActivityDriver extends DriverBaseActivity implements D
      */
     private synchronized void getAndStoreStringValues(String result) {
         try {
-
 
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -287,17 +276,13 @@ public abstract class MainActivityDriver extends DriverBaseActivity implements D
                 DriverNC.fields.add(field.getName());
                 DriverNC.fields_value.add(getResources().getString(id));
                 DriverNC.fields_id.put(field.getName(), id);
-
             }
         }
-
 
         for (Map.Entry<String, String> entry : DriverNC.nfields_byName.entrySet()) {
             String h = entry.getKey();
             DriverNC.nfields_byID.put(DriverNC.fields_id.get(h), DriverNC.nfields_byName.get(h));
-            // do stuff
         }
-
     }
 
     /**
@@ -311,7 +296,6 @@ public abstract class MainActivityDriver extends DriverBaseActivity implements D
                 DriverCL.fields.add(field.getName());
                 DriverCL.fields_value.add(getResources().getString(id));
                 DriverCL.fields_id.put(field.getName(), id);
-
             }
         }
 
@@ -321,7 +305,6 @@ public abstract class MainActivityDriver extends DriverBaseActivity implements D
             DriverCL.nfields_byID.put(DriverCL.fields_id.get(h), DriverCL.nfields_byName.get(h));
             // do stuff
         }
-
     }
 
     /**
@@ -343,30 +326,22 @@ public abstract class MainActivityDriver extends DriverBaseActivity implements D
         registerReceiver(networkStatus, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
         registerReceiver(gpsStatus, new IntentFilter(LocationManager.PROVIDERS_CHANGED_ACTION));
         // TODO: Move this to where you establish a user session
-        new Handler().postDelayed(new Runnable() {
-
-            @Override
-            public void run() {
-
+        new Handler().postDelayed(() -> {
 /*
-
-                if (!(DriverSessionSave.getSession("wholekeyColor", MainActivityDriver.this).trim().equals(""))) {
-                    getAndStoreStringValues(DriverSessionSave.getSession("wholekey", MainActivityDriver.this));
-                    getAndStoreColorValues(DriverSessionSave.getSession("wholekeyColor", MainActivityDriver.this));
-                }
-                if (DriverSessionSave.getSession("base_url", MainActivityDriver.this).trim().equals("")) {
-                    DriverServiceGenerator.API_BASE_URL = DriverSessionSave.getSession("base_url", MainActivityDriver.this);
-                    getAndStoreStringValues(DriverSessionSave.getSession("wholekey", MainActivityDriver.this));
-                    getAndStoreColorValues(DriverSessionSave.getSession("wholekeyColor", MainActivityDriver.this));
-                }
-*/
-
-/*
-                if (APP_VERSION == null) {
-                    APP_VERSION = BuildConfig.VERSION_NAME;
-                }*/
-
+            if (!(DriverSessionSave.getSession("wholekeyColor", MainActivityDriver.this).trim().equals(""))) {
+                getAndStoreStringValues(DriverSessionSave.getSession("wholekey", MainActivityDriver.this));
+                getAndStoreColorValues(DriverSessionSave.getSession("wholekeyColor", MainActivityDriver.this));
             }
+            if (DriverSessionSave.getSession("base_url", MainActivityDriver.this).trim().equals("")) {
+                DriverServiceGenerator.API_BASE_URL = DriverSessionSave.getSession("base_url", MainActivityDriver.this);
+                getAndStoreStringValues(DriverSessionSave.getSession("wholekey", MainActivityDriver.this));
+                getAndStoreColorValues(DriverSessionSave.getSession("wholekeyColor", MainActivityDriver.this));
+            }
+*/
+/*
+            if (APP_VERSION == null) {
+                APP_VERSION = BuildConfig.VERSION_NAME;
+            }*/
         }, 200);
 
         //  requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -377,8 +352,7 @@ public abstract class MainActivityDriver extends DriverBaseActivity implements D
             if (MainActivityDriver.this != null) {
                 Initialize();
                 try {
-                    if (mshowDialog != null && mshowDialog.isShowing())
-                        mshowDialog.dismiss();
+                    if (mshowDialog != null && mshowDialog.isShowing()) mshowDialog.dismiss();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -414,7 +388,6 @@ public abstract class MainActivityDriver extends DriverBaseActivity implements D
         Log.i(TAG, msg);
     }
 
-
     /**
      * This is method for check the mail is valid by the use of regex class.
      */
@@ -438,11 +411,10 @@ public abstract class MainActivityDriver extends DriverBaseActivity implements D
         ConnectivityManager connectivity = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
         if (connectivity != null) {
             NetworkInfo[] info = connectivity.getAllNetworkInfo();
-            if (info != null)
-                for (NetworkInfo networkInfo : info)
-                    if (networkInfo.getState() == NetworkInfo.State.CONNECTED) {
-                        return true;
-                    }
+            if (info != null) for (NetworkInfo networkInfo : info)
+                if (networkInfo.getState() == NetworkInfo.State.CONNECTED) {
+                    return true;
+                }
         }
         return false;
     }
@@ -453,21 +425,15 @@ public abstract class MainActivityDriver extends DriverBaseActivity implements D
     public void showLoading(Context context) {
 
         try {
-            if (mshowDialog != null)
-                if (mshowDialog.isShowing())
-                    mshowDialog.dismiss();
+            if (mshowDialog != null) if (mshowDialog.isShowing()) mshowDialog.dismiss();
             View view = View.inflate(context, R.layout.driver_progress_bar, null);
             mshowDialog = new Dialog(context, R.style.dialogwinddow);
             mshowDialog.setContentView(view);
             mshowDialog.setCancelable(false);
-
             mshowDialog.show();
-
             ImageView iv = mshowDialog.findViewById(R.id.giff);
             DrawableImageViewTarget imageViewTarget = new DrawableImageViewTarget(iv);
-            Glide.with(MainActivityDriver.this)
-                    .load(R.raw.driver_loading_anim)
-                    .into(imageViewTarget);
+            Glide.with(MainActivityDriver.this).load(R.raw.driver_loading_anim).into(imageViewTarget);
 
         } catch (Exception e) {
             // TODO: handle exception
@@ -476,7 +442,6 @@ public abstract class MainActivityDriver extends DriverBaseActivity implements D
 
     /**
      * This is method for convert the string value into MD5
-     *
      * @param pass - String to convert to MD5
      */
     public String convertPassMd5(String pass) {
@@ -504,7 +469,6 @@ public abstract class MainActivityDriver extends DriverBaseActivity implements D
      */
     public void logout(final Context context) {
 
-
         JSONObject j = new JSONObject();
         try {
             j.put("driver_id", DriverSessionSave.getSession("Id", context));
@@ -514,9 +478,7 @@ public abstract class MainActivityDriver extends DriverBaseActivity implements D
         }
         String url = "type=user_logout";
         new Logout(url, j);
-
     }
-
 
     @Override
     public void positiveButtonClick(DialogInterface dialog, int id, String s) {
@@ -599,17 +561,15 @@ public abstract class MainActivityDriver extends DriverBaseActivity implements D
 //                    startActivity(i);
 //                }
 //            } else {
-                if (DriverSessionSave.getSession("Id", MainActivityDriver.this).trim().equals("")) {
-                    if (!((this instanceof DriverUserLoginAct) || (this instanceof DriverSplashAct))) {
-                        Intent i = new Intent(MainActivityDriver.this, DriverUserLoginAct.class);
-                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT | Intent.FLAG_ACTIVITY_NO_ANIMATION | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                        startActivity(i);
-                    }
+            if (DriverSessionSave.getSession("Id", MainActivityDriver.this).trim().equals("")) {
+                if (!((this instanceof DriverUserLoginAct) || (this instanceof DriverSplashAct))) {
+                    Intent i = new Intent(MainActivityDriver.this, DriverUserLoginAct.class);
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT | Intent.FLAG_ACTIVITY_NO_ANIMATION | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    startActivity(i);
                 }
+            }
 //            }
         }
-
-
     }
 
     /**
@@ -617,9 +577,7 @@ public abstract class MainActivityDriver extends DriverBaseActivity implements D
      */
     //not used...
     public void alert_view(Context mContext, String title, String message, String success_txt, String failure_txt) {
-        if (alertDialog != null)
-            if (alertDialog.isShowing())
-                alertDialog.dismiss();
+        if (alertDialog != null) if (alertDialog.isShowing()) alertDialog.dismiss();
 
         Toast.makeText(mContext, message, Toast.LENGTH_LONG).show();
 //        final View view = View.inflate(mContext, R.layout.driver_alert_view, null);
@@ -642,15 +600,13 @@ public abstract class MainActivityDriver extends DriverBaseActivity implements D
 //        button_success.setOnClickListener(v -> {
 //            alertDialog.dismiss();
 //        });
-
     }
 
     @Override
     protected void onDestroy() {
         unregisterReceiver(networkStatus);
         unregisterReceiver(gpsStatus);
-        if (dialog1 != null)
-            Driver_Utils.closeDialog(dialog1);
+        if (dialog1 != null) Driver_Utils.closeDialog(dialog1);
         super.onDestroy();
     }
 
@@ -659,9 +615,8 @@ public abstract class MainActivityDriver extends DriverBaseActivity implements D
      */
     public void cancelLoading() {
         try {
-            if (mshowDialog != null)
-                if (mshowDialog.isShowing() && MainActivityDriver.this != null)
-                    mshowDialog.dismiss();
+            if (mshowDialog != null) if (mshowDialog.isShowing() && MainActivityDriver.this != null)
+                mshowDialog.dismiss();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -682,8 +637,7 @@ public abstract class MainActivityDriver extends DriverBaseActivity implements D
             case isValueNULL:
                 if (TextUtils.isEmpty(stringtovalidate))
                     message = "" + DriverNC.getResources().getString(R.string.enter_mobile_number);
-                else
-                    result = true;
+                else result = true;
                 break;
             case isValidPassword:
                 if (TextUtils.isEmpty(stringtovalidate))
@@ -692,53 +646,44 @@ public abstract class MainActivityDriver extends DriverBaseActivity implements D
                     message = "" + DriverNC.getResources().getString(R.string.pwd_min);
                 else if (stringtovalidate.length() > 32)
                     message = "" + DriverNC.getResources().getString(R.string.s_pass_max);
-                else
-                    result = true;
+                else result = true;
                 break;
             case isValidFirstname:
                 if (TextUtils.isEmpty(stringtovalidate))
                     message = "" + DriverNC.getResources().getString(R.string.enter_the_first_name);
-                else
-                    result = true;
+                else result = true;
                 break;
             case isValidLastname:
                 if (TextUtils.isEmpty(stringtovalidate))
                     message = "" + DriverNC.getResources().getString(R.string.enter_the_last_name);
-                else
-                    result = true;
+                else result = true;
                 break;
             case isValidCard:
                 if (TextUtils.isEmpty(stringtovalidate))
                     message = "" + DriverNC.getResources().getString(R.string.enter_the_card_number);
                 else if (stringtovalidate.length() < 9 || stringtovalidate.length() > 16)
                     message = "" + DriverNC.getResources().getString(R.string.enter_the_valid_card_number);
-                else
-                    result = true;
+                else result = true;
                 break;
             case isValidExpiry:
                 if (TextUtils.isEmpty(stringtovalidate))
                     message = "" + DriverNC.getResources().getString(R.string.enter_the_expiry_date);
-                else
-                    break;
+                else break;
             case isValidMail:
-
-
                 if (TextUtils.isEmpty(stringtovalidate))
                     message = "" + DriverNC.getResources().getString(R.string.enter_the_email);
                 else if (!validdmail(stringtovalidate))
                     message = "" + DriverNC.getResources().getString(R.string.enter_the_valid_email);
-                else
-                    result = true;
+                else result = true;
                 break;
             case isValidConfirmPassword:
                 if (TextUtils.isEmpty(stringtovalidate))
                     message = "" + DriverNC.getResources().getString(R.string.enter_the_confirmation_password);
-                else
-                    result = true;
+                else result = true;
                 break;
         }
         if (!message.equals("")) {
-            Toast.makeText(con,"" + message, Toast.LENGTH_LONG).show();
+            Toast.makeText(con, "" + message, Toast.LENGTH_LONG).show();
 //            dialog1 = Driver_Utils.alert_view(con, "" + DriverNC.getResources().getString(R.string.message), "" + message, "" + DriverNC.getResources().getString(R.string.ok), "", true, MainActivityDriver.this, "2");
         }
         return result;
@@ -777,7 +722,7 @@ public abstract class MainActivityDriver extends DriverBaseActivity implements D
                 }
                 new DriverAPIService_Retrofit_JSON(MainActivityDriver.this, this, data, false).execute(url);
             } else {
-                Toast.makeText(MainActivityDriver.this,"" +  DriverNC.getResources().getString(R.string.please_check_internet), Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivityDriver.this, "" + DriverNC.getResources().getString(R.string.please_check_internet), Toast.LENGTH_LONG).show();
 //                dialog1 = Driver_Utils.alert_view(MainActivityDriver.this, "" + DriverNC.getResources().getString(R.string.message), "" + DriverNC.getResources().getString(R.string.please_check_internet), "" + DriverNC.getResources().getString(R.string.ok), "", true, MainActivityDriver.this, "2");
             }
         }
@@ -796,26 +741,26 @@ public abstract class MainActivityDriver extends DriverBaseActivity implements D
 //                        dialog1 = Driver_Utils.alert_view_dialog(MainActivityDriver.this, DriverNC.getResources().getString(R.string.message), json.getString("message"), DriverNC.getResources().getString(R.string.ok), "", false, new DialogInterface.OnClickListener() {
 //                            @Override
 //                            public void onClick(DialogInterface dialog, int which) {
-                                int length = DriverCommonData.mActivitylist.size();
-                                if (length != 0) {
-                                    for (int i = 0; i < length; i++) {
-                                        DriverCommonData.mActivitylist.get(i).finish();
-                                    }
-                                }
+                        int length = DriverCommonData.mActivitylist.size();
+                        if (length != 0) {
+                            for (int i = 0; i < length; i++) {
+                                DriverCommonData.mActivitylist.get(i).finish();
+                            }
+                        }
 //                                dialog.dismiss();
-                                Intent intent = new Intent(MainActivityDriver.this, DriverUserLoginAct.class);
-                                startActivity(intent);
-                                finish();
+                        Intent intent = new Intent(MainActivityDriver.this, DriverUserLoginAct.class);
+                        startActivity(intent);
+                        finish();
 //                            }
 //                        }, (dialog, which) -> dialog.dismiss(), "");
-                        Toast.makeText(MainActivityDriver.this,"" + json.getString("message"), Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainActivityDriver.this, "" + json.getString("message"), Toast.LENGTH_LONG).show();
                     } else if (json.getInt("status") == -4) {
                         if (json.has("trip_id")) {
                             if (nonactiityobj != null) {
                                 nonactiityobj.startServicefromNonActivity(MainActivityDriver.this);
                             }
                             DriverSessionSave.saveSession("trip_id", json.getString("trip_id"), MainActivityDriver.this);
-                            Toast.makeText(MainActivityDriver.this,"" + json.getString("message"), Toast.LENGTH_LONG).show();
+                            Toast.makeText(MainActivityDriver.this, "" + json.getString("message"), Toast.LENGTH_LONG).show();
                             Intent i = new Intent(MainActivityDriver.this, DriverOngoingAct.class);
                             startActivity(i);
 //                            dialog1 = Driver_Utils.alert_view(MainActivityDriver.this, DriverNC.getResources().getString(R.string.message), json.getString("message"), DriverNC.getResources().getString(R.string.ok), "", true, MainActivityDriver.this, "3");
@@ -824,7 +769,7 @@ public abstract class MainActivityDriver extends DriverBaseActivity implements D
                         if (nonactiityobj != null) {
                             nonactiityobj.startServicefromNonActivity(MainActivityDriver.this);
                         }
-                        Toast.makeText(MainActivityDriver.this,"" + json.getString("message"), Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainActivityDriver.this, "" + json.getString("message"), Toast.LENGTH_LONG).show();
 //                        dialog1 = Driver_Utils.alert_view(MainActivityDriver.this, "" + DriverNC.getResources().getString(R.string.message), "" + json.getString("message"), "" + DriverNC.getResources().getString(R.string.ok), "", true, MainActivityDriver.this, "2");
                     }
                 } catch (JSONException e) {
@@ -836,6 +781,4 @@ public abstract class MainActivityDriver extends DriverBaseActivity implements D
             }
         }
     }
-
-
 }

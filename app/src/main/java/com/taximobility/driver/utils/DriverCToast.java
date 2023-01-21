@@ -12,8 +12,7 @@ public class DriverCToast {
 
     public static void ShowToast(Context context, String s) {
         if (context != null && s != null) {
-            if (mToast != null)
-                mToast.cancel();
+            if (mToast != null) mToast.cancel();
 
             mToast = Toast.makeText(context, "" + s, Toast.LENGTH_LONG);
             mToast.show();

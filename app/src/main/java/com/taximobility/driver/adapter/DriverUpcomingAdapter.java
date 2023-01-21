@@ -42,7 +42,7 @@ import com.taximobility.driver.utils.DirverColorchange;
 import com.taximobility.driver.utils.DriverCToast;
 import com.taximobility.driver.utils.DriverNC;
 import com.taximobility.driver.utils.DriverSessionSave;
-import com.taximobility.interfaces.AlertListener;
+import com.taximobility.driver.interfaces.AlertListener;
 import com.taximobility.util.Utility;
 
 import org.json.JSONException;
@@ -55,8 +55,7 @@ import java.util.Random;
 /**
  * This adapter class is used to show upcoming trip and pending trip
  */
-public class DriverUpcomingAdapter extends RecyclerView.Adapter<DriverUpcomingAdapter.CustomViewHolder> implements
-        DriverClickInterface, ActivityCompat.OnRequestPermissionsResultCallback {
+public class DriverUpcomingAdapter extends RecyclerView.Adapter<DriverUpcomingAdapter.CustomViewHolder> implements DriverClickInterface, ActivityCompat.OnRequestPermissionsResultCallback {
 
     private List<DriverUpcomingResponse.PastBooking> data = new ArrayList<>();
     private final Context mContext;
@@ -87,10 +86,8 @@ public class DriverUpcomingAdapter extends RecyclerView.Adapter<DriverUpcomingAd
             Picasso.get().load(data.get(position).profile_image).into(holder.driver_image);
             Picasso.get().load(data.get(position).profile_image).into(holder.passengerImg);
         } else {
-            if (data.get(position).passenger_name != "") {
-                ProfileImageSetupClass.setupProfileImage(
-                        data.get(position).passenger_name, holder.driver_image
-                );
+            if (!data.get(position).passenger_name.equals("")) {
+                ProfileImageSetupClass.setupProfileImage(data.get(position).passenger_name, holder.driver_image);
             } else {
                 Picasso.get().load(R.drawable.loadingimage).into(holder.driver_image);
             }
@@ -137,27 +134,24 @@ public class DriverUpcomingAdapter extends RecyclerView.Adapter<DriverUpcomingAd
                         }
                     }
                 });
-//            } else {*/
-            if (data.get(position).schedule.trim().equals("1")) {
-                holder.trip_track.setVisibility(View.GONE);
-                holder.book_lay.setVisibility(View.GONE);
-                holder.trip_cancel.setVisibility(View.GONE);
-                holder.trip_cancel.setTag(position);
-                holder.trip_details_lay.setVisibility(View.GONE);
-                holder.bookLaterLayout.setVisibility(View.VISIBLE);
-                holder.passengerPhoneTxt.setVisibility(View.GONE);
-                holder.passengerPhoneTxt.setText(data.get(position).passenger_phone);
-                holder.passengerName.setText(data.get(position).passenger_name);
-                holder.pickupTimeTxt.setText(data.get(position).pickup_time);
-                holder.updateTimeTxt.setText(data.get(position).time);
-                holder.updateDistanceTxt.setText(data.get(position).away);
+//            } else {*/ if (data.get(position).schedule.trim().equals("1")) {
+            holder.trip_track.setVisibility(View.GONE);
+            holder.book_lay.setVisibility(View.GONE);
+            holder.trip_cancel.setVisibility(View.GONE);
+            holder.trip_cancel.setTag(position);
+            holder.trip_details_lay.setVisibility(View.GONE);
+            holder.bookLaterLayout.setVisibility(View.VISIBLE);
+            holder.passengerPhoneTxt.setVisibility(View.GONE);
+            holder.passengerPhoneTxt.setText(data.get(position).passenger_phone);
+            holder.passengerName.setText(data.get(position).passenger_name);
+            holder.pickupTimeTxt.setText(data.get(position).pickup_time);
+            holder.updateTimeTxt.setText(data.get(position).time);
+            holder.updateDistanceTxt.setText(data.get(position).away);
+            holder.pickUpDropLayout.setData(getStopArray(position, data), "SCHEDULE", DriverSessionSave.getSession("Lang", mContext));
 
-                holder.pickUpDropLayout.setData(getStopArray(position, data), "SCHEDULE", DriverSessionSave.getSession("Lang", mContext));
-
-
-                holder.passengerCallTxt.setOnClickListener(view -> {
-                    try {
-                        passPhoneNo = data.get(position).passenger_country_code + data.get(position).passenger_phone;
+            holder.passengerCallTxt.setOnClickListener(view -> {
+                try {
+                    passPhoneNo = data.get(position).passenger_country_code + data.get(position).passenger_phone;
                         /*     if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(mContext, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
                                 Utils.alert_view_dialog(mContext, "", NC.getResources().getString(R.string.str_phone), NC.getResources().getString(R.string.yes), NC.getResources().getString(R.string.no), true, (dialog, i) -> {
                                     ActivityCompat.requestPermissions((Activity) mContext,
@@ -166,99 +160,94 @@ public class DriverUpcomingAdapter extends RecyclerView.Adapter<DriverUpcomingAd
                                     dialog.dismiss();
                                 }, (dialog, i) -> dialog.dismiss(), "");
                             } else {*/
-                        //                            }
-                        if (passPhoneNo.equals("0"))
-                            Toast.makeText(mContext, "" + DriverNC.getString(R.string.invalid_mobile_number), Toast.LENGTH_LONG);
-                        else
-                            ensureCall();
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                    //                            }
+                    if (passPhoneNo.equals("0"))
+                        Toast.makeText(mContext, "" + DriverNC.getString(R.string.invalid_mobile_number), Toast.LENGTH_LONG);
+                    else ensureCall();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+
+            holder.startTripTxt.setOnClickListener(view -> {
+                try {
+                    JSONObject j = new JSONObject();
+                    j.put("trip_id", data.get(position).passengers_log_id.trim());
+                    j.put("driver_id", DriverSessionSave.getSession("Id", mContext));
+                    j.put("pickup_latitude", DriverSessionSave.getSession(DriverCommonData.CURRENT_LAT, mContext));
+                    j.put("pickup_longitude", DriverSessionSave.getSession(DriverCommonData.CURRENT_LNG, mContext));
+                    String scheduleTripUrl = "type=schedule_start_trip";
+                    new DriverNonActivity().stopServicefromNonActivity(mContext);
+                    new ScheduleStartTrip(scheduleTripUrl, j, mInterface, position);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+
+            holder.cancelTxt.setOnClickListener(view -> {
+                upcomingTripId = data.get(position).passengers_log_id.trim();
+                cancelTripPosition = position;
+                Utility.actionSheet((Activity) mContext, DriverNC.getResources().getString(R.string.cancel_in_going_trip), DriverNC.getResources().getString(R.string.yes), DriverNC.getResources().getString(R.string.no), false, new AlertListener() {
+                    @Override
+                    public void onSuccess() {
+                        try {
+                            JSONObject j = new JSONObject();
+                            j.put("pass_logid", upcomingTripId);
+                            j.put("driver_id", DriverSessionSave.getSession("Id", mContext));
+                            j.put("taxi_id", DriverSessionSave.getSession("taxi_id", mContext));
+                            j.put("company_id", DriverSessionSave.getSession("company_id", mContext));
+                            j.put("driver_reply", "C");
+                            j.put("field", "");
+                            j.put("flag", "1");
+                            if (MainActivityDriver.mMyStatus.getOnstatus().equalsIgnoreCase("Arrivd"))
+                                j.put("driver_arrived", 1);
+                            else j.put("driver_arrived", 0);
+                            j.put("schedule", "1");
+                            final String canceltrip_url = "type=driver_reply";
+                            new CancelTrip(canceltrip_url, j, mInterface, cancelTripPosition);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure() {
+
                     }
                 });
+            });
 
-                holder.startTripTxt.setOnClickListener(view -> {
-                    try {
-                        JSONObject j = new JSONObject();
-                        j.put("trip_id", data.get(position).passengers_log_id.trim());
-                        j.put("driver_id", DriverSessionSave.getSession("Id", mContext));
-                        j.put("pickup_latitude", DriverSessionSave.getSession(DriverCommonData.CURRENT_LAT, mContext));
-                        j.put("pickup_longitude", DriverSessionSave.getSession(DriverCommonData.CURRENT_LNG, mContext));
-                        String scheduleTripUrl = "type=schedule_start_trip";
-                        new DriverNonActivity().stopServicefromNonActivity(mContext);
-                        new ScheduleStartTrip(scheduleTripUrl, j, mInterface, position);
-                    } catch (Exception e) {
-                        e.printStackTrace();
+        } else {
+            if (!data.get(position).travel_status.trim().equals("0")) {
+                holder.trip_details_lay.setVisibility(View.VISIBLE);
+                holder.trip_track.setVisibility(View.VISIBLE);
+                holder.book_lay.setVisibility(View.VISIBLE);
+                holder.bookLaterLayout.setVisibility(View.GONE);
+                holder.trip_cancel.setVisibility(View.GONE);
+                holder.trip_track.setTag(position);
+                holder.book_lay.setTag(position);
+                holder.trip_track.setOnClickListener(view -> {
+                    if (DriverSessionSave.getSession("shift_status", mContext).equalsIgnoreCase("IN")) {
+                        DriverSessionSave.saveSession("trip_id", data.get((Integer) view.getTag()).passengers_log_id.trim(), mContext);
+                        Intent in = new Intent(mContext, DriverOngoingAct.class);
+                        mContext.startActivity(in);
+                    } else {
+                        DriverCToast.ShowToast(mContext, DriverNC.getString(R.string.track_shift_status));
                     }
-
                 });
+                holder.book_lay.setOnClickListener(view -> {
 
-                holder.cancelTxt.setOnClickListener(view ->
-                {
-                    upcomingTripId = data.get(position).passengers_log_id.trim();
-                    cancelTripPosition = position;
-                    Utility.actionSheet((Activity) mContext, DriverNC.getResources().getString(R.string.cancel_in_going_trip), DriverNC.getResources().getString(R.string.yes), DriverNC.getResources().getString(R.string.no), false, new AlertListener() {
-                        @Override
-                        public void onSuccess() {
-                            try {
-                                JSONObject j = new JSONObject();
-                                j.put("pass_logid", upcomingTripId);
-                                j.put("driver_id", DriverSessionSave.getSession("Id", mContext));
-                                j.put("taxi_id", DriverSessionSave.getSession("taxi_id", mContext));
-                                j.put("company_id", DriverSessionSave.getSession("company_id", mContext));
-                                j.put("driver_reply", "C");
-                                j.put("field", "");
-                                j.put("flag", "1");
-                                if (MainActivityDriver.mMyStatus.getOnstatus().equalsIgnoreCase("Arrivd"))
-                                    j.put("driver_arrived", 1);
-                                else
-                                    j.put("driver_arrived", 0);
-                                j.put("schedule", "1");
-                                final String canceltrip_url = "type=driver_reply";
-                                new CancelTrip(canceltrip_url, j, mInterface, cancelTripPosition);
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
-
-                        @Override
-                        public void onFailure() {
-
-                        }
-                    });
                 });
 
             } else {
-                if (!data.get(position).travel_status.trim().equals("0")) {
-                    holder.trip_details_lay.setVisibility(View.VISIBLE);
-                    holder.trip_track.setVisibility(View.VISIBLE);
-                    holder.book_lay.setVisibility(View.VISIBLE);
-                    holder.bookLaterLayout.setVisibility(View.GONE);
-                    holder.trip_cancel.setVisibility(View.GONE);
-                    holder.trip_track.setTag(position);
-                    holder.book_lay.setTag(position);
-                    holder.trip_track.setOnClickListener(view -> {
-                        if (DriverSessionSave.getSession("shift_status", mContext).equalsIgnoreCase("IN")) {
-                            DriverSessionSave.saveSession("trip_id", data.get((Integer) view.getTag()).passengers_log_id.trim(), mContext);
-                            Intent in = new Intent(mContext, DriverOngoingAct.class);
-                            mContext.startActivity(in);
-                        } else {
-                            DriverCToast.ShowToast(mContext, DriverNC.getString(R.string.track_shift_status));
-                        }
-                    });
-                    holder.book_lay.setOnClickListener(view -> {
-
-                    });
-
-
-                } else {
-                    holder.trip_details_lay.setVisibility(View.VISIBLE);
-                    holder.trip_track.setVisibility(View.GONE);
-                    holder.book_lay.setVisibility(View.VISIBLE);
-                    holder.trip_cancel.setVisibility(View.VISIBLE);
-                    holder.bookLaterLayout.setVisibility(View.GONE);
-                    holder.trip_cancel.setTag(position);
-                }
+                holder.trip_details_lay.setVisibility(View.VISIBLE);
+                holder.trip_track.setVisibility(View.GONE);
+                holder.book_lay.setVisibility(View.VISIBLE);
+                holder.trip_cancel.setVisibility(View.VISIBLE);
+                holder.bookLaterLayout.setVisibility(View.GONE);
+                holder.trip_cancel.setTag(position);
             }
+        }
     }
 
     private ArrayList<DriverStopData> getStopArray(int position, List<DriverUpcomingResponse.PastBooking> data) {
@@ -310,26 +299,17 @@ public class DriverUpcomingAdapter extends RecyclerView.Adapter<DriverUpcomingAd
         });
     }
 
-
     /**
      * Handling functionality after permission granted
-     *
-     * @param requestCode
-     * @param permissions
-     * @param grantResults
      */
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        switch (requestCode) {
-            case MY_PERMISSIONS_REQUEST_CALL:
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    ensureCall();
-                }
-                break;
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == MY_PERMISSIONS_REQUEST_CALL) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                ensureCall();
+            }
         }
     }
-
 
     @Override
     public int getItemCount() {
@@ -371,8 +351,7 @@ public class DriverUpcomingAdapter extends RecyclerView.Adapter<DriverUpcomingAd
                     j.put("flag", "1");
                     if (MainActivityDriver.mMyStatus.getOnstatus().equalsIgnoreCase("Arrivd"))
                         j.put("driver_arrived", 1);
-                    else
-                        j.put("driver_arrived", 0);
+                    else j.put("driver_arrived", 0);
                     j.put("schedule", "1");
                     final String canceltrip_url = "type=driver_reply";
                     new CancelTrip(canceltrip_url, j, mInterface, cancelTripPosition);
@@ -388,11 +367,10 @@ public class DriverUpcomingAdapter extends RecyclerView.Adapter<DriverUpcomingAd
         dialog.dismiss();
     }
 
-
     /**
      * View holder class member this contains in every row in list.
      */
-    public class CustomViewHolder extends RecyclerView.ViewHolder {
+    public static class CustomViewHolder extends RecyclerView.ViewHolder {
         ImageView map_image, driver_image;
         TextView trip_time, trip_driver_name, trip_track, trip_cancel, model_name;
         LinearLayout book_lay;
@@ -402,8 +380,8 @@ public class DriverUpcomingAdapter extends RecyclerView.Adapter<DriverUpcomingAd
         TextView passengerCallTxt, cancelTxt, startTripTxt, txt_pickup, txt_drop, approx_fare, approx_distance;
         ImageView passengerImg, drop_icon;
         View divider;
-        private DriverPickupDropView pickUpDropLayout;
-        private LinearLayout trip_details_lay;
+        private final DriverPickupDropView pickUpDropLayout;
+        private final LinearLayout trip_details_lay;
 
         public CustomViewHolder(View v) {
             super(v);
@@ -434,11 +412,8 @@ public class DriverUpcomingAdapter extends RecyclerView.Adapter<DriverUpcomingAd
             approx_distance = v.findViewById(R.id.approx_distance);
             drop_icon = v.findViewById(R.id.drop_icon);
             divider = v.findViewById(R.id.divider);
-
-
         }
     }
-
 
     private class CancelTrip implements DriverAPIResult {
         DriverUpcomingAdapterInterface driverUpcomingAdapterInterface;
@@ -474,12 +449,10 @@ public class DriverUpcomingAdapter extends RecyclerView.Adapter<DriverUpcomingAd
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
             } else {
                 DriverCToast.ShowToast(mContext, DriverNC.getString(R.string.server_error));
             }
         }
-
     }
 
     private class ScheduleStartTrip implements DriverAPIResult {
@@ -543,11 +516,10 @@ public class DriverUpcomingAdapter extends RecyclerView.Adapter<DriverUpcomingAd
         ConnectivityManager connectivity = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
         if (connectivity != null) {
             NetworkInfo[] info = connectivity.getAllNetworkInfo();
-            if (info != null)
-                for (NetworkInfo networkInfo : info)
-                    if (networkInfo.getState() == NetworkInfo.State.CONNECTED) {
-                        return true;
-                    }
+            if (info != null) for (NetworkInfo networkInfo : info)
+                if (networkInfo.getState() == NetworkInfo.State.CONNECTED) {
+                    return true;
+                }
         }
         return false;
     }

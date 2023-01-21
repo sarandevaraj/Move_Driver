@@ -2,6 +2,8 @@ package com.taximobility.driver.service;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
+
 import com.taximobility.R;
 import com.taximobility.driver.data.DriverCommonData;
 import com.taximobility.driver.interfaces.DriverAPIResult;
@@ -28,11 +30,10 @@ public class DriverAPIService_Retrofit_JSON_NoProgress {
     String result = "";
     boolean dont_encode;
     private boolean wholeURL;
-    private boolean GetMethod = true;
-    private JSONObject data;
+    private final boolean GetMethod;
+    private final JSONObject data;
     private String url_type;
     private Call<ResponseBody> coreResponse;
-
 
     public DriverAPIService_Retrofit_JSON_NoProgress(Context ctx, DriverAPIResult res, JSONObject j, boolean getmethod) {
         mContext = ctx;
@@ -46,15 +47,13 @@ public class DriverAPIService_Retrofit_JSON_NoProgress {
         response = res;
         JSONObject jobj = null;
         try {
-            if (!getmethod)
-                jobj = new JSONObject(j);
+            if (!getmethod) jobj = new JSONObject(j);
         } catch (JSONException e) {
             e.printStackTrace();
         }
         this.data = jobj;
         GetMethod = getmethod;
     }
-
 
     public DriverAPIService_Retrofit_JSON_NoProgress(Context ctx, DriverAPIResult res, JSONObject j, boolean getmethod, String url, boolean dont_encode) {
         mContext = ctx;
@@ -63,8 +62,7 @@ public class DriverAPIService_Retrofit_JSON_NoProgress {
         this.dont_encode = dont_encode;
         GetMethod = getmethod;
         String[] type = url.split("type=");
-        if (type.length > 1)
-            url_type = type[1];
+        if (type.length > 1) url_type = type[1];
         else {
             wholeURL = true;
             url_type = url;
@@ -94,15 +92,12 @@ public class DriverAPIService_Retrofit_JSON_NoProgress {
                 }
 
                 if (!wholeURL)
-                    coreResponse = client.coreDetails("", "no-cache",
-                            url_type, DriverSessionSave.getSession(DriverCommonData.GETCORE_LASTUPDATE, mContext).equals("") ? "0" : DriverSessionSave.getSession(DriverCommonData.GETCORE_LASTUPDATE, mContext)
-                            , DriverSessionSave.getSession(DriverCommonData.ACCESS_KEY, mContext));
-                else
-                    coreResponse = client.getWhole("no-cache", url_type);
+                    coreResponse = client.coreDetails("", "no-cache", url_type, DriverSessionSave.getSession(DriverCommonData.GETCORE_LASTUPDATE, mContext).equals("") ? "0" : DriverSessionSave.getSession(DriverCommonData.GETCORE_LASTUPDATE, mContext), DriverSessionSave.getSession(DriverCommonData.ACCESS_KEY, mContext));
+                else coreResponse = client.getWhole("no-cache", url_type);
                 coreResponse.enqueue(new DriverRetrofitCallbackClass<>(mContext, new Callback<ResponseBody>() {
                     @Override
-                    public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
-                        String data = null;
+                    public void onResponse(@NonNull Call<ResponseBody> call, @NonNull retrofit2.Response<ResponseBody> response) {
+                        String data;
                         if (response.isSuccessful()) {
                             try {
                                 if (response.body() != null) {
@@ -128,7 +123,7 @@ public class DriverAPIService_Retrofit_JSON_NoProgress {
                     }
 
                     @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
                         if (DriverAPIService_Retrofit_JSON_NoProgress.this.response != null)
                             DriverAPIService_Retrofit_JSON_NoProgress.this.response.getResult(false, null);
                         DriverCToast.ShowToast(mContext, DriverNC.getString(R.string.server_error));
@@ -149,8 +144,8 @@ public class DriverAPIService_Retrofit_JSON_NoProgress {
                 Call<ResponseBody> coreResponse = client.updateUser(DriverServiceGenerator.COMPANY_KEY, body, url_type, DriverSessionSave.getSession("Lang", mContext));
                 coreResponse.enqueue(new DriverRetrofitCallbackClass<>(mContext, new Callback<ResponseBody>() {
                     @Override
-                    public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
-                        String data = null;
+                    public void onResponse(@NonNull Call<ResponseBody> call, @NonNull retrofit2.Response<ResponseBody> response) {
+                        String data;
                         if (response.isSuccessful()) {
                             try {
                                 if (response.body() != null) {
@@ -176,7 +171,7 @@ public class DriverAPIService_Retrofit_JSON_NoProgress {
                     }
 
                     @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
                         if (DriverAPIService_Retrofit_JSON_NoProgress.this.response != null)
                             DriverAPIService_Retrofit_JSON_NoProgress.this.response.getResult(false, null);
                         DriverCToast.ShowToast(mContext, DriverNC.getString(R.string.server_error));
@@ -184,21 +179,16 @@ public class DriverAPIService_Retrofit_JSON_NoProgress {
                     }
                 }));
             }
-
         }
-
     }
 
     public void execute(String url) {
         String[] type = url.split("=");
         this.url_type = type[1];
         onPreExecute();
-
     }
 
     public void execute() {
-
         onPreExecute();
-
     }
 }

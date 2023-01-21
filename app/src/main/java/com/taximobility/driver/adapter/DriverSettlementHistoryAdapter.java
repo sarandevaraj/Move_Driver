@@ -20,15 +20,11 @@ import java.util.List;
 public class DriverSettlementHistoryAdapter extends RecyclerView.Adapter<DriverSettlementHistoryAdapter.CustomViewHolder> {
 
     private final Context mContext;
-
     private final List<DriverListClass> data;
 
     public DriverSettlementHistoryAdapter(Context context, List<DriverListClass> pastData) {
-
         this.mContext = context;
-
         this.data = pastData;
-
     }
 
     LayoutInflater layoutInflater;
@@ -38,16 +34,11 @@ public class DriverSettlementHistoryAdapter extends RecyclerView.Adapter<DriverS
     public CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         if (layoutInflater == null) {
-
             layoutInflater = LayoutInflater.from(parent.getContext());
-
         }
-
         DriverSettlementHistoryListBinding binding = DataBindingUtil.inflate(layoutInflater, R.layout.driver_settlement_history_list, parent, false);
-
         DirverColorchange.ChangeColor(binding.mainLay, mContext);
         return new CustomViewHolder(binding.getRoot());
-
     }
 
     @Override
@@ -55,7 +46,6 @@ public class DriverSettlementHistoryAdapter extends RecyclerView.Adapter<DriverS
     public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
 
         holder.binding.setList(data.get(position));
-
         holder.binding.txtStatus.setImageDrawable(mContext.getResources().getDrawable(R.drawable.driver_ic_settled));
 
     }
@@ -63,9 +53,7 @@ public class DriverSettlementHistoryAdapter extends RecyclerView.Adapter<DriverS
     @Override
 
     public int getItemCount() {
-
         return data.size();
-
     }
 
     public static class CustomViewHolder extends RecyclerView.ViewHolder {
@@ -73,13 +61,8 @@ public class DriverSettlementHistoryAdapter extends RecyclerView.Adapter<DriverS
         DriverSettlementHistoryListBinding binding;
 
         public CustomViewHolder(View view) {
-
             super(view);
-
             binding = DataBindingUtil.bind(view);
-
         }
-
     }
-
 }
