@@ -36,10 +36,12 @@ android {
     configurations {
         all*.exclude group: 'com.android.support', module: 'support-v13'
     }
-    // Temporary fix until alpha10
     packagingOptions {
-        exclude 'META-INF/proguard/androidx-annotations.pro'
+        resources {
+            excludes += ['META-INF/proguard/androidx-annotations.pro']
+        }
     }
+// Temporary fix until alpha10
     buildTypes {
         release {
             minifyEnabled false
@@ -67,16 +69,6 @@ android {
             resValue "string", "facebookAppId", "$rootProject.ext.facebookAppId"
         }
     }
-    lintOptions {
-        checkReleaseBuilds false
-        disable 'InvalidPackage'
-        // set to true to turn off analysis progress reporting by lint
-        quiet true
-        // if true, stop the gradle build if errors are found
-        abortOnError false
-        // if true, only report errors
-        ignoreWarnings true
-    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -91,6 +83,14 @@ android {
     androidExtensions {
         experimental = true
     }
+    lint {
+        abortOnError false
+        checkReleaseBuilds false
+        disable 'InvalidPackage'
+        ignoreWarnings true
+        quiet true
+    }
+    namespace 'com.taximobility'
 }
 dependencies {
 //    implementation files('libs/jsoup-1.7.1.jar')

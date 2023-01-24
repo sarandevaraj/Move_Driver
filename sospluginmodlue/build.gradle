@@ -6,27 +6,24 @@ android {
     defaultConfig {
         minSdkVersion 19
         targetSdkVersion 31
-        versionCode 1
-        versionName "1.0"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
     buildTypes {
         release {
             minifyEnabled false
             shrinkResources false
-            debuggable false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
             minifyEnabled false
             shrinkResources false
-            debuggable true
         }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    namespace 'com.mayan.sospluginmodlue'
 }
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])

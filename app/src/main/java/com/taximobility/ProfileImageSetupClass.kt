@@ -12,7 +12,7 @@ object ProfileImageSetupClass {
         val mName: String = if (mFirstName == "")
             "A"
         else
-            mFirstName[0].toString().toUpperCase(Locale.ROOT)
+            mFirstName[0].toString().uppercase(Locale.ROOT)
         Picasso.get().load("${"http://mongo.tmobility.ai/public/no_image/"}$mName.png").placeholder(R.drawable.loadingimage).error(R.drawable.loadingimage).into(profileImage)
     }
 
