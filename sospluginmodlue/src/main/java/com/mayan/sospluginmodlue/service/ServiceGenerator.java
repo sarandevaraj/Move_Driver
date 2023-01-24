@@ -6,7 +6,6 @@ import android.os.Looper;
 import android.text.TextUtils;
 import android.widget.Toast;
 
-import com.mayan.sospluginmodlue.BuildConfig;
 import com.mayan.sospluginmodlue.R;
 import com.mayan.sospluginmodlue.util.SessionSave;
 
@@ -18,6 +17,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.concurrent.TimeUnit;
 
+import io.supercharge.shimmerlayout.BuildConfig;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.MediaType;

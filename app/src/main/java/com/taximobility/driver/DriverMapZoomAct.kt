@@ -39,7 +39,9 @@ class DriverMapZoomAct : DriverBaseActivity() {
     }
 
     override fun onTouchEvent(motionEvent: MotionEvent?): Boolean {
-        mScaleGestureDetector?.onTouchEvent(motionEvent)
+        if (motionEvent != null) {
+            mScaleGestureDetector?.onTouchEvent(motionEvent)
+        }
         return true
     }
 
