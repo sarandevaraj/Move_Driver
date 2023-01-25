@@ -34,7 +34,7 @@
             android:layout_height="match_parent" />
 
 
-        <com.taximobility.driver.utils.DriverCircleOverlayView
+        <com.moovex.driver.utils.DriverCircleOverlayView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="gone" />
@@ -158,7 +158,7 @@
                 android:textColor="@color/white" />
         </LinearLayout>
 
-        <com.taximobility.driver.pdview.DriverPickupDropView
+        <com.moovex.driver.pdview.DriverPickupDropView
             android:id="@+id/pd_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -816,7 +816,7 @@
                     android:padding="@dimen/dp_5"
                     android:visibility="visible">
 
-                    <com.taximobility.driver.utils.DriverRoundedImageView
+                    <com.moovex.driver.utils.DriverRoundedImageView
                         android:id="@+id/proimg"
                         android:layout_width="70dp"
                         android:layout_height="70dp"

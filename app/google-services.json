@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "53606335106",
-    "project_id": "t-mobility",
-    "storage_bucket": "t-mobility.appspot.com"
+    "project_number": "357985015083",
+    "project_id": "movex-308f8",
+    "storage_bucket": "movex-308f8.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:53606335106:android:22e36f15da264ee947aa9b",
+        "mobilesdk_app_id": "1:357985015083:android:3978c30126d6f4ab07e16e",
         "android_client_info": {
-          "package_name": "com.Taximobility"
+          "package_name": "com.moovex"
         }
       },
       "oauth_client": [
         {
-          "client_id": "53606335106-d773bdh7devs4tdf8pmou6rj15g101vp.apps.googleusercontent.com",
+          "client_id": "357985015083-3f9lmesejelpi2vb37t9i0plcua1m5pg.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCTyrdJ30zPOe66kiwlAFNVlm3Cb9xCHmE"
+          "current_key": "AIzaSyDtFmE4SgfTX6bX7NocLVD76Y5mHJsA5Fc"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "53606335106-d773bdh7devs4tdf8pmou6rj15g101vp.apps.googleusercontent.com",
+              "client_id": "357985015083-3f9lmesejelpi2vb37t9i0plcua1m5pg.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
@@ -36,27 +36,27 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:53606335106:android:f7356568be11969f47aa9b",
+        "mobilesdk_app_id": "1:357985015083:android:24ddbb44f7deb7d507e16e",
         "android_client_info": {
-          "package_name": "com.Taximobility.driver"
+          "package_name": "com.moovexx"
         }
       },
       "oauth_client": [
         {
-          "client_id": "53606335106-d773bdh7devs4tdf8pmou6rj15g101vp.apps.googleusercontent.com",
+          "client_id": "357985015083-3f9lmesejelpi2vb37t9i0plcua1m5pg.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCTyrdJ30zPOe66kiwlAFNVlm3Cb9xCHmE"
+          "current_key": "AIzaSyDtFmE4SgfTX6bX7NocLVD76Y5mHJsA5Fc"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "53606335106-d773bdh7devs4tdf8pmou6rj15g101vp.apps.googleusercontent.com",
+              "client_id": "357985015083-3f9lmesejelpi2vb37t9i0plcua1m5pg.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

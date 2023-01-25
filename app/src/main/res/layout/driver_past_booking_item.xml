@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical">
 
-                <com.taximobility.driver.utils.DriverRoundedImageView
+                <com.moovex.driver.utils.DriverRoundedImageView
                     android:id="@+id/driver_image"
                     android:layout_width="70dp"
                     android:layout_height="70dp"

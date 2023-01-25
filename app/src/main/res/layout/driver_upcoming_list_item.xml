@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical">
 
-                <com.taximobility.driver.utils.DriverRoundedImageView
+                <com.moovex.driver.utils.DriverRoundedImageView
                     android:id="@+id/driver_image"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
@@ -335,7 +335,7 @@
             android:padding="@dimen/dp_5"
             android:visibility="gone">
 
-            <com.taximobility.driver.utils.DriverRoundedImageView
+            <com.moovex.driver.utils.DriverRoundedImageView
                 android:id="@+id/passengerImg"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
@@ -359,7 +359,7 @@
                 card_view:layout_constraintStart_toEndOf="@+id/passengerImg"
                 card_view:layout_constraintTop_toTopOf="parent" />
 
-            <com.taximobility.driver.pdview.DriverPickupDropView
+            <com.moovex.driver.pdview.DriverPickupDropView
                 android:id="@+id/pd_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -8,7 +8,7 @@
 
             name="list"
 
-            type="com.taximobility.driver.data.apiData.DriverListClass" />
+            type="com.moovex.driver.data.apiData.DriverListClass" />
 
     </data>
 

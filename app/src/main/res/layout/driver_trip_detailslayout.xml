@@ -73,7 +73,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true">
 
-                        <com.taximobility.driver.utils.DriverRoundedImageView
+                        <com.moovex.driver.utils.DriverRoundedImageView
                             android:layout_width="80dip"
                             android:layout_height="80dip"
                             android:layout_centerInParent="true"
@@ -128,7 +128,7 @@
 
                 </RelativeLayout>
 
-                <com.taximobility.driver.utils.DriverRoundedImageView
+                <com.moovex.driver.utils.DriverRoundedImageView
                     android:id="@+id/driverImg"
                     android:layout_width="80dp"
                     android:layout_height="80dp"

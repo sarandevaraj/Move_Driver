@@ -222,7 +222,7 @@
             android:layout_height="match_parent">
 
 
-            <com.taximobility.driver.utils.DriverStreetMapWrapperLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            <com.moovex.driver.utils.DriverStreetMapWrapperLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/map_relative_layout"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
@@ -234,7 +234,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent" />
 
-            </com.taximobility.driver.utils.DriverStreetMapWrapperLayout>
+            </com.moovex.driver.utils.DriverStreetMapWrapperLayout>
 
             <ImageView
                 android:id="@+id/map_icon"

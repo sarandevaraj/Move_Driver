@@ -889,7 +889,7 @@
                         android:layout_gravity="top"
                         android:orientation="vertical">
 
-                        <com.taximobility.driver.pdview.DriverPickupDropView
+                        <com.moovex.driver.pdview.DriverPickupDropView
                             android:id="@+id/pdview"
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
@@ -913,7 +913,7 @@
                         android:padding="@dimen/dp_5"
                         android:visibility="visible">
 
-                        <com.taximobility.driver.utils.DriverRoundedImageView
+                        <com.moovex.driver.utils.DriverRoundedImageView
                             android:id="@+id/proimg"
                             android:layout_width="70dp"
                             android:layout_height="70dp"

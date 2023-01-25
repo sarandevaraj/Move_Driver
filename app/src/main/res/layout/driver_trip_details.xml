@@ -236,7 +236,7 @@
             android:orientation="horizontal"
             >
 
-            <com.taximobility.driver.utils.DriverRoundedImageView
+            <com.moovex.driver.utils.DriverRoundedImageView
                 android:id="@+id/driverImg"
                 android:layout_width="70dp"
                 android:layout_height="70dp"

@@ -90,7 +90,7 @@ android {
         ignoreWarnings true
         quiet true
     }
-    namespace 'com.taximobility'
+    namespace 'com.moovex'
 }
 dependencies {
 //    implementation files('libs/jsoup-1.7.1.jar')

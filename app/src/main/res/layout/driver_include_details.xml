@@ -39,7 +39,7 @@
                 android:layout_margin="5dp"
                 app:cardCornerRadius="5dp"
                 app:cardElevation="3dp">
-                <com.taximobility.driver.pdview.DriverPickupDropView
+                <com.moovex.driver.pdview.DriverPickupDropView
                     android:id="@+id/pd_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
