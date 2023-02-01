@@ -715,6 +715,7 @@ public class LocationUpdate extends Service implements DriverDistanceMatrixInter
                         DriverSessionSave.saveSession("taxi_speed", "0.0", LocationUpdate.this);
                     double taxiMinimumSpeed = Double.parseDouble(DriverSessionSave.getSession("taxi_speed", LocationUpdate.this));
 
+                    DriverSystems.out.println("nnn---onConnectedsssss LocationResult "+ speed+"    "+ taxiMinimumSpeed +"     "+ waitingTimeRunning);
                     if (speed <= taxiMinimumSpeed) {
                         if (!waitingTimeRunning && !DriverSessionSave.getSession(DriverCommonData.WAITING_TIME_MANUAL, LocationUpdate.this, false))
                             startWaitingTime();
@@ -1456,7 +1457,7 @@ public class LocationUpdate extends Service implements DriverDistanceMatrixInter
             // Configure the notification channel.
             notificationChannel.setDescription("Channel description");
             notificationChannel.enableLights(true);
-            notificationChannel.setLightColor(Color.RED);
+//            notificationChannel.setLightColor(Color.RED);
             notificationManager.createNotificationChannel(notificationChannel);
 
             builder = new Notification.Builder(this, NOTIFICATION_CHANNEL_ID).setContentText(message).setContentTitle(title).setOngoing(true).setSmallIcon(getNotificationIcon()).setContentIntent(pendingIntent).setLargeIcon(((BitmapDrawable) ContextCompat.getDrawable(context, R.drawable.ic_launcher)).getBitmap()).setStyle(new Notification.BigTextStyle().bigText(message)).setWhen(System.currentTimeMillis());
@@ -1573,7 +1574,7 @@ public class LocationUpdate extends Service implements DriverDistanceMatrixInter
             // Configure the notification channel.
             notificationChannel.setDescription("Channel description");
             notificationChannel.enableLights(true);
-            notificationChannel.setLightColor(Color.RED);
+//            notificationChannel.setLightColor(Color.RED);
             notificationManager.createNotificationChannel(notificationChannel);
             builder = new Notification.Builder(this, NOTIFICATION_CHANNEL_ID).addAction(action).setContentText(DriverNC.getString(R.string.app_running)).setContentTitle(getResources().getString(R.string.app_name)).setOngoing(true).setSmallIcon(R.drawable.small_logo).setColor(ContextCompat.getColor(getBaseContext(), R.color.button_accept)).setWhen(System.currentTimeMillis());
         } else {
@@ -1599,9 +1600,9 @@ public class LocationUpdate extends Service implements DriverDistanceMatrixInter
             // Configure the notification channel.
             notificationChannel.setDescription("Channel description");
             notificationChannel.enableLights(true);
-            notificationChannel.setLightColor(Color.RED);
+//            notificationChannel.setLightColor(Color.RED);
             notificationManager.createNotificationChannel(notificationChannel);
-            builder = new Notification.Builder(this, NOTIFICATION_CHANNEL_ID).addAction(action).setContentText("You have new trip").setContentTitle(getResources().getString(R.string.app_name)).setOngoing(true).setSmallIcon(R.drawable.small_logo).setColor(Color.RED).setWhen(System.currentTimeMillis());
+            builder = new Notification.Builder(this, NOTIFICATION_CHANNEL_ID).addAction(action).setContentText("You have new trip").setContentTitle(getResources().getString(R.string.app_name)).setOngoing(true).setSmallIcon(R.drawable.small_logo).setWhen(System.currentTimeMillis());
         } else {
             builder = new Notification.Builder(this).addAction(0, getString(R.string.notiy_lanch_app) + ""/* + getTripStatus()*/, activityPendingIntent).setContentText("You have new trip").setContentTitle(getResources().getString(R.string.app_name)).setContentTitle(getResources().getString(R.string.app_name)).setOngoing(true).setPriority(Notification.PRIORITY_HIGH).setSmallIcon(R.drawable.small_logo).setWhen(System.currentTimeMillis());
         }

@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.moovex.driver.utils.DriverCToast;
 import com.squareup.picasso.Picasso;
 import com.moovex.R;
 import com.moovex.driver.DriverMyFleetAct;
@@ -81,7 +82,13 @@ public class DriverMyFleetListAdapter extends RecyclerView.Adapter<DriverMyFleet
             taxi_img = v.findViewById(R.id.taxi_img);
             primary_txt = v.findViewById(R.id.primary_txt);
             fleet_list_lay = v.findViewById(R.id.fleet_list_lay);
-            primary_txt.setOnClickListener(view -> ((DriverMyFleetAct) mContext).setPrimaryFleet(data.get(getAdapterPosition()).getdetails_taxi_id()));
+            primary_txt.setOnClickListener(v1 -> {
+                if(getAdapterPosition()!=0){
+                    ((DriverMyFleetAct) mContext).setPrimaryFleet(data.get(getAdapterPosition()).getdetails_taxi_id());
+                }else{
+                    DriverCToast.ShowToast(mContext,mContext.getString(R.string.fleet_already_assigned));
+                }
+            });
         }
     }
 }

@@ -28,6 +28,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -75,7 +76,9 @@ public class DriverAddFleetAct extends AppCompatActivity implements DriverClickI
     Button save_btn;
     private Dialog cameraDialog, dialog1;
     private Uri imageUri;
-    ImageView vehicle_img;
+    AppCompatImageView vehicle_img;
+
+    LinearLayout identification_pic_txt;
     ListView listView;
     ArrayAdapter<String> adapter;
     private Bitmap mBitmap;
@@ -126,7 +129,9 @@ public class DriverAddFleetAct extends AppCompatActivity implements DriverClickI
         select_model = findViewById(R.id.select_model);
         vehicle_owner_name = findViewById(R.id.vehicle_owner_name);
         vehicle_manufacturer = findViewById(R.id.vehicle_manufacturer);
-        upload_vehicle_img = findViewById(R.id.upload_vehicle_img);
+//        upload_vehicle_img = findViewById(R.id.upload_vehicle_img);
+        identification_pic_txt = findViewById(R.id.identification_pic_txt);
+        vehicle_img = findViewById(R.id.img_identification);
         upload_img = findViewById(R.id.upload_img);
 
 
@@ -143,7 +148,7 @@ public class DriverAddFleetAct extends AppCompatActivity implements DriverClickI
                 DriverCToast.ShowToast(DriverAddFleetAct.this, DriverNC.getResources().getString(R.string.select_the_model));
             } else if (vehicle_manufacturer.getText().toString().trim().isEmpty()) {
                 DriverCToast.ShowToast(DriverAddFleetAct.this, DriverNC.getResources().getString(R.string.enter_vehicle_manufacturer));
-            } else if (upload_vehicle_img.getText().toString().trim().isEmpty()) {
+            } else if (vehicle_img.getDrawable() == null) {
                 DriverCToast.ShowToast(DriverAddFleetAct.this, DriverNC.getResources().getString(R.string.upload_image_file));
             } else {
                 String url = "type=saveNewFleet";
@@ -152,7 +157,7 @@ public class DriverAddFleetAct extends AppCompatActivity implements DriverClickI
         });
 
 
-        upload_img.setOnClickListener(view -> {
+        vehicle_img.setOnClickListener(view -> {
             try {
                 if (ActivityCompat.checkSelfPermission(DriverAddFleetAct.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(DriverAddFleetAct.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
 
@@ -429,11 +434,16 @@ public class DriverAddFleetAct extends AppCompatActivity implements DriverClickI
             super.onPostExecute(result);
             try {
                 if (DriverAddFleetAct.this != null && mDialog.isShowing()) mDialog.dismiss();
-                upload_vehicle_img.setText(file_name);
-                //vehicle_img.setBackgroundResource(0);
-                if (result != null)
-                    // vehicle_img.setImageBitmap(result);
-                    upload_vehicle_img.setText(file_name);
+                {
+//                    upload_vehicle_img.setText(file_name);
+                    identification_pic_txt.setVisibility(View.GONE);
+                    vehicle_img.setBackgroundResource(0);
+                }
+                if (result != null) {
+                    identification_pic_txt.setVisibility(View.GONE);
+                    vehicle_img.setImageBitmap(result);
+//                    upload_vehicle_img.setText(file_name);
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }

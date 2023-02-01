@@ -38,7 +38,7 @@ class DriverLocationSearchFragmentDriverDriver : Fragment(), DriverOnLocationSea
 
     private lateinit var driverOnPlaceSearchedListener: DriverOnLocationSearched
     override fun onLocationSearched(queryString: String) {
-        if (queryString.length > 2) driverOnPlaceSearchedListener.onLocationSearched(queryString)
+        if (queryString.length > 4) driverOnPlaceSearchedListener.onLocationSearched(queryString)
         else mAutoCompleteAdapterDriver.submitList(favouritesList)
     }
 

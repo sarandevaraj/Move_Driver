@@ -66,6 +66,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.mayan.sospluginmodlue.SOSActivity;
+import com.mayan.sospluginmodlue.service.SOSService;
 import com.moovex.ProfileImageSetupClass;
 import com.moovex.SplashActivity;
 import com.moovex.driver.utils.DriverRoundedImageView;
@@ -692,7 +693,7 @@ public class DriverMyStatus extends MainActivityDriver implements ConnectionCall
         });
 
         menu_sos.setOnClickListener(view -> {
-            startSOSService();
+            SOSService();
             drawerLayout.closeDrawers();
         });
 
@@ -1847,6 +1848,11 @@ public class DriverMyStatus extends MainActivityDriver implements ConnectionCall
         DriverSessionSave.saveSession("sos_id", DriverSessionSave.getSession("Id", DriverMyStatus.this), DriverMyStatus.this);
         DriverSessionSave.saveSession("user_type", "d", DriverMyStatus.this);
         startActivity(new Intent(DriverMyStatus.this, SOSActivity.class));
+    }
+    private void SOSService() {
+        DriverSessionSave.saveSession("sos_id", DriverSessionSave.getSession("Id", DriverMyStatus.this), DriverMyStatus.this);
+        DriverSessionSave.saveSession("user_type", "d", DriverMyStatus.this);
+        startService(new Intent(DriverMyStatus.this, SOSService.class));
     }
 
     @Override

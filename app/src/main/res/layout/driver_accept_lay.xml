@@ -554,12 +554,10 @@
                     android:orientation="horizontal"
                     android:visibility="gone">
 
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-
                         android:orientation="horizontal">
 
                         <ImageView
@@ -587,7 +585,6 @@
                                 android:textColor="@color/black" />
 
                         </LinearLayout>
-
 
                     </LinearLayout>
 
@@ -627,18 +624,13 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-
                                 android:orientation="horizontal">
-
 
                                 <TextView
                                     android:id="@+id/waittime_txt"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
-
-
                                     android:layout_weight="1"
-
                                     android:text="00:00:00"
                                     android:textColor="@color/black" />
 
@@ -661,6 +653,7 @@
                     android:layout_above="@+id/searchlay"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
+                    android:visibility="gone"
                     android:background="@color/separator_line" />
 
                 <RelativeLayout
@@ -869,7 +862,7 @@
                     android:layout_height="1dp"
                     android:layout_above="@+id/con_lay"
                     android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
+                    android:layout_marginRight="5dp"
                     android:background="@color/separator_line" />
 
                 <LinearLayout

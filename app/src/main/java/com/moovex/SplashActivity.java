@@ -31,10 +31,12 @@ import com.bumptech.glide.request.target.DrawableImageViewTarget;
 import com.moovex.data.apiData.CompanyDomainResponse;
 import com.moovex.driver.DriverMyStatus;
 import com.moovex.driver.DriverOngoingAct;
+import com.moovex.driver.DriverSettingsAct;
 import com.moovex.driver.DriverTripHistoryAct;
 import com.moovex.driver.DriverUserLoginAct;
 import com.moovex.driver.data.DriverCommonData;
 import com.moovex.driver.data.apiData.DriverApiRequestData;
+import com.moovex.driver.interfaces.AlertListener;
 import com.moovex.driver.interfaces.DriverAPIResult;
 import com.moovex.driver.utils.DriverCL;
 import com.moovex.driver.utils.DriverCToast;
@@ -415,18 +417,18 @@ public class SplashActivity extends AppCompatActivity {
 //                                startService(new Intent(SplashActivity.this, GetCardDetailsService.class));
                             }
                         } else {
-                            errorInSplash(cr.message == null ? DriverNC.getString(R.string.server_con_error) : cr.message);
+                            errorInSplash(cr.message == null ? getString(R.string.server_con_error) : cr.message);
                         }
                     }
                 } else {
-                    errorInSplash(DriverNC.getString(R.string.server_error));
+                    errorInSplash(getString(R.string.server_error));
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<CompanyDomainResponse> call, @NonNull Throwable t) {
                 cancelLoading();
-                errorInSplash(DriverNC.getString(R.string.server_error));
+                errorInSplash(getString(R.string.server_error));
             }
         }));
     }
@@ -955,20 +957,39 @@ public class SplashActivity extends AppCompatActivity {
 
     public void errorInSplash(String message) {
         try {
-            dialog = Utility.alert_view_dialog(SplashActivity.this, "" + DriverNC.getString(R.string.message), "" + message, "" + DriverNC.getString(R.string.try_again), "" + DriverNC.getString(R.string.cancel), false, (dialog, which) -> {
-                dialog.dismiss();
-                Intent intent = getIntent();
-                finish();
-                startActivity(intent);
-            }, (dialog, which) -> {
-                Activity activity = SplashActivity.this;
-                final Intent intent = new Intent(Intent.ACTION_MAIN);
-                intent.addCategory(Intent.CATEGORY_HOME);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                activity.startActivity(intent);
-                activity.finish();
-                dialog.dismiss();
-            }, "");
+
+//            dialog = Utility.alert_view_dialog(SplashActivity.this, "" + DriverNC.getString(R.string.message), "" + message, "" + DriverNC.getString(R.string.try_again), "" + DriverNC.getString(R.string.cancel), false, (dialog, which) -> {
+//                dialog.dismiss();
+//                Intent intent = getIntent();
+//                finish();
+//                startActivity(intent);
+//            }, (dialog, which) -> {
+//                Activity activity = SplashActivity.this;
+//                final Intent intent = new Intent(Intent.ACTION_MAIN);
+//                intent.addCategory(Intent.CATEGORY_HOME);
+//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                activity.startActivity(intent);
+//                activity.finish();
+//                dialog.dismiss();
+//            }, "");
+
+            Utility.actionSheetCancel(SplashActivity.this,"" + message,"" + getString(R.string.try_again), getString(R.string.cancel), false, new AlertListener() {
+                @Override
+                public void onSuccess() {
+                    Intent intent = getIntent();
+                    finish();
+                    startActivity(intent);
+                }
+                @Override
+                public void onFailure() {
+                    Activity activity = SplashActivity.this;
+                    final Intent intent = new Intent(Intent.ACTION_MAIN);
+                    intent.addCategory(Intent.CATEGORY_HOME);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    activity.startActivity(intent);
+                    activity.finish();
+                }
+            });
         } catch (Exception e) {
             e.printStackTrace();
         }

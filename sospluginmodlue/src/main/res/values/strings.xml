@@ -10,7 +10,7 @@
     <string name="emergency">Emergency</string>
     <string name="contact_min_alert">Please select valid contact number</string>
 
-    <string name="str_loc">Needs to update your current location to our server in order to verify our closest driver\'s availability and track the location during trip.</string>
+    <string name="str_loc">Needs to update your current location to our server in order to verify our closest driver\'s availability and track the location during job.</string>
     <string name="sos_contact">Read contacts permission is necessary to pick emergency contact</string>
     <string name="str_phone">Call phone and read phone state permission is necessary contact driver</string>
     <string name="str_media">We would like to access your media in order to set the profile picture</string>

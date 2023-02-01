@@ -42,6 +42,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.DrawableImageViewTarget;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.mayan.sospluginmodlue.SOSActivity;
+import com.mayan.sospluginmodlue.service.SOSService;
 import com.moovex.ProfileImageSetupClass;
 import com.squareup.picasso.Picasso;
 import com.moovex.R;
@@ -141,6 +143,7 @@ public class DriverMeAct extends MainActivityDriver implements OnClickListener, 
     private Uri imageUri;
     private Bitmap downImage;
     private TextView btntaxidetail;
+    private TextView btn_emergency_add;
     private RelativeLayout me_layout;
     private TextView emergency_contact;
     private TextView driverRat;
@@ -224,6 +227,7 @@ public class DriverMeAct extends MainActivityDriver implements OnClickListener, 
         // bankaccnoEdt = (EditText) findViewById(R.id.bankaccnoEdt);
         profileImage = findViewById(R.id.profile_image);
         btntaxidetail = findViewById(R.id.btntaxidetail);
+        btn_emergency_add = findViewById(R.id.btnadd_emergency);
         btntaxidetail.setText(DriverNC.getString(R.string.taxi_detailsu).trim());
         driverRat = findViewById(R.id.driverRat);
         HeadTitle.setText(DriverNC.getResources().getString(R.string.m_me));
@@ -304,7 +308,7 @@ public class DriverMeAct extends MainActivityDriver implements OnClickListener, 
             //               startActivity(new Intent(DriverMeAct.this, SOSActivity.class));
         });
 
-
+        btn_emergency_add.setOnClickListener(v -> StartSOSActivity());
         //Getting Driver Profile
         JSONObject j = new JSONObject();
         try {
@@ -428,6 +432,11 @@ public class DriverMeAct extends MainActivityDriver implements OnClickListener, 
 
     }
 
+    private void StartSOSActivity() {
+        DriverSessionSave.saveSession("sos_id", DriverSessionSave.getSession("Id", DriverMeAct.this), DriverMeAct.this);
+        DriverSessionSave.saveSession("user_type", "d", DriverMeAct.this);
+        startActivity(new Intent(DriverMeAct.this, SOSActivity.class));
+    }
 
     public void HuaweiDeviceAlert() {
 

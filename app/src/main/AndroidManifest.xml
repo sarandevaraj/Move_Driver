@@ -4,6 +4,7 @@
     android:versionCode="11"
     android:versionName="2.1">
 
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="com.adrop.permission.MAPS_RECEIVE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -121,7 +122,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.moovex.driver.files_root"
+            android:authorities="com.moovex.files_root"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
@@ -311,7 +312,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.moovex.driver.files_root"
+            android:authorities="com.moovex.files_root"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

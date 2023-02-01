@@ -42,6 +42,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:inputType="number"
             android:layout_margin="@dimen/pad_5dp"
             android:layout_weight="1"
             android:background="@drawable/border"
@@ -61,10 +62,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#000001"
+                android:background="@color/white"
                 android:text="@string/cancel"
                 android:textAlignment="center"
-                android:textColor="@color/white"
+                android:textColor="@color/button_accept"
                 android:textSize="14sp" />
 
             <Button
@@ -72,10 +73,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/colorAccent"
+                android:background="@color/button_accept"
                 android:text="@string/ok"
                 android:textAlignment="center"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="14sp" />
 
         </LinearLayout>
@@ -113,10 +114,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#000001"
+                android:background="@color/white"
                 android:text="@string/cancel"
                 android:textAlignment="center"
-                android:textColor="@color/white"
+                android:textColor="@color/button_accept"
                 android:textSize="14sp" />
 
             <Button
@@ -124,10 +125,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/colorAccent"
+                android:background="@color/button_accept"
                 android:text="@string/add"
                 android:textAlignment="center"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="14sp" />
 
         </LinearLayout>

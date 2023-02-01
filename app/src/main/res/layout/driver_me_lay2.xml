@@ -391,15 +391,39 @@
                         </LinearLayout>
                     </LinearLayout>
 
-
                     <LinearLayout
-                        android:id="@+id/privacy_lay"
+                        android:id="@+id/emergency_lay"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_20"
                         android:background="@drawable/white_corner_profile"
                         android:orientation="vertical"
                         app:layout_constraintTop_toBottomOf="@+id/personal_details_lay">
+
+
+                        <TextView
+                            android:id="@+id/btnadd_emergency"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/dp_5"
+                            android:background="@color/white"
+                            android:padding="14dp"
+                            android:text="@string/emergency_contact"
+                            android:gravity="center_vertical"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_14"
+                            app:drawableRightCompat="@drawable/google_ic_right_small"
+                            />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/privacy_lay"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/white_corner_profile"
+                        android:orientation="vertical"
+                        app:layout_constraintTop_toBottomOf="@+id/emergency_lay">
 
 
                     <TextView

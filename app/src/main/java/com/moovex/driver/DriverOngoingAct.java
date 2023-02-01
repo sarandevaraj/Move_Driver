@@ -1962,7 +1962,7 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
             TripcancelTxt.setVisibility(View.GONE);
             HeadTitle.setText("" + DriverNC.getResources().getString(R.string.ongoing_journey));
             HeadTitle.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
-            //tripinprogress_lay.setVisibility(View.VISIBLE);
+            tripinprogress_lay.setVisibility(View.VISIBLE);
             pickup_drop_lay.setVisibility(View.GONE);
             contact_lay.setVisibility(View.VISIBLE);
             TripcancelTxt.setVisibility(View.GONE);
@@ -2409,7 +2409,7 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
                         card_view_pickup.setRadius(0);
                         view_line_trip.setVisibility(View.GONE);
                         HeadTitle.setText("" + DriverNC.getResources().getString(R.string.ongoing_journey));
-                        // tripinprogress_lay.setVisibility(View.VISIBLE); //hide
+                         tripinprogress_lay.setVisibility(View.VISIBLE); //hide
                         pickup_drop_lay.setVisibility(View.GONE);
                         contact_lay.setVisibility(View.VISIBLE);
                         contact_txt.setVisibility(View.VISIBLE);
@@ -3224,7 +3224,7 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
                                     card_view_pickup.setRadius(0);
                                     view_line_trip.setVisibility(View.GONE);
                                     HeadTitle.setText(DriverNC.getResources().getString(R.string.tripprogress));
-                                    //tripinprogress_lay.setVisibility(View.VISIBLE); //hide
+                                    tripinprogress_lay.setVisibility(View.VISIBLE); //hide
                                     pickup_drop_lay.setVisibility(View.GONE);
                                     contact_lay.setVisibility(View.GONE);
                                     contact_txt.setVisibility(View.VISIBLE);

@@ -7,6 +7,7 @@ import android.content.res.Configuration;
 import android.util.Log;
 
 import com.moovex.R;
+import com.moovex.SplashActivity;
 import com.moovex.driver.DriverUserLoginAct;
 import com.moovex.driver.data.DriverCommonData;
 import com.moovex.driver.interfaces.DriverAPIResult;

@@ -201,7 +201,7 @@ public class DriverPayuncardAct extends MainActivityDriver implements OnClickLis
                 e.printStackTrace();
             }
 
-            callurl_paymentgateway();
+//            callurl_paymentgateway();
         }
     }
 
@@ -540,7 +540,7 @@ public class DriverPayuncardAct extends MainActivityDriver implements OnClickLis
             j.put("creditcard_cvv", creditcard_cvv);
             j.put("expmonth", "" + expmonth);
             j.put("expyear", "" + expyear);
-            j.put("pay_mod_id", "2");
+            j.put("pay_mod_id", "3");
             j.put("passenger_discount", "");
             j.put("minutes_traveled", f_minutes_traveled);
             j.put("minutes_fare", f_minutes_fare);

@@ -3,20 +3,14 @@ package com.mayan.sospluginmodlue
 import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
-import android.app.Dialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.os.Bundle
 import android.os.Handler
 import android.provider.ContactsContract
-import android.text.InputType
 import android.util.Log
 import android.view.View
-import android.view.ViewGroup
-import android.view.Window
-import android.view.WindowManager
-import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
@@ -39,7 +33,6 @@ import com.mayan.sospluginmodlue.service.ServiceGenerator
 import com.mayan.sospluginmodlue.util.SessionSave
 import jp.wasabeef.recyclerview.adapters.SlideInLeftAnimationAdapter
 import kotlinx.android.synthetic.main.sos__activity_main.*
-import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -54,6 +47,7 @@ class SOSActivity : AppCompatActivity(), ItemClicked {
         callDeleteApi(id)
     }
 
+    lateinit private var mBottomSheetDialog: BottomSheetDialog
     private var langcountry="";
     var contactsDataList: ArrayList<ContactsData> = ArrayList()
     var skeletonScreen: RecyclerViewSkeletonScreen? = null
@@ -157,7 +151,7 @@ class SOSActivity : AppCompatActivity(), ItemClicked {
 //        dialog.show()
 //        dialog.getWindow()?.setAttributes(lp)
 
-        val mBottomSheetDialog = BottomSheetDialog(this)
+        mBottomSheetDialog = BottomSheetDialog(this)
         val forgetView: View =
             this.getLayoutInflater().inflate(R.layout.sos_contact_dialog_view, null)
         mBottomSheetDialog.setContentView(forgetView)
@@ -177,7 +171,7 @@ class SOSActivity : AppCompatActivity(), ItemClicked {
                 try {
                     callAddApi(mbl_number.text.toString(), name.text.toString(),SessionSave.getSession("country_code", this@SOSActivity))
 //                    no_data_lay?.visibility = View.GONE
-                    mBottomSheetDialog.cancel()
+
                 } catch (e: java.lang.Exception) {
                     e.printStackTrace()
                 }
@@ -292,6 +286,7 @@ class SOSActivity : AppCompatActivity(), ItemClicked {
                     } else {
                         errorMessage(getString(R.string.please_try_again))
                     }
+                    this@SOSActivity.mBottomSheetDialog.cancel()
                 } else {
                     // more_info.setText(emergencyListData?.message)
                     Toast.makeText(this@SOSActivity, emergencyListData?.message, Toast.LENGTH_LONG).show()
@@ -474,6 +469,7 @@ class SOSActivity : AppCompatActivity(), ItemClicked {
     }
 
     public override fun onActivityResult(requestCode: Int, resultCode: Int, datas: Intent?) {
+        super.onActivityResult(requestCode, resultCode, datas)
         if (resultCode == Activity.RESULT_OK && datas != null) {
             val contactData = datas.data
             val c = contentResolver.query(contactData!!, null, null, null, null)

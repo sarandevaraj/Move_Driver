@@ -15,7 +15,7 @@
     <color name="dark_transparent">#24000000</color>
     <color name="light_transparent">#16000000</color>
 
-    <color name="button_accept">#F35454</color>
+    <color name="button_accept">#000000</color>
     <color name="button_reject">#05DBAA</color>
     <color name="black">#000000</color>
 </resources>

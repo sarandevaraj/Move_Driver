@@ -44,7 +44,7 @@
     <string name="book_taxi">Book Vehicle</string>
     <string name="bookedtaxi">You have booked the Vehicle.</string>
     <string name="book_now">Book Now</string>
-    <string name="confirm_booking">Confirm later Trips?</string>
+    <string name="confirm_booking">Confirm later Jobs?</string>
     <string name="select_payment">Please select the payment type</string>
 
 
@@ -55,8 +55,8 @@
 
     <!-- Ongoing Act -->
     <string name="back">Back</string>
-    <string name="Trip_in_progress">Trip in Progress</string>
-    <string name="intransit">Trip in Progress</string>
+    <string name="Trip_in_progress">Job in Progress</string>
+    <string name="intransit">Job in Progress</string>
     <string name="Confirmation">Confirmation</string>
 
     <!-- If you cancel the trip, cancellation fee will be detected from your card ! -->
@@ -79,8 +79,8 @@
     <string name="thank_you">Thank You</string>
 
 
-    <string name="payment_complete">Trip Completed</string>
-    <string name="thanksforflag">Thank you for using Movex. Make your next trip even more enjoyable.</string>
+    <string name="payment_complete">Job Completed</string>
+    <string name="thanksforflag">Thank you for using Movex. Make your next Job even more enjoyable.</string>
     <string name="ratedriver">Rate Your Driver</string>
     <string name="shareride">Share</string>
 
@@ -101,7 +101,7 @@
     <!-- menu -->
     <string name="menu">Menu</string>
     <string name="menu_gettaxi">Track my vehicle</string>
-    <string name="menu_mybooking">My Trips</string>
+    <string name="menu_mybooking">My Jobs</string>
     <string name="menu_payment">Payment Options</string>
     <string name="menu_profile">Profile</string>
     <string name="menu_favourites">Favourite</string>
@@ -116,9 +116,9 @@
     <!-- trip details -->
     <string name="place">Place</string>
 
-    <string name="jobref">Trip ID</string>
+    <string name="jobref">Job ID</string>
 
-    <string name="t_book">Trip Time</string>
+    <string name="t_book">Job Time</string>
 
 
     <!-- Aboutact -->
@@ -150,12 +150,12 @@
     <string name="reason2">2.Driver did not respond</string>
     <string name="reason3">3.Wrong address shown</string>
     <string name="reason4">4.Changed the travel plan</string>
-    <string name="reason5">5.Trip placed in error</string>
+    <string name="reason5">5.Job placed in error</string>
     <string name="reason6">6.Others</string>
 
 
     <string name="book_again">Book Again</string>
-    <string name="tripdetail">Trip Details</string>
+    <string name="tripdetail">Job Details</string>
     <string name="canceling_taxi">Cancelling Request</string>
     <string name="fav_pick_location">Favourite Pick up Location</string>
     <string name="fav_drop_location">Favourite Drop off Location</string>
@@ -182,7 +182,7 @@
         <item>100%</item>
     </string-array>
     <string name="eta">ETA</string>
-    <string name="hour_must_greater_than">Please make sure that the trip is scheduled after at least an hour from now.</string>
+    <string name="hour_must_greater_than">Please make sure that the job is scheduled after at least an hour from now.</string>
     <string name="on_going">On Going</string>
 
     <string name="permission_not_granted">Unable to perform selected action because permissions are not granted.</string>
@@ -272,14 +272,14 @@
     <string name="type_your_comment">Type your comments</string>
     <string name="contact_number">Contact number</string>
     <string name="z_split_fare_with">Split Fare with</string>
-    <string name="z_split_charged">Your trip will be charged</string>
+    <string name="z_split_charged">Your job will be charged</string>
     <string name="fblogin">Sign in with Facebook</string>
     <string name="cancel_fare">Cancellation Fare</string>
     <string name="estimate_fare">Estimated Fare</string>
     <string name="travelling_time">Travelling Time :</string>
     <string name="estimated_fare">Estimated Fare :</string>
     <string name="e_receipt">E-Receipt</string>
-    <string name="mybookings">My Trips</string>
+    <string name="mybookings">My Jobs</string>
     <string name="add_card">Add Card</string>
     <string name="edit_card">Edit Card</string>
     <string name="nocard">You don\'t have credit card details</string>
@@ -419,7 +419,7 @@
     <!--Add stop-->
     <string name="add_stop_desc">Adding stops may vary your fare. On a kind notice,do not add stops on the way of drop location to save time</string>
     <string name="add_stop_desc_title">Visit multiple places by adding stops</string>
-    <string name="pickUpCannotChanged">Pick up location cannot be changed once trip started</string>
+    <string name="pickUpCannotChanged">Pick up location cannot be changed once job started</string>
 
 
     <string name="found_search">Found not to show search</string>
@@ -431,7 +431,7 @@
 
     <!--Cancellation module-->
     <string name="pay_by">Pay by</string>
-    <string name="payAtNextTrip">Pay in next trip</string>
+    <string name="payAtNextTrip">Pay in next job</string>
     <string name="select_card">Select your card</string>
 
 
@@ -443,7 +443,7 @@
 
 
     <string name="confirm_delete">Are you sure want to delete favourite?</string>
-    <string name="book_ride">Book a Trip</string>
+    <string name="book_ride">Book a Job</string>
     <string name="book_delivery">Book Your Delivery</string>
     <string name="Need_proper_loc">Couldn\'t get your proper location, Please move to coverage area.</string>
     <string name="wallet_amount_alert">You have insufficient wallet amt. Do you want to recharge?</string>
@@ -451,7 +451,7 @@
 
     <string name="change_drop">CHANGE DROP</string>
     <string name="continueStr">CONTINUE</string>
-    <string name="restrict_alert">Drop location is outside city limits.Continue trip choose Packages</string>
+    <string name="restrict_alert">Drop location is outside city limits.Continue job choose Packages</string>
     <string name="you_are_offline">You are Now Offline</string>
     <string name="need_pickup_address">Check your pickup address</string>
     <string name="popular">POPULAR</string>
@@ -471,7 +471,7 @@
     <string name="privacy_camera_text"> We access your camera for taking photos to set your profile image.</string>
     <string name="privacy_device_information"> We collect and monitor your device information, such as device name, model, battery level, device manufacturer, SDK version, Play service version, available memory, available &amp; total storage, version code, version name, device token, device ID and device time to access app usage and avoid any unauthorized use. </string>
     <string name="privacy_contacts_text">We collect your contact information to ensure that you can reach your friends and family during an emergency situation by clicking the SOS button.</string>
-    <string name="privacy_location_text">We collect and monitor your current location to provide trip and delivery requests and track the trip and delivery progress</string>
+    <string name="privacy_location_text">We collect and monitor your current location to provide job and delivery requests and track the Job and delivery progress</string>
     <string name="change_permission_in_phone">You can change the above permissions from Phone Settings, at any time.</string>
     <string name="proceed">Proceed</string>
     <string name="store_data">See how we store, use and secure your data</string>
@@ -489,7 +489,7 @@
 \n(3)Contract data (e.g., registration time and manner, and status) to review app usage;
 \n(4)Vehicle information (e.g., vehicle number, vehicle model, vehicle owner name, manufacturer and vehicle image);
 \n(5)Driving license, driving license expiry date and driving license image;
-\n(6)Location information to provide accurate ride trip and delivery requests;
+\n(6)Location information to provide accurate ride job and delivery requests;
 \n(7)Device information (e.g.,device manufacturer, device token, device ID and device time) to access app usage and avoid unauthorized access;
 \n(8)Camera, photos and gallery to set and update profile photo;
 \n(9)Internet information to verify the availability of network and Wifi connectivity;
@@ -539,13 +539,13 @@
     <string name="done"> DONE </string>
     <string name="signin">Sign In</string>
     <string name="enter_your_mobile_number">Please enter your mobile number</string>
-    <string name="check_internet">Please Take New Trips</string>
+    <string name="check_internet">Please Take New Jobs</string>
     <string name="t_ok"> OK </string>
     <string name="enter_mobile_number">Please enter your mobile number</string>
     <string name="enter_the_password">Please enter your password</string>
     <string name="pwd_min">Password should be minimum 6 characters</string>
     <string name="confirmlogout">Are you sure you want to logout?</string>
-    <string name="confirm_complete">Are you sure you want to complete this trip?</string>
+    <string name="confirm_complete">Are you sure you want to complete this job?</string>
 
     <!-- HomeActivity -->
     <string name="m_me"> Profile </string>
@@ -582,9 +582,9 @@
     <string name="current_location">Current Location</string>
 
     <!-- JobsAct -->
-    <string name="trip_history">Trip History</string>
-    <string name="trip_details">Trip Details</string>
-    <string name="past_booking">Past Trips</string>
+    <string name="trip_history">Job History</string>
+    <string name="trip_details">Job Details</string>
+    <string name="past_booking">Past Jobs</string>
 
     <!-- Notification Act -->
     <string name="name">Name</string>
@@ -596,7 +596,7 @@
     <string name="secondstxt">Sec</string>
     <string name="accept"> ACCEPT </string>
     <string name="decline"> DECLINE </string>
-    <string name="Trip_Request">Trip Request</string>
+    <string name="Trip_Request">Job Request</string>
     <string name="seconds_to_left">LEFT TO ACCEPT</string>
 
     <!-- Ongoing Act -->
@@ -605,13 +605,13 @@
     <string name="stop_waiting">Stop Waiting</string>
     <string name="start_waiting">Start Waiting</string>
     <string name="heading_ongoing">Waiting For Passenger</string>
-    <string name="pass_onboard">Start Trip</string>
-    <string name="ongoing_journey">Trip in Progress</string>
+    <string name="pass_onboard">Start Job</string>
+    <string name="ongoing_journey">Job in Progress</string>
     <string name="waiting_time_txt">Waiting Time</string>
-    <string name="arvd_destination">End Trip</string>
+    <string name="arvd_destination">End Job</string>
     <string name="ive_arrived">I\'ve Arrived</string>
     <string name="pickup_passenger">Pickup Passenger</string>
-    <string name="you_are_in_trip">You\'re already in a trip!</string>
+    <string name="you_are_in_trip">You\'re already in a job!</string>
     <string name="pickuploc"> Pick up Location </string>
     <string name="droploc"> Drop Location </string>
     <string name="picklocation"> Pick up Location </string>
@@ -639,9 +639,9 @@
 
 
     <!-- Job Done Act -->
-    <string name="trip_completed">Trip Completed</string>
+    <string name="trip_completed">Job Completed</string>
 
-    <string name="trip_id">Trip ID</string>
+    <string name="trip_id">Job ID</string>
     <string name="p_congrats"> Payment Completed </string>
     <string name="p_main"> Back To Home </string>
 
@@ -657,7 +657,7 @@
     <string name="invite_whatsapp">Whats App</string>
     <string name="invite_twitter">Twitter</string>
     <string name="invite_sharevia">Share Via</string>
-    <string name="invite_frdrides">When a driver rides the trip with your code</string>
+    <string name="invite_frdrides">When a driver rides the job with your code</string>
     <string name="invite_youearn">You Earn</string>
     <string name="invite_friend">Invite Friends</string>
 
@@ -673,7 +673,7 @@
     <string name="t_droploc">Drop Location</string>
     <string name="t_droptime">Drop Time</string>
     <string name="t_distance">Distance Travelled</string>
-    <string name="t_tripduration">Trip Duration</string>
+    <string name="t_tripduration">Job Duration</string>
 
     <!-- pay uncard -->
     <string name="heading_payuncard">Pay with new card</string>
@@ -687,7 +687,7 @@
     <string name="ok">OK</string>
     <string name="select_language">Select Language</string>
     <string name="discount">Discount</string>
-    <string name="trip_fare">Trip Fare</string>
+    <string name="trip_fare">Job Fare</string>
     <string name="enter_the_first_name">Please enter your first name</string>
     <string name="enter_the_last_name">Please enter your last name</string>
     <string name="enter_the_card_number">Please enter your card number</string>
@@ -700,7 +700,7 @@
     <!-- Ongoing Trip Act -->
     <string name="yes">Yes</string>
     <string name="no">No</string>
-    <string name="cancel_in_going_trip">Are you sure want to cancel the trip?</string>
+    <string name="cancel_in_going_trip">Are you sure want to cancel the job?</string>
 
     <!-- If you cancel the trip, cancellation fee will be detected from your card ! -->
 
@@ -768,16 +768,16 @@
     <!-- signup -->
 
     <string name="referral"> Referral </string>
-    <string name="trip">Trip</string>
-    <string name="trips1">Trips</string>
+    <string name="trip">Job</string>
+    <string name="trips1">Jobs</string>
 
-    <string name="Lasttrip">Last Trip</string>
-    <string name="Last2trip">Last 2 Trips</string>
-    <string name="Last3trip">Recent Trips</string>
+    <string name="Lasttrip">Last Job</string>
+    <string name="Last2trip">Last 2 Jobs</string>
+    <string name="Last3trip">Recent Jobs</string>
 
     <string name="waitingpassenger">Waiting For Passenger</string>
-    <string name="tripprogress">Trip in Progress</string>
-    <string name="tripdetails">Trip Details</string>
+    <string name="tripprogress">Job in Progress</string>
+    <string name="tripdetails">Job Details</string>
 
 
     <!-- paymentoption lay -->
@@ -795,7 +795,7 @@
     <!-- farecalculator lay -->
     <string name="farecal"> Fare </string>
     <string name="string_tips">Tips</string>
-    <string name="round_trip"> Round Trip </string>
+    <string name="round_trip"> Round Job </string>
     <string name="f_km"> km </string>
     <string name="f_float"> 0.0 </string>
     <string name="f_currsymbol"> $ </string>
@@ -833,18 +833,18 @@
     <string name="wallet_history">Withdraw History</string>
     <string name="no_data">No data found</string>
     <string name="no_ref_available">No referrals are available</string>
-    <string name="no_trips_available">No trips are available</string>
+    <string name="no_trips_available">No jobs are available</string>
     <string name="back_home">Back To Home</string>
     <string name="enter_the_mobile_number">Please enter your mobile number</string>
     <string name="taxi_detailsu">Vehicle Details</string>
 
 
     <!-- Referal Code -->
-    <string name="referal_code">Enter trip referral code</string>
+    <string name="referal_code">Enter job referral code</string>
     <string name="Hreferal"> Referral Code </string>
     <string name="referal_amount">Referral Amount</string>
-    <string name="trip_amount">Trip Amount</string>
-    <string name="trip_Amount">Trip amount</string>
+    <string name="trip_amount">Job Amount</string>
+    <string name="trip_Amount">Job amount</string>
     <string name="payment_pending">Payment request in pending </string>
 
 
@@ -864,7 +864,7 @@
     <string name="Referalwithdraw_request">Referral Withdraw Request</string>
     <string name="payment_availed">Payment Availed</string>
     <string name="payment_request">Payment Request in Pending </string>
-    <string name="req_model">Trip Requested for </string>
+    <string name="req_model">Job Requested for </string>
     <string name="track_now">Track Now</string>
     <string name="fare2">123</string>
     <string name="droplocnew">Drop Location(Optional)</string>
@@ -899,8 +899,8 @@
 
     <string name="filter">Filter</string>
     <string name="up_coming">Up Coming</string>
-    <string name="new_trips">New Trips</string>
-    <string name="past_trips">Past Trips</string>
+    <string name="new_trips">New Jobs</string>
+    <string name="past_trips">Past Jobs</string>
 
 
     <!-- Referal Code -->
@@ -914,10 +914,10 @@
     <string name="enter_dest">Enter Drop Location</string>
     <string name="above">Above</string>
     <string name="below">Below</string>
-    <string name="start_trip">Start Trip</string>
-    <string name="end_trip">End Trip</string>
+    <string name="start_trip">Start Job</string>
+    <string name="end_trip">End Job</string>
 
-    <string name="trips">8 Trips</string>
+    <string name="trips">8 Jobs</string>
     <string name="Estimated">Estimated Amount</string>
     <string name="Week">This week</string>
     <string name="confirm_call">Are you sure,You want to call passenger?</string>
@@ -934,7 +934,7 @@
     <string name="today_hdr">Today</string>
 
 
-    <string name="tap_triphistory">Tap the trip history link to see your ongoing and past trip details</string>
+    <string name="tap_triphistory">Tap the job history link to see your ongoing and past Job details</string>
 
 
     <string name="completed">Completed</string>
@@ -954,7 +954,7 @@
     <string name="have_promocode">Have a  Promocode?</string>
     <!-- card registration -->
     <string name="reg_promocode">Pay by Referral Code</string>
-    <string name="walletmsg">Cashless, hassle-free trips with Movex wallet</string>
+    <string name="walletmsg">Cashless, hassle-free jobs with Movex wallet</string>
 
     <string name="reg_enterprcode">Please enter your Promo code</string>
     <string name="minimum_fare">Minimum Fare</string>
@@ -968,7 +968,7 @@
     <string name="total_distance">Total Distance</string>
     <string name="confir_complete_payment">Are you sure you want to Complete the Payment</string>
     <string name="confir_tips_payment">Are you sure you want to Complete the Payment without tips</string>
-    <string name="endter_valid_fare">Please make sure the trip fare before proceed.</string>
+    <string name="endter_valid_fare">Please make sure the job fare before proceed.</string>
 
 
     <string name="base_fare">Base Fare</string>
@@ -986,17 +986,17 @@
     <string name="additonal_time_fare">Fare for Additional Time</string>
     <string name="additonal_distance_fare">Fare for Additional</string>
 
-    <string name="triptype">Trip type</string>
+    <string name="triptype">Job type</string>
     <string name="hrs">hr(s)</string>
-    <string name="trip_type_outstation">Outstation Trip</string>
-    <string name="trip_type_rental">Rental Trip</string>
-    <string name="trip_type_normal">Local Trip</string>
-    <string name="trip_cost">Trip cost</string>
+    <string name="trip_type_outstation">Outstation Job</string>
+    <string name="trip_type_rental">Rental Job</string>
+    <string name="trip_type_normal">Local Job</string>
+    <string name="trip_cost">Job cost</string>
     <string name="net_total">Net Total</string>
 
     <string name="notiy_lanch_app">Open app</string>
     <string name="calculation_progress">Calculation Inprogress</string>
-    <string name="trip_summary">Trip Summary</string>
+    <string name="trip_summary">Job Summary</string>
     <string name="tap_drop">Tap your current Location on Map</string>
     <string name="use_map">Use Map</string>
     <string name="Selected_Week">Selected  Week</string>
@@ -1012,7 +1012,7 @@
     <string name="speed_ongoing">Speed</string>
     <string name="wait_time_ongoing">Waiting Time</string>
 
-    <string name="no_going_trip">No upcoming trips</string>
+    <string name="no_going_trip">No upcoming jobs</string>
     <string name="signup">Sign Up</string>
     <string name="address_not_found">Address not found</string>
     <string name="sucessfull_driver_registartion">Thanks for register as driver. We will get back to you shortly!</string>
@@ -1075,7 +1075,7 @@
     <string name="distance_calcuation_inprogress">Distance calculation in progress</string>
     <string name="email_optional">Email (Optional)</string>
     <string name="search_stop_hint">Enter stop location</string>
-    <string name="idle_stop">You seem to be idle for long time. Kindly click here to get a trip</string>
+    <string name="idle_stop">You seem to be idle for long time. Kindly click here to get a job</string>
     <string name="trip_stop">You seem to be idle for long time. Kindly click here to update the status</string>
 
 
@@ -1094,12 +1094,12 @@
 
     <string name="tap_loc">Tap to view Current location</string>
     <string name="withdraw_history">View transaction</string>
-    <string name="current_trips">Currently no trips available!</string>
+    <string name="current_trips">Currently no jobs available!</string>
     <string name="corporate">Corporate</string>
 
     <string name="passenger_phone">Call Passenger</string>
-    <string name="schedule_trip">Schedule Trip</string>
-    <string name="corporate_trip">Corporate Trip</string>
+    <string name="schedule_trip">Schedule Job</string>
+    <string name="corporate_trip">Corporate Job</string>
     <string name="app_name">Movex driver</string>
     <string name="become_driver">Become a Driver</string>
     <string name="become_passenger">Become a Passenger</string>
@@ -1107,22 +1107,22 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="sign_up_acc">Enter below details to complete the sign up process</string>
     <string name="history">History</string>
-    <string name="today_trip">Today\'s Trip</string>
-    <string name="accept_ride">Accept Trip</string>
+    <string name="today_trip">Today\'s Job</string>
+    <string name="accept_ride">Accept Job</string>
     <string name="notes_txt">Notes</string>
     <string name="dismiss">Dismiss</string>
     <string name="locate_on_map">Locate on Map</string>
-    <string name="newride">+ New Trip</string>
-    <string name="my_ride">Trips</string>
+    <string name="newride">+ New Job</string>
+    <string name="my_ride">Jobs</string>
     <string name="notification_setting">Notification Settings</string>
     <string name="call_helpline">Call Helpline</string>
     <string name="helpline">Helpline</string>
     <string name="confirm_call_admin">Are you sure,You want to call HelpLine?</string>
     <string name="below_miles">Below 25 Miles</string>
     <string name="above_miles">Above 25 Miles</string>
-    <string name="total_trips">Total Trips</string>
+    <string name="total_trips">Total Jobs</string>
     <string name="total_online">Total Online</string>
-    <string name="thanks_msg">Your Trips has been Scheduled. We will get back to you with Driver Details</string>
+    <string name="thanks_msg">Your Jobs has been Scheduled. We will get back to you with Driver Details</string>
     <string name="pay_back">Pay Back</string>
     <string name="add_balance_amount">Add Balance Amount to Passenger Wallet</string>
     <string name="enter_balance_amount">Enter Balance Amount</string>
@@ -1144,7 +1144,7 @@
     <string name="select_the_model">Please select your model</string>
     <string name="enter_vehicle_manufacturer">Please enter your vehicle manufacturer</string>
     <string name="upload_image_file">Please upload your vehicle image</string>
-    <string name="request_ride">Request Trip</string>
+    <string name="request_ride">Request Job</string>
     <string name="change_fleet">Are you sure want to change fleet </string>
     <string name="total_preferences_fare">Total Options Fare</string>
     <string name="preferences_fare">Options Fare</string>
@@ -1157,12 +1157,17 @@
     <string name="setDate">Set date</string>
     <string name="setTime">Set time</string>
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
-    <string name="trip_cancelled">Trip Cancelled</string>
-    <string name="trip_cancelled_by_passenger">Trip cancelled by passenger</string>
-    <string name="trip_completed_by_passenger_using_wallet">Trip completed by passenger wallet</string>
+    <string name="trip_cancelled">Job Cancelled</string>
+    <string name="trip_cancelled_by_passenger">Job cancelled by passenger</string>
+    <string name="trip_completed_by_passenger_using_wallet">Job completed by passenger wallet</string>
     <string name="wait_tips">Wait until passenger pay the tip or Disable the tip option and continue</string>
     <string name="delivery_fare">Delivery Fare</string>
     <string name="welcome_to_">Welcome to Movex</string>
     <string name="edit_profile">Edit Profile</string>
+    <string name="fleet_already_assigned">Fleet is already assigned!</string>
+
+    <string name="upload_identification_pic">Upload Vehicle Image as jpg,jpeg \n or png file only</string>
+    <string name="upload_photo">Upload Photo</string>
+
 
 </resources>
