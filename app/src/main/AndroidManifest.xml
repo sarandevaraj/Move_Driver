@@ -66,6 +66,10 @@
             android:theme="@style/Mymaterialact"
             android:windowSoftInputMode="adjustPan|stateHidden" />
 
+        <activity android:name=".SignatureAct"
+            android:theme="@style/Mymaterialact"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
+
         <!--
                 <service android:name=".MyFirebaseInstanceIDService">
                     <intent-filter>
@@ -423,7 +427,13 @@
             android:windowSoftInputMode="adjustPan|stateHidden" />
 
         <activity
-            android:name="com.moovex.driver.DriverChatWebviewAct"
+            android:name=".DriverFirebaseChatWebView"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyMaterialTheme"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+
+        <activity
+            android:name=".driver.DriverChatWebviewAct"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustResize|stateHidden" />

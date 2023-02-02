@@ -1164,6 +1164,12 @@
     <string name="delivery_fare">Delivery Fare</string>
     <string name="welcome_to_">Welcome to Movex</string>
     <string name="edit_profile">Edit Profile</string>
+    <string name="clear">Clear</string>
+    <string name="draw_signature">Draw Signature</string>
+    <string name="complete">Complete</string>
+    <string name="force_complete">Force Complete</string>
+    <string name="sign_required">Signature is Required</string>
+    <string name="chat_txt">Chat</string>
     <string name="fleet_already_assigned">Fleet is already assigned!</string>
 
     <string name="upload_identification_pic">Upload Vehicle Image as jpg,jpeg \n or png file only</string>

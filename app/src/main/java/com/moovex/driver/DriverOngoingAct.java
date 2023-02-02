@@ -79,7 +79,9 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.google.maps.android.PolyUtil;
 import com.mayan.sospluginmodlue.service.SOSService;
+import com.moovex.DriverFirebaseChatWebView;
 import com.moovex.ProfileImageSetupClass;
+import com.moovex.SignatureAct;
 import com.squareup.picasso.Picasso;
 import com.moovex.BuildConfig;
 import com.moovex.R;
@@ -210,15 +212,17 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
     private ImageView pickup_pin;
     private CardView drop_lay, card_view_pickup;
     private TextView order_details;
-    private TextView contact_txt, backup, back_up, mapInfoTxt, chatTxt;
+    private TextView contact_txt, backup, back_up, mapInfoTxt;
     private TextView CurrentlocationTxt, pickup_location_txt, txt_pickup, txt_drop;
     private TextView droplocationTxt, tv_notes, TripcancelTxt;
     private TextView nodataTxt, passengerphoneTxt, passnameTxt, speedTxt, vichle_name;
     private TextView HeadTitle, CancelTxt;
     private TextView waitingTimeTxt, total_km;
-    private LinearLayout lay_call;
+    private LinearLayout lay_call,chatTxt;
     private TextView preference;
     private boolean haspreference = false;
+    private boolean force_complete = false;
+    private String signature = "";
     BroadcastReceiver listener = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -450,6 +454,7 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
 
     @Override
     protected void onResume() {
+        cancelLoading();
         super.onResume();
         LocalDriverDistanceCalculation.registerDistanceInterface(DriverOngoingAct.this);
     }
@@ -609,7 +614,6 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
         card_bottom_lay = findViewById(R.id.card_bottom_lay);
         card_bottom_lay.setBackgroundResource(R.drawable.corner_over_wallet);
         card_bottom_lay.setCardElevation(20);
-        chatTxt.setVisibility(View.GONE);
         fav_icon_drop = findViewById(R.id.drop_loc_select);
         fav_icon_drop.setVisibility(View.GONE);
         if (dropppp.getVisibility() == View.GONE) {
@@ -839,8 +843,7 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
 
         chatTxt.setOnClickListener(v -> {
 
-            Intent in = new Intent(DriverOngoingAct.this, DriverChatWebviewAct.class);
-            in.putExtra("type", "2");
+            Intent in = new Intent(DriverOngoingAct.this, DriverFirebaseChatWebView.class);
             in.putExtra("trip_id", DriverSessionSave.getSession("trip_id", DriverOngoingAct.this));
             startActivity(in);
         });
@@ -1376,6 +1379,29 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
                     LocalDriverDistanceCalculation.newInstance(DriverOngoingAct.this).haversine(latitude1, longitude1, latitude1, longitude1);
                 }
             }
+        } else if (resultCode == RESULT_OK && requestCode == 301) {
+            if (data != null) {
+                Bundle result = data.getExtras();
+                if (result != null) {
+                    signature = result.getString("sign");
+                    force_complete = result.getBoolean("force_complete");
+                    endTrip();
+                }
+            }
+        }
+    }
+
+
+    private void endTrip() {
+        showLoading(DriverOngoingAct.this);
+//        getCurrentLocation(LOCATION_REQUEST_TYPE_COMPLETE_TRIP);
+        if (mLastLocation != null && mLastLocation.getAccuracy() <= slabAccuracy) {
+            latitude1 = mLastLocation.getLatitude();
+            longitude1 = mLastLocation.getLongitude();
+            new DriverGetAddressFromLatLng(DriverOngoingAct.this, new LatLng(latitude1, longitude1), DriverOngoingAct.this, "").execute();
+        } else {
+            cancelLoading();
+            RetryLocationPopUp();
         }
     }
 
@@ -1560,8 +1586,17 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
             case "2":
                 dialog.dismiss();
                 if (runningFor() > 10 && !LocationUpdate.DISTANCE_CALCULATION_INPROGRESS) {
-                    showLoading(DriverOngoingAct.this);
-                    getCurrentLocation(LOCATION_REQUEST_TYPE_COMPLETE_TRIP);
+
+                    if (SessionSave.getSession("is_signature_enable", DriverOngoingAct.this).equals("1")) {
+                        Intent intent = new Intent(DriverOngoingAct.this, SignatureAct.class);
+                        startActivityForResult(intent, 301);
+                    } else {
+                        signature = "";
+                        force_complete = true;
+                        endTrip();
+                    }
+//                    showLoading(DriverOngoingAct.this);
+//                    getCurrentLocation(LOCATION_REQUEST_TYPE_COMPLETE_TRIP);
                 } else {
                     cancelLoading();
                     DriverCToast.ShowToast(DriverOngoingAct.this, DriverNC.getString(R.string.distance_calcuation_inprogress));
@@ -1652,8 +1687,18 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
             @Override
             public void onSuccess() {
                 if (runningFor() > 10 && !LocationUpdate.DISTANCE_CALCULATION_INPROGRESS) {
-                    showLoading(DriverOngoingAct.this);
-                    getCurrentLocation(LOCATION_REQUEST_TYPE_COMPLETE_TRIP);
+
+//                    showLoading(DriverOngoingAct.this);
+//                    getCurrentLocation(LOCATION_REQUEST_TYPE_COMPLETE_TRIP);
+
+                    if (SessionSave.getSession("is_signature_enable", DriverOngoingAct.this).equals("1")) {
+                        Intent intent = new Intent(DriverOngoingAct.this, SignatureAct.class);
+                        startActivityForResult(intent, 301);
+                    } else {
+                        signature = "";
+                        force_complete = true;
+                        endTrip();
+                    }
                 } else {
                     cancelLoading();
                     DriverCToast.ShowToast(DriverOngoingAct.this, DriverNC.getString(R.string.distance_calcuation_inprogress));
@@ -2417,7 +2462,6 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
                         trip_view.setVisibility(View.VISIBLE);
                         HeadTitle.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
                         TripcancelTxt.setVisibility(View.GONE);
-                        //chatTxt.setVisibility(View.GONE);
                         butt_onboard.setText("" + DriverNC.getResources().getString(R.string.arvd_destination));
                         speed_lay.setVisibility(View.GONE);
 
@@ -2545,6 +2589,7 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
         public CompleteTrip(final String url, final Double latitude, final Double longitude) {
             DriverSystems.out.println("distanceeeeee " + stopLists.size() + "____" + DriverSessionSave.getGoogleDistance(DriverOngoingAct.this));
             try {
+
                 final JSONObject j = new JSONObject();
                 DriverCommonData.current_trip_accept = 0;
 
@@ -2564,8 +2609,12 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
                 String curVersion = BuildConfig.VERSION_NAME;
                 j.put("driver_app_version", curVersion);
                 j.put("new_distance", localDistance);
+                j.put("signature", signature);
+                j.put("signature_verify", force_complete ? "0" : "1");
                 j.put("stops", new JSONArray(new Gson().toJson(stopLists)));
                 boolean distanceCalcInprogress = false;
+
+
 
                /* JSONArray wayData = SessionSave.ReadGoogleWaypoints(OngoingAct.this);
                 Systems.out.println("WayDistance**" + j);
@@ -2575,7 +2624,6 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
                         if (wayPointsData.getDist() == 0.0)
                             distanceCalcInprogress = true;
                         Systems.out.println("WayDistance" + wayPointsData.getDist());
-
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

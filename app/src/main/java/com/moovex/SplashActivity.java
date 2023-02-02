@@ -1077,6 +1077,9 @@ public class SplashActivity extends AppCompatActivity {
                             SessionSave.saveSession("is_enabled_ive_arrived", array.getJSONObject(0).getString("is_enabled_ive_arrived"), SplashActivity.this);
                             System.out.println("is_enabled_ive_arrived check " + SessionSave.getSession("is_enabled_ive_arrived", SplashActivity.this));
                         }
+                        if (array.getJSONObject(0).has("is_signature_enable")){
+                            SessionSave.saveSession("is_signature_enable", array.getJSONObject(0).getString("is_signature_enable"), SplashActivity.this);
+                        }
 
                         if (array.getJSONObject(0).has(TaxiUtil.KM_RESTRICT))
                             SessionSave.saveSession(TaxiUtil.KM_RESTRICT, array.getJSONObject(0).getString(TaxiUtil.KM_RESTRICT), SplashActivity.this);

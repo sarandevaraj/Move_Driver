@@ -157,5 +157,7 @@ dependencies {
     implementation "com.google.maps.android:android-maps-utils:$rootProject.ext.maps_utils"
     //RazorPay
     implementation 'com.razorpay:checkout:1.5.12'
+// Signature
+    implementation 'com.github.gcacace:signature-pad:1.2.1'
 }
 apply plugin: 'com.google.gms.google-services'
