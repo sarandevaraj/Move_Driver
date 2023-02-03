@@ -427,7 +427,7 @@
             android:windowSoftInputMode="adjustPan|stateHidden" />
 
         <activity
-            android:name=".DriverFirebaseChatWebView"
+            android:name=".DriverFirebaseChatWebviewNew"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustResize|stateHidden" />

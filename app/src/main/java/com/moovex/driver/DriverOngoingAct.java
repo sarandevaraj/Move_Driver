@@ -79,7 +79,8 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.google.maps.android.PolyUtil;
 import com.mayan.sospluginmodlue.service.SOSService;
-import com.moovex.DriverFirebaseChatWebView;
+
+import com.moovex.DriverFirebaseChatWebviewNew;
 import com.moovex.ProfileImageSetupClass;
 import com.moovex.SignatureAct;
 import com.squareup.picasso.Picasso;
@@ -624,6 +625,13 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
             dropLay.invalidate();
         }
 
+
+        if(SessionSave.getSession("chat_feature", DriverOngoingAct.this).equals("1")){
+            chatTxt.setVisibility(View.VISIBLE);
+        }else{
+            chatTxt.setVisibility(View.GONE);
+        }
+
         try {
             alert_bundle = getIntent().getExtras();
             if (alert_bundle != null) {
@@ -843,7 +851,7 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
 
         chatTxt.setOnClickListener(v -> {
 
-            Intent in = new Intent(DriverOngoingAct.this, DriverFirebaseChatWebView.class);
+            Intent in = new Intent(DriverOngoingAct.this, DriverFirebaseChatWebviewNew.class);
             in.putExtra("trip_id", DriverSessionSave.getSession("trip_id", DriverOngoingAct.this));
             startActivity(in);
         });

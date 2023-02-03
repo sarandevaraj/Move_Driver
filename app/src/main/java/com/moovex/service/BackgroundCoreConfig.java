@@ -200,6 +200,15 @@ public class BackgroundCoreConfig extends IntentService {
                             DriverSessionSave.saveSession("is_driver_auto_accept", array.getJSONObject(0).getString("is_driver_auto_accept"), BackgroundCoreConfig.this);
                         }
 
+                        if (array.getJSONObject(0).has("chat_feature")) {
+                            SessionSave.saveSession("chat_feature", array.getJSONObject(0).getString("chat_feature"), BackgroundCoreConfig.this);
+                            System.out.println("chat_feature check " + SessionSave.getSession("chat_feature", BackgroundCoreConfig.this));
+                        }
+
+                        if (array.getJSONObject(0).has("is_signature_enable")){
+                            SessionSave.saveSession("is_signature_enable", array.getJSONObject(0).getString("is_signature_enable"), BackgroundCoreConfig.this);
+                        }
+
                         if (array.getJSONObject(0).has("is_enabled_ive_arrived")) {
                             SessionSave.saveSession("is_enabled_ive_arrived", array.getJSONObject(0).getString("is_enabled_ive_arrived"), BackgroundCoreConfig.this);
                             System.out.println("is_enabled_ive_arrived check " + SessionSave.getSession("is_enabled_ive_arrived", BackgroundCoreConfig.this));
