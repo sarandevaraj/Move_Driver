@@ -256,11 +256,11 @@ public class DriverTripDetailNewFrag extends Fragment {
             showFare(tripDetailResponse);
         } else callDetail();
 
-        trip_map_view.setOnClickListener(v1 -> {
-            Intent intent = new Intent(getActivity(), DriverMapZoomAct.class);
-            intent.putExtra("IMAGE_URI", mapImageUri);
-            getActivity().startActivity(intent);
-        });
+//        trip_map_view.setOnClickListener(v1 -> {
+//            Intent intent = new Intent(getActivity(), DriverMapZoomAct.class);
+//            intent.putExtra("IMAGE_URI", mapImageUri);
+//            getActivity().startActivity(intent);
+//        });
         return v;
     }
 
@@ -410,7 +410,9 @@ public class DriverTripDetailNewFrag extends Fragment {
 //        txt_drop.setMarqueeRepeatLimit(-1);
 //        txt_drop.setSelected(true);
 
-        ((DriverTripHistoryAct) getActivity()).setTitle("Trip Details #" + data.detail.trip_id);
+
+
+        ((DriverTripHistoryAct)getActivity()).setTitle(DriverNC.getString(R.string.tripdetails) + "#" + data.detail.trip_id);
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         loading.setVisibility(View.GONE);
