@@ -331,7 +331,7 @@ public class DriverFirebaseService extends FirebaseMessagingService {
             notificationChannel.setLightColor(Color.RED);
             mNotificationManager.createNotificationChannel(notificationChannel);
 
-            builder = new Notification.Builder(this, NOTIFICATION_CHANNEL_ID).setContentText(Message).setContentTitle(title).setOngoing(true).setBadgeIconType(NotificationCompat.BADGE_ICON_SMALL).setSmallIcon(R.drawable.driver_notification_icon).setColor(ContextCompat.getColor(getBaseContext(), R.color.button_accept)).setContentIntent(pendingIntent).setLargeIcon(((BitmapDrawable) ContextCompat.getDrawable(this, R.drawable.ic_launcher)).getBitmap()).setWhen(System.currentTimeMillis());
+            builder = new Notification.Builder(this, NOTIFICATION_CHANNEL_ID).setContentText(Message).setContentTitle(title).setOngoing(true).setBadgeIconType(NotificationCompat.BADGE_ICON_SMALL).setSmallIcon(R.drawable.small_logo).setColor(ContextCompat.getColor(getBaseContext(), R.color.button_accept)).setContentIntent(pendingIntent).setLargeIcon(((BitmapDrawable) ContextCompat.getDrawable(this, R.drawable.ic_launcher)).getBitmap()).setWhen(System.currentTimeMillis());
         } else {
             builder = new Notification.Builder(context);
             builder.setAutoCancel(false);
@@ -339,10 +339,10 @@ public class DriverFirebaseService extends FirebaseMessagingService {
             builder.setContentTitle(title);
             builder.setContentText(Message);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                builder.setSmallIcon(R.drawable.driver_notification_icon);
+                builder.setSmallIcon(R.drawable.small_logo);
                 builder.setColor(ContextCompat.getColor(getBaseContext(), R.color.button_accept));
             } else {
-                builder.setSmallIcon(R.drawable.driver_notification_icon);
+                builder.setSmallIcon(R.drawable.small_logo);
             }
             builder.setContentIntent(pendingIntent);
             builder.setOngoing(false);

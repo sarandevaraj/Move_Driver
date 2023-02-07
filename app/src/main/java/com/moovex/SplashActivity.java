@@ -311,7 +311,7 @@ public class SplashActivity extends AppCompatActivity {
                 key = keyy;*/
 
                 url = "http://mongo.tmobility.ai/passengerapi301/index/";
-                str_domain = "taximobility.ai";
+                str_domain = "tmobility.ai";
                 key = keyy;
 
                /* url = "http://taxi10.taximobility.com/passengerapi301/index/";

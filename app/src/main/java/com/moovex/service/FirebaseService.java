@@ -539,7 +539,7 @@ public class FirebaseService extends FirebaseMessagingService {
             notificationChannel.enableLights(true);
             notificationChannel.setLightColor(Color.RED);
             mNotificationManager.createNotificationChannel(notificationChannel);
-            builderD = new Notification.Builder(this, NOTIFICATION_CHANNEL_ID).setContentText(Message).setContentTitle(title).setOngoing(true).setBadgeIconType(NotificationCompat.BADGE_ICON_SMALL).setSmallIcon(R.drawable.driver_notification_icon).setColor(ContextCompat.getColor(getBaseContext(), R.color.button_accept)).setContentIntent(pendingIntent).setLargeIcon(((BitmapDrawable) ContextCompat.getDrawable(this, R.drawable.ic_launcher)).getBitmap()).setWhen(System.currentTimeMillis());
+            builderD = new Notification.Builder(this, NOTIFICATION_CHANNEL_ID).setContentText(Message).setContentTitle(title).setOngoing(true).setBadgeIconType(NotificationCompat.BADGE_ICON_SMALL).setSmallIcon(R.drawable.small_logo).setColor(ContextCompat.getColor(getBaseContext(), R.color.button_accept)).setContentIntent(pendingIntent).setLargeIcon(((BitmapDrawable) ContextCompat.getDrawable(this, R.drawable.ic_launcher)).getBitmap()).setWhen(System.currentTimeMillis());
         } else {
             builderD = new Notification.Builder(context);
             builderD.setAutoCancel(false);
@@ -547,10 +547,10 @@ public class FirebaseService extends FirebaseMessagingService {
             builderD.setContentTitle(title);
             builderD.setContentText(Message);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                builderD.setSmallIcon(R.drawable.driver_notification_icon);
+                builderD.setSmallIcon(R.drawable.small_logo);
                 builderD.setColor(ContextCompat.getColor(getBaseContext(), R.color.button_accept));
             } else {
-                builderD.setSmallIcon(R.drawable.driver_notification_icon);
+                builderD.setSmallIcon(R.drawable.small_logo);
             }
             builderD.setContentIntent(pendingIntent);
             builderD.setOngoing(false);
@@ -586,7 +586,7 @@ public class FirebaseService extends FirebaseMessagingService {
             notificationChannel.setLightColor(Color.RED);
             mNotificationManager.createNotificationChannel(notificationChannel);
 
-            builderD = new Notification.Builder(this, NOTIFICATION_CHANNEL_ID).setContentText(Message).setContentTitle(title).setOngoing(true).setAutoCancel(true).setSmallIcon(R.drawable.driver_notification_icon).setColor(ContextCompat.getColor(getBaseContext(), R.color.button_accept)).setContentIntent(pendingIntent).setLargeIcon(((BitmapDrawable) getResources().getDrawable(R.drawable.ic_launcher)).getBitmap()).setWhen(System.currentTimeMillis());
+            builderD = new Notification.Builder(this, NOTIFICATION_CHANNEL_ID).setContentText(Message).setContentTitle(title).setOngoing(true).setAutoCancel(true).setSmallIcon(R.drawable.small_logo).setColor(ContextCompat.getColor(getBaseContext(), R.color.button_accept)).setContentIntent(pendingIntent).setLargeIcon(((BitmapDrawable) getResources().getDrawable(R.drawable.ic_launcher)).getBitmap()).setWhen(System.currentTimeMillis());
         } else {
             builderD = new Notification.Builder(context);
             builderD.setAutoCancel(true);
@@ -594,10 +594,10 @@ public class FirebaseService extends FirebaseMessagingService {
             builderD.setContentTitle(title);
             builderD.setContentText(Message);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                builderD.setSmallIcon(R.drawable.driver_notification_icon);
+                builderD.setSmallIcon(R.drawable.small_logo);
                 builderD.setColor(ContextCompat.getColor(getBaseContext(), R.color.button_accept));
             } else {
-                builderD.setSmallIcon(R.drawable.driver_notification_icon);
+                builderD.setSmallIcon(R.drawable.small_logo);
             }
             builderD.setContentIntent(pendingIntent);
             builderD.setOngoing(false);

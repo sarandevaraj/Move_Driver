@@ -1012,7 +1012,7 @@
     <string name="speed_ongoing">Speed</string>
     <string name="wait_time_ongoing">Waiting Time</string>
 
-    <string name="no_going_trip">No upcoming jobs</string>
+    <string name="no_going_trip">Currently, no new job is available</string>
     <string name="signup">Sign Up</string>
     <string name="address_not_found">Address not found</string>
     <string name="sucessfull_driver_registartion">Thanks for register as driver. We will get back to you shortly!</string>
