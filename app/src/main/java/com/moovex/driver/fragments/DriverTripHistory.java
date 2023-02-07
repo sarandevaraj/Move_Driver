@@ -2,6 +2,7 @@ package com.moovex.driver.fragments;
 
 import android.app.Dialog;
 import android.os.Bundle;
+import android.service.controls.actions.BooleanAction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,11 +11,14 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.DrawableImageViewTarget;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.moovex.R;
 import com.moovex.driver.DriverTripHistoryAct;
 import com.moovex.driver.adapter.DriverPastBookingAdapter;
 import com.moovex.driver.adapter.DriverUpcomingAdapter;
 import com.moovex.driver.data.apiData.DriverApiRequestData;
+import com.moovex.driver.data.apiData.DriverTripDetailResponse;
 import com.moovex.driver.data.apiData.DriverUpcomingResponse;
 import com.moovex.driver.interfaces.DriverUpcomingAdapterInterface;
 import com.moovex.driver.service.DriverCoreClient;
@@ -29,6 +33,7 @@ import com.moovex.driver.utils.DriverSessionSave;
 import com.moovex.driver.utils.DriverSystems;
 import com.moovex.util.AppController;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -143,8 +148,17 @@ public class DriverTripHistory extends Fragment implements DriverUpcomingAdapter
                 history_recyclerView.setAdapter(past_booking_adapter);
             }
         });
-
-        txt_up_coming.callOnClick();
+        boolean ispastbookingenable = false;
+        if (getArguments() != null) {
+            System.out.println("  Sakthi check up coming pastbooking inside bundle -----> "+ispastbookingenable);
+            Bundle mBundle = getArguments();
+            ispastbookingenable = mBundle.getBoolean("ispastbookingenable");
+        }
+        System.out.println("  Sakthi check up coming pastbooking  -----> "+ispastbookingenable);
+        if(ispastbookingenable)
+            txt_past_booking.callOnClick();
+        else
+            txt_up_coming.callOnClick();
 
         history_recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override

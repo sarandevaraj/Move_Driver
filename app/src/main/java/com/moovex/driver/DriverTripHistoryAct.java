@@ -57,8 +57,20 @@ public class DriverTripHistoryAct extends DriverBaseActivity {
             b.putString("tripDetailResponse", tripDetailResponse);
             ff.setArguments(b);
             getSupportFragmentManager().beginTransaction().add(R.id.mainFrag, ff).commit();
-        } else
-            getSupportFragmentManager().beginTransaction().add(R.id.mainFrag, new DriverTripHistory()).commit();
+        } else{
+            boolean ispastbookingenable = false;
+            if(getIntent().getExtras()!=null){
+                System.out.println("  Sakthi check up coming pastbooking  inside act-----> "+ispastbookingenable);
+                Bundle bundle = getIntent().getExtras();
+                ispastbookingenable =  bundle.getBoolean("ispastbookingenable");
+            }
+            System.out.println("  Sakthi check up coming pastbooking  out side act-----> "+ispastbookingenable);
+            DriverTripHistory ff = new DriverTripHistory();
+            Bundle b = new Bundle();
+            b.putBoolean("ispastbookingenable", ispastbookingenable);
+            ff.setArguments(b);
+            getSupportFragmentManager().beginTransaction().add(R.id.mainFrag, ff).commit();
+        }
     }
 
     @Override

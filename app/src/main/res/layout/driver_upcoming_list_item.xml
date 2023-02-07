@@ -229,7 +229,7 @@
                     </FrameLayout>
 
                 </RelativeLayout>
-
+z
                 <LinearLayout
                     android:id="@+id/pick_lay"
                     android:layout_width="match_parent"
@@ -243,7 +243,7 @@
                         android:layout_height="@dimen/pad_30dp"
                         android:layout_gravity="center"
                         android:padding="5dp"
-                        card_view:srcCompat="@drawable/ic_pickup_pin" />
+                        card_view:srcCompat="@drawable/google_ic_marker" />
 
                     <TextView
                         android:id="@+id/txt_pickup"
@@ -280,7 +280,7 @@
                         android:layout_height="@dimen/pad_30dp"
                         android:layout_gravity="center"
                         android:padding="6dp"
-                        card_view:srcCompat="@drawable/ic_drop_pin" />
+                        card_view:srcCompat="@drawable/google_ic_marker" />
 
 
                     <TextView

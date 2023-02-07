@@ -1503,7 +1503,7 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
                     if (!DriverSessionSave.getSession("p_image", DriverOngoingAct.this).equals("")) {
                         imagepath = "" + DriverSessionSave.getSession("p_image", DriverOngoingAct.this);
                         Log.i("Imagepath in session", DriverSessionSave.getSession("p_image", DriverOngoingAct.this));
-                    } else
+                    } else {
 //                        imagepath = DriverSessionSave.getSession("noimage_base", DriverOngoingAct.this);
 //                    Picasso.get().load(imagepath).placeholder(getResources().getDrawable(R.drawable.driver_loadingimage)).error(getResources().getDrawable(R.drawable.driver_noimage)).into(proimg);
 
@@ -1516,6 +1516,7 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
                                 Picasso.get().load(R.drawable.loadingimage).into(proimg);
                             }
                         }
+                    }
 
 
                     MapsInitializer.initialize(DriverOngoingAct.this);

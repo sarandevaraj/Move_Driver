@@ -105,6 +105,7 @@ public class DriverAddFleetAct extends AppCompatActivity implements DriverClickI
         if (bundle != null && !TextUtils.isEmpty(bundle.getString("model_details"))) {
             model_details = bundle.getString("model_details");
             owner_name = bundle.getString("owner_name");
+            System.out.println("Sakthi check name for driver  Add fleet-----> " + bundle.getString("owner_name")+ "   "+ owner_name);
             Log.e("model_details", model_details);
             try {
 
@@ -136,7 +137,7 @@ public class DriverAddFleetAct extends AppCompatActivity implements DriverClickI
 
 
         save_btn = findViewById(R.id.save_btn);
-        vehicle_owner_name.setText(owner_name);
+        vehicle_owner_name.setText(" "+DriverSessionSave.getSession("Name", DriverAddFleetAct.this));
 
         select_model.setOnClickListener(view -> openModellist());
 

@@ -108,6 +108,7 @@ public class DriverMyFleetAct extends MainActivityDriver {
                             mDriverFleetData.setprimaryFleet(mJsonObject.getString("primaryFleet"));
                             DriverSessionSave.saveSession("fleet_company_id", mJsonObject.getString("company_id"), DriverMyFleetAct.this);
                             ownerName = mJsonObject.getString("name");
+                            System.out.println("Sakthi check name for driver  My fleet-----> " + mJsonObject.getString("name") + "   "+ ownerName);
 
                             fleetList.add(mDriverFleetData);
                         }

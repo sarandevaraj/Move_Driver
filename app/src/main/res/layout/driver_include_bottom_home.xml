@@ -106,7 +106,7 @@
                             android:paddingRight="10dp"
                             android:paddingBottom="6dp"
                             android:paddingTop="2dp"
-                            android:text="@string/trip_history"
+                            android:text="@string/up_coming"
                             android:textColor="@color/button_accept"
                             android:textSize="18sp" />
 

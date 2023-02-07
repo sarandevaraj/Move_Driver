@@ -936,12 +936,12 @@ public class DriverFarecalcAct extends MainActivityDriver implements DriverClick
                 }
 
                 if (f_eveningfare_applicable.equalsIgnoreCase("1")/* && (trip_type.equals("2") || trip_type.equals("3"))*/) {
-                    eve_fare.setText("" + f_eveningfare);
+                    eve_fare.setText("" +DriverSessionSave.getSession("site_currency", DriverFarecalcAct.this)+ " "+f_eveningfare);
                     eve_fare_lay.setVisibility(View.VISIBLE);
                 } else eve_fare_lay.setVisibility(View.GONE);
 
                 if (f_nightfareapplicable.equalsIgnoreCase("1") /*&& (trip_type.equals("2") || trip_type.equals("3"))*/) {
-                    night_fare.setText("" + f_nightfare);
+                    night_fare.setText("" +DriverSessionSave.getSession("site_currency", DriverFarecalcAct.this)+ " "+ f_nightfare);
                     night_fare_lay.setVisibility(View.VISIBLE);
                 } else night_fare_lay.setVisibility(View.GONE);
 

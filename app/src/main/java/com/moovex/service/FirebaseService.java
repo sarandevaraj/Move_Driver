@@ -181,7 +181,7 @@ public class FirebaseService extends FirebaseMessagingService {
 
         int requestID = (int) System.currentTimeMillis();
         notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, requestID, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, requestID, notificationIntent, PendingIntent.FLAG_IMMUTABLE);
         String Message = "";
 
         String NOTIFICATION_CHANNEL_ID = "my_channel_id_01";
@@ -528,7 +528,7 @@ public class FirebaseService extends FirebaseMessagingService {
         DriverSystems.out.println("GGGGGGGGG" + data);
         int requestID = (int) System.currentTimeMillis();
         notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, requestID, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, requestID, notificationIntent, PendingIntent.FLAG_IMMUTABLE);
         DriverSessionSave.saveSession("LogoutMessage", Message, FirebaseService.this);
         String NOTIFICATION_CHANNEL_ID = "my_channel_id_01";
 
@@ -547,10 +547,10 @@ public class FirebaseService extends FirebaseMessagingService {
             builderD.setContentTitle(title);
             builderD.setContentText(Message);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                builderD.setSmallIcon(R.drawable.driver_notification_icon);
+                builderD.setSmallIcon(R.drawable.ic_launcher);
                 builderD.setColor(ContextCompat.getColor(getBaseContext(), R.color.button_accept));
             } else {
-                builderD.setSmallIcon(R.drawable.driver_notification_icon);
+                builderD.setSmallIcon(R.drawable.ic_launcher);
             }
             builderD.setContentIntent(pendingIntent);
             builderD.setOngoing(false);
@@ -575,7 +575,7 @@ public class FirebaseService extends FirebaseMessagingService {
         notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         notificationIntent.putExtra("alert_message", message);
         notificationIntent.putExtra("alert_schedule", "1");
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, requestID, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, requestID, notificationIntent, PendingIntent.FLAG_IMMUTABLE);
         String NOTIFICATION_CHANNEL_ID = "my_channel_id_01";
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -594,10 +594,10 @@ public class FirebaseService extends FirebaseMessagingService {
             builderD.setContentTitle(title);
             builderD.setContentText(Message);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                builderD.setSmallIcon(R.drawable.driver_notification_icon);
+                builderD.setSmallIcon(R.drawable.ic_launcher);
                 builderD.setColor(ContextCompat.getColor(getBaseContext(), R.color.button_accept));
             } else {
-                builderD.setSmallIcon(R.drawable.driver_notification_icon);
+                builderD.setSmallIcon(R.drawable.ic_launcher);
             }
             builderD.setContentIntent(pendingIntent);
             builderD.setOngoing(false);

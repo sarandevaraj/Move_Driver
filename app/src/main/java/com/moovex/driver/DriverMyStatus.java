@@ -468,7 +468,7 @@ public class DriverMyStatus extends MainActivityDriver implements ConnectionCall
         new_ride = findViewById(R.id.new_ride);
         Trip_history = findViewById(R.id.trip_history_header);
 
-        Trip_history.setText(/*Html.fromHtml("<u>" +*/ DriverNC.getResources().getString(R.string.trip_history) /*+ "</u>")*/);
+        Trip_history.setText(/*Html.fromHtml("<u>" +*/ DriverNC.getResources().getString(R.string.up_coming) /*+ "</u>")*/);
 
         btn_shift = findViewById(R.id.btn_shift);
         offline_lay_bottom = findViewById(R.id.offline_lay_bottom);
@@ -519,10 +519,15 @@ public class DriverMyStatus extends MainActivityDriver implements ConnectionCall
         }
         currentLocation1.setText(DriverNC.getString(R.string.tap_loc));
 
-        first_lay.setOnClickListener(view -> Trip_history.performClick());
-        second_lay.setOnClickListener(view -> Trip_history.performClick());
-        third_lay.setOnClickListener(view -> Trip_history.performClick());
+//        first_lay.setOnClickListener(view -> Trip_history.performClick());
+//        second_lay.setOnClickListener(view -> Trip_history.performClick());
+//        third_lay.setOnClickListener(view -> Trip_history.performClick());
 
+        lasttripheader.setOnClickListener(v -> {
+            Intent intent = new Intent(DriverMyStatus.this, DriverTripHistoryAct.class);
+            intent.putExtra("ispastbookingenable", true);
+            startActivity(intent);
+        });
         new_ride.setOnClickListener(view -> {
             if (DriverSessionSave.getSession("shift_status", DriverMyStatus.this).equals("IN")) {
 

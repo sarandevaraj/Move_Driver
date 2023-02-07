@@ -319,7 +319,7 @@ public class DriverFirebaseService extends FirebaseMessagingService {
         DriverSystems.out.println("GGGGGGGGG" + data);
         int requestID = (int) System.currentTimeMillis();
         notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, requestID, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, requestID, notificationIntent, PendingIntent.FLAG_IMMUTABLE);
         DriverSessionSave.saveSession("LogoutMessage", Message, DriverFirebaseService.this);
         String NOTIFICATION_CHANNEL_ID = "my_channel_id_01";
 
@@ -368,7 +368,7 @@ public class DriverFirebaseService extends FirebaseMessagingService {
         notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         notificationIntent.putExtra("alert_message", message);
         notificationIntent.putExtra("alert_schedule", "1");
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, requestID, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, requestID, notificationIntent, PendingIntent.FLAG_IMMUTABLE);
         String NOTIFICATION_CHANNEL_ID = "my_channel_id_01";
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
