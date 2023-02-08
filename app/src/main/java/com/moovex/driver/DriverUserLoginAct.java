@@ -87,6 +87,8 @@ public class DriverUserLoginAct extends MainActivityDriver implements DriverClic
     private Dialog dialog1;
     private final String Auth_key = "";
 
+    public static int ACTION_MANAGE_OVERLAY_PERMISSION_REQUEST_CODE = 69;
+
     // Set the layout to activity.
     @Override
     public int setLayout() {
@@ -379,6 +381,15 @@ public class DriverUserLoginAct extends MainActivityDriver implements DriverClic
         view.setText(spanTxt, TextView.BufferType.SPANNABLE);
     }
 
+    public void checkPermissionOverLay() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (!Settings.canDrawOverlays(this)) {
+                Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                        Uri.parse("package:" + getPackageName()));
+                startActivityForResult(intent, ACTION_MANAGE_OVERLAY_PERMISSION_REQUEST_CODE);
+            }
+        }
+    }
     public void HuaweiDeviceAlert() {
 
         Utility.actionSheet(DriverUserLoginAct.this, "" + String.format(DriverNC.getResources().getString(R.string.huawei_msg)), DriverNC.getResources().getString(R.string.ok), DriverNC.getResources().getString(R.string.cancel), false, new AlertListener() {
@@ -602,24 +613,27 @@ public class DriverUserLoginAct extends MainActivityDriver implements DriverClic
     protected void onResume() {
         super.onResume();
 
-/*
-        String reqString = Build.MANUFACTURER;
-        if (DriverSessionSave.getSession("settings_alert", DriverUserLoginAct.this).isEmpty()) {
-            if (reqString.toLowerCase().contains("huawei")) {
-                HuaweiDeviceAlert();
-            } else if (reqString.toLowerCase().contains("vivo")) {
-                vivoDeviceAlert();
-            } else if (reqString.toLowerCase().contains("xiaomi")) {
-                xiaomiDeviceAlert();
-            } else if (reqString.toLowerCase().contains("oppo")) {
-                oppoDeviceAlert();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+            if (!Settings.canDrawOverlays(DriverUserLoginAct.this))
+                checkPermissionOverLay();
+    /*
+            String reqString = Build.MANUFACTURER;
+            if (DriverSessionSave.getSession("settings_alert", DriverUserLoginAct.this).isEmpty()) {
+                if (reqString.toLowerCase().contains("huawei")) {
+                    HuaweiDeviceAlert();
+                } else if (reqString.toLowerCase().contains("vivo")) {
+                    vivoDeviceAlert();
+                } else if (reqString.toLowerCase().contains("xiaomi")) {
+                    xiaomiDeviceAlert();
+                } else if (reqString.toLowerCase().contains("oppo")) {
+                    oppoDeviceAlert();
+                }
             }
-        }
 
- */
+     */
     }
 
-    @Override
+        @Override
     protected void onStop() {
         Driver_Utils.closeDialog(mDialog);
         Driver_Utils.closeDialog(mDialogs);
@@ -650,7 +664,7 @@ public class DriverUserLoginAct extends MainActivityDriver implements DriverClic
             final Button OK = forgetView.findViewById(R.id.okbtn);
             final Button Cancel = forgetView.findViewById(R.id.cancelbtn);
 
-            OK.setOnClickListener(new View.OnClickListener() {
+            OK.setOnClickListener(new OnClickListener() {
                 private String mobilenumber;
 
                 @Override
@@ -672,7 +686,7 @@ public class DriverUserLoginAct extends MainActivityDriver implements DriverClic
                     }
                 }
             });
-            Cancel.setOnClickListener(new View.OnClickListener() {
+            Cancel.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(final View v) {
                     pop_up(jsonDriver);
@@ -1623,9 +1637,9 @@ public class DriverUserLoginAct extends MainActivityDriver implements DriverClic
                         }
 
                         if (json.has("user_key")) {
-                            String userKey = json.getString(DriverCommonData.USER_KEY);
+                            String userKey = json.getString(USER_KEY);
                             if (!TextUtils.isEmpty(userKey))
-                                DriverSessionSave.saveSession(DriverCommonData.USER_KEY, userKey, DriverUserLoginAct.this);
+                                DriverSessionSave.saveSession(USER_KEY, userKey, DriverUserLoginAct.this);
                         }
 
                         if (json.has("sos_detail"))

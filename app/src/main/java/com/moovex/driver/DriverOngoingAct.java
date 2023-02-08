@@ -1500,23 +1500,23 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
                 final int resultCode = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(DriverOngoingAct.this);
                 if (resultCode == ConnectionResult.SUCCESS) {
                     String imagepath = "";
-                    if (!DriverSessionSave.getSession("p_image", DriverOngoingAct.this).equals("")) {
-                        imagepath = "" + DriverSessionSave.getSession("p_image", DriverOngoingAct.this);
+//                    if (!DriverSessionSave.getSession("p_image", DriverOngoingAct.this).equals("")) {
+                    imagepath = "" + DriverSessionSave.getSession("p_image", DriverOngoingAct.this);
                         Log.i("Imagepath in session", DriverSessionSave.getSession("p_image", DriverOngoingAct.this));
-                    } else {
+//                    } else {
 //                        imagepath = DriverSessionSave.getSession("noimage_base", DriverOngoingAct.this);
 //                    Picasso.get().load(imagepath).placeholder(getResources().getDrawable(R.drawable.driver_loadingimage)).error(getResources().getDrawable(R.drawable.driver_noimage)).into(proimg);
 
-                        if (imagepath != null && imagepath.length() > 0) {
-                            Picasso.get().load(imagepath).error(R.drawable.loadingimage).placeholder(R.drawable.loadingimage).into(proimg);
+                    if (imagepath != null && imagepath.length() > 0) {
+                        Picasso.get().load(imagepath).error(R.drawable.loadingimage).placeholder(R.drawable.loadingimage).into(proimg);
+                    } else {
+                        if (DriverSessionSave.getSession("passenger_name", DriverOngoingAct.this) != "") {
+                            ProfileImageSetupClass.setupProfileImage(DriverSessionSave.getSession("passenger_name", DriverOngoingAct.this), proimg);
                         } else {
-                            if (DriverSessionSave.getSession("passenger_name", DriverOngoingAct.this) != "") {
-                                ProfileImageSetupClass.setupProfileImage(DriverSessionSave.getSession("passenger_name", DriverOngoingAct.this), proimg);
-                            } else {
-                                Picasso.get().load(R.drawable.loadingimage).into(proimg);
-                            }
+                            Picasso.get().load(R.drawable.loadingimage).into(proimg);
                         }
                     }
+//                    }
 
 
                     MapsInitializer.initialize(DriverOngoingAct.this);
@@ -3352,12 +3352,12 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
                                 MainActivityDriver.mMyStatus.setpassengerNotes(p_notes);
                                 MainActivityDriver.mMyStatus.setpassengerphone(p_phone);
                                 init();
-                                String imagepath;
-                                if (!DriverSessionSave.getSession("p_image", DriverOngoingAct.this).equals("")) {
+                                String imagepath = "";
+//                                if (!DriverSessionSave.getSession("p_image", DriverOngoingAct.this).equals("")) {
                                     imagepath = "" + DriverSessionSave.getSession("p_image", DriverOngoingAct.this);
                                     Log.i("Imagepath in session", DriverSessionSave.getSession("p_image", DriverOngoingAct.this));
 //                                }
-//                                else
+//                                else{
 //                                    imagepath = DriverSessionSave.getSession("noimage_base", DriverOngoingAct.this);
                                     //   Picasso.get().load(imagepath).placeholder(getResources().getDrawable(R.drawable.driver_loadingimage)).error(getResources().getDrawable(R.drawable.driver_noimage)).into(proimg);
 
@@ -3370,7 +3370,7 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
                                             Picasso.get().load(R.drawable.loadingimage).into(proimg);
                                         }
                                     }
-                                }
+//                                }
 
                             } else if (p_driverstatus.equalsIgnoreCase("A") && p_travelstatus.equalsIgnoreCase("5")) {
                                 System.out.println("FarecalcAct ___Tripdetail__" + DriverSessionSave.getSession(DriverCommonData.IS_CORPORATE_BOOKING, DriverOngoingAct.this));
