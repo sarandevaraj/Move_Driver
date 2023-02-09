@@ -190,7 +190,7 @@ public class DriverFarecalcAct extends MainActivityDriver implements DriverClick
     private boolean keyboardListenersAttached = false;
     private ViewTreeObserver.OnGlobalLayoutListener keyboardLayoutListener = null;
     private TextView night_fare, total_amt, v_preferences_fare;
-    private LinearLayout night_fare_lay;
+    private LinearLayout night_fare_lay,prefrences_lay;
     private LinearLayout totalamountTxt_lay;
     private AppCompatButton btn_emergency;
     private Dialog dialog1;
@@ -377,6 +377,7 @@ public class DriverFarecalcAct extends MainActivityDriver implements DriverClick
         tv_dropTime = findViewById(R.id.tv_dropTime);
         tv_tripFare = findViewById(R.id.tv_trip_fare);
         v_preferences_fare = findViewById(R.id.v_preferences_fare);
+        prefrences_lay = findViewById(R.id.prefrences_lay);
         tv_total_disatnce = findViewById(R.id.tv_total_distance);
         et_time_hour = findViewById(R.id.ed_time_hour);
         et_time_mins = findViewById(R.id.ed_time_mins);
@@ -877,6 +878,10 @@ public class DriverFarecalcAct extends MainActivityDriver implements DriverClick
                 total_preference_fare = json.has("total_preference_fare") ? json.getString("total_preference_fare") : "";
                 complete_service_id = json.has("service_id") ? json.getString("service_id") : "";
                 v_preferences_fare.setText("" + DriverSessionSave.getSession("site_currency", DriverFarecalcAct.this) + total_preference_fare);
+                if(total_preference_fare.equals("")||total_preference_fare.equals("0"))
+                    prefrences_lay.setVisibility(View.GONE);
+                else
+                    prefrences_lay.setVisibility(View.VISIBLE);
                 drop_location = json.getString("drop");
                 f_waitingtime = json.getString("waiting_time");
                 f_waitingcost = json.getString("waiting_cost");
