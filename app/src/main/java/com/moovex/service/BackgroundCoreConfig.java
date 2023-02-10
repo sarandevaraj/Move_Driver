@@ -1,5 +1,6 @@
 package com.moovex.service;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.IntentService;
 import android.content.Intent;
@@ -10,6 +11,7 @@ import com.moovex.R;
 import com.moovex.SplashActivity;
 import com.moovex.driver.DriverUserLoginAct;
 import com.moovex.driver.data.DriverCommonData;
+import com.moovex.driver.interfaces.AlertListener;
 import com.moovex.driver.interfaces.DriverAPIResult;
 import com.moovex.driver.utils.DriverCL;
 import com.moovex.driver.utils.DriverCToast;
@@ -19,6 +21,7 @@ import com.moovex.driver.utils.DriverSystems;
 import com.moovex.util.AppController;
 import com.moovex.util.SessionSave;
 import com.moovex.util.TaxiUtil;
+import com.moovex.util.Utility;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -81,6 +84,31 @@ public class BackgroundCoreConfig extends IntentService {
 
         String url = "type=getcoreconfig";
         new CoreConfigCall(url);
+    }
+
+    public void errorInSplashGetCore(String message) {
+        try {
+            Utility.actionSheetCancel((Activity) getApplicationContext(),"" + message,"" + getString(R.string.try_again), getString(R.string.cancel), false, new AlertListener() {
+                @Override
+                public void onSuccess() {
+                    String url = "type=getcoreconfig";
+                    new BackgroundCoreConfig.CoreConfigCall(url);
+//                    Intent intent = getIntent();
+//                    finish();
+//                    startActivity(intent);
+                }
+                @Override
+                public void onFailure() {
+                    BackgroundCoreConfig activity = BackgroundCoreConfig.this;
+                    final Intent intent = new Intent(Intent.ACTION_MAIN);
+                    intent.addCategory(Intent.CATEGORY_HOME);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    activity.startActivity(intent);
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void errorInSplash(String message) {
@@ -433,7 +461,7 @@ public class BackgroundCoreConfig extends IntentService {
                     e.printStackTrace();
                 }
             } else {
-                errorInSplash(DriverNC.getString(R.string.server_error));
+                errorInSplashGetCore(getString(R.string.server_error));
             }
         }
     }

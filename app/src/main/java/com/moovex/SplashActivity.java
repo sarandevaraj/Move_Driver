@@ -955,6 +955,32 @@ public class SplashActivity extends AppCompatActivity {
         }
     }
 
+    public void errorInSplashGetCore(String message) {
+        try {
+            Utility.actionSheetCancel(SplashActivity.this,"" + message,"" + getString(R.string.try_again), getString(R.string.cancel), false, new AlertListener() {
+                @Override
+                public void onSuccess() {
+                    String url = "type=getcoreconfig";
+                    new SplashActivity.CoreConfigCall(url);
+//                    Intent intent = getIntent();
+//                    finish();
+//                    startActivity(intent);
+                }
+                @Override
+                public void onFailure() {
+                    Activity activity = SplashActivity.this;
+                    final Intent intent = new Intent(Intent.ACTION_MAIN);
+                    intent.addCategory(Intent.CATEGORY_HOME);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    activity.startActivity(intent);
+                    activity.finish();
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void errorInSplash(String message) {
         try {
 
@@ -1337,7 +1363,7 @@ public class SplashActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             } else {
-                errorInSplash(DriverNC.getString(R.string.server_error));
+                errorInSplashGetCore(getString(R.string.server_error));
             }
         }
     }
