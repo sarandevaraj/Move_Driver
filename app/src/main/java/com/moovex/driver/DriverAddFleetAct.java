@@ -575,6 +575,7 @@ public class DriverAddFleetAct extends AppCompatActivity implements DriverClickI
                 super(itemView);
                 reasontxt = itemView.findViewById(R.id.reason_txt);
                 check1 = itemView.findViewById(R.id.check1);
+                check1.setVisibility(View.GONE);
                 lay_reason = itemView.findViewById(R.id.lay_reason);
             }
 
