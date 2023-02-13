@@ -232,7 +232,7 @@
                         android:layout_height="50dp"
                         android:background="@color/transparent"
                         android:padding="10dp"
-                        app:srcCompat="@drawable/ic_launcher" />
+                        app:srcCompat="@drawable/google_ic_driver_offline" />
 
                     <LinearLayout
                         android:gravity="center|left"

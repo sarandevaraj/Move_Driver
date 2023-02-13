@@ -1174,6 +1174,7 @@
 
     <string name="upload_identification_pic">Upload Vehicle Image as jpg,jpeg \n or png file only</string>
     <string name="upload_photo">Upload Photo</string>
+    <string name="add_fleet">Add Fleet</string>
 
 
 </resources>

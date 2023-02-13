@@ -94,7 +94,7 @@
                             android:layout_toLeftOf="@+id/trip_history_header"
                             android:padding="6dp"
                             android:textColor="@color/black"
-                            android:textSize="15sp" />
+                            android:textSize="@dimen/sp_16" />
 
 
                         <TextView
@@ -108,22 +108,22 @@
                             android:paddingTop="2dp"
                             android:text="@string/up_coming"
                             android:textColor="@color/button_accept"
-                            android:textSize="18sp" />
+                            android:textSize="@dimen/sp_16" />
 
                         <View
                             android:layout_width="90dp"
-                            android:layout_height="2dp"
+                            android:layout_height="1dp"
                             android:layout_alignParentRight="true"
                             android:layout_below="@+id/trip_history_header"
                             android:layout_marginRight="10dp"
                             android:background="@color/black" />
 
                         <View
-                            android:layout_width="45dp"
+                            android:layout_width="90dp"
                             android:layout_height="1dp"
                             android:layout_below="@+id/lasttrip_header"
                             android:layout_marginLeft="10dp"
-                            android:background="@color/linebottom_light" />
+                            android:background="@color/black" />
 
 
                     </RelativeLayout>

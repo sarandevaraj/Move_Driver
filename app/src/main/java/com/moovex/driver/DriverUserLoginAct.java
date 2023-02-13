@@ -14,7 +14,9 @@ import android.text.InputType;
 import android.text.SpannableStringBuilder;
 import android.text.TextPaint;
 import android.text.TextUtils;
+import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.LinkMovementMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
 import android.view.KeyEvent;
@@ -73,9 +75,10 @@ public class DriverUserLoginAct extends MainActivityDriver implements DriverClic
     private static boolean FORCE_LOGIN = false;
     Dialog mDialog;
     private EditText PhoneEdt;
-    private EditText PasswordEdt;
+    private EditText password_edit;
     private TextView ForgotTxt, signup_web, become_driver, become_pass;
-    private TextView DoneBtn, hidePwd;
+    private TextView DoneBtn;
+    private ImageView hidePwd;
     private String phone;
     private String password;
     private DriverSplashAct mSplash;
@@ -137,6 +140,8 @@ public class DriverUserLoginAct extends MainActivityDriver implements DriverClic
         leftIcon.setVisibility(View.VISIBLE);
         leftIcon.setBackgroundResource(R.drawable.driver_back);
         hidePwd = findViewById(R.id.hidePwd);
+
+
         HeadTitle.setText("" + DriverNC.getResources().getString(R.string.signin));
         Glide.with(this).load(DriverSessionSave.getSession("image_path", this) + "signinlogo_driver.png").apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true)).into((ImageView) findViewById(R.id.imageview));
 
@@ -147,13 +152,34 @@ public class DriverUserLoginAct extends MainActivityDriver implements DriverClic
             Glide.with(this).load(R.drawable.access_logo).into((ImageView) findViewById(R.id.imageview));
         }
 
-        PasswordEdt = findViewById(R.id.passwordEdt);
-        PasswordEdt.setOnEditorActionListener(this);
+        password_edit = findViewById(R.id.password_Edt);
+        password_edit.setOnEditorActionListener(this);
         signup_web = findViewById(R.id.signup_web);
 
         ForgotTxt = findViewById(R.id.forgotpswdTxt);
         become_driver = findViewById(R.id.become_driver);
         become_pass = findViewById(R.id.become_pass);
+
+        hidePwd.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(v.getId()==R.id.hidePwd){
+                    if(password_edit.getTransformationMethod().equals(PasswordTransformationMethod.getInstance())){
+                        ((ImageView)(v)).setImageResource(R.drawable.google_ic_password_hide);
+                        //Show Password
+                        password_edit.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    }
+                    else{
+                        ((ImageView)(v)).setImageResource(R.drawable.google_ic_password_show);
+                        //Hide Password
+                        password_edit.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    }
+                }
+
+
+            }
+        });
         SessionSave.saveSession("base_url", SessionSave.getSession("passenger_base_url", DriverUserLoginAct.this), DriverUserLoginAct.this);
         become_driver.setOnClickListener(V -> {
             String driverSignUpUrl = DriverSessionSave.getSession("api_base", DriverUserLoginAct.this) + "become_driver_mobile.html" + "?v=1";
@@ -188,36 +214,7 @@ public class DriverUserLoginAct extends MainActivityDriver implements DriverClic
 //        CommonData.mDevice_id = mDeviceid;
         /* newly add for password hide and show*/
 
-        hidePwd.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
 
-                if (hidePwd.getText().toString().equals(DriverNC.getResources().getString(R.string.show))) {
-                    PasswordEdt.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-                    DriverFontHelper.applyFont(getApplicationContext(), PasswordEdt);
-                    hidePwd.setText("" + DriverNC.getResources().getString(R.string.hide));
-
-                } else {
-                    PasswordEdt.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                    DriverFontHelper.applyFont(getApplicationContext(), PasswordEdt);
-                    hidePwd.setText("" + DriverNC.getResources().getString(R.string.show));
-
-                }
-            }
-        });
-        PasswordEdt.setOnFocusChangeListener((v, hasFocus) -> {
-            // TODO Auto-generated method stub
-            if (hasFocus) {
-                hidePwd.setVisibility(View.VISIBLE);
-                hidePwd.setText(DriverNC.getString(R.string.show));
-
-            } else {
-                hidePwd.setVisibility(View.GONE);
-                PasswordEdt.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                DriverFontHelper.applyFont(getApplicationContext(), PasswordEdt);
-            }
-        });
 
 
         signup_web.setOnClickListener(v -> {
@@ -296,10 +293,10 @@ public class DriverUserLoginAct extends MainActivityDriver implements DriverClic
 //
 //            phone = PhoneEdt.getText().toString().trim();
 //            if (validations(ValidateAction.isValueNULL, DriverUserLoginAct.this, phone))
-//                if (validations(ValidateAction.isValidPassword, DriverUserLoginAct.this, PasswordEdt.getText().toString().trim())) {
+//                if (validations(ValidateAction.isValidPassword, DriverUserLoginAct.this, password_edit.getText().toString().trim())) {
 //                    DriverSessionSave.saveSession("phone_number", phone, DriverUserLoginAct.this);
-//                    DriverSessionSave.saveSession("driver_password", PasswordEdt.getText().toString().trim(), DriverUserLoginAct.this);
-//                    password = PasswordEdt.getText().toString().trim();
+//                    DriverSessionSave.saveSession("driver_password", password_edit.getText().toString().trim(), DriverUserLoginAct.this);
+//                    password = password_edit.getText().toString().trim();
 //                    final String url = "type=user_validate";
 //                    new SignIn(url, FORCE_LOGIN);
 //                }
@@ -311,7 +308,7 @@ public class DriverUserLoginAct extends MainActivityDriver implements DriverClic
             try {
 
                 if (validations(ValidateAction.isValueNULL, DriverUserLoginAct.this, phone)) {
-                    if (validations(ValidateAction.isValidPassword, DriverUserLoginAct.this, PasswordEdt.getText().toString().trim())) {
+                    if (validations(ValidateAction.isValidPassword, DriverUserLoginAct.this, password_edit.getText().toString().trim())) {
                         SessionSave.saveSession("base_url", SessionSave.getSession("driver_base_url", DriverUserLoginAct.this), DriverUserLoginAct.this);
                         final String url = "type=driver_login";
                         DriverSessionSave.saveSession(USER_KEY, "", DriverUserLoginAct.this);
@@ -341,7 +338,13 @@ public class DriverUserLoginAct extends MainActivityDriver implements DriverClic
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         });
+
+
+
     }
+
+
+
 
     private void setSpannableTextView(TextView view) {
         SpannableStringBuilder spanTxt = new SpannableStringBuilder(DriverNC.getString(R.string.terms_condition) + " ");
@@ -1001,10 +1004,10 @@ public class DriverUserLoginAct extends MainActivityDriver implements DriverClic
 //            phone = PhoneEdt.getText().toString().trim();
 //            SessionSave.saveSession("base_url", SessionSave.getSession("passenger_base_url", DriverUserLoginAct.this), DriverUserLoginAct.this);
 //            if (validations(ValidateAction.isValueNULL, DriverUserLoginAct.this, phone))
-//                if (validations(ValidateAction.isValidPassword, DriverUserLoginAct.this, PasswordEdt.getText().toString().trim())) {
+//                if (validations(ValidateAction.isValidPassword, DriverUserLoginAct.this, password_edit.getText().toString().trim())) {
 //                    DriverSessionSave.saveSession("phone_number", phone, DriverUserLoginAct.this);
-//                    DriverSessionSave.saveSession("driver_password", PasswordEdt.getText().toString().trim(), DriverUserLoginAct.this);
-//                    password = PasswordEdt.getText().toString().trim();
+//                    DriverSessionSave.saveSession("driver_password", password_edit.getText().toString().trim(), DriverUserLoginAct.this);
+//                    password = password_edit.getText().toString().trim();
 //                    final String url = "type=user_validate";
 //                    new SignIn(url, false);
             DoneBtn.performClick();
@@ -1113,7 +1116,7 @@ public class DriverUserLoginAct extends MainActivityDriver implements DriverClic
 //                //    j.put("device_info", new JSONObject(new Gson().toJson(DeviceUtils.INSTANCE.getAllInfo(UserLoginAct.this))));
 //                DriverUserLoginAct.FORCE_LOGIN = false;
 //                DoneBtn.setEnabled(false);
-//                PasswordEdt.setOnEditorActionListener(null);
+//                password_edit.setOnEditorActionListener(null);
 //                new APIService_Retrofit_JSON(DriverUserLoginAct.this, this, j, false).execute(url);
 //            } catch (Exception e) {
 //                e.printStackTrace();
@@ -1319,12 +1322,12 @@ public class DriverUserLoginAct extends MainActivityDriver implements DriverClic
 //                    DoneBtn.setEnabled(true);
 //                }
 //
-//                PasswordEdt.setOnEditorActionListener(DriverUserLoginAct.this);
+//                password_edit.setOnEditorActionListener(DriverUserLoginAct.this);
 //
 //            } catch (final Exception e) {
 //                e.printStackTrace();
 //                DoneBtn.setEnabled(true);
-//                PasswordEdt.setOnEditorActionListener(DriverUserLoginAct.this);
+//                password_edit.setOnEditorActionListener(DriverUserLoginAct.this);
 //                runOnUiThread(runnableServerError);
 //            }
 //        }
@@ -1569,7 +1572,7 @@ public class DriverUserLoginAct extends MainActivityDriver implements DriverClic
         DriverSignIn(final String url, boolean FORCE_LOGIN) {
             try {
                 System.out.println("LOGIN  " + DriverCommonData.mDevice_id);
-                String new_password = convertPassMd5(PasswordEdt.getText().toString().trim());
+                String new_password = convertPassMd5(password_edit.getText().toString().trim());
 
                 JSONObject j = new JSONObject();
                 j.put("phone", phone);
@@ -1587,7 +1590,7 @@ public class DriverUserLoginAct extends MainActivityDriver implements DriverClic
                 //    j.put("device_info", new JSONObject(new Gson().toJson(DeviceUtils.INSTANCE.getAllInfo(UserLoginAct.this))));
                 // DriverUserLoginAct.FORCE_LOGIN = false;
                 DoneBtn.setEnabled(false);
-                PasswordEdt.setOnEditorActionListener(null);
+                password_edit.setOnEditorActionListener(null);
                 new DriverAPIService_Retrofit_JSON(DriverUserLoginAct.this, this, j, false).execute(url);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -1674,12 +1677,12 @@ public class DriverUserLoginAct extends MainActivityDriver implements DriverClic
                     DoneBtn.setEnabled(true);
                 }
 
-                PasswordEdt.setOnEditorActionListener(DriverUserLoginAct.this);
+                password_edit.setOnEditorActionListener(DriverUserLoginAct.this);
 
             } catch (final Exception e) {
                 e.printStackTrace();
                 DoneBtn.setEnabled(true);
-                PasswordEdt.setOnEditorActionListener(DriverUserLoginAct.this);
+                password_edit.setOnEditorActionListener(DriverUserLoginAct.this);
                 runOnUiThread(runnableServerError);
             }
         }

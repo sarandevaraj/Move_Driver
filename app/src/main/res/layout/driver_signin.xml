@@ -74,19 +74,24 @@
                 android:id="@+id/phoneEdt"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/imageview"
+                android:layout_alignParentLeft="true"
                 android:layout_marginLeft="5dp"
-                android:layout_marginTop="@dimen/dp_40"
+                android:layout_marginRight="5dp"
                 android:background="@color/white"
+                android:drawablePadding="5dp"
                 android:fontFamily="@font/normalfont"
+                android:drawableLeft="@drawable/google_ic_phone"
                 android:hint="@string/phone"
                 android:inputType="number"
                 android:maxLength="13"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
                 android:singleLine="true"
-                android:textSize="@dimen/sp_20"
                 android:textColor="@color/sub_heading"
+                android:textSize="@dimen/sp_20"
+                android:layout_below="@+id/imageview"
+                android:layout_marginTop="@dimen/dp_40"
+
                 />
 
             <View
@@ -107,22 +112,21 @@
                 android:background="@color/white">
 
 
-                <TextView
+                <ImageView
                     android:id="@+id/hidePwd"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="5dp"
-                    android:background="@color/appbg"
                     android:padding="9dp"
-                    android:text="@string/show"
+                    android:src="@drawable/google_ic_password_show"
                     android:textColor="@color/block"
-                    android:visibility="gone" />
+                    android:visibility="visible" />
 
 
                 <EditText
-                    android:id="@+id/passwordEdt"
+                    android:id="@+id/password_Edt"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
@@ -132,6 +136,7 @@
                     android:background="@color/white"
                     android:drawablePadding="5dp"
                     android:fontFamily="@font/normalfont"
+                    android:drawableLeft="@drawable/google_ic_password"
                     android:hint="@string/password"
                     android:inputType="textPassword"
                     android:maxLength="32"
