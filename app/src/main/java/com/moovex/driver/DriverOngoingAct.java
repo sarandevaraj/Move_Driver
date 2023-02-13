@@ -239,6 +239,7 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
     private ImageView pick_fav;
     private View trip_view;
     private ArrayList<LatLng> stopListData = new ArrayList<>();
+    private ArrayList<LatLng> stopListData_new = new ArrayList<>();
     private ArrayList<DriverStopData> stopLists = new ArrayList<>();
     private Marker c_marker, p_marker, d_marker;
     private Marker a_marker;
@@ -354,7 +355,21 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
 //                                if (viaLatlng != null)
 //                                    pp.add(viaLatlng);
                                 if (pp != null) {
-                                    route.setUpPolyLine(map, DriverOngoingAct.this, pp.get(0), pp.get(1), pp);
+                                    if(DriverSessionSave.getSession("pickuptopass",context).equals("1")) {
+                                        stopListData_new = new ArrayList<>();
+                                        stopListData_new.add(new LatLng(pp.get(0).latitude, pp.get(0).longitude));
+                                        stopListData_new.add(new LatLng(pp.get(1).latitude, pp.get(1).longitude));
+                                        String route_path_pass = DriverSessionSave.getSession("overviewpolyline_saved",context);
+                                        new Handler().postDelayed(() -> {
+                                            if (route_path_pass != null && !route_path_pass.isEmpty() && !route_path_pass.equalsIgnoreCase("0"))
+                                                route.drawRouteFromPolyline(map, route_path_pass, stopListData_new);
+                                            else
+                                                route.setUpPolyLine(map, DriverOngoingAct.this, pp.get(0), pp.get(1), pp);
+                                        }, 500);
+                                    }else{
+                                        DriverSessionSave.saveSession("pickuptopass","1",context);
+                                        route.setUpPolyLine(map, DriverOngoingAct.this, pp.get(0), pp.get(1), pp);
+                                    }
                                 }
                             } else {
                                 ArrayList<LatLng> pp = new ArrayList<>();

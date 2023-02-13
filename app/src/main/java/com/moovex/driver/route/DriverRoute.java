@@ -175,7 +175,7 @@ public class DriverRoute {
             /** Traversing all routes */
             jOverviewPoly = ((JSONObject) jRoutes.get(0)).getJSONObject("overview_polyline");
             overViewPolyLine = jOverviewPoly.getString("points");
-
+            DriverSessionSave.saveSession("overviewpolyline_saved",overViewPolyLine,mContext);
             path = decodePoly(overViewPolyLine);
         } catch (JSONException e1) {
             e1.printStackTrace();

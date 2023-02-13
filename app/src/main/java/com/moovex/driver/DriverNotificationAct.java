@@ -443,7 +443,7 @@ public class DriverNotificationAct extends MainActivityDriver implements OnMapRe
             }
             // If driver accept the trip,following actions will perform.
             donutProgress.setOnClickListener(v -> {
-
+                DriverSessionSave.saveSession("pickuptopass","0",context);
                 try {
                     ViewEnabledWithDelay(3000, donutProgress);
                     if (DriverNetworkStatus.isOnline(DriverNotificationAct.this)) {
