@@ -16,6 +16,7 @@
 
     <RelativeLayout
         android:id="@+id/toolbar"
+        android:background="@color/black"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize">
 
@@ -28,15 +29,14 @@
             android:text="@string/emergency"
             android:textSize="@dimen/dp_18"
             android:id="@+id/back"
-            app:srcCompat="@drawable/ic_arrow_back_black_24dp" />
+            app:srcCompat="@drawable/ic_arrow_back_white" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="@string/emergency_contact"
-
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/white"
             android:textSize="@dimen/dp_18" />
 
         <androidx.appcompat.widget.AppCompatButton
@@ -51,12 +51,6 @@
             android:textColor="@color/white"
             android:visibility="gone" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_1"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="1dp"
-            android:background="@color/colorLine" />
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
