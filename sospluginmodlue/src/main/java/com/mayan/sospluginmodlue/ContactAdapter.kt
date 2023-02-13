@@ -1,12 +1,10 @@
 package com.mayan.sospluginmodlue
 
-import android.app.AlertDialog
 import android.content.Context
-import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import com.mayan.sospluginmodlue.model.ContactsData
 import kotlinx.android.synthetic.main.sos__contact_list_item.view.*
 
@@ -22,6 +20,13 @@ class ContactAdapter(val item: ArrayList<ContactsData>, val mContext: Context, v
         holder.tvPhoneNumber?.text = item[position].country_code + " " + item[position].contact_number
 
         holder.imageDelete.tag = holder.imageProgress
+
+            if (item[position].contact_name !== "") {
+                ProfileImageSetupClass.setupProfileImage(
+                    item[position].contact_name
+                    , holder.proimg
+                )
+            }
 
     }
 
@@ -54,6 +59,7 @@ class ContactAdapter(val item: ArrayList<ContactsData>, val mContext: Context, v
         val tvPhoneNumber = view.tv_phno
         val imageDelete = view.img_delete
         val imageProgress = view.img_progress
+        val proimg = view.proimg
 
         init {
             imageDelete.setOnClickListener {
