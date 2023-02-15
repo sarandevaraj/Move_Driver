@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/appbg"
     android:orientation="vertical"
-    tools:context="com.moovex.driver.DriverWithDrawMenuAct">
+    tools:context="com.movedriver.driver.DriverWithDrawMenuAct">
 
     <RelativeLayout
         android:id="@+id/slide_lay"

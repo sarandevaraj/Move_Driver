@@ -188,7 +188,7 @@
                 </FrameLayout>
 
 
-                <com.moovex.driver.utils.DriverRoundedImageView
+                <com.movedriver.driver.utils.DriverRoundedImageView
                     android:id="@+id/profileImg"
                     android:layout_width="80dp"
                     android:layout_height="80dp"

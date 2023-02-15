@@ -37,7 +37,7 @@
                     android:orientation="horizontal"
                     android:padding="15dp">
 
-                    <com.moovex.driver.utils.DriverRoundedImageView
+                    <com.movedriver.driver.utils.DriverRoundedImageView
                         android:id="@+id/menu_profile_img"
                         android:layout_width="70dp"
                         android:layout_height="70dp"

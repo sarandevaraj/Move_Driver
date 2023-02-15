@@ -90,7 +90,7 @@ android {
         ignoreWarnings true
         quiet true
     }
-    namespace 'com.moovex'
+    namespace 'com.movedriver'
 }
 dependencies {
 //    implementation files('libs/jsoup-1.7.1.jar')

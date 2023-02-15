@@ -31,7 +31,7 @@
             android:layout_height="fill_parent" />
 
 
-        <com.moovex.driver.utils.DriverCircleOverlayView
+        <com.movedriver.driver.utils.DriverCircleOverlayView
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
@@ -157,7 +157,7 @@
         </LinearLayout>
 
 
-        <com.moovex.driver.pdview.DriverPickupDropView
+        <com.movedriver.driver.pdview.DriverPickupDropView
             android:id="@+id/pd_view"
             android:layout_below="@+id/timer"
             android:background="@color/transparent"

@@ -30,7 +30,7 @@
         android:required="true" />
 
     <application
-        android:name="com.moovex.util.AppController"
+        android:name="com.movedriver.util.AppController"
         android:allowBackup="false"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
@@ -48,7 +48,7 @@
             android:required="false" />
 
         <activity
-            android:name="com.moovex.SplashActivity"
+            android:name="com.movedriver.SplashActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
@@ -62,7 +62,7 @@
         </activity>
 
         <activity
-            android:name="com.moovex.driver.DriverAddFleetAct"
+            android:name="com.movedriver.driver.DriverAddFleetAct"
             android:theme="@style/Mymaterialact"
             android:windowSoftInputMode="adjustPan|stateHidden" />
 
@@ -77,7 +77,7 @@
                     </intent-filter>
                 </service>-->
         <service
-            android:name="com.moovex.service.FirebaseService"
+            android:name="com.movedriver.service.FirebaseService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
@@ -89,7 +89,7 @@
         <!--            android:resource="@drawable/driver_notification_icon"-->
         <!--            android:value="@color/button_accept"/>-->
 
-        <service android:name="com.moovex.service.BackgroundCoreConfig" />
+        <service android:name="com.movedriver.service.BackgroundCoreConfig" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationName"
@@ -110,14 +110,14 @@
         <!--            android:exported="false" />-->
 
         <receiver
-            android:name="com.moovex.util.NetworkStatus"
+            android:name="com.movedriver.util.NetworkStatus"
             android:exported="false">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
         <receiver
-            android:name="com.moovex.util.GpsStatus"
+            android:name="com.movedriver.util.GpsStatus"
             android:exported="false">
             <intent-filter>
                 <action android:name="android.location.PROVIDERS_CHANGED" />
@@ -126,7 +126,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.moovex.files_root"
+            android:authorities="com.movedriver.files_root"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
@@ -155,13 +155,13 @@
         <!--DRiver-->
 
         <activity
-            android:name="com.moovex.driver.DummyActivityDriver"
+            android:name="com.movedriver.driver.DummyActivityDriver"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustResize|stateHidden" />
 
         <receiver
-            android:name="com.moovex.driver.DriverCallReceiver"
+            android:name="com.movedriver.driver.DriverCallReceiver"
             android:enabled="true"
             android:exported="false">
             <intent-filter>
@@ -170,12 +170,12 @@
         </receiver>
 
         <activity
-            android:name="com.moovex.driver.utils.DriverSignUpWebviewAct"
+            android:name="com.movedriver.driver.utils.DriverSignUpWebviewAct"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name="com.moovex.driver.DriverSplashAct"
+            android:name="com.movedriver.driver.DriverSplashAct"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Translucent">
@@ -183,80 +183,80 @@
 
         </activity>
         <activity
-            android:name="com.moovex.driver.permission.DriverDevicePermissionActivityDriver"
+            android:name="com.movedriver.driver.permission.DriverDevicePermissionActivityDriver"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustResize|stateHidden" />
 
         <activity
-            android:name="com.moovex.driver.permission.DriverStoreAndSecureActivityDriver"
+            android:name="com.movedriver.driver.permission.DriverStoreAndSecureActivityDriver"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustResize|stateHidden" />
 
         <activity
-            android:name="com.moovex.driver.DriverWebviewAct"
+            android:name="com.movedriver.driver.DriverWebviewAct"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
-            android:name="com.moovex.driver.DriverStreetPickUpAct"
+            android:name="com.movedriver.driver.DriverStreetPickUpAct"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name="com.moovex.driver.locationSearch.DriverLocationSearchActivityDriver"
+            android:name="com.movedriver.driver.locationSearch.DriverLocationSearchActivityDriver"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="stateAlwaysVisible" />
 
         <activity
-            android:name="com.moovex.driver.DriverTripHistoryAct"
+            android:name="com.movedriver.driver.DriverTripHistoryAct"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name="com.moovex.driver.DriverTripDetails"
+            android:name="com.movedriver.driver.DriverTripDetails"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name="com.moovex.driver.DriverUserLoginAct"
+            android:name="com.movedriver.driver.DriverUserLoginAct"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name="com.moovex.driver.DriverJobdoneAct"
+            android:name="com.movedriver.driver.DriverJobdoneAct"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name="com.moovex.driver.DriverInviteFriendAct"
+            android:name="com.movedriver.driver.DriverInviteFriendAct"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name="com.moovex.driver.DriverOngoingAct"
+            android:name="com.movedriver.driver.DriverOngoingAct"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name="com.moovex.driver.DriverMeAct"
+            android:name="com.movedriver.driver.DriverMeAct"
             android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|layoutDirection|fontScale"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name="com.moovex.driver.DriverSettingsAct"
+            android:name="com.movedriver.driver.DriverSettingsAct"
             android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|layoutDirection|fontScale"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
 
         <activity
-            android:name="com.moovex.driver.DriverNotificationAct"
+            android:name="com.movedriver.driver.DriverNotificationAct"
             android:configChanges="locale"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
@@ -264,59 +264,59 @@
 
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name="com.moovex.driver.DriverFarecalcAct"
+            android:name="com.movedriver.driver.DriverFarecalcAct"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name="com.moovex.driver.DriverPayuncardAct"
+            android:name="com.movedriver.driver.DriverPayuncardAct"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name="com.moovex.driver.DriverCanceltripAct"
+            android:name="com.movedriver.driver.DriverCanceltripAct"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Transparent"
             android:windowSoftInputMode="adjustPan|stateHidden" />
 
         <activity
-            android:name="com.moovex.driver.DriverShowAlertAct"
+            android:name="com.movedriver.driver.DriverShowAlertAct"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Transparent"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name="com.moovex.driver.DriverMyStatus"
+            android:name="com.movedriver.driver.DriverMyStatus"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme_home"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name="com.moovex.driver.DriverWithdrawHistoryAct"
+            android:name="com.movedriver.driver.DriverWithdrawHistoryAct"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name="com.moovex.driver.DriverWithDrawMenuAct"
+            android:name="com.movedriver.driver.DriverWithDrawMenuAct"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name="com.moovex.driver.DriverWithdrawReqAct"
+            android:name="com.movedriver.driver.DriverWithdrawReqAct"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
 
         <activity
-            android:name="com.moovex.driver.DriverSelectDropLocationAct"
+            android:name="com.movedriver.driver.DriverSelectDropLocationAct"
             android:theme="@style/MyMaterialTheme" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.moovex.files_root"
+            android:authorities="com.movedriver.files_root"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
@@ -325,14 +325,14 @@
         </provider>
 
         <receiver
-            android:name="com.moovex.driver.utils.DriverNetworkStatus"
+            android:name="com.movedriver.driver.utils.DriverNetworkStatus"
             android:exported="false">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
         <receiver
-            android:name="com.moovex.driver.utils.DriverGpsStatus"
+            android:name="com.movedriver.driver.utils.DriverGpsStatus"
             android:exported="false">
             <intent-filter>
                 <action android:name="android.location.PROVIDERS_CHANGED" />
@@ -340,11 +340,11 @@
             </intent-filter>
         </receiver>
 
-        <service android:name="com.moovex.driver.service.DriverBackgroundCoreConfig" />
+        <service android:name="com.movedriver.driver.service.DriverBackgroundCoreConfig" />
 
 
         <receiver
-            android:name="com.moovex.driver.utils.DriverBootCompletedIntentReceiver"
+            android:name="com.movedriver.driver.utils.DriverBootCompletedIntentReceiver"
             android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
@@ -359,7 +359,7 @@
 
 
         <service
-            android:name="com.moovex.driver.service.LocationUpdate"
+            android:name="com.movedriver.driver.service.LocationUpdate"
             android:enabled="true"
             android:exported="true"
             android:foregroundServiceType="location" />
@@ -373,11 +373,11 @@
             android:value="@string/googleID" />
 
         <activity
-            android:name="com.moovex.driver.earningchart.DriverEarningsAct"
+            android:name="com.movedriver.driver.earningchart.DriverEarningsAct"
             android:theme="@style/MyMaterialTheme" />
 
         <service
-            android:name="com.moovex.driver.service.DriverForegroundEnablingService"
+            android:name="com.movedriver.driver.service.DriverForegroundEnablingService"
             android:enabled="true"
             android:exported="false" />
         <!-- <service android:name=".MyFirebaseInstanceIDService">
@@ -386,7 +386,7 @@
              </intent-filter>
          </service>-->
         <service
-            android:name="com.moovex.driver.service.DriverFirebaseService"
+            android:name="com.movedriver.driver.service.DriverFirebaseService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
@@ -399,30 +399,30 @@
 
 
         <activity
-            android:name="com.moovex.driver.DeleteAccountActivityDriver"
+            android:name="com.movedriver.driver.DeleteAccountActivityDriver"
             android:theme="@style/MyMaterialTheme" />
         <activity
-            android:name="com.moovex.driver.DriverTermsAndConditions"
+            android:name="com.movedriver.driver.DriverTermsAndConditions"
             android:launchMode="singleTask"
             android:theme="@style/MyMaterialTheme" />
         <activity
-            android:name="com.moovex.driver.DriverSettlementDetail"
+            android:name="com.movedriver.driver.DriverSettlementDetail"
             android:theme="@style/MyMaterialTheme" />
 
         <activity
-            android:name="com.moovex.driver.SettlementHistoryActivityDriver"
+            android:name="com.movedriver.driver.SettlementHistoryActivityDriver"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
 
 
         <activity
-            android:name="com.moovex.driver.DriverMapZoomAct"
+            android:name="com.movedriver.driver.DriverMapZoomAct"
             android:theme="@style/MyMaterialTheme">
 
         </activity>
 
         <activity
-            android:name="com.moovex.driver.DriverWalletHistory"
+            android:name="com.movedriver.driver.DriverWalletHistory"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
 
@@ -439,11 +439,11 @@
             android:windowSoftInputMode="adjustResize|stateHidden" />
 
         <activity
-            android:name="com.moovex.driver.DriverMyFleetAct"
+            android:name="com.movedriver.driver.DriverMyFleetAct"
             android:theme="@style/MyMaterialTheme" />
 
         <activity
-            android:name="com.moovex.ChatWebviewAct"
+            android:name="com.movedriver.ChatWebviewAct"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustResize|stateHidden" />
