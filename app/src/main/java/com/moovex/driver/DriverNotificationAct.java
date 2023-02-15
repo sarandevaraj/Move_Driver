@@ -240,8 +240,8 @@ public class DriverNotificationAct extends MainActivityDriver implements OnMapRe
                     final JSONObject json = new JSONObject(message);
                     final JSONObject tripdetails = json.getJSONObject("trip_details");
                     time_out = tripdetails.getInt("notification_time");
-                    km_txt.setText(tripdetails.getString("approx_distance"));
-                    approxment_fare.setText(tripdetails.getString("approx_fare"));
+                    km_txt.setText(tripdetails.getString("approx_distance")+" KM");
+                    approxment_fare.setText(""+DriverSessionSave.getSession("site_currency", DriverNotificationAct.this)+" "+tripdetails.getString("approx_fare"));
                     notes = tripdetails.getString("notes");
                     trip_id = tripdetails.getString("passengers_log_id");
                     if (tripdetails.has(DriverCommonData.SHOW_CANCEL_BUTTON))

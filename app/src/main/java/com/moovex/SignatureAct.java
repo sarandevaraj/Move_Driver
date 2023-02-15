@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.github.gcacace.signaturepad.views.SignaturePad;
@@ -30,6 +31,8 @@ public class SignatureAct extends MainActivity implements OnClickListener {
     private SignaturePad mSignaturePad;
     private TextView btn_clear;
 
+    private ImageView slideImg;
+
     @Override
     public int setLayout() {
         return R.layout.signature_lay;
@@ -48,6 +51,8 @@ public class SignatureAct extends MainActivity implements OnClickListener {
         btn_clear = findViewById(R.id.btn_clear);
         btn_complete = findViewById(R.id.btn_complete);
         btn_force_complete = findViewById(R.id.btn_force_complete);
+        slideImg = findViewById(R.id.slideImg);
+
         mSignaturePad.setOnSignedListener(new SignaturePad.OnSignedListener() {
 
             @Override
@@ -70,8 +75,11 @@ public class SignatureAct extends MainActivity implements OnClickListener {
             }
         });
 
-
         setonclickListener();
+
+        slideImg.setOnClickListener(v -> {
+            onBackPressed();
+        });
     }
 
 

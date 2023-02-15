@@ -5,6 +5,45 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="56dp"
+        android:background="@color/header_bgcolor">
+
+        <RelativeLayout
+            android:id="@+id/slide_lay"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/tool_bar"
+            android:layout_alignParentTop="true"
+            android:background="@color/black"
+            android:padding="10dp">
+
+            <ImageView
+                android:id="@+id/slideImg"
+                android:layout_width="@dimen/dp_18"
+                android:layout_height="@dimen/dp_18"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:drawablePadding="5dp"
+                android:layout_marginLeft="5dp"
+                android:textSize="16sp"
+                app:srcCompat="@drawable/ic_back_white" />
+
+            <TextView
+                android:id="@+id/headerTxt"
+                style="@android:style/TextAppearance.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:text="@string/draw_signature"
+                android:textAllCaps="false"
+                android:textColor="@color/white" />
+
+        </RelativeLayout>
+
+    </FrameLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -20,6 +59,7 @@
             android:layout_marginTop="@dimen/dp_10"
             android:layout_marginEnd="@dimen/dp_10"
             android:gravity="center"
+            android:visibility="gone"
             android:text="@string/draw_signature"
             android:textSize="16sp"
             android:textColor="@color/black"

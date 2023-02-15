@@ -1988,14 +1988,14 @@ public class DriverMyStatus extends MainActivityDriver implements ConnectionCall
                                 second_lay.setVisibility(View.GONE);
                                 third_lay.setVisibility(View.GONE);
 
-                                lasttripheader.setText(DriverNC.getString(R.string.Lasttrip));
+                                lasttripheader.setText(DriverNC.getString(R.string.Last3trip));
 
                             } else if (templength == 2) {
                                 first_lay.setVisibility(View.VISIBLE);
                                 second_lay.setVisibility(View.VISIBLE);
                                 third_lay.setVisibility(View.GONE);
 
-                                lasttripheader.setText(DriverNC.getString(R.string.Last2trip));
+                                lasttripheader.setText(DriverNC.getString(R.string.Last3trip));
                             } else if (templength == 3) {
                                 first_lay.setVisibility(View.VISIBLE);
                                 second_lay.setVisibility(View.VISIBLE);
