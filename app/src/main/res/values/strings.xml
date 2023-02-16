@@ -80,7 +80,7 @@
 
 
     <string name="payment_complete">Job Completed</string>
-    <string name="thanksforflag">Thank you for using x. Make your next Job even more enjoyable.</string>
+    <string name="thanksforflag">Thank you for using Move. Make your next Job even more enjoyable.</string>
     <string name="ratedriver">Rate Your Driver</string>
     <string name="shareride">Share</string>
 
@@ -208,8 +208,8 @@
 
     <!-- about us lay -->
     <string name="headtitle_below">Lorem Ipsum is simply dummy text of the printing and typesetting industry</string>
-    <string name="fblink">facebook.com/x</string>
-    <string name="twlink">twitter.com/x</string>
+    <string name="fblink">facebook.com/Move</string>
+    <string name="twlink">twitter.com/Move</string>
     <string name="facebook">Facebook</string>
     <string name="twitter">Twitter</string>
 
@@ -330,7 +330,7 @@
     </string-array>
 
 
-    <!-- TODO: Re or change this placeholder text -->
+    <!-- TODO: Remove or change this placeholder text -->
 
 
     <string name="error">Could not connect to server,Please try again</string>
@@ -338,7 +338,7 @@
 
 
     <string name="zerorating">Do you want to post your feedback without rating?</string>
-    <string name="message_alert_back">Your registration is not yet completed. If you click back, you must login again to complete the registration. Do you want to  back?</string>
+    <string name="message_alert_back">Your registration is not yet completed. If you click back, you must login again to complete the registration. Do you want to move back?</string>
 
 
     <string name="select_date_arab">حدد التاريخ الوقت</string>
@@ -397,7 +397,7 @@
 
     <string name="share_app">Share this app</string>
 
-    <string name="site_desc">x is a reliable eco-friendly public electric transport service which allows people to travel safely, without any delays at an affordable price. Depend on us to offer you the most eco friendly vehicles to transport you in total comfort.</string>
+    <string name="site_desc">Move is a reliable eco-friendly public electric transport service which allows people to travel safely, without any delays at an affordable price. Depend on us to offer you the most eco friendly vehicles to transport you in total comfort.</string>
 
     <string name="searching_text">Searching...</string>
 
@@ -445,7 +445,7 @@
     <string name="confirm_delete">Are you sure want to delete favourite?</string>
     <string name="book_ride">Book a Job</string>
     <string name="book_delivery">Book Your Delivery</string>
-    <string name="Need_proper_loc">Couldn\'t get your proper location, Please  to coverage area.</string>
+    <string name="Need_proper_loc">Couldn\'t get your proper location, Please move to coverage area.</string>
     <string name="wallet_amount_alert">You have insufficient wallet amt. Do you want to recharge?</string>
     <string name="fav_alert">Your location has been already added as a Favourite location</string>
 
@@ -475,15 +475,15 @@
     <string name="change_permission_in_phone">You can change the above permissions from Phone Settings, at any time.</string>
     <string name="proceed">Proceed</string>
     <string name="store_data">See how we store, use and secure your data</string>
-    <string name="by_clicking_proceed">By clicking the check box, you agree to the x Cabs</string>
-    <string name="by_clicking_proceed_btn">By clicking the Submit button, you agree to the x Cabs</string>
-    <string name="package_name">of x cabs</string>
+    <string name="by_clicking_proceed">By clicking the check box, you agree to the Move Cabs</string>
+    <string name="by_clicking_proceed_btn">By clicking the Submit button, you agree to the Move Cabs</string>
+    <string name="package_name">of Move cabs</string>
     <string name="see_how_we_use_your_data">See How We Use Your Data</string>
     <string name="how_do_we_use_your_data_description">We value your privacy and take all the measures necessary to protect your data at all times. The below important points are meant to help you understand how we collect and use your personal information. </string>
     <string name="brief_privacy_policy">Brief Privacy Policy</string>
     <string name="brief_privacy_policy_description">To provide better user experience of our mobile application and ensure that you are able to access all our features, we may collect and maintain your personal and other information which is shared by you or collected by us. We may collect, use, store, import and export your information and you are solely responsible for the accuracy of the details. To understand our policy, we request you to read our Privacy Policy.</string>
     <string name="what_do_we_collect">What do we collect?</string>
-    <string name="what_do_we_collect_desctiption"><![CDATA[x collects your personal information when you create, use and update your account. Using the information, we will be able to provide the complete experience of the application. The information we collect includes:
+    <string name="what_do_we_collect_desctiption"><![CDATA[Move collects your personal information when you create, use and update your account. Using the information, we will be able to provide the complete experience of the application. The information we collect includes:
 \n(1)Personal data (e.g., name, location, and password) to create, update and maintain the account;
 \n(2)Contact data (e.g., email ID, address, and telephone or mobile number) to create, update and maintain the account and also send notifications;
 \n(3)Contract data (e.g., registration time and manner, and status) to review app usage;
@@ -501,7 +501,7 @@
     <string name="what_do_we_use_it_for">What do we use it for?</string>
     <string name="what_do_we_use_it_fo_descr">The personal information will be collected, used and stored for the purpose of creating and maintaining your account. We will also collect the information to help drivers in getting incoming ride and delivery requests. To know more, please read our Privacy Policy.</string>
     <string name="how_do_we_protect_your_data">How do we protect your data?</string>
-    <string name="how_do_we_protect_your_data_desc">We use proper technical and organizational security measures to protect your sensitive and personal information. The transfer of information between x cabs and any other devices is in an encrypted form (SSL data). We adopt security measures based on the industry standards to prevent any modification, damage or loss of the data. To know more, please read our Privacy Policy.</string>
+    <string name="how_do_we_protect_your_data_desc">We use proper technical and organizational security measures to protect your sensitive and personal information. The transfer of information between Move cabs and any other devices is in an encrypted form (SSL data). We adopt security measures based on the industry standards to prevent any modification, damage or loss of the data. To know more, please read our Privacy Policy.</string>
     <string name="know_your_rights">Know your rights</string>
     <string name="know_your_rights_desc">Subject to and in accordance with the agreed Terms and Conditions and Privacy Policy, you also have the rights to know the purpose for which your information is collected, the kind of data that is collected, the way the data is stored and which agency collects and manages your information. You also have the right to correct, delete and modify your personal information and withdraw the consent which is given by you. To know more, please read our Privacy Policy and Terms and Conditions.</string>
     <string name="agreed_checkbox">You need to agree to our Privacy Policy and Terms and Conditions to proceed further.</string>
@@ -810,7 +810,7 @@
     <string name="old_password_and_newpassword_are_same">Old password and new password are Same</string>
 
     <!-- version update -->
-    <string name="version_up_message">There is a new version of x available, this version is no longer supported.</string>
+    <string name="version_up_message">There is a new version of Move available, this version is no longer supported.</string>
     <string name="version_up_title">Update</string>
     <string name="version_up_now">Update now</string>
     <string name="version_up_later">Later</string>
@@ -954,7 +954,7 @@
     <string name="have_promocode">Have a  Promocode?</string>
     <!-- card registration -->
     <string name="reg_promocode">Pay by Referral Code</string>
-    <string name="walletmsg">Cashless, hassle-free jobs with x wallet</string>
+    <string name="walletmsg">Cashless, hassle-free jobs with Move wallet</string>
 
     <string name="reg_enterprcode">Please enter your Promo code</string>
     <string name="minimum_fare">Minimum Fare</string>
@@ -1040,7 +1040,7 @@
     <string name="sos_more_info">You can add up to 3 contacts</string>
     <string name="add_contacts">Add Contacts</string>
     <string name="already_added">Contact already present. Please try adding another contact.</string>
-    <string name="contact_limit_reached">You can add up to 3 contacts. Re any contact to add another.</string>
+    <string name="contact_limit_reached">You can add up to 3 contacts. Remove any contact to add another.</string>
     <string name="please_try_again">Please try again</string>
     <string name="emergency">Emergency</string>
     <string name="contact_min_alert">Please select valid contact number</string>
@@ -1063,15 +1063,15 @@
     <string name="last_req">Last req sent by </string>
     <string name="req_to_admin">Request to Admin</string>
     <string name="days_limit_exceed">Kindly Select with in 31 days</string>
-    <string name="wallet_tooltip_text">Wallet details are d here</string>
-    <string name="withdraw_tooltip_text">Withdraw details are d here</string>
+    <string name="wallet_tooltip_text">Wallet details are moved here</string>
+    <string name="withdraw_tooltip_text">Withdraw details are moved here</string>
     <string name="settlement_tooltip_text">Introducing "Amount Settlement" option here</string>
-    <string name="wallet_d_tooltip">Wallet details are d to Earnings page</string>
+    <string name="wallet_moved_tooltip">Wallet details are moved to Earnings page</string>
     <string name="next">Next</string>
     <string name="id">ID</string>
     <string name="requested_payment">Requested Payments</string>
     <string name="driver_commision">Driver Commission</string>
-    <string name="low_gps_alert_message">Couldn\'t get your proper location, Please  to coverage area.</string>
+    <string name="low_gps_alert_message">Couldn\'t get your proper location, Please move to coverage area.</string>
     <string name="distance_calcuation_inprogress">Distance calculation in progress</string>
     <string name="email_optional">Email (Optional)</string>
     <string name="search_stop_hint">Enter stop location</string>
@@ -1081,11 +1081,11 @@
 
     <string name="mob_settings">Mobile settings     </string>
     <string name="huawei_title">Protected Apps</string>
-    <string name="huawei_msg">x App  requires to be enabled in \'Protected Apps\' to Function Properly.</string>
+    <string name="huawei_msg">Move App  requires to be enabled in \'Protected Apps\' to Function Properly.</string>
     <string name="auto_start">Auto start Enable</string>
-    <string name="auto_start_msg">x App requires to be enabled in \'Auto Start\' and \'Other Permissions\' to Function Properly.</string>
+    <string name="auto_start_msg">Move App requires to be enabled in \'Auto Start\' and \'Other Permissions\' to Function Properly.</string>
     <string name="power_saving">Power saving disable</string>
-    <string name="power_saving_msg">x App requires to be disabled in \'Power saving\' to Function Properly.</string>
+    <string name="power_saving_msg">Move App requires to be disabled in \'Power saving\' to Function Properly.</string>
     <string name="track_shift_status">Now you are in shift out.Kindly shift in to continue.</string>
     <string name="you_are_in_shift_out">You are in shift out</string>
     <string name="something">Something went wrong!</string>
@@ -1100,10 +1100,10 @@
     <string name="passenger_phone">Call Passenger</string>
     <string name="schedule_trip">Schedule Job</string>
     <string name="corporate_trip">Corporate Job</string>
-    <string name="app_name"> Driver</string>
+    <string name="app_name">Move driver</string>
     <string name="become_driver">Become a Driver</string>
     <string name="become_passenger">Become a Passenger</string>
-    <!-- TODO: Re or change this placeholder text -->
+    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="sign_up_acc">Enter below details to complete the sign up process</string>
     <string name="history">History</string>
@@ -1162,7 +1162,7 @@
     <string name="trip_completed_by_passenger_using_wallet">Job completed by passenger wallet</string>
     <string name="wait_tips">Wait until passenger pay the tip or Disable the tip option and continue</string>
     <string name="delivery_fare">Delivery Fare</string>
-    <string name="welcome_to_">Welcome to x</string>
+    <string name="welcome_to_">Welcome to Move</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="clear">Clear</string>
     <string name="draw_signature">Draw Signature</string>
