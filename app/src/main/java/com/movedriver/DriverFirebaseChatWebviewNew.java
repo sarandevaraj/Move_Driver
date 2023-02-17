@@ -5,6 +5,7 @@ import static com.movedriver.util.ConstantsKt.API_BASE;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.DrawableImageViewTarget;
+import com.movedriver.driver.DriverOngoingAct;
 import com.movedriver.service.FirebaseService;
 import com.movedriver.util.GpsStatus;
 import com.movedriver.util.SessionSave;
@@ -61,6 +63,9 @@ public class DriverFirebaseChatWebviewNew extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        Intent i = new Intent(DriverFirebaseChatWebviewNew.this, DriverOngoingAct.class);
+        startActivity(i);
+        finish();
         super.onBackPressed();
     }
 

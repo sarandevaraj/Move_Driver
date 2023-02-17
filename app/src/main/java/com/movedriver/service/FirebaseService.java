@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.movedriver.ChatWebviewAct;
+import com.movedriver.DriverFirebaseChatWebviewNew;
 import com.movedriver.R;
 import com.movedriver.SplashActivity;
 import com.movedriver.data.apiData.PromoDataList;
@@ -91,8 +92,10 @@ public class FirebaseService extends FirebaseMessagingService {
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
         if (SessionSave.getSession("user_type", FirebaseService.this).equalsIgnoreCase("p")) {
+            DriverSystems.out.println("Sakthi MyFirebaseIIDServices p " + remoteMessage.getData());
             onHandleIntent(remoteMessage);
         } else {
+            DriverSystems.out.println("Sakthi MyFirebaseIIDServices D " + remoteMessage.getData());
             onHandleIntentD(remoteMessage);
         }
         // Check if message contains a data payload.
@@ -291,8 +294,10 @@ public class FirebaseService extends FirebaseMessagingService {
         String unique = "";
         try {
             message = remoteMessage.getData().get("message");
+            System.out.println("Sakthi check firebase notification "+ message);
             if (message != null && !message.isEmpty()) {
                 JSONObject jsonObject = new JSONObject(message);
+                System.out.println("Sakthi check firebase notification "+ jsonObject);
                 if (jsonObject.getString("status").equals("14")) {
                     if (jsonObject.getString("display").equals("1")) {
                         if (jsonObject.has("message")) {
@@ -452,6 +457,9 @@ public class FirebaseService extends FirebaseMessagingService {
                     sendBroadcast(intent);
                     JSONObject json = new JSONObject(message);
                     sendNotification(json.getString("message"));
+                } else if (jsonObject.getString("status").equals("1256")){
+                    System.out.println("Sakthi check firebase notification "+ jsonObject);
+                    generateNotificationD(this, message, DriverSplashAct.class);
                 } else generateNotificationD(this, message, DriverSplashAct.class);
 
             }
@@ -494,6 +502,10 @@ public class FirebaseService extends FirebaseMessagingService {
             } else if (jo.getString("status").equals("42") || jo.getString("status").equals("45") || jo.getString("status").equals("41") || jo.getString("status").equals("45") || jo.getString("status").equals("44")) {
                 Message = jo.getString("message");
                 showNotification(context, Message, message);
+            } else if (jo.getString("status").equals("1256")){
+                System.out.println("Sakthi check firebase notification 2 "+ jo );
+                Message = jo.getString("sender") + " : " + jo.getString("send_message") ;
+                showNotificationtochat(context, Message, message);
             } else if (jo.getString("status").equals("14")) {
                 Message = jo.getString("message");
                 Intent i = new Intent(FirebaseService.this, DriverMyStatus.class);
@@ -567,6 +579,55 @@ public class FirebaseService extends FirebaseMessagingService {
         }
     }
 
+    private void showNotificationtochat(Context context, String Message, String data) {
+
+        mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        String title = context.getString(R.string.app_name);
+        Intent notificationIntent = new Intent(this, DriverFirebaseChatWebviewNew.class);
+        notificationIntent.putExtra("trip_id", DriverSessionSave.getSession("trip_id", context));
+        notificationIntent.putExtra("GCMnotification", data);
+        DriverSessionSave.saveSession("GCMnotification", data, context);
+        DriverSystems.out.println("GGGGGGGGG" + data);
+        int requestID = (int) System.currentTimeMillis();
+        notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, requestID, notificationIntent, PendingIntent.FLAG_IMMUTABLE);
+        DriverSessionSave.saveSession("LogoutMessage", Message, FirebaseService.this);
+        String NOTIFICATION_CHANNEL_ID = "my_channel_id_01";
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, "My Notifications", NotificationManager.IMPORTANCE_HIGH);
+            // Configure the notification channel.
+            notificationChannel.setDescription("Channel description");
+            notificationChannel.enableLights(true);
+            notificationChannel.setLightColor(Color.RED);
+            mNotificationManager.createNotificationChannel(notificationChannel);
+            builderD = new Notification.Builder(this, NOTIFICATION_CHANNEL_ID).setContentText(Message).setContentTitle(title).setOngoing(true).setBadgeIconType(NotificationCompat.BADGE_ICON_SMALL).setSmallIcon(R.drawable.small_logo).setColor(ContextCompat.getColor(getBaseContext(), R.color.button_accept)).setContentIntent(pendingIntent).setLargeIcon(((BitmapDrawable) ContextCompat.getDrawable(this, R.drawable.ic_launcher)).getBitmap()).setWhen(System.currentTimeMillis());
+        } else {
+            builderD = new Notification.Builder(context);
+            builderD.setAutoCancel(false);
+            builderD.setTicker(DriverNC.getString(R.string.app_name));
+            builderD.setContentTitle(title);
+            builderD.setContentText(Message);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                builderD.setSmallIcon(R.drawable.small_logo);
+                builderD.setColor(ContextCompat.getColor(getBaseContext(), R.color.button_accept));
+            } else {
+                builderD.setSmallIcon(R.drawable.small_logo);
+            }
+            builderD.setContentIntent(pendingIntent);
+            builderD.setOngoing(false);
+        }
+        Notification myNotication = builderD.build();
+        myNotication.flags |= Notification.FLAG_AUTO_CANCEL;
+        mNotificationManager.notify(NOTIFICATION_ID, myNotication);
+        Uri notification1 = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        try {
+            Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification1);
+            r.play();
+        } catch (NullPointerException ex) {
+            ex.printStackTrace();
+        }
+    }
     private void showNotificationBookLater(Context context, String Message, String message, Intent intent) {
         mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         String title = context.getString(R.string.app_name);
