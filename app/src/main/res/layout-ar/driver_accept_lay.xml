@@ -510,7 +510,7 @@
 
                                 </RelativeLayout>
 
-                                <com.movedriver.driver.utils.DriverRoundedImageView
+                                <com.movedriverdriver.driver.utils.DriverRoundedImageView
                                     android:id="@+id/proimg"
                                     android:layout_width="80dp"
                                     android:layout_height="80dp"
@@ -599,7 +599,7 @@
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content" />
 
-                        <com.movedriver.driver.pdview.DriverPickupDropView
+                        <com.movedriverdriver.driver.pdview.DriverPickupDropView
                             android:id="@+id/pdview"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"

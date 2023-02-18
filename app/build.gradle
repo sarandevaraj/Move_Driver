@@ -11,9 +11,9 @@ android {
         release_config {
             try {
                 storeFile file('/home/developer/Documents/Android Project/Snape/snapecabs_andr/app/keystore/keystore.jks')
-                storePassword 'taximobility'
-                keyAlias 'taximobility'
-                keyPassword 'taximobility'
+                storePassword 'movedriverdriver'
+                keyAlias 'movedriverdriver'
+                keyPassword 'movedriverdriver'
             } catch (Exception ignored) {
                 throw new InvalidUserDataException("You should define KEYSTORE_PASSWORD and KEY_PASSWORD in gradle.properties.")
             }
@@ -90,7 +90,7 @@ android {
         ignoreWarnings true
         quiet true
     }
-    namespace 'com.movedriver'
+    namespace 'com.movedriverdriver'
 }
 dependencies {
 //    implementation files('libs/jsoup-1.7.1.jar')

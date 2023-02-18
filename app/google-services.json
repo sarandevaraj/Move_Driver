@@ -8,9 +8,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:143322435711:android:5e6a7bbc992f34f83a2f4a",
+        "mobilesdk_app_id": "1:143322435711:android:06117f5f2d6c3fc33a2f4a",
         "android_client_info": {
-          "package_name": "com.move"
+          "package_name": "com.movecustomer"
         }
       },
       "oauth_client": [
@@ -37,9 +37,9 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:143322435711:android:9e7624fdb623029e3a2f4a",
+        "mobilesdk_app_id": "1:143322435711:android:ea7322d9ca5891ce3a2f4a",
         "android_client_info": {
-          "package_name": "com.movedriver"
+          "package_name": "com.movedriverdriver"
         }
       },
       "oauth_client": [

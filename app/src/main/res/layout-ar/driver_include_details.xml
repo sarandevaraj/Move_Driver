@@ -37,7 +37,7 @@
                 app:cardElevation="3dp"
                 app:cardUseCompatPadding="true">
 
-                <com.movedriver.driver.pdview.DriverPickupDropView
+                <com.movedriverdriver.driver.pdview.DriverPickupDropView
                     android:id="@+id/pd_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -187,7 +187,7 @@
             </LinearLayout>
 
 
-            <com.movedriver.driver.utils.DriverRoundedImageView
+            <com.movedriverdriver.driver.utils.DriverRoundedImageView
 
                 android:id="@+id/driverImg"
                 android:layout_width="80dp"

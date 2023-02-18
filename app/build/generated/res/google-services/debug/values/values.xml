@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="default_web_client_id" translatable="false">731540038622-er2vubp4ft9qn64jlemilhahl9s3bi1n.apps.googleusercontent.com</string>
-    <string name="firebase_database_url" translatable="false">https://taximobility-driver.firebaseio.com</string>
-    <string name="gcm_defaultSenderId" translatable="false">731540038622</string>
-    <string name="google_api_key" translatable="false">AIzaSyBawiaJfKO97N2XcrCaLI5ilylX_BtAS9s</string>
-    <string name="google_app_id" translatable="false">1:731540038622:android:04dd108a61177c56</string>
-    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyBawiaJfKO97N2XcrCaLI5ilylX_BtAS9s</string>
-    <string name="google_storage_bucket" translatable="false">taximobility-driver.appspot.com</string>
-    <string name="project_id" translatable="false">taximobility-driver</string>
+    <string name="default_web_client_id" translatable="false">143322435711-df4i29b1ev35tk476kq1qk6npc2tpr6f.apps.googleusercontent.com</string>
+    <string name="firebase_database_url" translatable="false">https://tagmytaxi-90a20.firebaseio.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">143322435711</string>
+    <string name="google_api_key" translatable="false">AIzaSyCe6ABcGJJGwdXT8dVFbhXbnnhjYgMWpQg</string>
+    <string name="google_app_id" translatable="false">1:143322435711:android:ea7322d9ca5891ce3a2f4a</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyCe6ABcGJJGwdXT8dVFbhXbnnhjYgMWpQg</string>
+    <string name="google_storage_bucket" translatable="false">tagmytaxi-90a20.appspot.com</string>
+    <string name="project_id" translatable="false">tagmytaxi-90a20</string>
 </resources>

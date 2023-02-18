@@ -19,7 +19,7 @@
             app:cardElevation="3dp"
             app:cardUseCompatPadding="true">
 
-            <com.movedriver.driver.pdview.DriverPickupDropView
+            <com.movedriverdriver.driver.pdview.DriverPickupDropView
                 android:id="@+id/pd_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

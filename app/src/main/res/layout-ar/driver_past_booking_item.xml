@@ -40,7 +40,7 @@
                 android:layout_height="80dp"
                 android:gravity="center_vertical">
 
-                <com.movedriver.driver.utils.DriverRoundedImageView
+                <com.movedriverdriver.driver.utils.DriverRoundedImageView
                     android:id="@+id/driver_image"
                     android:layout_width="60dp"
                     android:layout_height="60dp"

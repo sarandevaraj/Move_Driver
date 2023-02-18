@@ -1,0 +1,7 @@
+package com.movedriverdriver.driver.data.apiData;
+
+public class DriverSettlementPaymentData {
+    public int status;
+    public String message;
+}
+

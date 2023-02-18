@@ -2,6 +2,6 @@ package androidx.databinding;
 
 public class DataBinderMapperImpl extends MergedDataBinderMapper {
   DataBinderMapperImpl() {
-    addMapper(new com.taximobility.DataBinderMapperImpl());
+    addMapper(new com.movedriverdriver.DataBinderMapperImpl());
   }
 }

@@ -151,7 +151,7 @@
 
             </RelativeLayout>
 
-            <com.movedriver.driver.utils.DriverRoundedImageView
+            <com.movedriverdriver.driver.utils.DriverRoundedImageView
                 android:id="@+id/profileimage"
                 android:layout_width="80dp"
                 android:layout_height="80dp"

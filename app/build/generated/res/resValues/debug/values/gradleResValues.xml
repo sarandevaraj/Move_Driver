@@ -3,10 +3,13 @@
 
     <!-- Automatically generated file. DO NOT MODIFY -->
 
-    <!-- Values from build type: debug -->
-    <string name="common_name" translatable="false">MoveX</string>
+    <!-- Value from build type: debug -->
+    <string name="common_name" translatable="false">Move Driver</string>
+    <!-- Value from build type: debug -->
     <string name="facebookAppId" translatable="false">10684112666354</string>
+    <!-- Value from build type: debug -->
     <string name="facebookId" translatable="false">com.facebook.app.FacebookContentProvider10684112666354</string>
-    <string name="googleID" translatable="false">AIzaSyD4bjaWEK1vs0DSAF6kUYTEqODQgCk2dr8</string>
+    <!-- Value from build type: debug -->
+    <string name="googleID" translatable="false">AIzaSyCvwWt2UBTqq2Iew6IbQ0VdsEGz2Wporz8</string>
 
 </resources>

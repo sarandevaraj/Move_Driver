@@ -29,7 +29,7 @@
                 android:orientation="horizontal"
                 android:visibility="visible">
 
-                <com.movedriver.driver.utils.DriverRoundedImageView
+                <com.movedriverdriver.driver.utils.DriverRoundedImageView
                     android:id="@+id/taxi_img"
                     android:layout_width="80dp"
                     android:layout_height="80dp"

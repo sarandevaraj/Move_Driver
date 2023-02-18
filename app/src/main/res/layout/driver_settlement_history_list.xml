@@ -8,7 +8,7 @@
 
             name="list"
 
-            type="com.movedriver.driver.data.apiData.DriverListClass" />
+            type="com.movedriverdriver.driver.data.apiData.DriverListClass" />
 
     </data>
 

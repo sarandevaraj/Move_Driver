@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.Taximobility.driver"
-    android:versionCode="9"
-    android:versionName="1.5" >
+    package="com.movedriverdriver"
+    android:versionCode="1"
+    android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="19"
-        android:targetSdkVersion="31" />
+        android:minSdkVersion="21"
+        android:targetSdkVersion="33" />
 
-    <!-- <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" /> -->
-    <!-- <uses-permission android:name="android.permission.WRITE_SETTINGS" /> -->
-    <!-- <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" /> -->
-
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="com.adrop.permission.MAPS_RECEIVE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -20,20 +17,14 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <!-- <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" /> -->
-    <!-- <uses-permission android:name="android.permission.READ_CALENDAR" /> -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <!-- <uses-permission android:name="android.permission.CALL_PHONE" /> -->
-    <!-- <uses-permission android:name="android.permission.READ_PHONE_STATE" /> -->
     <uses-permission android:name="android.permission.GPS_ENABLED_CHANGE" />
-    <!-- <uses-permission android:name="android.permission.READ_CONTACTS" /> -->
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
     <uses-permission android:name="com.adrop.permission.C2D_MESSAGE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="com.google.android.things.permission.SET_TIME" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    <!-- <uses-permission android:name="android.permission.GET_ACCOUNTS" /> -->
 
     <uses-feature
         android:name="android.hardware.location.gps"
@@ -44,8 +35,14 @@
 
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
+    <queries>
+
+        <!-- Needs to be explicitly declared on Android R+ -->
+        <package android:name="com.google.android.apps.maps" />
+    </queries>
+
     <application
-        android:name="com.taximobility.util.AppController"
+        android:name="com.movedriverdriver.util.AppController"
         android:allowBackup="false"
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
         android:debuggable="true"
@@ -63,7 +60,7 @@
             android:required="false" />
 
         <activity
-            android:name="com.taximobility.SplashActivity"
+            android:name="com.movedriverdriver.SplashActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
@@ -75,94 +72,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-        -->
         <activity
-            android:name="com.taximobility.WebviewAct"
-            android:theme="@style/Mymaterialact"
-            android:windowSoftInputMode="adjustResize|stateHidden" />
-
-        <!-- <activity -->
-        <!-- android:name="moovexx.ContactShareActivity" -->
-        <!-- android:theme="@style/Mymaterialact" -->
-        <!-- android:windowSoftInputMode="adjustResize|stateHidden" /> -->
-        <activity
-            android:name="com.taximobility.driver.DriverAddFleetAct"
+            android:name="com.movedriverdriver.driver.DriverAddFleetAct"
             android:theme="@style/Mymaterialact"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name="com.taximobility.permission.DevicePermissionActivity"
+            android:name="com.movedriverdriver.SignatureAct"
             android:theme="@style/Mymaterialact"
-            android:windowSoftInputMode="adjustResize|stateHidden" />
-        <activity
-            android:name="com.taximobility.permission.StoreAndSecureActivity"
-            android:theme="@style/Mymaterialact"
-            android:windowSoftInputMode="adjustResize|stateHidden" />
-        <activity
-            android:name="com.taximobility.ReceiptAct"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:theme="@style/Mymaterialact"
-            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
-        <activity
-            android:name="com.taximobility.MainHomeFragmentActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:supportsRtl="true"
-            android:theme="@style/MyMaterialTheme"
-            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
-        <activity
-            android:name="com.taximobility.PayuncardAct"
-            android:screenOrientation="portrait"
-            android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
-        <activity
-            android:name="com.taximobility.ActivityThanks"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan|stateVisible" />
-        <activity
-            android:name="com.taximobility.Login.LoginActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan|stateVisible" />
-        <activity
-            android:name="com.taximobility.ContinousRequest"
-            android:theme="@style/Transparent1"
-            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
-        <activity
-            android:name="com.taximobility.locationSearch.AddStopActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/MyMaterialTheme"
-            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
-        <activity
-            android:name="com.taximobility.Login.RegisterActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan|stateVisible" />
-        <activity
-            android:name="com.taximobility.TermsAndConditions"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
-        <activity
-            android:name="com.taximobility.TripDetailsAct"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" />
-        <activity
-            android:name="com.taximobility.Login.LoginSelectionAcivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity
-            android:name="com.taximobility.Login.CardRegisterAct"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
-        <activity
-            android:name="com.taximobility.Login.VerificationActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateVisible" />
 
         <!--
                 <service android:name=".MyFirebaseInstanceIDService">
@@ -172,7 +89,7 @@
                 </service>
         -->
         <service
-            android:name="com.taximobility.service.FirebaseService"
+            android:name="com.movedriverdriver.service.FirebaseService"
             android:exported="false" >
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
@@ -184,7 +101,7 @@
         <!-- android:resource="@drawable/driver_notification_icon" -->
         <!-- android:value="@color/button_accept"/> -->
 
-        <service android:name="com.taximobility.service.BackgroundCoreConfig" />
+        <service android:name="com.movedriverdriver.service.BackgroundCoreConfig" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationName"
@@ -206,14 +123,14 @@
         <!-- android:exported="false" /> -->
 
         <receiver
-            android:name="com.taximobility.util.NetworkStatus"
+            android:name="com.movedriverdriver.util.NetworkStatus"
             android:exported="false" >
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
         <receiver
-            android:name="com.taximobility.util.GpsStatus"
+            android:name="com.movedriverdriver.util.GpsStatus"
             android:exported="false" >
             <intent-filter>
                 <action android:name="android.location.PROVIDERS_CHANGED" />
@@ -222,71 +139,27 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.Taximobility.driver.files_root"
+            android:authorities="com.movedriverdriver.files_root"
             android:exported="false"
             android:grantUriPermissions="true" >
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
-        </provider> <!-- <meta-data -->
-        <!-- android:name="com.google.android.maps.v2.API_KEY" -->
-        <!-- android:value="AIzaSyDewldf9PLpuky-ALFglTIhNdU5mp82G9k" /> -->
-        <!-- <meta-data -->
-        <!--
-         android:name="com.google.android.maps.v2.API_KEY"
-         android:value="AIzaSyB-ofTslYif7glRvvoACQvdhk3oKOA93bU" />
-        -->
-        <!--
-           <meta-data
-           android:name="com.google.android.geo.API_KEY"
-           android:value="AIzaSyDOelatbj5RRQtUMRWI4bEtN3K_JfAbtmA"/>
-        -->
+        </provider>
 
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <service android:name="com.taximobility.service.GetPassengerUpdate" /> <!-- <service android:name=".service.AuthService" /> -->
+        <!-- <service android:name=".service.AuthService" /> -->
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Mymaterialact" />
-        <activity
-            android:name="com.taximobility.roomDB.CommonLoggerAct"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.taximobility.roomDB.FullLoggerAct"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.taximobility.roomDB.FindLogActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.taximobility.ShowAlertAct"
-            android:theme="@style/Theme.Transparent3"
-            android:windowSoftInputMode="adjustPan|stateHidden" />
-        <activity
-            android:name="com.taximobility.locationSearch.PickupDropSearchActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name="com.taximobility.locationSearch.LocationSearchActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name="com.taximobility.MapZoomAct"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:theme="@style/Mymaterialact"
-            android:windowSoftInputMode="adjustResize" />
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-
-        <service
-            android:name="com.taximobility.tripCancel.service.GetCardDetailsService"
-            android:exported="false" />
-
         <meta-data
             android:name="firebase_analytics_collection_enabled"
             android:value="false" />
@@ -294,13 +167,13 @@
         <!-- DRiver -->
 
         <activity
-            android:name="com.taximobility.driver.DummyActivityDriver"
+            android:name="com.movedriverdriver.driver.DummyActivityDriver"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustResize|stateHidden" />
 
         <receiver
-            android:name="com.taximobility.driver.DriverCallReceiver"
+            android:name="com.movedriverdriver.driver.DriverCallReceiver"
             android:enabled="true"
             android:exported="false" >
             <intent-filter>
@@ -309,150 +182,144 @@
         </receiver>
 
         <activity
-            android:name="com.taximobility.driver.utils.DriverSignUpWebviewAct"
+            android:name="com.movedriverdriver.driver.utils.DriverSignUpWebviewAct"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name="com.taximobility.driver.DriverSplashAct"
+            android:name="com.movedriverdriver.driver.DriverSplashAct"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Translucent" >
         </activity>
         <activity
-            android:name="com.taximobility.driver.permission.DriverDevicePermissionActivityDriver"
+            android:name="com.movedriverdriver.driver.permission.DriverDevicePermissionActivityDriver"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
-            android:name="com.taximobility.driver.permission.DriverStoreAndSecureActivityDriver"
+            android:name="com.movedriverdriver.driver.permission.DriverStoreAndSecureActivityDriver"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
-            android:name="com.taximobility.driver.DriverWebviewAct"
+            android:name="com.movedriverdriver.driver.DriverWebviewAct"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
-            android:name="com.taximobility.driver.DriverStreetPickUpAct"
+            android:name="com.movedriverdriver.driver.DriverStreetPickUpAct"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name="com.taximobility.driver.locationSearch.DriverLocationSearchActivityDriver"
+            android:name="com.movedriverdriver.driver.locationSearch.DriverLocationSearchActivityDriver"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="stateAlwaysVisible" />
         <activity
-            android:name="com.taximobility.driver.DriverTripHistoryAct"
+            android:name="com.movedriverdriver.driver.DriverTripHistoryAct"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name="com.taximobility.driver.DriverTripDetails"
+            android:name="com.movedriverdriver.driver.DriverTripDetails"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name="com.taximobility.driver.DriverUserLoginAct"
+            android:name="com.movedriverdriver.driver.DriverUserLoginAct"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name="com.taximobility.driver.DriverJobdoneAct"
+            android:name="com.movedriverdriver.driver.DriverJobdoneAct"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name="com.taximobility.driver.DriverInviteFriendAct"
+            android:name="com.movedriverdriver.driver.DriverInviteFriendAct"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name="com.taximobility.driver.DriverOngoingAct"
+            android:name="com.movedriverdriver.driver.DriverOngoingAct"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name="com.taximobility.driver.DriverMeAct"
+            android:name="com.movedriverdriver.driver.DriverMeAct"
             android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|layoutDirection|fontScale"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name="com.taximobility.driver.DriverSettingsAct"
+            android:name="com.movedriverdriver.driver.DriverSettingsAct"
             android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|layoutDirection|fontScale"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name="com.taximobility.driver.DriverNotificationAct"
+            android:name="com.movedriverdriver.driver.DriverNotificationAct"
             android:configChanges="locale"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name="com.taximobility.driver.DriverFarecalcAct"
+            android:name="com.movedriverdriver.driver.DriverFarecalcAct"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name="com.taximobility.driver.DriverPayuncardAct"
+            android:name="com.movedriverdriver.driver.DriverPayuncardAct"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name="com.taximobility.driver.DriverCanceltripAct"
+            android:name="com.movedriverdriver.driver.DriverCanceltripAct"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Transparent"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name="com.taximobility.driver.DriverShowAlertAct"
+            android:name="com.movedriverdriver.driver.DriverShowAlertAct"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Transparent"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name="com.taximobility.driver.DriverMyStatus"
+            android:name="com.movedriverdriver.driver.DriverMyStatus"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme_home"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name="com.taximobility.driver.DriverWithdrawHistoryAct"
+            android:name="com.movedriverdriver.driver.DriverWithdrawHistoryAct"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name="com.taximobility.driver.DriverWithDrawMenuAct"
+            android:name="com.movedriverdriver.driver.DriverWithDrawMenuAct"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name="com.taximobility.driver.DriverWithdrawReqAct"
+            android:name="com.movedriverdriver.driver.DriverWithdrawReqAct"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
-        <!--
-              <activity
-              android:name="com.yalantis.ucrop.UCropActivity"
-              android:screenOrientation="portrait"
-              android:theme="@style/MyMaterialTheme" />
-        -->
         <activity
-            android:name="com.taximobility.driver.DriverSelectDropLocationAct"
+            android:name="com.movedriverdriver.driver.DriverSelectDropLocationAct"
             android:theme="@style/MyMaterialTheme" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.Taximobility.driver.files_root"
+            android:authorities="com.movedriverdriver.files_root"
             android:exported="false"
             android:grantUriPermissions="true" >
             <meta-data
@@ -461,14 +328,14 @@
         </provider>
 
         <receiver
-            android:name="com.taximobility.driver.utils.DriverNetworkStatus"
+            android:name="com.movedriverdriver.driver.utils.DriverNetworkStatus"
             android:exported="false" >
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
         <receiver
-            android:name="com.taximobility.driver.utils.DriverGpsStatus"
+            android:name="com.movedriverdriver.driver.utils.DriverGpsStatus"
             android:exported="false" >
             <intent-filter>
                 <action android:name="android.location.PROVIDERS_CHANGED" />
@@ -477,10 +344,10 @@
             </intent-filter>
         </receiver>
 
-        <service android:name="com.taximobility.driver.service.DriverBackgroundCoreConfig" />
+        <service android:name="com.movedriverdriver.driver.service.DriverBackgroundCoreConfig" />
 
         <receiver
-            android:name="com.taximobility.driver.utils.DriverBootCompletedIntentReceiver"
+            android:name="com.movedriverdriver.driver.utils.DriverBootCompletedIntentReceiver"
             android:exported="false" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
@@ -496,24 +363,24 @@
         <!-- <service android:name=".service.UpdateLocation" /> -->
 
         <service
-            android:name="com.taximobility.driver.service.LocationUpdate"
+            android:name="com.movedriverdriver.driver.service.LocationUpdate"
             android:enabled="true"
             android:exported="true"
             android:foregroundServiceType="location" />
 
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
+        <!-- <meta-data -->
+        <!-- android:name="com.google.android.gms.version" -->
+        <!-- android:value="@integer/google_play_services_version" /> -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/googleID" />
 
         <activity
-            android:name="com.taximobility.driver.earningchart.DriverEarningsAct"
+            android:name="com.movedriverdriver.driver.earningchart.DriverEarningsAct"
             android:theme="@style/MyMaterialTheme" />
 
         <service
-            android:name="com.taximobility.driver.service.DriverForegroundEnablingService"
+            android:name="com.movedriverdriver.driver.service.DriverForegroundEnablingService"
             android:enabled="true"
             android:exported="false" />
         <!--
@@ -524,7 +391,7 @@
          </service>
         -->
         <service
-            android:name="com.taximobility.driver.service.DriverFirebaseService"
+            android:name="com.movedriverdriver.driver.service.DriverFirebaseService"
             android:exported="false" >
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
@@ -536,37 +403,42 @@
             android:value="@string/default_notification_channel_id" />
 
         <activity
-            android:name="com.taximobility.driver.DeleteAccountActivityDriver"
+            android:name="com.movedriverdriver.driver.DeleteAccountActivityDriver"
             android:theme="@style/MyMaterialTheme" />
         <activity
-            android:name="com.taximobility.driver.DriverTermsAndConditions"
+            android:name="com.movedriverdriver.driver.DriverTermsAndConditions"
             android:launchMode="singleTask"
             android:theme="@style/MyMaterialTheme" />
         <activity
-            android:name="com.taximobility.driver.DriverSettlementDetail"
+            android:name="com.movedriverdriver.driver.DriverSettlementDetail"
             android:theme="@style/MyMaterialTheme" />
         <activity
-            android:name="com.taximobility.driver.SettlementHistoryActivityDriver"
+            android:name="com.movedriverdriver.driver.SettlementHistoryActivityDriver"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name="com.taximobility.driver.DriverMapZoomAct"
+            android:name="com.movedriverdriver.driver.DriverMapZoomAct"
             android:theme="@style/MyMaterialTheme" >
         </activity>
         <activity
-            android:name="com.taximobility.driver.DriverWalletHistory"
+            android:name="com.movedriverdriver.driver.DriverWalletHistory"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name="com.taximobility.driver.DriverChatWebviewAct"
+            android:name="com.movedriverdriver.DriverFirebaseChatWebviewNew"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
-            android:name="com.taximobility.driver.DriverMyFleetAct"
+            android:name="com.movedriverdriver.driver.DriverChatWebviewAct"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyMaterialTheme"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name="com.movedriverdriver.driver.DriverMyFleetAct"
             android:theme="@style/MyMaterialTheme" />
         <activity
-            android:name="com.taximobility.ChatWebviewAct"
+            android:name="com.movedriverdriver.ChatWebviewAct"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustResize|stateHidden" />
@@ -618,7 +490,7 @@
 
         <provider
             android:name="com.squareup.picasso.PicassoProvider"
-            android:authorities="com.Taximobility.driver.com.squareup.picasso"
+            android:authorities="com.movedriverdriver.com.squareup.picasso"
             android:exported="false" />
 
         <activity
@@ -656,10 +528,10 @@
                 android:name="com.google.firebase.components:com.google.firebase.iid.Registrar"
                 android:value="com.google.firebase.components.ComponentRegistrar" />
             <meta-data
-                android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar"
+                android:name="com.google.firebase.components:com.google.firebase.datatransport.TransportRegistrar"
                 android:value="com.google.firebase.components.ComponentRegistrar" />
             <meta-data
-                android:name="com.google.firebase.components:com.google.firebase.datatransport.TransportRegistrar"
+                android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar"
                 android:value="com.google.firebase.components.ComponentRegistrar" />
         </service>
 
@@ -690,6 +562,11 @@
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
             </intent-filter>
         </receiver>
+
+        <activity
+            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+            android:exported="false"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <!--
          The initialization ContentProvider will call FacebookSdk.sdkInitialize automatically
          with the application context. This config is merged in with the host app's manifest,
@@ -701,7 +578,7 @@
         -->
         <provider
             android:name="com.facebook.internal.FacebookInitProvider"
-            android:authorities="com.Taximobility.driver.FacebookInitProvider"
+            android:authorities="com.movedriverdriver.FacebookInitProvider"
             android:exported="false" />
 
         <receiver
@@ -720,20 +597,15 @@
             </intent-filter>
         </receiver>
 
-        <activity
-            android:name="com.google.android.gms.common.api.GoogleApiActivity"
-            android:exported="false"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-
         <provider
             android:name="com.google.firebase.provider.FirebaseInitProvider"
-            android:authorities="com.Taximobility.driver.firebaseinitprovider"
+            android:authorities="com.movedriverdriver.firebaseinitprovider"
             android:directBootAware="true"
             android:exported="false"
             android:initOrder="100" />
         <provider
             android:name="androidx.lifecycle.ProcessLifecycleOwnerInitializer"
-            android:authorities="com.Taximobility.driver.lifecycle-process"
+            android:authorities="com.movedriverdriver.lifecycle-process"
             android:exported="false"
             android:multiprocess="true" />
 
