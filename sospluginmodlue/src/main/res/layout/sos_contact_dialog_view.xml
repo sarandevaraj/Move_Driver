@@ -20,7 +20,7 @@
             android:padding="5dp"
             android:text="@string/enter_contact_details_here"
             android:textAlignment="center"
-            android:textColor="@color/button_accept"
+            android:textColor="@color/black"
             android:textSize="18sp">
 
         </TextView>
@@ -65,7 +65,7 @@
                 android:background="@color/white"
                 android:text="@string/cancel"
                 android:textAlignment="center"
-                android:textColor="@color/button_accept"
+                android:textColor="@color/black"
                 android:textSize="14sp" />
 
             <Button
@@ -117,7 +117,7 @@
                 android:background="@color/white"
                 android:text="@string/cancel"
                 android:textAlignment="center"
-                android:textColor="@color/button_accept"
+                android:textColor="@color/black"
                 android:textSize="14sp" />
 
             <Button

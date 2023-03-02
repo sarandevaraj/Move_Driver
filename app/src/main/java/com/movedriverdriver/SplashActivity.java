@@ -112,7 +112,7 @@ public class SplashActivity extends AppCompatActivity {
     ProgressBar progressBar1;
     TextView status_text;
     private Dialog loadingDialog;
-    private final boolean askDomain = false;
+    private final boolean askDomain = true;
     private final boolean isLocationasked = false;
     private Dialog urlPopup;
     private long getCore_Utc;
@@ -305,12 +305,12 @@ public class SplashActivity extends AppCompatActivity {
             if (!TextUtils.isEmpty(keyy)/*!mUrl.equals("") && !domain.equals("")*/) {
                 url = "http://move.tmobility.ai/passengerapi301/index/";
                 str_domain = "tmobility.ai";
-                key = "move";
+                key = keyy;
 
             } else {
                 url = "http://move.tmobility.ai/passengerapi301/index/"; //Live
                 str_domain = "tmobility.ai";
-                key = "move"; // live
+                key = keyy; // live
             }
         } catch (Exception e) {
             e.printStackTrace();

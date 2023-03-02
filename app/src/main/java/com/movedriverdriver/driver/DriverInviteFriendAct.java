@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -45,6 +46,7 @@ import java.util.Locale;
 public class DriverInviteFriendAct extends MainActivityDriver implements OnClickListener {
     private LinearLayout SlideImg;
     private LinearLayout Donelay;
+    private FrameLayout shadow;
     private TextView BackBtn;
     private TextView leftIcon;
     private TextView HeadTitle;
@@ -83,6 +85,8 @@ public class DriverInviteFriendAct extends MainActivityDriver implements OnClick
      */
     public void priorChanges() {
         PENDING_ACTION_BUNDLE_KEY = getPackageName() + "PendingAction";
+        shadow=findViewById(R.id.shadow);
+        shadow.setVisibility(View.GONE);
         profileImg = findViewById(R.id.profileImg);
         Donelay = findViewById(R.id.rightlay);
         Donelay.setVisibility(View.INVISIBLE);
@@ -189,6 +193,7 @@ public class DriverInviteFriendAct extends MainActivityDriver implements OnClick
             // TODO Auto-generated method stub
             DriverSystems.out.println("calleddd" + result);
             if (isSuccess) {
+                shadow.setVisibility(View.VISIBLE);
                 invite_main.setVisibility(View.VISIBLE);
                 wallet_history.setVisibility(View.VISIBLE);
                 invite_loading.setVisibility(View.GONE);

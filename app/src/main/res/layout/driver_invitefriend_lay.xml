@@ -58,7 +58,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_20"
             android:layout_below="@+id/slide_lay"
-            android:foreground="@color/black"
+            android:foreground="@color/button_accept"
             android:visibility="visible"></FrameLayout>
 
         <LinearLayout
@@ -99,7 +99,7 @@
                     android:id="@+id/view_header"
                     android:layout_width="match_parent"
                     android:layout_height="160dp"
-                    android:background="@color/black"
+                    android:background="@color/button_accept"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <FrameLayout

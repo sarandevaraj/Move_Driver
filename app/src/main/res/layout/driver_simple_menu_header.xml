@@ -78,7 +78,7 @@
             android:background="@drawable/driver_border_select"
             android:visibility="visible"
             android:layout_marginRight="10dp"
-            android:textColor="@color/button_accept" />
+            android:textColor="@color/black" />
 
 
     </RelativeLayout>

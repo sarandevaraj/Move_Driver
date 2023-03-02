@@ -76,7 +76,7 @@
             android:layout_alignParentLeft="true"
             android:layout_toLeftOf="@+id/withdraw_BalanceAmttext1"
             android:text="@string/referal_amount"
-            android:textColor="@color/button_accept"
+            android:textColor="@color/black"
             android:textSize="16sp" />
 
         <View
@@ -154,7 +154,7 @@
             android:layout_alignParentLeft="true"
             android:layout_toLeftOf="@+id/withdraw_BalanceAmttext2"
             android:text="@string/trip_amount"
-            android:textColor="@color/button_accept"
+            android:textColor="@color/black"
             android:textSize="16sp" />
 
         <View

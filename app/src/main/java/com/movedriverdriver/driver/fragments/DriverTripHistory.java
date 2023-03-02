@@ -96,7 +96,7 @@ public class DriverTripHistory extends Fragment implements DriverUpcomingAdapter
         //upcoming trip history onclick
         txt_up_coming.setOnClickListener(view -> {
             upcoming_underline.setBackgroundColor(DriverCL.getResources().getColor(R.color.white));
-            past_underline.setBackgroundColor(DriverCL.getResources().getColor(R.color.black));
+            past_underline.setBackgroundColor(DriverCL.getResources().getColor(R.color.button_accept));
             // txt_up_coming.setBackgroundColor(DriverCL.getResources().getColor(R.color.button_accept));
             txt_up_coming.setTextColor(DriverCL.getResources().getColor(R.color.white));
             txt_past_booking.setTextColor(DriverCL.getResources().getColor(R.color.textviewcolor_light));
@@ -120,7 +120,7 @@ public class DriverTripHistory extends Fragment implements DriverUpcomingAdapter
         //past booking trip history onclick
         txt_past_booking.setOnClickListener(view -> {
             past_underline.setBackgroundColor(DriverCL.getResources().getColor(R.color.white));
-            upcoming_underline.setBackgroundColor(DriverCL.getResources().getColor(R.color.black));
+            upcoming_underline.setBackgroundColor(DriverCL.getResources().getColor(R.color.button_accept));
             //  txt_up_coming.setBackgroundColor(DriverCL.getResources().getColor(R.color.button_accept));
             txt_past_booking.setTextColor(DriverCL.getResources().getColor(R.color.white));
             txt_up_coming.setTextColor(DriverCL.getResources().getColor(R.color.textviewcolor_light));

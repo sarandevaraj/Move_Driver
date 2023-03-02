@@ -6,7 +6,7 @@
         android:right="1dp"
         android:top="1dp">
           <shape>
-              <solid android:color="@color/button_reject" />
+              <solid android:color="@color/button_accept" />
               <corners
                   android:bottomRightRadius="3dp"
                   android:bottomLeftRadius="3dp"

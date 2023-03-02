@@ -95,7 +95,7 @@
             android:layout_height="50dp"
             android:layout_below="@+id/actionbar"
             android:layout_weight="1"
-            android:background="@color/black"
+            android:background="@color/button_accept"
             android:orientation="vertical">
 
             <TextView
@@ -130,7 +130,7 @@
             android:layout_height="50dp"
             android:layout_below="@+id/actionbar"
             android:layout_weight="1"
-            android:background="@color/black"
+            android:background="@color/button_accept"
             android:orientation="vertical">
 
             <TextView

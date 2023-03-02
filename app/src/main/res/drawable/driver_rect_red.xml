@@ -20,7 +20,7 @@
                 android:color="@color/button_accept" />
 
             <corners android:radius="3dp" />
-            <solid android:color="#ffffff" />
+            <solid android:color="#4CAF50" />
         </shape>
     </item>
     <!-- This is the main color -->
