@@ -427,7 +427,7 @@ public class DriverFarecalcAct extends MainActivityDriver implements DriverClick
         slideImg = findViewById(R.id.slideImg);
         walletlay = findViewById(R.id.walletlay);
         paylay = findViewById(R.id.paylay);
-//        slideImg.setVisibility(View.GONE);
+        slideImg.setVisibility(View.GONE);
         promoLayout = findViewById(R.id.discountlayout);
         lay_fare = findViewById(R.id.lay_fare);
         remarks = findViewById(R.id.remarks);

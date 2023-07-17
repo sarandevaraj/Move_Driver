@@ -1707,7 +1707,7 @@ public class DriverOngoingAct extends MainActivityDriver implements DriverClickI
      * This is method for confirmation for complete the trip
      */
     public void CompleteTrip(final AppCompatActivity context) {
-        Utility.actionSheet(DriverOngoingAct.this, DriverNC.getResources().getString(R.string.confirm_complete), DriverNC.getResources().getString(R.string.yes), DriverNC.getResources().getString(R.string.no), false, new AlertListener() {
+        Utility.actionSheetCompleteTrip(DriverOngoingAct.this, DriverNC.getResources().getString(R.string.complete_trip),DriverNC.getResources().getString(R.string.confirm_complete), DriverNC.getResources().getString(R.string.yes), DriverNC.getResources().getString(R.string.no), false, new AlertListener() {
             @Override
             public void onSuccess() {
                 if (runningFor() > 10 && !LocationUpdate.DISTANCE_CALCULATION_INPROGRESS) {

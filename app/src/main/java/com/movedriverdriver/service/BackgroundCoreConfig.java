@@ -348,8 +348,8 @@ public class BackgroundCoreConfig extends IntentService {
                         if (array.getJSONObject(0).has("sos_msg"))
                             SessionSave.saveSession("sos_message", array.getJSONObject(0).getString("sos_msg"), BackgroundCoreConfig.this);
 
-                        if (array.getJSONObject(0).has("playstore_passenger"))
-                            SessionSave.saveSession(TaxiUtil.PLAY_STORE_LINK, array.getJSONObject(0).getString("playstore_passenger"), BackgroundCoreConfig.this);
+                        if (array.getJSONObject(0).has("playstore_driver"))
+                            SessionSave.saveSession(TaxiUtil.PLAY_STORE_LINK, array.getJSONObject(0).getString("playstore_driver"), BackgroundCoreConfig.this);
 
                         SessionSave.saveSession(API_BASE, array.getJSONObject(0).getString("api_base"), BackgroundCoreConfig.this);
                         SessionSave.saveSession("logo_base", array.getJSONObject(0).getString("logo_base"), BackgroundCoreConfig.this);

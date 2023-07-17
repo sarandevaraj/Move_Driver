@@ -36,7 +36,7 @@ public class DriverSettingsAct extends MainActivityDriver implements View.OnClic
         slide_lay.setBackgroundColor(getResources().getColor(R.color.button_accept));
         HeadTitle.setText(DriverNC.getResources().getString(R.string.settings));
 
-        log_out_txt.setOnClickListener(view -> Utility.actionSheet(DriverSettingsAct.this, DriverNC.getResources().getString(R.string.confirmlogout), DriverNC.getResources().getString(R.string.menu_logout), DriverNC.getResources().getString(R.string.cancel), false, new AlertListener() {
+        log_out_txt.setOnClickListener(view -> Utility.actionSheetlogout(DriverSettingsAct.this, DriverNC.getResources().getString(R.string.confirmlogout), DriverNC.getResources().getString(R.string.menu_logout), DriverNC.getResources().getString(R.string.cancel), false, new AlertListener() {
             @Override
             public void onSuccess() {
                 if (view == log_out_txt) {

@@ -165,12 +165,12 @@ public class DriverUserLoginAct extends MainActivityDriver implements DriverClic
 
                 if(v.getId()==R.id.hidePwd){
                     if(password_edit.getTransformationMethod().equals(PasswordTransformationMethod.getInstance())){
-                        ((ImageView)(v)).setImageResource(R.drawable.google_ic_password_hide);
+                        ((ImageView)(v)).setImageResource(R.drawable.google_ic_password_show);
                         //Show Password
                         password_edit.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                     }
                     else{
-                        ((ImageView)(v)).setImageResource(R.drawable.google_ic_password_show);
+                        ((ImageView)(v)).setImageResource(R.drawable.google_ic_password_hide);
                         //Hide Password
                         password_edit.setTransformationMethod(PasswordTransformationMethod.getInstance());
                     }

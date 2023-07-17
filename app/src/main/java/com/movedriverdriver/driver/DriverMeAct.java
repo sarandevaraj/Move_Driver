@@ -221,7 +221,7 @@ public class DriverMeAct extends MainActivityDriver implements OnClickListener, 
         logout_img = findViewById(R.id.logout_img);
         btn_back.setVisibility(View.VISIBLE);
         bt_delete_acc = findViewById(R.id.bt_privacysettings);
-        //  ((TextView) findViewById(R.id.language_setting)).setText(Html.fromHtml("<p><u>" + (DriverNC.getString(R.string.select_language).trim()) + "<p><u>"));
+//        ((TextView) findViewById(R.id.language_setting)).setText(Html.fromHtml("<p><u>" + (DriverNC.getString(R.string.select_language).trim()) + "<p><u>"));
         //bankEdt = (EditText) findViewById(R.id.bankEdt);
         // bankaccnoEdt = (EditText) findViewById(R.id.bankaccnoEdt);
         profileImage = findViewById(R.id.profile_image);

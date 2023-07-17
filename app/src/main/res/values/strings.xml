@@ -546,6 +546,7 @@
     <string name="pwd_min">Password should be minimum 6 characters</string>
     <string name="confirmlogout">Are you sure you want to logout?</string>
     <string name="confirm_complete">Are you sure you want to complete this job?</string>
+    <string name="complete_trip">Complete Trip</string>
 
     <!-- HomeActivity -->
     <string name="m_me"> Profile </string>

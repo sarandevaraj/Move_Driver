@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Typeface;
 import android.os.Build;
 
 import androidx.annotation.RequiresApi;
@@ -291,6 +292,119 @@ public class Utility {
         final Button submitBtn = sheetView.findViewById(R.id.submit_btn);
         submitBtn.setText(success_txt);
         titleTxt.setText(title);
+        submitBtn.setOnClickListener(v -> {
+            listener.onSuccess();
+            mBottomSheetDialog.cancel();
+        });
+
+        cancelBtn.setOnClickListener(v -> {
+            mBottomSheetDialog.cancel();
+            listener.onFailure();
+        });
+    }
+    public static void actionSheetlogout(final Activity mContext, String title, String success_txt, String failure_txt, Boolean cancelable, AlertListener listener) {
+
+        BottomSheetDialog mBottomSheetDialog = new BottomSheetDialog(mContext);
+        View sheetView = mContext.getLayoutInflater().inflate(R.layout.alert_sheet, null);
+        mBottomSheetDialog.setContentView(sheetView);
+        mBottomSheetDialog.show();
+        Colorchange.ChangeColor((ViewGroup) sheetView, mContext);
+        FontHelper.applyFont(mContext, sheetView.findViewById(R.id.rootlay));
+        final TextView titleTxt = sheetView.findViewById(R.id.title_txt);
+        final Button cancelBtn = sheetView.findViewById(R.id.cancel_btn);
+        final Button submitBtn = sheetView.findViewById(R.id.submit_btn);
+        final TextView headerTxt = sheetView.findViewById(R.id.sheet_title);
+        headerTxt.setVisibility(View.VISIBLE);
+        final View viewhead = sheetView.findViewById(R.id.view_logout);
+        viewhead.setVisibility(View.VISIBLE);
+
+        if (failure_txt.equals("")) cancelBtn.setVisibility(View.INVISIBLE);
+        else cancelBtn.setVisibility(View.VISIBLE);
+        titleTxt.setText(title);
+        submitBtn.setText(success_txt);
+        cancelBtn.setText(failure_txt);
+
+        submitBtn.setOnClickListener(v -> {
+            listener.onSuccess();
+            mBottomSheetDialog.cancel();
+        });
+
+        cancelBtn.setOnClickListener(v -> {
+            mBottomSheetDialog.cancel();
+            listener.onFailure();
+        });
+
+    }
+
+    public static void actionSheetCompleteTrip(final Activity mContext, String heading, String title, String success_txt, String failure_txt, Boolean cancelable, AlertListener listener) {
+
+        BottomSheetDialog mBottomSheetDialog = new BottomSheetDialog(mContext);
+        View sheetView = mContext.getLayoutInflater().inflate(R.layout.alert_sheet, null);
+        mBottomSheetDialog.setContentView(sheetView);
+        mBottomSheetDialog.show();
+        Colorchange.ChangeColor((ViewGroup) sheetView, mContext);
+        FontHelper.applyFont(mContext, sheetView.findViewById(R.id.rootlay));
+        final TextView titleTxt = sheetView.findViewById(R.id.title_txt);
+        final Button cancelBtn = sheetView.findViewById(R.id.cancel_btn);
+        final Button submitBtn = sheetView.findViewById(R.id.submit_btn);
+        final TextView headerTxt = sheetView.findViewById(R.id.sheet_title);
+        headerTxt.setVisibility(View.VISIBLE);
+
+        // Set the header text to "Complete Trip"
+        headerTxt.setText(heading);
+        // Apply bold font style to the header text
+        headerTxt.setTypeface(headerTxt.getTypeface(), Typeface.BOLD);
+
+        if (failure_txt.equals("")) {
+            cancelBtn.setVisibility(View.INVISIBLE);
+        } else {
+            cancelBtn.setVisibility(View.VISIBLE);
+        }
+
+        titleTxt.setText(title);
+        submitBtn.setText(success_txt);
+        cancelBtn.setText(failure_txt);
+
+        submitBtn.setOnClickListener(v -> {
+            listener.onSuccess();
+            mBottomSheetDialog.cancel();
+        });
+
+        cancelBtn.setOnClickListener(v -> {
+            mBottomSheetDialog.cancel();
+            listener.onFailure();
+        });
+    }
+
+    public static void actionSheetStreetCompleteTrip(final Activity mContext, String heading, String title, String success_txt, String failure_txt, Boolean cancelable, AlertListener listener) {
+
+        BottomSheetDialog mBottomSheetDialog = new BottomSheetDialog(mContext);
+        View sheetView = mContext.getLayoutInflater().inflate(R.layout.alert_sheet, null);
+        mBottomSheetDialog.setContentView(sheetView);
+        mBottomSheetDialog.show();
+        Colorchange.ChangeColor((ViewGroup) sheetView, mContext);
+        FontHelper.applyFont(mContext, sheetView.findViewById(R.id.rootlay));
+        final TextView titleTxt = sheetView.findViewById(R.id.title_txt);
+        final Button cancelBtn = sheetView.findViewById(R.id.cancel_btn);
+        final Button submitBtn = sheetView.findViewById(R.id.submit_btn);
+        final TextView headerTxt = sheetView.findViewById(R.id.sheet_title);
+        headerTxt.setVisibility(View.VISIBLE);
+
+        // Set the header text to "Complete Trip"
+        headerTxt.setText(heading);
+        // Apply bold font style to the header text
+        headerTxt.setTypeface(headerTxt.getTypeface(), Typeface.BOLD);
+
+        if (failure_txt.equals("")) {
+            cancelBtn.setVisibility(View.INVISIBLE);
+        } else {
+            cancelBtn.setVisibility(View.VISIBLE);
+        }
+
+        titleTxt.setText(title);
+        submitBtn.setText(success_txt);
+        cancelBtn.setText(failure_txt);
+
         submitBtn.setOnClickListener(v -> {
             listener.onSuccess();
             mBottomSheetDialog.cancel();

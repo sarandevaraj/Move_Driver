@@ -866,7 +866,7 @@ public class DriverStreetPickUpAct extends DriverBaseActivity implements DriverC
      */
     public void CompleteTrip(final AppCompatActivity context) {
 
-        Utility.actionSheet(DriverStreetPickUpAct.this, DriverNC.getResources().getString(R.string.confirm_complete), DriverNC.getResources().getString(R.string.yes), DriverNC.getResources().getString(R.string.cancel), false, new AlertListener() {
+        Utility.actionSheetStreetCompleteTrip(DriverStreetPickUpAct.this, DriverNC.getResources().getString(R.string.complete_trip),DriverNC.getResources().getString(R.string.confirm_complete), DriverNC.getResources().getString(R.string.yes), DriverNC.getResources().getString(R.string.cancel), false, new AlertListener() {
             @Override
             public void onSuccess() {
                 try {

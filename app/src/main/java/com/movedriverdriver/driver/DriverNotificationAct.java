@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -207,7 +208,6 @@ public class DriverNotificationAct extends MainActivityDriver implements OnMapRe
                 drop_loc_select = findViewById(R.id.drop_loc_select);
                 drop_loc_select.setVisibility(View.GONE);
                 card_bottom_lay.setCardElevation(20);
-
                 RelativeLayout notify_lay = findViewById(R.id.noti_font_2);
 
                 notify_lay.setOnClickListener(view -> {
@@ -215,8 +215,6 @@ public class DriverNotificationAct extends MainActivityDriver implements OnMapRe
                 });
 
                 accept_trip.setOnClickListener(v -> donutProgress.performClick());
-
-
                 txt_notes.setOnClickListener(view -> {
                     if (notes.length() != 0 && !notes.contains("null")) {
                         Toast.makeText(DriverNotificationAct.this, notes, Toast.LENGTH_LONG).show();
@@ -376,6 +374,11 @@ public class DriverNotificationAct extends MainActivityDriver implements OnMapRe
                 if (notes.length() != 0 && !notes.contains("null")) {
                     text_notes.setText("" + notes);
                     noteslayout.setVisibility(View.VISIBLE);
+                    txt_notes.setVisibility( View.VISIBLE );
+                }
+                else {
+                    noteslayout.setVisibility( View.GONE );
+                    txt_notes.setVisibility( View.GONE );
                 }
                 passNameTxt.setText(passenger_name);
                 pickupLocTxt.setText(pickup);

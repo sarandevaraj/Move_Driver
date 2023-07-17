@@ -120,7 +120,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginRight="5dp"
                     android:padding="9dp"
-                    android:src="@drawable/google_ic_password_show"
+                    android:src="@drawable/google_ic_password_hide"
                     android:textColor="@color/block"
                     android:visibility="visible" />
 

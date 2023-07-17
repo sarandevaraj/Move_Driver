@@ -4,6 +4,9 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.mayan.sospluginmodlue.model.ContactsData
 import kotlinx.android.synthetic.main.sos__contact_list_item.view.*
@@ -32,8 +35,11 @@ class ContactAdapter(val item: ArrayList<ContactsData>, val mContext: Context, v
 
     // Gets the number of animals in the list
     override fun getItemCount(): Int {
-        return item.size
-
+        val itemCount = item.size
+        if (itemCount == 0) {
+            Toast.makeText(mContext, "No contacts found", Toast.LENGTH_SHORT).show()
+        }
+        return itemCount
     }
 
     fun remove(contactID: Int) {
@@ -68,7 +74,7 @@ class ContactAdapter(val item: ArrayList<ContactsData>, val mContext: Context, v
                 if (view.tag is View)
                     view.visibility = View.VISIBLE
                 itemClicked.deleteItemClicked(item[adapterPosition].contact_id!!)
-                /*
+
                 val builder = AlertDialog.Builder(mContext)
                 // Set the alert dialog title
                 builder.setTitle("")
@@ -94,7 +100,7 @@ class ContactAdapter(val item: ArrayList<ContactsData>, val mContext: Context, v
                 }
                 dialogs.show()
 
-                 */
+
             }
         }
 
