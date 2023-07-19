@@ -30,7 +30,7 @@
         android:required="true" />
 
     <application
-        android:name="com.movedriverdriver.util.AppController"
+        android:name=".util.AppController"
         android:allowBackup="false"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
@@ -41,6 +41,9 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:allowBackup,icon,theme,label"
         tools:targetApi="m">
+        <activity
+            android:name=".driver.DriverlanguageAct"
+            android:exported="false" />
 
         <uses-library android:name="com.google.android.maps" />
         <uses-library
@@ -48,7 +51,7 @@
             android:required="false" />
 
         <activity
-            android:name="com.movedriverdriver.SplashActivity"
+            android:name=".SplashActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
@@ -60,41 +63,38 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name="com.movedriverdriver.driver.DriverAddFleetAct"
+            android:name=".driver.DriverAddFleetAct"
             android:theme="@style/Mymaterialact"
             android:windowSoftInputMode="adjustPan|stateHidden" />
-
-        <activity android:name=".SignatureAct"
+        <activity
+            android:name=".SignatureAct"
             android:theme="@style/Mymaterialact"
-            android:windowSoftInputMode="adjustPan|stateHidden"/>
-
+            android:windowSoftInputMode="adjustPan|stateHidden" />
         <!--
                 <service android:name=".MyFirebaseInstanceIDService">
                     <intent-filter>
                         <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
                     </intent-filter>
-                </service>-->
+                </service>
+        -->
         <service
-            android:name="com.movedriverdriver.service.FirebaseService"
+            android:name=".service.FirebaseService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
-        </service>
-
-        <!--        <meta-data-->
-        <!--            android:name="com.google.firebase.messaging.default_notification_icon"-->
-        <!--            android:resource="@drawable/driver_notification_icon"-->
-        <!--            android:value="@color/button_accept"/>-->
-
-        <service android:name="com.movedriverdriver.service.BackgroundCoreConfig" />
+        </service> <!-- <meta-data -->
+        <!-- android:name="com.google.firebase.messaging.default_notification_icon" -->
+        <!-- android:resource="@drawable/driver_notification_icon" -->
+        <!-- android:value="@color/button_accept"/> -->
+        <service android:name=".service.BackgroundCoreConfig" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationName"
             android:value="@string/app_name"
             tools:ignore="ManifestResource" />
+
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
@@ -102,22 +102,19 @@
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebookAppId" />
-
-        <!--        <provider-->
-        <!--            android:name="com.facebook.FacebookContentProvider"-->
-        <!--            android:authorities="@string/facebookId"-->
-        <!--            android:exported="false" />-->
-
+            android:value="@string/facebookAppId" /> <!-- <provider -->
+        <!-- android:name="com.facebook.FacebookContentProvider" -->
+        <!-- android:authorities="@string/facebookId" -->
+        <!-- android:exported="false" /> -->
         <receiver
-            android:name="com.movedriverdriver.util.NetworkStatus"
+            android:name=".util.NetworkStatus"
             android:exported="false">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
         <receiver
-            android:name="com.movedriverdriver.util.GpsStatus"
+            android:name=".util.GpsStatus"
             android:exported="false">
             <intent-filter>
                 <action android:name="android.location.PROVIDERS_CHANGED" />
@@ -136,9 +133,7 @@
 
         <meta-data
             android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
-
-        <!-- <service android:name=".service.AuthService" /> -->
+            android:value="@integer/google_play_services_version" /> <!-- <service android:name=".service.AuthService" /> -->
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"
@@ -147,21 +142,17 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-
         <meta-data
             android:name="firebase_analytics_collection_enabled"
-            android:value="false" />
-
-        <!--DRiver-->
-
+            android:value="false" /> <!-- DRiver -->
         <activity
-            android:name="com.movedriverdriver.driver.DummyActivityDriver"
+            android:name=".driver.DummyActivityDriver"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustResize|stateHidden" />
 
         <receiver
-            android:name="com.movedriverdriver.driver.DriverCallReceiver"
+            android:name=".driver.DriverCallReceiver"
             android:enabled="true"
             android:exported="false">
             <intent-filter>
@@ -170,148 +161,138 @@
         </receiver>
 
         <activity
-            android:name="com.movedriverdriver.driver.utils.DriverSignUpWebviewAct"
+            android:name=".driver.utils.DriverSignUpWebviewAct"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name="com.movedriverdriver.driver.DriverSplashAct"
+            android:name=".driver.DriverSplashAct"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Translucent">
-
-
-        </activity>
+            android:theme="@style/Theme.AppCompat.Translucent"></activity>
         <activity
-            android:name="com.movedriverdriver.driver.permission.DriverDevicePermissionActivityDriver"
-            android:screenOrientation="portrait"
-            android:theme="@style/MyMaterialTheme"
-            android:windowSoftInputMode="adjustResize|stateHidden" />
-
-        <activity
-            android:name="com.movedriverdriver.driver.permission.DriverStoreAndSecureActivityDriver"
-            android:screenOrientation="portrait"
-            android:theme="@style/MyMaterialTheme"
-            android:windowSoftInputMode="adjustResize|stateHidden" />
-
-        <activity
-            android:name="com.movedriverdriver.driver.DriverWebviewAct"
+            android:name=".driver.permission.DriverDevicePermissionActivityDriver"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
-            android:name="com.movedriverdriver.driver.DriverStreetPickUpAct"
+            android:name=".driver.permission.DriverStoreAndSecureActivityDriver"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyMaterialTheme"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name=".driver.DriverWebviewAct"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyMaterialTheme"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name=".driver.DriverStreetPickUpAct"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name="com.movedriverdriver.driver.locationSearch.DriverLocationSearchActivityDriver"
+            android:name=".driver.locationSearch.DriverLocationSearchActivityDriver"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="stateAlwaysVisible" />
-
         <activity
-            android:name="com.movedriverdriver.driver.DriverTripHistoryAct"
+            android:name=".driver.DriverTripHistoryAct"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name="com.movedriverdriver.driver.DriverTripDetails"
+            android:name=".driver.DriverTripDetails"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name="com.movedriverdriver.driver.DriverUserLoginAct"
+            android:name=".driver.DriverUserLoginAct"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name="com.movedriverdriver.driver.DriverJobdoneAct"
+            android:name=".driver.DriverJobdoneAct"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name="com.movedriverdriver.driver.DriverInviteFriendAct"
+            android:name=".driver.DriverInviteFriendAct"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name="com.movedriverdriver.driver.DriverOngoingAct"
+            android:name=".driver.DriverOngoingAct"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name="com.movedriverdriver.driver.DriverMeAct"
+            android:name=".driver.DriverMeAct"
             android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|layoutDirection|fontScale"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name="com.movedriverdriver.driver.DriverSettingsAct"
+            android:name=".driver.DriverSettingsAct"
             android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|layoutDirection|fontScale"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
-
         <activity
-            android:name="com.movedriverdriver.driver.DriverNotificationAct"
+            android:name=".driver.DriverNotificationAct"
             android:configChanges="locale"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
-
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name="com.movedriverdriver.driver.DriverFarecalcAct"
+            android:name=".driver.DriverFarecalcAct"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name="com.movedriverdriver.driver.DriverPayuncardAct"
+            android:name=".driver.DriverPayuncardAct"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name="com.movedriverdriver.driver.DriverCanceltripAct"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.Transparent"
-            android:windowSoftInputMode="adjustPan|stateHidden" />
-
-        <activity
-            android:name="com.movedriverdriver.driver.DriverShowAlertAct"
+            android:name=".driver.DriverCanceltripAct"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Transparent"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name="com.movedriverdriver.driver.DriverMyStatus"
+            android:name=".driver.DriverShowAlertAct"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Transparent"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".driver.DriverMyStatus"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme_home"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name="com.movedriverdriver.driver.DriverWithdrawHistoryAct"
+            android:name=".driver.DriverWithdrawHistoryAct"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name="com.movedriverdriver.driver.DriverWithDrawMenuAct"
+            android:name=".driver.DriverWithDrawMenuAct"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name="com.movedriverdriver.driver.DriverWithdrawReqAct"
+            android:name=".driver.DriverWithdrawReqAct"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
-
         <activity
-            android:name="com.movedriverdriver.driver.DriverSelectDropLocationAct"
+            android:name=".driver.DriverSelectDropLocationAct"
             android:theme="@style/MyMaterialTheme" />
 
         <provider
@@ -325,68 +306,66 @@
         </provider>
 
         <receiver
-            android:name="com.movedriverdriver.driver.utils.DriverNetworkStatus"
+            android:name=".driver.utils.DriverNetworkStatus"
             android:exported="false">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
         <receiver
-            android:name="com.movedriverdriver.driver.utils.DriverGpsStatus"
+            android:name=".driver.utils.DriverGpsStatus"
             android:exported="false">
             <intent-filter>
                 <action android:name="android.location.PROVIDERS_CHANGED" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
 
-        <service android:name="com.movedriverdriver.driver.service.DriverBackgroundCoreConfig" />
-
+        <service android:name=".driver.service.DriverBackgroundCoreConfig" />
 
         <receiver
-            android:name="com.movedriverdriver.driver.utils.DriverBootCompletedIntentReceiver"
+            android:name=".driver.utils.DriverBootCompletedIntentReceiver"
             android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-
-        <!--  <service
+        <!--
+  <service
               android:name=".service.WaitingTimerRun"
-              android:stopWithTask="false" />-->
-        <!--  <service android:name="taximobilitybility.driver.service.LocationUpdate" />-->
-        <!-- <service android:name=".service.UpdateLocation" />-->
-
-
+              android:stopWithTask="false" />
+        -->
+        <!-- <service android:name="taximobilitybility.driver.service.LocationUpdate" /> -->
+        <!-- <service android:name=".service.UpdateLocation" /> -->
         <service
-            android:name="com.movedriverdriver.driver.service.LocationUpdate"
+            android:name=".driver.service.LocationUpdate"
             android:enabled="true"
             android:exported="true"
-            android:foregroundServiceType="location" />
-
-
-<!--        <meta-data-->
-<!--            android:name="com.google.android.gms.version"-->
-<!--            android:value="@integer/google_play_services_version" />-->
+            android:foregroundServiceType="location" /> <!-- <meta-data -->
+        <!-- android:name="com.google.android.gms.version" -->
+        <!-- android:value="@integer/google_play_services_version" /> -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/googleID" />
 
         <activity
-            android:name="com.movedriverdriver.driver.earningchart.DriverEarningsAct"
+            android:name=".driver.earningchart.DriverEarningsAct"
             android:theme="@style/MyMaterialTheme" />
 
         <service
-            android:name="com.movedriverdriver.driver.service.DriverForegroundEnablingService"
+            android:name=".driver.service.DriverForegroundEnablingService"
             android:enabled="true"
             android:exported="false" />
-        <!-- <service android:name=".MyFirebaseInstanceIDService">
+        <!--
+ <service android:name=".MyFirebaseInstanceIDService">
              <intent-filter>
                  <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
              </intent-filter>
-         </service>-->
+         </service>
+        -->
         <service
-            android:name="com.movedriverdriver.driver.service.DriverFirebaseService"
+            android:name=".driver.service.DriverFirebaseService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
@@ -397,53 +376,42 @@
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/default_notification_channel_id" />
 
-
         <activity
-            android:name="com.movedriverdriver.driver.DeleteAccountActivityDriver"
+            android:name=".driver.DeleteAccountActivityDriver"
             android:theme="@style/MyMaterialTheme" />
         <activity
-            android:name="com.movedriverdriver.driver.DriverTermsAndConditions"
+            android:name=".driver.DriverTermsAndConditions"
             android:launchMode="singleTask"
             android:theme="@style/MyMaterialTheme" />
         <activity
-            android:name="com.movedriverdriver.driver.DriverSettlementDetail"
+            android:name=".driver.DriverSettlementDetail"
             android:theme="@style/MyMaterialTheme" />
-
         <activity
-            android:name="com.movedriverdriver.driver.SettlementHistoryActivityDriver"
+            android:name=".driver.SettlementHistoryActivityDriver"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
-
-
         <activity
-            android:name="com.movedriverdriver.driver.DriverMapZoomAct"
-            android:theme="@style/MyMaterialTheme">
-
-        </activity>
-
+            android:name=".driver.DriverMapZoomAct"
+            android:theme="@style/MyMaterialTheme"></activity>
         <activity
-            android:name="com.movedriverdriver.driver.DriverWalletHistory"
+            android:name=".driver.DriverWalletHistory"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
-
         <activity
             android:name=".DriverFirebaseChatWebviewNew"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustResize|stateHidden" />
-
         <activity
             android:name=".driver.DriverChatWebviewAct"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustResize|stateHidden" />
-
         <activity
-            android:name="com.movedriverdriver.driver.DriverMyFleetAct"
+            android:name=".driver.DriverMyFleetAct"
             android:theme="@style/MyMaterialTheme" />
-
         <activity
-            android:name="com.movedriverdriver.ChatWebviewAct"
+            android:name=".ChatWebviewAct"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustResize|stateHidden" />
@@ -463,19 +431,12 @@
             android:theme="@style/CheckoutTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <data
                     android:host="rzp.io"
                     android:scheme="io.rzp" />
             </intent-filter>
         </activity>
-
-        <!--        <meta-data-->
-        <!--            android:name="com.razorpay.ApiKey"-->
-        <!--            android:value="rzp_live_w5qhHavFaedhdm" />-->
-
-        <!--// test key - rzp_test_v67rWleYcdwBqU-->
-
-        <!--// test key - rzp_live_w5qhHavFaedhdm-->
     </application>
 
 </manifest>

@@ -17,26 +17,22 @@
         android:baselineAligned="false"
         android:gravity="center_vertical"
         android:orientation="vertical"
-        android:visibility="visible"
-        >
+        android:visibility="visible">
 
         <TextView
             android:id="@+id/header_titleTxt"
             style="@android:style/TextAppearance.Medium"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:paddingStart="35dp"
             android:paddingTop="@dimen/dp_3"
-            android:paddingEnd="@dimen/dp_20"
             android:paddingBottom="@dimen/dp_3"
             android:textColor="@color/white"
-            app:layout_constraintBottom_toTopOf="@id/layoutShadow"
-            app:layout_constraintEnd_toStartOf="@id/barrierRight"
+            android:text="@string/Language"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-
-            tools:text="@string/Language" />
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
         <LinearLayout
             android:id="@+id/leftIconTxt"
@@ -47,9 +43,9 @@
             android:paddingTop="2dp"
             android:paddingEnd="5dp"
             android:paddingBottom="2dp"
-            app:layout_constraintBottom_toTopOf="@id/layoutShadow"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
 
             <ImageView
                 android:id="@+id/back_img"
@@ -61,31 +57,16 @@
 
         </LinearLayout>
 
-        <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/barrierRight"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:barrierDirection="start" />
-
-        <FrameLayout
-            android:id="@+id/layoutShadow"
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:foreground="@drawable/background_shadow"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <ListView
+    <LinearLayout
         android:padding="@dimen/dp_10"
         android:id="@+id/language_list"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
-    </ListView>
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    </LinearLayout>
 
     <View
         android:layout_marginStart="@dimen/dp_15"

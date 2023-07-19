@@ -666,8 +666,8 @@ public class DriverMeAct extends MainActivityDriver implements OnClickListener, 
         final View view = View.inflate(DriverMeAct.this, R.layout.driver_lang_list, null);
         mlangDialog = new Dialog(DriverMeAct.this, R.style.dialogwinddow);
         mlangDialog.setContentView(view);
-        DriverFontHelper.applyFont(DriverMeAct.this, mlangDialog.findViewById(R.id.id_lang));
-        DirverColorchange.ChangeColor(mlangDialog.findViewById(R.id.id_lang), DriverMeAct.this);
+//        DriverFontHelper.applyFont(DriverMeAct.this, mlangDialog.findViewById(R.id.id_lang));
+//        DirverColorchange.ChangeColor(mlangDialog.findViewById(R.id.id_lang), DriverMeAct.this);
         mlangDialog.setCancelable(true);
         mlangDialog.show();
         String[] totalLang = (DriverSessionSave.getSession("lang_json", DriverMeAct.this)).trim().split("____");

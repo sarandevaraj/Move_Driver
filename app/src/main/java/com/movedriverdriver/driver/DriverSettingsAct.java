@@ -13,7 +13,7 @@ import com.movedriverdriver.util.Utility;
 
 public class DriverSettingsAct extends MainActivityDriver implements View.OnClickListener {
 
-    private TextView bt_privacysettings,notification_settings,log_out_txt,edit_profile_txt;
+    private TextView bt_privacysettings,notification_settings,bt_Languagesettings,log_out_txt,edit_profile_txt;
     private ImageView slider;
     private TextView HeadTitle;
     private RelativeLayout slide_lay;
@@ -33,9 +33,14 @@ public class DriverSettingsAct extends MainActivityDriver implements View.OnClic
         slider = findViewById(R.id.slideImg);
         HeadTitle = findViewById(R.id.headerTxt);
         slide_lay=findViewById(R.id.slide_lay);
+        bt_Languagesettings = findViewById(R.id.bt_Languagesettings);
         slide_lay.setBackgroundColor(getResources().getColor(R.color.button_accept));
         HeadTitle.setText(DriverNC.getResources().getString(R.string.settings));
 
+        bt_Languagesettings.setOnClickListener(v -> {
+            Intent langacc = new Intent(DriverSettingsAct.this, DriverlanguageAct.class);
+            startActivity(langacc);
+        });
         log_out_txt.setOnClickListener(view -> Utility.actionSheetlogout(DriverSettingsAct.this, DriverNC.getResources().getString(R.string.confirmlogout), DriverNC.getResources().getString(R.string.menu_logout), DriverNC.getResources().getString(R.string.cancel), false, new AlertListener() {
             @Override
             public void onSuccess() {
