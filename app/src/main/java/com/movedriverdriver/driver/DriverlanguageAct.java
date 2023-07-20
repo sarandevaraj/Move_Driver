@@ -8,6 +8,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -25,6 +26,7 @@ public class DriverlanguageAct extends AppCompatActivity {
 
     private Dialog mlangDialog;
     private int types = 1;
+    private ImageView btn_back;
 
     private LinearLayout lay_fav_res1;
 
@@ -33,7 +35,17 @@ public class DriverlanguageAct extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driverlanguage);
 
+        btn_back = findViewById( R.id.back_img );
+
         String[] totalLang = (DriverSessionSave.getSession("lang_json", DriverlanguageAct.this)).trim().split("____");
+
+        btn_back.setOnClickListener(v -> {
+
+            Intent in = new Intent(DriverlanguageAct.this, DriverSettingsAct.class);
+            startActivity(in);
+            finish();
+
+        });
 
         lay_fav_res1 = findViewById(R.id.language_list);
         for (int i = 0; i < totalLang.length; i++) {
@@ -58,7 +70,6 @@ public class DriverlanguageAct extends AppCompatActivity {
         }
 
     }
-
     private class callString implements DriverAPIResult {
         public callString(final String url) {
             String urls = DriverSessionSave.getSession("currentStringUrl", DriverlanguageAct.this);

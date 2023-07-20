@@ -843,17 +843,25 @@ public class DriverMeAct extends MainActivityDriver implements OnClickListener, 
             }
             // If profile image view clicked the following process run.
             else if (v == profileImage) {
-
-                try {
-                    if (ActivityCompat.checkSelfPermission(DriverMeAct.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED ||
-                            ActivityCompat.checkSelfPermission(DriverMeAct.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                    // For Android 12 and above, use the new permission model
+                    if (ActivityCompat.checkSelfPermission(DriverMeAct.this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED &&
+                            ActivityCompat.checkSelfPermission(DriverMeAct.this, Manifest.permission.READ_MEDIA_IMAGES) == PackageManager.PERMISSION_GRANTED) {
+                        // Both READ_EXTERNAL_STORAGE and READ_MEDIA_IMAGES permissions are granted
+                        getCamera();
+                    } else {
+                        // Request the READ_EXTERNAL_STORAGE and READ_MEDIA_IMAGES permissions if they are not granted
                         Utility.actionSheet(DriverMeAct.this, DriverNC.getResources().getString(R.string.str_media), DriverNC.getResources().getString(R.string.yes), "", false, new AlertListener() {
                             @Override
                             public void onSuccess() {
+                                // Request both permissions
                                 ActivityCompat.requestPermissions(DriverMeAct.this,
-                                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.READ_MEDIA_IMAGES},
                                         MY_PERMISSIONS_REQUEST_CAMERA);
+
+                                // The camera or gallery option should be triggered after the user clicks "yes" and the permissions are granted.
+                                // So, move the getCamera() call inside this onSuccess() callback.
+                                getCamera();
                             }
 
                             @Override
@@ -861,6 +869,26 @@ public class DriverMeAct extends MainActivityDriver implements OnClickListener, 
 
                             }
                         });
+                    }
+                }else {
+                    // For devices with OS less than Android 12, use the traditional permission model
+                    try {
+                        if (ActivityCompat.checkSelfPermission( DriverMeAct.this, Manifest.permission.READ_EXTERNAL_STORAGE ) != PackageManager.PERMISSION_GRANTED ||
+                                ActivityCompat.checkSelfPermission( DriverMeAct.this, Manifest.permission.WRITE_EXTERNAL_STORAGE ) != PackageManager.PERMISSION_GRANTED) {
+
+                            Utility.actionSheet( DriverMeAct.this, DriverNC.getResources().getString( R.string.str_media ), DriverNC.getResources().getString( R.string.yes ), "", false, new AlertListener() {
+                                @Override
+                                public void onSuccess() {
+                                    ActivityCompat.requestPermissions( DriverMeAct.this,
+                                            new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                                            MY_PERMISSIONS_REQUEST_CAMERA );
+                                }
+
+                                @Override
+                                public void onFailure() {
+
+                                }
+                            } );
                         /*
                         dialog1 = Driver_Utils.alert_view_dialog(DriverMeAct.this, "", DriverNC.getResources().getString(R.string.str_media), DriverNC.getResources().getString(R.string.yes), "", true, new DialogInterface.OnClickListener() {
                             @Override
@@ -873,11 +901,12 @@ public class DriverMeAct extends MainActivityDriver implements OnClickListener, 
                         }, (dialogInterface, i) -> dialogInterface.dismiss(), "");
 
                          */
-                    } else
-                        getCamera();
-                } catch (Exception e) {
+                        } else
+                            getCamera();
+                    } catch (Exception e) {
 
-                    // TODO: handle exception
+                        // TODO: handle exception
+                    }
                 }
             }
             // If done view to update the driver basic details.

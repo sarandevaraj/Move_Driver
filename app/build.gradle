@@ -11,9 +11,9 @@ android {
         release_config {
             try {
                 storeFile file('/home/developer/Documents/Android Project/Snape/snapecabs_andr/app/keystore/keystore.jks')
-                storePassword 'movedriverdriver'
-                keyAlias 'movedriverdriver'
-                keyPassword 'movedriverdriver'
+                storePassword 'movedriver'
+                keyAlias 'movedriver'
+                keyPassword 'movedriver'
             } catch (Exception ignored) {
                 throw new InvalidUserDataException("You should define KEYSTORE_PASSWORD and KEY_PASSWORD in gradle.properties.")
             }
