@@ -419,6 +419,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:layout_marginTop="@dimen/dp_8"
                         android:id="@+id/privacy_lay"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

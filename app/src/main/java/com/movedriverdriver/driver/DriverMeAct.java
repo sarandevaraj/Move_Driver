@@ -687,8 +687,8 @@ public class DriverMeAct extends MainActivityDriver implements OnClickListener, 
                 String url = DriverSessionSave.getSession(DriverSessionSave.getSession("LANG" + pos, DriverMeAct.this), DriverMeAct.this);
                 DriverSystems.out.println("current_url" + url);
                 DriverSessionSave.saveSession("currentStringUrl", url, DriverMeAct.this);
-                // if (!DriverSessionSave.getSession("Lang", DriverMeAct.this).equalsIgnoreCase(DriverSessionSave.getSession("LANGCode" + pos, DriverMeAct.this)))
-                //new callString("strings.xml");
+                 if (!DriverSessionSave.getSession("Lang", DriverMeAct.this).equalsIgnoreCase(DriverSessionSave.getSession("LANGCode" + pos, DriverMeAct.this)))
+                new callString("strings.xml");
 
             });
             lay_fav_res1.addView(tv);
