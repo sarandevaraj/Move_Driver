@@ -6,6 +6,7 @@ import android.os.Looper;
 import android.text.TextUtils;
 import android.widget.Toast;
 
+import com.mayan.sospluginmodlue.BuildConfig;
 import com.mayan.sospluginmodlue.R;
 import com.mayan.sospluginmodlue.util.SessionSave;
 
@@ -17,17 +18,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.concurrent.TimeUnit;
 
-import io.supercharge.shimmerlayout.BuildConfig;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 import okhttp3.logging.HttpLoggingInterceptor;
-import okio.BufferedSink;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -189,7 +187,7 @@ public class ServiceGenerator {
             HttpUrl url = originalHttpUrl.newBuilder()
                     .addQueryParameter("dt", "a")
                     .addQueryParameter("i", SessionSave.getSession("Id", mContext))
-                    .addQueryParameter("pv", "" + BuildConfig.VERSION_CODE)
+                    .addQueryParameter("pv", "" + "1")
                     .build();
 
             builder.url(url);
