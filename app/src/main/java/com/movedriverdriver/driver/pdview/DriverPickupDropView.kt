@@ -70,8 +70,8 @@ class DriverPickupDropView @JvmOverloads constructor(
                 textView.isClickable = true
                 textView.post {
                     textView.isSingleLine = true
-                    textView.ellipsize = TextUtils.TruncateAt.MARQUEE
-                    textView.marqueeRepeatLimit = -1
+//                    textView.ellipsize = TextUtils.TruncateAt.MARQUEE
+//                    textView.marqueeRepeatLimit = -1
                     textView.isSelected = true
                 }
             }

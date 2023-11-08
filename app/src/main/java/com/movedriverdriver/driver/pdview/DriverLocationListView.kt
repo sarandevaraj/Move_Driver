@@ -76,8 +76,8 @@ class DriverLocationListView : LinearLayout, DriverCollapseInterface {
             edtStop.layoutParams = layParams
             edtStop.gravity = Gravity.CENTER_VERTICAL or Gravity.RIGHT
             edtStop.isSingleLine = true
-            edtStop.ellipsize = TextUtils.TruncateAt.MARQUEE
-            edtStop.marqueeRepeatLimit = -1
+//            edtStop.ellipsize = TextUtils.TruncateAt.MARQUEE
+//            edtStop.marqueeRepeatLimit = -1
             edtStop.isSelected = true
             edtStop.text = driverStopData.placeName
             addView(edtStop)
@@ -108,8 +108,8 @@ class DriverLocationListView : LinearLayout, DriverCollapseInterface {
             edtStop.layoutParams = layParams
             edtStop.gravity = Gravity.CENTER_VERTICAL
             edtStop.isSingleLine = true
-            edtStop.ellipsize = TextUtils.TruncateAt.MARQUEE
-            edtStop.marqueeRepeatLimit = -1
+//            edtStop.ellipsize = TextUtils.TruncateAt.MARQUEE
+//            edtStop.marqueeRepeatLimit = -1
             edtStop.post {
                 edtStop.isSelected = true
             }

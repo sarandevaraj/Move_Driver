@@ -60,6 +60,7 @@ public class DriverWithdraw_referalhistory_adapter extends BaseAdapter {
                 holder.request_taxi = convertView.findViewById(R.id.request_taxi);
                 holder.status = convertView.findViewById(R.id.status);
                 holder.layout = convertView.findViewById(R.id.main);
+                holder.layout = convertView.findViewById( R.id.view_detail );
 
                 convertView.setTag(holder);
             } else {
@@ -84,5 +85,6 @@ public class DriverWithdraw_referalhistory_adapter extends BaseAdapter {
         TextView request_amount;
         TextView request_taxi;
         TextView status;
+        TextView view_detail;
     }
 }

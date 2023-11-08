@@ -60,10 +60,9 @@ public class DriverWithdraw_history_adapter extends BaseAdapter {
             holder.request_amount = convertView.findViewById(R.id.request_amount);
             holder.request_taxi = convertView.findViewById(R.id.request_taxi);
             holder.status = convertView.findViewById(R.id.status);
-            holder.layout = convertView.findViewById(R.id.main);
-            convertView.setTag(holder);
+            holder.view_detail = convertView.findViewById(R.id.view_detail);
 
-            holder.layout.setOnClickListener(v -> {
+            holder.view_detail.setOnClickListener(v -> {
                 String withdrawrequestId = mList.get(position).get("wallet_request_id");
                 Intent in = new Intent(mContext, DriverWithdrawReqAct.class);
                 in.putExtra("wallet_request_id", withdrawrequestId);
@@ -94,5 +93,6 @@ public class DriverWithdraw_history_adapter extends BaseAdapter {
         TextView request_amount;
         TextView request_taxi;
         TextView status;
+        TextView view_detail;
     }
 }
