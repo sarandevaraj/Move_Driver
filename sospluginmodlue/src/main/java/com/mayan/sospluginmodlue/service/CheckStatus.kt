@@ -158,7 +158,7 @@ class CheckStatus(val json: JSONObject, val context: Context) {
         cancelIntent.action = Intent.ACTION_MAIN
         cancelIntent.addCategory(Intent.CATEGORY_LAUNCHER)
         cancelIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT or Intent.FLAG_ACTIVITY_NO_ANIMATION or Intent.FLAG_ACTIVITY_SINGLE_TOP
-        val cn = ComponentName(context, Class.forName("com.movedriverdriver.driver.DriverUserLoginAct"))
+        val cn = ComponentName(context, Class.forName("com.blackertaxi.driver.UserLoginAct"))
         cancelIntent.component = cn
         context.startActivity(cancelIntent)
     }

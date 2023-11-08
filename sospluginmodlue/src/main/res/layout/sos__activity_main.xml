@@ -16,26 +16,26 @@
 
     <RelativeLayout
         android:id="@+id/toolbar"
-        android:background="@color/button_accept"
         android:layout_width="match_parent"
+        android:background="@color/button_accept"
         android:layout_height="?attr/actionBarSize">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
             android:layout_alignParentLeft="true"
             android:layout_centerInParent="true"
             android:padding="10dp"
-            android:text="@string/emergency"
-            android:textSize="@dimen/dp_18"
             android:id="@+id/back"
-            app:srcCompat="@drawable/ic_arrow_back_white" />
+            app:srcCompat="@drawable/ic_back_white"
+            tools:ignore="VectorDrawableCompat" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="@string/emergency_contact"
+
             android:textColor="@color/white"
             android:textSize="@dimen/dp_18" />
 
@@ -50,6 +50,7 @@
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:visibility="gone" />
+
 
     </RelativeLayout>
 

@@ -3,10 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     android:orientation="vertical">
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/add_contact"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -15,6 +16,7 @@
         tools:ignore="MissingConstraints">
 
         <TextView
+            android:id="@+id/titleTxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="5dp"
@@ -28,25 +30,48 @@
         <EditText
             android:id="@+id/sos_name"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
+            android:layout_below="@+id/titleTxt"
             android:layout_gravity="center"
-            android:layout_margin="@dimen/pad_5dp"
-            android:layout_weight="1"
+            android:layout_marginStart="@dimen/pad_5dp"
+            android:layout_marginTop="@dimen/pad_5dp"
+            android:layout_marginEnd="@dimen/pad_5dp"
+            android:layout_marginBottom="@dimen/pad_5dp"
             android:background="@drawable/border"
             android:hint="Enter Name"
+            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
+            android:inputType="text"
             android:padding="@dimen/dp_5"
             android:textColor="@color/black" />
+
+        <com.mayan.sospluginmodlue.countrycode.CountryCodePicker
+            android:id="@+id/ccp"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:gravity="center"
+            android:layout_below="@+id/sos_name"
+            android:background="@drawable/border"
+            app:defaultNameCode="IN"
+            android:padding="@dimen/dp_5"
+            android:layout_marginTop="@dimen/dp_5"
+            android:layout_marginStart="@dimen/dp_5"
+            app:hideNameCode="true"
+            app:textSize="16sp" />
 
         <EditText
             android:id="@+id/sos_mbl_number"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
+            android:layout_below="@+id/sos_name"
             android:layout_gravity="center"
-            android:inputType="number"
-            android:layout_margin="@dimen/pad_5dp"
-            android:layout_weight="1"
+            android:layout_toRightOf="@+id/ccp"
+            android:layout_marginStart="@dimen/pad_5dp"
+            android:layout_marginTop="@dimen/pad_5dp"
+            android:layout_marginEnd="@dimen/pad_5dp"
+            android:layout_marginBottom="@dimen/pad_5dp"
             android:background="@drawable/border"
             android:hint="Enter Mobile Number"
+            android:inputType="number"
             android:padding="@dimen/dp_5"
             android:textColor="@color/black" />
 
@@ -54,6 +79,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_5"
+            android:layout_below="@id/sos_mbl_number"
             android:layout_weight="2"
             android:orientation="horizontal">
 
@@ -81,7 +107,7 @@
 
         </LinearLayout>
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/no_contact"
